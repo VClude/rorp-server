@@ -21,17 +21,17 @@ Citizen.CreateThread(function()
 		Citizen.Wait( 1 )
 	end
 
--- 	-- #### Spawners #### --
---   -- Spawn DJs
-	  for _, item in pairs(pakjoni) do
-		pakjoni =  CreatePed(item.type, item.hash, item.x, item.y, item.z, item.h, false, true)
-		SetBlockingOfNonTemporaryEvents(pakjoni, true)
-		SetPedDiesWhenInjured(pakjoni, false)
-		SetPedCanPlayAmbientAnims(pakjoni, false)
-		SetPedCanRagdollFromPlayerImpact(pakjoni, false)
-		SetEntityInvincible(pakjoni, true)
-		FreezeEntityPosition(pakjoni, true)
-	end
+-- -- 	-- #### Spawners #### --
+-- --   -- Spawn DJs
+-- 	  for _, item in pairs(pakjoni) do
+-- 		pakjoni =  CreatePed(item.type, item.hash, item.x, item.y, item.z, item.h, false, true)
+-- 		SetBlockingOfNonTemporaryEvents(pakjoni, true)
+-- 		SetPedDiesWhenInjured(pakjoni, false)
+-- 		SetPedCanPlayAmbientAnims(pakjoni, false)
+-- 		SetPedCanRagdollFromPlayerImpact(pakjoni, false)
+-- 		SetEntityInvincible(pakjoni, true)
+-- 		FreezeEntityPosition(pakjoni, true)
+-- 	end
 	
 	PlayerData = ESX.GetPlayerData()
 	
