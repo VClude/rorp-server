@@ -42,7 +42,7 @@ Config.Jobs.fueler = {
 				{
 					name = _U('f_fuel'),
 					db_name = 'petrol',
-					time = 5,
+					time = 2,
 					max = 24,
 					add = 1,
 					remove = 1,
