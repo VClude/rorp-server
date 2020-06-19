@@ -101,6 +101,57 @@ Citizen.CreateThread(function()
 -- end
 end)
 
+function GoldSellEvent()
+	
+	currentlyMining = true
+	local playerPed = PlayerPedId()
+	local coords = GetEntityCoords(playerPed)
+	
+	FreezeEntityPosition(playerPed, true)
+	SetCurrentPedWeapon(playerPed, GetHashKey('WEAPON_UNARMED'))
+	Citizen.Wait(200)
+	
+	local pickaxe = GetHashKey("prop_tool_pickaxe")
+	
+	-- Loads model
+	RequestModel(pickaxe)
+    while not HasModelLoaded(pickaxe) do
+      Wait(1)
+    end
+	
+	local anim = "melee@hatchet@streamed_core_fps"
+	local action = "plyr_front_takedown"
+	
+	 -- Loads animation
+    RequestAnimDict(anim)
+    while not HasAnimDictLoaded(anim) do
+      Wait(1)
+    end
+	
+	local object = CreateObject(pickaxe, coords.x, coords.y, coords.z, true, false, false)
+	AttachEntityToEntity(object, playerPed, GetPedBoneIndex(playerPed, 57005), 0.1, 0.0, 0.0, -90.0, 25.0, 35.0, true, true, false, true, 1, true)
+	
+	exports['progressBars']:startUI((10000), "Menjual Emas")
+	TaskPlayAnim(PlayerPedId(), anim, action, 3.0, -3.0, -1, 31, 0, false, false, false)
+	Citizen.Wait(2000)
+	TaskPlayAnim(PlayerPedId(), anim, action, 3.0, -3.0, -1, 31, 0, false, false, false)
+	Citizen.Wait(2000)
+	TaskPlayAnim(PlayerPedId(), anim, action, 3.0, -3.0, -1, 31, 0, false, false, false)
+	Citizen.Wait(2000)
+	TaskPlayAnim(PlayerPedId(), anim, action, 3.0, -3.0, -1, 31, 0, false, false, false)
+	Citizen.Wait(2000)
+	TaskPlayAnim(PlayerPedId(), anim, action, 3.0, -3.0, -1, 31, 0, false, false, false)
+	Citizen.Wait(2000)
+	
+	TriggerServerEvent("esx_jobs:payGold")
+	
+	ClearPedTasks(PlayerPedId())
+	FreezeEntityPosition(playerPed, false)
+    DeleteObject(object)
+	currentlyMining = false
+
+end
+
 function MiningEvent()
 	
 	currentlyMining = true

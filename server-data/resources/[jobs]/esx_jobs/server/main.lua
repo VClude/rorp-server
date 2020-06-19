@@ -180,6 +180,16 @@ ESX.RegisterServerCallback("esx_jobs:removeStone",function(source,cb)
 	end
 end)
 
+-- jual emas
+RegisterServerEvent("esx_jobs:payGold")
+AddEventHandler("esx_jobs:payGold", function()
+	local xPlayer = ESX.GetPlayerFromId(source)
+	local goldQty = ESX.getInventoryItem(gold).count
+	local amount = goldQty * 3000
+	xPlayer.addMoney(amount)
+	TriggerClientEvent("esx:showNotification",source,"Kamu mendapatkan ~r~"..amount.."~s~x ~y~"..itemLabel.."~s~")
+end)
+
 -- Function to reward player after mining/washing:
 RegisterServerEvent("esx_jobs:reward")
 AddEventHandler("esx_jobs:reward", function(itemName,itemAmount)
