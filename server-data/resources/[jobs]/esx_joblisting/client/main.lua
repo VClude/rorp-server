@@ -180,7 +180,7 @@ Citizen.CreateThread(function()
 	for i=1, #Config.Zones, 1 do
 		local blip = AddBlipForCoord(Config.Zones[i])
 
-		SetBlipSprite (blip, 498)
+		SetBlipSprite (blip, 407)
 		SetBlipDisplay(blip, 4)
 		SetBlipScale  (blip, 1.2)
 		SetBlipColour (blip, 0)
