@@ -393,7 +393,7 @@ AddEventHandler('rtx_bennys:RegisterLicense', function(ID, type)
 		}, function(rowsChanged)
 			if rowsChanged then
 				TriggerClientEvent('esx:showNotification',source,'Anda berhasil memberikan lisensi')
-				TriggerClientEvent('esx:showNotification',xPlayer.identifier,'Anda menerima ~b~Repair License~s~ dari Bennys')
+				-- TriggerClientEvent('esx:showNotification',xPlayer.identifier,'Anda menerima ~b~Repair License~s~ dari Bennys')
 			else
 				TriggerClientEvent('esx:showNotification',source,'Gagal memberikan lisensi')
 			end
