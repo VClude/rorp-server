@@ -768,7 +768,7 @@ function OpenRegLicense()
 					else
 						menu.close()
 						TriggerServerEvent('esx_license:addLicense', count, 'repair')
-						print('SUKSES LICENSE')
+						NotifSukses('Berhasil memberikan Lisensi')
 						Citizen.Wait(1000)
 					end
 				end, GetPlayerServerId(PlayerId(count)), 'repair')
@@ -2696,7 +2696,7 @@ AddEventHandler('rtx_bennys:GantiBan', function()
 				end
 			end		
 		else
-			ESX.ShowNotification('Missing License')
+			NotifError("Tidak memiliki lisensi")
 		end
 	end, GetPlayerServerId(PlayerId()), 'repair')
 end)
@@ -2754,7 +2754,7 @@ AddEventHandler('rtx_bennys:RepairWithFixkit', function()
 				ESX.ShowNotification(_U('no_vehicle_nearby'))
 			end
 		else
-			ESX.ShowNotification('Missing License')
+			NotifError("Tidak memiliki lisensi")
 		end
 	end, GetPlayerServerId(PlayerId()), 'repair')
 end)
