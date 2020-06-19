@@ -1,5 +1,5 @@
 var invLocale = new Object();
-invLocale.dropItem = "LAten vallen";
-invLocale.useItem = "Gebruiken";
-invLocale.giveItem = "Geven";
-invLocale.secondInventoryNotAvailable = "Secundaire inventaris is niet beschikbaar.";
+invLocale.dropItem = "Jatuhkan";
+invLocale.useItem = "Gunakan";
+invLocale.giveItem = "Kirim";
+invLocale.secondInventoryNotAvailable = "Inventory 2 Tidak Tersedia";
