@@ -151,4 +151,18 @@ Config.DrawSmelter3DText = "Tekan ~g~[E]~s~ untuk ~y~Melebur Batu~s~"				-- set 
 
 Config.KeyToStartSmelting = 38
 
+Config.GoldSpot = 
+{
+
+	{ ["x"] = 228.58, ["y"] = 213.83, ["z"] = 105.73, ["h"] = 290.86 }
+	
+}
+
+Config.GoldMarker = 27 												-- marker type
+Config.GoldColor = { r = 240, g = 52, b = 52, a = 100 } 		-- rgba color of the marker
+Config.GoldScale = { x = 1.25, y = 1.25, z = 1.25 }  			-- the scale for the marker on the x, y and z axis
+Config.DrawGold3DText = "Tekan ~g~[E]~s~ untuk ~y~Menjual Emas~s~"				-- set your desired text here
+
+Config.KeyToStartSell = 38
+
 
