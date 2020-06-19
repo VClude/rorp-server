@@ -392,9 +392,9 @@ AddEventHandler('rtx_bennys:RegisterLicense', function(ID, type)
 			['@owner']		= xPlayer.identifier
 		}, function(rowsChanged)
 			if rowsChanged then
-				ESX.TriggerClientEvent('esx:showNotification',source,'Anda berhasil memberikan lisensi kepada ~b~'..xPlayer.firstname..' '..xPlayer.lastname)
+				ESX.TriggerClientEvent('esx:showNotification',source,'Anda berhasil memberikan lisensi')
 			else
-				ESX.TriggerClientEvent('esx:showNotification',source,'Gagal memberikan lisensi kepada '..xPlayer.firstname..' '..xPlayer.lastname)
+				ESX.TriggerClientEvent('esx:showNotification',source,'Gagal memberikan lisensi kepada')
 			end
 		end)
 	end
