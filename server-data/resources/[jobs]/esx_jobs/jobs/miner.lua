@@ -40,36 +40,7 @@ Config.Jobs.miner = {
 			Type = 'cust_work',
 			MiningSpots = 
 			{
-				{ 
-					Pos = { x = 2972.1259765625, y = 2841.3889160156, z = 46.025562286377 },
-					Heading = 292.26123046875,
-					InUse = false
-				},
-				{ 
-					Pos = { x = 2973.166015625, y = 2837.9240722656, z = 45.692588806152 },
-					Heading = 294.16989135742,
-					InUse = false
-				},
-				{ 
-					Pos = { x = 2974.2604980469, y = 2834.1079101563, z = 45.742488861084 },
-					Heading = 312.42669677734,
-					InUse = false
-				},
-				{ 
-					Pos = { x = 2977.44, y = 2832.41, z = 46.41 },
-					Heading = 320.27,
-					InUse = false
-				},
-				{ 
-					Pos = { x = 2978.7, y = 2829.05, z = 46.25 },
-					Heading = 284.95,
-					InUse = false
-				},
-				{ 
-					Pos = { x = 2980.33, y = 2825.32, z = 45.93 },
-					Heading = 315.82,
-					InUse = false
-				}
+
 			},
 
 			MiningMarker = 27, 												-- marker type
