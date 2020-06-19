@@ -1,0 +1,9 @@
+var invLocale = new Object();
+invLocale.dropItem = "Drop";
+invLocale.useItem = "Use";
+invLocale.giveItem = "Give";
+invLocale.label = "Label";
+invLocale.stealmoney = "Steal Cash";
+invLocale.seizemoney = "Seize Cash";
+invLocale.takemoney = "Take Cash";
+invLocale.storemoney = "Store Cash";
