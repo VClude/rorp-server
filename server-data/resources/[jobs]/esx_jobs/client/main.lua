@@ -7,7 +7,7 @@ local PlayerData = nil
 local currentlyMining = false
 local currentlyWashing = false
 local currentlySmelting = false
-
+local currentlySelling = false
 Citizen.CreateThread(function()
 	while ESX == nil do
 		TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
@@ -151,6 +151,29 @@ function GoldSellEvent()
 	currentlyMining = false
 
 end
+
+Citizen.CreateThread(function()
+	while true do
+        Citizen.Wait(5)
+		local coords = GetEntityCoords(GetPlayerPed(-1))
+		for k,v in pairs(Config.GoldSpot) do
+			local distance = GetDistanceBetweenCoords(coords, v.x, v.y, v.z, true)
+			if distance <= 20.0 and not currentlySelling then
+				DrawMarker(Config.GoldMarker, v.x, v.y, v.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.GoldScale.x, Config.GoldScale.y, Config.GoldScale.z, Config.GoldColor.r,Config.GoldColor.g,Config.GoldColor.b,Config.GoldColor.a, false, true, 2, true, false, false, false)					
+			else
+				Citizen.Wait(1000)
+			end	
+			if distance <= 1.2 and not currentlySelling then
+				DrawText3Ds(v.x, v.y, v.z, Config.DrawGold3DText)
+				if IsControlJustPressed(0, Config.KeyToStartSelling) then
+					GoldSellEvent()
+					Citizen.Wait(300)
+				end
+			end
+		end		
+	end
+end)
+
 
 function MiningEvent()
 	
