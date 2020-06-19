@@ -37,6 +37,22 @@ Citizen.CreateThread(function()
 	
 end)
 
+-- Create blips
+Citizen.CreateThread(function()
+	for i=1, #Config.Zones, 1 do
+		local blip = AddBlipForCoord(Config.Zones[i])
+		SetBlipSprite (blip, 304)
+		SetBlipDisplay(blip, 4)
+		SetBlipScale  (blip, 1.0)
+		SetBlipColour (blip, 5)
+		SetBlipAsShortRange(blip, true)
+
+		BeginTextCommandSetBlipName("STRING")
+		AddTextComponentSubstringPlayerName('VIP Service')
+		EndTextCommandSetBlipName(blip)
+	end
+end)
+
 RegisterNetEvent('esx:playerLoaded')
 AddEventHandler('esx:playerLoaded', function(xPlayer)
     PlayerData = xPlayer
