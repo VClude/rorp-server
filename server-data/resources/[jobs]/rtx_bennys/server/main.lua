@@ -384,20 +384,20 @@ RegisterServerEvent('rtx_bennys:RegisterLicense')
 AddEventHandler('rtx_bennys:RegisterLicense', function(ID, type)
 	local xPlayer = ESX.GetPlayerFromId(ID)
 
-	-- if xPlayer == nil then
-	-- 	print('Player ga ada')
-	-- else
-	-- 	print('player ada')
-	
+	if xPlayer == nil then
+		print('Player ga ada')
+	else
+		print('player ada')
+	end
 
 	MySQL.Async.execute('INSERT INTO user_licenses (type, owner) VALUES (@type, @owner)', {
 		['@type']		= type,
 		['@owner']		= xPlayer.identifier
 	}, function(rowsChanged)
 		if rowsChanged then
-			print('sukses cangcut')
+			print('sukses')
 		else
-			print('gagal cangcut')
+			print('gagal')
 		end
 	end)
 

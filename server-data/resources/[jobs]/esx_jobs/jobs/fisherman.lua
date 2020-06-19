@@ -51,7 +51,7 @@ Config.Jobs.fisherman = {
 				{
 					name   = _U('fm_fish'),
 					db_name= 'fish',
-					time   = 2,
+					time   = 1,
 					max    = 100,
 					add    = 1,
 					remove = 1,
