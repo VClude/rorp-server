@@ -234,45 +234,51 @@ end
 
 -- Blip on map for Quarry Location:
 Citizen.CreateThread(function()
-	for k,v in ipairs(Config.QuarryLocation)do
-		local blip = AddBlipForCoord(v.x, v.y, v.z)
-		SetBlipSprite(blip, Config.QuarryBlipSprite)
-		SetBlipDisplay(blip, Config.QuarryBlipDisplay)
-		SetBlipScale  (blip, Config.QuarryBlipScale)
-		SetBlipColour (blip, Config.QuarryBlipColour)
-		SetBlipAsShortRange(blip, true)
-		BeginTextCommandSetBlipName("STRING")
-		AddTextComponentString(Config.QuarryBlipNameOnMap)
-		EndTextCommandSetBlipName(blip)
+	if PlayerData.job.name == 'miner' then
+		for k,v in ipairs(Config.QuarryLocation)do
+			local blip = AddBlipForCoord(v.x, v.y, v.z)
+			SetBlipSprite(blip, Config.QuarryBlipSprite)
+			SetBlipDisplay(blip, Config.QuarryBlipDisplay)
+			SetBlipScale  (blip, Config.QuarryBlipScale)
+			SetBlipColour (blip, Config.QuarryBlipColour)
+			SetBlipAsShortRange(blip, true)
+			BeginTextCommandSetBlipName("STRING")
+			AddTextComponentString(Config.QuarryBlipNameOnMap)
+			EndTextCommandSetBlipName(blip)
+		end
 	end
 end)
 
 -- Blip on map for Washer Location:
 Citizen.CreateThread(function()
-	for k,v in ipairs(Config.WasherLocation)do
-		local blip = AddBlipForCoord(v.x, v.y, v.z)
-		SetBlipSprite(blip, Config.WasherBlipSprite)
-		SetBlipDisplay(blip, Config.WasherBlipDisplay)
-		SetBlipScale  (blip, Config.WasherBlipScale)
-		SetBlipColour (blip, Config.WasherBlipColour)
-		SetBlipAsShortRange(blip, true)
-		BeginTextCommandSetBlipName("STRING")
-		AddTextComponentString(Config.WasherBlipNameOnMap)
-		EndTextCommandSetBlipName(blip)
+	if PlayerData.job.name == 'miner' then
+		for k,v in ipairs(Config.WasherLocation)do
+			local blip = AddBlipForCoord(v.x, v.y, v.z)
+			SetBlipSprite(blip, Config.WasherBlipSprite)
+			SetBlipDisplay(blip, Config.WasherBlipDisplay)
+			SetBlipScale  (blip, Config.WasherBlipScale)
+			SetBlipColour (blip, Config.WasherBlipColour)
+			SetBlipAsShortRange(blip, true)
+			BeginTextCommandSetBlipName("STRING")
+			AddTextComponentString(Config.WasherBlipNameOnMap)
+			EndTextCommandSetBlipName(blip)
+		end
 	end
 end)
 
 -- Blip on map for Smelter Location:
 Citizen.CreateThread(function()
-	for k,v in ipairs(Config.SmelterLocation)do
-		local blip = AddBlipForCoord(v.x, v.y, v.z)
-		SetBlipSprite(blip, Config.SmelterBlipSprite)
-		SetBlipDisplay(blip, Config.SmelterBlipDisplay)
-		SetBlipScale  (blip, Config.SmelterBlipScale)
-		SetBlipColour (blip, Config.SmelterBlipColour)
-		SetBlipAsShortRange(blip, true)
-		BeginTextCommandSetBlipName("STRING")
-		AddTextComponentString(Config.SmelterBlipNameOnMap)
-		EndTextCommandSetBlipName(blip)
+	if PlayerData.job.name == 'miner' then
+		for k,v in ipairs(Config.SmelterLocation)do
+			local blip = AddBlipForCoord(v.x, v.y, v.z)
+			SetBlipSprite(blip, Config.SmelterBlipSprite)
+			SetBlipDisplay(blip, Config.SmelterBlipDisplay)
+			SetBlipScale  (blip, Config.SmelterBlipScale)
+			SetBlipColour (blip, Config.SmelterBlipColour)
+			SetBlipAsShortRange(blip, true)
+			BeginTextCommandSetBlipName("STRING")
+			AddTextComponentString(Config.SmelterBlipNameOnMap)
+			EndTextCommandSetBlipName(blip)
+		end
 	end
 end)

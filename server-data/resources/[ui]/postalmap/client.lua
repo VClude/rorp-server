@@ -1,5 +1,5 @@
 Citizen.CreateThread(function()
-    SetMapZoomDataLevel(0, 1.0, 0.9, 0.08, 0.0, 0.0)
+    SetMapZoomDataLevel(0, 1.5, 0.9, 0.08, 0.0, 0.0)
     SetMapZoomDataLevel(1, 1.5, 0.9, 0.08, 0.0, 0.0)
     SetMapZoomDataLevel(2, 8.6, 0.9, 0.08, 0.0, 0.0)
     SetMapZoomDataLevel(3, 18.3, 0.9, 0.08, 0.0, 0.0)
