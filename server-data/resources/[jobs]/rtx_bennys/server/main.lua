@@ -379,24 +379,3 @@ AddEventHandler('rtx_bennys:removeItem', function(itemName,itemAmount)
 	local itemLabel = ESX.GetItemLabel(itemName)
 	xPlayer.removeInventoryItem(itemName, itemAmount)
 end)
-
-RegisterServerEvent('rtx_bennys:RegisterLicense')
-AddEventHandler('rtx_bennys:RegisterLicense', function(ID, type)
-	local xPlayer = ESX.GetPlayerFromId(ID)
-
-	if xPlayer == nil then
-		TriggerClientEvent('esx:showNotification',source,'ID tersebut sedang tidak ada di kota')
-	else
-		MySQL.Async.execute('INSERT INTO user_licenses (type, owner) VALUES (@type, @owner)', {
-			['@type']		= type,
-			['@owner']		= xPlayer.identifier
-		}, function(rowsChanged)
-			if rowsChanged then
-				TriggerClientEvent('esx:showNotification',source,'Anda berhasil memberikan lisensi')
-				-- TriggerClientEvent('esx:showNotification',xPlayer.identifier,'Anda menerima ~b~Repair License~s~ dari Bennys')
-			else
-				TriggerClientEvent('esx:showNotification',source,'Gagal memberikan lisensi')
-			end
-		end)
-	end
-end)

@@ -760,9 +760,17 @@ function OpenRegLicense()
 			if count == nil then
 				ESX.ShowNotification('Player tidak ada')
 			else
-				menu.close()
-				TriggerServerEvent('rtx_bennys:RegisterLicense', count, 'repair')
-				Citizen.Wait(1000)
+				ESX.TriggerServerCallback('esx_license:checkLicense', function(hasRepairLicense)
+					if hasRepairLicense then
+						menu.close()
+						ESX.ShowNotification('Player ini sudah memiliki ~b~Repair License')
+						Citizen.Wait(1000)
+					else
+						menu.close()
+						TriggerServerEvent('esx_license:addLicense', count, 'repair')
+						print('SUKSES LICENSE')
+						Citizen.Wait(1000)
+				end, GetPlayerServerId(count), 'repair')
 			end
 		end, function(data, menu)
 			 menu.close()
