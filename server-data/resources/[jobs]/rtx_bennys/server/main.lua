@@ -385,16 +385,16 @@ AddEventHandler('rtx_bennys:RegisterLicense', function(ID, type)
 	local xPlayer = ESX.GetPlayerFromId(ID)
 
 	if xPlayer == nil then
-		ESX.TriggerClientEvent('esx:showNotification',source,'ID tersebut sedang tidak ada di kota')
+		TriggerClientEvent('esx:showNotification',source,'ID tersebut sedang tidak ada di kota')
 	else
 		MySQL.Async.execute('INSERT INTO user_licenses (type, owner) VALUES (@type, @owner)', {
 			['@type']		= type,
 			['@owner']		= xPlayer.identifier
 		}, function(rowsChanged)
 			if rowsChanged then
-				ESX.TriggerClientEvent('esx:showNotification',source,'Anda berhasil memberikan lisensi')
+				TriggerClientEvent('esx:showNotification',source,'Anda berhasil memberikan lisensi kepada ~b~'..xPlayer.firstname..' '..xPlayer.lastname)
 			else
-				ESX.TriggerClientEvent('esx:showNotification',source,'Gagal memberikan lisensi kepada')
+				TriggerClientEvent('esx:showNotification',source,'Gagal memberikan lisensi kepada ~b~'..xPlayer.firstname..' '..xPlayer.lastname)
 			end
 		end)
 	end
