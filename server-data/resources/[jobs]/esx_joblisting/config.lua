@@ -8,7 +8,7 @@ Config.MarkerType   = 1
 Config.Locale       = 'en'
 
 Config.Zones = {
-	vector3(-138.95, -631.45, 168.82)
+	vector3(-438.59, 1075.42, 352.43)
 }
 
 Config.ZonesMarker = {
