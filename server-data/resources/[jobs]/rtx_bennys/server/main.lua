@@ -384,21 +384,18 @@ RegisterServerEvent('rtx_bennys:RegisterLicense')
 AddEventHandler('rtx_bennys:RegisterLicense', function(ID, type)
 	local xPlayer = ESX.GetPlayerFromId(ID)
 
-	-- if xPlayer == nil then
-	-- 	print('Player ga ada')
-	-- else
-	-- 	print('player ada')
-	
-
-	MySQL.Async.execute('INSERT INTO user_licenses (type, owner) VALUES (@type, @owner)', {
-		['@type']		= type,
-		['@owner']		= xPlayer.identifier
-	}, function(rowsChanged)
-		if rowsChanged then
-			print('sukses cangcut')
-		else
-			print('gagal cangcut')
-		end
-	end)
-
+	if xPlayer == nil then
+		ESX.TriggerClientEvent('esx:showNotification',source,'ID tersebut sedang tidak ada di kota')
+	else
+		MySQL.Async.execute('INSERT INTO user_licenses (type, owner) VALUES (@type, @owner)', {
+			['@type']		= type,
+			['@owner']		= xPlayer.identifier
+		}, function(rowsChanged)
+			if rowsChanged then
+				ESX.TriggerClientEvent('esx:showNotification',source,'Anda berhasil memberikan lisensi kepada ~b~'..xPlayer.firstname..' '..xPlayer.lastname..)
+			else
+				ESX.TriggerClientEvent('esx:showNotification',source,'Gagal memberikan lisensi kepada '..xPlayer.firstname..' '..xPlayer.lastname..)
+			end
+		end)
+	end
 end)
