@@ -103,7 +103,7 @@ end)
 
 function GoldSellEvent()
 	
-	currentlyMining = true
+	currentlySelling = true
 	local playerPed = PlayerPedId()
 	local coords = GetEntityCoords(playerPed)
 	
@@ -148,7 +148,7 @@ function GoldSellEvent()
 	ClearPedTasks(PlayerPedId())
 	FreezeEntityPosition(playerPed, false)
     DeleteObject(object)
-	currentlyMining = false
+	currentlySelling = false
 
 end
 
@@ -165,7 +165,7 @@ Citizen.CreateThread(function()
 			end	
 			if distance <= 1.2 and not currentlySelling then
 				DrawText3Ds(v.x, v.y, v.z, Config.DrawGold3DText)
-				if IsControlJustPressed(0, Config.KeyToStartSelling) then
+				if IsControlJustPressed(0, Config.KeyToStartSell) then
 					GoldSellEvent()
 					Citizen.Wait(300)
 				end
