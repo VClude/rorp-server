@@ -771,7 +771,7 @@ function OpenRegLicense()
 						print('SUKSES LICENSE')
 						Citizen.Wait(1000)
 					end
-				end, GetPlayerServerId(count), 'repair')
+				end, GetPlayerServerId(PlayerId(count)), 'repair')
 			end
 		end, function(data, menu)
 			 menu.close()
