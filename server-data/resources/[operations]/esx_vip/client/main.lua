@@ -37,7 +37,7 @@ Citizen.CreateThread(function()
 	
 end)
 
--- Create blips
+-- Create blipss
 Citizen.CreateThread(function()
 	for i=1, #Config.Zones, 1 do
 		local blip = AddBlipForCoord(Config.Zones[i])
