@@ -2,8 +2,8 @@ local menuIsShowed, hasAlreadyEnteredMarker, isInMarker = false, false, false
 ESX = nil
 local PlayerData              = {}
 
-local mbakajeng = {
-	{type = 4, hash = 1167167044, x = -138.77, y = -634.05, z = 167.82, h = 5.14}
+local pakjoni = {
+	{type = 4, hash = 2120901815, x = -145.18, y = -643.49, z = 167.82, h = 273.2}
 }
 
 Citizen.CreateThread(function()
@@ -16,24 +16,24 @@ Citizen.CreateThread(function()
         Citizen.Wait(10)
 	end
 
--- 	RequestModel(1167167044)
--- 	while ( not HasModelLoaded( 1167167044 ) ) do
--- 		Citizen.Wait( 1 )
--- 	end
+	RequestModel(2120901815)
+	while ( not HasModelLoaded( 2120901815 ) ) do
+		Citizen.Wait( 1 )
+	end
 
--- -- 	-- #### Spawners #### --
--- --   -- Spawn DJs
--- 	  for _, item in pairs(mbakajeng) do
--- 		mbakajeng =  CreatePed(item.type, item.hash, item.x, item.y, item.z, item.h, false, true)
--- 		SetBlockingOfNonTemporaryEvents(mbakajeng, true)
--- 		SetPedDiesWhenInjured(mbakajeng, false)
--- 		SetPedCanPlayAmbientAnims(mbakajeng, false)
--- 		SetPedCanRagdollFromPlayerImpact(mbakajeng, false)
--- 		SetEntityInvincible(mbakajeng, true)
--- 		FreezeEntityPosition(mbakajeng, true)
--- 	end
+-- 	-- #### Spawners #### --
+--   -- Spawn DJs
+	  for _, item in pairs(pakjoni) do
+		pakjoni =  CreatePed(item.type, item.hash, item.x, item.y, item.z, item.h, false, true)
+		SetBlockingOfNonTemporaryEvents(pakjoni, true)
+		SetPedDiesWhenInjured(pakjoni, false)
+		SetPedCanPlayAmbientAnims(pakjoni, false)
+		SetPedCanRagdollFromPlayerImpact(pakjoni, false)
+		SetEntityInvincible(pakjoni, true)
+		FreezeEntityPosition(pakjoni, true)
+	end
 	
--- 	PlayerData = ESX.GetPlayerData()
+	PlayerData = ESX.GetPlayerData()
 	
 end)
 
