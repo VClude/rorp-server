@@ -770,11 +770,12 @@ function OpenRegLicense()
 						TriggerServerEvent('esx_license:addLicense', count, 'repair')
 						print('SUKSES LICENSE')
 						Citizen.Wait(1000)
+					end
 				end, GetPlayerServerId(count), 'repair')
 			end
 		end, function(data, menu)
 			 menu.close()
-		end)
+	end)
 end
 
 function OpenBennysInventoryMenu()
