@@ -4,7 +4,7 @@ local CurrentActionMsg  = nil
 local CurrentTest       = nil
 
 local dataPakToto = {
-	{type = 4, hash = 2705543429, x = -125.77, y = -640.9, z = 168.82, h = 92.94}
+	{type = 4, hash = 2705543429, x = -125.77, y = -640.9, z = 167.82, h = 92.94}
 }
 
 Citizen.CreateThread(function()
