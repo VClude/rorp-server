@@ -16,22 +16,22 @@ Citizen.CreateThread(function()
         Citizen.Wait(10)
 	end
 
-	RequestModel(1167167044)
-	while ( not HasModelLoaded( 1167167044 ) ) do
-		Citizen.Wait( 1 )
-	end
+-- 	RequestModel(1167167044)
+-- 	while ( not HasModelLoaded( 1167167044 ) ) do
+-- 		Citizen.Wait( 1 )
+-- 	end
 
--- 	-- #### Spawners #### --
---   -- Spawn DJs
-	  for _, item in pairs(mbakajeng) do
-		mbakajeng =  CreatePed(item.type, item.hash, item.x, item.y, item.z, item.h, false, true)
-		SetBlockingOfNonTemporaryEvents(mbakajeng, true)
-		SetPedDiesWhenInjured(mbakajeng, false)
-		SetPedCanPlayAmbientAnims(mbakajeng, false)
-		SetPedCanRagdollFromPlayerImpact(mbakajeng, false)
-		SetEntityInvincible(mbakajeng, true)
-		FreezeEntityPosition(mbakajeng, true)
-	end
+-- -- 	-- #### Spawners #### --
+-- --   -- Spawn DJs
+-- 	  for _, item in pairs(mbakajeng) do
+-- 		mbakajeng =  CreatePed(item.type, item.hash, item.x, item.y, item.z, item.h, false, true)
+-- 		SetBlockingOfNonTemporaryEvents(mbakajeng, true)
+-- 		SetPedDiesWhenInjured(mbakajeng, false)
+-- 		SetPedCanPlayAmbientAnims(mbakajeng, false)
+-- 		SetPedCanRagdollFromPlayerImpact(mbakajeng, false)
+-- 		SetEntityInvincible(mbakajeng, true)
+-- 		FreezeEntityPosition(mbakajeng, true)
+-- 	end
 	
 	PlayerData = ESX.GetPlayerData()
 
