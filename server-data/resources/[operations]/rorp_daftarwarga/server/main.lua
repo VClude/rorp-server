@@ -41,7 +41,7 @@ AddEventHandler('rorp_daftarwarga:giftCar', function(plate, model)
 		['@garage_name'] = 'Garasi_Walkot'
 	}, function(rowsChanged)
 		xPlayer.showNotification('Silahkan ambil mobilmu di garasi walikota dengan plat: ~g~'.. plate)
-		TriggerEvent('rorp_daftarwarga:removeStatWargaBaru')
+		-- TriggerEvent('rorp_daftarwarga:removeStatWargaBaru')
 	end)
 
 end)
