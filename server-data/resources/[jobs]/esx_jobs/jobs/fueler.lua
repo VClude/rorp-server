@@ -36,16 +36,18 @@ Config.Jobs.fueler = {
 			Color = {r = 204, g = 204, b = 0},
 			Marker = 1,
 			Blip = true,
+			Label = 'Mengambil Minyak',
 			Name = _U('f_drill_oil'),
 			Type = 'work',
+			Duration = 20000,
 			Item = {
 				{
 					name = _U('f_fuel'),
 					db_name = 'petrol',
-					time = 2,
+					time = 0,
 					max = 24,
-					add = 1,
-					remove = 1,
+					add = 24,
+					remove = 0,
 					requires = 'nothing',
 					requires_name = 'Nothing',
 					drop = 100
@@ -63,6 +65,7 @@ Config.Jobs.fueler = {
 			Blip = true,
 			Name = _U('f_fuel_refine'),
 			Type = 'work',
+			Duration = 20000,
 			Item = {
 				{
 					name = _U('f_fuel_refine'),
@@ -88,6 +91,7 @@ Config.Jobs.fueler = {
 			Blip = true,
 			Name = _U('f_fuel_mixture'),
 			Type = 'work',
+			Duration = 20000,
 			Item = {
 				{
 					name = _U('f_gas'),

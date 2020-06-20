@@ -8,6 +8,7 @@ local currentlyMining = false
 local currentlyWashing = false
 local currentlySmelting = false
 local currentlySelling = false
+local onWork = false
 Citizen.CreateThread(function()
 	while ESX == nil do
 		TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
@@ -291,33 +292,48 @@ AddEventHandler('esx_jobs:action', function(job, zone, zoneIndex)
 		local playerPed = PlayerPedId()
 
 		if IsPedOnFoot(playerPed) then
+			-- TriggerEvent("mythic_progressbar:client:progress", {
+			-- 	name = "unique_action_name",
+			-- 	duration = zone.Duration,
+			-- 	label = "Bekerja",
+			-- 	useWhileDead = false,
+			-- 	canCancel = true,
+			-- 	controlDisables = {
+			-- 		disableMovement = true,
+			-- 		disableCarMovement = true,
+			-- 		disableMouse = false,
+			-- 		disableCombat = true,
+			-- 	},
+			-- 	animation = {
+			-- 		animDict = "missheistdockssetup1clipboard@idle_a",
+			-- 		anim = "idle_a",
+			-- 	},
+			-- 	prop = {
+			-- 		model = "prop_paper_bag_small",
+			-- 	},
+			-- 	TriggerServerEvent('esx_jobs:startWork', zoneIndex)
+			-- }, function(status)
+			-- 	if not status then
+			-- 		-- Do Something If Event Wasn't Cancelled
+			-- 		TriggerServerEvent('esx_jobs:stopWork')
+			-- 	end
+			-- end)
+
+			onWork = true
+			local playerPed = PlayerPedId()
+			local coords = GetEntityCoords(playerPed)
 			
-			TriggerEvent("mythic_progressbar:client:progress", {
-				name = "unique_action_name",
-				duration = 20000,
-				label = "Bekerja",
-				useWhileDead = false,
-				canCancel = true,
-				controlDisables = {
-					disableMovement = true,
-					disableCarMovement = true,
-					disableMouse = false,
-					disableCombat = true,
-				},
-				animation = {
-					animDict = "missheistdockssetup1clipboard@idle_a",
-					anim = "idle_a",
-				},
-				prop = {
-					model = "prop_paper_bag_small",
-				},
-				TriggerServerEvent('esx_jobs:startWork', zoneIndex)
-			}, function(status)
-				if not status then
-					-- Do Something If Event Wasn't Cancelled
-					TriggerServerEvent('esx_jobs:stopWork')
+			FreezeEntityPosition(playerPed, true)
+			SetCurrentPedWeapon(playerPed, GetHashKey('WEAPON_UNARMED'))
+			Citizen.Wait(200)
+				
+			exports['progressBars']:startUI((zone.Duration), zone.Name)
+			Citizen.Wait(zone.Duration)
+			for k,v in pairs(zone.Item) do
+				TriggerServerEvent("esx_jobs:reward",v.db_name,v.add)
 				end
-			end)
+			FreezeEntityPosition(playerPed, false)
+			onWork = false
 
 		else
 			ESX.ShowNotification(_U('foot_work'))
