@@ -20,6 +20,30 @@ Citizen.CreateThread(function()
 	end
 end)
 
+function BukaMenuDaftarPenduduk()
+    
+    ESX.TriggerServerCallback('rorp_daftarwarga:cekWargabaru', function(wargabaru)
+
+		if wargabaru == true then
+
+	        ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'daftar_warga_baru', {
+                title    = 'Daftar Kependudukan',
+                align    = 'bottom-right',
+                elements = {
+                    {label = 'Daftar warga Republic Of Roleplay', value = 'theory_test'},
+                },
+            }, function(data, menu)
+                    StartTheoryTest()
+                    menu.close()
+                end
+            )
+		else
+			ESX.ShowNotification('Kamu bukan warga baru')
+		end
+	end)
+
+end
+
 function StartTheoryTest()
 	CurrentTest = 'theory'
 
@@ -50,30 +74,6 @@ end
 
 function SetCurrentZoneType(type)
 CurrentZoneType = type
-end
-
-function BukaMenuDaftarPenduduk()
-    
-    ESX.TriggerServerCallback('rorp_daftarwarga:cekWargabaru', function(wargabaru)
-
-		if wargabaru == true then
-
-	        ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'daftar_warga_baru', {
-                title    = 'Daftar Kependudukan',
-                align    = 'bottom-right',
-                elements = {
-                    {label = 'Daftar warga Republic Of Roleplay', value = 'theory_test'},
-                },
-            }, function(data, menu)
-                    StartTheoryTest()
-                    menu.close()
-                end
-            )
-		else
-			ESX.ShowNotification('Kamu bukan warga baru')
-		end
-	end)
-
 end
 
 RegisterNUICallback('question', function(data, cb)
