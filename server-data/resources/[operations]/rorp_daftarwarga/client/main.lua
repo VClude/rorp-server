@@ -61,11 +61,14 @@ function BukaMenuDaftarPenduduk()
 	        ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'daftar_warga_baru', {
                 title    = 'Daftar Kependudukan',
                 align    = 'bottom-right',
-                elements = {label = 'Daftar warga Republic Of Roleplay', value = 'theory_test'},
+                elements = {
+                    {label = 'Daftar warga Republic Of Roleplay', value = 'theory_test'},
+                },
             }, function(data, menu)
-                StartTheoryTest()
-                menu.close()
-            end)
+                    StartTheoryTest()
+                    menu.close()
+                end
+            )
 		else
 			ESX.ShowNotification('Kamu bukan warga baru')
 		end
