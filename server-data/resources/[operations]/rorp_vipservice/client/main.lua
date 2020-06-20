@@ -3,7 +3,7 @@ ESX = nil
 local PlayerData              = {}
 
 local pakjoni = {
-	{type = 4, hash = 2120901815, x = -145.18, y = -643.49, z = 167.82, h = 273.2}
+	{type = 4, hash = 2705543429, x = -145.18, y = -643.49, z = 167.82, h = 273.2}
 }
 
 Citizen.CreateThread(function()
@@ -16,8 +16,8 @@ Citizen.CreateThread(function()
         Citizen.Wait(10)
 	end
 
-	RequestModel(2120901815)
-	while ( not HasModelLoaded( 2120901815 ) ) do
+	RequestModel(2705543429)
+	while ( not HasModelLoaded( 2705543429 ) ) do
 		Citizen.Wait( 1 )
 	end
 
@@ -60,34 +60,18 @@ end)
 
 
 function ShowRewardListingMenu()
-	ESX.TriggerServerCallback('esx_vip:cekWargabaru', function(wargabaru)
-
-		if wargabaru == true then
-
-			ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'rewardmenu', {
-				title    = 'Pengambilan Hadiah',
-				align    = 'bottom-right',
-				elements = {
-					{label = 'Ambil hadiah mobil', value = 'hadiah_wargabaru'},
-				  },
-			}, function(data, menu)
-				local generatedPlate = GeneratePlate()
-				local model = Config.ModelMobilWargaBaru
-					ESX.TriggerServerCallback('esx_vip:giftCar', function(success)
-						if success then
-							menu.close()
-						end
-					end, generatedPlate, model)
-					ESX.TriggerServerCallback('esx_vip:removeStatWargaBaru')
-				end
-			)
-		else
-			ESX.ShowNotification('Tidak ada hadiah untuk kamu saat ini')
-		end
+ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'rewardmenu', {
+	title    = 'Pengambilan Hadiah',
+	align    = 'bottom-right',
+	elements = {
+		{label = 'Belum ada data', value = 'test'},
+		},
+}, function(data, menu)
+	ESX.ShowNotification('Belum FIX COK !')
 	end)
 end
 
-AddEventHandler('esx_vip:hasExitedMarker', function(zone)
+AddEventHandler('rorp_vipservice:hasExitedMarker', function(zone)
 	ESX.UI.Menu.CloseAll()
 end)
 
@@ -118,7 +102,7 @@ Citizen.CreateThread(function()
 
 		if not isInMarker and hasAlreadyEnteredMarker then
 			hasAlreadyEnteredMarker = false
-			TriggerEvent('esx_vip:hasExitedMarker')
+			TriggerEvent('rorp_vipservice:hasExitedMarker')
 		end
 	end
 end)
