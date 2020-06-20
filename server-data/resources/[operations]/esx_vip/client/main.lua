@@ -39,8 +39,8 @@ end)
 
 -- Create blips
 Citizen.CreateThread(function()
-	for i=1, #Config.Zones, 1 do
-		local blip = AddBlipForCoord(Config.Zones[i])
+	for i=1, #Config.Blips, 1 do
+		local blip = AddBlipForCoord(Config.Blips[i])
 		SetBlipSprite (blip, 304)
 		SetBlipDisplay(blip, 4)
 		SetBlipScale  (blip, 1.0)
