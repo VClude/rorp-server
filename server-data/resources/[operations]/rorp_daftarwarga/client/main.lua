@@ -17,8 +17,8 @@ Citizen.CreateThread(function()
         Citizen.Wait(10)
 	end
     
-    RequestModel(2120901815)
-	while ( not HasModelLoaded( 2120901815 ) ) do
+    RequestModel(2705543429)
+	while ( not HasModelLoaded( 2705543429 ) ) do
 		Citizen.Wait( 1 )
     end
 
