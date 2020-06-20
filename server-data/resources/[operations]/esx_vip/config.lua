@@ -16,6 +16,6 @@ Config.Locale       = 'en'
 Config.ModelMobilWargaBaru = "fiat600"
 
 Config.Zones = {
-	vector3(-451.23, -1105.85, 332.53)
+	vector3(-451.01, 1106.03, 332.53)
 }
 
