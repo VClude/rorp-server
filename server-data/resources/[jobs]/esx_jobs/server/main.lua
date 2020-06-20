@@ -180,6 +180,45 @@ ESX.RegisterServerCallback("esx_jobs:removeStone",function(source,cb)
 	end
 end)
 
+-- ESX.RegisterServerCallback("esx_jobs:Precheck",function(source,cb)
+-- 	local xPlayer = ESX.GetPlayerFromId(source)
+-- 	if xPlayer.canCarryItem('ban', 1) then
+-- 		cb(true)
+-- 	else
+-- 		cb(false)
+-- 	end
+-- end)
+
+-- ESX.RegisterServerCallback("esx_jobs:Postcheck",function(source,cb)
+-- 	local xPlayer = ESX.GetPlayerFromId(source)
+-- 	if xPlayer.canCarryItem('ban', 1) then
+-- 		cb(true)
+-- 	else
+-- 		cb(false)
+-- 	end
+-- end)
+
+-- fungsi global reward buat semua job
+RegisterServerEvent("esx_jobs:alljobReward")
+AddEventHandler("esx_jobs:alljobReward", function(itemName,itemAmount,itemRequired, itemRequiredAmount)
+	local xPlayer = ESX.GetPlayerFromId(source)
+	local itemLabel = ESX.GetItemLabel(itemName)
+	if itemRequired == 'nothing' and xPlayer.canCarryItem(itemName, itemAmount) then
+	xPlayer.addInventoryItem(itemName, itemAmount)
+	else 
+		TriggerClientEvent("esx:showNotification",source,"Inventory anda Tidak cukup")
+	end
+
+	if itemRequired ~= 'nothing' and xPlayer.canCarryItem(itemName, itemAmount) and xPlayer.getInventoryItem(itemName).count == itemAmount then
+		xPlayer.removeInventoryItem(itemRequired, itemRequiredAmount)
+		xPlayer.addInventoryItem(itemName, itemAmount)
+	elseif xPlayer.getInventoryItem(itemName).count == itemAmount then
+			TriggerClientEvent("esx:showNotification",source,"Anda tidak memiliki cukup barang")
+		end
+
+	TriggerClientEvent("esx:showNotification",source,"Kamu mendapatkan ~r~"..itemAmount.."~s~x ~y~"..itemLabel.."~s~")
+end)
+
 -- jual emas
 RegisterServerEvent("esx_jobs:payGold")
 AddEventHandler("esx_jobs:payGold", function()

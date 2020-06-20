@@ -330,7 +330,7 @@ AddEventHandler('esx_jobs:action', function(job, zone, zoneIndex)
 			exports['progressBars']:startUI((zone.Duration), zone.Name)
 			Citizen.Wait(zone.Duration)
 			for k,v in pairs(zone.Item) do
-				TriggerServerEvent("esx_jobs:reward",v.db_name,v.add)
+				TriggerServerEvent("esx_jobs:alljobReward",v.db_name,v.add, v.requires, v.remove)
 				end
 			FreezeEntityPosition(playerPed, false)
 			onWork = false
