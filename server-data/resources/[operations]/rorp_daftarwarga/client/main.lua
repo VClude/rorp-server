@@ -67,8 +67,11 @@ function StopTheoryTest(success)
 
     if success then
         local generatedPlate = GeneratePlate()
-		local model = Config.ModelMobilWargaBaru
-        TriggerServerEvent('rorp_daftarwarga:giftCar', generatePlate, model)
+        print(generatedPlate)
+        local model = Config.ModelMobilWargaBaru
+        print(model)
+        -- TriggerServerEvent('rorp_daftarwarga:giftCar', generatePlate, model)
+        ESX.ShowNotification('BERHASIL')
 	else
 		ESX.ShowNotification(_U('test_gagal'))
 	end
