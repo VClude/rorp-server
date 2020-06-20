@@ -203,20 +203,25 @@ RegisterServerEvent("esx_jobs:alljobReward")
 AddEventHandler("esx_jobs:alljobReward", function(itemName,itemAmount,itemRequired, itemRequiredAmount)
 	local xPlayer = ESX.GetPlayerFromId(source)
 	local itemLabel = ESX.GetItemLabel(itemName)
-	if itemRequired == 'nothing' and xPlayer.canCarryItem(itemName, itemAmount) then
-	xPlayer.addInventoryItem(itemName, itemAmount)
+	if itemRequired == 'nothing' then
+		-- if xPlayer.canCarryItem(itemName, itemAmount) then
+			xPlayer.addInventoryItem(itemName, itemAmount)
+			TriggerClientEvent("esx:showNotification",source,"Kamu mendapatkan ~r~"..itemAmount.."~s~x ~y~"..itemLabel.."~s~")
+		-- else
+			-- TriggerClientEvent("esx:showNotification",source,"Inventory "..itemName.." anda "..itemAmount.." Tidak cukup")
+		-- end
 	else 
-		TriggerClientEvent("esx:showNotification",source,"Inventory anda Tidak cukup")
+		if xPlayer.getInventoryItem(itemRequired).count == itemRequiredAmount then
+			if xPlayer.canCarryItem(itemName, itemAmount) then
+				xPlayer.addInventoryItem(itemName, itemAmount)
+				TriggerClientEvent("esx:showNotification",source,"Kamu mendapatkan ~r~"..itemAmount.."~s~x ~y~"..itemLabel.."~s~")
+			else
+				TriggerClientEvent("esx:showNotification",source,"Inventory 2 anda Tidak cukup")
+			end
+		else
+			TriggerClientEvent("esx:showNotification",source,"Anda tidak memiliki barang")
+		end	
 	end
-
-	if itemRequired ~= 'nothing' and xPlayer.canCarryItem(itemName, itemAmount) and xPlayer.getInventoryItem(itemName).count == itemAmount then
-		xPlayer.removeInventoryItem(itemRequired, itemRequiredAmount)
-		xPlayer.addInventoryItem(itemName, itemAmount)
-	elseif xPlayer.getInventoryItem(itemName).count == itemAmount then
-			TriggerClientEvent("esx:showNotification",source,"Anda tidak memiliki cukup barang")
-		end
-
-	TriggerClientEvent("esx:showNotification",source,"Kamu mendapatkan ~r~"..itemAmount.."~s~x ~y~"..itemLabel.."~s~")
 end)
 
 -- jual emas

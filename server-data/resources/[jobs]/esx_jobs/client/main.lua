@@ -290,7 +290,7 @@ AddEventHandler('esx_jobs:action', function(job, zone, zoneIndex)
 		hintToDisplay = nil
 		hintIsShowed = false
 		local playerPed = PlayerPedId()
-
+		
 		if IsPedOnFoot(playerPed) then
 			-- TriggerEvent("mythic_progressbar:client:progress", {
 			-- 	name = "unique_action_name",
