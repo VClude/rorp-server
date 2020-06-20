@@ -211,7 +211,7 @@ AddEventHandler("esx_jobs:alljobReward", function(itemName,itemAmount,itemRequir
 			TriggerClientEvent("esx:showNotification",source,"anda tidak bisa membawa lebih banyak "..itemName.."")
 		end
 	else 
-		if xPlayer.getInventoryItem(itemRequired).count == itemRequiredAmount then
+		if xPlayer.getInventoryItem(itemRequired).count >= itemRequiredAmount then
 			if xPlayer.canCarryItem(itemName, itemAmount) then
 				xPlayer.removeInventoryItem(itemRequired, itemRequiredAmount)
 				xPlayer.addInventoryItem(itemName, itemAmount)
