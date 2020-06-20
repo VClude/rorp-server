@@ -3,8 +3,8 @@ local CurrentAction     = nil
 local CurrentActionMsg  = nil
 local CurrentTest       = nil
 
-local paktoto = {
-	{type = 4, hash = 2705543429, x = -125.9, y = -641.01, z = 168.82, h = 101.28}
+local dataPakToto = {
+	{type = 4, hash = 2705543429, x = -125.77, y = -640.9, z = 168.82, h = 92.94}
 }
 
 Citizen.CreateThread(function()
@@ -22,7 +22,7 @@ Citizen.CreateThread(function()
 		Citizen.Wait( 1 )
     end
 
-    for _, item in pairs(paktoto) do
+    for _, item in pairs(dataPakToto) do
 		paktoto =  CreatePed(item.type, item.hash, item.x, item.y, item.z, item.h, false, true)
 		SetBlockingOfNonTemporaryEvents(paktoto, true)
 		SetPedDiesWhenInjured(paktoto, false)
@@ -84,8 +84,11 @@ function StopTheoryTest(success)
         local model = Config.ModelMobilWargaBaru
         ESX.TriggerServerCallback('rorp_daftarwarga:giftCar',function(success)
             if success then
-                ESX.ShowNotification(_U('test_berhasil')..generatedPlate)
                 ESX.TriggerServerCallback('rorp_daftarwarga:removeStatWargaBaru')
+                ESX.ShowNotification(_U('test_berhasil'))
+                Citizen.Wait(2000)
+                ESX.ShowNotification('Silahkan ambil mobil anda di ~b~Garasi Walikota~w~ dengan Plat No: ~g~'..generatedPlate)
+                
             end
         end, generatedPlate, model)
 	else
