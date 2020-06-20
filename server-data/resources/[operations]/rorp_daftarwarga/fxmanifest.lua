@@ -11,14 +11,15 @@ server_scripts {
 	'@es_extended/locale.lua',
 	'config.lua',
 	'locales/en.lua',
-	'server/main.lua'
+    'server/main.lua'
 }
 
 client_scripts {
 	'@es_extended/locale.lua',
 	'config.lua',
 	'locales/en.lua',
-	'client/main.lua'
+    'client/main.lua',
+    'client/utils.lua'
 
 }
 ui_page 'html/ui.html'
