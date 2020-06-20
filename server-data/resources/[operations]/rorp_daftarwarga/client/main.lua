@@ -58,13 +58,13 @@ function BukaMenuDaftarPenduduk()
 
 		if wargabaru == true then
             table.insert(elements, {
-                label = (('%s: <span style="color:green;">%s</span>'):format(_U('warga_baru'))),
+                label = (_U('bukan_warga_baru')),
                 value = 'theory_test'
             })
 		else
 
 			table.insert(elements, {
-                label = (('%s: <span style="color:green;">%s</span>'):format(_U('bukan_warga_baru'))),
+                label = (_U('bukan_warga_baru')),
                 value = 'bukan_warga_baru'
             })
 		end
