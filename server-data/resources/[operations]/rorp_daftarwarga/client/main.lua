@@ -66,6 +66,8 @@ function StopTheoryTest(success)
 	SetNuiFocus(false)
 
     if success then
+        local generatedPlate = GeneratePlate()
+		local model = Config.ModelMobilWargaBaru
         TriggerServerEvent('rorp_daftarwarga:giftCar', generatePlate, model)
 	else
 		ESX.ShowNotification(_U('test_gagal'))
