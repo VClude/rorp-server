@@ -82,11 +82,8 @@ function ShowRewardListingMenu()
 				end
 			)
 		else
-
 			ESX.ShowNotification('Tidak ada hadiah untuk kamu saat ini')
-
 		end
-
 	end)
 end
 
