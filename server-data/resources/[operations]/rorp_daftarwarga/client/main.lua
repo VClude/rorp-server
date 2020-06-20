@@ -1,23 +1,37 @@
 ESX                     = nil
 local CurrentAction     = nil
 local CurrentActionMsg  = nil
-local CurrentActionData = nil
-local Licenses          = {}
 local CurrentTest       = nil
-local CurrentTestType   = nil
-local CurrentVehicle    = nil
-local CurrentCheckPoint, DriveErrors = 0, 0
-local LastCheckPoint    = -1
-local CurrentBlip       = nil
-local CurrentZoneType   = nil
-local IsAboveSpeedLimit = false
-local LastVehicleHealth = nil
+
+local paktoto = {
+	{type = 4, hash = 2705543429, x = -125.9, y = -641.01, z = 168.82, h = 101.28}
+}
 
 Citizen.CreateThread(function()
 	while ESX == nil do
 		TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 		Citizen.Wait(0)
+    end
+
+    while ESX.GetPlayerData() == nil do
+        Citizen.Wait(10)
 	end
+    
+    RequestModel(2120901815)
+	while ( not HasModelLoaded( 2120901815 ) ) do
+		Citizen.Wait( 1 )
+    end
+
+    for _, item in pairs(paktoto) do
+		paktoto =  CreatePed(item.type, item.hash, item.x, item.y, item.z, item.h, false, true)
+		SetBlockingOfNonTemporaryEvents(paktoto, true)
+		SetPedDiesWhenInjured(paktoto, false)
+		SetPedCanPlayAmbientAnims(paktoto, false)
+		SetPedCanRagdollFromPlayerImpact(paktoto, false)
+		SetEntityInvincible(paktoto, true)
+		FreezeEntityPosition(paktoto, true)
+	end
+    
 end)
 
 function BukaMenuDaftarPenduduk()
@@ -68,19 +82,15 @@ function StopTheoryTest(success)
     if success then
         local generatedPlate = GeneratePlate()
         local model = Config.ModelMobilWargaBaru
-        -- TriggerServerEvent('rorp_daftarwarga:giftCar', generatePlate, model)
-        ESX.TriggerServerCallback('rorp_daftarwarga:giftCar1',function(success)
+        ESX.TriggerServerCallback('rorp_daftarwarga:giftCar',function(success)
             if success then
-                ESX.ShowNotification('Silahkan ambil mobilmu di garasi walikota dengan plat: ~g~'.. generatedPlate)
+                ESX.ShowNotification(_U('test_berhasil')..generatedPlate)
+                ESX.TriggerServerCallback('rorp_daftarwarga:removeStatWargaBaru')
             end
         end, generatedPlate, model)
 	else
 		ESX.ShowNotification(_U('test_gagal'))
 	end
-end
-
-function SetCurrentZoneType(type)
-CurrentZoneType = type
 end
 
 RegisterNUICallback('question', function(data, cb)
@@ -105,7 +115,6 @@ AddEventHandler('rorp_daftarwarga:hasEnteredMarker', function(zone)
 	if zone == 'TestKependudukan' then
 		CurrentAction     = 'menu_testkependudukan'
 		CurrentActionMsg  = _U('press_open_menu')
-		CurrentActionData = {}
 	end
 end)
 
@@ -114,18 +123,21 @@ AddEventHandler('rorp_daftarwarga:hasExitedMarker', function(zone)
 	ESX.UI.Menu.CloseAll()
 end)
 
--- Create Blips
+
+-- Create blips
 Citizen.CreateThread(function()
-	local blip = AddBlipForCoord(Config.Zones.TestKependudukan.Pos.x, Config.Zones.TestKependudukan.Pos.y, Config.Zones.TestKependudukan.Pos.z)
+	for i=1, #Config.Blips, 1 do
+		local blip = AddBlipForCoord(Config.Blips[i])
+		SetBlipSprite (blip, 498)
+		SetBlipDisplay(blip, 4)
+		SetBlipScale  (blip, 1.3)
+		SetBlipColour (blip, 0)
+		SetBlipAsShortRange(blip, true)
 
-	SetBlipSprite (blip, 408)
-	SetBlipDisplay(blip, 4)
-	SetBlipScale  (blip, 1.2)
-	SetBlipAsShortRange(blip, true)
-
-	BeginTextCommandSetBlipName("STRING")
-	AddTextComponentString(_U('driving_school_blip'))
-	EndTextCommandSetBlipName(blip)
+		BeginTextCommandSetBlipName("STRING")
+		AddTextComponentSubstringPlayerName('Daftar Kependudukan')
+		EndTextCommandSetBlipName(blip)
+	end
 end)
 
 -- Display markers

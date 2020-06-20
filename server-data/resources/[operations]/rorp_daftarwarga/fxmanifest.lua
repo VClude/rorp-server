@@ -10,14 +10,14 @@ server_scripts {
 	'@mysql-async/lib/MySQL.lua',
 	'@es_extended/locale.lua',
 	'config.lua',
-	'locales/en.lua',
+	'locales/id.lua',
     'server/main.lua'
 }
 
 client_scripts {
 	'@es_extended/locale.lua',
 	'config.lua',
-	'locales/en.lua',
+	'locales/id.lua',
     'client/main.lua',
     'client/utils.lua'
 
@@ -27,7 +27,7 @@ ui_page 'html/ui.html'
 files {
 	'html/ui.html',
 	'html/logo.png',
-	'html/dmv.png',
+	'html/id_card.png',
 	'html/styles.css',
 	'html/questions.js',
 	'html/scripts.js',

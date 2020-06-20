@@ -28,24 +28,7 @@ AddEventHandler('esx_dmvschool:pay', function(price)
 	TriggerClientEvent('esx:showNotification', _source, _U('you_paid', ESX.Math.GroupDigits(price)))
 end)
 
-RegisterNetEvent('rorp_daftarwarga:giftCar')
-AddEventHandler('rorp_daftarwarga:giftCar', function(plate, model)
-	local xPlayer = ESX.GetPlayerFromId(source)
-
-	MySQL.Async.execute('INSERT INTO owned_vehicles (owner, plate, vehicle, type, stored, garage_name) VALUES (@owner, @plate, @vehicle, @type, @stored, @garage_name)', {
-		['@owner'] = xPlayer.identifier,
-		['@plate'] = plate,
-		['@vehicle'] = json.encode({modPlateHolder = -1, modDashboard = -1, modAerials = -1, modTrunk = -1, modTrimA = -1, modSteeringWheel = -1, modDoorSpeaker = -1, modBrakes = 2, modSpeakers = -1, plate = plate , modGrille = -1, modFrame = 0, modShifterLeavers = -1, modStruts = -1, modRearBumper = -1, modAirFilter = -1, modTransmission = -1, windowTint = -1, modFrontBumper = -1, modAPlate = -1, modFender = -1, modTank = -1, modSeats = -1, modExhaust = -1, modEngine = -1, modHood = -1, modEngineBlock = -1, modSuspension = 3, modSideSkirt = -1, modelName = fiat600, modSmokeEnabled = 1, modSpoilers = -1, modRoof = -1, modHorns = -1, modHydrolic = -1, modFrontWheels = -1, modVanityPlate = -1, modOrnaments = -1, modWindows = -1, modDial = -1, modArchCover = -1, modRightFender = -1, modArmor = -1, modXenon = false, modBackWheels = -1, modTurbo = 1, modTrimB = -1, modLivery = -1, model = GetHashKey(model)}),
-		['@type'] = 'car',
-		['@stored'] = 1,
-		['@garage_name'] = 'Garasi_Walkot'
-	}, function(rowsChanged)
-		xPlayer.showNotification('Silahkan ambil mobilmu di garasi walikota dengan plat: ~g~'.. plate)
-		-- TriggerEvent('rorp_daftarwarga:removeStatWargaBaru')
-	end)
-end)
-
-ESX.RegisterServerCallback('rorp_daftarwarga:giftCar1', function(source, cb, plate, model)
+ESX.RegisterServerCallback('rorp_daftarwarga:giftCar', function(source, cb, plate, model)
 	local xPlayer = ESX.GetPlayerFromId(source)
 
 	MySQL.Async.execute('INSERT INTO owned_vehicles (owner, plate, vehicle, type, stored, garage_name) VALUES (@owner, @plate, @vehicle, @type, @stored, @garage_name)', {
@@ -82,16 +65,13 @@ ESX.RegisterServerCallback('rorp_daftarwarga:cekWargabaru', function(source, cb)
 	end)
 end)
 
-RegisterNetEvent('rorp_daftarwarga:removeStatWargaBaru')
-AddEventHandler('rorp_daftarwarga:removeStatWargaBaru', function(source)
+ESX.RegisterServerCallback('rorp_daftarwarga:removeStatWargaBaru', function(source)
 	local xPlayer = ESX.GetPlayerFromId(source)
 
 	MySQL.Async.execute('UPDATE users SET wargaBaru = @wargaBaru where identifier = @identifier', {
 		['@identifier'] = xPlayer.identifier,
 		['@wargaBaru'] = 0
 	})
-
-
 end)
 
 Citizen.CreateThread(function()
