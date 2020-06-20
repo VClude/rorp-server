@@ -57,36 +57,26 @@ function BukaMenuDaftarPenduduk()
     ESX.TriggerServerCallback('rorp_daftarwarga:cekWargabaru', function(wargabaru)
 
 		if wargabaru == true then
-            table.insert(elements, {
-                label = (_U('bukan_warga_baru')),
-                value = 'theory_test'
-            })
+            ESX.UI.Menu.CloseAll()
+
+	        ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'daftar_warga_baru', {
+                title    = _U('driving_school'),
+                elements = elements,
+                align    = 'bottom-right'
+            }, function(data, menu)
+                if data.current.value == 'theory_test' then
+                    menu.close()
+                    StartTheoryTest()
+                else
+                    menu.close()
+                end
+                ESX.UI.Menu.CloseAll()
+            end)
 		else
-
-			table.insert(elements, {
-                label = (_U('bukan_warga_baru')),
-                value = 'bukan_warga_baru'
-            })
+			ESX.ShowNotification('Kamu bukan warga baru')
 		end
 	end)
 
-	local elements = {}
-
-	ESX.UI.Menu.CloseAll()
-
-	ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'daftar_warga_baru', {
-		title    = _U('driving_school'),
-		elements = elements,
-		align    = 'bottom-right'
-	}, function(data, menu)
-		if data.current.value == 'theory_test' then
-			menu.close()
-            StartTheoryTest()
-        else
-            menu.close()
-		end
-		ESX.UI.Menu.CloseAll()
-	end)
 end
 
 RegisterNUICallback('question', function(data, cb)
