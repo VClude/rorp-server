@@ -57,15 +57,14 @@ function BukaMenuDaftarPenduduk()
     ESX.TriggerServerCallback('rorp_daftarwarga:cekWargabaru', function(wargabaru)
 
 		if wargabaru == true then
-            ESX.UI.Menu.CloseAll()
 
 	        ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'daftar_warga_baru', {
-                title    = _U('driving_school'),
+                title    = 'Daftar Kependudukan',
+                align    = 'bottom-right',
                 elements = {label = 'Daftar warga Republic Of Roleplay', value = 'theory_test'},
-                align    = 'bottom-right'
             }, function(data, menu)
-                menu.close()
                 StartTheoryTest()
+                menu.close()
             end)
 		else
 			ESX.ShowNotification('Kamu bukan warga baru')
