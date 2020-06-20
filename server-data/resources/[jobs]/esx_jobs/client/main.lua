@@ -543,8 +543,11 @@ Citizen.CreateThread(function()
 		local zones, currentZone, currentZoneIndex, isInMarker = {}
 		local letSleep, playerPed = true, PlayerPedId()
 		local playerCoords = GetEntityCoords(playerPed)
+		if PlayerData == nil then
 
-		if PlayerData.job then
+		elseif PlayerData.job == nil then
+
+		else
 			if Config.Jobs[PlayerData.job.name] then
 				zones = Config.Jobs[PlayerData.job.name].Zones
 			end

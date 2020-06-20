@@ -180,9 +180,9 @@ ESX.RegisterServerCallback("esx_jobs:removeStone",function(source,cb)
 	end
 end)
 
--- ESX.RegisterServerCallback("esx_jobs:Precheck",function(source,cb)
+-- ESX.RegisterServerCallback("esx_jobs:preCheck",function(source,cb)
 -- 	local xPlayer = ESX.GetPlayerFromId(source)
--- 	if xPlayer.canCarryItem('ban', 1) then
+-- 	if xPlayer.canCarryItem('petrol', 24) then
 -- 		cb(true)
 -- 	else
 -- 		cb(false)
@@ -204,19 +204,20 @@ AddEventHandler("esx_jobs:alljobReward", function(itemName,itemAmount,itemRequir
 	local xPlayer = ESX.GetPlayerFromId(source)
 	local itemLabel = ESX.GetItemLabel(itemName)
 	if itemRequired == 'nothing' then
-		-- if xPlayer.canCarryItem(itemName, itemAmount) then
+		if xPlayer.canCarryItem(itemName, itemAmount) then
 			xPlayer.addInventoryItem(itemName, itemAmount)
 			TriggerClientEvent("esx:showNotification",source,"Kamu mendapatkan ~r~"..itemAmount.."~s~x ~y~"..itemLabel.."~s~")
-		-- else
-			-- TriggerClientEvent("esx:showNotification",source,"Inventory "..itemName.." anda "..itemAmount.." Tidak cukup")
-		-- end
+		else
+			TriggerClientEvent("esx:showNotification",source,"anda tidak bisa membawa lebih banyak "..itemName.."")
+		end
 	else 
 		if xPlayer.getInventoryItem(itemRequired).count == itemRequiredAmount then
 			if xPlayer.canCarryItem(itemName, itemAmount) then
+				xPlayer.removeInventoryItem(itemRequired, itemRequiredAmount)
 				xPlayer.addInventoryItem(itemName, itemAmount)
 				TriggerClientEvent("esx:showNotification",source,"Kamu mendapatkan ~r~"..itemAmount.."~s~x ~y~"..itemLabel.."~s~")
 			else
-				TriggerClientEvent("esx:showNotification",source,"Inventory 2 anda Tidak cukup")
+				TriggerClientEvent("esx:showNotification",source,"anda tidak bisa membawa lebih banyak barang")
 			end
 		else
 			TriggerClientEvent("esx:showNotification",source,"Anda tidak memiliki barang")
