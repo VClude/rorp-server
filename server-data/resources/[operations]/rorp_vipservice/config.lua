@@ -12,5 +12,5 @@ Config.Zones = {
 }
 
 Config.Blips = {
-	vector3(-451.01, 1106.03, 332.53)
+	vector3(-426.41, 1095.93, 335.11)
 }
