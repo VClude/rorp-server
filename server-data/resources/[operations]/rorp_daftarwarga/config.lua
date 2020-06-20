@@ -12,3 +12,11 @@ Config.Zones = {
 	},
 
 }
+
+Config.ModelMobilWargaBaru = "fiat600"
+
+-- looks like this: 'LLL NNN'
+-- The maximum plate length is 8 chars (including spaces & symbols), don't go past it!
+Config.PlateLetters = 3
+Config.PlateNumbers = 3
+Config.PlateUseSpace = true
