@@ -61,19 +61,11 @@ function BukaMenuDaftarPenduduk()
 
 	        ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'daftar_warga_baru', {
                 title    = _U('driving_school'),
-                elements = {
-                    label = 'Daftar menjadi warga Republic Of Roleplay',
-                    value = 'theory_test'
-                },
+                elements = {label = 'Daftar warga Republic Of Roleplay', value = 'theory_test'},
                 align    = 'bottom-right'
             }, function(data, menu)
-                if data.current.value == 'theory_test' then
-                    menu.close()
-                    StartTheoryTest()
-                else
-                    menu.close()
-                end
-                ESX.UI.Menu.CloseAll()
+                menu.close()
+                StartTheoryTest()
             end)
 		else
 			ESX.ShowNotification('Kamu bukan warga baru')
