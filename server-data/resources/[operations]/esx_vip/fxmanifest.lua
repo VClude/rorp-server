@@ -2,7 +2,7 @@ fx_version 'adamant'
 
 game 'gta5'
 
-description 'ESX Job Listing'
+description 'ESX VIP'
 
 version '1.1.0'
 

@@ -2,9 +2,9 @@ local menuIsShowed, hasAlreadyEnteredMarker, isInMarker = false, false, false
 ESX = nil
 local PlayerData              = {}
 
-local pakjoni = {
-	{type = 4, hash = 2120901815, x = -145.18, y = -643.49, z = 167.82, h = 273.2}
-}
+-- local pakjoni = {
+-- 	{type = 4, hash = 2120901815, x = -145.18, y = -643.49, z = 167.82, h = 273.2}
+-- }
 
 Citizen.CreateThread(function()
 	while ESX == nil do
@@ -16,10 +16,10 @@ Citizen.CreateThread(function()
         Citizen.Wait(10)
 	end
 
-	RequestModel(2120901815)
-	while ( not HasModelLoaded( 2120901815 ) ) do
-		Citizen.Wait( 1 )
-	end
+	-- RequestModel(2120901815)
+	-- while ( not HasModelLoaded( 2120901815 ) ) do
+	-- 	Citizen.Wait( 1 )
+	-- end
 
 -- -- 	-- #### Spawners #### --
 -- --   -- Spawn DJs
