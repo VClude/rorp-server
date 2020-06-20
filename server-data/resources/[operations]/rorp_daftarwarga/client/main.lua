@@ -4,7 +4,7 @@ local CurrentActionMsg  = nil
 local CurrentTest       = nil
 
 local dataPakToto = {
-	{type = 4, hash = 2705543429, x = -125.77, y = -640.9, z = 167.82, h = 92.94}
+	{type = 4, hash = 2120901815, x = -125.77, y = -640.9, z = 167.82, h = 92.94}
 }
 
 Citizen.CreateThread(function()
@@ -17,8 +17,8 @@ Citizen.CreateThread(function()
         Citizen.Wait(10)
 	end
     
-    RequestModel(2705543429)
-	while ( not HasModelLoaded( 2705543429 ) ) do
+    RequestModel(2120901815)
+	while (not HasModelLoaded(2120901815)) do
 		Citizen.Wait( 1 )
     end
 

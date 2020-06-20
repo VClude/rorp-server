@@ -1,5 +1,5 @@
 Config                 = {}
-Config.DrawDistance    = 50.0
+Config.DrawDistance    = 5.0
 Config.Locale          = 'id'
 
 Config.Zones = {
