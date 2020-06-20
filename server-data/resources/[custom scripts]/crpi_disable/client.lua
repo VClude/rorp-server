@@ -14,6 +14,11 @@ local gates = {
 	"prop_sec_barrier_ld_02a"
 }
 
+RegisterCommand('stuck', function(source)
+	ClearPedTasksImmediately(GetPlayerPed(-1))
+	SetNuiFocus(false, false)
+end,false)
+
 Citizen.CreateThread( function()
     while true do 
         Citizen.Wait( 1 )

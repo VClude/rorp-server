@@ -3,11 +3,6 @@ local firstSpawn, PlayerLoaded = true, false
 isDead = false
 ESX = nil
 
-RegisterCommand('stuck', function(source)
-	ClearPedTasksImmediately(GetPlayerPed(-1))
-end,false)
-
-
 Citizen.CreateThread(function()
 	while ESX == nil do
 		TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
