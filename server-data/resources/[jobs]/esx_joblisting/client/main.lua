@@ -39,10 +39,10 @@ Citizen.CreateThread(function()
 	
 end)
 
-RegisterNetEvent('esx:playerLoaded')
-AddEventHandler('esx:playerLoaded', function(xPlayer)
-    PlayerData = xPlayer
-end)
+-- RegisterNetEvent('esx:playerLoaded')
+-- AddEventHandler('esx:playerLoaded', function(xPlayer)
+--     PlayerData = xPlayer
+-- end)
 
 function LoadMarkers()
     Citizen.CreateThread(function()
