@@ -90,7 +90,7 @@ function ShowRewardListingMenu()
 	end)
 end
 
-AddEventHandler('esx_joblisting:hasExitedMarker', function(zone)
+AddEventHandler('esx_vip:hasExitedMarker', function(zone)
 	ESX.UI.Menu.CloseAll()
 end)
 
@@ -121,7 +121,7 @@ Citizen.CreateThread(function()
 
 		if not isInMarker and hasAlreadyEnteredMarker then
 			hasAlreadyEnteredMarker = false
-			TriggerEvent('esx_joblisting:hasExitedMarker')
+			TriggerEvent('esx_vip:hasExitedMarker')
 		end
 	end
 end)
