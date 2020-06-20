@@ -141,7 +141,7 @@ end)
 -- Server Callback to get inventory pickaxe:
 ESX.RegisterServerCallback("esx_jobs:getPickaxe",function(source,cb)
 	local xPlayer = ESX.GetPlayerFromId(source)
-	if xPlayer.getInventoryItem("pickaxe").count >= 1 then
+	if xPlayer.getInventoryItem("pickaxe").count >= 1 and xPlayer.getJob().name == 'miner' then
 		cb(true)
 	else
 		cb(false)
@@ -151,7 +151,7 @@ end)
 -- Server Callback to get inventory washing pan:
 ESX.RegisterServerCallback("esx_jobs:getWashPan",function(source,cb)
 	local xPlayer = ESX.GetPlayerFromId(source)
-	if xPlayer.getInventoryItem("washpan").count >= 1 then
+	if xPlayer.getInventoryItem("washpan").count >= 1  and xPlayer.getJob().name == 'miner' then
 		cb(true)
 	else
 		cb(false)
@@ -161,7 +161,7 @@ end)
 -- Server Callback to get washed stone:
 ESX.RegisterServerCallback("esx_jobs:getWashedStone",function(source,cb)
 	local xPlayer = ESX.GetPlayerFromId(source)
-	if xPlayer.getInventoryItem("washed_stone").count >= 10 then
+	if xPlayer.getInventoryItem("washed_stone").count >= 10  and xPlayer.getJob().name == 'miner' then
 		xPlayer.removeInventoryItem("washed_stone", 10)
 		cb(true)
 	else
@@ -172,7 +172,7 @@ end)
 -- Server Callback to get stone count & remove stone:
 ESX.RegisterServerCallback("esx_jobs:removeStone",function(source,cb)
 	local xPlayer = ESX.GetPlayerFromId(source)
-	if xPlayer.getInventoryItem("stone").count >= 10 then
+	if xPlayer.getInventoryItem("stone").count >= 10  and xPlayer.getJob().name == 'miner' then
 		xPlayer.removeInventoryItem("stone", 10)
 		cb(true)
 	else

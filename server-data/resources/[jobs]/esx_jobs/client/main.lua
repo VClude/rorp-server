@@ -87,7 +87,7 @@ Citizen.CreateThread(function()
 							if pickaxe then
 								MiningEvent()	
 							else
-								ESX.ShowNotification("Kamu membutuhkan ~y~pickaxe~s~ untuk ~b~Menambang~s~ disini!")
+								ESX.ShowNotification("Kamu membutuhkan ~y~pickaxe~s~ serta Menjadi Penambang untuk ~b~Menambang~s~ disini!")
 							end
 						end)
 					else
@@ -173,7 +173,7 @@ Citizen.CreateThread(function()
 						if washPan then
 							WasherEvent()
 						else
-							ESX.ShowNotification("Kamu membutuhkan ~y~wash pan~s~ untuk ~b~Mencuci~s~ disini!")
+							ESX.ShowNotification("Kamu membutuhkan ~y~wash pan~s~ serta Menjadi Penambang untuk ~b~Mencuci~s~ disini!")
 						end
 					end)
 					Citizen.Wait(300)
@@ -200,7 +200,7 @@ function WasherEvent()
 			Citizen.Wait(10000)
 			TriggerServerEvent("esx_jobs:reward",'washed_stone',10)	
 		else
-			ESX.ShowNotification("Kamu membutuhkan ~y~10x Batu~s~ untuk ~b~Mencuci~s~ disini!")
+			ESX.ShowNotification("Kamu membutuhkan ~y~10x Batu~s~ serta Menjadi Penambang untuk ~b~Mencuci~s~ disini!")
 		end
 		ClearPedTasks(playerPed)
 		FreezeEntityPosition(playerPed, false)
@@ -229,7 +229,7 @@ Citizen.CreateThread(function()
 							if WashedStone then
 								SmeltingEvent()	
 							else
-								ESX.ShowNotification("Kamu membutuhkan sekiranya ~y~10x Batu Bersih~s~ untuk di ~b~Lebur~s~ disini!")
+								ESX.ShowNotification("Kamu membutuhkan sekiranya ~y~10x Batu Bersih~s~ serta Menjadi Penambang untuk di ~b~Lebur~s~ disini!")
 							end
 						end)
 					else
