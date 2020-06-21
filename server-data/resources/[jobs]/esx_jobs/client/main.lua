@@ -429,7 +429,7 @@ AddEventHandler('esx_jobs:action', function(job, zone, zoneIndex)
 		exports['progressBars']:startUI((10000), 'Menjual hasil kerja')
 		Citizen.Wait(10000)
 		for k,v in pairs(zone.Item) do
-			TriggerServerEvent("esx_jobs:alljobPayout",v.db_name,v.price)
+			TriggerServerEvent("esx_jobs:alljobPayout",v.requires,v.price)
 			end
 		FreezeEntityPosition(playerPed, false)
 		onWork = false
