@@ -418,7 +418,21 @@ AddEventHandler('esx_jobs:action', function(job, zone, zoneIndex)
 
 		hintToDisplay = nil
 		hintIsShowed = false
-		TriggerServerEvent('esx_jobs:startWork', zoneIndex)
+		onWork = true
+		local playerPed = PlayerPedId()
+		local coords = GetEntityCoords(playerPed)
+
+		FreezeEntityPosition(playerPed, true)
+		SetCurrentPedWeapon(playerPed, GetHashKey('WEAPON_UNARMED'))
+		Citizen.Wait(200)
+			
+		exports['progressBars']:startUI((10000), 'Menjual hasil kerja')
+		Citizen.Wait(10000)
+		for k,v in pairs(zone.Item) do
+			TriggerServerEvent("esx_jobs:alljobPayout",v.db_name,v.price)
+			end
+		FreezeEntityPosition(playerPed, false)
+		onWork = false
 	end
 
 	--nextStep(zone.GPS)

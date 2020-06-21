@@ -28,7 +28,7 @@ Citizen.CreateThread(function()
 						for k,v in ipairs(data.jobItem) do
 							local itemQtty, requiredItemQtty = 0, 0
 
-							if v.name ~= _U('delivery') then
+							if v.name ~= _U('deliverys') then
 								itemQtty = xPlayer.getInventoryItem(v.db_name).count
 							end
 
@@ -36,14 +36,14 @@ Citizen.CreateThread(function()
 								requiredItemQtty = xPlayer.getInventoryItem(data.jobItem[1].requires).count
 							end
 			
-							if v.name ~= _U('delivery') and itemQtty >= v.max then
+							if v.name ~= _U('deliverys') and itemQtty >= v.max then
 								xPlayer.showNotification(_U('max_limit', v.name))
 								playersWorking[playerId] = nil
 							elseif v.requires ~= 'nothing' and requiredItemQtty <= 0 then
 								xPlayer.showNotification(_U('not_enough', data.jobItem[1].requires_name))
 								playersWorking[playerId] = nil
 							else
-								if v.name ~= _U('delivery') then
+								if v.name ~= _U('deliverys') then
 									-- chances to drop the item
 									if v.drop == 100 then
 										xPlayer.addInventoryItem(v.db_name, v.add)
@@ -224,6 +224,24 @@ AddEventHandler("esx_jobs:alljobReward", function(itemName,itemAmount,itemRequir
 		end	
 	end
 end)
+
+
+-- fungsi global reward buat semua job
+RegisterServerEvent("esx_jobs:alljobPayout")
+AddEventHandler("esx_jobs:alljobPayout", function(itemName, itemPrice)
+	local xPlayer = ESX.GetPlayerFromId(source)
+	local itemLabel = ESX.GetItemLabel(itemName)
+	local itemAmount = xPlayer.getInventoryItem(itemName).count
+	local price = itemPrice * itemAmount
+		if itemAmount > 0 then
+			xPlayer.removeInventoryItem(itemName, itemAmount)
+			xPlayer.addMoney(price)
+			TriggerClientEvent("esx:showNotification",source,"Kamu menjual ~r~"..itemName.."~s~x Sejumlah ~y~"..itemAmount.."~s~")
+		else
+			TriggerClientEvent("esx:showNotification",source,"anda tidak mempunyai "..itemName.." untuk dijual")
+		end
+end)
+
 
 -- jual emas
 RegisterServerEvent("esx_jobs:payGold")
