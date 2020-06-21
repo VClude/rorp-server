@@ -8,14 +8,14 @@ Config.Jobs.fisherman = {
 	Vehicles = {
 
 		Truck = {
-			Spawner = 2,
+			Spawner = 1,
 			Hash = 'benson',
 			Trailer = 'none',
 			HasCaution = true
 		},
 
 		Boat = {
-			Spawner = 1,
+			Spawner = 2,
 			Hash = 'tug',
 			Trailer = 'none',
 			HasCaution = false
