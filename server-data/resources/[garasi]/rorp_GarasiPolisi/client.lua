@@ -81,23 +81,23 @@ Citizen.CreateThread(function()
 end)
 
 -- Blip on Map for Boat Garages:
-Citizen.CreateThread(function()
-	if Config.EnableBoatGarageBlip == true then
-		for k,v in pairs(Config.BoatZones) do
-			for i = 1, #v.Pos, 1 do
-				local blip = AddBlipForCoord(v.Pos[i].x, v.Pos[i].y, v.Pos[i].z)
-				SetBlipSprite(blip, Config.BoatGarageSprite)
-				SetBlipDisplay(blip, Config.BoatGarageDisplay)
-				SetBlipScale  (blip, Config.BoatGarageScale)
-				SetBlipColour (blip, Config.BoatGarageColour)
-				SetBlipAsShortRange(blip, true)
-				BeginTextCommandSetBlipName("STRING")
-				AddTextComponentString(Config.BoatGarageName)
-				EndTextCommandSetBlipName(blip)
-			end
-		end
-	end
-end)
+-- Citizen.CreateThread(function()
+-- 	if Config.EnableBoatGarageBlip == true then
+-- 		for k,v in pairs(Config.BoatZones) do
+-- 			for i = 1, #v.Pos, 1 do
+-- 				local blip = AddBlipForCoord(v.Pos[i].x, v.Pos[i].y, v.Pos[i].z)
+-- 				SetBlipSprite(blip, Config.BoatGarageSprite)
+-- 				SetBlipDisplay(blip, Config.BoatGarageDisplay)
+-- 				SetBlipScale  (blip, Config.BoatGarageScale)
+-- 				SetBlipColour (blip, Config.BoatGarageColour)
+-- 				SetBlipAsShortRange(blip, true)
+-- 				BeginTextCommandSetBlipName("STRING")
+-- 				AddTextComponentString(Config.BoatGarageName)
+-- 				EndTextCommandSetBlipName(blip)
+-- 			end
+-- 		end
+-- 	end
+-- end)
 
 local insideMarker = false
 
@@ -144,22 +144,22 @@ Citizen.CreateThread(function()
 				end
 			end
 
-			for k,v in pairs(Config.BoatZones) do
-				for i = 1, #v.Pos, 1 do
-					local distance = Vdist(coords, v.Pos[i].x, v.Pos[i].y, v.Pos[i].z)
-					if (distance < 20.0) and insideMarker == false then
-						DrawMarker(Config.PoliceBoatMarker, v.Pos[i].x, v.Pos[i].y, v.Pos[i].z, 0.0, 0.0, 0.0, 0.0, 0, 0.0, Config.PoliceBoatMarkerScale.x, Config.PoliceBoatMarkerScale.y, Config.PoliceBoatMarkerScale.z, Config.PoliceBoatMarkerColor.r,Config.PoliceBoatMarkerColor.g,Config.PoliceBoatMarkerColor.b,Config.PoliceBoatMarkerColor.a, false, true, 2, true, false, false, false)						
-					end
-					if (distance < 3.0 ) and insideMarker == false then
-						DrawText3Ds(v.Pos[i].x, v.Pos[i].y, v.Pos[i].z, Config.BoatDraw3DText)
-						if IsControlJustPressed(0, Config.KeyToOpenBoatGarage) then
-							PoliceGarage('boat')
-							insideMarker = true
-							Citizen.Wait(500)
-						end
-					end
-				end
-			end
+			-- for k,v in pairs(Config.BoatZones) do
+			-- 	for i = 1, #v.Pos, 1 do
+			-- 		local distance = Vdist(coords, v.Pos[i].x, v.Pos[i].y, v.Pos[i].z)
+			-- 		if (distance < 20.0) and insideMarker == false then
+			-- 			DrawMarker(Config.PoliceBoatMarker, v.Pos[i].x, v.Pos[i].y, v.Pos[i].z, 0.0, 0.0, 0.0, 0.0, 0, 0.0, Config.PoliceBoatMarkerScale.x, Config.PoliceBoatMarkerScale.y, Config.PoliceBoatMarkerScale.z, Config.PoliceBoatMarkerColor.r,Config.PoliceBoatMarkerColor.g,Config.PoliceBoatMarkerColor.b,Config.PoliceBoatMarkerColor.a, false, true, 2, true, false, false, false)						
+			-- 		end
+			-- 		if (distance < 3.0 ) and insideMarker == false then
+			-- 			DrawText3Ds(v.Pos[i].x, v.Pos[i].y, v.Pos[i].z, Config.BoatDraw3DText)
+			-- 			if IsControlJustPressed(0, Config.KeyToOpenBoatGarage) then
+			-- 				PoliceGarage('boat')
+			-- 				insideMarker = true
+			-- 				Citizen.Wait(500)
+			-- 			end
+			-- 		end
+			-- 	end
+			-- end
 
 			for k,v in pairs(Config.ExtraZones) do
 				for i = 1, #v.Pos, 1 do
@@ -203,8 +203,8 @@ PoliceGarage = function(type)
 				VehicleMenu('car')
 			elseif type == 'helicopter' then
 				VehicleMenu('helicopter')
-			elseif type == 'boat' then
-				VehicleMenu('boat')
+			-- elseif type == 'boat' then
+			-- 	VehicleMenu('boat')
 			end
 		elseif data.current.action == 'store_vehicle' then
 			local veh,dist = ESX.Game.GetClosestVehicle(playerCoords)
@@ -257,10 +257,10 @@ VehicleMenu = function(type)
 		for k,v in pairs(Config.PoliceHelicopters) do
 			table.insert(elements,{label = v.label, name = v.label, model = v.model, price = v.price, type = 'helicopter'})
 		end
-	elseif type == 'boat' then
-		for k,v in pairs(Config.PoliceBoats) do
-			table.insert(elements,{label = v.label, name = v.label, model = v.model, price = v.price, type = 'boat'})
-		end
+	-- elseif type == 'boat' then
+	-- 	for k,v in pairs(Config.PoliceBoats) do
+	-- 		table.insert(elements,{label = v.label, name = v.label, model = v.model, price = v.price, type = 'boat'})
+	-- 	end
 	end
 		
 	ESX.UI.Menu.Open('default', GetCurrentResourceName(), "esx_policeGarage_vehicle_garage",
@@ -287,13 +287,14 @@ VehicleMenu = function(type)
 
 		SetPedIntoVehicle(GetPlayerPed(-1),veh,-1)
 		SetVehicleNumberPlateText(veh,plate)
+		TriggerEvent("carremote:grantKeys",veh)
 		
 		if type == 'car' then
 			ESX.ShowNotification(Config.CarOutFromPolGar)
 		elseif type == 'helicopter' then
 			ESX.ShowNotification(Config.HeliOutFromPolGar)
-		elseif type == 'boat' then
-			ESX.ShowNotification(Config.BoatOutFromPolGar)
+		-- elseif type == 'boat' then
+		-- 	ESX.ShowNotification(Config.BoatOutFromPolGar)
 		end
 		
 		TriggerEvent("fuel:setFuel",veh,100.0)
@@ -336,61 +337,61 @@ function drawLoadingText(text, red, green, blue, alpha)
 	EndTextCommandDisplayText(0.5, 0.5)
 end
 
--- Fix Police Vehicle Command:
-RegisterCommand(Config.RepairCommand, function(source, args)
-	if ESX.PlayerData.job and (ESX.PlayerData.job.name == Config.PoliceDatabaseName) then
-		policeFix()
-	end
-end,false)
+-- -- Fix Police Vehicle Command:
+-- RegisterCommand(Config.RepairCommand, function(source, args)
+-- 	if ESX.PlayerData.job and (ESX.PlayerData.job.name == Config.PoliceDatabaseName) then
+-- 		policeFix()
+-- 	end
+-- end,false)
 
--- Fix Police Vehicle Function:
-function policeFix()
-	local ped = GetPlayerPed(-1)
-	for k,v in pairs(Config.CarZones) do
-		for i = 1, #v.Pos, 1 do
-			if IsPedInAnyVehicle(ped, true) then
-				local veh = GetVehiclePedIsIn(ped, false)
-				if GetDistanceBetweenCoords(GetEntityCoords(ped), v.Pos[i].x, v.Pos[i].y, v.Pos[i].z, true) <= Config.Distance then
-					ESX.ShowNotification(Config.VehRepNotify)
-					FreezeEntityPosition(veh, true)
-					exports['progressBars']:startUI((Config.RepairTime * 1000), Config.Progress1)
-					Citizen.Wait((Config.RepairTime * 1000))
-					ESX.ShowNotification(Config.VehRepDoneNotify)
-					SetVehicleFixed(veh)
-					FreezeEntityPosition(veh, false)
-				end
-			end
-		end	
-	end
-end
+-- -- Fix Police Vehicle Function:
+-- function policeFix()
+-- 	local ped = GetPlayerPed(-1)
+-- 	for k,v in pairs(Config.CarZones) do
+-- 		for i = 1, #v.Pos, 1 do
+-- 			if IsPedInAnyVehicle(ped, true) then
+-- 				local veh = GetVehiclePedIsIn(ped, false)
+-- 				if GetDistanceBetweenCoords(GetEntityCoords(ped), v.Pos[i].x, v.Pos[i].y, v.Pos[i].z, true) <= Config.Distance then
+-- 					ESX.ShowNotification(Config.VehRepNotify)
+-- 					FreezeEntityPosition(veh, true)
+-- 					exports['progressBars']:startUI((Config.RepairTime * 1000), Config.Progress1)
+-- 					Citizen.Wait((Config.RepairTime * 1000))
+-- 					ESX.ShowNotification(Config.VehRepDoneNotify)
+-- 					SetVehicleFixed(veh)
+-- 					FreezeEntityPosition(veh, false)
+-- 				end
+-- 			end
+-- 		end	
+-- 	end
+-- end
 
--- Clean Police Vehicle Command:
-RegisterCommand(Config.CleanCommand, function(source, args)
-	if ESX.PlayerData.job and (ESX.PlayerData.job.name == Config.PoliceDatabaseName) then
-		policeClean()
-	end
-end,false)
+-- -- Clean Police Vehicle Command:
+-- RegisterCommand(Config.CleanCommand, function(source, args)
+-- 	if ESX.PlayerData.job and (ESX.PlayerData.job.name == Config.PoliceDatabaseName) then
+-- 		policeClean()
+-- 	end
+-- end,false)
 
--- Clean Police Vehicle Command:
-function policeClean()
-	local ped = GetPlayerPed(-1)
-	for k,v in pairs(Config.CarZones) do
-		for i = 1, #v.Pos, 1 do
-			if IsPedInAnyVehicle(ped, true) then
-				local veh = GetVehiclePedIsIn(ped, false)
-				if GetDistanceBetweenCoords(GetEntityCoords(ped), v.Pos[i].x, v.Pos[i].y, v.Pos[i].z, true) <= Config.Distance then
-					ESX.ShowNotification(Config.VehCleanNotify)
-					FreezeEntityPosition(veh, true)
-					exports['progressBars']:startUI((Config.CleanTime * 1000), Config.Progress2)
-					Citizen.Wait((Config.CleanTime * 1000))
-					ESX.ShowNotification(Config.VehCleanDoneNotify)
-					SetVehicleDirtLevel(veh, 0.1)
-					FreezeEntityPosition(veh, false)
-				end
-			end
-		end	
-	end
-end
+-- -- Clean Police Vehicle Command:
+-- function policeClean()
+-- 	local ped = GetPlayerPed(-1)
+-- 	for k,v in pairs(Config.CarZones) do
+-- 		for i = 1, #v.Pos, 1 do
+-- 			if IsPedInAnyVehicle(ped, true) then
+-- 				local veh = GetVehiclePedIsIn(ped, false)
+-- 				if GetDistanceBetweenCoords(GetEntityCoords(ped), v.Pos[i].x, v.Pos[i].y, v.Pos[i].z, true) <= Config.Distance then
+-- 					ESX.ShowNotification(Config.VehCleanNotify)
+-- 					FreezeEntityPosition(veh, true)
+-- 					exports['progressBars']:startUI((Config.CleanTime * 1000), Config.Progress2)
+-- 					Citizen.Wait((Config.CleanTime * 1000))
+-- 					ESX.ShowNotification(Config.VehCleanDoneNotify)
+-- 					SetVehicleDirtLevel(veh, 0.1)
+-- 					FreezeEntityPosition(veh, false)
+-- 				end
+-- 			end
+-- 		end	
+-- 	end
+-- end
 
 -- Police Extra Menu:
 function OpenExtraMenu()

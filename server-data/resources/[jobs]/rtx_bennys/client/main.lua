@@ -1997,25 +1997,8 @@ function LiftBennysMenu1()
 
 	function(data, menu)
 		local val = data.current.value
-		
-		if val == 'vytahup' then
-			if elevatorProp ~= nil then
-				elevatorDown = false
-				elevatorUp = true
-				elevatorStop = false
-			end			
-		elseif val == 'vytahstop' then
-			if elevatorProp ~= nil then
-				elevatorUp = false
-				elevatorDown = false
-			end
-		elseif val == 'vytahdown' then
-			if elevatorProp ~= nil then
-				elevatorUp = false
-				elevatorDown = true
-				elevatorStop = false
-			end
-		elseif val == 'vytahzapnout' then
+
+		if val == 'vytahzapnout' then
 			if elevatorOn == false then
 				spawnProp("nacelle", elevatorBaseX, elevatorBaseY, elevatorBaseZ)
 				elevatorOn = true
@@ -2026,6 +2009,35 @@ function LiftBennysMenu1()
 				elevatorOn = false
 			end
 		end
+		
+		-- if val == 'vytahup' then
+		-- 	if elevatorProp ~= nil then
+		-- 		elevatorDown = false
+		-- 		elevatorUp = true
+		-- 		elevatorStop = false
+		-- 	end			
+		-- elseif val == 'vytahstop' then
+		-- 	if elevatorProp ~= nil then
+		-- 		elevatorUp = false
+		-- 		elevatorDown = false
+		-- 	end
+		-- elseif val == 'vytahdown' then
+		-- 	if elevatorProp ~= nil then
+		-- 		elevatorUp = false
+		-- 		elevatorDown = true
+		-- 		elevatorStop = false
+		-- 	end
+		-- elseif val == 'vytahzapnout' then
+		-- 	if elevatorOn == false then
+		-- 		spawnProp("nacelle", elevatorBaseX, elevatorBaseY, elevatorBaseZ)
+		-- 		elevatorOn = true
+		-- 	end
+		-- elseif val == 'vytahvypnout' then
+		-- 	if elevatorOn == true then
+		-- 		DeleteObject(elevatorProp)
+		-- 		elevatorOn = false
+		-- 	end
+		-- end
 	end,
 	function(data, menu)
 		menu.close()
@@ -2051,35 +2063,47 @@ function LiftBennysMenu2()
 
 	function(data, menu)
 		local val = data.current.value
-		
-		if val == 'vytahup' then
-			if elevator2Prop ~= nil then
-				elevator2Down = false
-				elevator2Up = true
-				elevator2Stop = false
-			end			
-		elseif val == 'vytahstop' then
-			if elevator2Prop ~= nil then
-				elevator2Up = false
-				elevator2Down = false
-			end
-		elseif val == 'vytahdown' then
-			if elevator2Prop ~= nil then
-				elevator2Up = false
-				elevator2Down = true
-				elevator2Stop = false
-			end
-		elseif val == 'vytahzapnout' then
+
+		if val == 'vytahzapnout' then
 			if elevator2On == false then
-				spawnProp2("nacelle", elevator2BaseX, elevator2BaseY, elevator2BaseZ)
+				spawnProp("nacelle", elevatorBaseX, elevatorBaseY, elevatorBaseZ)
 				elevator2On = true
 			end
 		elseif val == 'vytahvypnout' then
 			if elevator2On == true then
-				DeleteObject(elevator2Prop)
+				DeleteObject(elevatorProp)
 				elevator2On = false
 			end
 		end
+		
+		-- if val == 'vytahup' then
+		-- 	if elevator2Prop ~= nil then
+		-- 		elevator2Down = false
+		-- 		elevator2Up = true
+		-- 		elevator2Stop = false
+		-- 	end			
+		-- elseif val == 'vytahstop' then
+		-- 	if elevator2Prop ~= nil then
+		-- 		elevator2Up = false
+		-- 		elevator2Down = false
+		-- 	end
+		-- elseif val == 'vytahdown' then
+		-- 	if elevator2Prop ~= nil then
+		-- 		elevator2Up = false
+		-- 		elevator2Down = true
+		-- 		elevator2Stop = false
+		-- 	end
+		-- elseif val == 'vytahzapnout' then
+		-- 	if elevator2On == false then
+		-- 		spawnProp2("nacelle", elevator2BaseX, elevator2BaseY, elevator2BaseZ)
+		-- 		elevator2On = true
+		-- 	end
+		-- elseif val == 'vytahvypnout' then
+		-- 	if elevator2On == true then
+		-- 		DeleteObject(elevator2Prop)
+		-- 		elevator2On = false
+		-- 	end
+		-- end
 	end,
 	function(data, menu)
 		menu.close()
