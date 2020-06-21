@@ -10,17 +10,57 @@ html, body {
 	display: none;
 }
 
-#console {
+#givekeys {
+	background-repeat: no-repeat;
+	font-weight: 400;
+	font-size: 12px;
+	width: 170px;
+	height: 60px;
+	color: #212121;
 	position: absolute;
-	left: 0;
-	bottom: 0;
-	width: 320px;
-	height: 250px;
-	background-color: rgba(0, 0, 0, 0.8);
-	color: white;
-	padding: 5px;
-	overflow-y: auto;
-	overflow-x: hidden;
+	right: 55px;
+	bottom: 15px;
+	overflow: hidden;
+	cursor: default;
+	display: none;
+}
+
+.button {
+	position: relative;
+	background-color: #2F2F2F;
+	border: none;
+	font-size: 15px;
+	color: #FFFFFF;
+	width: 170px;
+	height: 30px;
+	text-align: center;
+	vertical-align: center;
+	-webkit-transition-duration: 0.4s; /* Safari */
+	transition-duration: 0.4s;
+	text-decoration: none;
+	overflow: hidden;
+	cursor: default;
+	border: 2px solid black;
+}
+  
+.button:after {
+	content: "";
+	background: #595959;
+	display: block;
+	position: absolute;
+	padding-top: 300%;
+	padding-left: 350%;
+	margin-left: -20px!important;
+	margin-top: -120%;
+	opacity: 0;
+	transition: all 0.8s
+}
+  
+.button:active:after {
+	padding: 0;
+	margin: 0;
+	opacity: 1;
+	transition: 0s
 }
 
 #keyfob {
@@ -33,7 +73,7 @@ html, body {
 	color: #212121;
 	position: absolute;
 	right: 40px;
-	bottom: 0px;
+	bottom: 80px;
 	overflow: hidden;
 	cursor: default;
 	display: none;

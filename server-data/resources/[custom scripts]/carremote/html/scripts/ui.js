@@ -10,6 +10,7 @@ function httpPost(event, data) {
 document.onkeydown = function (data) {
 	if (data.which == '314' || '27') { // Escape key 
 		document.getElementById("keyfob").style.display = 'none';
+		document.getElementById("givekeys").style.display = 'none';
 		document.getElementById("carDisconnected").style.display = 'none';
 		document.getElementById("carConnected").style.display = 'none';
 		document.getElementById("engineOff").style.display = 'none';
@@ -27,6 +28,7 @@ window.addEventListener('message', function(event) {
 	// Open Key Fob
 	if (event.data.type == "openKeyFob") {
 		document.getElementById("keyfob").style.display = 'block';
+		document.getElementById("givekeys").style.display = 'block';
 		
 	} else if (event.data.type == "setHotKey") {
 		hotKey = event.data.value
@@ -216,6 +218,7 @@ window.addEventListener('message', function(event) {
 
 	} else if (event.data.type == "closeAll") {
 		document.getElementById("keyfob").style.display = 'none';
+		document.getElementById("givekeys").style.display = 'none';
 		document.getElementById("carDisconnected").style.display = 'none';
 		document.getElementById("carConnected").style.display = 'none';
 		document.getElementById("engineOff").style.display = 'none';
