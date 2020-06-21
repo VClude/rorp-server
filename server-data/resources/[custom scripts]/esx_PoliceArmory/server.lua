@@ -24,8 +24,8 @@ AddEventHandler("esx_policeArmory:weaponTakenOut", function(weapon,giveAmmo)
 		end)
         xPlayer.addWeapon(weapon, Config.AmmountOfAmmo)
 		local DATE = os.date("%H:%M (%d.%m.%y)")
-		local message = "**" ..GetPlayerName(source).. "** [" ..xPlayer.getIdentifier().. "] **|** has **taken** " .. ESX.GetWeaponLabel(weapon) .. " from the Police Armory **|** " ..DATE
-		PerformHttpRequest(""..Config.DiscordWebook.."", function(err, text, headers) end, 'POST', json.encode({username = "Police Armory", content = message}), { ['Content-Type'] = 'application/json' })
+		local message = "```**" ..GetPlayerName(source).. "** [" ..xPlayer.getIdentifier().. "] **|** has **taken** " .. ESX.GetWeaponLabel(weapon) .. " from the Police Armory **|** " ..DATE"```"
+		PerformHttpRequest(""..Config.DiscordWebook.."", function(err, text, headers) end, 'POST', json.encode({username = "SATPAM GUDANG POLISI", content = message}), { ['Content-Type'] = 'application/json' })
 		TriggerClientEvent("esx:showNotification", source, "You ~y~took~s~ 1x ~r~" .. ESX.GetWeaponLabel(weapon).."~r~")
     end
 	
