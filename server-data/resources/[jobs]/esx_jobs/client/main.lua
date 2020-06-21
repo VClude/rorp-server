@@ -341,6 +341,8 @@ AddEventHandler('esx_jobs:action', function(job, zone, zoneIndex)
 	elseif zone.Type == 'vehspawner' then
 		local jobObject, spawnPoint, vehicle = Config.Jobs[PlayerData.job.name]
 
+		print (Config.Jobs[PlayerData.job.name])
+
 		if jobObject then
 			for k,v in pairs(jobObject.Zones) do
 				if v.Type == 'vehspawnpt' and v.Spawner == zone.Spawner then
