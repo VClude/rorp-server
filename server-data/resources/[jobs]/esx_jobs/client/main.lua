@@ -294,14 +294,14 @@ AddEventHandler('esx_jobs:action', function(job, zone, zoneIndex)
 			local playerPed = PlayerPedId()
 			local coords = GetEntityCoords(playerPed)
 			
-			FreezeEntityPosition(playerPed, true)
+			-- FreezeEntityPosition(playerPed, true)
 			SetCurrentPedWeapon(playerPed, GetHashKey('WEAPON_UNARMED'))
 			Citizen.Wait(200)
 
 			TriggerEvent("mythic_progressbar:client:progress", {
 				name = "ambil_ayam_hidup",
 				duration = zone.Duration,
-				label = "Mengambil Ayam Hidup (Tekan 'X' Untuk Cancel)",
+				label = "Tekan 'X' Untuk Cancel",
 				useWhileDead = false,
 				canCancel = true,
 				controlDisables = {
@@ -321,6 +321,7 @@ AddEventHandler('esx_jobs:action', function(job, zone, zoneIndex)
 				if not status then
 					for k,v in pairs(zone.Item) do
 						TriggerServerEvent("esx_jobs:alljobReward",v.db_name,v.add, v.requires, v.remove)
+						FreezeEntityPosition(playerPed, false)
 						onWork = false
 					end
 				end
