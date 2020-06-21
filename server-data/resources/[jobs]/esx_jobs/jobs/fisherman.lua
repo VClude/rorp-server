@@ -71,7 +71,7 @@ Config.Jobs.fisherman = {
 			Blip  = true,
 			Name  = _U('fm_spawnboat_title'),
 			Type  = 'vehspawner',
-			Spawner = 2,
+			Spawner = 1,
 			Hint  = _U('fm_spawnboat'),
 			Caution = 0,
 			GPS = {x = 4435.21, y = 4829.60, z = 0.34}
@@ -84,7 +84,7 @@ Config.Jobs.fisherman = {
 			Blip  = false,
 			Name  = _U('fm_boat_title'),
 			Type  = 'vehspawnpt',
-			Spawner = 2,
+			Spawner = 1,
 			GPS = 0,
 			Heading = 270.1
 		},
@@ -98,7 +98,7 @@ Config.Jobs.fisherman = {
 			Name  = _U('fm_boat_return_title'),
 			Type  = 'vehdelete',
 			Hint  = _U('fm_boat_return_button'),
-			Spawner = 2,
+			Spawner = 1,
 			Caution = 0,
 			GPS = {x = -1012.64, y = -1354.62, z = 5.54},
 			Teleport = {x = 3867.44, y = 4463.62, z = 1.72}
@@ -112,7 +112,7 @@ Config.Jobs.fisherman = {
 			Blip  = false,
 			Name  = _U('spawn_veh'),
 			Type  = 'vehspawner',
-			Spawner = 1,
+			Spawner = 2,
 			Hint  = _U('spawn_veh_button'),
 			Caution = 2000,
 			GPS = {x = 3867.44, y = 4463.62, z = 1.72}
@@ -125,7 +125,7 @@ Config.Jobs.fisherman = {
 			Blip  = false,
 			Name  = _U('service_vh'),
 			Type  = 'vehspawnpt',
-			Spawner = 1,
+			Spawner = 2,
 			GPS = 0,
 			Heading = 70.1
 		},
@@ -139,7 +139,7 @@ Config.Jobs.fisherman = {
 			Name  = _U('return_vh'),
 			Type  = 'vehdelete',
 			Hint  = _U('return_vh_button'),
-			Spawner = 1,
+			Spawner = 2,
 			Caution = 2000,
 			GPS = 0,
 			Teleport = 0
