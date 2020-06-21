@@ -347,6 +347,36 @@ AddEventHandler('esx_jobs:action', function(job, zone, zoneIndex)
 					spawner = v.Spawner
 					break
 				end
+				
+			end
+
+			for k,v in pairs(jobObject.Vehicles) do
+				if v.Spawner == zone.Spawner then
+					vehicle = v
+					break
+				end
+			end
+		end
+
+		if jobObject and spawnPoint and vehicle and ESX.Game.IsSpawnPointClear(spawnPoint.Pos, 5.0) then
+			spawnVehicle(spawnPoint, vehicle, zone.Caution)
+		else
+			ESX.ShowNotification(_U('spawn_blocked'))
+		end
+
+	elseif zone.Type == 'vehspawner2' then
+		local jobObject, spawnPoint, vehicle = Config.Jobs[PlayerData.job.name]
+
+		print (Config.Jobs[PlayerData.job.name])
+
+		if jobObject then
+			for k,v in pairs(jobObject.Zones) do
+				if v.Type == 'vehspawnpt2' and v.Spawner == zone.Spawner then
+					spawnPoint = v
+					spawner = v.Spawner
+					break
+				end
+				
 			end
 
 			for k,v in pairs(jobObject.Vehicles) do
