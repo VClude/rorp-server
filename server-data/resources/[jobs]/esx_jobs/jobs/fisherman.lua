@@ -7,18 +7,19 @@ Config.Jobs.fisherman = {
 
 	Vehicles = {
 
-		Truck = {
-			Spawner = 1,
-			Hash = 'benson',
-			Trailer = 'none',
-			HasCaution = true
-		},
 
 		Boat = {
-			Spawner = 2,
+			Spawner = 1,
 			Hash = 'tug',
 			Trailer = 'none',
 			HasCaution = false
+		},
+
+		Truck = {
+			Spawner = 2,
+			Hash = 'benson',
+			Trailer = 'none',
+			HasCaution = true
 		}
 
 	},
@@ -112,7 +113,7 @@ Config.Jobs.fisherman = {
 			Marker= 1,
 			Blip  = false,
 			Name  = _U('spawn_veh'),
-			Type  = 'vehspawner',
+			Type  = 'vehspawner2',
 			Spawner = 2,
 			Hint  = _U('spawn_veh_button'),
 			Caution = 2000,
@@ -125,7 +126,7 @@ Config.Jobs.fisherman = {
 			Marker= -1,
 			Blip  = false,
 			Name  = _U('service_vh'),
-			Type  = 'vehspawnpt',
+			Type  = 'vehspawnpt2',
 			Spawner = 2,
 			GPS = 0,
 			Heading = 70.1
