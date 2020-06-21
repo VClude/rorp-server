@@ -299,7 +299,7 @@ AddEventHandler('esx_jobs:action', function(job, zone, zoneIndex)
 			Citizen.Wait(200)
 
 			TriggerEvent("mythic_progressbar:client:progress", {
-				name = "ambil_ayam_hidup",
+				name = "on_working",
 				duration = zone.Duration,
 				label = "Tekan 'X' Untuk Cancel",
 				useWhileDead = false,
@@ -425,17 +425,36 @@ AddEventHandler('esx_jobs:action', function(job, zone, zoneIndex)
 		local playerPed = PlayerPedId()
 		local coords = GetEntityCoords(playerPed)
 
-		FreezeEntityPosition(playerPed, true)
 		SetCurrentPedWeapon(playerPed, GetHashKey('WEAPON_UNARMED'))
 		Citizen.Wait(200)
-			
-		exports['progressBars']:startUI((10000), 'Menjual hasil kerja')
-		Citizen.Wait(10000)
-		for k,v in pairs(zone.Item) do
-			TriggerServerEvent("esx_jobs:alljobPayout",v.requires,v.price)
+
+		TriggerEvent("mythic_progressbar:client:progress", {
+			name = "on_delivery",
+			duration = 20000,
+			label = "Tekan 'X' Untuk Cancel",
+			useWhileDead = false,
+			canCancel = true,
+			controlDisables = {
+				disableMovement = true,
+				disableCarMovement = true,
+				disableMouse = false,
+				disableCombat = true,
+			},
+			animation = {
+				animDict = "missheistdockssetup1clipboard@idle_a",
+				anim = "idle_a",
+			},
+			prop = {
+				model = "prop_paper_bag_small",
+			},
+		}, function(status)
+			if not status then
+				for k,v in pairs(zone.Item) do
+					TriggerServerEvent("esx_jobs:alljobPayout",v.requires,v.price)
+					onWork = false
+				end
 			end
-		FreezeEntityPosition(playerPed, false)
-		onWork = false
+		end)
 	end
 
 	--nextStep(zone.GPS)
