@@ -51,9 +51,9 @@ AddEventHandler("esx:setJob", function(job)
 	if PlayerData == nil then
 		PlayerData = ESX.GetPlayerData()
     		PlayerData.job = job
-		print ('Kofferbak kan beroep niet synchroniseren. Dit is niet erg.')  -- Cannot sync job, not bad
+		print ('Trunk cannot sync profession. This is not bad.')  -- Cannot sync job, not bad
 	else
-		print ('Kofferbak heeft je beroep gesynchroniseerd.') -- Can sync job
+		print ('Trunk has synchronized your profession.') -- Can sync job
 		PlayerData.job = job
 	end
 end)
@@ -146,21 +146,37 @@ function openmenuvehicle()
                 OpenCoffreInventoryMenu(GetVehicleNumberPlateText(vehFront), Config.VehicleWeight[class], myVeh)
               end
             else
-           
-            exports['b1g_notify']:Notify('true', _U("trunk_closed"))
+            
+            exports.pNotify:SendNotification({
+              text = _U("trunk_closed"),
+              type = "info",
+              timeout = math.random(1000, 10000),
+              layout = "centerLeft",
+              queue = "left"
+            })
             end
           end
         else
-         
-            exports['b1g_notify']:Notify('false', _U("no_veh_nearby"))
+            exports.pNotify:SendNotification({
+              text = _U("no_veh_nearby"),
+              type = "info",
+              timeout = math.random(1000, 10000),
+              layout = "centerLeft",
+              queue = "left"
+            })
         end
         lastOpen = true
         GUI.Time = GetGameTimer()
       end
     else
       -- Not their vehicle
-    
-            exports['b1g_notify']:Notify('false', _U("nacho_veh"))
+      exports.pNotify:SendNotification({
+        text = _U("nacho_veh"),
+        type = "error",
+        timeout = math.random(1000, 10000),
+        layout = "centerLeft",
+        queue = "left"
+      })
     end
   end
 end
