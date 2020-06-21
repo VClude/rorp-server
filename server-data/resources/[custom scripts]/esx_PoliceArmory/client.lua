@@ -285,9 +285,9 @@ function KevlarMenu()
 				title    = Config.PoliceKevlarTitle,
 				align    = "top-left",
 				elements = {
-					{label = Config.Vest1, armor = 25},
-					{label = Config.Vest2, armor = 50},
-					{label = Config.Vest3, armor = 75},
+					-- {label = Config.Vest1, armor = 25},
+					-- {label = Config.Vest2, armor = 50},
+					-- {label = Config.Vest3, armor = 75},
 					{label = Config.Vest4, armor = 100},
 					{label = Config.RemoveVest, armor = 0},
 			}
@@ -308,7 +308,7 @@ function KevlarMenu()
 				elseif data.current.armor == 75 then
 					SetPedComponentVariation(ped, Config.VestVariation3.componentId, Config.VestVariation3.drawableId, Config.VestVariation3.textureId, Config.VestVariation3.paletteId)
 				elseif data.current.armor == 100 then
-					SetPedComponentVariation(ped, Config.VestVariation4.componentId, Config.VestVariation4.drawableId, Config.VestVariation4.textureId, Config.VestVariation4.paletteId)
+					SetPedComponentVariation(ped, Config.VestVariation1.componentId, Config.VestVariation1.drawableId, Config.VestVariation1.textureId, Config.VestVariation1.paletteId)
 				end
 			end
 						

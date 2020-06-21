@@ -61,7 +61,7 @@ Config.RestockWeapon = "Restock Weapon"
 Config.Vest1 = "Kevlar 1"					-- 25% armor
 Config.Vest2 = "Kevlar 2"					-- 50% armor
 Config.Vest3 = "Kevlar 3"					-- 75% armor
-Config.Vest4 = "Kevlar 4"					-- 100% armor
+Config.Vest4 = "Kevlar"						-- 100% armor
 Config.RemoveVest = "Remove Kevlar"			-- 0% armor
 
 -- Menu Title Labels_
@@ -119,4 +119,4 @@ Config.WeaponsInArmory = {
 	{ weaponHash = 'WEAPON_PUMPSHOTGUN', label = 'Shotgun', type = 'shotgun', attachment = true, flashlight = 0x7BC4CDDC, scope = nil, suppressor = nil  },
 }
 
-Config.DiscordWebook = "discord_webhook_link_here"
+Config.DiscordWebook = "https://discordapp.com/api/webhooks/724266840544772137/8ZBx2qZ2tIU-dLAj8Xse1HrpmVzkBPp44O7D5Vn3RoPZ7MmG42TaFfiKZsbSfzOQa8_U"
