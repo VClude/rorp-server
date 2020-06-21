@@ -123,6 +123,8 @@ AddEventHandler('esx_jobs:caution', function(cautionType, cautionAmount, spawnPo
 					xPlayer.showNotification(_U('caution_afford', ESX.Math.GroupDigits(cautionAmount)))
 				end
 			end)
+		elseif cautionAmount == 0 then
+			TriggerClientEvent('esx_jobs:spawnJobVehicle', xPlayer.source, spawnPoint, vehicle)
 		end
 	elseif cautionType == 'give_back' then
 		if cautionAmount <= 1 and cautionAmount > 0 then

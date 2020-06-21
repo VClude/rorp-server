@@ -1,5 +1,5 @@
 local menuIsShowed, hintIsShowed, hintToDisplay, hasAlreadyEnteredMarker, isInMarker, vehicleObjInCaseofDrop, vehicleInCaseofDrop, vehicleMaxHealth
-local PlayerData, Blips, JobBlips, myPlate, onDuty, spawner = {}, {}, {}, {}, false, 0
+local PlayerData, Blips, JobBlips, myPlate, onDuty, spawner = {}, {}, {}, {}, true, 0
 
 ESX = nil
 
@@ -364,35 +364,6 @@ AddEventHandler('esx_jobs:action', function(job, zone, zoneIndex)
 			ESX.ShowNotification(_U('spawn_blocked'))
 		end
 
-	elseif zone.Type == 'vehspawner2' then
-		local jobObject, spawnPoint, vehicle = Config.Jobs[PlayerData.job.name]
-
-		print (Config.Jobs[PlayerData.job.name])
-
-		if jobObject then
-			for k,v in pairs(jobObject.Zones) do
-				if v.Type == 'vehspawnpt2' and v.Spawner == zone.Spawner then
-					spawnPoint = v
-					spawner = v.Spawner
-					break
-				end
-				
-			end
-
-			for k,v in pairs(jobObject.Vehicles) do
-				if v.Spawner == zone.Spawner then
-					vehicle = v
-					break
-				end
-			end
-		end
-
-		if jobObject and spawnPoint and vehicle and ESX.Game.IsSpawnPointClear(spawnPoint.Pos, 5.0) then
-			spawnVehicle(spawnPoint, vehicle, zone.Caution)
-		else
-			ESX.ShowNotification(_U('spawn_blocked'))
-		end
-
 	elseif zone.Type == 'vehdelete' then
 		local jobObject = Config.Jobs[PlayerData.job.name]
 
@@ -542,7 +513,6 @@ end
 RegisterNetEvent('esx_jobs:spawnJobVehicle')
 AddEventHandler('esx_jobs:spawnJobVehicle', function(spawnPoint, vehicle)
 	local playerPed = PlayerPedId()
-
 	ESX.Game.SpawnVehicle(vehicle.Hash, spawnPoint.Pos, spawnPoint.Heading, function(spawnedVehicle)
 
 		if vehicle.Trailer ~= 'none' then
