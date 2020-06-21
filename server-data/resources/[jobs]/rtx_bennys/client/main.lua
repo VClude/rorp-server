@@ -2370,6 +2370,7 @@ VehicleMenu = function(type)
 
 		SetPedIntoVehicle(GetPlayerPed(-1),veh,-1)
 		SetVehicleNumberPlateText(veh,plate)
+		TriggerEvent("carremote:grantKeys", veh)
 		
 		if type == 'car' then
 			ESX.ShowNotification(Config.CarOutFromPolGar)
