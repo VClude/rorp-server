@@ -4,7 +4,7 @@ var disabledFunction = null;
 
 window.addEventListener("message", function (event) {
     if (event.data.action == "setWeight") {
-        $("#weight").html(event.data.text);
+        $("#weight").html((event.data.text));
     }
     if (event.data.action == "display") {
         type = event.data.type
@@ -181,7 +181,7 @@ function setCount(item) {
     count = item.count
 
     if (item.limit > 0) {
-        count = item.count + " / " + item.limit
+        count = item.count + " (" + (item.weight * item.count / 1000) + " KG)"
     }
 
     if (item.type === "item_weapon") {
