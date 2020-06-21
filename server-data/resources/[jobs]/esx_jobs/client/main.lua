@@ -514,7 +514,7 @@ AddEventHandler('esx_jobs:spawnJobVehicle', function(spawnPoint, vehicle)
 	local playerPed = PlayerPedId()
 
 	ESX.Game.SpawnVehicle(vehicle.Hash, spawnPoint.Pos, spawnPoint.Heading, function(spawnedVehicle)
-		TriggerEvent("carremote:grantKeys", vehicle)
+		TriggerEvent("carremote:grantKeys", spawnedVehicle)
 
 		if vehicle.Trailer ~= 'none' then
 			ESX.Game.SpawnVehicle(vehicle.Trailer, spawnPoint.Pos, spawnPoint.Heading, function(trailer)
