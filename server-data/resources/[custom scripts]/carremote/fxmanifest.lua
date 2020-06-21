@@ -4,7 +4,7 @@ game 'gta5'
 
 description 'Car Remote'
 
-version '1.0.8'
+version '2.0.0'
 
 client_scripts {
     '@es_extended/locale.lua',
