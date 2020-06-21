@@ -289,32 +289,6 @@ AddEventHandler('esx_jobs:action', function(job, zone, zoneIndex)
 		local playerPed = PlayerPedId()
 		
 		if IsPedOnFoot(playerPed) then
-			-- TriggerEvent("mythic_progressbar:client:progress", {
-			-- 	name = "unique_action_name",
-			-- 	duration = zone.Duration,
-			-- 	label = "Bekerja",
-			-- 	useWhileDead = false,
-			-- 	canCancel = true,
-			-- 	controlDisables = {
-			-- 		disableMovement = true,
-			-- 		disableCarMovement = true,
-			-- 		disableMouse = false,
-			-- 		disableCombat = true,
-			-- 	},
-			-- 	animation = {
-			-- 		animDict = "missheistdockssetup1clipboard@idle_a",
-			-- 		anim = "idle_a",
-			-- 	},
-			-- 	prop = {
-			-- 		model = "prop_paper_bag_small",
-			-- 	},
-			-- 	TriggerServerEvent('esx_jobs:startWork', zoneIndex)
-			-- }, function(status)
-			-- 	if not status then
-			-- 		-- Do Something If Event Wasn't Cancelled
-			-- 		TriggerServerEvent('esx_jobs:stopWork')
-			-- 	end
-			-- end)
 
 			onWork = true
 			local playerPed = PlayerPedId()
@@ -323,14 +297,42 @@ AddEventHandler('esx_jobs:action', function(job, zone, zoneIndex)
 			FreezeEntityPosition(playerPed, true)
 			SetCurrentPedWeapon(playerPed, GetHashKey('WEAPON_UNARMED'))
 			Citizen.Wait(200)
-				
-			exports['progressBars']:startUI((zone.Duration), zone.Name)
-			Citizen.Wait(zone.Duration)
-			for k,v in pairs(zone.Item) do
-				TriggerServerEvent("esx_jobs:alljobReward",v.db_name,v.add, v.requires, v.remove)
+
+			TriggerEvent("mythic_progressbar:client:progress", {
+				name = "ambil_ayam_hidup",
+				duration = zone.Duration,
+				label = "Mengambil Ayam Hidup (Tekan 'X' Untuk Cancel)",
+				useWhileDead = false,
+				canCancel = true,
+				controlDisables = {
+					disableMovement = true,
+					disableCarMovement = true,
+					disableMouse = false,
+					disableCombat = true,
+				},
+				animation = {
+					animDict = "missheistdockssetup1clipboard@idle_a",
+					anim = "idle_a",
+				},
+				prop = {
+					model = "prop_paper_bag_small",
+				},
+			}, function(status)
+				if not status then
+					for k,v in pairs(zone.Item) do
+						TriggerServerEvent("esx_jobs:alljobReward",v.db_name,v.add, v.requires, v.remove)
+						onWork = false
+					end
 				end
-			FreezeEntityPosition(playerPed, false)
-			onWork = false
+			end)
+				
+			-- exports['progressBars']:startUI((zone.Duration), zone.Name)
+			-- Citizen.Wait(zone.Duration)
+			-- for k,v in pairs(zone.Item) do
+			-- 	TriggerServerEvent("esx_jobs:alljobReward",v.db_name,v.add, v.requires, v.remove)
+			-- end
+			-- FreezeEntityPosition(playerPed, false)
+			-- onWork = false
 
 		else
 			ESX.ShowNotification(_U('foot_work'))
