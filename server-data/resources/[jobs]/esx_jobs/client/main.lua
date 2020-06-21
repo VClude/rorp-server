@@ -67,9 +67,6 @@ Citizen.CreateThread(function()
 	while true do
         Citizen.Wait(5)
 		local coords = GetEntityCoords(GetPlayerPed(-1))
-		-- if PlayerData.job.name ~= 'miner' then
-		-- 	ESX.ShowNotification("lu bukan penambang gblk")
-		-- else
 		for k,v in pairs(Config.MiningSpots) do
 			local distance = GetDistanceBetweenCoords(coords, v.Pos.x, v.Pos.y, v.Pos.z, true)
 			if distance <= 20.0 and not currentlyMining then
