@@ -48,7 +48,7 @@ AddEventHandler("mythic_progressbar:client:progress", function(action, cb)
             Citizen.CreateThread(function ()
                 while isDoingAction do
                     Citizen.Wait(0)
-                    if IsControlJustPressed(0, 178) and mythic_action.canCancel then
+                    if IsControlJustPressed(0, 73) and mythic_action.canCancel then
                         TriggerEvent("mythic_progressbar:client:cancel")
                     end
                 end
