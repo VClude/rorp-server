@@ -34,7 +34,7 @@ Config.VehicleWeight = {
     [7] = 500, --Super
     [8] = 500, --Motorcycles
     [9] = 18000, --Off-road
-    [10] = 30000, --Industrial
+    [10] = 20000, --Industrial
     [11] = 7000, --Utility
     [12] = 10000, --Vans
     [13] = 0, --Cycles
@@ -44,7 +44,7 @@ Config.VehicleWeight = {
     [17] = 4000, --Service
     [18] = 4000, --Emergency
     [19] = 0, --Military
-    [20] = 30000, --Commercial
+    [20] = 20000, --Commercial
     [21] = 0 --Trains
 }
 

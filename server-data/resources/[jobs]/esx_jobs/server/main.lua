@@ -233,12 +233,17 @@ RegisterServerEvent("esx_jobs:alljobPayout")
 AddEventHandler("esx_jobs:alljobPayout", function(itemName, itemPrice)
 	local xPlayer = ESX.GetPlayerFromId(source)
 	local itemLabel = ESX.GetItemLabel(itemName)
-	local itemAmount = xPlayer.getInventoryItem(itemName).count
-	local price = itemPrice * itemAmount
-		if itemAmount > 0 then
+
+		if itemName ~= 'nothing' and itemAmount > 0 then
+			local itemAmount = xPlayer.getInventoryItem(itemName).count
+			local price = itemPrice * itemAmount
 			xPlayer.removeInventoryItem(itemName, itemAmount)
 			xPlayer.addMoney(price)
 			TriggerClientEvent("esx:showNotification",source,"Kamu menjual ~r~"..itemName.."~s~x Sejumlah ~y~"..itemAmount.."~s~")
+		elseif itemName == 'nothing' then
+			xPlayer.addMoney(itemPrice)
+			TriggerClientEvent("esx:showNotification",source,"Kamu mendapatkan Rp. ~r~"..itemPrice.."")
+
 		else
 			TriggerClientEvent("esx:showNotification",source,"anda tidak mempunyai "..itemName.." untuk dijual")
 		end

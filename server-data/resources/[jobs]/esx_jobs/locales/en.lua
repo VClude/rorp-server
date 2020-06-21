@@ -112,4 +112,9 @@ Locales['en'] = {
   ['dd_clothing']               = 'baju',
   ['dd_makeclothing']           = 'tekan ~INPUT_PICKUP~ untuk membuat baju.',
   ['dd_deliver_clothes']        = 'tekan ~INPUT_PICKUP~ untuk mengirim baju.',
-  }
+  
+  ['pet_a']                     = 'tekan ~INPUT_PICKUP~ untuk mengambil jeruk.',
+  ['pet_b']                     = 'tekan ~INPUT_PICKUP~ untuk menjual jeruk.',
+  ['pet_c']                     = 'tekan ~INPUT_PICKUP~ untuk melakukan pesugihan.',
+
+}
