@@ -37,6 +37,7 @@ Config.Jobs.lumberjack = {
 			Blip = true,
 			Name = _U('lj_mapblip'),
 			Type = 'work',
+			Duration = 20000,
 			Item = {
 				{
 					name = _U('lj_wood'),
@@ -44,7 +45,7 @@ Config.Jobs.lumberjack = {
 					time = 3,
 					max = 20,
 					add = 1,
-					remove = 1,
+					remove = 0,
 					requires = 'nothing',
 					requires_name = 'Nothing',
 					drop = 100
@@ -61,6 +62,7 @@ Config.Jobs.lumberjack = {
 			Blip = false,
 			Name = _U('lj_cutwood'),
 			Type = 'work',
+			Duration = 20000,
 			Item = {
 				{
 					name = _U('lj_cutwood'),
@@ -85,6 +87,7 @@ Config.Jobs.lumberjack = {
 			Blip = false,
 			Name = _U('lj_board'),
 			Type = 'work',
+			Duration = 20000,
 			Item = {
 				{
 					name = _U('lj_planks'),

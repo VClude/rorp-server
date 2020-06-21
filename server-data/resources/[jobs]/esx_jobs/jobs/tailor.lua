@@ -38,6 +38,7 @@ Config.Jobs.tailor = {
 			Blip = true,
 			Name = _U('dd_wool'),
 			Type = 'work',
+			Duration = 20000,
 			Item = {
 				{
 					name = _U('dd_wool'),
@@ -45,7 +46,7 @@ Config.Jobs.tailor = {
 					time = 3,
 					max = 40,
 					add = 1,
-					remove = 1,
+					remove = 0,
 					requires = 'nothing',
 					requires_name = 'Nothing',
 					drop = 100
@@ -63,6 +64,7 @@ Config.Jobs.tailor = {
 			Blip = false,
 			Name = _U('dd_fabric'),
 			Type = 'work',
+			Duration = 20000,
 			Item = {
 				{
 					name = _U('dd_fabric'),
@@ -88,6 +90,7 @@ Config.Jobs.tailor = {
 			Blip = false,
 			Name = _U('dd_clothing'),
 			Type = 'work',
+			Duration = 20000,
 			Item = {
 				{
 					name = _U('dd_clothing'),

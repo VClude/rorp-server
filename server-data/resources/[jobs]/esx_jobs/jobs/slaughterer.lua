@@ -36,6 +36,7 @@ Config.Jobs.slaughterer = {
 			Blip = true,
 			Name = _U('s_hen'),
 			Type = 'work',
+			Duration = 20000,
 			Item = {
 				{
 					name = _U('s_alive_chicken'),
@@ -43,7 +44,7 @@ Config.Jobs.slaughterer = {
 					time = 1,
 					max = 20,
 					add = 5,
-					remove = 1,
+					remove = 0,
 					requires = 'nothing',
 					requires_name = 'Nothing',
 					drop = 100
@@ -60,6 +61,7 @@ Config.Jobs.slaughterer = {
 			Blip = false,
 			Name = _U('s_slaughtered'),
 			Type = 'work',
+			Duration = 20000,
 			Item = {
 				{
 					name = _U('s_slaughtered_chicken'),
@@ -84,6 +86,7 @@ Config.Jobs.slaughterer = {
 			Blip = false,
 			Name = _U('s_package'),
 			Type = 'work',
+			Duration = 20000,
 			Item = {
 				{
 					name = _U('s_packagechicken'),

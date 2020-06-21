@@ -47,6 +47,7 @@ Config.Jobs.fisherman = {
 			Type  = 'work',
 			Hint  = _U('fm_fish_button'),
 			GPS   = {x = 3859.43, y = 4448.83, z = 0.39},
+			Duration = 20000,
 			Item = {
 				{
 					name   = _U('fm_fish'),
@@ -54,7 +55,7 @@ Config.Jobs.fisherman = {
 					time   = 2,
 					max    = 100,
 					add    = 1,
-					remove = 1,
+					remove = 0,
 					requires = 'nothing',
 					requires_name = 'Nothing',
 					drop   = 100
