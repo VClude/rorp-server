@@ -544,7 +544,6 @@ AddEventHandler('esx_jobs:spawnJobVehicle', function(spawnPoint, vehicle)
 	local playerPed = PlayerPedId()
 
 	ESX.Game.SpawnVehicle(vehicle.Hash, spawnPoint.Pos, spawnPoint.Heading, function(spawnedVehicle)
-		TriggerEvent("carremote:grantKeys", spawnedVehicle)
 
 		if vehicle.Trailer ~= 'none' then
 			ESX.Game.SpawnVehicle(vehicle.Trailer, spawnPoint.Pos, spawnPoint.Heading, function(trailer)
@@ -556,6 +555,7 @@ AddEventHandler('esx_jobs:spawnJobVehicle', function(spawnPoint, vehicle)
 		local plate = 'WORK' .. math.random(100, 900)
 		SetVehicleNumberPlateText(spawnedVehicle, plate)
 		myPlate[plate] = true
+		TriggerEvent("carremote:grantKeys", spawnedVehicle)
 
 		TaskWarpPedIntoVehicle(playerPed, spawnedVehicle, -1)
 
