@@ -197,7 +197,7 @@ Config.Jobs.petani = {
 	Zones = {
 
 		CloakRoom = {
-			Pos = {x = 2402.97, y = 5021.44, z = 46.13},
+			Pos = {x = 2402.97, y = 5021.44, z = 45.13},
 			Size = {x = 3.0, y = 3.0, z = 1.0},
 			Color = {r = 204, g = 204, b = 0},
 			Marker = 1,
@@ -209,7 +209,7 @@ Config.Jobs.petani = {
 		},
 
 		Jeruk = {
-			Pos = {x = 2345.74, y = 5024.06, z = 43.7},
+			Pos = {x = 2345.74, y = 5024.06, z = 42.7},
 			Size = {x = 3.0, y = 3.0, z = 1.0},
 			Color = {r = 204, g = 204, b = 0},
 			Marker = 1,
@@ -235,7 +235,7 @@ Config.Jobs.petani = {
 		},
 
 		VehicleSpawner = {
-			Pos = {x = 2404.81, y = 5037.68, z = 45.99},
+			Pos = {x = 2404.81, y = 5037.68, z = 44.99},
 			Size = {x = 3.0, y = 3.0, z = 1.0},
 			Color = {r = 204, g = 204, b = 0},
 			Marker = 1,
@@ -249,7 +249,7 @@ Config.Jobs.petani = {
 		},
 
 		VehicleSpawnPoint = {
-			Pos = {x = 2421.24, y = 5031.01, z = 45.95},
+			Pos = {x = 2421.24, y = 5031.01, z = 44.95},
 			Size = {x = 3.0, y = 3.0, z = 1.0},
 			Marker = -1,
 			Blip = false,
@@ -261,7 +261,7 @@ Config.Jobs.petani = {
 		},
 
 		VehicleDeletePoint = {
-			Pos = {x = 2400.07, y = 5053.74, z = 46.39},
+			Pos = {x = 2400.07, y = 5053.74, z = 45.39},
 			Size = {x = 3.0, y = 3.0, z = 1.0},
 			Color = {r = 255, g = 0, b = 0},
 			Marker = 1,
@@ -276,7 +276,7 @@ Config.Jobs.petani = {
 		},
 
 		Delivery = {
-			Pos = {x = -437.62, y = 1591.73, z = 357.55},
+			Pos = {x = -437.62, y = 1591.73, z = 356.55},
 			Color = {r = 204, g = 204, b = 0},
 			Size = {x = 5.0, y = 5.0, z = 3.0},
 			Marker = 1,
