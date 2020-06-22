@@ -9,53 +9,29 @@ Citizen.CreateThread(function()
 
 		if GetDistanceBetweenCoords(coords, Config.CircleZones.LicenseShop.coords, true) < 5 then
 			if not menuOpen then
-				ESX.ShowHelpNotification(_U('licenseshop_prompt'))
-
-				if IsControlJustReleased(0, 38) then
-					if not IsPedInAnyVehicle(playerPed, true) then
-						if Config.RequireCopsOnline then
-							ESX.TriggerServerCallback('esx_illegal:EnoughCops', function(cb)
-								if cb then
-									if Config.RestrictLicenseShopAcces == true then
-										CheckJob()
-									else
-										wasOpen = true
-										OpenlicenseShop()
-									end
-								else
-									ESX.ShowNotification(_U('cops_notenough'))
-								end
-							end, Config.Cops.LicenseShop)
-						else
-							if Config.RestrictLicenseShopAcces == true then
-								CheckJob()
-							else
-								wasOpen = true
-								OpenlicenseShop()
-							end
-						end
-					else
-						ESX.ShowNotification(_U('need_on_foot'))
-					end
-				end
-			else
-				Citizen.Wait(500)
+				checkjob()
 			end
-		else
+		--[[else
 			if wasOpen then
 				wasOpen = false
 				ESX.UI.Menu.CloseAll()
 			end
-			Citizen.Wait(500)
+
+			Citizen.Wait(500)--]]
 		end
 	end
 end)
 
-function CheckJob()
+function checkjob()
 	ESX.TriggerServerCallback('esx_illegal:CheckJob', function(cb)
-		if cb then
-			wasOpen = true
-			OpenlicenseShop()
+	if cb then
+		ESX.ShowHelpNotification(_U('licenseshop_prompt'))
+			if IsControlJustReleased(0, Keys['E']) then
+				wasOpen = true
+				OpenlicenseShop()
+			else
+				Citizen.Wait(500)
+			end
 		end
 	end)
 end

@@ -1,5 +1,4 @@
 ESX = nil
-local CopsConnected = 0
 
 TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 
@@ -54,60 +53,11 @@ end)
 
 ESX.RegisterServerCallback('esx_illegal:canPickUp', function(source, cb, item)
 	local xPlayer = ESX.GetPlayerFromId(source)
-	cb(xPlayer.canCarryItem(item, 1))
-end)
+	local xItem = xPlayer.getInventoryItem(item)
 
-ESX.RegisterServerCallback('esx_illegal:CheckLisense', function(source, cb, itemName)
-	local xPlayer = ESX.GetPlayerFromId(source)
-	local xLisence = xPlayer.getInventoryItem(itemName)
-
-	if xLisence.count == 1 then
-		cb(true)
-	else
+	if xItem.limit ~= -1 and xItem.count >= xItem.limit then
 		cb(false)
-	end
-end)
-
-ESX.RegisterServerCallback('esx_illegal:EnoughCops', function(source, cb, configvalue)	
-	if CopsConnected < configvalue then
-		cb(false)
-		return
 	else
 		cb(true)
-		return
-	end
-end)
-
-RegisterServerEvent('esx_illegal:CountCops')
-AddEventHandler('esx_illegal:CountCops', function()
-	local xPlayers = ESX.GetPlayers()
-	CopsConnected = 0
-
-	for k,Player in pairs(xPlayers) do
-		local xPlayer = ESX.GetPlayerFromId(Player)
-
-		if xPlayer.job.name == 'police' then
-			CopsConnected = CopsConnected + 1
-		end
-	end
-
-	if Config.EnableCopCheckMessage then
-		print('[',os.date("%H:%M"),']', 'esx_illegal: Counted all online cops: ', CopsConnected)
-	end
-end)
-
-Citizen.CreateThread(function()
-	if Config.RequireCopsOnline then
-		while true do
-			Citizen.Wait(Config.CopsCheckRefreshTime * 60000)
-			TriggerEvent('esx_illegal:CountCops')
-		end
-	end
-end)
-
-Citizen.CreateThread(function()
-	if Config.RequireCopsOnline then
-		Citizen.Wait(5 * 60000)
-		TriggerEvent('esx_illegal:CountCops')
 	end
 end)

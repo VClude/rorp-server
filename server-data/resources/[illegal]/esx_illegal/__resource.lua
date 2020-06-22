@@ -1,8 +1,8 @@
 resource_manifest_version '44febabe-d386-4d18-afbe-5e627f4af937'
 
-description 'ESX Illegal'
+description 'ESX Drugs by DoPeMan'
 
-version '2.0.0'
+version '1.0.0'
 
 server_scripts {
 	'@mysql-async/lib/MySQL.lua',
@@ -17,7 +17,7 @@ server_scripts {
 	'server/weed.lua',
 	'server/heroin.lua',
 	'server/chemicals.lua',
-	'server/licenseshop.lua',
+	'server/lisenceshop.lua',
 	'server/moneywash.lua',
 }
 
@@ -36,9 +36,8 @@ client_scripts {
 	'client/hydrochloricacid.lua',
 	'client/sodiumhydroxide.lua',
 	'client/sulfuricacid.lua',
-	'client/licenseshop.lua',
+	'client/lisenceshop.lua',
 	'client/moneywash.lua',
-	'client/teleport.lua',
 }
 
 dependencies {

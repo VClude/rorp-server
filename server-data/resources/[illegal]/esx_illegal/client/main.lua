@@ -33,39 +33,23 @@ Citizen.CreateThread(function()
 		local playerPed = PlayerPedId()
 		local coords = GetEntityCoords(playerPed)
 
-		if GetDistanceBetweenCoords(coords, Config.CircleZones.DrugDealer.coords, true) < 1.5 then
+		if GetDistanceBetweenCoords(coords, Config.CircleZones.DrugDealer.coords, true) < 1.50 then
 			if not menuOpen then
 				ESX.ShowHelpNotification(_U('dealer_prompt'))
 
-				if IsControlJustReleased(0, 38) then
-					if not IsPedInAnyVehicle(playerPed, true) then
-						if Config.RequireCopsOnline then
-							ESX.TriggerServerCallback('esx_illegal:EnoughCops', function(cb)
-								if cb then
-									wasOpen = true
-									OpenDrugShop()
-								else
-									ESX.ShowNotification(_U('cops_notenough'))
-								end
-							end, Config.Cops.DrugDealer)
-						else
-							wasOpen = true
-							OpenDrugShop()
-						end
-					else
-						ESX.ShowNotification(_U('need_on_foot'))
-					end
+				if IsControlJustReleased(0, Keys['E']) then
+					wasOpen = true
+					OpenDrugShop()
 				end
 			else
-				Citizen.Wait(500)
+				Citizen.Wait(0)
 			end
-		else
+			else
 			if wasOpen then
 				wasOpen = false
 				ESX.UI.Menu.CloseAll()
 			end
-
-			Citizen.Wait(500)
+			Citizen.Wait(0)
 		end
 	end
 end)
@@ -113,36 +97,66 @@ AddEventHandler('onResourceStop', function(resource)
 	end
 end)
 
-function CreateBlipCircle(coords, text, radius, color, sprite)
-	
-	if Config.EnableMapsBlimps then
-		local blip = AddBlipForRadius(coords, radius)
+function OpenBuyLicenseMenu(licenseName)
+	menuOpen = true
+	local license = Config.LicensePrices[licenseName]
 
-		SetBlipHighDetail(blip, true)
-		SetBlipColour(blip, 1)
-		SetBlipAlpha (blip, 128)
+	local elements = {
+		{
+			label = _U('license_no'),
+			value = 'no'
+		},
 
-		-- create a blip in the middle
-		blip = AddBlipForCoord(coords)
+		{
+			label = ('%s - <span style="color:green;">%s</span>'):format(license.label, _U('dealer_item', ESX.Math.GroupDigits(license.price))),
+			value = licenseName,
+			price = license.price,
+			licenseName = license.label
+		}
+	}
 
-		SetBlipHighDetail(blip, true)
-		SetBlipSprite (blip, sprite)
-		SetBlipScale  (blip, 1.0)
-		SetBlipColour (blip, color)
-		SetBlipAsShortRange(blip, true)
+	ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'license_shop', {
+		title    = _U('license_title'),
+		align    = 'top-left',
+		elements = elements
+	}, function(data, menu)
 
-		BeginTextCommandSetBlipName("STRING")
-		AddTextComponentString(text)
-		EndTextCommandSetBlipName(blip)
-	end
+		if data.current.value ~= 'no' then
+			ESX.TriggerServerCallback('esx_illegal:buyLicense', function(boughtLicense)
+				if boughtLicense then
+					ESX.ShowNotification(_U('license_bought', data.current.licenseName, ESX.Math.GroupDigits(data.current.price)))
+				else
+					ESX.ShowNotification(_U('license_bought_fail', data.current.licenseName))
+				end
+			end, data.current.value)
+		else
+			menu.close()
+		end
+
+	end, function(data, menu)
+		menu.close()
+		menuOpen = false
+	end)
 end
 
+function CreateBlipCircle(coords, text, radius, color, sprite)	
+	local blip = AddBlipForRadius(coords, radius)
+	SetBlipHighDetail(blip, true)
+	SetBlipColour(blip, 1)
+	SetBlipAlpha (blip, 128)
+	-- create a blip in the middle
+	blip = AddBlipForCoord(coords)
+	SetBlipHighDetail(blip, true)
+	SetBlipSprite (blip, sprite)
+	SetBlipScale  (blip, 1.0)
+	SetBlipColour (blip, color)
+	SetBlipAsShortRange(blip, true)
+	BeginTextCommandSetBlipName("STRING")
+	AddTextComponentString(text)
+	EndTextCommandSetBlipName(blip)
+end
 Citizen.CreateThread(function()
-	if Config.EnableMapsBlimps then
-		for k,zone in pairs(Config.CircleZones) do
-			if zone.enabled then
-				CreateBlipCircle(zone.blimpcoords, zone.name, zone.radius, zone.color, zone.sprite)
-			end
-		end
+	for k,zone in pairs(Config.CircleZones) do
+		CreateBlipCircle(zone.coords, zone.name, zone.radius, zone.color, zone.sprite)
 	end
 end)

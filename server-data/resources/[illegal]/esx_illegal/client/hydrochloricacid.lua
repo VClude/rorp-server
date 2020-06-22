@@ -35,17 +35,30 @@ Citizen.CreateThread(function()
 			end
 
 			if IsControlJustReleased(0, Keys['E']) and not isPickingUp then
-				if Config.RequireCopsOnline then
-					ESX.TriggerServerCallback('esx_illegal:EnoughCops', function(cb)
-						if cb then
-							PickUpHydrochloricAcid(playerPed, coords, nearbyObject, nearbyID)
-						else
-							ESX.ShowNotification(_U('cops_notenough'))
-						end
-					end, Config.Cops.Meth)
-				else
-					PickUpHydrochloricAcid(playerPed, coords, nearbyObject, nearbyID)
-				end
+				isPickingUp = true
+
+				ESX.TriggerServerCallback('esx_illegal:canPickUp', function(canPickUp)
+
+					if canPickUp then
+						TaskStartScenarioInPlace(playerPed, 'world_human_gardener_plant', 0, false)
+
+						Citizen.Wait(2000)
+						ClearPedTasks(playerPed)
+						Citizen.Wait(1500)
+		
+						ESX.Game.DeleteObject(nearbyObject)
+		
+						table.remove(HydrochloricAcidBarrels, nearbyID)
+						spawnedHydrochloricAcidBarrels = spawnedHydrochloricAcidBarrels - 1
+		
+						TriggerServerEvent('esx_illegal:pickedUpHydrochloricAcid')
+					else
+						ESX.ShowNotification(_U('HydrochloricAcid_inventoryfull'))
+					end
+
+					isPickingUp = false
+
+				end, 'hydrochloric_acid')
 			end
 
 		else
@@ -55,34 +68,6 @@ Citizen.CreateThread(function()
 	end
 
 end)
-
-function PickUpHydrochloricAcid(playerPed, coords, nearbyObject, nearbyID)
-	isPickingUp = true
-
-	ESX.TriggerServerCallback('esx_illegal:canPickUp', function(canPickUp)
-
-		if canPickUp then
-			TaskStartScenarioInPlace(playerPed, 'world_human_gardener_plant', 0, false)
-
-			Citizen.Wait(2000)
-			ClearPedTasks(playerPed)
-			Citizen.Wait(1500)
-
-			ESX.Game.DeleteObject(nearbyObject)
-
-			table.remove(HydrochloricAcidBarrels, nearbyID)
-
-			TriggerServerEvent('esx_illegal:pickedUpHydrochloricAcid')
-			Citizen.Wait(5000)
-			spawnedHydrochloricAcidBarrels = spawnedHydrochloricAcidBarrels - 1
-		else
-			ESX.ShowNotification(_U('HydrochloricAcid_inventoryfull'))
-		end
-
-		isPickingUp = false
-
-	end, 'hydrochloric_acid')
-end
 
 AddEventHandler('onResourceStop', function(resource)
 	if resource == GetCurrentResourceName() then

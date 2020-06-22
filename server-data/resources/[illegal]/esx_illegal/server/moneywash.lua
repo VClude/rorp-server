@@ -16,3 +16,14 @@ ESX.RegisterServerCallback('esx_illegal:GetBlackmoney', function(source, cb)
 	
 	cb(ammount)
 end)
+
+ESX.RegisterServerCallback('esx_illegal:CheckMoneyWashLicense', function(source, cb)
+	local xPlayer = ESX.GetPlayerFromId(source)
+	local xMoneyWash = xPlayer.getInventoryItem('moneywash')
+
+	if xMoneyWash.count == 1 then
+		cb(true)
+	else
+		cb(false)
+	end
+end)

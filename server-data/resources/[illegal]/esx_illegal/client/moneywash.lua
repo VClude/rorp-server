@@ -11,57 +11,38 @@ Citizen.CreateThread(function()
 			if not menuOpen then
 				ESX.ShowHelpNotification(_U('moneywash_prompt'))
 
-				if IsControlJustReleased(0, 38) then
-					if not IsPedInAnyVehicle(playerPed, true) then
-						if Config.RequireCopsOnline then
-							ESX.TriggerServerCallback('esx_illegal:EnoughCops', function(cb)
-								if cb then
-									if Config.MoneyWashLicenseEnabled then
-										CheckMoneyWashLicense()
-									else
-										wasOpen = true
-										OpenMoneyWash()
-									end
-								else
-									ESX.ShowNotification(_U('cops_notenough'))
-								end
-							end, Config.Cops.MoneyWash)
-						else
-							if Config.MoneyWashLicenseEnabled then
-								CheckMoneyWashLicense()
-							else
-								wasOpen = true
-								OpenMoneyWash()
-							end
-						end	
+				if IsControlJustReleased(0, Keys['E']) then
+					if Config.MoneyWashLicenseEnabled then
+						CheckMoneyWashLicense()
 					else
-						ESX.ShowNotification(_U('need_on_foot'))
-					end	
+						wasOpen = true
+						OpenMoneyWash()
+					end
 				end
 			else
 				Citizen.Wait(500)
 			end
-		else
+		--[[else
 			if wasOpen then
 				wasOpen = false
 				ESX.UI.Menu.CloseAll()
 			end
 
-			Citizen.Wait(500)
+			Citizen.Wait(500)--]]
 		end
 	end
 end)
 
 function CheckMoneyWashLicense()
 
-	ESX.TriggerServerCallback('esx_illegal:CheckLisense', function(cb)
+	ESX.TriggerServerCallback('esx_illegal:CheckMoneyWashLicense', function(cb)
 		if cb then
 			wasOpen = true
 			OpenMoneyWash()
 		else
 			ESX.ShowNotification(_U('need_license'))
 		end
-	end, 'moneywash')
+	end)
 end
 
 function OpenMoneyWash()
