@@ -4,7 +4,7 @@ AirportRoute = {
     SpawnPoint = {x = -923.7001, y = -2283.8886, z = 6.7090, heading = 333.65},
     BusReturnPoint = {x = -923.7001, y = -2283.8886, z = 6.7090, heading = 333.65},
     Payment = 8000,
-    PaymentPerPassenger = 10,
+    PaymentPerStation = 800,
     Lines = {
         {
             Name = 'airport_route',

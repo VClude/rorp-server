@@ -273,6 +273,7 @@ function handleNormalStop()
         Events.ArrivedAtStop(currentStopNameKey, nextStopNameKey)
         handleUnloading(currentStop)
         handleLoading()
+        payForEachStation()
         -- payForEachPedLoaded(#pedsAtNextStop)
 
         local nextStopName = _U(nextStopNameKey)
@@ -325,9 +326,9 @@ function handleUnloading(stopCoords)
 end
 
 function determineWaitForPassengersMessage()
-    if numberDepartingPedsNextStop == 0 and #pedsAtNextStop == 0 then
-        return _U('no_passengers_loading_or_unloading')
-    elseif numberDepartingPedsNextStop == 0 then
+    -- if numberDepartingPedsNextStop == 0 and #pedsAtNextStop == 0 then
+    --     return _U('no_passengers_loading_or_unloading')
+    if numberDepartingPedsNextStop == 0 then
         return _U('no_passengers_unloading')
     elseif #pedsAtNextStop == 0 then
         return _U('no_passengers_loading')
@@ -392,15 +393,21 @@ end
 --     end
 -- end
 
-function payForEachPedLoaded(numberOfPeds)
-    if numberOfPeds > 0 then
+-- function payForEachPedLoaded(numberOfPeds)
+--     if numberOfPeds > 0 then
         -- local amountToPay = numberOfPeds * activeRoute.PaymentPerPassenger
-        local amountToPay = activeRoute.PaymentPerPassenger
+        -- local amountToPay = activeRoute.PaymentPerStation
         -- TriggerServerEvent('blarglebus:passengersLoaded', amountToPay)
         -- ESX.ShowNotification(_U('passengers_loaded', numberOfPeds, amountToPay))
-        ESX.ShowNotification(_U('passengers_loaded', amountToPay))
-        totalMoneyPaidThisRoute = totalMoneyPaidThisRoute + amountToPay
-    end
+--         ESX.ShowNotification(_U('passengers_loaded', amountToPay))
+--         totalMoneyPaidThisRoute = totalMoneyPaidThisRoute + amountToPay
+--     end
+-- end
+
+function payForEachStation()
+    local amountToPay = activeRoute.PaymentPerStation
+    ESX.ShowNotification(_U('passengers_loaded', amountToPay))
+    totalMoneyPaidThisRoute = totalMoneyPaidThisRoute + amountToPay
 end
 
 function setUpNextStop()
