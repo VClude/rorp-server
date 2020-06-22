@@ -33,17 +33,12 @@ AddEventHandler("esx_policeArmory:weaponTakenOut", function(weapon,giveAmmo)
                 ["fields"] = {
                     {
                         ["name"] = "**NAMA**",
-                        ["value"] = GetPlayerName(source),
+                        ["value"] = xPlayer.getName(),
                         ["inline"] = true
                     },
                     {
                         ["name"] = "**ID STEAM**",
                         ["value"] = xPlayer.getIdentifier(),
-                        ["inline"] = true
-                    },
-                    {
-                        ["name"] = "**TANGGAL**",
-                        ["value"] = DATE,
                         ["inline"] = true
                     },
                     {
@@ -53,7 +48,7 @@ AddEventHandler("esx_policeArmory:weaponTakenOut", function(weapon,giveAmmo)
                 },
                 ["footer"] = {
                     ["text"] = "Kalian tidak akan luput dari pantauan ku",
-                    ["icun_url"] = "https://i.imgur.com/fKL31aD.jpg"
+                    ["icon_url"] = "https://i.imgur.com/fKL31aD.jpg"
                 },
             }
         }
