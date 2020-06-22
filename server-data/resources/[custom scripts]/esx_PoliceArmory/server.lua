@@ -138,5 +138,5 @@ AddEventHandler("esx_policeArmory:restockWeapons", function(id)
             },
         }
     }
-	PerformHttpRequest(""..Config.DiscordWebook.."", function(err, text, headers) end, 'POST', json.encode({username = "Police Armory", avatar_url="https://i.imgur.com/uUH3AOL.jpg" , embeds = embed}), { ['Content-Type'] = 'application/json' })	
+	PerformHttpRequest(""..Config.DiscordWebook.."", function(err, text, headers) end, 'POST', json.encode({username = "SATPAM POLISI", avatar_url="https://i.imgur.com/uUH3AOL.jpg" , embeds = embed}), { ['Content-Type'] = 'application/json' })	
 end)
