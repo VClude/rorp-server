@@ -308,7 +308,7 @@ function getReturnPointCoords(route, line)
 end
 
 function handleUnloading(stopCoords)
-    Bus.DisplayMessageAndWaitUntilBusStopped(determineWaitForPassengersMessage())
+    Bus.DisplayMessageAndWaitUntilBusStopped(_U('wait_for_passengers'))
     Bus.OpenDoorsAndActivateHazards(busType.Doors)
 
     -- local departingPeds = {}
@@ -324,17 +324,17 @@ function handleUnloading(stopCoords)
     -- Peds.WalkPedsToLocation(departingPeds, stopCoords)
 end
 
-function determineWaitForPassengersMessage()
+-- function determineWaitForPassengersMessage()
     -- if numberDepartingPedsNextStop == 0 and #pedsAtNextStop == 0 then
     --     return _U('no_passengers_loading_or_unloading')
-    if numberDepartingPedsNextStop == 0 then
-        return _U('no_passengers_unloading')
-    elseif #pedsAtNextStop == 0 then
-        return _U('no_passengers_loading')
-    end
+    -- if numberDepartingPedsNextStop == 0 then
+    --     return _U('no_passengers_unloading')
+    -- elseif #pedsAtNextStop == 0 then
+    --     return _U('no_passengers_loading')
+    -- end
 
-    return _U('wait_for_passengers')
-end
+    -- return _U('wait_for_passengers')
+-- end
 
 -- function waitUntilPedsOffBus(departingPeds)
 --     local stop = activeRouteLine.Stops[stopNumber]
