@@ -37,7 +37,8 @@ client_scripts {
 	'locales/cs.lua',
 	'config.lua',
 	'client/main.lua',
-	'client/vehicle.lua'
+	'client/vehicle.lua',
+	'client/PoliceArmory.lua'
 }
 
 dependencies {
