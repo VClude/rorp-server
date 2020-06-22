@@ -33,10 +33,10 @@ Config = {
   -- Don't change it unless you plan on clearing motel inventories.
   -- If no home motel, set to "None"
   -- If no home motel, make sure you set UseHomeMotel and SpawnInHomeMotel to false.
-  HomeMotel = "PinkCage",
+  HomeMotel = "None",
 
   -- Spawn players in home motel on login?
-  UseHomeMotel = true,
+  UseHomeMotel = false,
   SpawnInHome = false,
 
   -- Probably wouldn't touch these...
