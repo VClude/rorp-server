@@ -273,9 +273,9 @@ function handleNormalStop()
         Events.ArrivedAtStop(currentStopNameKey, nextStopNameKey)
         handleUnloading(currentStop)
         handleLoading()
-        payForEachPedLoaded(#pedsAtNextStop)
-        print(#pedsAtNextStop)
-
+        -- payForEachPedLoaded(#pedsAtNextStop)
+        payForEachStation()
+        
         local nextStopName = _U(nextStopNameKey)
         if (isLastStop(stopNumber)) then
             local coords = getReturnPointCoords(activeRoute, activeRouteLine)
@@ -393,15 +393,13 @@ end
 --     end
 -- end
 
-function payForEachPedLoaded(numberOfPeds)
-    if numberOfPeds == 0 then
+function payForEachStation()
         -- local amountToPay = numberOfPeds * activeRoute.PaymentPerPassenger
-        local amountToPay = activeRoute.PaymentPerStation
-        -- TriggerServerEvent('blarglebus:passengersLoaded', amountToPay)
-        -- ESX.ShowNotification(_U('passengers_loaded', numberOfPeds, amountToPay))
-        ESX.ShowNotification(_U('passengers_loaded', amountToPay))
-        totalMoneyPaidThisRoute = totalMoneyPaidThisRoute + amountToPay
-    end
+    local amountToPay = activeRoute.PaymentPerStation
+    -- TriggerServerEvent('blarglebus:passengersLoaded', amountToPay)
+    -- ESX.ShowNotification(_U('passengers_loaded', numberOfPeds, amountToPay))
+    -- ESX.ShowNotification(_U('passengers_loaded', amountToPay))
+    totalMoneyPaidThisRoute = totalMoneyPaidThisRoute + amountToPay
 end
 
 function setUpNextStop()
