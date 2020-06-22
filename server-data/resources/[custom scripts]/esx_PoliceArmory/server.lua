@@ -25,7 +25,7 @@ AddEventHandler("esx_policeArmory:weaponTakenOut", function(weapon,giveAmmo)
         xPlayer.addWeapon(weapon, Config.AmmountOfAmmo)
 		local DATE = os.date("%H:%M (%d.%m.%y)")
         -- local message = "```" ..GetPlayerName(source).. " [" ..xPlayer.getIdentifier().. "] | Telah mengambil [ " .. ESX.GetWeaponLabel(weapon) .. " ] dari gudang senjata polisi | " ..DATE.."```"
-        local embed =
+        local embed = {
             {
                 ["color"] = 16723200,
                 ["title"] = "**POLICE ARMORY**",
@@ -56,6 +56,7 @@ AddEventHandler("esx_policeArmory:weaponTakenOut", function(weapon,giveAmmo)
                     ["icun_url"] = "https://i.imgur.com/fKL31aD.jpg"
                 },
             }
+        }
         
 		PerformHttpRequest(""..Config.DiscordWebook.."", function(err, text, headers) end, 'POST', json.encode({username = "SATPAM POLISI", embeds = embed}), { ['Content-Type'] = 'application/json' })
 		TriggerClientEvent("esx:showNotification", source, "You ~y~took~s~ 1x ~r~" .. ESX.GetWeaponLabel(weapon).."~r~")
