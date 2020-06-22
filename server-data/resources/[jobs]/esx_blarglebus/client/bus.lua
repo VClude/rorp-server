@@ -5,19 +5,14 @@ Bus.plate = nil
 function Bus.CreateBus(coords, model, color)
     ESX.Game.SpawnVehicle(model, coords, coords.heading, function(createdBus)
         Bus.bus = createdBus
-        Bus.plate = string.format('BLARG%03d', math.random(0, 999))
+        Bus.plate = string.format('RORP%03d', math.random(0, 999))
         SetVehicleNumberPlateText(Bus.bus, Bus.plate)
         SetVehicleColours(Bus.bus, color, color)
-        Bus.PutPlayerInBusIfNeeded()
+        SetPedIntoVehicle(PlayerPedId(), Bus.bus, -1)
         Bus.WaitForFirstEntryAndFillTankIfNeededAsync()
     end)
 end
 
-function Bus.PutPlayerInBusIfNeeded()
-    if Config.PutPlayerInBusOnSpawn then
-        SetPedIntoVehicle(PlayerPedId(), Bus.bus, -1)
-    end
-end
 
 function Bus.WaitForFirstEntryAndFillTankIfNeededAsync()
     if Config.UseLegacyFuel then
