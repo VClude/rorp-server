@@ -1,0 +1,314 @@
+/*Order Menu*/
+#container, #container1 {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: 620px;
+    width: 1240px;
+    background-color: grey;
+}
+
+.text {
+    font-size: 50px;
+    text-align: center;
+    color: white;
+}
+
+.name {
+    position: absolute;
+    left:35%;
+    top: 50%;
+    font-weight: bold;
+    font-style: italic;
+    color: white;
+}
+
+.price {
+    position: absolute;
+    left: 35%;
+    font-weight: bold;
+    color: white;
+}
+
+/*Burger/Sandwich*/
+.btitle, .stitle {
+    position: absolute;
+    left: 1%;
+    top: 40%;
+    transform: translate(-50%, -50%);
+    height: 100%;
+    width: 75px;
+    margin-left: 20px;
+}
+
+.title {
+    position: absolute;
+    left: 100%;
+    top: 20%;
+    font-size: 26;
+    font-family: cursive;
+    font-weight: bold;
+    color: black;
+}
+
+.breadb, .breads {
+    position: absolute;
+    left: 8%;
+    top: 40%;
+    transform: translate(-50%, -50%);
+    height: 230px;
+    margin-left: 20px;
+}
+
+#bbb, #bbs {
+    position: absolute;
+    left: 35%;
+    top: 73%;
+    background-color: green;
+    border-color: green;
+    font-weight: bold;
+    color: black;
+}
+
+.cheese {
+    position: absolute;
+    left: 30%;
+    top: 40%;
+    transform: translate(-50%, -50%);
+    height: 230px;
+    margin-left: 20px;
+}
+
+#bce, #bce1 {
+    position: absolute;
+    left: 35%;
+    top: 72%;
+    background-color: green;
+    border-color: green;
+    font-weight: bold;
+    color: black;
+}
+
+.meat, .ham {
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%, -50%);
+    height: 230px;
+    margin-left: 20px;
+}
+
+#bmt, #bhm {
+    position: absolute;
+    left: 35%;
+    top: 72%;
+    background-color: green;
+    border-color: green;
+    font-weight: bold;
+    color: black;
+}
+
+/*Hot Dog*/
+.htitle {
+    position: absolute;
+    left: 1%;
+    top: 85%;
+    transform: translate(-50%, -50%);
+    height: 100%;
+    width: 75px;
+    margin-left: 20px;
+}
+
+.title {
+    position: absolute;
+    left: 100%;
+    top: 20%;
+    font-size: 26;
+    font-family: cursive;
+    font-weight: bold;
+    color: white;
+}
+
+.breadh {
+    position: absolute;
+    left: 8%;
+    top: 78%;
+    transform: translate(-50%, -50%);
+    height: 230px;
+    margin-left: 20px;
+}
+
+#bbh {
+    position: absolute;
+    left: 35%;
+    top: 73%;
+    background-color: green;
+    border-color: green;
+    font-weight: bold;
+    color: black;
+}
+
+.sausage {
+    position: absolute;
+    left: 30%;
+    top: 79%;
+    transform: translate(-50%, -50%);
+    height: 230px;
+    margin-left: 20px;
+}
+
+#bse {
+    position: absolute;
+    left: 35%;
+    top: 65%;
+    background-color: green;
+    border-color: green;
+    font-weight: bold;
+    color: black;
+}
+
+/*Kitchen Menu*/
+#containerk {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: 620px;
+    width: 1240px;
+}
+
+.namek {
+    position: absolute;
+    left:35%;
+    top: 18%;
+    font-weight: bold;
+    font-style: italic;
+    color: white;
+}
+
+.ingredientsk {
+    position: absolute;
+    left: 35%;
+    font-weight: bold;
+    color: white;
+}
+
+/*Burger*/
+.burgerk {
+    position: absolute;
+    left: 5%;
+    top: 70%;
+    transform: translate(-50%, -50%);
+    height: 100%;
+    width: 75px;
+    margin-left: 20px;
+}
+
+#bc1 {
+    position: absolute;
+    left: 35%;
+    top: 35%;
+    background-color: green;
+    border-color: green;
+    font-weight: bold;
+    color: black;
+}
+
+/*Burger*/
+.sandwichk {
+    position: absolute;
+    left: 45%;
+    top: 70%;
+    transform: translate(-50%, -50%);
+    height: 100%;
+    width: 75px;
+    margin-left: 20px;
+}
+
+#bc2 {
+    position: absolute;
+    left: 35%;
+    top: 35%;
+    background-color: green;
+    border-color: green;
+    font-weight: bold;
+    color: black;
+}
+
+/*Hot Dog*/
+.hotdogk {
+    position: absolute;
+    left: 88%;
+    top: 70%;
+    transform: translate(-50%, -50%);
+    height: 100%;
+    width: 75px;
+    margin-left: 20px;
+}
+
+#bc3 {
+    position: absolute;
+    left: 35%;
+    top: 33%;
+    background-color: green;
+    border-color: green;
+    font-weight: bold;
+    color: black;
+}
+
+/*General*/
+#cbg {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: 620px;
+    width: 1240px;
+}
+
+.tshop {
+    position: absolute;
+    left: 35%;
+    transform: translate(-50%, -50%);
+    margin-left: 20px;
+}
+
+.tstitle {
+    position: absolute;
+    left: 100%;
+    top: 20%;
+    font-size: 32;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    color: white;
+}
+
+.page-prv{
+    position: absolute;
+    left: 92%;
+    top: 2%;
+    width: 35px;
+    height: 35px;
+    transition: .5s;
+    float: left;
+    transform: rotate(45deg);
+    box-shadow: -2px 2px 0 rgba(134, 134, 134, 0.5);
+}
+
+.page-nxt{
+    position: absolute;
+    left: 93%;
+    top: 2%;
+    width: 35px;
+    height: 35px;
+    transition: .5s;
+    float: left;
+    transform: rotate(225deg);
+    box-shadow: -2px 2px 0 rgba(134, 134, 134, 0.5);
+}
+
+.page-prv:hover, .page-nxt:hover {
+    cursor: pointer;
+    box-shadow: -2px 2px 0 rgba(134, 134, 134, 1);
+}
