@@ -28,7 +28,7 @@ Citizen.CreateThread(function()
 
     Overlay.Init()
     startAbortRouteThread()
-    startPedCleanupThread()
+    -- startPedCleanupThread()
     startMainLoop()
 end)
 
