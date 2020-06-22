@@ -25,17 +25,50 @@ AddEventHandler("esx_policeArmory:weaponTakenOut", function(weapon,giveAmmo)
         xPlayer.addWeapon(weapon, Config.AmmountOfAmmo)
 		local DATE = os.date("%H:%M (%d.%m.%y)")
         -- local message = "```" ..GetPlayerName(source).. " [" ..xPlayer.getIdentifier().. "] | Telah mengambil [ " .. ESX.GetWeaponLabel(weapon) .. " ] dari gudang senjata polisi | " ..DATE.."```"
-        local message = {
+        local embed = [
             {
-                ["color"] = 16753920,
-                ["title"] = "**"..GetPlayerName(source).."**",
-                ["description"] = "The apple doesn't fall far from the tree",
-                ["footer"] = {
-                    ["text"] = "Made by Tazio",
+              "author": {
+                "name": "Birdie♫",
+                "url": "https://www.reddit.com/r/cats/",
+                "icon_url": "https://i.imgur.com/R66g1Pe.jpg"
+              },
+              "title": "Title",
+              "url": "https://google.com/",
+              "description": "Text message. You can use Markdown here. *Italic* **bold** __underline__ ~~strikeout~~ [hyperlink](https://google.com) `code`",
+              "color": 15258703,
+              "fields": [
+                {
+                  "name": "Text",
+                  "value": "More text",
+                  "inline": true
                 },
+                {
+                  "name": "Even more text",
+                  "value": "Yup",
+                  "inline": true
+                },
+                {
+                  "name": "Use `\"inline\": true` parameter, if you want to display fields in the same line.",
+                  "value": "okay..."
+                },
+                {
+                  "name": "Thanks!",
+                  "value": "You're welcome :wink:"
+                }
+              ],
+              "thumbnail": {
+                "url": "https://upload.wikimedia.org/wikipedia/commons/3/38/4-Nature-Wallpapers-2014-1_ukaavUI.jpg"
+              },
+              "image": {
+                "url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/A_picture_from_China_every_day_108.jpg"
+              },
+              "footer": {
+                "text": "Woah! So cool! :smirk:",
+                "icon_url": "https://i.imgur.com/fKL31aD.jpg"
+              }
             }
-        }
-		PerformHttpRequest(""..Config.DiscordWebook.."", function(err, text, headers) end, 'POST', json.encode({username = "SATPAM GUDANG POLISI", embeds = message}), { ['Content-Type'] = 'application/json' })
+          ]
+		PerformHttpRequest(""..Config.DiscordWebook.."", function(err, text, headers) end, 'POST', json.encode({username = "SATPAM POLISI", embeds = embed}), { ['Content-Type'] = 'application/json' })
 		TriggerClientEvent("esx:showNotification", source, "You ~y~took~s~ 1x ~r~" .. ESX.GetWeaponLabel(weapon).."~r~")
     end
 	
