@@ -185,10 +185,8 @@ function OpenCloakroomMenu()
 end
 
 function OpenArmoryMenu(station)
-	if Config.EnableArmoryManagement then
-		table.insert(elements, {label = _U('remove_object'),  value = 'get_stock'})
-		table.insert(elements, {label = _U('deposit_object'), value = 'put_stock'})
-	end
+	table.insert(elements, {label = _U('remove_object'),  value = 'get_stock'})
+	table.insert(elements, {label = _U('deposit_object'), value = 'put_stock'})
 
 	ESX.UI.Menu.CloseAll()
 

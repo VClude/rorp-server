@@ -6,7 +6,6 @@ Config.MarkerSize                 = {x = 1.5, y = 1.5, z = 0.5}
 Config.MarkerColor                = {r = 50, g = 50, b = 204}
 
 Config.EnablePlayerManagement     = true
-Config.EnableArmoryManagement     = true
 Config.EnableESXIdentity          = true -- enable if you're using esx_identity
 Config.EnableLicenses             = true -- enable if you're using esx_license
 
