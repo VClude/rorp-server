@@ -12,7 +12,7 @@ Locales['en'] = {
     ['route_selection_random']              = 'Random',
 
     ['start_route']                         = 'press ~INPUT_PICKUP~ to start ~g~%s~.',
-    ['passengers_loaded']                   = 's~ passengers paid for this stop. Collected ~g~$%d.',
+    ['passengers_loaded']                   = 'passengers paid for this stop. Collected ~g~$%d.',
     ['return_to_terminal']                  = 'Route is finished. Return to the terminal.',
     ['stop_bus']                            = 'Stop bus to return it and get paid.',
     ['abort_route_help']                    = 'press ~INPUT_PICKUP~ to abort route. Will cost ~r~$%d.',
