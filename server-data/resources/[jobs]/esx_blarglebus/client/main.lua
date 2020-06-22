@@ -406,7 +406,7 @@ end
 
 function payForEachStation()
     local amountToPay = activeRoute.PaymentPerStation
-    ESX.ShowNotification(_U('passengers_loaded', amountToPay))
+    ESX.ShowNotification(_U('passengers_loaded'))
     totalMoneyPaidThisRoute = totalMoneyPaidThisRoute + amountToPay
 end
 
