@@ -2,18 +2,18 @@ ESX = nil
 
 TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 
-RegisterNetEvent('blarglebus:finishRoute')
-AddEventHandler('blarglebus:finishRoute', function(amount)
+RegisterNetEvent('rorp_supirbis:finishRoute')
+AddEventHandler('rorp_supirbis:finishRoute', function(amount)
     updateMoney(source, function(player) player.addMoney(amount) end)
 end)
 
-RegisterNetEvent('blarglebus:passengersLoaded')
-AddEventHandler('blarglebus:passengersLoaded', function(amount)
+RegisterNetEvent('rorp_supirbis:passengersLoaded')
+AddEventHandler('rorp_supirbis:passengersLoaded', function(amount)
     updateMoney(source, function(player) player.addMoney(amount) end)
 end)
 
-RegisterNetEvent('blarglebus:abortRoute')
-AddEventHandler('blarglebus:abortRoute', function(amount)
+RegisterNetEvent('rorp_supirbis:abortRoute')
+AddEventHandler('rorp_supirbis:abortRoute', function(amount)
     updateMoney(source, function(player) player.removeMoney(amount) end)
 end)
 

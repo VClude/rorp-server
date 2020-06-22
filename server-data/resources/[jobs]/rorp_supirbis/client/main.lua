@@ -241,7 +241,7 @@ function handleReturningBus()
     if playerDistanceFromCoords(coords) < Config.Markers.Size then
         Bus.DisplayMessageAndWaitUntilBusStopped(_U('stop_bus'))
 
-        TriggerServerEvent('blarglebus:finishRoute', activeRoute.Payment)
+        TriggerServerEvent('rorp_supirbis:finishRoute', activeRoute.Payment)
         Events.RouteEnded()
         immediatelyEndRoute()
 
@@ -338,7 +338,7 @@ function handleAbortRoute()
 
         if IsControlJustPressed(1, E_KEY) then
             handleSettingRouteJustAbortedAsync()
-            TriggerServerEvent('blarglebus:abortRoute', totalMoneyPaidThisRoute)
+            TriggerServerEvent('rorp_supirbis:abortRoute', totalMoneyPaidThisRoute)
 
             immediatelyEndRoute()
             Blips.ResetBlips()
