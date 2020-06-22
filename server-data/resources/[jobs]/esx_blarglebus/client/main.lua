@@ -274,6 +274,7 @@ function handleNormalStop()
         handleUnloading(currentStop)
         handleLoading()
         payForEachPedLoaded(#pedsAtNextStop)
+        print(#pedsAtNextStop)
 
         local nextStopName = _U(nextStopNameKey)
         if (isLastStop(stopNumber)) then
@@ -393,7 +394,7 @@ end
 -- end
 
 function payForEachPedLoaded(numberOfPeds)
-    if numberOfPeds < 0 then
+    if numberOfPeds == 0 then
         -- local amountToPay = numberOfPeds * activeRoute.PaymentPerPassenger
         local amountToPay = activeRoute.PaymentPerStation
         -- TriggerServerEvent('blarglebus:passengersLoaded', amountToPay)
