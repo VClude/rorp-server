@@ -1,5 +1,5 @@
 ESX = nil
-local arrayWeight = {}
+local arrayWeight = Config.localWeight
 local VehicleList = {}
 local VehicleInventory = {}
 
@@ -10,23 +10,10 @@ TriggerEvent(
   end
 )
 
-MySQL.ready(function ()
-  MySQL.Async.fetchAll(
-    'SELECT role, class, gender, race FROM pf_profiles WHERE identifier = @identifier',{['@identifier'] = identifier},
-    function(result)
-    	TriggerClientEvent("GetPlayerData", source, result)
-    end)
-
 AddEventHandler(
   "onMySQLReady",
-  MySQL.ready(function ()
   function()
     MySQL.Async.execute("DELETE FROM `trunk_inventory` WHERE `owned` = 0", {})
-    MySQL.Async.fetchAll(
-      'SELECT weight from items'},
-      function(result)
-        arrayWeight = result
-      end)
   end
 )
 
