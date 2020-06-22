@@ -28,11 +28,32 @@ AddEventHandler("esx_policeArmory:weaponTakenOut", function(weapon,giveAmmo)
         local embed = {
             {
                 "color" = 16723200,
-                "title" = "**POLICE ARMORY**",
+                ["title"] = "**POLICE ARMORY**",
                 -- ["description"] = "The apple doesn't fall far from the tree",
-                -- "fields" = {
-                "footer" = {
-                    "text" = DATE,
+                ["fields"] = {
+                    {
+                        ["name"] = "**NAMA**",
+                        ["value"] = GetPlayerName(source),
+                        ["inline"] = true
+                    },
+                    {
+                        ["name"] = "**ID STEAM**",
+                        ["value"] = xPlayer.getIdentifier(),
+                        ["inline"] = true
+                    },
+                    {
+                        ["name"] = "**TANGGAL**",
+                        ["value"] = DATE,
+                        ["inline"] = true
+                    },
+                    {
+                        ["name"] = "**KETERANGAN**",
+                        ["value"] = "Telah Mengambil Senjata **[ ".. ESX.GetWeaponLabel(weapon) .." ]** Dari Police Armory",
+                    }
+                },
+                ["footer"] = {
+                    ["text"] = "Kalian tidak akan luput dari pantauan ku",
+                    ["icun_url"] = "https://i.imgur.com/fKL31aD.jpg"
                 },
             }
         }
