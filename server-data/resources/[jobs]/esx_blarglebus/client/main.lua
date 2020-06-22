@@ -398,7 +398,7 @@ function payForEachStation()
     local amountToPay = activeRoute.PaymentPerStation
     -- TriggerServerEvent('blarglebus:passengersLoaded', amountToPay)
     -- ESX.ShowNotification(_U('passengers_loaded', numberOfPeds, amountToPay))
-    -- ESX.ShowNotification(_U('passengers_loaded', amountToPay))
+    ESX.ShowNotification(_U('passengers_loaded', amountToPay))
     totalMoneyPaidThisRoute = totalMoneyPaidThisRoute + amountToPay
 end
 
