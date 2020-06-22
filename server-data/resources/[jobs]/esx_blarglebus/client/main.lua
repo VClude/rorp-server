@@ -325,9 +325,9 @@ function handleUnloading(stopCoords)
 end
 
 function determineWaitForPassengersMessage()
-    if numberDepartingPedsNextStop == 0 and #pedsAtNextStop == 0 then
-        return _U('no_passengers_loading_or_unloading')
-    elseif numberDepartingPedsNextStop == 0 then
+    -- if numberDepartingPedsNextStop == 0 and #pedsAtNextStop == 0 then
+    --     return _U('no_passengers_loading_or_unloading')
+    if numberDepartingPedsNextStop == 0 then
         return _U('no_passengers_unloading')
     elseif #pedsAtNextStop == 0 then
         return _U('no_passengers_loading')
