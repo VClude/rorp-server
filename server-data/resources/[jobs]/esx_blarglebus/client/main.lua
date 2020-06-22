@@ -273,7 +273,7 @@ function handleNormalStop()
         Events.ArrivedAtStop(currentStopNameKey, nextStopNameKey)
         handleUnloading(currentStop)
         handleLoading()
-        -- payForEachPedLoaded(#pedsAtNextStop)
+        payForEachPedLoaded(#pedsAtNextStop)
 
         local nextStopName = _U(nextStopNameKey)
         if (isLastStop(stopNumber)) then
