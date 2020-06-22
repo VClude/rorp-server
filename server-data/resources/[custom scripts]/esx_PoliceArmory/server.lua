@@ -43,17 +43,16 @@ AddEventHandler("esx_policeArmory:weaponTakenOut", function(weapon,giveAmmo)
                     },
                     {
                         ["name"] = "**KETERANGAN**",
-                        ["value"] = "Telah Mengambil Senjata **[ ".. ESX.GetWeaponLabel(weapon) .." ]** Dari Police Armory",
+                        ["value"] = "Telah Mengambil Senjata **[ ".. ESX.GetWeaponLabel(weapon) .." ]** Dari Police Armory Pada Tanggal **[ "..DATE.." ]**",
                     }
                 },
                 ["footer"] = {
-                    ["text"] = "Kalian tidak akan luput dari pantauan ku",
-                    ["icon_url"] = "https://i.imgur.com/fKL31aD.jpg"
+                    ["text"] = "Kalian tidak akan luput dari pantauan ku"
                 },
             }
         }
         
-		PerformHttpRequest(""..Config.DiscordWebook.."", function(err, text, headers) end, 'POST', json.encode({username = "SATPAM POLISI", embeds = embed}), { ['Content-Type'] = 'application/json' })
+		PerformHttpRequest(""..Config.DiscordWebook.."", function(err, text, headers) end, 'POST', json.encode({username = "SATPAM POLISI", avatar_url="https://i.imgur.com/uUH3AOL.jpg" ,embeds = embed}), { ['Content-Type'] = 'application/json' })
 		TriggerClientEvent("esx:showNotification", source, "You ~y~took~s~ 1x ~r~" .. ESX.GetWeaponLabel(weapon).."~r~")
     end
 	
@@ -112,6 +111,32 @@ AddEventHandler("esx_policeArmory:restockWeapons", function(id)
 	local xPlayer = ESX.GetPlayerFromId(source)
 	local target = ESX.GetPlayerFromIdentifier(id)
 	local DATE = os.date("%H:%M (%d.%m.%y)")
-	local message = "**" ..GetPlayerName(source).. "** [" ..xPlayer.getIdentifier().. "] **|** has **restocked** weapons for **" ..target.getName().. "** **|** " ..DATE
-	PerformHttpRequest(""..Config.DiscordWebook.."", function(err, text, headers) end, 'POST', json.encode({username = "Police Armory", content = message}), { ['Content-Type'] = 'application/json' })	
+    -- local message = "**" ..GetPlayerName(source).. "** [" ..xPlayer.getIdentifier().. "] **|** has **restocked** weapons for **" ..target.getName().. "** **|** " ..DATE
+    local embed = {
+        {
+            ["color"] = 3342080,
+            ["title"] = "**POLICE ARMORY**",
+            -- ["description"] = "The apple doesn't fall far from the tree",
+            ["fields"] = {
+                {
+                    ["name"] = "**NAMA**",
+                    ["value"] = xPlayer.getName(),
+                    ["inline"] = true
+                },
+                {
+                    ["name"] = "**ID STEAM**",
+                    ["value"] = xPlayer.getIdentifier(),
+                    ["inline"] = true
+                },
+                {
+                    ["name"] = "**KETERANGAN**",
+                    ["value"] = "Telah Merestock Senjata Untuk **[ "..target.getName().." ]** di Police Armory Pada Tanggal **[ "..DATE.." ]**",
+                }
+            },
+            ["footer"] = {
+                ["text"] = "Kalian tidak akan luput dari pantauan ku"
+            },
+        }
+    }
+	PerformHttpRequest(""..Config.DiscordWebook.."", function(err, text, headers) end, 'POST', json.encode({username = "Police Armory", avatar_url="https://i.imgur.com/uUH3AOL.jpg" , embeds = embed}), { ['Content-Type'] = 'application/json' })	
 end)
