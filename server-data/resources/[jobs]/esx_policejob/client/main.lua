@@ -185,8 +185,10 @@ function OpenCloakroomMenu()
 end
 
 function OpenArmoryMenu(station)
-	table.insert(elements, {label = _U('remove_object'),  value = 'get_stock'})
-	table.insert(elements, {label = _U('deposit_object'), value = 'put_stock'})
+	local elements = {
+		{label = _U('remove_object'),  value = 'get_stock'},
+		{label = _U('deposit_object'), value = 'put_stock'}
+	} 
 
 	ESX.UI.Menu.CloseAll()
 
