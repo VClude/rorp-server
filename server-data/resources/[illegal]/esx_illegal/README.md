@@ -1,32 +1,39 @@
+# esx_illegal - ESX V1.2.0
 
-![alt text](https://forum.syntaxgaming.de/index.php?attachment/50-unbenannt-png/)
+I changed ESX_Drugs and added a lot of features like more drugs and licenses for the money wash and the money wash itself.      
+If you're running on an older verion of ESX(V1.1.0) than please use [this](https://github.com/Xovos/esx_illegal/tree/pre-limit-update) branch.
 
-[Requirements]:
+![alt text](https://media.discordapp.net/attachments/572834058652876804/572834129230692352/unknown.png)
 
-MySQL
-EssentialMode Base by @Kanersps: [[Release] EssentialMode base ](https://forum.fivem.net/t/release-essentialmode-base/3665)
-ES Extended (ESX) by @GiZz: [https://github.com/FXServer-ESX/fxserver-es_extended ](https://github.com/FXServer-ESX/fxserver-es_extended)
-esx_policejob: [https://github.com/FXServer-ESX/fxserver-esx_policejob ](https://github.com/FXServer-ESX/fxserver-esx_policejob)
+## Download & Installation
 
-[Features]:
+### Using [fvm](https://github.com/qlaffont/fvm-installer)
+```
+fvm install --save --folder=esx Xovos/esx_illegal
+```
 
-1. -Illegal job opportunities await!
-2. -I changed ESX_Drugs and added a lot of features like more drugs and licenses for the money wash and the money wash itself
-3. -Marijuana/Coke/Meth/Lsd/Heroin as Farms
-4. -Gather -> Package/Process -> Sales!
-5. -Optinal you can make MoneyWash License
-6. -Gives dirty money to purchase illegal goods with
-7. -Police can see or interact with the drug zones
-8. -Multi-language support (en, es)
+### Using Git
+```
+cd resources
+git clone https://github.com/Xovos/esx_illegal [esx]/esx_illegal
+```
 
-[Installation]:
+## Installation
+- Import `esx_illegal.sql` in your database
+- Add this in your `server.cfg`:
 
-1. Change directory to resources/[esx]/
-2. Clone the Git repository: [https://github.com/DoPeMan17/esx_drugs ](https://github.com/DoPeMan17/esx_drugs)
-3. Import esx_drugs.sql into your MySQL database
-4. Add this to your server.cfg “start esx_drugs”
+```
+start esx_illegal
+```
 
-[Additional Information]
-For any and all support please visit the ESX Discord: [https://discord.gg/dtMRh86](https://discord.gg/dtMRh86) as I do not provide support and have been away from quite some time.
+# Legal
+### License
+esx_illegal - drugs job
 
-There are more plugins available which you can view at [https://github.com/DoPeMan17](https://github.com/DoPeMan17).
+Copyright (C) 2015-2018 Xovos
+
+This program Is free software: you can redistribute it And/Or modify it under the terms Of the GNU General Public License As published by the Free Software Foundation, either version 3 Of the License, Or (at your option) any later version.
+
+This program Is distributed In the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty Of MERCHANTABILITY Or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License For more details.
+
+You should have received a copy Of the GNU General Public License along with this program. If Not, see http://www.gnu.org/licenses/.

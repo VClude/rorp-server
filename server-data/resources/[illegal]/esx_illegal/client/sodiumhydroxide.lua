@@ -18,47 +18,34 @@ end)
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
-		local playerPe3 = PlayerPedId()
-		local coords = GetEntityCoords(playerPe3)
-		local nearbyObject3, nearbyID3
+		local playerPed = PlayerPedId()
+		local coords = GetEntityCoords(playerPed)
+		local nearbyObject, nearbyID
 
 		for i=1, #SodiumHydroxideBarrels, 1 do
 			if GetDistanceBetweenCoords(coords, GetEntityCoords(SodiumHydroxideBarrels[i]), false) < 1 then
-				nearbyObject3, nearbyID3 = SodiumHydroxideBarrels[i], i
+				nearbyObject, nearbyID = SodiumHydroxideBarrels[i], i
 			end
 		end
 
-		if nearbyObject3 and IsPedOnFoot(playerPe3) then
+		if nearbyObject and IsPedOnFoot(playerPed) then
 
 			if not isPickingUp then
 				ESX.ShowHelpNotification(_U('SodiumHydroxide_pickupprompt'))
 			end
 
 			if IsControlJustReleased(0, Keys['E']) and not isPickingUp then
-				isPickingUp = true
-
-				ESX.TriggerServerCallback('esx_illegal:canPickUp', function(canPickUp)
-
-					if canPickUp then
-						TaskStartScenarioInPlace(playerPe3, 'world_human_gardener_plant', 0, false)
-
-						Citizen.Wait(2000)
-						ClearPedTasks(playerPe3)
-						Citizen.Wait(1500)
-		
-						ESX.Game.DeleteObject(nearbyObject3)
-		
-						table.remove(SodiumHydroxideBarrels, nearbyID3)
-						spawnedSodiumHydroxideBarrels = spawnedSodiumHydroxideBarrels - 1
-		
-						TriggerServerEvent('esx_illegal:pickedUpSodiumHydroxide')
-					else
-						ESX.ShowNotification(_U('sodium_hydroxide_inventoryfull'))
-					end
-
-					isPickingUp = false
-
-				end, 'sodium_hydroxide')
+				if Config.RequireCopsOnline then
+					ESX.TriggerServerCallback('esx_illegal:EnoughCops', function(cb)
+						if cb then
+							PickUpSodiumHydroxide(playerPed, coords, nearbyObject, nearbyID)
+						else
+							ESX.ShowNotification(_U('cops_notenough'))
+						end
+					end, Config.Cops.Meth)
+				else
+					PickUpSodiumHydroxide(playerPed, coords, nearbyObject, nearbyID)
+				end
 			end
 
 		else
@@ -68,6 +55,34 @@ Citizen.CreateThread(function()
 	end
 
 end)
+
+function PickUpSodiumHydroxide(playerPed, coords, nearbyObject, nearbyID)
+	isPickingUp = true
+
+	ESX.TriggerServerCallback('esx_illegal:canPickUp', function(canPickUp)
+
+		if canPickUp then
+			TaskStartScenarioInPlace(playerPed, 'world_human_gardener_plant', 0, false)
+
+			Citizen.Wait(2000)
+			ClearPedTasks(playerPed)
+			Citizen.Wait(1500)
+
+			ESX.Game.DeleteObject(nearbyObject)
+
+			table.remove(SodiumHydroxideBarrels, nearbyID)
+
+			TriggerServerEvent('esx_illegal:pickedUpSodiumHydroxide')
+			Citizen.Wait(5000)
+			spawnedSodiumHydroxideBarrels = spawnedSodiumHydroxideBarrels - 1
+		else
+			ESX.ShowNotification(_U('sodium_hydroxide_inventoryfull'))
+		end
+
+		isPickingUp = false
+
+	end, 'sodium_hydroxide')
+end
 
 AddEventHandler('onResourceStop', function(resource)
 	if resource == GetCurrentResourceName() then
