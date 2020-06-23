@@ -40,7 +40,7 @@ ESX.RegisterServerCallback('rorp_daftarwarga:cekWargabaru', function(source, cb)
 end)
 
 RegisterNetEvent('rorp_daftarwarga:addKTP')
-AddEventHandler('rorp_daftarwarga:addKTP', function(type,jmlhUang)
+AddEventHandler('rorp_daftarwarga:addKTP', function(source, type,jmlhUang)
 	local _source = source
 	local xPlayer = GetPlayerFromId(_source)
 
