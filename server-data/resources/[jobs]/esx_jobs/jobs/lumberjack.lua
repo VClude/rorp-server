@@ -30,7 +30,7 @@ Config.Jobs.lumberjack = {
 		},
 
 		Wood = {
-			Pos = {x = -534.32, y = 5373.79, z = 69.50},
+			Pos = {x = 1521.12, y = 1807.04, z = 106.98},
 			Size = {x = 3.0, y = 3.0, z = 1.0},
 			Color = {r = 204, g = 204, b = 0},
 			Marker = 1,
@@ -55,7 +55,7 @@ Config.Jobs.lumberjack = {
 		},
 
 		CuttedWood = {
-			Pos = {x = -552.21, y = 5326.90, z = 72.59},
+			Pos = {x = 1534.88, y = 1703.16, z = 108.71},
 			Size = {x = 3.0, y = 3.0, z = 1.0},
 			Color = {r = 204, g = 204, b = 0},
 			Marker = 1,
@@ -69,7 +69,7 @@ Config.Jobs.lumberjack = {
 					db_name = 'cutted_wood',
 					time = 5,
 					max = 20,
-					add = 1,
+					add = 10,
 					remove = 1,
 					requires = 'wood',
 					requires_name = _U('lj_wood'),
@@ -79,30 +79,30 @@ Config.Jobs.lumberjack = {
 			Hint = _U('lj_cutwood_button')
 		},
 
-		Planks = {
-			Pos = {x = -501.38, y = 5280.53, z = 79.61},
-			Size = {x = 3.0, y = 3.0, z = 1.0},
-			Color = {r = 204, g = 204, b = 0},
-			Marker = 1,
-			Blip = false,
-			Name = _U('lj_board'),
-			Type = 'work',
-			Duration = 20000,
-			Item = {
-				{
-					name = _U('lj_planks'),
-					db_name = 'packaged_plank',
-					time = 4,
-					max = 100,
-					add = 5,
-					remove = 1,
-					requires = 'cutted_wood',
-					requires_name = _U('lj_cutwood'),
-					drop = 100
-				}
-			},
-			Hint = _U('lj_pick_boards')
-		},
+		-- Planks = {
+		-- 	Pos = {x = -501.38, y = 5280.53, z = 79.61},
+		-- 	Size = {x = 3.0, y = 3.0, z = 1.0},
+		-- 	Color = {r = 204, g = 204, b = 0},
+		-- 	Marker = 1,
+		-- 	Blip = false,
+		-- 	Name = _U('lj_board'),
+		-- 	Type = 'work',
+		-- 	Duration = 20000,
+		-- 	Item = {
+		-- 		{
+		-- 			name = _U('lj_planks'),
+		-- 			db_name = 'packaged_plank',
+		-- 			time = 4,
+		-- 			max = 100,
+		-- 			add = 5,
+		-- 			remove = 1,
+		-- 			requires = 'cutted_wood',
+		-- 			requires_name = _U('lj_cutwood'),
+		-- 			drop = 100
+		-- 		}
+		-- 	},
+		-- 	Hint = _U('lj_pick_boards')
+		-- },
 
 		VehicleSpawner = {
 			Pos = {x = 1191.96, y = -1261.77, z = 34.17},
@@ -158,9 +158,9 @@ Config.Jobs.lumberjack = {
 					time = 0.5,
 					remove = 1,
 					max = 100, -- if not present, probably an error at itemQtty >= item.max in esx_jobs_sv.lua
-					price = 13,
-					requires = 'packaged_plank',
-					requires_name = _U('lj_planks'),
+					price = 210,
+					requires = 'cutted_wood',
+					requires_name = _U('lj_cutwood'),
 					drop = 100
 				}
 			},

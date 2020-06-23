@@ -29,7 +29,7 @@ Config.Jobs.slaughterer = {
 		},
 
 		AliveChicken = {
-			Pos = {x = -62.90, y = 6241.46, z = 30.09},
+			Pos = {x = 997.49, y = -2107.24, z = 29.48},
 			Size = {x = 3.0, y = 3.0, z = 1.0},
 			Color = {r = 204, g = 204, b = 0},
 			Marker = 1,
@@ -40,7 +40,7 @@ Config.Jobs.slaughterer = {
 			Item = {
 				{
 					name = _U('s_alive_chicken'),
-					db_name = 'alive_chicken',
+					db_name = 'meats',
 					time = 1,
 					max = 1,
 					add = 1,
@@ -54,7 +54,7 @@ Config.Jobs.slaughterer = {
 		},
 
 		SlaughterHouse = {
-			Pos = {x = -77.99, y = 6229.06, z = 30.09},
+			Pos = {x = 997.79, y = -2145.36, z = 28.48},
 			Size = {x = 3.0, y = 3.0, z = 1.0},
 			Color = {r = 204, g = 204, b = 0},
 			Marker = 1,
@@ -65,12 +65,12 @@ Config.Jobs.slaughterer = {
 			Item = {
 				{
 					name = _U('s_slaughtered_chicken'),
-					db_name = 'slaughtered_chicken',
+					db_name = 'meat_cincang',
 					time = 5,
 					max = 20,
 					add = 1,
 					remove = 1,
-					requires = 'alive_chicken',
+					requires = 'meats',
 					requires_name = _U('s_alive_chicken'),
 					drop = 100
 				}
@@ -79,7 +79,7 @@ Config.Jobs.slaughterer = {
 		},
 
 		Packaging = {
-			Pos = {x = -101.97, y = 6208.79, z = 30.02},
+			Pos = {x = 993.11, y = -2178.17, z = 28.98},
 			Size = {x = 3.0, y = 3.0, z = 1.0},
 			Color = {r = 204, g = 204, b = 0},
 			Marker = 1,
@@ -90,12 +90,12 @@ Config.Jobs.slaughterer = {
 			Item = {
 				{
 					name = _U('s_packagechicken'),
-					db_name = 'packaged_chicken',
+					db_name = 'sosis',
 					time = 4,
 					max = 100,
 					add = 10,
 					remove = 1,
-					requires = 'slaughtered_chicken',
+					requires = 'meat_cincang',
 					requires_name = _U('s_unpackaged'),
 					drop = 100
 				}
@@ -158,7 +158,7 @@ Config.Jobs.slaughterer = {
 					remove = 1,
 					max = 100, -- if not present, probably an error at itemQtty >= item.max in esx_jobs_sv.lua
 					price = 230,
-					requires = 'packaged_chicken',
+					requires = 'sosis',
 					requires_name = _U('s_packagechicken'),
 					drop = 100
 				}

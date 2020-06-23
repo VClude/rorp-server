@@ -31,13 +31,27 @@ Config.Jobs.miner = {
 		},
 
 		Mine = {
-			Pos = {x = 2970.8962402344, y = 2837.1481933594, z = 45.153564453125},
+			Pos = {x = 2826.7, y = -707.93, z = 1.23},
 			Size = {x = 5.0, y = 5.0, z = 1.0},
 			Color = {r = 204, g = 204, b = 0},
 			Marker = 1,
 			Blip = true,
 			Name = _U('m_rock'),
-			Type = 'cust_work',
+			Type = 'work',
+			Duration = 20000,
+			Item = {
+				{
+					name = _U('m_rock'),
+					db_name = 'stone',
+					time = 3,
+					max = 7,
+					add = 7,
+					remove = 0,
+					requires = 'nothing',
+					requires_name = 'Nothing',
+					drop = 100
+				}
+			},
 			Hint = _U('m_pickrocks'),
 			GPS = {x = 1966.31, y = 530.83, z = 160.73}
 		},
@@ -122,7 +136,7 @@ Config.Jobs.miner = {
 					time = 0.5,
 					remove = 1,
 					max = 56, -- if not present, probably an error at itemQtty >= item.max in esx_jobs_sv.lua
-					price = 5,
+					price = 600,
 					requires = 'copper',
 					requires_name = _U('m_copper'),
 					drop = 100
@@ -148,7 +162,7 @@ Config.Jobs.miner = {
 					time = 0.5,
 					remove = 1,
 					max = 42, -- if not present, probably an error at itemQtty >= item.max in esx_jobs_sv.lua
-					price = 9,
+					price = 300,
 					requires = 'iron',
 					requires_name = _U('m_iron'),
 					drop = 100
@@ -174,7 +188,7 @@ Config.Jobs.miner = {
 					time = 0.5,
 					remove = 1,
 					max = 21, -- if not present, probably an error at itemQtty >= item.max in esx_jobs_sv.lua
-					price = 25,
+					price = 8000,
 					requires = 'gold',
 					requires_name = _U('m_gold'),
 					drop = 100
@@ -200,7 +214,7 @@ Config.Jobs.miner = {
 					time = 0.5,
 					remove = 1,
 					max = 50, -- if not present, probably an error at itemQtty >= item.max in esx_jobs_sv.lua
-					price = 250,
+					price = 10000,
 					requires = 'diamond',
 					requires_name = _U('m_diamond'),
 					drop = 100
