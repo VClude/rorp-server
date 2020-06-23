@@ -67,7 +67,7 @@ ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'rewardmenu', {
 		{label = 'Belum ada data', value = 'test'},
 		},
 }, function(data, menu)
-	ESX.ShowNotification('Belum FIX COK !')
+	ESX.ShowNotification('Work In Progress')
 	end)
 end
 
