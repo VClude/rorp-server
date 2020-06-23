@@ -18,9 +18,7 @@ client_scripts {
 	'@es_extended/locale.lua',
 	'config.lua',
 	'locales/id.lua',
-    'client/main.lua',
-    'client/utils.lua'
-
+    'client/main.lua'
 }
 ui_page 'html/ui.html'
 
