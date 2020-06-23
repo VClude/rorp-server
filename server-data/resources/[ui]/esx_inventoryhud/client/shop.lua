@@ -293,8 +293,6 @@ Citizen.CreateThread(function()
     for k, v in pairs(Config.Shops.WeaponShop.Locations) do
         CreateBlip(vector3(Config.Shops.WeaponShop.Locations[k].x, Config.Shops.WeaponShop.Locations[k].y, Config.Shops.WeaponShop.Locations[k].z), _U('weapon_shop_name'), 3.0, Config.WeaponColor, Config.WeaponShopBlipID)
     end
-
-    CreateBlip(vector3(-755.79, 5596.07, 41.67), "Cablecart", 3.0, 4, 36)
 end)
 
 Citizen.CreateThread(function()
