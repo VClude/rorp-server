@@ -78,7 +78,7 @@
 		  local x,y,z = table.unpack(GetEntityCoords(ped))
   
 		  if distance < 2.0 then
-			  DrawText3D(x,y,z, 'Press [~g~E~s~] to manage individual', 0.4)
+			  DrawText3D(x,y,z, 'Tekan [~g~E~s~] untuk cek korban', 0.4)
 			  
 			  if IsControlPressed(0, 38) then
 				  OpenDeathMenu(ped)
@@ -98,7 +98,7 @@ end
   
 	  while (timestamp + 4500) > GetGameTimer() do
 		  Citizen.Wait(0)
-		  DrawText3D(x, y, z, 'The damage seems to occure here', 0.4)
+		  DrawText3D(x, y, z, 'Terlihat luka disekitar sini', 0.4)
 		  checking = false
 	  end
   end
@@ -110,8 +110,8 @@ end
   
 	  local elements   = {}
   
-	  table.insert(elements, {label = 'Try to identify deathcause', value = 'deathcause'})
-	  table.insert(elements, {label = 'Try to identify where the damage occured', value = 'damage'})
+	  table.insert(elements, {label = 'Mencoba identifikasi korban', value = 'deathcause'})
+	  table.insert(elements, {label = 'Mencoba identifikasi letak luka korban', value = 'damage'})
   
   
 	  ESX.UI.Menu.Open(
@@ -136,7 +136,7 @@ end
 					Notification(x,y,z)
 				
 			  else
-				  Notify('Where the damage occured could not get identified')
+				  Notify('Luka tidak dapat diidentifikasi')
 			  end
 		  end
   

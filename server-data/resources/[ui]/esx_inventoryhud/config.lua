@@ -151,7 +151,7 @@ Config.Shops = {
     },
     LicenseShop = {
         Locations = {
-            { x = 12.47, y = -1105.5, z = 29.8}
+            { x = -12.47, y = -1105.5, z = 29.8}
         }
     }
 }
