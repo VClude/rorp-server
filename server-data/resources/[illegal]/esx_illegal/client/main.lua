@@ -49,8 +49,12 @@ Citizen.CreateThread(function()
 								end
 							end, Config.Cops.DrugDealer)
 						else
+							if ESX.PlayerData.job.name ~= 'petani' then
+								ESX.ShowNotification("Anda tidak punya hak untuk menjual barang illegal")
+							else
 							wasOpen = true
 							OpenDrugShop()
+							end
 						end
 					else
 						ESX.ShowNotification(_U('need_on_foot'))
@@ -69,6 +73,7 @@ Citizen.CreateThread(function()
 		end
 	end
 end)
+
 
 function OpenDrugShop()
 	ESX.UI.Menu.CloseAll()
@@ -138,7 +143,17 @@ function CreateBlipCircle(coords, text, radius, color, sprite)
 end
 
 Citizen.CreateThread(function()
-	if Config.EnableMapsBlimps then
+	while ESX == nil do
+		TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
+		Citizen.Wait(0)
+	end
+
+	while ESX.GetPlayerData().job == nil do
+		Citizen.Wait(100)
+	end
+
+	ESX.PlayerData = ESX.GetPlayerData()
+	if Config.EnableMapsBlimps and ESX.GetPlayerData().job.name == 'police' then
 		for k,zone in pairs(Config.CircleZones) do
 			if zone.enabled then
 				CreateBlipCircle(zone.blimpcoords, zone.name, zone.radius, zone.color, zone.sprite)

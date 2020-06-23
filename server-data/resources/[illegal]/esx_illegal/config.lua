@@ -21,7 +21,7 @@ Config.Delays = {
 	MethProcessing = 1000 * 10,
 	CokeProcessing = 1000 * 10,
 	lsdProcessing = 1000 * 10,
-	HeroinProcessing = 1000 * 10,
+	HeroinProcessing = 2000 * 10,
 	thionylchlorideProcessing = 1000 * 10,
 }
 
@@ -106,14 +106,14 @@ Config.CircleZones = {
 	-- thionylchlorideProcessing = {coords = vector3(1903.98, 4922.70, 48.16), blimpcoords = vector3(1903.98, 4922.70, 48.16), name = _U('blip_thionylchlorideprocessing'),color = 12, sprite = 364, radius = 0.0, enabled = true},
 	
 	--Heroin
-	HeroinField = {coords = vector3(16.34, 6875.94, 12.64), blimpcoords = vector3(16.34, 6875.94, 12.64), name = _U('blip_heroinfield'), color = 7, sprite = 497, radius = 0, enabled = true},
-	HeroinProcessing = {coords = vector3(1.69, 3693.27, 38.51), blimpcoords = vector3(1.69, 3693.27, 38.51), name = _U('blip_heroinprocessing'), color = 7, sprite = 497, radius = 0.0, enabled = true},
+	HeroinField = {coords = vector3(299.44, 4323.16, 47.69), blimpcoords = vector3(299.44, 4323.16, 47.69), name = _U('blip_heroinfield'), color = 7, sprite = 497, radius = 0, enabled = true},
+	HeroinProcessing = {coords = vector3(90.55, 3745.3, 39.77), blimpcoords = vector3(90.55, 3745.3, 39.77), name = _U('blip_heroinprocessing'), color = 7, sprite = 497, radius = 0.0, enabled = true},
 
 	--License
 	LicenseShop = {coords = vector3(707.17, -962.5, 30.4), blimpcoords = vector3(707.17, -962.5, 30.4), name = _U('blip_licenseshop'),color = 9, sprite = 498, radius = 0.0, enabled = true},
 
 	--DrugDealer
-	DrugDealer = {coords = vector3(-1172.02, -1571.98, 4.66), blimpcoords = vector3(-1172.02, -1571.98, 4.66), name = _U('blip_drugdealer'), color = 6, sprite = 378, radius = 0.0, enabled = true},
+	DrugDealer = {coords = vector3(1724.75, 4737.8, 41.12), blimpcoords = vector3(1724.75, 4737.8, 41.12), name = _U('blip_drugdealer'), color = 6, sprite = 378, radius = 0.0, enabled = true},
 	
 	--MoneyWash
 	MoneyWash = {coords = vector3(1119.87, -3195.44, -39.40), blimpcoords = vector3(48.19, 6305.98, 32.36), name = _U('blip_moneywash'), color = 1, sprite = 500, radius = 0.0, enabled = true},
