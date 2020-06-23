@@ -3,7 +3,7 @@ Config = {}
 Config.Locale = 'en'
 
 -- Set the time (in minutes) during the player is outlaw
-Config.Timer = 1
+Config.Timer = 2
 
 -- Set if show alert when player use gun
 Config.GunshotAlert = true
