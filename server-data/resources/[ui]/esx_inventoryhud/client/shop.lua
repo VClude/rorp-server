@@ -19,7 +19,8 @@ Citizen.CreateThread(function()
         Citizen.Wait(0)
         player = GetPlayerPed(-1)
         coords = GetEntityCoords(player)
-        if IsInRegularShopZone(coords) or IsInRobsLiquorZone(coords) or IsInYouToolZone(coords) or IsInPrisonShopZone(coords) or IsInWeaponShopZone(coords) then
+        -- if IsInRegularShopZone(coords) or IsInRobsLiquorZone(coords) or IsInYouToolZone(coords) or IsInPrisonShopZone(coords) or IsInWeaponShopZone(coords) then
+        if IsInRegularShopZone(coords) or IsInRobsLiquorZone(coords) or IsInWeaponShopZone(coords) then
             if IsInRegularShopZone(coords) then
                 if currentAction then
                     ESX.ShowHelpNotification(currentActionMsg)
@@ -38,24 +39,24 @@ Citizen.CreateThread(function()
                     end
                 end
             end
-            if IsInYouToolZone(coords) then
-                if currentAction then
-                    ESX.ShowHelpNotification(currentActionMsg)
-                    if IsControlJustReleased(0, Keys["E"]) then
-                        OpenShopInv("youtool")
-                        Citizen.Wait(2000)
-                    end
-                end
-            end
-            if IsInPrisonShopZone(coords) then
-                if currentAction then
-                    ESX.ShowHelpNotification(currentActionMsg)
-                    if IsControlJustReleased(0, Keys["E"]) then
-                        OpenShopInv("prison")
-                        Citizen.Wait(2000)
-                    end
-                end
-            end
+            -- if IsInYouToolZone(coords) then
+            --     if currentAction then
+            --         ESX.ShowHelpNotification(currentActionMsg)
+            --         if IsControlJustReleased(0, Keys["E"]) then
+            --             OpenShopInv("youtool")
+            --             Citizen.Wait(2000)
+            --         end
+            --     end
+            -- end
+            -- if IsInPrisonShopZone(coords) then
+            --     if currentAction then
+            --         ESX.ShowHelpNotification(currentActionMsg)
+            --         if IsControlJustReleased(0, Keys["E"]) then
+            --             OpenShopInv("prison")
+            --             Citizen.Wait(2000)
+            --         end
+            --     end
+            -- end
             if IsInWeaponShopZone(coords) then
                 if currentAction then
                     ESX.ShowHelpNotification(currentActionMsg)
@@ -190,25 +191,25 @@ function IsInRobsLiquorZone(coords)
     return false
 end
 
-function IsInYouToolZone(coords)
-    YouTool = Config.Shops.YouTool.Locations
-    for i = 1, #YouTool, 1 do
-        if GetDistanceBetweenCoords(coords, YouTool[i].x, YouTool[i].y, YouTool[i].z, true) < 1.5 then
-            return true
-        end
-    end
-    return false
-end
+-- function IsInYouToolZone(coords)
+--     YouTool = Config.Shops.YouTool.Locations
+--     for i = 1, #YouTool, 1 do
+--         if GetDistanceBetweenCoords(coords, YouTool[i].x, YouTool[i].y, YouTool[i].z, true) < 1.5 then
+--             return true
+--         end
+--     end
+--     return false
+-- end
 
-function IsInPrisonShopZone(coords)
-    PrisonShop = Config.Shops.PrisonShop.Locations
-    for i = 1, #PrisonShop, 1 do
-        if GetDistanceBetweenCoords(coords, PrisonShop[i].x, PrisonShop[i].y, PrisonShop[i].z, true) < 1.5 then
-            return true
-        end
-    end
-    return false
-end
+-- function IsInPrisonShopZone(coords)
+--     PrisonShop = Config.Shops.PrisonShop.Locations
+--     for i = 1, #PrisonShop, 1 do
+--         if GetDistanceBetweenCoords(coords, PrisonShop[i].x, PrisonShop[i].y, PrisonShop[i].z, true) < 1.5 then
+--             return true
+--         end
+--     end
+--     return false
+-- end
 
 function IsInWeaponShopZone(coords)
     WeaponShop = Config.Shops.WeaponShop.Locations
