@@ -22,27 +22,12 @@ ESX.RegisterServerCallback('rorp_daftarwarga:giftCar', function(source, cb, plat
 	end)
 end)
 
-ESX.RegisterServerCallback('rorp_daftarwarga:cekWargabaru', function(source, cb)
-	local _source = source
-	local identifier = ESX.GetPlayerFromId(_source).identifier
-
-	MySQL.Async.fetchAll('SELECT wargaBaru FROM users WHERE identifier = @identifier', {
-		['@identifier'] = identifier
-	}, function(result)
-		local user = result[1]
-		local wargaBaru = user['wargaBaru']
-		if wargaBaru == true then
-			cb(true)
-		else
-			cb(false)
-		end
-	end)
-end)
-
 RegisterNetEvent('rorp_daftarwarga:addKTP')
-AddEventHandler('rorp_daftarwarga:addKTP', function(source, type,jmlhUang)
+AddEventHandler('rorp_daftarwarga:addKTP', function(type,jmlhUang)
 	local _source = source
-	local xPlayer = GetPlayerFromId(_source)
+	local xPlayer = GetPlayerFromId(source)
+
+	print(xPlayer)
 
 	TriggerEvent('esx_license:addLicense', _source, type)
 	TriggerClientEvent('esx:showNotification', _source, (_U('test_berhasil')))
