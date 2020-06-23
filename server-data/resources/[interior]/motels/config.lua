@@ -33,10 +33,10 @@ Config = {
   -- Don't change it unless you plan on clearing motel inventories.
   -- If no home motel, set to "None"
   -- If no home motel, make sure you set UseHomeMotel and SpawnInHomeMotel to false.
-  HomeMotel = "PinkCage",
+  HomeMotel = "None",
 
   -- Spawn players in home motel on login?
-  UseHomeMotel = true,
+  UseHomeMotel = false,
   SpawnInHome = false,
 
   -- Probably wouldn't touch these...
@@ -49,13 +49,13 @@ Config = {
   Prices = {
     PinkCage = 500,
     Bilingsgate = 250,
-    Motoa = 350,
+    -- Motoa = 350,
     Rancho = 125,
     VonCrastenburg = 250,
-    DreamView = 500,
+    -- DreamView = 500,
     CrownJewels = 1000,
-    BayviewLodge = 500,
-    Eastern = 250,
+    -- BayviewLodge = 500,
+    -- Eastern = 250,
   },
 
   Motels = {
@@ -141,33 +141,33 @@ Config = {
       },
     },
 
-    Motoa = {
-      Location = vector3(1122.91,2655.80,38.00),
-      GridLocation = vector3(1122.91,2655.80,20.00),
-      GridWidth = 5,
-      GridLength = 5,
+    -- Motoa = {
+    --   Location = vector3(1122.91,2655.80,38.00),
+    --   GridLocation = vector3(1122.91,2655.80,20.00),
+    --   GridWidth = 5,
+    --   GridLength = 5,
 
-      BlipCol     = 21,
-      BlipSprite  = 475,
-      BlipScale   = 1.0,
-      BlipDisplay = 3,
-      BlipText    = "Motoa Motor Inn",
+    --   BlipCol     = 21,
+    --   BlipSprite  = 475,
+    --   BlipScale   = 1.0,
+    --   BlipDisplay = 3,
+    --   BlipText    = "Motoa Motor Inn",
 
-      Entrys = {
-        vector4(1142.37,2654.63,38.15,  90.0),
-        vector4(1142.37,2651.05,38.15,  90.0),
-        vector4(1142.37,2643.48,38.15,  90.0),
-        vector4(1141.14,2641.67,38.15, 180.0),
-        vector4(1136.30,2641.67,38.15, 180.0),
-        vector4(1132.72,2641.67,38.15, 180.0),
-        vector4(1125.25,2641.67,38.15, 180.0),
-        vector4(1121.31,2641.67,38.15, 180.0),
-        vector4(1114.66,2641.67,38.15, 180.0),
-        vector4(1107.13,2641.67,38.15, 180.0),
-        vector4(1106.07,2649.49,38.15, 270.0),
-        vector4(1106.05,2652.86,38.15, 270.0),
-      },
-    },
+    --   Entrys = {
+    --     vector4(1142.37,2654.63,38.15,  90.0),
+    --     vector4(1142.37,2651.05,38.15,  90.0),
+    --     vector4(1142.37,2643.48,38.15,  90.0),
+    --     vector4(1141.14,2641.67,38.15, 180.0),
+    --     vector4(1136.30,2641.67,38.15, 180.0),
+    --     vector4(1132.72,2641.67,38.15, 180.0),
+    --     vector4(1125.25,2641.67,38.15, 180.0),
+    --     vector4(1121.31,2641.67,38.15, 180.0),
+    --     vector4(1114.66,2641.67,38.15, 180.0),
+    --     vector4(1107.13,2641.67,38.15, 180.0),
+    --     vector4(1106.07,2649.49,38.15, 270.0),
+    --     vector4(1106.05,2652.86,38.15, 270.0),
+    --   },
+    -- },
 
     Rancho = {
       Location = vector3(361.95, -1798.7, 29.1),
@@ -299,57 +299,57 @@ Config = {
       },
     },
 
-    BayviewLodge = {
-      Location = vector3(-695.99, 5802.4, 17.33),
-      GridLocation = vector3(-695.99, 5802.4, -3.33),
-      GridWidth = 3,
-      GridLength = 3,
+    -- BayviewLodge = {
+    --   Location = vector3(-695.99, 5802.4, 17.33),
+    --   GridLocation = vector3(-695.99, 5802.4, -3.33),
+    --   GridWidth = 3,
+    --   GridLength = 3,
 
-      BlipCol     = 69,
-      BlipSprite  = 475,
-      BlipScale   = 1.0,
-      BlipDisplay = 3,
-      BlipText    = "Bayview Lodge Motel",
+    --   BlipCol     = 69,
+    --   BlipSprite  = 475,
+    --   BlipScale   = 1.0,
+    --   BlipDisplay = 3,
+    --   BlipText    = "Bayview Lodge Motel",
 
-      Entrys = {
-        vector4(-681.93,5770.73,17.51,61.64),
-        vector4(-683.74,5766.74,17.51,58.03),
-        vector4(-685.59,5762.73,17.51,62.5),
-        vector4(-687.43,5758.96,17.51,60.26),
-        vector4(-694.23,5761.31,17.51,327.58),
-        vector4(-681.93,5770.73,17.51,331.36),
-        vector4(-698.17,5763.12,17.51,328.17),
-        vector4(-702.1,5764.96,17.51,335.04),
-        vector4(-706.01,5766.77,17.51,333.22),
-        vector4(-709.94,5768.59,17.51,332.44),
-      },
-    },
+    --   Entrys = {
+    --     vector4(-681.93,5770.73,17.51,61.64),
+    --     vector4(-683.74,5766.74,17.51,58.03),
+    --     vector4(-685.59,5762.73,17.51,62.5),
+    --     vector4(-687.43,5758.96,17.51,60.26),
+    --     vector4(-694.23,5761.31,17.51,327.58),
+    --     vector4(-681.93,5770.73,17.51,331.36),
+    --     vector4(-698.17,5763.12,17.51,328.17),
+    --     vector4(-702.1,5764.96,17.51,335.04),
+    --     vector4(-706.01,5766.77,17.51,333.22),
+    --     vector4(-709.94,5768.59,17.51,332.44),
+    --   },
+    -- },
 
-    Eastern = {
-      Location = vector3(317.33, 2623.21, 44.46),
-      GridLocation = vector3(317.33, 2623.21, 25.46),
-      GridWidth = 3,
-      GridLength = 3,
+    -- Eastern = {
+    --   Location = vector3(317.33, 2623.21, 44.46),
+    --   GridLocation = vector3(317.33, 2623.21, 25.46),
+    --   GridWidth = 3,
+    --   GridLength = 3,
 
-      BlipCol     = 17,
-      BlipSprite  = 475,
-      BlipScale   = 1.0,
-      BlipDisplay = 3,
-      BlipText    = "Eastern Motel",
+    --   BlipCol     = 17,
+    --   BlipSprite  = 475,
+    --   BlipScale   = 1.0,
+    --   BlipDisplay = 3,
+    --   BlipText    = "Eastern Motel",
 
-      Entrys = {
-        vector4(341.65,2614.96,44.67,23.35),
-        vector4(347.09,2618.03,44.67,27.34),
-        vector4(354.44,2619.71,44.67,24.63),
-        vector4(359.76,2622.87,44.67,21.57),
-        vector4(367.1,2624.54,44.67,23.82),
-        vector4(372.58,2627.6,44.67,30.03),
-        vector4(379.87,2629.24,44.67,29.74),
-        vector4(385.27,2632.36,44.67,22.79),
-        vector4(392.58,2634.09,44.67,37.75),
-        vector4(398.01,2637.01,44.67,33.42),
-      },
-    },
+    --   Entrys = {
+    --     vector4(341.65,2614.96,44.67,23.35),
+    --     vector4(347.09,2618.03,44.67,27.34),
+    --     vector4(354.44,2619.71,44.67,24.63),
+    --     vector4(359.76,2622.87,44.67,21.57),
+    --     vector4(367.1,2624.54,44.67,23.82),
+    --     vector4(372.58,2627.6,44.67,30.03),
+    --     vector4(379.87,2629.24,44.67,29.74),
+    --     vector4(385.27,2632.36,44.67,22.79),
+    --     vector4(392.58,2634.09,44.67,37.75),
+    --     vector4(398.01,2637.01,44.67,33.42),
+    --   },
+    -- },
   },
 }
 
