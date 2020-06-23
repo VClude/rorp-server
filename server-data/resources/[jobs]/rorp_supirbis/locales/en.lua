@@ -89,4 +89,10 @@ Locales['en'] = {
     ['stop_metro_eclipse_cougar']           = 'W Eclipse Blvd / Cougar Ave',
     ['stop_metro_marathon']                 = 'Marathon Ave',
 
+    ['stop_driving_school']                 = 'Sekolah Mengemudi',
+    ['stop_rumah_sakit']                    = 'Rumah Sakit Pill Box',
+    ['stop_job_center']                     = 'Wali Kota',
+    ['stop_transit_bus']                    = 'Transit Bis Dinas',
+    ['stop_penris']                         = 'Kantor PENRIS',
+    ['stop_ZANY']                           = "ZANY-Z'S",
 }
