@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<CVehicleModelInfoVarGlobal>
+  <VehiclePlates>
+    <Textures>
+      <Item>
+        <TextureSetName>greenbird</TextureSetName>
+        <DiffuseMapName>plate01</DiffuseMapName>
+        <NormalMapName>plate01_n</NormalMapName>
+        <FontExtents x="0.08000000" y="0.35500000" z="0.92000000" w="0.81600000"/>
+        <MaxLettersOnPlate x="7.00000000" y="1.00000000"/>
+        <FontColor value="0xFF0F2352"/>
+        <FontOutlineColor value="0x00FFFFFF"/>
+        <IsFontOutlineEnabled value="false"/>
+        <FontOutlineMinMaxDepth x="0.47500000" y="0.50000000"/>
+      </Item>
