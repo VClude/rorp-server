@@ -67,34 +67,34 @@ Config.Garages = {
 			HelpPrompt = _U('store_car')
 		}, 	
 	},
-	Garasi_Paleto = {
-		Name = _('garage_name'),
-		SpawnPoint = {
-			Pos = {x = -90.09,y = 6555.63,z = 31.49 },
-			Heading = 224.36,
-			Marker = { w= 1.5, h= 1.0,r=0,g=255,b=0},
-			HelpPrompt = _U('spawn_car')
-		},
-		DeletePoint = {
-			Pos = {x = -77.89,y = 6537.23,z = 31.49 },
-			Marker = { w= 1.5, h= 1.0,r=255,g=0,b=0},
-			HelpPrompt = _U('store_car')
-		}, 	
-	},
-	Garasi_Shandy = {
-		Name = _('garage_name'),
-		SpawnPoint = {
-			Pos = {x = 1480.74,y = 3751.08,z = 33.75 },
-			Heading = 224.36,
-			Marker = { w= 1.5, h= 1.0,r=0,g=255,b=0},
-			HelpPrompt = _U('spawn_car')
-		},
-		DeletePoint = {
-			Pos = {x = 1463.99,y = 3741.58,z = 33.56 },
-			Marker = { w= 1.5, h= 1.0,r=255,g=0,b=0},
-			HelpPrompt = _U('store_car')
-		},
-	},
+	-- Garasi_Paleto = {
+	-- 	Name = _('garage_name'),
+	-- 	SpawnPoint = {
+	-- 		Pos = {x = -90.09,y = 6555.63,z = 31.49 },
+	-- 		Heading = 224.36,
+	-- 		Marker = { w= 1.5, h= 1.0,r=0,g=255,b=0},
+	-- 		HelpPrompt = _U('spawn_car')
+	-- 	},
+	-- 	DeletePoint = {
+	-- 		Pos = {x = -77.89,y = 6537.23,z = 31.49 },
+	-- 		Marker = { w= 1.5, h= 1.0,r=255,g=0,b=0},
+	-- 		HelpPrompt = _U('store_car')
+	-- 	}, 	
+	-- },
+	-- Garasi_Shandy = {
+	-- 	Name = _('garage_name'),
+	-- 	SpawnPoint = {
+	-- 		Pos = {x = 1480.74,y = 3751.08,z = 33.75 },
+	-- 		Heading = 224.36,
+	-- 		Marker = { w= 1.5, h= 1.0,r=0,g=255,b=0},
+	-- 		HelpPrompt = _U('spawn_car')
+	-- 	},
+	-- 	DeletePoint = {
+	-- 		Pos = {x = 1463.99,y = 3741.58,z = 33.56 },
+	-- 		Marker = { w= 1.5, h= 1.0,r=255,g=0,b=0},
+	-- 		HelpPrompt = _U('store_car')
+	-- 	},
+	-- },
 	Garasi_Walkot = {
 		Name = _('garage_name'),
 		SpawnPoint = {
