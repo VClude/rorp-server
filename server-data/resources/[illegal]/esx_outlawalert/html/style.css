@@ -9,7 +9,8 @@
 }
 .alerts-wrapper {
     display: none;
-    float: right;
+    float: left;
+    bottom:0;
 }
 
 .content {

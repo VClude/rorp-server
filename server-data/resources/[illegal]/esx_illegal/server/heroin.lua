@@ -3,9 +3,10 @@ local playersProcessingPoppyResin = {}
 RegisterServerEvent('esx_illegal:pickedUpPoppy')
 AddEventHandler('esx_illegal:pickedUpPoppy', function()
 	local xPlayer = ESX.GetPlayerFromId(source)
-
-	if xPlayer.canCarryItem('poppyresin', 1) then
-		xPlayer.addInventoryItem('poppyresin', 1)
+	
+	local getC = math.random(1,3)
+	if xPlayer.canCarryItem('poppyresin', getC) then
+		xPlayer.addInventoryItem('poppyresin', getC)
 	else
 		xPlayer.showNotification(_U('poppy_inventoryfull'))
 	end
@@ -21,8 +22,8 @@ AddEventHandler('esx_illegal:processPoppyResin', function()
 			local xPoppyResin, xHeroin = xPlayer.getInventoryItem('poppyresin'), xPlayer.getInventoryItem('heroin')
 
 			if xPoppyResin.count > 0 then
-				if xPlayer.canSwapItem('poppyresin', 1, 'heroin', 1) then
-					xPlayer.removeInventoryItem('poppyresin', 1)
+				if xPlayer.canSwapItem('poppyresin', 3, 'heroin', 1) then
+					xPlayer.removeInventoryItem('poppyresin', 3)
 					xPlayer.addInventoryItem('heroin', 1)
 
 					xPlayer.showNotification(_U('heroin_processed'))

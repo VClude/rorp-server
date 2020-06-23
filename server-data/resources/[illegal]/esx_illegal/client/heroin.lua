@@ -152,7 +152,7 @@ AddEventHandler('onResourceStop', function(resource)
 end)
 
 function SpawnPoppyPlants()
-	while spawnedPoppys < 15 do
+	while spawnedPoppys < 5 do
 		Citizen.Wait(0)
 		local heroinCoords = GenerateHeroinCoords()
 
@@ -213,7 +213,7 @@ function GenerateHeroinCoords()
 end
 
 function GetCoordZHeroin(x, y)
-	local groundCheckHeights = { 10.0, 11.0, 12.0, 13.0, 14.0, 15.0, 16.0, 17.0, 18.0, 19.0, 20.0 }
+	local groundCheckHeights = { 38.0, 39.0, 40.0, 41.0, 42.0, 43.0, 44.0, 45.0, 46.0, 47.0, 48.0, 49.0, 50.0 }
 
 	for i, height in ipairs(groundCheckHeights) do
 		local foundGround, z = GetGroundZFor_3dCoord(x, y, height)
