@@ -25,7 +25,7 @@ end)
 RegisterNetEvent('rorp_daftarwarga:addKTP')
 AddEventHandler('rorp_daftarwarga:addKTP', function(type,jmlhUang)
 	local _source = source
-	local xPlayer = GetPlayerFromId(source)
+	local xPlayer = ESX.GetPlayerFromId(source)
 
 	print(xPlayer)
 
