@@ -38,6 +38,8 @@ function BukaMenuDaftarPenduduk()
 
 	ESX.TriggerServerCallback('esx_license:checkLicense', function(hasKTP)
 		if hasKTP then
+			ESX.ShowNotification(_U('punya_KTP'))
+		else
 			ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'daftar_warga_baru', {
                 title    = 'Daftar Kependudukan',
                 align    = 'bottom-right',
@@ -49,8 +51,6 @@ function BukaMenuDaftarPenduduk()
                     menu.close()
                 end
             )
-		else
-			ESX.ShowNotification(_U('punya_KTP'))
 		end
 	end, GetPlayerServerId(PlayerId()), 'KTP')
     
