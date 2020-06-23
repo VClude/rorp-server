@@ -110,7 +110,7 @@ Config.CircleZones = {
 	HeroinProcessing = {coords = vector3(1.69, 3693.27, 38.51), blimpcoords = vector3(1.69, 3693.27, 38.51), name = _U('blip_heroinprocessing'), color = 7, sprite = 497, radius = 0.0, enabled = true},
 
 	--License
-	LicenseShop = {coords = vector3(707.17, -962.5, 30.4), blimpcoords = vector3(707.17, -962.5, 30.4), name = _U('blip_licenseshop'),color = 9, sprite = 498, radius = 0.0, enabled = true},
+	-- LicenseShop = {coords = vector3(707.17, -962.5, 30.4), blimpcoords = vector3(707.17, -962.5, 30.4), name = _U('blip_licenseshop'),color = 9, sprite = 498, radius = 0.0, enabled = true},
 
 	--DrugDealer
 	DrugDealer = {coords = vector3(-1172.02, -1571.98, 4.66), blimpcoords = vector3(-1172.02, -1571.98, 4.66), name = _U('blip_drugdealer'), color = 6, sprite = 378, radius = 0.0, enabled = true},
