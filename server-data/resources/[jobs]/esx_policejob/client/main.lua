@@ -960,6 +960,13 @@ end)
 
 -- Create blips
 Citizen.CreateThread(function()
+	-- corona
+	local blips = AddBlipForRadius(552.03, 5430.21, 670.21 , 3700.0) 
+
+	SetBlipHighDetail(blips, true)
+	SetBlipColour(blips, 1)
+	SetBlipAlpha (blips, 128)
+	-- corona
 
 	for k,v in pairs(Config.PoliceStations) do
 		local blip = AddBlipForRadius(v.Blip.Coords, 50.0)
