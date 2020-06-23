@@ -37,5 +37,5 @@ Config.ShowCopsMisbehave = true
 
 -- Jobs in this table are considered as cops
 Config.WhitelistedCops = {
-	
+	police
 }
