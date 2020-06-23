@@ -328,3 +328,29 @@ Config.Jobs.petani = {
 	}
 }
 
+Config.Jobs.pedagang = {
+
+	BlipInfos = {
+		Sprite = 85,
+		Color = 4
+	},
+
+
+	Zones = {
+
+
+		Masak = {
+			Pos = { x=962.5, y=-1585.5, z=29.6 },
+			Size = { x = 2.5, y = 2.5, z = 1.5 },
+			Color = { r = 255, g = 0, b = 0, a = 100 },
+			Marker = 1,
+			Blip = true,
+			Name = 'Tempat Memasak',
+			Type = 'na',
+			Duration = 20000,
+			Hint = 'Tekan e untuk Memasak',
+			GPS = {x = 715.95, y = -959.63, z = 29.39}
+		}
+	}
+}
+
