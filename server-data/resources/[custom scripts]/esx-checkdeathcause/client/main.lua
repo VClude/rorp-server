@@ -118,7 +118,7 @@ end
 		  'default', GetCurrentResourceName(), 'dead_citizen',
 		  {
 			  title    = 'Choose Option',
-			  align    = 'top-right',
+			  align    = 'top-left',
 			  elements = elements,
 		  },
 	  function(data, menu)
