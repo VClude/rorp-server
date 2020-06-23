@@ -79,21 +79,33 @@ function menuIdentitas()
 
 						if data2.current.value == "ktp1" then
 
-							TriggerServerEvent('jsfour-idcard:open', GetPlayerServerId(PlayerId()), GetPlayerServerId(PlayerId()))
-							ESX.UI.Menu.CloseAll()
+							ESX.TriggerServerCallback('esx_license:checkLicense', function(hasKTP)
+								if hasKTP then
+									TriggerServerEvent('jsfour-idcard:open', GetPlayerServerId(PlayerId()), GetPlayerServerId(PlayerId()))
+									ESX.UI.Menu.CloseAll()
+								else
+									ESX.ShowNotification('Belum memiliki KTP')
+								end
+							end, GetPlayerServerId(PlayerId()), 'KTP')
 						
 						else
 
-							local player, distance = ESX.Game.GetClosestPlayer()
+							ESX.TriggerServerCallback('esx_license:checkLicense', function(hasKTP)
+								if hasKTP then
+									local player, distance = ESX.Game.GetClosestPlayer()
 
-							if distance ~= -1 and distance <= 3.0 then
-								TriggerServerEvent('jsfour-idcard:open', GetPlayerServerId(PlayerId()), GetPlayerServerId(player))
-								ExecuteCommand('me Menunjukan KTP')
-								ESX.UI.Menu.CloseAll()
-							else
-								ESX.ShowNotification('Tidak ada orang disekitar')
-								ESX.UI.Menu.CloseAll()
-							end
+									if distance ~= -1 and distance <= 3.0 then
+										TriggerServerEvent('jsfour-idcard:open', GetPlayerServerId(PlayerId()), GetPlayerServerId(player))
+										ExecuteCommand('me Menunjukan KTP')
+										ESX.UI.Menu.CloseAll()
+									else
+										ESX.ShowNotification('Tidak ada orang disekitar')
+										ESX.UI.Menu.CloseAll()
+									end
+								else
+									ESX.ShowNotification('Belum memiliki KTP')
+								end
+							end, GetPlayerServerId(PlayerId()), 'KTP')
 
 						end
 

@@ -13,6 +13,8 @@ Config.Zones = {
 
 }
 
+Config.UangTunjangan = 20000
+
 Config.Blips = {
 	vector3(-451.01, 1106.03, 332.53)
 }

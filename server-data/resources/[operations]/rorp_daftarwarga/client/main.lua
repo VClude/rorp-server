@@ -35,12 +35,10 @@ Citizen.CreateThread(function()
 end)
 
 function BukaMenuDaftarPenduduk()
-    
-    ESX.TriggerServerCallback('rorp_daftarwarga:cekWargabaru', function(wargabaru)
 
-		if wargabaru == true then
-
-	        ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'daftar_warga_baru', {
+	ESX.TriggerServerCallback('esx_license:checkLicense', function(hasKTP)
+		if hasKTP then
+			ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'daftar_warga_baru', {
                 title    = 'Daftar Kependudukan',
                 align    = 'bottom-right',
                 elements = {
@@ -52,10 +50,10 @@ function BukaMenuDaftarPenduduk()
                 end
             )
 		else
-			ESX.ShowNotification('Kamu bukan warga baru')
+			ESX.ShowNotification(_U('punya_KTP'))
 		end
-	end)
-
+	end, GetPlayerServerId(PlayerId()), 'KTP')
+    
 end
 
 function StartTheoryTest()
@@ -80,17 +78,7 @@ function StopTheoryTest(success)
 	SetNuiFocus(false)
 
     if success then
-        local generatedPlate = GeneratePlate()
-        local model = Config.ModelMobilWargaBaru
-        ESX.TriggerServerCallback('rorp_daftarwarga:giftCar',function(success)
-            if success then
-                ESX.TriggerServerCallback('rorp_daftarwarga:removeStatWargaBaru')
-                ESX.ShowNotification(_U('test_berhasil'))
-                Citizen.Wait(2000)
-                ESX.ShowNotification('Silahkan ambil mobil anda di ~b~Garasi Walikota~w~ dengan Plat No: ~g~'..generatedPlate)
-                
-            end
-        end, generatedPlate, model)
+        TriggerServerEvent('rorp_daftarwarga:addKTP','KTP', Config.UangTunjangan)
 	else
 		ESX.ShowNotification(_U('test_gagal'))
 	end

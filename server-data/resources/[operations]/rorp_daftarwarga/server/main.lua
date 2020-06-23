@@ -2,32 +2,6 @@ ESX = nil
 
 TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 
-AddEventHandler('esx:playerLoaded', function(source)
-	TriggerEvent('esx_license:getLicenses', source, function(licenses)
-		TriggerClientEvent('esx_dmvschool:loadLicenses', source, licenses)
-	end)
-end)
-
-RegisterNetEvent('esx_dmvschool:addLicense')
-AddEventHandler('esx_dmvschool:addLicense', function(type)
-	local _source = source
-
-	TriggerEvent('esx_license:addLicense', _source, type, function()
-		TriggerEvent('esx_license:getLicenses', _source, function(licenses)
-			TriggerClientEvent('esx_dmvschool:loadLicenses', _source, licenses)
-		end)
-	end)
-end)
-
-RegisterNetEvent('esx_dmvschool:pay')
-AddEventHandler('esx_dmvschool:pay', function(price)
-	local _source = source
-	local xPlayer = ESX.GetPlayerFromId(_source)
-
-	xPlayer.removeMoney(price)
-	TriggerClientEvent('esx:showNotification', _source, _U('you_paid', ESX.Math.GroupDigits(price)))
-end)
-
 ESX.RegisterServerCallback('rorp_daftarwarga:giftCar', function(source, cb, plate, model)
 	local xPlayer = ESX.GetPlayerFromId(source)
 
@@ -63,6 +37,19 @@ ESX.RegisterServerCallback('rorp_daftarwarga:cekWargabaru', function(source, cb)
 			cb(false)
 		end
 	end)
+end)
+
+RegisterNetEvent('rorp_daftarwarga:addKTP')
+AddEventHandler('rorp_daftarwarga:addKTP', function(type,jmlhUang)
+	local _source = source
+	local xPlayer = GetPlayerFromId(_source)
+
+	TriggerEvent('esx_license:addLicense', _source, type)
+	TriggerClientEvent('esx:showNotification', _source, (_U('test_berhasil'))
+	Citizen.Wait(2000)
+	xPlayer.addMoney(jmlhUang)
+	TriggerClientEvent('esx:showNotification', _source, (_U('uang_subsidi'), ESX.Math.GroupDigits(jmlhUang)))
+
 end)
 
 ESX.RegisterServerCallback('rorp_daftarwarga:removeStatWargaBaru', function(source)
