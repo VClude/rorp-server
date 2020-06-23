@@ -24,3 +24,15 @@ client_scripts {
 	'config.lua',
 	'client/main.lua'
 }
+server_export 'ShowAlert'
+export 'ShowAlert'
+
+ui_page {
+    'html/alerts.html',
+}
+
+files {
+	'html/alerts.html',
+	'html/main.js', 
+	'html/style.css',
+}

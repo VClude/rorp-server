@@ -29,13 +29,6 @@ AddEventHandler('esx:setJob', function(job)
 	isPlayerWhitelisted = refreshPlayerWhitelisted()
 end)
 
-RegisterNetEvent('esx_outlawalert:outlawNotify')
-AddEventHandler('esx_outlawalert:outlawNotify', function(alert)
-	if isPlayerWhitelisted then
-		ESX.ShowNotification(alert)
-	end
-end)
-
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(100)
@@ -82,6 +75,94 @@ function refreshPlayerWhitelisted()
 
 	return false
 end
+
+
+RegisterNetEvent('esx_outlawalert:outlawNotify')
+AddEventHandler('esx_outlawalert:outlawNotify', function(type, data, length)
+	if isPlayerWhitelisted then
+		SendNUIMessage({action = 'display', style = type, info = data, length = length})
+    	PlaySound(-1, "Event_Start_Text", "GTAO_FM_Events_Soundset", 0, 0, 1)
+	end
+end)
+
+Citizen.CreateThread(function()
+	while true do
+		Citizen.Wait(2000)
+
+		if DecorGetInt(PlayerPedId(), 'isOutlaw') == 2 then
+			Citizen.Wait(timing)
+			DecorSetInt(PlayerPedId(), 'isOutlaw', 1)
+		end
+	end
+end)
+
+Citizen.CreateThread(function()
+	while true do
+		Citizen.Wait(0)
+
+		local playerPed = PlayerPedId()
+		local playerCoords = GetEntityCoords(playerPed)
+
+		-- is jackin'
+		if (IsPedTryingToEnterALockedVehicle(playerPed) or IsPedJacking(playerPed)) and Config.CarJackingAlert then
+
+			Citizen.Wait(3000)
+			local vehicle = GetVehiclePedIsIn(playerPed, true)
+
+			if vehicle and ((isPlayerWhitelisted and Config.ShowCopsMisbehave) or not isPlayerWhitelisted) then
+				local plate = ESX.Math.Trim(GetVehicleNumberPlateText(vehicle))
+
+				ESX.TriggerServerCallback('esx_outlawalert:isVehicleOwner', function(owner)
+					if not owner then
+
+						local vehicleLabel = GetDisplayNameFromVehicleModel(GetEntityModel(vehicle))
+						vehicleLabel = GetLabelText(vehicleLabel)
+
+						DecorSetInt(playerPed, 'isOutlaw', 2)
+
+						TriggerServerEvent('esx_outlawalert:carJackInProgress', {
+							x = ESX.Math.Round(playerCoords.x, 1),
+							y = ESX.Math.Round(playerCoords.y, 1),
+							z = ESX.Math.Round(playerCoords.z, 1)
+						}, streetName, vehicleLabel, playerGender)
+					end
+				end, plate)
+			end
+			-- is in combat
+		elseif IsPedInMeleeCombat(playerPed) and Config.MeleeAlert then
+
+			Citizen.Wait(3000)
+
+			if (isPlayerWhitelisted and Config.ShowCopsMisbehave) or not isPlayerWhitelisted then
+				DecorSetInt(playerPed, 'isOutlaw', 2)
+
+				TriggerServerEvent('esx_outlawalert:combatInProgress', {
+					x = ESX.Math.Round(playerCoords.x, 1),
+					y = ESX.Math.Round(playerCoords.y, 1),
+					z = ESX.Math.Round(playerCoords.z, 1)
+				}, streetName, playerGender)
+			end
+			-- is shootin'
+		elseif IsPedShooting(playerPed) and not IsPedCurrentWeaponSilenced(playerPed) and Config.GunshotAlert then
+
+			Citizen.Wait(3000)
+
+			if (isPlayerWhitelisted and Config.ShowCopsMisbehave) or not isPlayerWhitelisted then
+				DecorSetInt(playerPed, 'isOutlaw', 2)
+
+				TriggerServerEvent('esx_outlawalert:gunshotInProgress', {
+					x = ESX.Math.Round(playerCoords.x, 1),
+					y = ESX.Math.Round(playerCoords.y, 1),
+					z = ESX.Math.Round(playerCoords.z, 1)
+				}, streetName, playerGender)
+			end
+
+		end
+	end
+end)
+
+
+
 
 RegisterNetEvent('esx_outlawalert:carJackInProgress')
 AddEventHandler('esx_outlawalert:carJackInProgress', function(targetCoords)
@@ -154,82 +235,6 @@ AddEventHandler('esx_outlawalert:combatInProgress', function(targetCoords)
 				RemoveBlip(meleeBlip)
 				return
 			end
-		end
-	end
-end)
-
-Citizen.CreateThread(function()
-	while true do
-		Citizen.Wait(2000)
-
-		if DecorGetInt(PlayerPedId(), 'isOutlaw') == 2 then
-			Citizen.Wait(timing)
-			DecorSetInt(PlayerPedId(), 'isOutlaw', 1)
-		end
-	end
-end)
-
-Citizen.CreateThread(function()
-	while true do
-		Citizen.Wait(0)
-
-		local playerPed = PlayerPedId()
-		local playerCoords = GetEntityCoords(playerPed)
-
-		-- is jackin'
-		if (IsPedTryingToEnterALockedVehicle(playerPed) or IsPedJacking(playerPed)) and Config.CarJackingAlert then
-
-			Citizen.Wait(3000)
-			local vehicle = GetVehiclePedIsIn(playerPed, true)
-
-			if vehicle and ((isPlayerWhitelisted and Config.ShowCopsMisbehave) or not isPlayerWhitelisted) then
-				local plate = ESX.Math.Trim(GetVehicleNumberPlateText(vehicle))
-
-				ESX.TriggerServerCallback('esx_outlawalert:isVehicleOwner', function(owner)
-					if not owner then
-
-						local vehicleLabel = GetDisplayNameFromVehicleModel(GetEntityModel(vehicle))
-						vehicleLabel = GetLabelText(vehicleLabel)
-
-						DecorSetInt(playerPed, 'isOutlaw', 2)
-
-						TriggerServerEvent('esx_outlawalert:carJackInProgress', {
-							x = ESX.Math.Round(playerCoords.x, 1),
-							y = ESX.Math.Round(playerCoords.y, 1),
-							z = ESX.Math.Round(playerCoords.z, 1)
-						}, streetName, vehicleLabel, playerGender)
-					end
-				end, plate)
-			end
-
-		elseif IsPedInMeleeCombat(playerPed) and Config.MeleeAlert then
-
-			Citizen.Wait(3000)
-
-			if (isPlayerWhitelisted and Config.ShowCopsMisbehave) or not isPlayerWhitelisted then
-				DecorSetInt(playerPed, 'isOutlaw', 2)
-
-				TriggerServerEvent('esx_outlawalert:combatInProgress', {
-					x = ESX.Math.Round(playerCoords.x, 1),
-					y = ESX.Math.Round(playerCoords.y, 1),
-					z = ESX.Math.Round(playerCoords.z, 1)
-				}, streetName, playerGender)
-			end
-
-		elseif IsPedShooting(playerPed) and not IsPedCurrentWeaponSilenced(playerPed) and Config.GunshotAlert then
-
-			Citizen.Wait(3000)
-
-			if (isPlayerWhitelisted and Config.ShowCopsMisbehave) or not isPlayerWhitelisted then
-				DecorSetInt(playerPed, 'isOutlaw', 2)
-
-				TriggerServerEvent('esx_outlawalert:gunshotInProgress', {
-					x = ESX.Math.Round(playerCoords.x, 1),
-					y = ESX.Math.Round(playerCoords.y, 1),
-					z = ESX.Math.Round(playerCoords.z, 1)
-				}, streetName, playerGender)
-			end
-
 		end
 	end
 end)

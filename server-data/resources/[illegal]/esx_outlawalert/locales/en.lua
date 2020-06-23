@@ -1,7 +1,7 @@
 Locales['en'] = {
   ['male'] = 'male',
   ['female'] = 'female',
-  ['carjack'] = '~o~Carjack in progress~s~: a ~r~%s~s~ was spotted jacking an ~o~%s~s~ at ~y~%s~s~',
-  ['combat'] = '~o~Fight in progress~s~: a ~r~%s~s~ has been spotted fighting at ~y~%s~s~',
-  ['gunshot'] = '~o~Shootout in progress~s~: a ~r~%s~s~ has been spotted firing a weapon at ~y~%s~s~',
+  ['carjack'] = 'Carjack in progress: a %s was spotted jacking an %s at %s',
+  ['combat'] = 'Fight in progress: a %s has been spotted fighting at %s',
+  ['gunshot'] = 'Shootout in progress~s~: a %s has been spotted firing a weapon at %s',
 }
