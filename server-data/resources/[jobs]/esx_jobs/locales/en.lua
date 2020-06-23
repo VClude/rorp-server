@@ -27,8 +27,8 @@ Locales['en'] = {
   ['public_leave']              = 'tekan ~INPUT_PICKUP~ untuk keluar dari bangunan.',
 
   -- Lumber Jack job
-  ['lj_locker_room']            = 'lumberjack\'s Locker Room',
-  ['lj_mapblip']                = 'wood pile',
+  ['lj_locker_room']            = '1. Ruang Ganti Kerja',
+  ['lj_mapblip']                = '2. Pengambilan Kayu',
   ['lj_wood']                   = 'wood',
   ['lj_pickup']                 = 'press ~INPUT_PICKUP~ to retrieve wood.',
   ['lj_cutwood']                = 'wood cutting',
@@ -52,7 +52,7 @@ Locales['en'] = {
   ['fm_deliver_fish']           = 'press ~INPUT_PICKUP~ to deliver the fish.',
 
   -- Fuel
-  ['f_oil_refiner']             = 'oil Refiner Locker Room',
+  ['f_oil_refiner']             = '1. Ruang Ganti Pekerja',
   ['f_drill_oil']               = 'drill for oil',
   ['f_fuel']                    = 'oil',
   ['f_drillbutton']             = 'press ~INPUT_PICKUP~ to drill.',
@@ -90,26 +90,26 @@ Locales['en'] = {
   ['reporter_garage']           = 'Press ~INPUT_PICKUP~ to go down to the garage.',
 
   -- Slaughterer
-  ['s_slaughter_locker']        = 'butcher\'s Locker Room',
-  ['s_hen']                     = 'chicken coop',
-  ['s_alive_chicken']           = 'live Chicken',
-  ['s_catch_hen']               = 'press ~INPUT_PICKUP~ to catch live chickens.',
-  ['s_slaughtered_chicken']     = 'chicken to be packed',
-  ['s_chop_animal']             = 'press ~INPUT_PICKUP~ to chop the chickens.',
-  ['s_slaughtered']             = 'slaughter house',
-  ['s_package']                 = 'packaging',
-  ['s_packagechicken']          = 'chicken in tray',
+  ['s_slaughter_locker']        = '1. Ruang Ganti Baju',
+  ['s_hen']                     = '2. Pemotongan Sapi',
+  ['s_alive_chicken']           = 'Sapi Potong',
+  ['s_catch_hen']               = 'Tekan ~INPUT_PICKUP~ untuk memotong Sapi.',
+  ['s_slaughtered_chicken']     = 'Penggilingan Daging',
+  ['s_chop_animal']             = 'Tekan ~INPUT_PICKUP~ untuk menggiling Daging.',
+  ['s_slaughtered']             = 'Penggilingan Daging',
+  ['s_package']                 = 'Mengemas Daging Cincang',
+  ['s_packagechicken']          = 'Daging Cincang',
   ['s_unpackaged']              = 'chicken to be packed',
-  ['s_unpackaged_button']       = 'press ~INPUT_PICKUP~ to set the chicken in a tray.',
-  ['s_deliver']                 = 'press ~INPUT_PICKUP~ to deliver the chicken trays.',
+  ['s_unpackaged_button']       = 'Tekan ~INPUT_PICKUP~ untuk mengemas Daging Cincang.',
+  ['s_deliver']                 = 'Tekan ~INPUT_PICKUP~ untuk mengirim sosis.',
 
   -- Dress Designer
-  ['dd_dress_locker']           = 'Ruang Ganti Baju',
-  ['dd_wool']                   = 'wool',
-  ['dd_pickup']                 = 'tekan ~INPUT_PICKUP~ untuk mengambil wool.',
-  ['dd_fabric']                 = 'kain',
+  ['dd_dress_locker']           = '1. Ruang Kerja & Ganti Baju',
+  ['dd_wool']                   = '2. Pengambilan Benang',
+  ['dd_pickup']                 = 'tekan ~INPUT_PICKUP~ untuk mengambil Benang.',
+  ['dd_fabric']                 = '3. Pembuatan Kain',
   ['dd_makefabric']             = 'tekan ~INPUT_PICKUP~ untuk membuat kain.',
-  ['dd_clothing']               = 'baju',
+  ['dd_clothing']               = '4. Pembuatan Baju',
   ['dd_makeclothing']           = 'tekan ~INPUT_PICKUP~ untuk membuat baju.',
   ['dd_deliver_clothes']        = 'tekan ~INPUT_PICKUP~ untuk mengirim baju.',
   

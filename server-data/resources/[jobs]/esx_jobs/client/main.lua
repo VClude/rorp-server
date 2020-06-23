@@ -85,7 +85,7 @@ Citizen.CreateThread(function()
 							if pickaxe then
 								MiningEvent()	
 							else
-								ESX.ShowNotification("Kamu membutuhkan ~y~pickaxe~s~ serta Menjadi Penambang untuk ~b~Menambang~s~ disini!")
+								ESX.ShowNotification("Kamu harus Menjadi Penambang untuk ~b~Menambang~s~ disini!")
 							end
 						end)
 					else
@@ -143,7 +143,7 @@ function MiningEvent()
 	TaskPlayAnim(PlayerPedId(), anim, action, 3.0, -3.0, -1, 31, 0, false, false, false)
 	Citizen.Wait(2000)
 	
-	TriggerServerEvent("esx_jobs:reward",'stone',5)
+	TriggerServerEvent("esx_jobs:reward",'stone',7)
 	
 	ClearPedTasks(PlayerPedId())
 	FreezeEntityPosition(playerPed, false)
@@ -171,7 +171,7 @@ Citizen.CreateThread(function()
 						if washPan then
 							WasherEvent()
 						else
-							ESX.ShowNotification("Kamu membutuhkan ~y~wash pan~s~ serta Menjadi Penambang untuk ~b~Mencuci~s~ disini!")
+							ESX.ShowNotification("Kamu harus  Menjadi Penambang untuk ~b~Mencuci~s~ disini!")
 						end
 					end)
 					Citizen.Wait(300)
@@ -196,9 +196,9 @@ function WasherEvent()
 			exports['progressBars']:startUI((10000), "WASHING STONE")
 			TaskStartScenarioInPlace(playerPed, "PROP_HUMAN_BUM_BIN", 0, true)
 			Citizen.Wait(10000)
-			TriggerServerEvent("esx_jobs:reward",'washed_stone',10)	
+			TriggerServerEvent("esx_jobs:reward",'washed_stone',7)	
 		else
-			ESX.ShowNotification("Kamu membutuhkan ~y~10x Batu~s~ serta Menjadi Penambang untuk ~b~Mencuci~s~ disini!")
+			ESX.ShowNotification("Kamu membutuhkan ~y~7x Batu~s~ serta Menjadi Penambang untuk ~b~Mencuci~s~ disini!")
 		end
 		ClearPedTasks(playerPed)
 		FreezeEntityPosition(playerPed, false)

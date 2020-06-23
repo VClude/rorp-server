@@ -31,7 +31,7 @@ Config.Jobs.tailor = {
 		},
 
 		Wool = {
-			Pos = {x = 1978.92, y = 5171.70, z = 46.63},
+			Pos = {x = -1585.74, y = -838.05, z = 8.95},
 			Size = {x = 3.0, y = 3.0, z = 1.0},
 			Color = {r = 204, g = 204, b = 0},
 			Marker = 1,
@@ -71,8 +71,8 @@ Config.Jobs.tailor = {
 					db_name = 'fabric',
 					time = 5,
 					max = 80,
-					add = 2,
-					remove = 1,
+					add = 10,
+					remove = 10,
 					requires = 'wool',
 					requires_name = _U('dd_wool'),
 					drop = 100
@@ -97,8 +97,8 @@ Config.Jobs.tailor = {
 					db_name = 'clothe',
 					time = 4,
 					max = 40,
-					add = 1,
-					remove = 2,
+					add = 10,
+					remove = 10,
 					requires = 'fabric',
 					requires_name = _U('dd_fabric'),
 					drop = 100

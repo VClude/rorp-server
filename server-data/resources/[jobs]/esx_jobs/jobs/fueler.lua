@@ -24,20 +24,20 @@ Config.Jobs.fueler = {
 			Color = {r = 204, g = 204, b = 0},
 			Marker = 1,
 			Blip = true,
-			Name = _U('f_oil_refiner'),
+			Name = '1. Ruang Ganti Kerja',
 			Type = 'cloakroom',
 			Hint = _U('cloak_change'),
 			GPS = {x = 554.59, y = -2314.43, z = 4.86}
 		},
 
 		OilFarm = {
-			Pos = {x = 609.58, y = 2856.74, z = 38.90},
+			Pos = {x = 1529.07, y = -2070.18, z = 76.27},
 			Size = {x = 20.0, y = 20.0, z = 1.0},
 			Color = {r = 204, g = 204, b = 0},
 			Marker = 1,
 			Blip = true,
-			Label = 'Mengambil Minyak',
-			Name = _U('f_drill_oil'),
+			Label = '2. Mengambil Minyak',
+			Name = '2. Mengambil Minyak',
 			Type = 'work',
 			Duration = 20000,
 			Item = {
@@ -63,7 +63,8 @@ Config.Jobs.fueler = {
 			Color = {r = 204, g = 204, b = 0},
 			Marker = 1,
 			Blip = true,
-			Name = _U('f_fuel_refine'),
+			Label = '3. Pengolahan Minyak',
+			Name = '3. Pengolahan Minyak',
 			Type = 'work',
 			Duration = 20000,
 			Item = {
@@ -89,7 +90,8 @@ Config.Jobs.fueler = {
 			Color = {r = 204, g = 204, b = 0},
 			Marker = 1,
 			Blip = true,
-			Name = _U('f_fuel_mixture'),
+			Label = '4. Pengolahan Gas',
+			Name = '4. Pengolahan Gas',
 			Type = 'work',
 			Duration = 20000,
 			Item = {
@@ -156,7 +158,8 @@ Config.Jobs.fueler = {
 			Size = {x = 10.0, y = 10.0, z = 1.0},
 			Marker = 1,
 			Blip = true,
-			Name = _U('f_deliver_gas'),
+			Label = '5. Pengiriman Gas',
+			Name = '5. Pengiriman Gas',
 			Type = 'delivery',
 			Spawner = 1,
 			Item = {
@@ -165,7 +168,7 @@ Config.Jobs.fueler = {
 					time = 0.5,
 					remove = 1,
 					max = 100, -- if not present, probably an error at itemQtty >= item.max in esx_jobs_sv.lua
-					price = 61,
+					price = 250,
 					requires = 'essence',
 					requires_name = _U('f_gas'),
 					drop = 100
