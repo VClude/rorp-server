@@ -53,7 +53,7 @@ Config.ui = {
 	showSocietyMoney	= true,
 
 	showDate 			= false,
-	showLocation 		= true,
+	showLocation 		= false,
 	showVoice	 		= false,
 
 	showHealth			= true,
@@ -64,5 +64,5 @@ Config.ui = {
 
 	showMinimap			= false,
 
-	showWeapons			= true,	
+	showWeapons			= false,	
 }
