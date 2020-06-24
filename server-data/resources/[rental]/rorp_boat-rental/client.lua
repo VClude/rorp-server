@@ -104,6 +104,7 @@ function OpenBoatsMenu()
 		ESX.ShowNotification('Anda telah membayar : Rp. ~y~'..Config.Seashark)
 		local veh = CreateVehicle("seashark",-712.24,-1339.78,-0.41,136.88,true,false)
 		SetPedIntoVehicle (PlayerPedId(-1),veh,-1)
+		SetVehicleRadioEnabled(veh,false)
 	end
 	
 	if data.current.value == 'boat2' then
