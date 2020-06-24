@@ -54,23 +54,21 @@ Config = {
 
 -- Drug sale prices, while slinging drugs inside a territory.
 DrugPrices = {
-  ['weed_packaged']    = 100,
-  ['cocaine_packaged'] = 500,
-  ['meth_packaged']    = 300,
+  ['heroin'] = 500,
 }
 
 -- The color for the blip when gang/job is controlling zone.
 BlipColors = {
   police  = 0,
-  kartel   = 2,
-  mafia  = 7,
+  kartel   = 8,
+  mafia  = 3,
 }
 
 -- Colors for drawtext.
 TextColors = {
   police  = "white",              
-  kartel   = "green",
-  ballas  = "purple",
+  kartel   = "pink",
+  mafia  = "blue",
 }
 
 -- Don't touch.
@@ -88,18 +86,11 @@ Territories = {
 
     areas = {                                             -- Areas are responsible for the large square blips on the map.
       [1] = { 
-        location  = vector3(904.06,-164.28,73.97),
-        width     = 350.0,
-        height    = 200.0,
-        heading   = 60,
+        location  = vector3(-155.48,6378.9,31.53),
+        width     = 1000.0,
+        height    = 500.0,
+        heading   = 130,
         display   = 3
-      },
-      [2] = {
-        location  = vector3(789.57,-328.67,73.97),
-        width     = 300.0,
-        height    = 200.0,
-        heading   = 60,
-        display   = 3        
       }
     },
 
@@ -117,7 +108,7 @@ Territories = {
     actions = { 
       ["entry"] = {
         helpText = _U["enter_laundry"],
-        location = vector3(1005.76,-114.52,73.50),
+        location = vector3(-96.15,6324.71,31.58),
       },
       ["exit"] = {
         helpText = _U["leave_laundry"],
@@ -208,24 +199,24 @@ Territories = {
     zone      = "GRAPES",
 
     canSell   = {
-      'weed_packaged',
+      'meth_packaged',
     },
 
     areas = {
       [1] = {
         location  = vector3(2115.0,4977.2,40.73),
-        width     = 350.0,
-        height    = 200.0,
-        heading   = 60,
+        width     = 450.0,
+        height    = 900.0,
+        heading   = 223,
         display   = 3
       }
     },
 
     blipData = {
-      pos = vector3(183.03, -1836.59, 28.10),
-      sprite = 496,
+      pos = vector3(2030.23, 4980.12, 42.1),
+      sprite = 499,
       color = 2,
-      text = _U["growhouse_blip"],
+      text = _U["methlab_blip"],
       display = 5,
       shortRange = true,
       scale = 1.0,
@@ -234,167 +225,8 @@ Territories = {
     -- WEED GROW HOUSE
     actions = {
       ["entry"] = {
-        helpText = _U["enter_growhouse"],
-        location = vector3(183.03, -1836.59, 28.10),
-      },
-      ["exit"] = {
-        helpText = _U["leave_growhouse"],
-        location = vector3(1066.28, -3183.46, -39.16),
-      },
-      ["gather_plant"] = {
-        helpText    = _U["gather_plant"],
-        progText    = _U["gather_plant_prog"],
-
-        requireRate = 0, 
-        requireItem = false,
-        rewardItem  = "weed_untrimmed",
-        rewardRate  = 5,
-
-        location    = vector3(1057.54,-3197.2,-39.13),
-        offset      = vector3(-0.014, 0.896, 1.0),
-        rotation    = vector3(0.0, 0.0, 90.0),
-        time        = 15000,
-        act         = "Weed",
-        scene       = 1,
-      },
-      ["trim_plant"] = {
-        helpText    = _U["trim_plant"],
-        progText    = _U["trim_plant_prog"],
-
-        requireRate = 5, 
-        requireItem = "weed_untrimmed",
-        rewardItem  = "weed_packaged",
-        rewardRate  = 1,
-
-        location    = vector3(1038.14,-3205.45,-38.16),
-        offset      = vector3(-0.3, 0.4, 0.96),
-        rotation    = vector3(0.0, 0.0, 90.0),
-        time        = 30000,
-        act         = "Weed",
-        scene       = 2,
-      },
-    }
-  },
-
-  -- CHAMBERLAIN HILLS
-  ["ChamberlainHills"] = {
-    openzone  = false,
-    control   = "ballas",
-    influence = 100.0,
-    zone      = "CHAMH",
-
-    canSell   = {
-      'meth_packaged',
-    },
-
-    areas = {
-      [1] = {
-        location  = vector3(-147.9323, -1600.784, 38.29156),
-        width     = 200.0,
-        height    = 280.0,
-        heading   = 50,
-        display   = 3
-      },
-    },
-
-    blipData = {
-      pos = vector3(-161.6598, -1638.28, 37.2459),
-      sprite = 499,
-      color = 3,
-      text = _U["methlab_blip"],
-      display = 5,
-      shortRange = true,
-      scale = 1.0,
-    },
-
-    -- METH LABORATORY
-    actions = {
-      ["entry"] = {
-        helpText = _U["enter_methlab"],
-        location = vector3(-161.6598, -1638.28, 37.2459),
-      },
-      ["exit"] = {
-        helpText = _U["leave_methlab"],
-        location = vector3(997.0199, -3200.684, -36.39373),
-      },
-      ["cook_meth"] = {
-        helpText    = _U["cook_meth"],
-        progText    = _U["cook_meth_prog"],
-
-        requireRate = 0, 
-        requireItem = false,
-        rewardItem  = "meth_raw",
-        rewardRate  = 5,
-
-        location    = vector3(1005.80,-3200.40,-38.90),
-        offset      = vector3(-4.88,-1.95,0.0),
-        rotation    = vector3(0.0, 0.0, 0.0),
-        time        = 73000,
-        act         = "Meth",
-        scene       = 1,
-      },
-      ["package_meth"] = {
-        helpText    = _U["package_meth"],
-        progText    = _U["package_meth_prog"],
-
-        requireRate = 5, 
-        requireItem = "meth_raw",
-        rewardItem  = "meth_packaged",
-        rewardRate  = 1,
-
-        location    = vector3(1011.80,-3194.90,-38.99),
-        offset      = vector3(4.48,1.7,1.0),
-        rotation    = vector3(0.0, 0.0, 0.0),
-        time        = 50000,
-        act         = "Meth",
-        scene       = 2,
-      },
-    }
-  },
-
-  -- RANCHO
-  ["Rancho"] = {
-    openzone  = false,
-    control   = "vagos",
-    influence = 100.0,
-    zone      = "RANCHO",
-
-    canSell   = {
-      'cocaine_packaged',
-    },
-
-    areas = {
-      [1] = {
-        location  = vector3(320.2412, -2039.633, 28.96141),
-        width     = 290.0,
-        height    = 220.0,
-        heading   = 50,
-        display   = 3
-      },
-      [2] = {
-        location  = vector3(413.2437, -1782.743, 40.27221),
-        width     = 370.0,
-        height    = 300.0,
-        heading   = 50,
-        display   = 3
-      },  
-    },
-
-    blipData = {
-      pos = vector3(465.00, -1894.07, 27.90),
-      sprite = 497,
-      color = 0,
-      text = _U["cokelab_blip"],
-      display = 5,
-      shortRange = true,
-      scale = 1.0,
-    },
-
-    -- COCAINE FACTORY
-    actions = {
-      ["entry"] = {
         helpText = _U["enter_cokelab"],
-        location = vector3(465.00, -1894.07, 25.90),
+        location = vector3(2030.52, 4980.08, 42.1),
       },
       ["exit"] = {
         helpText = _U["leave_cokelab"],
@@ -404,10 +236,10 @@ Territories = {
         helpText    = _U["gather_cocaine"],
         progText    = _U["gather_cocaine_prog"],
 
-        requireRate = 0, 
-        requireItem = false,
-        rewardItem  = "cocaine_uncut",
-        rewardRate  = 10,
+        requireRate = 8, 
+        requireItem = 'poppyresin',
+        rewardItem  = "heroinbubuk",
+        rewardRate  = 4,
 
         location    = vector3(1093.18,-3194.925,-39.60),
         offset      = vector3(1.911,0.31,0.0),
@@ -420,10 +252,10 @@ Territories = {
         helpText    = _U["process_cocaine"],
         progText    = _U["process_cocaine_prog"],
 
-        requireRate = 10, 
-        requireItem = "cocaine_uncut",
-        rewardItem  = "cocaine_cut",
-        rewardRate  = 5,
+        requireRate = 4, 
+        requireItem = "heroinbubuk",
+        rewardItem  = "heroin",
+        rewardRate  = 2,
 
         location    = vector3(1099.544,-3194.13,-39.60),
         offset      = vector3(0.31, -1.71,0.0),
@@ -431,22 +263,6 @@ Territories = {
         time        = 25000,
         act         = "Cocaine",
         scene       = 1,
-      }, 
-      ["package_cocaine"] = {
-        helpText    = _U["package_cocaine"],
-        progText    = _U["package_cocaine_prog"],
-
-        requireRate = 5, 
-        requireItem = "cocaine_cut",
-        rewardItem  = "cocaine_packaged",
-        rewardRate  = 1,
-
-        location    = vector3(1101.245,-3198.82,-39.60),
-        offset      = vector3(7.663,-2.222,0.395),
-        rotation    = vector3(0.0, 0.0, 0.0),
-        time        = 59000,
-        act         = "Cocaine",
-        scene       = 2,
       }, 
     }
   },

@@ -16,11 +16,11 @@ Langs['en'] = {
   ["cutting_money"] = "Press ~INPUT_PICKUP~ to cut your counterfeit cash.",
   ["cleaning_money"] = "Press ~INPUT_PICKUP~ to clean your counterfeit cash.",
 
-  ["enter_cokelab"] = "Press ~INPUT_PICKUP~ to enter the cocaine lab.",
-  ["leave_cokelab"] = "Press ~INPUT_PICKUP~ to leave the cocaine lab.",
-  ["gather_cocaine"] = "Press ~INPUT_PICKUP~ to gather the cocaine.",
-  ["process_cocaine"] = "Press ~INPUT_PICKUP~ to process the cocaine.",
-  ["package_cocaine"] = "Press ~INPUT_PICKUP~ to package the cocaine.",
+  ["enter_cokelab"] = "Tekan ~INPUT_PICKUP~ untuk memasuki rumah Heroin",
+  ["leave_cokelab"] = "Tekan ~INPUT_PICKUP~ untuk keluar dari Rumah",
+  ["gather_cocaine"] = "Tekan ~INPUT_PICKUP~ untuk menumbuk poppy",
+  ["process_cocaine"] = "Tekan ~INPUT_PICKUP~ untuk memproses Heroin",
+  ["package_cocaine"] = "Tekan ~INPUT_PICKUP~ untuk Mengemas Heroin.",
 
   ["cancel_selling"] = "Slinging Drugs...\nPress ~INPUT_DETONATE~ to cancel.",
 
@@ -31,8 +31,8 @@ Langs['en'] = {
   ["drug_deal_reported"] = "Somebody reported a drug deal. Press [~r~H~s~] to set a waypoint.",
 
   -- PROGBARS TEXT
-  ["gather_cocaine_prog"] = "Gathering Cocaine",
-  ["process_cocaine_prog"] = "Cutting Cocaine",
+  ["gather_cocaine_prog"] = "Menumbuk Poppy",
+  ["process_cocaine_prog"] = "Memproses Heroin",
   ["package_cocaine_prog"] = "Packaging Cocaine",
 
   ["gather_plant_prog"] = "Gathering Weed",
@@ -53,5 +53,5 @@ Langs['en'] = {
   ["cokelab_blip"] = "Cocaine Lab",
   ["laundry_blip"] = "Money Wash",
 
-  ["not_enough"] = "You don't have enough %s (~r~%s needed~s~)",
+  ["not_enough"] = "anda tidak mempunyai cukup barang",
 }

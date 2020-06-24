@@ -107,7 +107,7 @@ Config.CircleZones = {
 	
 	--Heroin
 	HeroinField = {coords = vector3(299.44, 4323.16, 47.69), blimpcoords = vector3(299.44, 4323.16, 47.69), name = _U('blip_heroinfield'), color = 7, sprite = 497, radius = 0, enabled = true, illegal = true},
-	HeroinProcessing = {coords = vector3(90.55, 3745.3, 39.77), blimpcoords = vector3(90.55, 3745.3, 39.77), name = _U('blip_heroinprocessing'), color = 7, sprite = 497, radius = 0.0, enabled = true, illegal = true},
+	-- HeroinProcessing = {coords = vector3(90.55, 3745.3, 39.77), blimpcoords = vector3(90.55, 3745.3, 39.77), name = _U('blip_heroinprocessing'), color = 7, sprite = 497, radius = 0.0, enabled = true, illegal = true},
 
 	--License
 	-- LicenseShop = {coords = vector3(727.17, 962.5, 30.4), blimpcoords = vector3(707.17, -962.5, 30.4), name = _U('blip_licenseshop'),color = 9, sprite = 498, radius = 0.0, enabled = true},
@@ -116,5 +116,5 @@ Config.CircleZones = {
 	DrugDealer = {coords = vector3(1724.75, 4737.8, 41.12), blimpcoords = vector3(1724.75, 4737.8, 41.12), name = _U('blip_drugdealer'), color = 6, sprite = 378, radius = 0.0, enabled = true, illegal = true},
 	
 	--MoneyWash
-	MoneyWash = {coords = vector3(1119.87, -3195.44, -39.40), blimpcoords = vector3(48.19, 6305.98, 32.36), name = _U('blip_moneywash'), color = 1, sprite = 500, radius = 0.0, enabled = true, illegal = true},
+	-- MoneyWash = {coords = vector3(1119.87, -3195.44, -39.40), blimpcoords = vector3(48.19, 6305.98, 32.36), name = _U('blip_moneywash'), color = 1, sprite = 500, radius = 0.0, enabled = true, illegal = true},
 }

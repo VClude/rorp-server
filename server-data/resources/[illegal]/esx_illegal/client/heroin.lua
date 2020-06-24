@@ -17,39 +17,39 @@ Citizen.CreateThread(function()
 	end
 end)
 
-Citizen.CreateThread(function()
-	while true do
-		Citizen.Wait(0)
-		local playerPed = PlayerPedId()
-		local coords = GetEntityCoords(playerPed)
+-- Citizen.CreateThread(function()
+-- 	while true do
+-- 		Citizen.Wait(0)
+-- 		local playerPed = PlayerPedId()
+-- 		local coords = GetEntityCoords(playerPed)
 
-		if GetDistanceBetweenCoords(coords, Config.CircleZones.HeroinProcessing.coords, true) < 5 then
-			if not isProcessing then
-				ESX.ShowHelpNotification(_U('heroin_processprompt'))
-			end
+-- 		if GetDistanceBetweenCoords(coords, Config.CircleZones.HeroinProcessing.coords, true) < 5 then
+-- 			if not isProcessing then
+-- 				ESX.ShowHelpNotification(_U('heroin_processprompt'))
+-- 			end
 
-			if IsControlJustReleased(0, Keys['E']) and not isProcessing then
-				if not IsPedInAnyVehicle(playerPed, true) then
-					if Config.RequireCopsOnline then
-						ESX.TriggerServerCallback('esx_illegal:EnoughCops', function(cb)
-							if cb then
-								ProcessHeroin()
-							else
-								ESX.ShowNotification(_U('cops_notenough'))
-							end
-						end, Config.Cops.Heroin)
-					else
-						ProcessHeroin()
-					end
-				else
-					ESX.ShowNotification(_U('need_on_foot'))
-				end
-			end
-		else
-			Citizen.Wait(500)
-		end
-	end
-end)
+-- 			if IsControlJustReleased(0, Keys['E']) and not isProcessing then
+-- 				if not IsPedInAnyVehicle(playerPed, true) then
+-- 					if Config.RequireCopsOnline then
+-- 						ESX.TriggerServerCallback('esx_illegal:EnoughCops', function(cb)
+-- 							if cb then
+-- 								ProcessHeroin()
+-- 							else
+-- 								ESX.ShowNotification(_U('cops_notenough'))
+-- 							end
+-- 						end, Config.Cops.Heroin)
+-- 					else
+-- 						ProcessHeroin()
+-- 					end
+-- 				else
+-- 					ESX.ShowNotification(_U('need_on_foot'))
+-- 				end
+-- 			end
+-- 		else
+-- 			Citizen.Wait(500)
+-- 		end
+-- 	end
+-- end)
 
 function ProcessHeroin()
 	isProcessing = true
