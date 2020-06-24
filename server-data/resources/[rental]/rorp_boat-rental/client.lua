@@ -78,6 +78,7 @@ end)
 function OpenBoatsMenu()
 	
 	local elements = {}
+	local playerPed = PlayerPedId()
 	
 	table.insert(elements, {label = _U('boat'), value = 'boat'}) 
 	table.insert(elements, {label = _U('boat2'), value = 'boat2'}) 
@@ -102,41 +103,51 @@ function OpenBoatsMenu()
 	if data.current.value == 'boat' then
 		TriggerServerEvent("rorp_boat-rental:lowmoney", Config.Seashark)
 		ESX.ShowNotification('Anda telah membayar : Rp. ~y~'..Config.Seashark)
-		local veh = CreateVehicle("seashark",-712.24,-1339.78,-0.41,136.88,true,false)
-		SetPedIntoVehicle (PlayerPedId(-1),veh,-1)
-		SetVehicleRadioEnabled(veh,false)
+		ESX.Game.SpawnVehicle("seashark", Config.SpawnPos, Config.SpawnHeading, function(spawnedVehicle)
+
+			TaskWarpPedIntoVehicle(playerPed, spawnedVehicle, -1)
+
+		end)
 	end
 	
 	if data.current.value == 'boat2' then
 		TriggerServerEvent("rorp_boat-rental:lowmoney", Config.Dinghy)
 		ESX.ShowNotification('Anda telah membayar : Rp. ~y~'..Config.Dinghy)
-		CreateVehicle("dinghy",-712.24,-1339.78,-0.41,136.88,true,false)
-		-- SetPedIntoVehicle (PlayerPedId(-1),veh,-1)
-		-- SetVehicleRadioEnabled(veh,false)
+		ESX.Game.SpawnVehicle("dinghy", Config.SpawnPos, Config.SpawnHeading, function(spawnedVehicle)
+
+			TaskWarpPedIntoVehicle(playerPed, spawnedVehicle, -1)
+
+		end)
 	end
 
 	if data.current.value == 'boat3' then
 		TriggerServerEvent("rorp_boat-rental:lowmoney", Config.Jetmax)
 		ESX.ShowNotification('Anda telah membayar : Rp. ~y~'..Config.Jetmax)
-		local veh = CreateVehicle("jetmax",-712.24,-1339.78,-0.41,136.88,true,false)
-		SetPedIntoVehicle (PlayerPedId(-1),veh,-1)
-		SetVehicleRadioEnabled(veh,false)
+		ESX.Game.SpawnVehicle("jetmax", Config.SpawnPos, Config.SpawnHeading, function(spawnedVehicle)
+
+			TaskWarpPedIntoVehicle(playerPed, spawnedVehicle, -1)
+
+		end)
 	end
 	
 	if data.current.value == 'boat4' then
 		TriggerServerEvent("rorp_boat-rental:lowmoney", Config.Marquis)
 		ESX.ShowNotification('Anda telah membayar : Rp. ~y~'..Config.Marquis)
-		local veh = CreateVehicle("marquis",-712.24,-1339.78,-0.41,136.88,true,false)
-		SetPedIntoVehicle (PlayerPedId(-1),veh,-1)
-		SetVehicleRadioEnabled(veh,false)
+		ESX.Game.SpawnVehicle("marquis", Config.SpawnPos, Config.SpawnHeading, function(spawnedVehicle)
+
+			TaskWarpPedIntoVehicle(playerPed, spawnedVehicle, -1)
+
+		end)
 	end
 	
 	if data.current.value == 'boat5' then
 		TriggerServerEvent("rorp_boat-rental:lowmoney", Config.Tug)
 		ESX.ShowNotification('Anda telah membayar : Rp. ~y~'..Config.Tug)
-		local veh = CreateVehicle("tug",-712.24,-1339.78,-0.41,136.88,true,false)
-		SetPedIntoVehicle (PlayerPedId(-1),veh,-1)
-		SetVehicleRadioEnabled(veh,false)
+		ESX.Game.SpawnVehicle("tug", Config.SpawnPos, Config.SpawnHeading, function(spawnedVehicle)
+
+			TaskWarpPedIntoVehicle(playerPed, spawnedVehicle, -1)
+
+		end)
 	end
 
 	ESX.UI.Menu.CloseAll()

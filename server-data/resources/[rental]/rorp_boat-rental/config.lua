@@ -6,6 +6,9 @@ Config.EnablePrice = true -- false = bikes for free
 Config.EnableEffects = false
 Config.EnableBlips = true
 
+Config.SpawnPos = vector3(-712.24,-1339.78,-0.41)
+Config.SpawnHeading = 136.88
+
 --- #### PRICES	
 Config.Seashark = 89
 Config.Dinghy = 99
