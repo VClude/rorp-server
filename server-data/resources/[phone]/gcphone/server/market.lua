@@ -39,12 +39,12 @@ AddEventHandler('gcPhone:buyMarket', function(itemName, amount, price)
 	price = price * amount
 
 	-- can the player afford this item?
-	if xPlayer.getBank() >= price then
+	if xPlayer.getAccount('bank').money >= price then
 		-- can the player carry the said amount of x item?
 		-- if sourceItem.weight ~= -1 and (sourceItem.count + amount) > sourceItem.weight then
-		if (sourceItem.count + amount) > sourceItem.limit then
-			TriggerClientEvent('esx:showNotification', _source, "Vous n'avez pas assez d'inventaire!")
-		else
+		-- if (sourceItem.count + amount) > sourceItem.limit then
+			-- TriggerClientEvent('esx:showNotification', _source, "Vous n'avez pas assez d'inventaire!")
+		-- else
 			xPlayer.removeAccountMoney('bank', price)
             -- local time = 10 -- 10 seconds
             -- while (time ~= 0) do -- Whist we have time to wait
@@ -55,7 +55,7 @@ AddEventHandler('gcPhone:buyMarket', function(itemName, amount, price)
             -- end
 			xPlayer.addInventoryItem(itemName, amount)
 			TriggerClientEvent('esx:showNotification', _source, "Compte déduit de: " .. price .. " $ ")
-		end
+		-- end
 	else
 		local missingMoney = price - xPlayer.getBank()
 		TriggerClientEvent('esx:showNotification', _source, "Vous n'avez pas assez d'argent, vous manque " .. missingMoney .. "$~s~!")

@@ -21,7 +21,7 @@ local KeyToucheCloseEvent = {
   { code = 176, event = 'Enter' },
   { code = 177, event = 'Backspace' },
 }
-local KeyOpenClose = Keys["F2"] -- F2
+local KeyOpenClose = Keys["F5"] -- F2
 local KeyTakeCall = Keys["E"] -- E
 local KeySimMenu = Keys["N9"] -- N9
 local menuIsOpen = false
@@ -148,7 +148,7 @@ function showFixePhoneHelper (coords)
       coords.x, coords.y, coords.z, 1)
     if dist <= 2.0 then
       SetTextComponentFormat("STRING")
-      AddTextComponentString("~g~" .. data.name .. ' ~o~' .. number .. '~n~~INPUT_PICKUP~~w~ Utiliser')
+      AddTextComponentString("~g~" .. data.name .. ' ~o~' .. number .. '~n~~INPUT_PICKUP~~w~ gunakan')
       DisplayHelpTextFromStringLabel(0, 0, 0, -1)
       if IsControlJustPressed(1, KeyTakeCall) and GetLastInputMethod(2) then
         startFixeCall(number)
@@ -177,7 +177,7 @@ Citizen.CreateThread(function ()
           inRangedist = dist
           if (dist <= 1.5) then 
             SetTextComponentFormat("STRING")
-            AddTextComponentString("~INPUT_PICKUP~ Décrocher")
+            AddTextComponentString("Tekan ~INPUT_PICKUP~ untuk mengambil")
             DisplayHelpTextFromStringLabel(0, 0, 1, -1)
             if IsControlJustPressed(1, KeyTakeCall) and GetLastInputMethod(2) then
               PhonePlayCall(true)
@@ -274,12 +274,12 @@ AddEventHandler("gcPhone:receiveMessage", function(message)
   SendNUIMessage({event = 'newMessage', message = message})
   table.insert(messages, message)
   if message.owner == 0 then
-    local text = '~o~Nouveau message'
+    local text = '~o~Pesan Baru'
     if ShowNumberNotification == true then
-      text = '~o~Nouveau message du ~y~'.. message.transmitter
+      text = '~o~Pesan baru dari ~y~'.. message.transmitter
       for _,contact in pairs(contacts) do
         if contact.number == message.transmitter then
-          text = '~o~Nouveau message de ~g~'.. contact.display
+          text = '~o~Pesan baru dari ~g~'.. contact.display
           break
         end
       end

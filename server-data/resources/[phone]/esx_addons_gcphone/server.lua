@@ -103,8 +103,22 @@ AddEventHandler('esx:playerLoaded', function(source)
   }, function(result)
 
     local phoneNumber = result[1].phone_number
-    xPlayer.set('phoneNumber', phoneNumber)
+    if phoneNumber == nil then
+      newnumb = tonumber(xPlayer.identifier,10)
+        MySQL.Async.execute(
+          'UPDATE users SET phone_number = @phone_number where users.identifier = @identifier',
+          {
+            ['@phone_number']   = newnumb,
+            ['@identifier']   = xPlayer.identifier,
+          },
+          function (rowsChanged)
 
+          end
+        )
+        xPlayer.set('phoneNumber', phoneNumber)
+    else
+      xPlayer.set('phoneNumber', phoneNumber)
+  end
     if PhoneNumbers[xPlayer.job.name] ~= nil then
       TriggerEvent('esx_addons_gcphone:addSource', xPlayer.job.name, source)
     end

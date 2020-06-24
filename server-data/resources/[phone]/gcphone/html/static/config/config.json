@@ -470,7 +470,7 @@
             "inHomePage": true
         },
         {
-            "name": "Telefon",
+            "name": "Telephone",
             "fr_FR__name": "Téléphonne",
             "tr_TR__name": "Telefon",
             "cs_CZ__name": "Telefon",
@@ -483,7 +483,7 @@
             "inHomePage": true
         },
         {
-            "name": "Poruke",
+            "name": "Messages",
             "fr_FR__name": "Messages",
             "tr_TR__name": "Mesajlar",
             "en_US__name": "Messages",
@@ -497,7 +497,7 @@
             "puceRef": "nbMessagesUnread"
         },
         {
-            "name": "Kontakti",
+            "name": "Contacts",
             "fr_FR__name": "Contacts",
             "tr_TR__name": "Rehber",
             "en_US__name": "Contacts",
@@ -510,7 +510,7 @@
             "inHomePage": true
         },
         {
-            "name": "Podešavanja",
+            "name": "System",
             "fr_FR__name": "Paramètres",
             "tr_TR__name": "Ayarlar",
             "en_US__name": "System",
@@ -523,31 +523,7 @@
             "inHomePage": true
         },
         {
-            "name": "Banka",
-            "fr_FR__name": "Banque",
-            "tr_TR__name": "Banka",
-            "en_US__name": "Bankmanager",
-            "cs_CZ__name": "Banka",
-            "de_DE__name": "Bank",
-            "pl_PL__name": "Lawka",
-            "es_ES__name": "Banquillo",
-            "icons": "/html/static/img/icons_app/bank.png",
-            "routeName": "bank",
-            "inHomePage": true
-        },
-        {
-            "name": "Berza",
-            "fr_FR__name": "Bourse",
-            "tr_TR__name": "Borsa",
-            "cs_CZ__name": "Burza",
-            "en_US__name": "Stock Market",
-            "de_DE__name": "Börse",
-            "icons": "/html/static/img/icons_app/bourse.png",
-            "routeName": "bourse",
-            "enabled": true
-        },
-        {
-            "name": "Kamera",
+            "name": "Camera",
             "fr_FR__name": "Photo",
             "tr_TR__name": "Kamera",
             "cs_CZ__name": "Fotoaparát",
@@ -556,7 +532,8 @@
             "pl_PL__name": "Kamera",
             "es_ES__name": "Cámara",
             "icons": "/html/static/img/icons_app/photo.png",
-            "routeName": "photo"
+            "routeName": "photo",
+            "inHomePage": true
         },
         {
             "name": "Dark Chat",
@@ -567,123 +544,11 @@
             "pl_PL__name": "Czat czarny",
             "es_ES__name": "Chat Oscuro",
             "icons": "/html/static/img/icons_app/tchat.png",
-            "routeName": "tchat"
-        },
-        {
-            "name": "Oglasi",
-            "fr_FR__name": "Pages jaune",
-            "tr_TR__name": "Sarı Sayfalar",
-            "en_US__name": "Yellow Pages",
-            "de_DE__name": "Sarı Sayfalar",
-            "pl_PL__name": "Czat czarny",
-            "es_ES__name": "Chat Oscuro",
-            "icons": "/html/static/img/yellowpages/logo.png",
-            "routeName": "yellowpages",
+            "routeName": "tchat",
             "inHomePage": true
-        },
-        {
-            "name": "Računi",
-            "fr_FR__name": "Factures",
-            "tr_TR__name": "Faturalar",
-            "en_US__name": "Billing",
-            "de_DE__name": "Faturalar",
-            "pl_PL__name": "Czat czarny",
-            "es_ES__name": "Chat Oscuro",
-            "icons": "/html/static/img/fatura/logo.png",
-            "routeName": "faturaslash",
-            "inHomePage": true
-        },
-        {
-            "name": "Instagram",
-            "fr_FR__name": "Instagram",
-            "tr_TR__name": "Instagram",
-            "en_US__name": "Instagram",
-            "de_DE__name": "Instagram",
-            "pl_PL__name": "Instagram",
-            "es_ES__name": "Instagram",
-            "icons": "/html/static/img/instagram/instagram.png",
-            "routeName": "instagramslash",
-            "inHomePage": true
-        },
-        {
-            "name": "2048",
-            "fr_FR__name": "2048",
-            "tr_TR__name": "2048",
-            "en_US__name": "2048",
-            "de_DE__name": "2048",
-            "pl_PL__name": "2048",
-            "es_ES__name": "2048",
-            "icons": "/html/static/img/2048/logo.png",
-            "routeName": "numbers",
-            "inHomePage": false
-        },
-        {
-            "name": "Tetris",
-            "fr_FR__name": "Tetris",
-            "tr_TR__name": "Tetris",
-            "en_US__name": "Tetris",
-            "de_DE__name": "Tetris",
-            "pl_PL__name": "Tetris",
-            "es_ES__name": "Tetris",
-            "icons": "/html/static/img/2048/logo2.png",
-            "routeName": "tetris",
-            "inHomePage": false
-        },
-        {
-            "name": "Snake",
-            "fr_FR__name": "Snake",
-            "tr_TR__name": "Snake",
-            "en_US__name": "Snake",
-            "de_DE__name": "Snake",
-            "pl_PL__name": "Snake",
-            "es_ES__name": "Snake",
-            "icons": "/html/static/img/2048/snake.png",
-            "routeName": "snake",
-            "inHomePage": false
-        },
-        {
-            "name": "Reddit",
-            "fr_FR__name": "Reddit",
-            "tr_TR__name": "Reddit",
-            "en_US__name": "Reddit",
-            "de_DE__name": "Dark Net",
-            "pl_PL__name": "Czat czarny",
-            "es_ES__name": "Chat Oscuro",
-            "icons": "/html/static/img/icons_app/reddit.png",
-            "routeName": "reddit",
-            "inHomePage": true
-        },
-        {
-            "name": "Vijesti",
-            "fr_FR__name": "Journal",
-            "tr_TR__name": "Haberler",
-            "en_US__name": "Haberler",
-            "de_DE__name": "Haberler",
-            "pl_PL__name": "Haberler",
-            "es_ES__name": "Haberler",
-            "icons": "/html/static/img/2048/haber.png",
-            "routeName": "haberlerslplash",
-            "inHomePage": true
-        },
-        {
-            "name": "Trgovina",
-            "fr_FR__name": "Marché",
-            "tr_TR__name": "Market",
-            "en_US__name": "Market",
-            "de_DE__name": "Market",
-            "pl_PL__name": "Market",
-            "es_ES__name": "Market",
-            "icons": "/html/static/img/icons_app/market.png",
-            "routeName": "marketslsh",
-            "inHomePage": true
-        },
-        {
-            "name": "9GAG",
-            "icons": "/html/static/img/icons_app/9gag.png",
-            "routeName": "9gag"
         }
     ],
-    "defaultLanguage": "tr_TR",
+    "defaultLanguage": "en_US",
     "language": {
         "fr_FR": {
             "NAME": "français",
