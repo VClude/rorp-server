@@ -68,18 +68,48 @@ Citizen.CreateThread(function()
 					end 
 				elseif haveboat == true then
 
-					helptext(_U('storebike'))
+					-- helptext(_U('storeboat'))
 
 					if IsControlJustPressed(0, Keys['E']) then
 
-						if IsPedOnAnyBike(ped) then
+						ESX.ShowNotification('Tolong kembalikan perahu sebelumnya')
+						-- if IsPedOnVehicle(ped) then
+
+						-- 	TriggerEvent('esx:deleteVehicle')
+						-- 	ESX.ShowNotification(_U('boatmessage'))
+						-- 	haveboat = false
+
+						-- else
+							
+						-- end
+					end 		
+				end
+			elseif distance < 1.45 then
+				ESX.UI.Menu.CloseAll()
+            end
+        end
+    end
+end)
+
+Citizen.CreateThread(function()
+    while true do
+        Citizen.Wait(0)
+	
+        for k in pairs(Config.MarkerReturnZones) do
+        	local ped = PlayerPedId()
+            local pedcoords = GetEntityCoords(ped, false)
+            local distance = Vdist(pedcoords.x, pedcoords.y, pedcoords.z, Config.MarkerReturnZones[k].x, Config.MarkerReturnZones[k].y, Config.MarkerReturnZones[k].z)
+            if distance <= 1.40 then
+				if haveboat == true then
+					helptext(_U('storeboat'))
+
+					if IsControlJustPressed(0, Keys['E']) then						
+						if IsPedOnVehicle(ped) then
 
 							TriggerEvent('esx:deleteVehicle')
-							ESX.ShowNotification(_U('bikemessage'))
+							ESX.ShowNotification(_U('boatmessage'))
 							haveboat = false
-
-						else
-							ESX.ShowNotification('Tolong kembalikan sepeda sebelumnya')
+							
 						end
 					end 		
 				end
@@ -108,7 +138,7 @@ function OpenBoatsMenu()
 	ESX.UI.Menu.Open(
     'default', GetCurrentResourceName(), 'client',
     {
-		title    = _U('biketitle'),
+		title    = _U('boattitle'),
 		align    = 'bottom-right',
 		elements = elements,
     },
@@ -117,39 +147,42 @@ function OpenBoatsMenu()
 	function(data, menu)
 
 	if data.current.value == 'boat' then
-		TriggerServerEvent("rorp_boat-rental:lowmoney", Config.PriceTriBike)
-		ESX.ShowNotification('Anda telah membayar : Rp. ~y~'..Config.PriceTriBike)
+		TriggerServerEvent("rorp_boat-rental:lowmoney", Config.Seashark)
+		ESX.ShowNotification('Anda telah membayar : Rp. ~y~'..Config.Seashark)
 		local veh = CreateVehicle("seashark",-712.24,-1339.78,-0.41,136.88,true,false)
-		-- local veh = ESX.Game.SpawnVehicle("seashark",Config.BoatSpawn, 136.88)
 		SetPedIntoVehicle (PlayerPedId(-1),veh,-1)
 	end
 	
 	if data.current.value == 'boat2' then
-		TriggerServerEvent("rorp_boat-rental:lowmoney", Config.PriceTriBike)
-		ESX.ShowNotification('Anda telah membayar : Rp. ~y~'..Config.PriceTriBike)
-		TriggerEvent('esx:spawnVehicle', "dinghy",Config.BoatSpawn, 136.88)
+		TriggerServerEvent("rorp_boat-rental:lowmoney", Config.Dinghy)
+		ESX.ShowNotification('Anda telah membayar : Rp. ~y~'..Config.Dinghy)
+		local veh = CreateVehicle("dinghy",-712.24,-1339.78,-0.41,136.88,true,false)
+		SetPedIntoVehicle (PlayerPedId(-1),veh,-1)
 	end
 
 	if data.current.value == 'boat3' then
-		TriggerServerEvent("rorp_boat-rental:lowmoney", Config.PriceTriBike)
-		ESX.ShowNotification('Anda telah membayar : Rp. ~y~'..Config.PriceTriBike)
-		TriggerEvent('esx:spawnVehicle', "jetmax",Config.BoatSpawn, 136.88)
+		TriggerServerEvent("rorp_boat-rental:lowmoney", Config.Jetmax)
+		ESX.ShowNotification('Anda telah membayar : Rp. ~y~'..Config.Jetmax)
+		local veh = CreateVehicle("jetmax",-712.24,-1339.78,-0.41,136.88,true,false)
+		SetPedIntoVehicle (PlayerPedId(-1),veh,-1)
 	end
 	
 	if data.current.value == 'boat4' then
-		TriggerServerEvent("rorp_boat-rental:lowmoney", Config.PriceTriBike)
-		ESX.ShowNotification('Anda telah membayar : Rp. ~y~'..Config.PriceTriBike)
-		TriggerEvent('esx:spawnVehicle', "marquis",Config.BoatSpawn, 136.88)
+		TriggerServerEvent("rorp_boat-rental:lowmoney", Config.Marquis)
+		ESX.ShowNotification('Anda telah membayar : Rp. ~y~'..Config.Marquis)
+		local veh = CreateVehicle("marquis",-712.24,-1339.78,-0.41,136.88,true,false)
+		SetPedIntoVehicle (PlayerPedId(-1),veh,-1)
 	end
 	
 	if data.current.value == 'boat5' then
-		TriggerServerEvent("rorp_boat-rental:lowmoney", Config.PriceTriBike)
-		ESX.ShowNotification('Anda telah membayar : Rp. ~y~'..Config.PriceTriBike)
-		TriggerEvent('esx:spawnVehicle', "tug",Config.BoatSpawn, 136.88)
+		TriggerServerEvent("rorp_boat-rental:lowmoney", Config.Tug)
+		ESX.ShowNotification('Anda telah membayar : Rp. ~y~'..Config.Tug)
+		local veh = CreateVehicle("tug",-712.24,-1339.78,-0.41,136.88,true,false)
+		SetPedIntoVehicle (PlayerPedId(-1),veh,-1)
 	end
 
 	ESX.UI.Menu.CloseAll()
-	havebike = true	
+	haveboat = true	
 	
 
     end,

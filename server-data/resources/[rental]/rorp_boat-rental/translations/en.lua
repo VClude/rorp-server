@@ -1,20 +1,17 @@
 Locales['en'] = {
-	['press_e'] = 'Tekan ~INPUT_CONTEXT~ untuk menyewa sepeda.',
-	['storebike'] = 'Tekan ~INPUT_CONTEXT~ untuk mengembalikan sepeda.',	
-	['biketitle'] = 'Rental Sepeda',
-	['bike'] = 'Bike - <span style="color:green;">TriBike</span> <span style="color:red;">89$</span>',
-	['bike2'] = 'Bike - <span style="color:green;">Scorcher</span> <span style="color:red;">99$</span>',
-	['bike3'] = 'Bike - <span style="color:green;">Cruiser</span> <span style="color:red;">129$</span>',
-	['bike4'] = 'Bike - <span style="color:green;">BMX</span> <span style="color:red;">109$</span>',
-	['bikefree'] = 'Bike - <span style="color:green;">TriBike</span>',
-	['bike2free'] = 'Bike - <span style="color:green;">Scorcher</span>',
-	['bike3free'] = 'Bike - <span style="color:green;">Cruiser</span>',
-	['bike4free'] = 'Bike - <span style="color:green;">BMX</span>',
-	['bikemessage'] = 'Kami harap anda menikmatinya. Silahkan datang lagi kembali. :)',
-	['notabike'] = 'Kamu tidak dalam menggunakan sepeda!',
+	['press_e'] = 'Tekan ~INPUT_CONTEXT~ untuk menyewa perahu.',
+	['storeboat'] = 'Tekan ~INPUT_CONTEXT~ untuk mengembalikan perahu.',	
+	['boattitle'] = 'Rental Perahu',
+	['boat'] = 'Perahu - <span style="color:green;">Seashark</span> <span style="color:red;">89$</span>',
+	['boat2'] = 'Perahu - <span style="color:green;">Dinghy</span> <span style="color:red;">99$</span>',
+	['boat3'] = 'Perahu - <span style="color:green;">Jetmax</span> <span style="color:red;">129$</span>',
+	['boat4'] = 'Perahu - <span style="color:green;">Marquis</span> <span style="color:red;">109$</span>',
+	['boat5'] = 'Perahu - <span style="color:green;">Tug</span> <span style="color:red;">109$</span>',
+	['boatmessage'] = 'Kami harap anda menikmatinya. Silahkan datang lagi kembali. :)',
+	['notaboat'] = 'Kamu tidak dalam menggunakan sepeda!',
 	
-	['bike_pay'] = 'Kamu telah membayar: $%s',
+	['boat_pay'] = 'Kamu telah membayar: $%s',
 	
-	['bikes'] = '[Bikes]',
+	['boat'] = '[Bikes]',
 	
 }
