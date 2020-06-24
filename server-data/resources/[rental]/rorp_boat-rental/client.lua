@@ -59,60 +59,13 @@ Citizen.CreateThread(function()
             local pedcoords = GetEntityCoords(ped, false)
             local distance = Vdist(pedcoords.x, pedcoords.y, pedcoords.z, Config.MarkerZones[k].x, Config.MarkerZones[k].y, Config.MarkerZones[k].z)
             if distance <= 1.40 then
-				if haveboat == false then
 
-					helptext(_U('press_e'))
-					
-					if IsControlJustPressed(0, Keys['E']) and IsPedOnFoot(ped) then
-						OpenBoatsMenu()
-					end 
-				elseif haveboat == true then
-
-					-- helptext(_U('storeboat'))
-
-					if IsControlJustPressed(0, Keys['E']) then
-
-						ESX.ShowNotification('Tolong kembalikan perahu sebelumnya')
-						-- if IsPedOnVehicle(ped) then
-
-						-- 	TriggerEvent('esx:deleteVehicle')
-						-- 	ESX.ShowNotification(_U('boatmessage'))
-						-- 	haveboat = false
-
-						-- else
-							
-						-- end
-					end 		
-				end
-			elseif distance < 1.45 then
-				ESX.UI.Menu.CloseAll()
-            end
-        end
-    end
-end)
-
-Citizen.CreateThread(function()
-    while true do
-        Citizen.Wait(0)
-	
-        for k in pairs(Config.MarkerReturnZones) do
-        	local ped = PlayerPedId()
-            local pedcoords = GetEntityCoords(ped, false)
-            local distance = Vdist(pedcoords.x, pedcoords.y, pedcoords.z, Config.MarkerReturnZones[k].x, Config.MarkerReturnZones[k].y, Config.MarkerReturnZones[k].z)
-            if distance <= 1.40 then
-				if haveboat == true then
-					helptext(_U('storeboat'))
-
-					if IsControlJustPressed(0, Keys['E']) then						
-						if IsPedOnVehicle(ped) then
-
-							TriggerEvent('esx:deleteVehicle')
-							ESX.ShowNotification(_U('boatmessage'))
-							haveboat = false
-							
-						end
-					end 		
-				end
+				helptext(_U('press_e'))
+				
+				if IsControlJustPressed(0, Keys['E']) and IsPedOnFoot(ped) then
+					OpenBoatsMenu()
+				end 
+			
 			elseif distance < 1.45 then
 				ESX.UI.Menu.CloseAll()
             end

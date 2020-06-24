@@ -12,6 +12,6 @@ Locales['en'] = {
 	
 	['boat_pay'] = 'Kamu telah membayar: $%s',
 	
-	['boat'] = '[Bikes]',
+	['boats'] = '[Bikes]',
 	
 }
