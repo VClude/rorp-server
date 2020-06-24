@@ -1,5 +1,5 @@
 ScenicRoute = {
-    Name = 'scenic_route',
+    Name = 'rute_dinas',
     Bus = BusType.CityBus,
     SpawnPoint = {x = 244.29, y = 1152.79, z = 225.46, heading = 11.79},
     BusReturnPoint = {x = 244.29, y = 1152.79, z = 225.46, heading = 11.79},
@@ -7,11 +7,12 @@ ScenicRoute = {
     PaymentPerStation = 3000,
     Lines = {
         {
-            Name = 'scenic_route',
+            Name = 'rute_dinas',
             BusColor = 39,
             Stops = {
                 {x = -1889.26,   y = 2045.91, z = 140.21, name = 'stop_petani', unloadType = UnloadType.All},
                 {x = -1085.12, y = -2011.23,  z = 12.37, name = 'stop_tukang_sapi', unloadType = UnloadType.Some},
+                {x = 539.95, y = -2277.31, z = 5.33, name = 'stop_fueler', unloadType = UnloadType.Some},
                 {x = 915.2, y = -2194.81, z = 29.66, name = 'stop_miner', unloadType = UnloadType.Some},
                 {x = 1257.96, y = -1271.65, z = 34.61, name = 'stop_lumberjack', unloadType = UnloadType.Some},
                 {x = 795.19, y = -958.41, z = 25.17, name = 'stop_tailor', unloadType = UnloadType.Some},

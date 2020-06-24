@@ -26,8 +26,9 @@ Locales['en'] = {
     ['exploit_attempted_log_message']       = 'blarglebus: %s attempted exploiting! (reason: called server functions when job not set to busdriver)',
 
     ['abort_route']                         = 'Abort ~g~%s',
-    ['airport_route']                       = 'Airport Shuttle Route',
+    ['airport_route']                       = 'Bis Airport',
     ['scenic_route']                        = 'Scenic Route',
+    ['rute_dinas']                          = 'Bis Dinas',
     ['metro_route']                         = 'Los Santos Transit Metro Route',
     ['metro_yellow']                        = 'Metro Yellow Line',
     ['metro_blue']                          = 'Metro Blue Line',
@@ -90,9 +91,17 @@ Locales['en'] = {
     ['stop_metro_marathon']                 = 'Marathon Ave',
 
     ['stop_driving_school']                 = 'Sekolah Mengemudi',
-    ['stop_rumah_sakit']                    = 'Rumah Sakit Pill Box',
+    ['stop_rumah_sakit']                    = 'Rumah Sakit Pillbox Hill',
     ['stop_job_center']                     = 'Wali Kota',
     ['stop_transit_bus']                    = 'Transit Bis Dinas',
     ['stop_penris']                         = 'Kantor PENRIS',
     ['stop_ZANY']                           = "ZANY-Z'S",
+
+
+    ['stop_petani']                         = 'Dinas Kejra Petani',
+    ['stop_tukang_sapi']                    = 'Dinas Kerja Potong Sapi',
+    ['stop_miner']                          = 'Dinas Kerja Tambang Batu',
+    ['stop_fueler']                         = 'Dinas Kerja Tambang Minyak',
+    ['stop_lumberjack']                     = 'Dinas Kerja Potong Kayu',
+    ['stop_tailor']                         = 'Dinas Kerja Penjahit',
 }
