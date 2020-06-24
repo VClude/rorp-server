@@ -626,77 +626,77 @@ AddEventHandler('ft_libs:OnClientReady', function()
 		})
 	end
 	
-	for k,v in pairs (Config.GaragesMecano) do
-		exports.ft_libs:AddArea("esx_eden_garage_area_"..k.."_mecanospawnpoint", {
-			enable = false,
-			marker = {
-				weight = v.SpawnPoint.Marker.w,
-				height = v.SpawnPoint.Marker.h,
-				red = v.SpawnPoint.Marker.r,
-				green = v.SpawnPoint.Marker.g,
-				blue = v.SpawnPoint.Marker.b,
-				type = 27,
-			},
-			trigger = {
-				weight = v.SpawnPoint.Marker.w,
-				active = {
-					callback = function()
-						exports.ft_libs:HelpPromt(v.SpawnPoint.HelpPrompt)
-						if IsControlJustReleased(0, 38) and IsInputDisabled(0) and GetLastInputMethod(2) and not IsPedInAnyVehicle(PlayerPedId()) then
-							ListVehiclesFourriereMenu(v)
-						end
-					end,
-				},
-				exit = {
-					callback = exitmarker
-				},
-			},
-			blip = {
-				text = v.Name,
-				colorId = Config.MecanoBlip.color,
-				imageId = Config.MecanoBlip.sprite,
-			},
-			locations = {
-				{
-					x = v.SpawnPoint.Pos.x,
-					y = v.SpawnPoint.Pos.y,
-					z = v.SpawnPoint.Pos.z,
-				},
-			},
-		})
-		exports.ft_libs:AddArea("esx_eden_garage_area_"..k.."_mecanodeletepoint", {
-			enable = false,
-			marker = {
-				weight = v.DeletePoint.Marker.w,
-				height = v.DeletePoint.Marker.h,
-				red = v.DeletePoint.Marker.r,
-				green = v.DeletePoint.Marker.g,
-				blue = v.DeletePoint.Marker.b,
-				type = 27,
-			},
-			trigger = {
-				weight = v.DeletePoint.Marker.w,
-				active = {
-					callback = function()
-						exports.ft_libs:HelpPromt(v.DeletePoint.HelpPrompt)
-						if IsControlJustReleased(0, 38) and IsInputDisabled(0) and GetLastInputMethod(2) then
-							StockVehicleFourriereMenu()
-						end
-					end,
-				},
-				exit = {
-					callback = exitmarker
-				},
-			},
-			locations = {
-				{
-					x = v.DeletePoint.Pos.x,
-					y = v.DeletePoint.Pos.y,
-					z = v.DeletePoint.Pos.z,
-				},
-			},
-		})
-	end
+	-- for k,v in pairs (Config.GaragesMecano) do
+	-- 	exports.ft_libs:AddArea("esx_eden_garage_area_"..k.."_mecanospawnpoint", {
+	-- 		enable = false,
+	-- 		marker = {
+	-- 			weight = v.SpawnPoint.Marker.w,
+	-- 			height = v.SpawnPoint.Marker.h,
+	-- 			red = v.SpawnPoint.Marker.r,
+	-- 			green = v.SpawnPoint.Marker.g,
+	-- 			blue = v.SpawnPoint.Marker.b,
+	-- 			type = 27,
+	-- 		},
+	-- 		trigger = {
+	-- 			weight = v.SpawnPoint.Marker.w,
+	-- 			active = {
+	-- 				callback = function()
+	-- 					exports.ft_libs:HelpPromt(v.SpawnPoint.HelpPrompt)
+	-- 					if IsControlJustReleased(0, 38) and IsInputDisabled(0) and GetLastInputMethod(2) and not IsPedInAnyVehicle(PlayerPedId()) then
+	-- 						ListVehiclesFourriereMenu(v)
+	-- 					end
+	-- 				end,
+	-- 			},
+	-- 			exit = {
+	-- 				callback = exitmarker
+	-- 			},
+	-- 		},
+	-- 		blip = {
+	-- 			text = v.Name,
+	-- 			colorId = Config.MecanoBlip.color,
+	-- 			imageId = Config.MecanoBlip.sprite,
+	-- 		},
+	-- 		locations = {
+	-- 			{
+	-- 				x = v.SpawnPoint.Pos.x,
+	-- 				y = v.SpawnPoint.Pos.y,
+	-- 				z = v.SpawnPoint.Pos.z,
+	-- 			},
+	-- 		},
+	-- 	})
+	-- 	exports.ft_libs:AddArea("esx_eden_garage_area_"..k.."_mecanodeletepoint", {
+	-- 		enable = false,
+	-- 		marker = {
+	-- 			weight = v.DeletePoint.Marker.w,
+	-- 			height = v.DeletePoint.Marker.h,
+	-- 			red = v.DeletePoint.Marker.r,
+	-- 			green = v.DeletePoint.Marker.g,
+	-- 			blue = v.DeletePoint.Marker.b,
+	-- 			type = 27,
+	-- 		},
+	-- 		trigger = {
+	-- 			weight = v.DeletePoint.Marker.w,
+	-- 			active = {
+	-- 				callback = function()
+	-- 					exports.ft_libs:HelpPromt(v.DeletePoint.HelpPrompt)
+	-- 					if IsControlJustReleased(0, 38) and IsInputDisabled(0) and GetLastInputMethod(2) then
+	-- 						StockVehicleFourriereMenu()
+	-- 					end
+	-- 				end,
+	-- 			},
+	-- 			exit = {
+	-- 				callback = exitmarker
+	-- 			},
+	-- 		},
+	-- 		locations = {
+	-- 			{
+	-- 				x = v.DeletePoint.Pos.x,
+	-- 				y = v.DeletePoint.Pos.y,
+	-- 				z = v.DeletePoint.Pos.z,
+	-- 			},
+	-- 		},
+	-- 	})
+	-- end
 	
 	-- for k,v in pairs (Config.BoatGarages) do
 	-- 	exports.ft_libs:AddArea("esx_eden_garage_area_"..k.."_garage_BoatGarages", {
@@ -892,107 +892,107 @@ AddEventHandler('ft_libs:OnClientReady', function()
 	-- 		},
 	-- 	})
 	-- end
-	for k,v in pairs (Config.SocietyGarages) do
-		for key, value in pairs (v) do
-			exports.ft_libs:AddArea("esx_eden_garage_area_"..k.."_garage_society_"..key, {
-				enable = false,
-				marker = {
-					weight = value.Marker.w,
-					height = value.Marker.h,
-					red = value.Marker.r,
-					green = value.Marker.g,
-					blue = value.Marker.b,
-					type = 27,
-				},
-				trigger = {
-					weight = value.Marker.w,
-					active = {
-						callback = function()
-							exports.ft_libs:HelpPromt(value.HelpPrompt)
-							if IsControlJustReleased(0, 38) and IsInputDisabled(0) and GetLastInputMethod(2) and not IsPedInAnyVehicle(PlayerPedId()) then
-								OpenMenuGarage(value, k, k, "car")
-							end
-						end,
-					},
-					exit = {
-						callback = exitmarker
-					},
-				},
-				blip = {
-					text = value.Name,
-					colorId = Config.AirplaneBlip.color,
-					imageId = Config.AirplaneBlip.sprite,
-				},
-				locations = {
-					value.Pos				
-				},
-			})
-			exports.ft_libs:AddArea("esx_eden_garage_area_"..k.."_spawnpoint_society_"..key, {
-				enable = false,
-				marker = {
-					weight = value.SpawnPoint.Marker.w,
-					height = value.SpawnPoint.Marker.h,
-					red = value.SpawnPoint.Marker.r,
-					green = value.SpawnPoint.Marker.g,
-					blue = value.SpawnPoint.Marker.b,
-					type = 27,
-				},
-				trigger = {
-					weight = value.SpawnPoint.Marker.w,
-					active = {
-						callback = function()
-							exports.ft_libs:HelpPromt(value.SpawnPoint.HelpPrompt)
-							if IsControlJustReleased(0, 38) and IsInputDisabled(0) and GetLastInputMethod(2) and not IsPedInAnyVehicle(PlayerPedId()) then
-								ListVehiclesMenu(value, k, k, "car")
-							end
-						end,
-					},
-					exit = {
-						callback = exitmarker
-					},
-				},
-				locations = {
-					{
-						x = value.SpawnPoint.Pos.x,
-						y = value.SpawnPoint.Pos.y,
-						z = value.SpawnPoint.Pos.z,
-					},
-				},
-			})
-			exports.ft_libs:AddArea("esx_eden_garage_area_"..k.."_deletepoint_society_"..key, {
-				enable = false,
-				marker = {
-					weight = value.DeletePoint.Marker.w,
-					height = value.DeletePoint.Marker.h,
-					red = value.DeletePoint.Marker.r,
-					green = value.DeletePoint.Marker.g,
-					blue = value.DeletePoint.Marker.b,
-					type = 27,
-				},
-				trigger = {
-					weight = value.DeletePoint.Marker.w,
-					active = {
-						callback = function()
-							exports.ft_libs:HelpPromt(value.DeletePoint.HelpPrompt)
-							if IsControlJustReleased(0, 38) and IsInputDisabled(0) and GetLastInputMethod(2) then
-								StockVehicleMenu(k, k, "car")
-							end
-						end,
-					},
-					exit = {
-						callback = exitmarker
-					},
-				},
-				locations = {
-					{
-						x = value.DeletePoint.Pos.x,
-						y = value.DeletePoint.Pos.y,
-						z = value.DeletePoint.Pos.z,
-					},
-				},
-			})
-		end
-	end
+	-- for k,v in pairs (Config.SocietyGarages) do
+	-- 	for key, value in pairs (v) do
+	-- 		exports.ft_libs:AddArea("esx_eden_garage_area_"..k.."_garage_society_"..key, {
+	-- 			enable = false,
+	-- 			marker = {
+	-- 				weight = value.Marker.w,
+	-- 				height = value.Marker.h,
+	-- 				red = value.Marker.r,
+	-- 				green = value.Marker.g,
+	-- 				blue = value.Marker.b,
+	-- 				type = 27,
+	-- 			},
+	-- 			trigger = {
+	-- 				weight = value.Marker.w,
+	-- 				active = {
+	-- 					callback = function()
+	-- 						exports.ft_libs:HelpPromt(value.HelpPrompt)
+	-- 						if IsControlJustReleased(0, 38) and IsInputDisabled(0) and GetLastInputMethod(2) and not IsPedInAnyVehicle(PlayerPedId()) then
+	-- 							OpenMenuGarage(value, k, k, "car")
+	-- 						end
+	-- 					end,
+	-- 				},
+	-- 				exit = {
+	-- 					callback = exitmarker
+	-- 				},
+	-- 			},
+	-- 			blip = {
+	-- 				text = value.Name,
+	-- 				colorId = Config.AirplaneBlip.color,
+	-- 				imageId = Config.AirplaneBlip.sprite,
+	-- 			},
+	-- 			locations = {
+	-- 				value.Pos				
+	-- 			},
+	-- 		})
+	-- 		exports.ft_libs:AddArea("esx_eden_garage_area_"..k.."_spawnpoint_society_"..key, {
+	-- 			enable = false,
+	-- 			marker = {
+	-- 				weight = value.SpawnPoint.Marker.w,
+	-- 				height = value.SpawnPoint.Marker.h,
+	-- 				red = value.SpawnPoint.Marker.r,
+	-- 				green = value.SpawnPoint.Marker.g,
+	-- 				blue = value.SpawnPoint.Marker.b,
+	-- 				type = 27,
+	-- 			},
+	-- 			trigger = {
+	-- 				weight = value.SpawnPoint.Marker.w,
+	-- 				active = {
+	-- 					callback = function()
+	-- 						exports.ft_libs:HelpPromt(value.SpawnPoint.HelpPrompt)
+	-- 						if IsControlJustReleased(0, 38) and IsInputDisabled(0) and GetLastInputMethod(2) and not IsPedInAnyVehicle(PlayerPedId()) then
+	-- 							ListVehiclesMenu(value, k, k, "car")
+	-- 						end
+	-- 					end,
+	-- 				},
+	-- 				exit = {
+	-- 					callback = exitmarker
+	-- 				},
+	-- 			},
+	-- 			locations = {
+	-- 				{
+	-- 					x = value.SpawnPoint.Pos.x,
+	-- 					y = value.SpawnPoint.Pos.y,
+	-- 					z = value.SpawnPoint.Pos.z,
+	-- 				},
+	-- 			},
+	-- 		})
+	-- 		exports.ft_libs:AddArea("esx_eden_garage_area_"..k.."_deletepoint_society_"..key, {
+	-- 			enable = false,
+	-- 			marker = {
+	-- 				weight = value.DeletePoint.Marker.w,
+	-- 				height = value.DeletePoint.Marker.h,
+	-- 				red = value.DeletePoint.Marker.r,
+	-- 				green = value.DeletePoint.Marker.g,
+	-- 				blue = value.DeletePoint.Marker.b,
+	-- 				type = 27,
+	-- 			},
+	-- 			trigger = {
+	-- 				weight = value.DeletePoint.Marker.w,
+	-- 				active = {
+	-- 					callback = function()
+	-- 						exports.ft_libs:HelpPromt(value.DeletePoint.HelpPrompt)
+	-- 						if IsControlJustReleased(0, 38) and IsInputDisabled(0) and GetLastInputMethod(2) then
+	-- 							StockVehicleMenu(k, k, "car")
+	-- 						end
+	-- 					end,
+	-- 				},
+	-- 				exit = {
+	-- 					callback = exitmarker
+	-- 				},
+	-- 			},
+	-- 			locations = {
+	-- 				{
+	-- 					x = value.DeletePoint.Pos.x,
+	-- 					y = value.DeletePoint.Pos.y,
+	-- 					z = value.DeletePoint.Pos.z,
+	-- 				},
+	-- 			},
+	-- 		})
+	-- 	end
+	-- end
 end)
 
 -- End key control
