@@ -47,10 +47,8 @@ Config = {
   },
 
   GangJobs = {                        -- List all jobs that are able to contest for and control territories here.
-    "grove",                          -- NOTE: Don't need to include police. Thats taken from PoliceJobs table above.
-    "ballas",
-    "vagos",
-    "lostmc",
+    "kartel",                          -- NOTE: Don't need to include police. Thats taken from PoliceJobs table above.
+    "mafia",
   }
 }
 
@@ -64,30 +62,26 @@ DrugPrices = {
 -- The color for the blip when gang/job is controlling zone.
 BlipColors = {
   police  = 0,
-  grove   = 2,
-  ballas  = 7,
-  vagos   = 70,
-  lostmc  = 1,
+  kartel   = 2,
+  mafia  = 7,
 }
 
 -- Colors for drawtext.
 TextColors = {
   police  = "white",              
-  grove   = "green",
+  kartel   = "green",
   ballas  = "purple",
-  vagos   = "yellow",
-  lostmc  = "red",
 }
 
 -- Don't touch.
 _U = Langs[Config.Lang]  
 
 Territories = {
-  ["East V"] = {
-    openzone    = false,                                  -- Allow all players to use this drug production facility and sling drugs in this zone?
-    control     = "lostmc",                               -- The default control for this zone belongs to this job.
+  ["Paletto"] = {
+    openzone    = true,                                  -- Allow all players to use this drug production facility and sling drugs in this zone?
+    control     = "mafia",                               -- The default control for this zone belongs to this job.
     influence   = 100.0,                                  -- The default influence for this zone.
-    zone        = "EAST_V",                               -- Probably don't change this unless you intend on moving the zones around.
+    zone        = "PALETO",                               -- Probably don't change this unless you intend on moving the zones around.
 
     canSell = false,                                      -- Can sell drugs in this zone? If false, no drugs can be sold here.
                                                           -- Check other examples on how to sell drugs in a zone.
@@ -207,11 +201,11 @@ Territories = {
     }
   },
   -- DAVIS
-  ["Davis"] = {
-    openzone  = false,
-    control   = "grove",
+  ["Grapeseed"] = {
+    openzone  = true,
+    control   = "kartel",
     influence = 100.0,
-    zone      = "DAVIS",
+    zone      = "GRAPES",
 
     canSell   = {
       'weed_packaged',
@@ -219,19 +213,12 @@ Territories = {
 
     areas = {
       [1] = {
-        location  = vector3(53.95,-1818.36,27.66),
-        width     = 390.0,
-        height    = 210.0,
-        heading   = 50,
+        location  = vector3(2115.0,4977.2,40.73),
+        width     = 350.0,
+        height    = 200.0,
+        heading   = 60,
         display   = 3
-      },
-      [2] = {
-        location  = vector3(169.062, -1587.663, 77.28895),
-        width     = 260.0,
-        height    = 300.0,
-        heading   = 50,
-        display   = 3
-      }, 
+      }
     },
 
     blipData = {

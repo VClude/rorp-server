@@ -24,7 +24,7 @@ Locales ['en'] = {
   ['meth_processingtoofar'] = 'the processing has been ~r~canceled~s~ due to you abandoning the area.',
   
   -- coke
-  ['coke_pickupprompt'] = 'Tekan ~INPUT_CONTEXT~ untuk mengambil ~g~Coca~s~ .',
+  ['coke_pickupprompt'] = 'Tekan ~INPUT_CONTEXT~ untuk mengambil ~g~Tebu~s~ .',
   ['coke_inventoryfull'] = 'inventory anda Penuh',
   ['coke_processprompt'] = 'press ~INPUT_CONTEXT~ to start ~g~Processing Coke~s~.',
   ['coke_processingstarted'] = 'processing ~g~Coke~s~...',
