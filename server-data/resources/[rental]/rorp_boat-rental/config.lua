@@ -21,7 +21,7 @@ Config.TypeMarker = 38
 	
 Config.MarkerZones = { 
 
-    {x = -1263.02,y = -1439.86,z = 4.35},
+    {x = -731.02,y = -1309.17,z = 5.0},
 
 }
 
