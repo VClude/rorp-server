@@ -4,7 +4,7 @@ ScenicRoute = {
     SpawnPoint = {x = 244.29, y = 1152.79, z = 225.46, heading = 11.79},
     BusReturnPoint = {x = 244.29, y = 1152.79, z = 225.46, heading = 11.79},
     Payment = 15000,
-    PaymentPerStation = Payment / 5,
+    PaymentPerStation = 3000,
     Lines = {
         {
             Name = 'scenic_route',
