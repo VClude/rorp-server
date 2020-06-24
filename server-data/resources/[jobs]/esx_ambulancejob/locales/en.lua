@@ -70,8 +70,8 @@ Locales['en'] = {
   ['respawn_bleedout_prompt'] = 'hold [~b~E~s~] to respawn',
   ['respawn_bleedout_fine'] = 'hold [~b~E~s~] to respawn for ~g~$%s~s~',
   ['respawn_bleedout_fine_msg'] = 'you paid ~r~$%s~s~ to respawn.',
-  ['distress_send'] = 'press [~b~G~s~] to send distress signal',
-  ['distress_sent'] = 'distress signal has been sent to available units!',
+  ['distress_send'] = 'Tekan [~b~G~s~] untuk mengirim Sinyal ke EMS',
+  ['distress_sent'] = 'Sinyal berhasil dikirim ke EMS',
   ['combatlog_message'] = 'you have been force-respawned because you\'ve previously left the server when dead.',
   -- Revive
   ['revive_help'] = 'revive a player',

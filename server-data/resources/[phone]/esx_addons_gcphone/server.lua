@@ -17,7 +17,7 @@ end)
 
 function notifyAlertSMS (number, alert, listSrc)
   if PhoneNumbers[number] ~= nil then
-	local mess = 'De #' .. alert.numero  .. ' : ' .. alert.message
+	local mess = 'Dari No :' .. alert.numero  .. ' : ' .. alert.message
 	if alert.coords ~= nil then
 		mess = mess .. ' ' .. alert.coords.x .. ', ' .. alert.coords.y 
 	end

@@ -41,46 +41,13 @@
     "Calvin & Hobbes": "back001.jpg",
     "Destiny": "back002.jpg",
     "Stormtrooper": "back003.jpg",
-	"Thatcher": "R6.jpg",
-  	"Fortnite": "FORTNITE.jpg",
-  	"Tohka & Yoshinon": "Tohka&Yoshinon.jpg",
-	"Sword Art Online": "sao.jpg",
-    "Emilia": "Emilia.jpg",
-    "Rétro 1 ": "back001.jpg",
-    "Rétro 2": "back002.jpg",
-    "Rétro 3": "back003.jpg",
-    "Rétro 4": "back004.jpg",
-    "Rétro 5": "back005.jpg",
-    "Rétro 6": "back006.jpg",
-    "Rétro 7": "back007.jpg",
-    "Rétro 8": "back008.gif",
-    "Rétro 9": "back009.gif",
-    "Guitare": "01.jpg",
-    "Los Santos": "02.jpg",
-    "Poursuite": "03.jpg",
-    "Franklin": "04.jpg",
-    "Police boom": "05.jpg",
-    "Trevor & Michael": "06.jpg",
-    "San Andreas": "07.jpg",
-    "Cité": "08.jpg",
-    "Ciel & Forêt": "09.jpg",
-    "Forêt Colorer": "10.jpg",
-    "Vague Géante": "11.jpg",
-    "Lion": "12.jpg",
-    "Planète": "13.jpg",
-    "Rose": "14.jpg",
-    "Bleu": "15.jpg",
-    "Noir": "16.jpg",
-    "Chocolat": "17.jpg",
-    "Assassins Creed": "18.jpg",
-    "Stalactite": "19.jpg",
-    "Origin": "20.jpg",
-    "Pacman": "21.jpg",
+    "Re:Zero": "Emilia.jpg",
+    "Point Blank": "pb.jpg",
     "Custom URL": "URL"
   },
   "background_default": {
-    "label": "Rétro 8",
-    "value": "back008.gif"
+    "label": "Destiny",
+    "value": "back002.jpg"
   },
   "coque": {
 	"Sansumg S8": "s8.png",
@@ -101,354 +68,29 @@
     },
 "serviceCall": [
     {
-      "display": "Police",
+      "display": "Polisi",
       "icon": "/html/static/img/icons_app/policier.png",
       "subMenu": [
-        {
-          "title": "Signaler un vol",
-          "eventName": "police",
-          "type": "Vol"
-        },
-        {
-          "title": "Signaler une agression",
-          "eventName": "police",
-          "type": "Aggression"
-        },
-        {
-          "title": "Signaler coup de feu",
-          "eventName": "police",
-          "type": "Coup de feu"
-        },
-        {
-          "title": "Signaler vol voiture",
-          "eventName": "police",
-          "type": "Vol voiture"
-        },
-        {
-          "title": "Appeller la police",
-          "eventName": "police"
-        },
-		{
-          "title": "Premier Secours",
-          "eventName": "police",
-          "type": "Premier Secours"
-        }
+				{
+					"title": "Kirim Pesan",
+					"eventName": "esx_addons_gcphone:call",
+					"type": {
+						"number": "police"
+					}
+				}
       ]
     },
     {
-      "display": "Ambulance",
+      "display": "EMS",
       "icon": "/html/static/img/icons_app/ambulancier.png",
       "subMenu": [
-        {
-          "title": "NORD Appel pour réanimation",
-          "eventName": "ambulance",
-          "type": "NORD Une personne est dans le coma"
-        },
-	    {
-          "title": "NORD Appel pour des soins",
-          "eventName": "ambulance",
-          "type": "NORD J'ai besoin de soins"
-        },	
-		{
-          "title": "SUD Appel pour réanimation",
-          "eventName": "ambulance",
-          "type": "SUD Une personne est dans le coma"
-        },
-	    {
-          "title": "SUD Appel pour des soins",
-          "eventName": "ambulance",
-          "type": "SUD J'ai besoin de soins"
-        },	
-	    {
-          "title": "Alerte Incendie",
-          "eventName": "ambulance",
-          "type": "POMPIER Alerte Incendie"
-        },			
-        {
-          "title": "Appeller les secours",
-          "eventName": "ambulance"
-        }
-      ]
-    },
-	{
-      "display": "Taxi",
-      "icon": "/html/static/img/icons_app/taxi.png",
-      "subMenu": [
-        {
-          "title": "Taxi pour 1 personne",
-          "eventName": "taxi",
-          "type": "Taxi 1 personne svp"
-        },
-        {
-          "title": "Taxi pour 2 personnes",
-          "eventName": "taxi",
-          "type": "Taxi 2 personnes svp"
-        },
-        {
-          "title": "Taxi pour 3 personnes",
-          "eventName": "taxi",
-          "type": "taxi 3 personnes svp"
-        },
-        {
-          "title": "Appeller un taxi",
-          "eventName": "taxi"
-        }
-      ]
-    },
-    {
-      "display": "Mecano",
-      "icon": "/html/static/img/icons_app/mecano.png",
-      "subMenu": [
-        {
-          "title": "Vehicule en panne",
-          "eventName": "mecano",
-          "type": "Panne vehicule"
-        },
-        {
-          "title": "Accident",
-          "eventName": "mecano",
-          "type": "Accident"
-        },
-        {
-          "title": "Commande kits",
-          "eventName": "mecano",
-          "type": "Commande kits"
-        },
-        {
-          "title": "Appeller un mécano",
-          "eventName": "mecano"
-        }
-      ]
-    },
-    {
-      "display": "Gouvernement",
-      "icon": "/html/static/img/icons_app/state.png",
-      "subMenu": [
-        {
-          "title": "Appeller le gouvernement",
-          "eventName": "state"
-        }
-      ]
-    },
-    {
-      "display": "Banquier",
-      "icon": "/html/static/img/icons_app/banquier.png",
-      "subMenu": [
-        {
-          "title": "Demande de rendez-vous",
-          "eventName": "banker",
-          "type": "RDV"
-        },
-        {
-          "title": "Paiement Crédit",
-          "eventName": "banker",
-          "type": "Demande de crédit"
-        },
-        {
-          "title": "Appeller un banquier",
-          "eventName": "banker"
-        }
-      ]
-    },
-    {
-      "display": "Bahamas",
-      "icon": "/html/static/img/icons_app/bahama.png",
-      "subMenu": [
-        {
-          "title": "Appeller le bahamas",
-          "eventName": "bahamas"
-        }
-      ]
-    },
-    {
-      "display": "Ammunation",
-      "icon": "/html/static/img/icons_app/ammunation.png",
-      "subMenu": [
-        {
-          "title": "Appeller l'ammunation",
-          "eventName": "biker"
-        }
-      ]
-    },
-    {
-      "display": "Agent Immobilier",
-      "icon": "/html/static/img/icons_app/agent.png",
-      "subMenu": [
-        {
-          "title": "Demande de visite",
-          "eventName": "realestateagent",
-          "type": "Visite immobilier"
-        },
-        {
-          "title": "Demande d'achat",
-          "eventName": "realestateagent",
-          "type": "Achat immobilier"
-        },
-        {
-          "title": "Demande de Location",
-          "eventName": "realestateagent",
-          "type": "Location immobilier"
-        },
-        {
-          "title": "Appeller un Agent immobilier",
-          "eventName": "realestateagent"
-        }
-      ]
-    },
-    {
-      "display": "Fermier",
-      "icon": "/html/static/img/icons_app/Fermier.png",
-      "subMenu": [
-        {
-          "title": "Appeller un fermier",
-          "eventName": "fermier"
-        }
-      ]
-    },
-    {
-      "display": "Tequila",
-      "icon": "/html/static/img/icons_app/tequila.png",
-      "subMenu": [
-        {
-          "title": "Appeller un épicier",
-          "eventName": "brewer"
-        }
-      ]
-    },
-    {
-      "display": "FoodTruck",
-      "icon": "/html/static/img/icons_app/foodTruck.png",
-      "subMenu": [
-        {
-          "title": "Appeller foodtruck",
-          "eventName": "foodtruck"
-        }
-      ]
-    },
-    {
-      "display": "Unicorn",
-      "icon": "/html/static/img/icons_app/unicorn.png",
-      "subMenu": [
-        {
-          "title": "Commande boissons",
-          "eventName": "unicorn",
-          "type": "Commande boissons"
-        },
-        {
-          "title": "Commande dance public",
-          "eventName": "unicorn",
-          "type": "Dance public"
-        },
-        {
-          "title": "Commande dance privée",
-          "eventName": "unicorn",
-          "type": "Dance Privée"
-        },
-        {
-          "title": "Appeller au unicorn",
-          "eventName": "unicorn"
-        }
-      ]
-    },
-    {
-      "display": "Epicier",
-      "icon": "/html/static/img/icons_app/epicerie.png",
-      "subMenu": [
-        {
-          "title": "Commande Boissons",
-          "eventName": "trucker",
-          "type": "Commande boissons"
-        },
-        {
-          "title": "Commande Nourriture",
-          "eventName": "trucker",
-          "type": "Commande boissons"
-        },
-        {
-          "title": "Commande autres",
-          "eventName": "trucker",
-          "type": "Commande autres"
-        }
-      ]
-    },
-    {
-      "display": "Brinks",
-      "icon": "/html/static/img/icons_app/brinks.png",
-      "subMenu": [
-        {
-          "title": "Appeller un Agent de la brinks",
-          "eventName": "brinks"
-        }
-      ]
-    },
-    {
-      "display": "Avocat-Juge",
-      "icon": "/html/static/img/icons_app/lawyer.png",
-      "subMenu": [
-        {
-          "title": "Demande de rendez-vous",
-          "eventName": "lawyer",
-          "type": "Demande de RDV"
-        },
-        {
-          "title": "RDV parloir",
-          "eventName": "lawyer",
-          "type": "RDV parloir"
-        },
-        {
-          "title": "Appeller un avocat-Juge",
-          "eventName": "lawyer"
-        }
-      ]
-    },
-    {
-      "display": "Airlines",
-      "icon": "/html/static/img/icons_app/airlines.png",
-      "subMenu": [
-        {
-          "title": "Appeller un Pilote airlines",
-          "eventName": "airlines"
-        }
-      ]
-    },
-    {
-      "display": "WeazelNews",
-      "icon": "/html/static/img/icons_app/journaliste.png",
-      "subMenu": [
-        {
-          "title": "Appeller un journaliste",
-          "eventName": "ftnews"
-        }
-      ]
-    },
-    {
-      "display": "Irish Export",
-      "icon": "/html/static/img/app_tchat/splashtchat.png",
-      "subMenu": [
-        {
-          "title": "Appeller un employer Ferrara Export",
-          "eventName": "johnson"
-        }
-      ]
-    },
-    {
-      "display": "LSPI",
-      "icon": "/html/static/img/icons_app/GasStation.png",
-      "subMenu": [
-        {
-          "title": "Appeller un LSPI",
-          "eventName": "fuel"
-        }
-      ]
-    },
-    {
-      "display": "Staff",
-      "icon": "/html/static/img/icons_app/staff.png",
-      "subMenu": [
-        {
-          "title": "Appeller le Staff",
-          "eventName": "staff"
-        }
+				{
+					"title": "Kirim Pesan",
+					"eventName": "esx_addons_gcphone:call",
+					"type": {
+						"number": "ambulance"
+					}
+				}
       ]
     }
   ],
