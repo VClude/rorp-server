@@ -263,7 +263,23 @@ Territories = {
         time        = 25000,
         act         = "Cocaine",
         scene       = 1,
-      }, 
+      },
+      ["process_cocaine"] = {
+        helpText    = _U["process_cocaine"],
+        progText    = _U["process_cocaine_prog"],
+
+        requireRate = 4, 
+        requireItem = "heroinbubuk",
+        rewardItem  = "heroin",
+        rewardRate  = 2,
+
+        location    = vector3(1101.99,-3193.78,-38.99),
+        offset      = vector3(0.31, -1.71,0.0),
+        rotation    = vector3(0.0, 0.0, -90.0),
+        time        = 25000,
+        act         = "Cocaine",
+        scene       = 1,
+      },  
     }
   },
 } 
