@@ -27,7 +27,7 @@ Citizen.CreateThread(function()
 	
 	for _, info in pairs(Config.BlipZones) do
 		info.blip = AddBlipForCoord(info.x, info.y, info.z)
-		SetBlipType(info.blip, 410)
+		SetBlipSprite(info.blip, 410)
 		SetBlipDisplay(info.blip, 4)
 		SetBlipScale(info.blip, 0.8)
 		SetBlipColour(info.blip, info.colour)
