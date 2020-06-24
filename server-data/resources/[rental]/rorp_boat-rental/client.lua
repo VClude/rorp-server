@@ -59,7 +59,7 @@ Citizen.CreateThread(function()
             local pedcoords = GetEntityCoords(ped, false)
             local distance = Vdist(pedcoords.x, pedcoords.y, pedcoords.z, Config.MarkerZones[k].x, Config.MarkerZones[k].y, Config.MarkerZones[k].z)
             if distance <= 1.40 then
-				if havebike == false then
+				if haveboat == false then
 
 					helptext(_U('press_e'))
 					
