@@ -119,7 +119,7 @@ function OpenBoatsMenu()
 	if data.current.value == 'boat' then
 		TriggerServerEvent("rorp_boat-rental:lowmoney", Config.PriceTriBike)
 		ESX.ShowNotification('Anda telah membayar : Rp. ~y~'..Config.PriceTriBike)
-		TriggerEvent('esx:spawnVehicle', "seashark",Config.BoatSpawn, 136.88)
+		ESX.Game.SpawnVehicle("seashark",Config.BoatSpawn, 136.88)
 	end
 	
 	if data.current.value == 'boat2' then
