@@ -82,7 +82,7 @@ function OpenBoatsMenu()
 	table.insert(elements, {label = _U('boat'), value = 'boat'}) 
 	table.insert(elements, {label = _U('boat2'), value = 'boat2'}) 
 	table.insert(elements, {label = _U('boat3'), value = 'boat3'}) 
-	table.insert(elements, {label = _U('boat4'), value = 'boat4'})
+	-- table.insert(elements, {label = _U('boat4'), value = 'boat4'})
 	table.insert(elements, {label = _U('boat5'), value = 'boat5'}) 
 	
 	
@@ -123,13 +123,13 @@ function OpenBoatsMenu()
 		SetVehicleRadioEnabled(veh,false)
 	end
 	
-	if data.current.value == 'boat4' then
-		TriggerServerEvent("rorp_boat-rental:lowmoney", Config.Marquis)
-		ESX.ShowNotification('Anda telah membayar : Rp. ~y~'..Config.Marquis)
-		local veh = CreateVehicle("marquis",-712.24,-1339.78,-0.41,136.88,true,false)
-		SetPedIntoVehicle (PlayerPedId(-1),veh,-1)
-		SetVehicleRadioEnabled(veh,false)
-	end
+	-- if data.current.value == 'boat4' then
+	-- 	TriggerServerEvent("rorp_boat-rental:lowmoney", Config.Marquis)
+	-- 	ESX.ShowNotification('Anda telah membayar : Rp. ~y~'..Config.Marquis)
+	-- 	local veh = CreateVehicle("marquis",-712.24,-1339.78,-0.41,136.88,true,false)
+	-- 	SetPedIntoVehicle (PlayerPedId(-1),veh,-1)
+	-- 	SetVehicleRadioEnabled(veh,false)
+	-- end
 	
 	if data.current.value == 'boat5' then
 		TriggerServerEvent("rorp_boat-rental:lowmoney", Config.Tug)
