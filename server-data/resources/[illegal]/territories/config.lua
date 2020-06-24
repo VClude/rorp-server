@@ -15,9 +15,9 @@ Config = {
   InfluenceTick     = 5000,           -- how long between influence gain/loss tick?
 
   DisplayZoneForAll = false,           -- Display territory zone blips for all?
-  DrugProcessBlip   = true,           -- Display drug process blip for gang members?
+  DrugProcessBlip   = false,           -- Display drug process blip for gang members?
 
-  MaxPlayerCount    = 32,             -- Change if using onesync I guess?
+  MaxPlayerCount    = 64,             -- Change if using onesync I guess?
   UseProgBars       = true,          -- Using ProgBars? (should be included inside mod folder)
   StartEvent        = 'Thread',       -- If you don't want to start the mod by Citizen.CreateThread, change from "Thread" to your event name.
                                       -- NOTE: Must be client event/non-networked event.
