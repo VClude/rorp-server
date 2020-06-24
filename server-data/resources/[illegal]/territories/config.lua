@@ -84,7 +84,7 @@ _U = Langs[Config.Lang]
 
 Territories = {
   ["East V"] = {
-    openzone    = false,                                  -- Allow all players to use this drug production facility and sling drugs in this zone?
+    openzone    = true,                                  -- Allow all players to use this drug production facility and sling drugs in this zone?
     control     = "lostmc",                               -- The default control for this zone belongs to this job.
     influence   = 100.0,                                  -- The default influence for this zone.
     zone        = "EAST_V",                               -- Probably don't change this unless you intend on moving the zones around.
