@@ -3,8 +3,8 @@ mLibs = exports["meta_libs"]
 
 Config = {
   Lang              = 'en',           -- Currently only supports en.
-  Debug             = false,          -- Remove after testing.
-  ShowDebugText     = false,          -- Display drawtext for zone? Mostly used for debugging.
+  Debug             = true,          -- Remove after testing.
+  ShowDebugText     = true,          -- Display drawtext for zone? Mostly used for debugging.
 
   InteractControl   = 38,             -- Control code to interact with most things.
   SlingDrugsControl = 47,             -- Hotkey to sling drugs.
@@ -18,7 +18,7 @@ Config = {
   DrugProcessBlip   = true,           -- Display drug process blip for gang members?
 
   MaxPlayerCount    = 32,             -- Change if using onesync I guess?
-  UseProgBars       = false,          -- Using ProgBars? (should be included inside mod folder)
+  UseProgBars       = true,          -- Using ProgBars? (should be included inside mod folder)
   StartEvent        = 'Thread',       -- If you don't want to start the mod by Citizen.CreateThread, change from "Thread" to your event name.
                                       -- NOTE: Must be client event/non-networked event.
 
