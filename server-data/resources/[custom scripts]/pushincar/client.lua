@@ -60,12 +60,12 @@ Citizen.CreateThread(function()
         local ped = PlayerPedId()
         if Vehicle.Vehicle ~= nil then
  
-                if IsVehicleSeatFree(Vehicle.Vehicle, -1) and ((GetVehicleEngineHealth(Vehicle.Vehicle) <= Config.DamageNeeded or exports["LegacyFuel"]:GetFuel(Vehicle.Vehicle) <= 5 ) )then
+                if IsVehicleSeatFree(Vehicle.Vehicle, -1) and (GetVehicleEngineHealth(Vehicle.Vehicle) <= Config.DamageNeeded or exports["LegacyFuel"]:GetFuel(Vehicle.Vehicle) <= 5) then
                     ESX.Game.Utils.DrawText3D({x = Vehicle.Coords.x, y = Vehicle.Coords.y, z = Vehicle.Coords.z}, 'Tekan [~g~SHIFT~w~] dan [~g~E~w~] untuk mendorong kendaraan', 0.4)
                 end
      
 
-            if IsControlPressed(0, Keys["LEFTSHIFT"]) and IsVehicleSeatFree(Vehicle.Vehicle, -1) and not IsEntityAttachedToEntity(ped, Vehicle.Vehicle) and IsControlJustPressed(0, Keys["E"])  and GetVehicleEngineHealth(Vehicle.Vehicle) <= Config.DamageNeeded then
+            if IsControlPressed(0, Keys["LEFTSHIFT"]) and IsVehicleSeatFree(Vehicle.Vehicle, -1) and not IsEntityAttachedToEntity(ped, Vehicle.Vehicle) and IsControlJustPressed(0, Keys["E"])  and (GetVehicleEngineHealth(Vehicle.Vehicle) <= Config.DamageNeeded or exports["LegacyFuel"]:GetFuel(Vehicle.Vehicle) <= 5) then
                 NetworkRequestControlOfEntity(Vehicle.Vehicle)
                 local coords = GetEntityCoords(ped)
                 if Vehicle.IsInFront then    
