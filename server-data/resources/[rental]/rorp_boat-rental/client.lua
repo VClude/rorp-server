@@ -19,7 +19,7 @@ Citizen.CreateThread(function()
     end
 end)
 
-local havebike = false
+local haveboat = false
 
 Citizen.CreateThread(function()
 
@@ -29,7 +29,7 @@ Citizen.CreateThread(function()
 		info.blip = AddBlipForCoord(info.x, info.y, info.z)
 		SetBlipSprite(info.blip, 410)
 		SetBlipDisplay(info.blip, 4)
-		SetBlipScale(info.blip, 0.8)
+		SetBlipScale(info.blip, 1.2)
 		SetBlipColour(info.blip, info.colour)
 		SetBlipAsShortRange(info.blip, true)
 		BeginTextCommandSetBlipName("STRING")
@@ -64,9 +64,9 @@ Citizen.CreateThread(function()
 					helptext(_U('press_e'))
 					
 					if IsControlJustPressed(0, Keys['E']) and IsPedOnFoot(ped) then
-						OpenBikesMenu()
+						OpenBoatsMenu()
 					end 
-				elseif havebike == true then
+				elseif haveboat == true then
 
 					helptext(_U('storebike'))
 
@@ -76,7 +76,7 @@ Citizen.CreateThread(function()
 
 							TriggerEvent('esx:deleteVehicle')
 							ESX.ShowNotification(_U('bikemessage'))
-							havebike = false
+							haveboat = false
 
 						else
 							ESX.ShowNotification('Tolong kembalikan sepeda sebelumnya')
@@ -92,23 +92,15 @@ end)
 
 
 
-function OpenBikesMenu()
+function OpenBoatsMenu()
 	
 	local elements = {}
 	
-	if Config.EnablePrice == false then
-		table.insert(elements, {label = _U('bikefree'), value = 'bike'}) 
-		table.insert(elements, {label = _U('bike2free'), value = 'bike2'}) 
-		table.insert(elements, {label = _U('bike3free'), value = 'bike3'}) 
-		table.insert(elements, {label = _U('bike4free'), value = 'bike4'}) 
-	end
-	
-	if Config.EnablePrice == true then
-		table.insert(elements, {label = _U('bike'), value = 'bike'}) 
-		table.insert(elements, {label = _U('bike2'), value = 'bike2'}) 
-		table.insert(elements, {label = _U('bike3'), value = 'bike3'}) 
-		table.insert(elements, {label = _U('bike4'), value = 'bike4'}) 
-	end
+	table.insert(elements, {label = _U('boat'), value = 'boat'}) 
+	table.insert(elements, {label = _U('boat2'), value = 'boat2'}) 
+	table.insert(elements, {label = _U('boat3'), value = 'boat3'}) 
+	table.insert(elements, {label = _U('boat4'), value = 'boat4'})
+	table.insert(elements, {label = _U('boat5'), value = 'boat5'}) 
 	
 	
 	ESX.UI.Menu.CloseAll()
@@ -124,57 +116,34 @@ function OpenBikesMenu()
 	
 	function(data, menu)
 
-	if data.current.value == 'bike' then
-		if Config.EnablePrice then
-			TriggerServerEvent("esx:bike:lowmoney", Config.PriceTriBike)
-			ESX.ShowNotification('Anda telah membayar : Rp.~y~'..Config.PriceTriBike)
-		end
-		
-		if Config.EnableEffects then
-			spawn_effect("tribike2")
-		else
-			TriggerEvent('esx:spawnVehicle', "tribike2")
-		end
+	if data.current.value == 'boat' then
+		TriggerServerEvent("rorp_boat-rental:lowmoney", Config.PriceTriBike)
+		ESX.ShowNotification('Anda telah membayar : Rp. ~y~'..Config.PriceTriBike)
+		TriggerEvent('esx:spawnVehicle', "seashark",Config.BoatSpawn, 136.88)
 	end
 	
-	if data.current.value == 'bike2' then
-		if Config.EnablePrice then
-			TriggerServerEvent("esx:bike:lowmoney", Config.PriceScorcher)
-			ESX.ShowNotification('Anda telah membayar : Rp.~y~'..Config.PriceScorcher)
-		end
-		
-		if Config.EnableEffects then
-			spawn_effect("scorcher")
-		else
-			TriggerEvent('esx:spawnVehicle', "scorcher")
-		end
-		
+	if data.current.value == 'boat2' then
+		TriggerServerEvent("rorp_boat-rental:lowmoney", Config.PriceTriBike)
+		ESX.ShowNotification('Anda telah membayar : Rp. ~y~'..Config.PriceTriBike)
+		TriggerEvent('esx:spawnVehicle', "dinghy",Config.BoatSpawn, 136.88)
+	end
+
+	if data.current.value == 'boat3' then
+		TriggerServerEvent("rorp_boat-rental:lowmoney", Config.PriceTriBike)
+		ESX.ShowNotification('Anda telah membayar : Rp. ~y~'..Config.PriceTriBike)
+		TriggerEvent('esx:spawnVehicle', "jetmax",Config.BoatSpawn, 136.88)
 	end
 	
-	if data.current.value == 'bike3' then
-		if Config.EnablePrice then
-			TriggerServerEvent("esx:bike:lowmoney", Config.PriceCruiser) 
-			ESX.ShowNotification('Anda telah membayar : Rp.~y~'..Config.PriceCruiser)
-		end
-		
-		if Config.EnableEffects then
-			spawn_effect("cruiser")
-		else
-			TriggerEvent('esx:spawnVehicle', "cruiser")
-		end
+	if data.current.value == 'boat4' then
+		TriggerServerEvent("rorp_boat-rental:lowmoney", Config.PriceTriBike)
+		ESX.ShowNotification('Anda telah membayar : Rp. ~y~'..Config.PriceTriBike)
+		TriggerEvent('esx:spawnVehicle', "marquis",Config.BoatSpawn, 136.88)
 	end
 	
-	if data.current.value == 'bike4' then
-		if Config.EnablePrice then
-			TriggerServerEvent("esx:bike:lowmoney", Config.PriceBmx) 
-			ESX.ShowNotification('Anda telah membayar : Rp.~y~'..Config.PriceBmx)
-		end
-		
-		if Config.EnableEffects then
-			spawn_effect("bmx")
-		else
-			TriggerEvent('esx:spawnVehicle', "bmx")
-		end
+	if data.current.value == 'boat5' then
+		TriggerServerEvent("rorp_boat-rental:lowmoney", Config.PriceTriBike)
+		ESX.ShowNotification('Anda telah membayar : Rp. ~y~'..Config.PriceTriBike)
+		TriggerEvent('esx:spawnVehicle', "tug",Config.BoatSpawn, 136.88)
 	end
 
 	ESX.UI.Menu.CloseAll()
@@ -193,11 +162,4 @@ function helptext(text)
 	SetTextComponentFormat('STRING')
 	AddTextComponentString(text)
 	DisplayHelpTextFromStringLabel(0, 0, 1, -1)
-end
-
-function spawn_effect(somecar) 
-	DoScreenFadeOut(1000)
-	Citizen.Wait(1000)
-	TriggerEvent('esx:spawnVehicle', somecar)
-	DoScreenFadeIn(3000) 
 end
