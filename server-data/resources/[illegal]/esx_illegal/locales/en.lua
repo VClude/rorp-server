@@ -24,8 +24,8 @@ Locales ['en'] = {
   ['meth_processingtoofar'] = 'the processing has been ~r~canceled~s~ due to you abandoning the area.',
   
   -- coke
-  ['coke_pickupprompt'] = 'press ~INPUT_CONTEXT~ to harvest the ~g~Coca~s~ plant.',
-  ['coke_inventoryfull'] = 'you don\'t have enough inventory space for ~g~Coca leaf~s~.',
+  ['coke_pickupprompt'] = 'Tekan ~INPUT_CONTEXT~ untuk mengambil ~g~Coca~s~ .',
+  ['coke_inventoryfull'] = 'inventory anda Penuh',
   ['coke_processprompt'] = 'press ~INPUT_CONTEXT~ to start ~g~Processing Coke~s~.',
   ['coke_processingstarted'] = 'processing ~g~Coke~s~...',
   ['coke_processingfull'] = 'processing ~r~canceled~s~ due to full inventory!',
@@ -105,7 +105,7 @@ Locales ['en'] = {
   ['blip_SodiumHydroxideFarm'] = 'Sodium Hydroxide Farm',
   ['blip_ChemicalsFarm'] = 'Chemicals Farm',
   ['blip_ChemicalsProcessing'] = 'Chemicals Processing',
-  ['blip_CokeFarm'] = 'Coca Field',
+  ['blip_CokeFarm'] = 'Ladang Tebu',
   ['blip_Cokeprocessing'] = 'Coke Processing',
   ['blip_lsdprocessing'] = 'LSD Processing',
   ['blip_thionylchlorideprocessing'] = 'Thionyl Chloride Processing',

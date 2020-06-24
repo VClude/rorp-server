@@ -164,3 +164,34 @@ Config.DrawGold3DText = "Tekan ~g~[E]~s~ untuk ~y~Menjual Emas~s~"				-- set you
 Config.KeyToStartSell = 38
 
 
+Config.TebuSpots = 
+{
+	{ 
+		Pos = { x = -1766.36, y = 2029.42, z = 122.58 },
+		Heading = 177.36,
+		InUse = false
+	},
+	{ 
+		Pos = { x = -1777.62, y = 2035.43, z = 124.85 },
+		Heading = 201.13,
+		InUse = false
+	},
+	{ 
+		Pos = { x = -1776.32, y = 2014.91, z = 122.27 },
+		Heading = 202.15,
+		InUse = false
+	},
+	{ 
+		Pos = { x = -1790.69, y = 2025.23, z = 126.36 },
+		Heading = 173.28,
+		InUse = false
+	},
+	{ 
+		Pos = { x = -1784.81, y = 2015.7, z = 123.59 },
+		Heading = 169.29,
+		InUse = false
+	},
+}
+
+Config.tebuText = "Tekan ~g~[E]~s~ untuk Mengambil ~b~Jeruk~s~"				-- set your desired text here
+

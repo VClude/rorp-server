@@ -17,39 +17,39 @@ Citizen.CreateThread(function()
 	end
 end)
 
-Citizen.CreateThread(function()
-	while true do
-		Citizen.Wait(0)
-		local playerPed = PlayerPedId()
-		local coords = GetEntityCoords(playerPed)
+-- Citizen.CreateThread(function()
+-- 	while true do
+-- 		Citizen.Wait(0)
+-- 		local playerPed = PlayerPedId()
+-- 		local coords = GetEntityCoords(playerPed)
 
-		if GetDistanceBetweenCoords(coords, Config.CircleZones.CokeProcessing.coords, true) < 5 then
-			if not isProcessing then
-				ESX.ShowHelpNotification(_U('coke_processprompt'))
-			end
+-- 		if GetDistanceBetweenCoords(coords, Config.CircleZones.CokeProcessing.coords, true) < 5 then
+-- 			if not isProcessing then
+-- 				ESX.ShowHelpNotification(_U('coke_processprompt'))
+-- 			end
 
-			if IsControlJustReleased(0, Keys['E']) and not isProcessing then
-				if not IsPedInAnyVehicle(playerPed, true) then
-					if Config.RequireCopsOnline then
-						ESX.TriggerServerCallback('esx_illegal:EnoughCops', function(cb)
-							if cb then
-								ProcessCoke()
-							else
-								ESX.ShowNotification(_U('cops_notenough'))
-							end
-						end, Config.Cops.Coke)
-					else
-						ProcessCoke()
-					end
-				else
-					ESX.ShowNotification(_U('need_on_foot'))
-				end
-			end
-		else
-			Citizen.Wait(500)
-		end
-	end
-end)
+-- 			if IsControlJustReleased(0, Keys['E']) and not isProcessing then
+-- 				if not IsPedInAnyVehicle(playerPed, true) then
+-- 					if Config.RequireCopsOnline then
+-- 						ESX.TriggerServerCallback('esx_illegal:EnoughCops', function(cb)
+-- 							if cb then
+-- 								ProcessCoke()
+-- 							else
+-- 								ESX.ShowNotification(_U('cops_notenough'))
+-- 							end
+-- 						end, Config.Cops.Coke)
+-- 					else
+-- 						ProcessCoke()
+-- 					end
+-- 				else
+-- 					ESX.ShowNotification(_U('need_on_foot'))
+-- 				end
+-- 			end
+-- 		else
+-- 			Citizen.Wait(500)
+-- 		end
+-- 	end
+-- end)
 
 function ProcessCoke()
 	isProcessing = true
@@ -74,6 +74,19 @@ function ProcessCoke()
 end
 
 Citizen.CreateThread(function()
+	while ESX == nil do
+		TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
+		Citizen.Wait(0)
+	end
+
+	while ESX.GetPlayerData().job == nil do
+		Citizen.Wait(100)
+	end
+
+	ESX.PlayerData = ESX.GetPlayerData()
+end)
+
+Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
 		local playerPed = PlayerPedId()
@@ -93,16 +106,11 @@ Citizen.CreateThread(function()
 			end
 
 			if IsControlJustReleased(0, Keys['E']) and not isPickingUp then
-				if Config.RequireCopsOnline then
-					ESX.TriggerServerCallback('esx_illegal:EnoughCops', function(cb)
-						if cb then
-							PickUpCocaLeaf(playerPed, coords, nearbyObject, nearbyID)
-						else
-							ESX.ShowNotification(_U('cops_notenough'))
-						end
-					end, Config.Cops.Coke)
-				else
+				if ESX.PlayerData.job.name == 'petani' then
 					PickUpCocaLeaf(playerPed, coords, nearbyObject, nearbyID)
+				else
+					print(ESX.PlayerData.job.name)
+					ESX.ShowNotification(" Anda Membutuhkan job Petani untuk mengambil Tebu ")
 				end
 			end
 
@@ -138,7 +146,7 @@ function PickUpCocaLeaf(playerPed, coords, nearbyObject, nearbyID)
 
 		isPickingUp = false
 
-	end, 'coca_leaf')
+	end, 'tebu')
 end
 
 AddEventHandler('onResourceStop', function(resource)
@@ -150,7 +158,7 @@ AddEventHandler('onResourceStop', function(resource)
 end)
 
 function SpawnCocaPlants()
-	while spawnedCocaLeaf < 15 do
+	while spawnedCocaLeaf < 10 do
 		Citizen.Wait(0)
 		local weedCoords = GenerateCocaLeafCoords()
 
@@ -211,7 +219,7 @@ function GenerateCocaLeafCoords()
 end
 
 function GetCoordZCoke(x, y)
-	local groundCheckHeights = { 70.0, 71.0, 72.0, 73.0, 74.0, 75.0, 76.0, 77.0, 78.0, 79.0, 80.0 }
+	local groundCheckHeights = { 110.0, 111.0, 112.0, 113.0, 114.0, 115.0, 116.0, 117.0, 118.0, 119.0, 120.0 }
 
 	for i, height in ipairs(groundCheckHeights) do
 		local foundGround, z = GetGroundZFor_3dCoord(x, y, height)

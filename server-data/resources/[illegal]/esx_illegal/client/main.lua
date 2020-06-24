@@ -153,10 +153,14 @@ Citizen.CreateThread(function()
 	end
 
 	ESX.PlayerData = ESX.GetPlayerData()
-	if Config.EnableMapsBlimps and ESX.GetPlayerData().job.name == 'police' then
+	if Config.EnableMapsBlimps then
 		for k,zone in pairs(Config.CircleZones) do
-			if zone.enabled then
+			if zone.enabled and zone.illegal and ESX.GetPlayerData().job.name == 'police' then
 				CreateBlipCircle(zone.blimpcoords, zone.name, zone.radius, zone.color, zone.sprite)
+			elseif zone.enabled and zone.illegal == false and ESX.GetPlayerData().job.name == 'petani' then
+				CreateBlipCircle(zone.blimpcoords, zone.name, zone.radius, zone.color, zone.sprite)
+			else
+
 			end
 		end
 	end

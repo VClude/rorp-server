@@ -97,24 +97,24 @@ Config.CircleZones = {
 	-- ChemicalsField = {coords = vector3(817.46, -3192.84, 5.9), blimpcoords = vector3(817.46, -3192.84, 5.9), name = _U('blip_ChemicalsFarm'), color = 3, sprite = 499, radius = 0.0, enabled = true},
 	-- ChemicalsConvertionMenu = {coords = vector3(3718.8, 4533.45, 21.67), blimpcoords = vector3(3718.8, 4533.45, 21.67), name = _U('blip_ChemicalsProcessing'), color = 3, sprite = 499, radius = 0.0, enabled = true},
 	
-	--Coke
-	-- CokeField = {coords = vector3(-310.43, 2496.34, 76.60), blimpcoords = vector3(-310.43, 2496.34, 76.60), name = _U('blip_CokeFarm'), color = 4, sprite = 501, radius = 0.0, enabled = true},
-	-- CokeProcessing = {coords = vector3(1090.00, -3194.93, -38.99), blimpcoords = vector3(143.15, -1656.22, 30.49), name = _U('blip_Cokeprocessing'),color = 4, sprite = 501, radius = 0.0, enabled = true},
+	--Coke (ALIAS TEBU)
+	CokeField = {coords = vector3(-1764.88, 1991.45, 117), blimpcoords = vector3(-1764.88, 1991.45, 117), name = _U('blip_CokeFarm'), color = 4, sprite = 501, radius = 0.0, enabled = false, illegal = false},
+	-- CokeProcessing = {coords = vector3(1090.00, -3194.93, -38.99), blimpcoords = vector3(143.15, -1656.22, 30.49), name = _U('blip_Cokeprocessing'),color = 4, sprite = 501, radius = 0.0, enabled = true, illegal = false},
 	
 	--LSD
 	-- lsdProcessing = {coords = vector3(91.26, 3749.31, 40.77), blimpcoords = vector3(91.26, 3749.31, 40.77), name = _U('blip_lsdprocessing'),color = 12, sprite = 364, radius = 0.0, enabled = true},
 	-- thionylchlorideProcessing = {coords = vector3(1903.98, 4922.70, 48.16), blimpcoords = vector3(1903.98, 4922.70, 48.16), name = _U('blip_thionylchlorideprocessing'),color = 12, sprite = 364, radius = 0.0, enabled = true},
 	
 	--Heroin
-	HeroinField = {coords = vector3(299.44, 4323.16, 47.69), blimpcoords = vector3(299.44, 4323.16, 47.69), name = _U('blip_heroinfield'), color = 7, sprite = 497, radius = 0, enabled = true},
-	HeroinProcessing = {coords = vector3(90.55, 3745.3, 39.77), blimpcoords = vector3(90.55, 3745.3, 39.77), name = _U('blip_heroinprocessing'), color = 7, sprite = 497, radius = 0.0, enabled = true},
+	HeroinField = {coords = vector3(299.44, 4323.16, 47.69), blimpcoords = vector3(299.44, 4323.16, 47.69), name = _U('blip_heroinfield'), color = 7, sprite = 497, radius = 0, enabled = true, illegal = true},
+	HeroinProcessing = {coords = vector3(90.55, 3745.3, 39.77), blimpcoords = vector3(90.55, 3745.3, 39.77), name = _U('blip_heroinprocessing'), color = 7, sprite = 497, radius = 0.0, enabled = true, illegal = true},
 
 	--License
 	-- LicenseShop = {coords = vector3(727.17, 962.5, 30.4), blimpcoords = vector3(707.17, -962.5, 30.4), name = _U('blip_licenseshop'),color = 9, sprite = 498, radius = 0.0, enabled = true},
 
 	--DrugDealer
-	DrugDealer = {coords = vector3(1724.75, 4737.8, 41.12), blimpcoords = vector3(1724.75, 4737.8, 41.12), name = _U('blip_drugdealer'), color = 6, sprite = 378, radius = 0.0, enabled = true},
+	DrugDealer = {coords = vector3(1724.75, 4737.8, 41.12), blimpcoords = vector3(1724.75, 4737.8, 41.12), name = _U('blip_drugdealer'), color = 6, sprite = 378, radius = 0.0, enabled = true, illegal = true},
 	
 	--MoneyWash
-	MoneyWash = {coords = vector3(1119.87, -3195.44, -39.40), blimpcoords = vector3(48.19, 6305.98, 32.36), name = _U('blip_moneywash'), color = 1, sprite = 500, radius = 0.0, enabled = true},
+	MoneyWash = {coords = vector3(1119.87, -3195.44, -39.40), blimpcoords = vector3(48.19, 6305.98, 32.36), name = _U('blip_moneywash'), color = 1, sprite = 500, radius = 0.0, enabled = true, illegal = true},
 }

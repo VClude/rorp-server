@@ -61,15 +61,15 @@ function OpenMenu()
 	end)
 end
 
--- function custom miner
--- Core Thread Function:
+
+-- fungsi tebu
 Citizen.CreateThread(function()
 	while true do
         Citizen.Wait(5)
 		local coords = GetEntityCoords(GetPlayerPed(-1))
-		for k,v in pairs(Config.MiningSpots) do
+		for k,v in pairs(Config.TebuSpots) do
 			local distance = GetDistanceBetweenCoords(coords, v.Pos.x, v.Pos.y, v.Pos.z, true)
-			if distance <= 20.0 and not currentlyMining then
+			if distance <= 200.0 and not currentlyMining then
 				
 			DrawMarker(Config.MiningMarker, v.Pos.x, v.Pos.y, v.Pos.z-0.97, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.MiningMarkerScale.x, Config.MiningMarkerScale.y, Config.MiningMarkerScale.z, Config.MiningMarkerColor.r,Config.MiningMarkerColor.g,Config.MiningMarkerColor.b,Config.MiningMarkerColor.a, false, true, 2, true, false, false, false)
 									
@@ -77,15 +77,15 @@ Citizen.CreateThread(function()
 				Citizen.Wait(1000)
 			end	
 			if distance <= 1.0 and not currentlyMining then
-				DrawText3Ds(v.Pos.x, v.Pos.y, v.Pos.z, Config.DrawMining3DText)
+				DrawText3Ds(v.Pos.x, v.Pos.y, v.Pos.z, Config.tebuText)
 				if IsControlJustPressed(0, Config.KeyToStartMining) then
 					local closestPlayer, closestDistance = ESX.Game.GetClosestPlayer()
                     if closestPlayer == -1 or closestDistance >= 1 then
-						ESX.TriggerServerCallback("esx_jobs:getPickaxe", function(pickaxe)
+						ESX.TriggerServerCallback("esx_jobs:checkPetani", function(pickaxe)
 							if pickaxe then
-								MiningEvent()	
+								TebuEvent()	
 							else
-								ESX.ShowNotification("Kamu harus Menjadi Penambang untuk ~b~Menambang~s~ disini!")
+								ESX.ShowNotification("Kamu harus Menjadi Petani untuk memanen ~b~Jeruk~s~")
 							end
 						end)
 					else
@@ -98,6 +98,95 @@ Citizen.CreateThread(function()
 	end
 -- end
 end)
+-- function custom miner
+-- Core Thread Function:
+-- Citizen.CreateThread(function()
+-- 	while true do
+--         Citizen.Wait(5)
+-- 		local coords = GetEntityCoords(GetPlayerPed(-1))
+-- 		for k,v in pairs(Config.MiningSpots) do
+-- 			local distance = GetDistanceBetweenCoords(coords, v.Pos.x, v.Pos.y, v.Pos.z, true)
+-- 			if distance <= 20.0 and not currentlyMining then
+				
+-- 			DrawMarker(Config.MiningMarker, v.Pos.x, v.Pos.y, v.Pos.z-0.97, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.MiningMarkerScale.x, Config.MiningMarkerScale.y, Config.MiningMarkerScale.z, Config.MiningMarkerColor.r,Config.MiningMarkerColor.g,Config.MiningMarkerColor.b,Config.MiningMarkerColor.a, false, true, 2, true, false, false, false)
+									
+-- 			else
+-- 				Citizen.Wait(1000)
+-- 			end	
+-- 			if distance <= 1.0 and not currentlyMining then
+-- 				DrawText3Ds(v.Pos.x, v.Pos.y, v.Pos.z, Config.DrawMining3DText)
+-- 				if IsControlJustPressed(0, Config.KeyToStartMining) then
+-- 					local closestPlayer, closestDistance = ESX.Game.GetClosestPlayer()
+--                     if closestPlayer == -1 or closestDistance >= 1 then
+-- 						ESX.TriggerServerCallback("esx_jobs:getPickaxe", function(pickaxe)
+-- 							if pickaxe then
+-- 								MiningEvent()	
+-- 							else
+-- 								ESX.ShowNotification("Kamu harus Menjadi Penambang untuk ~b~Menambang~s~ disini!")
+-- 							end
+-- 						end)
+-- 					else
+-- 						ESX.ShowNotification("Kamu terlalu dekat dengan yang lain")
+-- 					end
+-- 					Citizen.Wait(300)
+-- 				end
+-- 			end
+-- 		end		
+-- 	end
+-- -- end
+-- end)
+
+
+function TebuEvent()
+	
+	currentlyMining = true
+	local playerPed = PlayerPedId()
+	local coords = GetEntityCoords(playerPed)
+	
+	FreezeEntityPosition(playerPed, true)
+	SetCurrentPedWeapon(playerPed, GetHashKey('WEAPON_UNARMED'))
+	Citizen.Wait(200)
+	
+	local frb = GetHashKey("prop_fruit_basket")
+	
+	-- Loads model
+	RequestModel(frb)
+    while not HasModelLoaded(frb) do
+      Wait(1)
+    end
+	
+	local anim = "missfbi_s4mop"
+	local action = "pickup_bucket_0"
+	
+	 -- Loads animation
+    RequestAnimDict(anim)
+    while not HasAnimDictLoaded(anim) do
+      Wait(1)
+    end
+	
+	local object = CreateObject(frb, coords.x, coords.y, coords.z, true, false, false)
+	AttachEntityToEntity(object, playerPed, GetPedBoneIndex(playerPed, 18905), 0.1, 0.0, 0.0, -90.0, 25.0, 35.0, true, true, false, true, 1, true)
+	
+	exports['progressBars']:startUI((12000), "Mengambil Jeruk")
+	TaskPlayAnim(PlayerPedId(), anim, action, 3.0, -3.0, -1, 31, 0, false, false, false)
+	Citizen.Wait(6000)
+	TaskPlayAnim(PlayerPedId(), anim, action, 3.0, -3.0, -1, 31, 0, false, false, false)
+	Citizen.Wait(6000)
+
+	
+	e = math.random(2,8)
+	TriggerServerEvent("esx_jobs:reward",'jeruk',e)
+	
+	ClearPedTasks(PlayerPedId())
+	FreezeEntityPosition(playerPed, false)
+	local objects = GetClosestObjectOfType(coords.x, coords.y, coords.z, 5.0, frb, false, false, false)
+	if object ~= 0 then
+		DeleteObject(objects)
+	end
+    DeleteObject(object)
+	currentlyMining = false
+
+end
 
 
 
@@ -205,6 +294,8 @@ function WasherEvent()
 		currentlyWashing = false
 	end)
 end
+
+
 
 -- Core Thread Function:
 Citizen.CreateThread(function()

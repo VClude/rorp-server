@@ -967,6 +967,13 @@ Citizen.CreateThread(function()
 	SetBlipColour(blips, 1)
 	SetBlipAlpha (blips, 128)
 	-- corona
+	-- petani
+	-- local blips = AddBlipForRadius(2050.15, 4916.26, 41 , 300.0) 
+
+	-- SetBlipHighDetail(blips, true)
+	-- SetBlipColour(blips, 2)
+	-- SetBlipAlpha (blips, 128)
+	-- petani
 
 	for k,v in pairs(Config.PoliceStations) do
 		local blip = AddBlipForRadius(v.Blip.Coords, 50.0)

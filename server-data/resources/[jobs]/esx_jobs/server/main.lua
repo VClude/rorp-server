@@ -150,6 +150,15 @@ ESX.RegisterServerCallback("esx_jobs:getPickaxe",function(source,cb)
 	end
 end)
 
+ESX.RegisterServerCallback("esx_jobs:checkPetani",function(source,cb)
+	local xPlayer = ESX.GetPlayerFromId(source)
+	if xPlayer.getJob().name == 'petani' then
+		cb(true)
+	else
+		cb(false)
+	end
+end)
+
 -- Server Callback to get inventory washing pan:
 ESX.RegisterServerCallback("esx_jobs:getWashPan",function(source,cb)
 	local xPlayer = ESX.GetPlayerFromId(source)
@@ -261,8 +270,12 @@ RegisterServerEvent("esx_jobs:reward")
 AddEventHandler("esx_jobs:reward", function(itemName,itemAmount)
 	local xPlayer = ESX.GetPlayerFromId(source)
 	local itemLabel = ESX.GetItemLabel(itemName)
-	xPlayer.addInventoryItem(itemName, itemAmount)
-	TriggerClientEvent("esx:showNotification",source,"Kamu mendapatkan ~r~"..itemAmount.."~s~x ~y~"..itemLabel.."~s~")
+	if xPlayer.canCarryItem(itemName, itemAmount) then
+		xPlayer.addInventoryItem(itemName, itemAmount)
+		TriggerClientEvent("esx:showNotification",source,"Kamu mendapatkan ~r~"..itemAmount.."~s~x ~y~"..itemLabel.."~s~")
+		else
+		TriggerClientEvent("esx:showNotification",source,"anda tidak bisa membawa lebih banyak "..itemName.."")
+	end
 end)
 
 -- Function to reward player after smelting:

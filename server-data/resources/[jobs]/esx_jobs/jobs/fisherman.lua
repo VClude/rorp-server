@@ -179,7 +179,7 @@ Config.Jobs.fisherman = {
 Config.Jobs.petani = {
 
 	BlipInfos = {
-		Sprite = 85,
+		Sprite = 501,
 		Color = 4
 	},
 
@@ -209,18 +209,44 @@ Config.Jobs.petani = {
 		},
 
 		Jeruk = {
-			Pos = {x = 2345.74, y = 5024.06, z = 42.7},
-			Size = {x = 3.0, y = 3.0, z = 1.0},
+			Pos = {x = -1768.88, y = 2032.91, z = 121.92},
+			Size = {x = 0.0, y = 0.0, z = 0.0},
 			Color = {r = 204, g = 204, b = 0},
 			Marker = 1,
 			Blip = true,
-			Name = 'Ambil Jeruk',
-			Type = 'work',
+			Name = '2. Kebun Jeruk',
+			Type = 'cust_work',
 			Duration = 20000,
 			Item = {
 				{
 					name = 'Jeruk',
 					db_name = 'jeruk',
+					time = 3,
+					max = 40,
+					add = 10,
+					remove = 0,
+					requires = 'nothing',
+					requires_name = 'Nothing',
+					drop = 100
+				}
+			},
+			Hint = _U('pet_a'),
+			GPS = {x = 715.95, y = -959.63, z = 29.39}
+		},
+
+		Tebu = {
+			Pos = {x = -1764.88, y = 1991.45, z = 117},
+			Size = {x = 3.0, y = 3.0, z = 1.0},
+			Color = {r = 204, g = 204, b = 0},
+			Marker = 1,
+			Blip = true,
+			Name = '2. Kebun Tebu',
+			Type = 'cust_work',
+			Duration = 20000,
+			Item = {
+				{
+					name = 'Tebu',
+					db_name = 'tebu',
 					time = 3,
 					max = 40,
 					add = 10,
