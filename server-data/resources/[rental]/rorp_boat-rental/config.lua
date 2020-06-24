@@ -9,6 +9,7 @@ Config.EnableBlips = true
 Config.BoatSpawn = vector3(-712.24, -1339.78, -0.41)
 
 
+
 --- #### PRICES	
 Config.PriceTriBike = 89
 Config.PriceScorcher = 99

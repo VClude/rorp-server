@@ -119,7 +119,8 @@ function OpenBoatsMenu()
 	if data.current.value == 'boat' then
 		TriggerServerEvent("rorp_boat-rental:lowmoney", Config.PriceTriBike)
 		ESX.ShowNotification('Anda telah membayar : Rp. ~y~'..Config.PriceTriBike)
-		local veh = ESX.Game.SpawnVehicle("seashark",Config.BoatSpawn, 136.88)
+		local veh = CreateVehicle("seashark",-712.24,-1339.78,-0.41,136.88,true,false)
+		-- local veh = ESX.Game.SpawnVehicle("seashark",Config.BoatSpawn, 136.88)
 		SetPedIntoVehicle (PlayerPedId(-1),veh,-1)
 	end
 	
