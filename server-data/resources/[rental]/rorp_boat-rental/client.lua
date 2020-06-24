@@ -110,9 +110,9 @@ function OpenBoatsMenu()
 	if data.current.value == 'boat2' then
 		TriggerServerEvent("rorp_boat-rental:lowmoney", Config.Dinghy)
 		ESX.ShowNotification('Anda telah membayar : Rp. ~y~'..Config.Dinghy)
-		local veh = CreateVehicle("dinghy",-712.24,-1339.78,-0.41,136.88,true,false)
-		SetPedIntoVehicle (PlayerPedId(-1),veh,-1)
-		SetVehicleRadioEnabled(veh,false)
+		CreateVehicle("dinghy",-712.24,-1339.78,-0.41,136.88,true,false)
+		-- SetPedIntoVehicle (PlayerPedId(-1),veh,-1)
+		-- SetVehicleRadioEnabled(veh,false)
 	end
 
 	if data.current.value == 'boat3' then
