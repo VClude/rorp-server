@@ -1,5 +1,4 @@
 # fivem-ipl
-
 The ultimate San Andreas IPL loader for FiveM. The IPLs in FiveM that are loaded by default in vanilla GTA V are not loaded which results in a lot of buggy places with missing interior and more.
 This script is contains [bob74_ipl](https://forum.fivem.net/t/release-fix-holes-in-the-map/25240), [iplLoader](https://github.com/n0thus/iplLoader) and other known IPL lists for the complete IPL loader.
 
@@ -43,9 +42,9 @@ This script is contains [bob74_ipl](https://forum.fivem.net/t/release-fix-holes-
 ## `iplList.lua` understanding
 This script load the basics interiors of the IPLs. You are able to modify which props are in the ipl or modify some textures. However some props can't be used at the same time, for example:
 ```lua
---'weed_growtha_stage1',
---'weed_growtha_stage2',
-'weed_growtha_stage3',
+--"weed_growtha_stage1",
+--"weed_growtha_stage2",
+"weed_growtha_stage3",
 ```
 
 Here, just one of them can be used. This type of props can be spotted quickly because it contains the same name (`weed_growtha_stage` for this example)

@@ -8,7 +8,7 @@ Config = {
 
   InteractControl   = 38,             -- Control code to interact with most things.
   SlingDrugsControl = 47,             -- Hotkey to sling drugs.
-  SlingByHotkey     = true,           -- If false must use /slingdrugs command
+  SlingByHotkey     = false,           -- If false must use /slingdrugs command
   InteractDist      = 2.0,            -- Distance to interact with things.
   InfluenceInHouse  = false,          -- Gain influence inside playerhousing?
 
