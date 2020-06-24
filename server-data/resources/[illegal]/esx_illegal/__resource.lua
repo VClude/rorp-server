@@ -17,8 +17,8 @@ server_scripts {
 	-- 'server/weed.lua',
 	'server/heroin.lua',
 	-- 'server/chemicals.lua',
-	'server/licenseshop.lua',
-	'server/moneywash.lua',
+	-- 'server/licenseshop.lua',
+	-- 'server/moneywash.lua',
 }
 
 client_scripts {
@@ -36,9 +36,9 @@ client_scripts {
 	-- 'client/hydrochloricacid.lua',
 	-- 'client/sodiumhydroxide.lua',
 	-- 'client/sulfuricacid.lua',
-	'client/licenseshop.lua',
-	'client/moneywash.lua',
-	'client/teleport.lua',
+	-- 'client/licenseshop.lua',
+	-- 'client/moneywash.lua',
+	-- 'client/teleport.lua',
 }
 
 dependencies {
