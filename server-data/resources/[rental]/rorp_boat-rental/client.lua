@@ -112,6 +112,7 @@ function OpenBoatsMenu()
 		ESX.ShowNotification('Anda telah membayar : Rp. ~y~'..Config.Dinghy)
 		local veh = CreateVehicle("dinghy",-712.24,-1339.78,-0.41,136.88,true,false)
 		SetPedIntoVehicle (PlayerPedId(-1),veh,-1)
+		SetVehicleRadioEnabled(veh,false)
 	end
 
 	if data.current.value == 'boat3' then
@@ -127,6 +128,7 @@ function OpenBoatsMenu()
 		ESX.ShowNotification('Anda telah membayar : Rp. ~y~'..Config.Marquis)
 		local veh = CreateVehicle("marquis",-712.24,-1339.78,-0.41,136.88,true,false)
 		SetPedIntoVehicle (PlayerPedId(-1),veh,-1)
+		SetVehicleRadioEnabled(veh,false)
 	end
 	
 	if data.current.value == 'boat5' then
@@ -134,10 +136,10 @@ function OpenBoatsMenu()
 		ESX.ShowNotification('Anda telah membayar : Rp. ~y~'..Config.Tug)
 		local veh = CreateVehicle("tug",-712.24,-1339.78,-0.41,136.88,true,false)
 		SetPedIntoVehicle (PlayerPedId(-1),veh,-1)
+		SetVehicleRadioEnabled(veh,false)
 	end
 
 	ESX.UI.Menu.CloseAll()
-	haveboat = true	
 	
 
     end,
