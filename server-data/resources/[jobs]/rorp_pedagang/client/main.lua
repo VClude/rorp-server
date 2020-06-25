@@ -120,7 +120,7 @@ AddEventHandler('rorp_pedagang:CookingEvent', function(_items)
                     NotifError('GA MASUK BRO')
                     ClearPedTasks(playerPed)
                 end
-            end,item)           
+            end,items)           
         end
     end)
 end)
