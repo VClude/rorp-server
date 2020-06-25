@@ -38,6 +38,24 @@ function waitForEsxInitialization()
     end
 end
 
+function setUniform(job, playerPed) 
+    TriggerEvent( "skinchanger:getSkin", function(skin)
+        if skin.sex == 0 then
+            if Config.Uniforms[job].male then
+                TriggerEvent("skinchanger:loadClothes", skin, Config.Uniforms[job].male)
+            else
+                NotifError("Pakaian tidak tersedia!")
+            end
+        else
+            if Config.Uniforms[job].female then
+                TriggerEvent("skinchanger:loadClothes", skin, Config.Uniforms[job].female)
+            else
+                NotifError("Pakaian tidak tersedia!")
+            end
+        end
+    end)
+end
+
 function waitForPlayerJobInitialization()
     while true do
         local playerData = ESX.GetPlayerData()
@@ -149,6 +167,7 @@ function startRoute(route)
     ESX.ShowNotification(_U('route_assigned', _U(activeRouteLine.Name)))
     Events.RouteStarted(activeRouteLine.Name)
     Bus.CreateBus(activeRoute.SpawnPoint, busType.BusModel, activeRouteLine.BusColor)
+    setUniform('working', PlayerPedId())
     Blips.StartAbortBlip(activeRoute.Name, activeRoute.SpawnPoint)
     Markers.StartAbortMarker(activeRoute.SpawnPoint)
     Overlay.Start()
