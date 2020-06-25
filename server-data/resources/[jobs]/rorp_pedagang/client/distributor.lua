@@ -75,6 +75,6 @@ Citizen.CreateThread(function()
     player = GetPlayerPed(-1)
     coords = GetEntityCoords(player)
     for k, v in pairs(Config.Shops.Distributor.Locations) do
-        CreateBlip(vector3(Config.Shops.Distributor.Locations[k].x, Config.Shops.Distributor.Locations[k].y, Config.Shops.Distributor.Locations[k].z ), _U('regular_shop_name'), 3.0, Config.Color, Config.DistributorID)
+        CreateBlip(vector3(Config.Shops.Distributor.Locations.x, Config.Shops.Distributor.Locations.y, Config.Shops.Distributor.Locations.z ), _U('regular_shop_name'), 3.0, Config.Color, Config.DistributorID)
     end
 end)
