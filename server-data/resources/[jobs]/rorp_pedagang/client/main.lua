@@ -85,8 +85,34 @@ end
 RegisterNetEvent('rorp_pedagang:CookingEvent')
 AddEventHandler('rorp_pedagang:CookingEvent', function(_items)
     local items = _items
-    
-    print(items)
+    local playerPed = PlayerPedId()	
+	SetCurrentPedWeapon(playerPed, GetHashKey('WEAPON_UNARMED'))
+    Citizen.Wait(200)
+    TriggerEvent("mythic_progbar:client:progress",
+	{
+		name = "cooking",
+		duration = 15000,
+		label = "Memasak...",
+		useWhileDead = false,
+		canCancel = false,
+		controlDisables = {
+			disableMovement = true,
+			disableCarMovement = true,
+			disableMouse = false,
+			disableCombat = true
+		},
+		animation = {
+            task = "PROP_HUMAN_BUM_BIN",
+        },
+        prop = {
+
+		},
+    },
+    function(status)
+        if not status then
+            print(items)
+        end
+    end)
 end)
 
 AddEventHandler("rorp_pedagang:hasEnteredMarker",function(zone)
