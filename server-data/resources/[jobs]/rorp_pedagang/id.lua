@@ -8,4 +8,7 @@ Locales['id'] = {
     ['distri']                     = 'Tekan ~b~[E]~w~ untuk membuka menu Distributor',
     ['quantity']                   = 'Jumlah',
     ['invalid_quantity']           = 'Jumlah Salah',
+    ['have_deposited']             = 'Kamu menyimpan ~y~x%s~s~ ~b~%s~s~',
+    ['have_withdrawn']             = 'Kamu mengambil ~y~x%s~s~ ~b~%s~s~',
+    ['player_cannot_hold']         = 'Inventory kamu sudah ~r~penuh!',
 }

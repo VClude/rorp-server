@@ -13,6 +13,24 @@ Config.Blips = {
     },
 }
 
+Config = {}
+
+
+Config.Recipes = {
+	-- Can be a normal ESX item
+	["lockpick"] = { 
+		{item = "bobbypin", quantity = 4 }, 
+		{item = "rubberband", quantity = 1 },
+	}
+	
+}
+
+-- Enable crafting menu through a keyboard shortcut
+Config.Keyboard = {
+	useKeyboard = false
+}
+
+
 Config.Zones = {
 	Cloakrooms = {
 		Pos = {["x"] = -634.64, ["y"] = 225.57, ["z"] = 81.88},

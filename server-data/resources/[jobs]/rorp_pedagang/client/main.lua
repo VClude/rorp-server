@@ -14,6 +14,7 @@ local Keys = {
   local HasAlreadyEnteredMarker, LastZone = false, nil
   local isInShopMenu                      = false
   local currentlyCooking                  = false
+  local display = false
 
 Citizen.CreateThread(function()
     while ESX == nil do
@@ -30,6 +31,57 @@ RegisterNetEvent('esx:setJob')
 AddEventHandler('esx:setJob', function(job)
 	ESX.PlayerData.job = job
 end)
+
+local function cooking(ingredients)
+	local ingredientsPrepped = {}
+	for name, count in pairs(ingredients) do
+		if count > 0 then
+			table.insert(ingredientsPrepped, { item = name , quantity = count})
+		end
+	end
+	TriggerServerEvent('rorp_pedagang:cooking', ingredientsPrepped)
+end
+
+RegisterNetEvent('rorp_pedagang:openMenu')
+AddEventHandler('rorp_pedagang:openMenu', function(playerInventory)
+	SetNuiFocus(true,true)
+	local preppedInventory = {}
+	for i=1, #playerInventory, 1 do
+		if playerInventory[i].count > 0 and not isWeapon(playerInventory[i].label) then
+			table.insert(preppedInventory, playerInventory[i])
+		end
+	end
+	SendNUIMessage({
+		inventory = preppedInventory,
+		display = true
+	})
+	display = true
+end)
+
+RegisterNUICallback('cookingNUI', function(data, cb)
+	cooking(data)
+end)
+
+RegisterNUICallback('NUIFocusOff', function()
+	SetNuiFocus(false, false)
+	SendNUIMessage({
+		display = false
+	})
+	display = false
+end)
+
+if Config.Keyboard.useKeyboard then
+	-- Handle menu input
+	Citizen.CreateThread(function()
+		while true do
+			Citizen.Wait(0)
+			if IsControlJustReleased(1, Keys["U"]) and GetLastInputMethod(2) then
+				TriggerServerEvent('rorp_pedagang:getPlayerInventory')
+			end
+		end
+	end)
+end
+
 
 AddEventHandler("rorp_pedagang:hasEnteredMarker",function(zone)
     if zone == "Cloakrooms" then
@@ -200,7 +252,7 @@ Citizen.CreateThread(function()
                         end						
                     elseif CurrentAction == "pedagang_inventory_menu" then
                         OpenPedagangInventoryMenu()			
-                    elseif CurrentAction == 'cooking_menu' then
+                    elseif CurrentAction == 'cooking_menu' and not currentlyCooking then
                         NotifInformasi('WORK IN PROGRESS')
                     elseif CurrentAction == 'distributor_menu' then
                         NotifInformasi('WORK IN PROGRESS')	
