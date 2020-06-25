@@ -55,6 +55,7 @@ end
 
 ESX.RegisterServerCallback('rorp_pedagang:checkSpace', function(source, cb, item)
 	checkSpace(item, cb)
+	print(item)
 end)
 
 function findRecipe(list)
