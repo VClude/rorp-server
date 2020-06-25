@@ -352,7 +352,7 @@ function OpenGetStocksMenu()
 				else
 					menu2.close()
 					menu.close()
-					TriggerServerEvent('rorp_pedagang:getStockItem', itemName, count)
+					TriggerServerEvent('rorp_pedagang:getStockItems', itemName, count)
 
 					Citizen.Wait(1000)
 					OpenGetStocksMenu()
