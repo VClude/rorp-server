@@ -569,10 +569,11 @@ function OpenMobileMechanicActionsMenu()
 			title = "Menu Bennys",
 			align = "bottom-right",
 			elements = {
-				{label = "Tagihan", value = "billing"},
-				{label = "Perbaiki Kendaraan", value = "fix_vehicle"},
-				{label = "Cuci Kendaraan", value = "clean_vehicle"},			
-				{label = "Ganti Ban", value = "ganti_ban"},				
+				{label = "Tagihan", 		  	value = "billing"},
+				{label = "Perbaiki Kendaraan",	value = "fix_vehicle"},
+				{label = "Cuci Kendaraan", 	  	value = "clean_vehicle"},			
+				{label = "Ganti Ban", 		  	value = "ganti_ban"},
+				{label = "Towing Kendaraan",    value = 'dep_vehicle'},			
 			}
 		},
 
@@ -699,6 +700,40 @@ function OpenMobileMechanicActionsMenu()
 					)
 				else
 					NotifError("Tidak ada kendaraan!")
+				end
+			elseif data.current.value == "dep_vehicle" then
+				local playerPed = PlayerPedId()
+				local vehicle = GetVehiclePedIsIn(playerPed, true)
+
+				local towmodel = GetHashKey('flatbed3')
+				local isVehicleTow = IsVehicleModel(vehicle, towmodel)
+
+				if isVehicleTow then
+					local targetVehicle = ESX.Game.GetVehicleInDirection()
+
+					if CurrentlyTowedVehicle == nil then
+						if targetVehicle ~= 0 then
+							if not IsPedInAnyVehicle(playerPed, true) then
+								if vehicle ~= targetVehicle then
+									AttachEntityToEntity(targetVehicle, vehicle, 20, -0.5, -5.0, 1.0, 0.0, 0.0, 0.0, false, false, false, false, 20, true)
+									CurrentlyTowedVehicle = targetVehicle
+									NotifSukses('Kendaraan sukses di towing')
+								else
+									NotifError("Kendaraan gagal di towing")
+								end
+							end
+						else
+							NotifInformasi("Tidak ada kendaraan untuk di towing")
+						end
+					else
+						AttachEntityToEntity(CurrentlyTowedVehicle, vehicle, 20, -0.5, -12.0, 1.0, 0.0, 0.0, 0.0, false, false, false, false, 20, true)
+						DetachEntity(CurrentlyTowedVehicle, true, true)
+
+						CurrentlyTowedVehicle = nil
+						NotifSukses("Sukse menurunkan kendaraan")
+					end
+				else
+					NotifError("Kamu membutuhkan Flatbed untuk towing kendaraan")
 				end
 			end
 		end,
