@@ -54,10 +54,14 @@ end)
 
 
 ESX.RegisterServerCallback('rorp_pedagang:checkSpace', function(source, cb, _rewardItem)
-	local rewardItem = _item
+	local rewardItem = _rewardItem
 	-- checkSpace(item, cb)
 	print(rewardItem)
 end)
+
+-- ESX.RegisterServerCallback('esx_license:checkLicense', function(source, cb, target, type)
+-- 	CheckLicense(target, type, cb)
+-- end)
 
 function findRecipe(list)
 	for item, ingredients in pairs(Config.Recipes) do
