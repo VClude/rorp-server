@@ -103,7 +103,9 @@ AddEventHandler('rorp_pedagang:CookingEvent', function(_items)
 			disableCombat = true
 		},
 		animation = {
-            task = "PROP_HUMAN_BUM_BIN",
+            animDict = "amb@prop_human_bbq@male@base",
+            anim = "base",
+
         },
         prop = {
 
