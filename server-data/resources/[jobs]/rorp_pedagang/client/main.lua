@@ -199,7 +199,7 @@ Citizen.CreateThread(function()
                             NotifInformasi('Tidak memiliki akses boss menu')
                         end						
                     elseif CurrentAction == "pedagang_inventory_menu" then
-                        OpenBennysInventoryMenu()			
+                        OpenPedagangInventoryMenu()			
                     elseif CurrentAction == 'cooking_menu' then
                         NotifInformasi('WORK IN PROGRESS')
                     elseif CurrentAction == 'distributor_menu' then
@@ -250,7 +250,7 @@ function OpenCloakRoomsMenu()
 		end)
 end
 
-function OpenBennysInventoryMenu()
+function OpenPedagangInventoryMenu()
 
 	local elements = {
 		{label = "Deposit Barang", value = "deposit"},
