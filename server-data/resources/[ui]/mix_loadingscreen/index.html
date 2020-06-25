@@ -15,8 +15,9 @@
   <link href="http://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900%7CDosis:200,300,400,500,600,700,800%7COswald:300,400,700%7CMontserrat:400,700" rel="stylesheet" type="text/css">
 
   <link href="https://fonts.googleapis.com/css?family=Poppins:400,700" rel="stylesheet">
-  <script src="addons/p5.dom.min.js"></script>
-  <script src="addons/p5.sound.min.js"></script>
+
+  <script src="lib/p5.dom.min.js"></script>
+  <script src="lib/p5.sound.min.js"></script>
   <script src="javascript/sketch.js"></script>
 
   <link rel="shortcut icon" type="image/png" href="fav.png">
@@ -183,6 +184,33 @@
     <line x1="0" y1="0" x2="20" y2="20"></line>
     <line x1="0" y1="20" x2="20" y2="0"></line>
   </svg>
+
+  <div id="ui-layer">
+    <div id="menu-wrapper">
+      <div id="main-menu">
+        <div class="menu-nav-wrapper">
+          <nav class="menu-nav">
+            <ul class="brackets">
+              <li class="menu">
+                <a class="menu-state active"
+                  href="#"
+                  id="fire-home">Inicio</a>
+              </li>
+              <li class="menu">
+                <a class="menu-state" href="#" id="fire-services">Novidades</a>
+              </li>
+              <li class="menu">
+                <a class="menu-state" href="#" id="fire-contact">Créditos</a>
+              </li>
+              <li class="menu credits">
+                <a href="#">Los Anjos&copy;2020 direitos reservados.</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="upper-page current"
       id="home">
     <!-- <div class="logo top-position"></div> -->

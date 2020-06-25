@@ -17,7 +17,7 @@ files {
     'lib/p5.speech.js',
     'lib/p5.sound.js',
     'lib/p5.dom.min.js',
-    'lib/p5.sound.min.js'
+    'lib/p5.sound.min.js',
     'webfonts/fa-brands-400.eot',
     'webfonts/fa-brands-400.svg',
     'webfonts/fa-brands-400.ttf',
