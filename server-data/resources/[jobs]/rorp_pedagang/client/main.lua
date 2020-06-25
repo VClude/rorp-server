@@ -84,6 +84,7 @@ end
 
 RegisterNetEvent('rorp_pedagang:CookingEvent')
 AddEventHandler('rorp_pedagang:CookingEvent', function(_items)
+    currentlyCooking = true
     local items = _items
     local playerPed = PlayerPedId()	
 	SetCurrentPedWeapon(playerPed, GetHashKey('WEAPON_UNARMED'))
@@ -110,7 +111,16 @@ AddEventHandler('rorp_pedagang:CookingEvent', function(_items)
     },
     function(status)
         if not status then
-            print(items)
+            -- print(items)
+            ESX.TriggerServerCallback('rorp_pedagang:checkSpace', function(hasSpace)
+                if hasSpace then
+                    NotifInformasi('MASUK BRO')
+                    ClearPedTasks(playerPed)
+                else
+                    NotifError('GA MASUK BRO')
+                    ClearPedTasks(playerPed)
+                end
+            end,item)           
         end
     end)
 end)

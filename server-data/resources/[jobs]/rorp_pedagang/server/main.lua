@@ -43,6 +43,20 @@ AddEventHandler('rorp_pedagang:cooking', function(ingredients)
 	end
 end)
 
+function checkSpace(item, cb)
+	local xPlayer = ESX.GetPlayerFromId(source)
+	if xPlayer.canCarryItem(item, 5) then
+		cb(true)
+	else
+		cb(false)
+	end
+end
+
+
+ESX.RegisterServerCallback('rorp_pedagang:checkSpace', function(source, cb, item)
+	checkSpace(item, cb)
+end)
+
 function findRecipe(list)
 	for item, ingredients in pairs(Config.Recipes) do
 		if #ingredients == #list then
