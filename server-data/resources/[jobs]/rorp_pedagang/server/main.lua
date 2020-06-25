@@ -33,7 +33,7 @@ AddEventHandler('rorp_pedagang:cooking', function(ingredients)
 				-- xPlayer.addInventoryItem(item, 1)
 				-- TriggerClientEvent('rorp_pedagang:CookingEvent', item)
 
-				TriggerClientEvent('rorp_pedagang:CookingEvent', item)
+				TriggerClientEvent('rorp_pedagang:CookingEvent',source, item)
 
 				TriggerClientEvent('esx:showNotification', _source, '~y~Berhasil Memasak: ~w~' .. itemLabel(item, xPlayer.inventory))
 			else
