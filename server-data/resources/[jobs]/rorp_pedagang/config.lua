@@ -2,6 +2,9 @@ Config                            = {}
 Config.Locale           = 'id'
 Config.DrawDistance     = 20
 
+Config.Color = 2
+Config.DistributorID = 52
+
 Config.Blips = {
     {
         Pos = {["x"] = -630.26, ["y"] = 234.47, ["z"] = 81.88},
@@ -27,6 +30,33 @@ Config.Keyboard = {
 	useKeyboard = false
 }
 
+Config.Shops = {
+    Distributor = {
+        Locations = {
+			{x = -616.58,   y = -1621.07,  z = 33.01},
+
+        },
+        Items = {
+            {name = 'bread'},
+            {name = 'water'},
+            {name = 'cigarette'},
+            {name = 'lighter'},
+            {name = 'rollingpaper'},
+            {name = 'phone'},
+            {name = 'sandwich'},
+            {name = 'hamburger'},
+            {name = 'cupcake'},
+            {name = 'chips'},
+            {name = 'pistachio'},
+            {name = 'chocolate'},
+            {name = 'cashew'},
+            {name = 'cocacola'},
+            {name = 'drpepper'},
+            {name = 'energy'},
+            {name = 'lemonade'},
+            {name = 'icetea'}
+        }
+    },
 
 Config.Zones = {
 	Cloakrooms = {
@@ -56,13 +86,6 @@ Config.Zones = {
 		Color = {r = 204, g = 204, b = 0},
 		Type = -1
 	},
-	
-	Distributor = {
-		Pos = {["x"] = -616.58, ["y"] = -1621.07, ["z"] = 33.01},
-		Size = {x = 1.5, y = 1.5, z = 1.0},
-		Color = {r = 204, g = 204, b = 0},
-		Type = -1
-	},	
 }
 
 Config.Uniforms = {

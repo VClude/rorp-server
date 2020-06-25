@@ -95,6 +95,7 @@ AddEventHandler('esx_inventoryhud:disableOpen', function()
     closeInventory()
     canOpenShopInventory = false
 end)
+
 AddEventHandler("esx_inventoryhud:enableOpen", function()
     canOpenShopInventory = true
 end)

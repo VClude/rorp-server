@@ -306,8 +306,6 @@ Citizen.CreateThread(function()
                         OpenPedagangInventoryMenu()			
                     elseif CurrentAction == 'cooking_menu' and not currentlyCooking then
                         TriggerServerEvent('rorp_pedagang:getPlayerInventory')
-                    elseif CurrentAction == 'distributor_menu' then
-                        NotifInformasi('WORK IN PROGRESS')	
                     end
                     CurrentAction = nil
                 end

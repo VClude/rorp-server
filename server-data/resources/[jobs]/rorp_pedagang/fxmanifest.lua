@@ -28,5 +28,6 @@ client_scripts {
     '@es_extended/locale.lua',
     'id.lua',
 	'config.lua',
-	'client/main.lua'
+	'client/main.lua',
+	'client/distributor.lua'
 }
