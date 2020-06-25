@@ -30,12 +30,49 @@ AddEventHandler('rorp_pedagang:cooking', function(ingredients)
 						xPlayer.removeInventoryItem(ingredient.item, ingredient.quantity)
 					end
 				end
-				xPlayer.addInventoryItem(item, 1)
+				-- xPlayer.addInventoryItem(item, 1)
+				-- TriggerClientEvent('rorp_pedagang:CookingEvent', item)
+
+				TriggerEvent("mythic_progbar:client:progress",
+				{
+					name = "cooking",
+					duration = 15000,
+					label = "Memasak...",
+					useWhileDead = false,
+					canCancel = false,
+					controlDisables = {
+						disableMovement = true,
+						disableCarMovement = true,
+						disableMouse = false,
+						disableCombat = true
+					},
+					animation = {
+						task = "PROP_HUMAN_BUM_BIN",
+					},
+					prop = {
+
+					},
+				},
+				function(status)
+					if not status then
+						print(item)
+					end
+				end)
+
 				TriggerClientEvent('esx:showNotification', _source, '~y~Berhasil Memasak: ~w~' .. itemLabel(item, xPlayer.inventory))
 			else
 				TriggerClientEvent('esx:showNotification', _source, _U('RecipeNotEnough'))
 			end
 		end
+	end
+end)
+
+ESX.RegisterServerCallback("rorp_pedagang:checkSpace",function(source,cb,)
+	local xPlayer = ESX.GetPlayerFromId(source)
+	if xPlayer.canCarryItem('fixtool', 5) then
+		cb(true)
+	else
+		cb(false)
 	end
 end)
 

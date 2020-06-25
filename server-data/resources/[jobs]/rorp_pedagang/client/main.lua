@@ -82,7 +82,6 @@ if Config.Keyboard.useKeyboard then
 	end)
 end
 
-
 AddEventHandler("rorp_pedagang:hasEnteredMarker",function(zone)
     if zone == "Cloakrooms" then
         CurrentAction = "cloakrooms_menu"
@@ -115,8 +114,8 @@ AddEventHandler("rorp_pedagang:hasExitedMarker", function(zone)
 end)
 
 -- Set Uniforms
-function setUniform(job, playerPed) TriggerEvent( "skinchanger:getSkin",
-    function(skin)
+function setUniform(job, playerPed) 
+    TriggerEvent( "skinchanger:getSkin", function(skin)
         if skin.sex == 0 then
             if Config.Uniforms[job].male then
                 TriggerEvent("skinchanger:loadClothes", skin, Config.Uniforms[job].male)
