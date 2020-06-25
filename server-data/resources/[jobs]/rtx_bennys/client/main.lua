@@ -726,7 +726,7 @@ function OpenMobileMechanicActionsMenu()
 							NotifInformasi("Tidak ada kendaraan untuk di towing")
 						end
 					else
-						-- AttachEntityToEntity(CurrentlyTowedVehicle, vehicle, 20, -0.5, -12.0, 1.0, 0.0, 0.0, 0.0, false, false, false, false, 20, true)
+						AttachEntityToEntity(CurrentlyTowedVehicle, vehicle, 20, -0.5, -12.0, 1.0, 0.0, 0.0, 0.0, false, false, false, false, 20, true)
 						DetachEntity(CurrentlyTowedVehicle, true, true)
 
 						CurrentlyTowedVehicle = nil
