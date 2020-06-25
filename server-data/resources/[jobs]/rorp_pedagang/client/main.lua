@@ -82,6 +82,13 @@ if Config.Keyboard.useKeyboard then
 	end)
 end
 
+RegisterNetEvent('rorp_pedagang:CookingEvent')
+AddEventHandler('rorp_pedagang:CookingEvent', function(_item)
+    local items = _items
+    
+    print(items)
+end)
+
 AddEventHandler("rorp_pedagang:hasEnteredMarker",function(zone)
     if zone == "Cloakrooms" then
         CurrentAction = "cloakrooms_menu"

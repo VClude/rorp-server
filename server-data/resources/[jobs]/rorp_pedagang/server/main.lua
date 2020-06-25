@@ -33,31 +33,7 @@ AddEventHandler('rorp_pedagang:cooking', function(ingredients)
 				-- xPlayer.addInventoryItem(item, 1)
 				-- TriggerClientEvent('rorp_pedagang:CookingEvent', item)
 
-				TriggerClientEvent("mythic_progbar:client:progress",
-				{
-					name = "cooking",
-					duration = 15000,
-					label = "Memasak...",
-					useWhileDead = false,
-					canCancel = false,
-					controlDisables = {
-						disableMovement = true,
-						disableCarMovement = true,
-						disableMouse = false,
-						disableCombat = true
-					},
-					animation = {
-						task = "PROP_HUMAN_BUM_BIN",
-					},
-					prop = {
-
-					},
-				},
-				function(status)
-					if not status then
-						print(item)
-					end
-				end)
+				TriggerClientEvent(rorp_pedagang:CookingEvent, source, item)
 
 				TriggerClientEvent('esx:showNotification', _source, '~y~Berhasil Memasak: ~w~' .. itemLabel(item, xPlayer.inventory))
 			else
