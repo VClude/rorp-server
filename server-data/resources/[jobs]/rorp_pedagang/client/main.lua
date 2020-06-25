@@ -103,12 +103,12 @@ AddEventHandler('rorp_pedagang:CookingEvent', function(_items)
 			disableCombat = true
 		},
 		animation = {
-            animDict = "amb@prop_human_bbq@male@base",
-            anim = "base",
+            animDict = "amb@prop_human_bbq@male@idle_a",
+            anim = "idle_a",
 
         },
         prop = {
-
+            model = "prop_bbq_2",
 		},
     },
     function(status)
