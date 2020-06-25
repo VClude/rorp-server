@@ -57,7 +57,7 @@ AddEventHandler("rorp_pedagang:hasEnteredMarker",function(zone)
         
     elseif zone == "Cooking" then
 
-        CurrentAction = "cooking"
+        CurrentAction = "cooking_menu"
 
         CurrentActionMsg = _U('cooking')
 
@@ -65,7 +65,7 @@ AddEventHandler("rorp_pedagang:hasEnteredMarker",function(zone)
 
     elseif zone == "Distributor" then
 
-        CurrentAction = "distributor"
+        CurrentAction = "distributor_menu"
 
         CurrentActionMsg = _U('distri')
 
@@ -124,9 +124,7 @@ Citizen.CreateThread(function()
             local coords, letSleep = GetEntityCoords(PlayerPedId()), true
             for k, v in pairs(Config.Zones) do
                 if v.Type ~= -1 and GetDistanceBetweenCoords(coords, v.Pos.x, v.Pos.y, v.Pos.z, true) < Config.DrawDistance then
-                    if ESX.PlayerData.grade_name == "boss" then
-                        DrawMarker(v.Type, v.Pos.x, v.Pos.y, v.Pos.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, v.Size.x, v.Size.y, v.Size.z, v.Color.r, v.Color.g, v.Color.b, 100, false, true, 2, false, nil, nil, false)
-                    end
+                    DrawMarker(v.Type, v.Pos.x, v.Pos.y, v.Pos.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, v.Size.x, v.Size.y, v.Size.z, v.Color.r, v.Color.g, v.Color.b, 100, false, true, 2, false, nil, nil, false)
                     letSleep = false
                 end
             end
@@ -193,44 +191,21 @@ Citizen.CreateThread(function()
 
                 if IsControlJustReleased(0, Keys["E"]) then
                     if CurrentAction == "cloakrooms_menu" then
-                        OpenCloakRoomsMenu()
-
+                        NotifInformasi('WORK IN PROGRESS')
                     elseif CurrentAction == "boss_menu" then
-                        if  ESX.PlayerData.job and ESX.PlayerData.job.name == "bennys" and ESX.PlayerData.job.grade_name == 'boss' then
-                            OpenBossMenu()
-                        else
-                            NotifInformasi('Anda bukan BOSS')
-                        end						
-                    elseif CurrentAction == "bennys_inventory_menu" then
-                        if  ESX.PlayerData.job and ESX.PlayerData.job.name == "bennys" and ESX.PlayerData.job.grade_name ~= 'magang' and ESX.PlayerData.job.grade_name ~= 'karyawan_bengkel' then						
-                            OpenBennysInventoryMenu()
-                        else
-                            NotifInformasi('Anda tidak memiliki akses membuka inventory')
-                        end							
-                    elseif CurrentAction == 'ls_custom' then
-                        if  ESX.PlayerData.job and ESX.PlayerData.job.name == "bennys" and ESX.PlayerData.job.grade_name ~= 'magang' then						
-                            OpenLSAction()
-                        else
-                            NotifInformasi('Pengalaman anda kurang untuk modifikasi kendaraan')
-                        end
+                        NotifInformasi('WORK IN PROGRESS')						
+                    elseif CurrentAction == "pedagang_inventory_menu" then
+                        NotifInformasi('WORK IN PROGRESS')				
+                    elseif CurrentAction == 'cooking_menu' then
+                        NotifInformasi('WORK IN PROGRESS')
+                    elseif CurrentAction == 'distributor_menu' then
+                        NotifInformasi('WORK IN PROGRESS')	
                     end
-
                     CurrentAction = nil
-
                 end
-
             end
-
-            if ( IsControlJustReleased( 0, 167 ) or IsDisabledControlJustReleased( 0, 167 ) ) and GetLastInputMethod( 0 ) and not IsDead and not ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'mobile_mechanic_actions') and (GetGameTimer() - GUI.Time) > 150 then
-                OpenMobileMechanicActionsMenu()
-            end
-
         else
-
             Citizen.Wait(500)
-
         end
-
     end
-
 end)
