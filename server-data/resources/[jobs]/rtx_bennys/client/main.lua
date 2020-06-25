@@ -742,7 +742,7 @@ function OpenBossMenu()
 		},
 		function(data, menu)
 			if data.current.value == "bennys_manage" then
-				TriggerEvent('esx_society:openBossMenu', 'bennys')
+				TriggerEvent('esx_society:openBossMenu', 'bennys',{wash = false})
 			elseif data.current.value == "reg_license" then
 				OpenRegLicense()
 			end

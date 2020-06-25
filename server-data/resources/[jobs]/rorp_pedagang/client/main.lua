@@ -192,7 +192,7 @@ Citizen.CreateThread(function()
                         OpenCloakRoomsMenu()
                     elseif CurrentAction == "boss_menu" then
                         if  ESX.PlayerData.job and ESX.PlayerData.job.name == "pedagang" and ESX.PlayerData.job.grade_name == 'boss' then
-                            TriggerEvent('esx_society:openBossMenu', pedagang)
+                            TriggerEvent('esx_society:openBossMenu', 'pedagang',{wash = false})
                         else
                             NotifInformasi('Tidak memiliki akses boss menu')
                         end						
