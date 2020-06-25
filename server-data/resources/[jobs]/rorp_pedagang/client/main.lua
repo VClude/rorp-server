@@ -47,7 +47,7 @@ AddEventHandler('rorp_pedagang:openMenu', function(playerInventory)
 	SetNuiFocus(true,true)
 	local preppedInventory = {}
 	for i=1, #playerInventory, 1 do
-		if playerInventory[i].count > 0 and not isWeapon(playerInventory[i].label) then
+		if playerInventory[i].count > 0 then
 			table.insert(preppedInventory, playerInventory[i])
 		end
 	end
