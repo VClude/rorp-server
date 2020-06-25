@@ -124,11 +124,7 @@ Citizen.CreateThread(function()
             local coords, letSleep = GetEntityCoords(PlayerPedId()), true
             for k, v in pairs(Config.Zones) do
                 if v.Type ~= -1 and GetDistanceBetweenCoords(coords, v.Pos.x, v.Pos.y, v.Pos.z, true) < Config.DrawDistance then
-                    if k == "BossMenu" then
-                        if ESX.PlayerData.grade_name == "juragan" then
-                            DrawMarker(v.Type, v.Pos.x, v.Pos.y, v.Pos.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, v.Size.x, v.Size.y, v.Size.z, v.Color.r, v.Color.g, v.Color.b, 100, false, true, 2, false, nil, nil, false)
-                        end
-                    else   
+                    if ESX.PlayerData.grade_name == "juragan" then
                         DrawMarker(v.Type, v.Pos.x, v.Pos.y, v.Pos.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, v.Size.x, v.Size.y, v.Size.z, v.Color.r, v.Color.g, v.Color.b, 100, false, true, 2, false, nil, nil, false)
                     end
                     letSleep = false
