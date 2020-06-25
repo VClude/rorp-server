@@ -92,7 +92,33 @@
 					}
 				}
       ]
-    }
+    },
+    {
+        "display": "Benny Mekanik",
+        "icon": "/html/static/img/icons_app/mechanic.png",
+        "subMenu": [
+                  {
+                      "title": "Kirim Pesan",
+                      "eventName": "esx_addons_gcphone:call",
+                      "type": {
+                          "number": "bennys"
+                      }
+                  }
+        ]
+      },
+      {
+        "display": "Pedagang",
+        "icon": "/html/static/img/icons_app/market.png",
+        "subMenu": [
+                  {
+                      "title": "Kirim Pesan",
+                      "eventName": "esx_addons_gcphone:call",
+                      "type": {
+                          "number": "pedagang"
+                      }
+                  }
+        ]
+      }
   ],
     
 	"defaultContacts": [
