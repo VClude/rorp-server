@@ -89,36 +89,44 @@ AddEventHandler('rorp_pedagang:CookingEvent', function(_items)
     local playerPed = PlayerPedId()	
 	SetCurrentPedWeapon(playerPed, GetHashKey('WEAPON_UNARMED'))
     Citizen.Wait(200)
-    TriggerEvent("mythic_progbar:client:progress",
-	{
-		name = "cooking",
-		duration = 15000,
-		label = "Memasak...",
-		useWhileDead = false,
-		canCancel = false,
-		controlDisables = {
-			disableMovement = true,
-			disableCarMovement = true,
-			disableMouse = false,
-			disableCombat = true
-		},
-		animation = {
-            animDict = "amb@prop_human_bbq@male@idle_a",
-            anim = "idle_a",
+    ClearPedTasks(GetPlayerPed(-1))
+    exports['progressBars']:startUI((10000), "MINING")
+    TaskStartScenarioInPlace(GetPlayerPed(-1), "PROP_HUMAN_BBQ", 0, true)
+	Citizen.Wait(10000)
+	
+	ClearPedTasks(PlayerPedId(-1))
+	FreezeEntityPosition(playerPed, false)
+	currentlyCooking = false
+    -- TriggerEvent("mythic_progbar:client:progress",
+	-- {
+	-- 	name = "cooking",
+	-- 	duration = 15000,
+	-- 	label = "Memasak...",
+	-- 	useWhileDead = false,
+	-- 	canCancel = false,
+	-- 	controlDisables = {
+	-- 		disableMovement = true,
+	-- 		disableCarMovement = true,
+	-- 		disableMouse = false,
+	-- 		disableCombat = true
+	-- 	},
+	-- 	animation = {
+    --         animDict = "amb@prop_human_bbq@male@idle_a",
+    --         anim = "idle_a",
 
-        },
-        prop = {
-            model = "prop_bbq_2",
-		},
-    },
-    function(status)
-        if not status then
-            ESX.ShowNotification(_U('CookingSuccess')..items)
-            TriggerServerEvent('rorp_pedagang:reward', items)
-            currentlyCooking = false
-            ClearPedTasks(playerPed)        
-        end
-    end)
+    --     },
+    --     prop = {
+    --         model = "prop_bbq_2",
+	-- 	},
+    -- },
+    -- function(status)
+    --     if not status then
+    --         ESX.ShowNotification(_U('CookingSuccess')..items)
+    --         TriggerServerEvent('rorp_pedagang:reward', items)
+    --         currentlyCooking = false
+    --         ClearPedTasks(playerPed)        
+    --     end
+    -- end)
 end)
 
 AddEventHandler("rorp_pedagang:hasEnteredMarker",function(zone)
