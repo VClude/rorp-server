@@ -56,7 +56,8 @@ Config.Shops = {
             {name = 'lemonade'},
             {name = 'icetea'}
         }
-    },
+    }
+}
 
 Config.Zones = {
 	Cloakrooms = {
