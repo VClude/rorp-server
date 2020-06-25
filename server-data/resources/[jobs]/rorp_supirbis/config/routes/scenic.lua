@@ -11,7 +11,7 @@ ScenicRoute = {
             BusColor = 39,
             Stops = {
                 {x = -1889.26,   y = 2045.91, z = 140.21, name = 'stop_petani', unloadType = UnloadType.All},
-                {x = -1085.12, y = -2011.23,  z = 12.37, name = 'stop_tukang_sapi', unloadType = UnloadType.Some},
+                {x = -1082.59, y = -2044.08,  z = 13.11, name = 'stop_tukang_sapi', unloadType = UnloadType.Some},
                 {x = 539.95, y = -2277.31, z = 5.33, name = 'stop_fueler', unloadType = UnloadType.Some},
                 {x = 915.2, y = -2194.81, z = 29.66, name = 'stop_miner', unloadType = UnloadType.Some},
                 {x = 1257.96, y = -1271.65, z = 34.61, name = 'stop_lumberjack', unloadType = UnloadType.Some},
