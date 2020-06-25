@@ -1,8 +1,22 @@
 ![nativeuiluarldmedia](https://picture.dylan-malandain.me/UINativeLuaReloadedFini.png)
+
+# Discord : https://discord.gg/Jjb2c8Q (No support)
+
 # NativeUILua-Reloaded
 
 ![OpenIssue](https://img.shields.io/github/issues/iTexZoz/NativeUILua_Reloaded.svg?style=flat)
 ![LastReleases](https://img.shields.io/github/release/iTexZoz/NativeUILua_Reloaded.svg?label=Last%20releases&style=flat)
+
+<h3>NativeUILua-Reloaded ported to C# by @manups4e.</h3>
+
+New method for use NativeUILua-Reloaded cross-resource
+```lua
+client_scripts {
+    "@NativeUILua_Reloaded/src/NativeUIReloaded.lua",
+}
+```
+
+https://github.com/manups4e/NativeUI
 
 # License (custom license)
 
