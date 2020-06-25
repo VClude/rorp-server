@@ -17,10 +17,9 @@ end)
 
 ESX.RegisterServerCallback('rorp_pedagang:getPlayerInventory', function(source, cb)
 	local xPlayer    = ESX.GetPlayerFromId(source)
-	-- local items      = xPlayer.inventory
+	local items      = xPlayer.inventory
 
-	-- cb({items = items})
-	xPlayer.showNotification('BACOT')
+	cb({items = items})
 end)
 
 RegisterServerEvent('rorp_pedagang:putStockItems')
@@ -63,5 +62,11 @@ AddEventHandler('rorp_pedagang:getStockItems', function(itemName, count)
 		else
 			xPlayer.showNotification(_U('invalid_quantity'))
 		end
+	end)
+end)
+
+ESX.RegisterServerCallback('rorp_pedagang:getStockItems', function(source, cb)
+	TriggerEvent('esx_addoninventory:getSharedInventory', 'society_pedagang', function(inventory)
+		cb(inventory.items)
 	end)
 end)
