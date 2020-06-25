@@ -108,7 +108,7 @@ Territories = {
     actions = { 
       ["entry"] = {
         helpText = _U["enter_laundry"],
-        location = vector3(-96.15,6324.71,31.58),
+        location = vector3(-154.85,6432.87,31.92),
       },
       ["exit"] = {
         helpText = _U["leave_laundry"],
