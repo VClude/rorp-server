@@ -1,6 +1,6 @@
 Locales['en'] = {
-  ['bennys']                  = 'Mechanic',
-  ['phone_bennys']            = 'Mechanic',
+  ['bennys']                  = 'Bennys',
+  ['phone_bennys']            = 'Bennys',
   ['kuruma']                    = 'Kuruma',
   ['drive_to_indicated']        = '~y~Drive~s~ to the marked location.',
   ['mission_canceled']          = 'Mission ~r~cancelled~s~',
