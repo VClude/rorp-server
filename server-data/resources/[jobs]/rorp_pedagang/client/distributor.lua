@@ -78,3 +78,14 @@ Citizen.CreateThread(function()
         CreateBlip(vector3(Config.Shops.Distributor.Locations.x, Config.Shops.Distributor.Locations.y, Config.Shops.Distributor.Locations.z ), _U('regular_shop_name'), 3.0, Config.Color, Config.DistributorID)
     end
 end)
+
+function CreateBlip(coords, text, radius, color, sprite)
+    local blip = AddBlipForCoord(coords)
+    SetBlipSprite(blip, sprite)
+    SetBlipColour(blip, color)
+    SetBlipScale(blip, 0.8)
+    SetBlipAsShortRange(blip, true)
+    BeginTextCommandSetBlipName("STRING")
+    AddTextComponentString(text)
+    EndTextCommandSetBlipName(blip)
+end
