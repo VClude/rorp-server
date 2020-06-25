@@ -43,25 +43,22 @@ AddEventHandler('rorp_pedagang:cooking', function(ingredients)
 	end
 end)
 
--- function checkSpace(source, item, cb)
--- 	local xPlayer = ESX.GetPlayerFromId(source)
--- 	if xPlayer.canCarryItem(item, 5) then
--- 		cb(true)
--- 	else
--- 		cb(false)
--- 	end
--- end
+function checkSpace(source, _items, cb)
+	local items = _items
+	local xPlayer = ESX.GetPlayerFromId(source)
+	if xPlayer.canCarryItem(items, 5) then
+		cb(true)
+	else
+		cb(false)
+	end
+end
 
 
 ESX.RegisterServerCallback('rorp_pedagang:checkSpace', function(source, cb, _rewardItem)
 	local rewardItem = _rewardItem
-	-- checkSpace(item, cb)
-	print(rewardItem)
+	checkSpace(rewardItem, cb)
 end)
 
--- ESX.RegisterServerCallback('esx_license:checkLicense', function(source, cb, target, type)
--- 	CheckLicense(target, type, cb)
--- end)
 
 function findRecipe(list)
 	for item, ingredients in pairs(Config.Recipes) do
