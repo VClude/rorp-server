@@ -323,3 +323,45 @@ function OpenPutStocksMenu()
 		end)
 	end)
 end
+
+function OpenGetStocksMenu()
+	ESX.TriggerServerCallback('rorp_pedagang:getStockItems', function(items)
+		local elements = {}
+
+		for i=1, #items, 1 do
+			table.insert(elements, {
+				label = 'x' .. items[i].count .. ' ' .. items[i].label,
+				value = items[i].name
+			})
+		end
+
+		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'stocks_menu', {
+			title    = 'Pedagang Inventory',
+			align    = 'bottom-right',
+			elements = elements
+		}, function(data, menu)
+			local itemName = data.current.value
+
+			ESX.UI.Menu.Open('dialog', GetCurrentResourceName(), 'stocks_menu_get_item_count', {
+				title = _U('quantity')
+			}, function(data2, menu2)
+				local count = tonumber(data2.value)
+
+				if count == nil then
+					ESX.ShowNotification(_U('invalid_quantity'))
+				else
+					menu2.close()
+					menu.close()
+					TriggerServerEvent('rorp_pedagang:getStockItem', itemName, count)
+
+					Citizen.Wait(1000)
+					OpenGetStocksMenu()
+				end
+			end, function(data2, menu2)
+				menu2.close()
+			end)
+		end, function(data, menu)
+			menu.close()
+		end)
+	end)
+end

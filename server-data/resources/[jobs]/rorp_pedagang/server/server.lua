@@ -40,3 +40,27 @@ AddEventHandler('rorp_pedagang:putStockItems', function(itemName, count)
 		xPlayer.showNotification(_U('have_deposited', count, item.label))
 	end)
 end)
+
+RegisterServerEvent('rorp_pedagang:getStockItem')
+AddEventHandler('rorp_pedagang:getStockItem', function(itemName, count)
+	local xPlayer = ESX.GetPlayerFromId(source)
+
+	TriggerEvent('esx_addoninventory:getSharedInventory', 'society_pedagang', function(inventory)
+		local item = inventory.getItem(itemName)
+
+		-- is there enough in the society?
+		if count > 0 and item.count >= count then
+
+			-- can the player carry the said amount of x item?
+			if xPlayer.canCarryItem(itemName, count) then
+				inventory.removeItem(itemName, count)
+				xPlayer.addInventoryItem(itemName, count)
+				xPlayer.showNotification(_U('have_withdrawn', count, item.label))
+			else
+				xPlayer.showNotification(_U('player_cannot_hold'))
+			end
+		else
+			xPlayer.showNotification(_U('invalid_quantity'))
+		end
+	end)
+end)
