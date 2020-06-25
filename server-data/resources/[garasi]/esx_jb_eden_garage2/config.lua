@@ -67,6 +67,21 @@ Config.Garages = {
 			HelpPrompt = _U('store_car')
 		}, 	
 	},
+
+	Garasi_Pelabuhan = {
+		Name = "Garasi Pelabuhan",
+		SpawnPoint = {
+			Pos = {x = -777.69,y = -1324.03,z = 5.15 },
+			Heading = 315.06,
+			Marker = { w= 1.5, h= 1.0,r=0,g=255,b=0},
+			HelpPrompt = _U('spawn_car')
+		},
+		DeletePoint = {
+			Pos = {x = -776.31,y = -1334.08,z = 5 },
+			Marker = { w= 1.5, h= 1.0,r=255,g=0,b=0},
+			HelpPrompt = _U('store_car')
+		}, 	
+	},
 	-- Garasi_Paleto = {
 	-- 	Name = _('garage_name'),
 	-- 	SpawnPoint = {

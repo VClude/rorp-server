@@ -233,50 +233,50 @@ Citizen.CreateThread(function()
 							DrawText3Ds(stringCoords.x, stringCoords.y, stringCoords.z + 1.2, Config.Strings.FullTank)
 						end
 					end
-				-- elseif isNearPump then
-				-- 	local stringCoords = GetEntityCoords(isNearPump)
+				elseif isNearPump then
+					local stringCoords = GetEntityCoords(isNearPump)
 
-				-- 	if currentCash >= Config.JerryCanCost then
-				-- 		if not HasPedGotWeapon(ped, 883325847) then
-				-- 			DrawText3Ds(stringCoords.x, stringCoords.y, stringCoords.z + 1.2, Config.Strings.PurchaseJerryCan)
+					if currentCash >= Config.JerryCanCost then
+						if not HasPedGotWeapon(ped, 883325847) then
+							DrawText3Ds(stringCoords.x, stringCoords.y, stringCoords.z + 1.2, Config.Strings.PurchaseJerryCan)
 
-				-- 			if IsControlJustReleased(0, 38) then
-				-- 				GiveWeaponToPed(ped, 883325847, 4500, false, true)
+							if IsControlJustReleased(0, 38) then
+								GiveWeaponToPed(ped, 883325847, 4500, false, true)
 
-				-- 				TriggerServerEvent('fuel:pay', Config.JerryCanCost)
+								TriggerServerEvent('fuel:pay', Config.JerryCanCost)
 
-				-- 				currentCash = ESX.GetPlayerData().money
-				-- 			end
-				-- 		else
-				-- 			if Config.UseESX then
-				-- 				local refillCost = Round(Config.RefillCost * (1 - GetAmmoInPedWeapon(ped, 883325847) / 4500))
+								currentCash = ESX.GetPlayerData().money
+							end
+						else
+							if Config.UseESX then
+								local refillCost = Round(Config.RefillCost * (1 - GetAmmoInPedWeapon(ped, 883325847) / 4500))
 
-				-- 				if refillCost > 0 then
-				-- 					if currentCash >= refillCost then
-				-- 						DrawText3Ds(stringCoords.x, stringCoords.y, stringCoords.z + 1.2, Config.Strings.RefillJerryCan .. refillCost)
+								if refillCost > 0 then
+									if currentCash >= refillCost then
+										DrawText3Ds(stringCoords.x, stringCoords.y, stringCoords.z + 1.2, Config.Strings.RefillJerryCan .. refillCost)
 
-				-- 						if IsControlJustReleased(0, 38) then
-				-- 							TriggerServerEvent('fuel:pay', refillCost)
+										if IsControlJustReleased(0, 38) then
+											TriggerServerEvent('fuel:pay', refillCost)
 
-				-- 							SetPedAmmo(ped, 883325847, 4500)
-				-- 						end
-				-- 					else
-				-- 						DrawText3Ds(stringCoords.x, stringCoords.y, stringCoords.z + 1.2, Config.Strings.NotEnoughCashJerryCan)
-				-- 					end
-				-- 				else
-				-- 					DrawText3Ds(stringCoords.x, stringCoords.y, stringCoords.z + 1.2, Config.Strings.JerryCanFull)
-				-- 				end
-				-- 			else
-				-- 				DrawText3Ds(stringCoords.x, stringCoords.y, stringCoords.z + 1.2, Config.Strings.RefillJerryCan)
+											SetPedAmmo(ped, 883325847, 4500)
+										end
+									else
+										DrawText3Ds(stringCoords.x, stringCoords.y, stringCoords.z + 1.2, Config.Strings.NotEnoughCashJerryCan)
+									end
+								else
+									DrawText3Ds(stringCoords.x, stringCoords.y, stringCoords.z + 1.2, Config.Strings.JerryCanFull)
+								end
+							else
+								DrawText3Ds(stringCoords.x, stringCoords.y, stringCoords.z + 1.2, Config.Strings.RefillJerryCan)
 
-				-- 				if IsControlJustReleased(0, 38) then
-				-- 					SetPedAmmo(ped, 883325847, 4500)
-				-- 				end
-				-- 			end
-				-- 		end
-				-- 	else
-				-- 		DrawText3Ds(stringCoords.x, stringCoords.y, stringCoords.z + 1.2, Config.Strings.NotEnoughCash)
-				-- 	end
+								if IsControlJustReleased(0, 38) then
+									SetPedAmmo(ped, 883325847, 4500)
+								end
+							end
+						end
+					else
+						DrawText3Ds(stringCoords.x, stringCoords.y, stringCoords.z + 1.2, Config.Strings.NotEnoughCash)
+					end
 				else
 					Citizen.Wait(250)
 				end
