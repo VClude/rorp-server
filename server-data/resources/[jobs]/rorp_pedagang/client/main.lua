@@ -121,7 +121,7 @@ AddEventHandler('rorp_pedagang:CookingEvent', function(_items)
                     ClearPedTasks(playerPed)
                     currentlyCooking = false
                 end
-            end, items)           
+            end, GetPlayerServerId(PlayerId()),items)           
         end
     end)
 end)

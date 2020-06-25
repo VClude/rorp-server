@@ -43,9 +43,10 @@ AddEventHandler('rorp_pedagang:cooking', function(ingredients)
 	end
 end)
 
-function checkSpace(source, _items, cb)
+function checkSpace(_target, _items, cb)
 	local items = _items
-	local xPlayer = ESX.GetPlayerFromId(source)
+	local target = _target
+	local xPlayer = ESX.GetPlayerFromId(target)
 	if xPlayer.canCarryItem(items, 5) then
 		cb(true)
 	else
@@ -54,9 +55,10 @@ function checkSpace(source, _items, cb)
 end
 
 
-ESX.RegisterServerCallback('rorp_pedagang:checkSpace', function(source, cb, _rewardItem)
+ESX.RegisterServerCallback('rorp_pedagang:checkSpace', function(source, cb, _target, _rewardItem)
 	local rewardItem = _rewardItem
-	checkSpace(rewardItem, cb)
+	local target = _target
+	checkSpace(target, rewardItem, cb)
 end)
 
 
