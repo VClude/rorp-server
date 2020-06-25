@@ -9,17 +9,18 @@ RegisterServerEvent('rorp_pedagang:setJob')
 AddEventHandler('rorp_pedagang:setJob', function(identifier,job,grade)
 	local xTarget = ESX.GetPlayerFromIdentifier(identifier)
 		
-		-- if xTarget then
-		-- 	xTarget.setJob(job, grade)
-		-- end
-	xPlayer.showNotification('BACOT')
+		if xTarget then
+			xTarget.setJob(job, grade)
+		end
+	
 end)
 
 ESX.RegisterServerCallback('rorp_pedagang:getPlayerInventory', function(source, cb)
 	local xPlayer    = ESX.GetPlayerFromId(source)
-	local items      = xPlayer.inventory
+	-- local items      = xPlayer.inventory
 
-	cb({items = items})
+	-- cb({items = items})
+	xPlayer.showNotification('BACOT')
 end)
 
 RegisterServerEvent('rorp_pedagang:putStockItems')
