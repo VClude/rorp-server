@@ -6,12 +6,6 @@ Locales['cs'] = {
   -- Vehicles
   ['ambulance'] = 'ambulance',
   ['helicopter_prompt'] = 'press ~INPUT_CONTEXT~ to access the ~y~Helicopter Actions~s~.',
-  ['helicopter_buy'] = 'helicopter shop',
-  ['helicopter_garage'] = 'open garage',
-  ['helicopter_store'] = 'store helicopter in garage',
-  ['helicopter_garage_title'] = 'helicopter Garage',
-  ['helicopter_title'] = 'helicopter Actions',
-  ['helicopter_notauthorized'] = 'you\'re not authorized to buy helicopters.',
   ['garage_prompt'] = 'press ~INPUT_CONTEXT~ to access the ~y~Vehicle Actions~s~.',
   ['garage_title'] = 'vehicle Actions',
   ['garage_stored'] = 'stored',
@@ -30,20 +24,19 @@ Locales['cs'] = {
   ['shop_item'] = '$%s',
   ['vehicleshop_title'] = 'vehicle Shop',
   ['vehicleshop_confirm'] = 'do you want to buy this vehicle?',
-  ['vehicleshop_bought'] = 'you have bought ~y~%s~s~ for ~r~$%s~s~',
+  ['vehicleshop_bought'] = 'you have bought ~y~%s~s~ for ~g~$%s~s~',
   ['vehicleshop_money'] = 'you cannot afford that vehicle',
   ['vehicleshop_awaiting_model'] = 'the vehicle is currently ~g~DOWNLOADING & LOADING~s~ please wait',
   ['confirm_no'] = 'no',
   ['confirm_yes'] = 'yes',
   -- Action Menu
-  ['hospital'] = 'nemocnice',
   ['revive_inprogress'] = 'probíhá oživení!',
   ['revive_complete'] = 'oživili jste ~y~%s~s~',
   ['revive_complete_award'] = 'oživili jste ~y~%s~s~ a dostali jste ~g~$%s~s~!',
+  ['revive_fail_offline'] = 'that player is no longer online',
   ['heal_inprogress'] = 'uzdravujete!',
   ['heal_complete'] = 'uzdravili jste ~y~%s~s~',
   ['no_players'] = 'v okolí není žádný hráč!',
-  ['no_vehicles'] = 'v okolí není žádné vozidlo',
   ['player_not_unconscious'] = 'hráč není v bezvědomí!',
   ['player_not_conscious'] = 'hráč je v bezvědomí!',
   -- Boss Menu
@@ -77,7 +70,6 @@ Locales['cs'] = {
   ['respawn_bleedout_fine_msg'] = 'zaplatili jste ~r~$%s~s~ za respawn.',
   ['distress_send'] = 'stiskněte [~b~G~s~] pro vyslání tísňového signálu',
   ['distress_sent'] = 'tísňový signál byl vyslán dostupným jednotkám!',
-  ['distress_message'] = 'nutná lékařská péče: občan v bezvědomí!',
   ['combatlog_message'] = 'byli jste násilně oživeni, protože jste předtím opustili server, když jste byli mrtví.',
   -- Revive
   ['revive_help'] = 'oživit hráče',
@@ -87,4 +79,7 @@ Locales['cs'] = {
   ['not_enough_medikit'] = 'nemáte ~b~medikit~s~.',
   ['not_enough_bandage'] = 'nemáte~b~bandage~s~.',
   ['healed'] = 'byli jste ošetřeni.',
+  -- Blips
+  ['blip_hospital'] = 'nemocnice',
+  ['blip_dead'] = 'unconscious player',
 }

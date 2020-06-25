@@ -6,12 +6,6 @@ Locales['pl'] = {
   -- Vehicles
   ['ambulance'] = 'ambulance',
   ['helicopter_prompt'] = 'press ~INPUT_CONTEXT~ to access the ~y~Helicopter Actions~s~.',
-  ['helicopter_buy'] = 'helicopter shop',
-  ['helicopter_garage'] = 'open garage',
-  ['helicopter_store'] = 'store helicopter in garage',
-  ['helicopter_garage_title'] = 'helicopter Garage',
-  ['helicopter_title'] = 'helicopter Actions',
-  ['helicopter_notauthorized'] = 'you\'re not authorized to buy helicopters.',
   ['garage_prompt'] = 'press ~INPUT_CONTEXT~ to access the ~y~Vehicle Actions~s~.',
   ['garage_title'] = 'vehicle Actions',
   ['garage_stored'] = 'stored',
@@ -30,20 +24,19 @@ Locales['pl'] = {
   ['shop_item'] = '$%s',
   ['vehicleshop_title'] = 'vehicle Shop',
   ['vehicleshop_confirm'] = 'do you want to buy this vehicle?',
-  ['vehicleshop_bought'] = 'you have bought ~y~%s~s~ for ~r~$%s~s~',
+  ['vehicleshop_bought'] = 'you have bought ~y~%s~s~ for ~g~$%s~s~',
   ['vehicleshop_money'] = 'you cannot afford that vehicle',
   ['vehicleshop_awaiting_model'] = 'the vehicle is currently ~g~DOWNLOADING & LOADING~s~ please wait',
   ['confirm_no'] = 'no',
   ['confirm_yes'] = 'yes',
   -- Action Menu
-  ['hospital'] = 'szpital',
   ['revive_inprogress'] = 'trwa wskrzeszenie',
   ['revive_complete'] = 'zostałeś wskrzeszony ~y~%s~s~',
   ['revive_complete_award'] = 'zostałeś wskrzeszony ~y~%s~s~ i zarobiono ~g~$%s~s~!',
+  ['revive_fail_offline'] = 'that player is no longer online',
   ['heal_inprogress'] = 'leczysz!',
   ['heal_complete'] = 'zostałeś uleczony ~y~%s~s~',
   ['no_players'] = 'brak graczy w pobliżu',
-  ['no_vehicles'] = 'brak pojazdów w pobliżu',
   ['player_not_unconscious'] = 'ten gracz nie jest nieprzytomny!',
   ['player_not_conscious'] = 'ten gracz nie jest świadomy!',
   -- Boss Menu
@@ -77,7 +70,6 @@ Locales['pl'] = {
   ['respawn_bleedout_fine_msg'] = 'you paid ~r~$%s~s~ to respawn.',
   ['distress_send'] = 'press [~b~G~s~] to send distress signal',
   ['distress_sent'] = 'distress signal has been sent to available units!',
-  ['distress_message'] = 'medical attention required: unconscious citizen!',
   ['combatlog_message'] = 'you have been force-respawned because you\'ve previously left the server when dead.',
   -- Revive
   ['revive_help'] = 'ożyw gracza',
@@ -87,4 +79,7 @@ Locales['pl'] = {
   ['not_enough_medikit'] = 'nie posiadasz ~b~apteczki~s~.',
   ['not_enough_bandage'] = 'nie posiadasz ~b~bandaża~s~.',
   ['healed'] = 'zostałeś potraktowany',
+  -- Blips
+  ['blip_hospital'] = 'szpital',
+  ['blip_dead'] = 'unconscious player',
 }
