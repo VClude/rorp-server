@@ -29,6 +29,12 @@ Citizen.CreateThread(function()
 
 end)
 
+RegisterNetEvent('esx:setJob')
+AddEventHandler('esx:setJob', function(job)
+	ESX.PlayerData.job = job
+end)
+
+
 AddEventHandler("rorp_pedagang:hasEnteredMarker",function(zone)
 
     if zone == "Cloakrooms" then
