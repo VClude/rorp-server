@@ -52,8 +52,7 @@ end)
 
 function checkSpace(_target, _items, cb)
 	local items = _items
-	local target = _target
-	local xPlayer = ESX.GetPlayerFromId(target)
+	local xPlayer = _target
 	if xPlayer.canCarryItem(items, 5) then
 		cb(true)
 	else
