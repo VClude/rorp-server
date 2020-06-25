@@ -4,7 +4,7 @@ local Vehicles = nil
 TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 
 TriggerEvent('esx_phone:registerNumber', 'bennys', _U('bennys'), true, true)
-TriggerEvent('esx_society:registerSociety', 'bennys', 'bennys', 'society_bennys', 'society_bennys', 'society_bennys', {type = 'public'})
+TriggerEvent('esx_society:registerSociety', 'bennys', 'Bennys', 'society_bennys', 'society_bennys', 'society_bennys', {type = 'public'})
 
 RegisterServerEvent('esx_bennysjob:setJob')
 AddEventHandler('esx_bennysjob:setJob', function(identifier,job,grade)
@@ -68,32 +68,6 @@ end)
 RegisterServerEvent('esx_bennysjob:message')
 AddEventHandler('esx_bennysjob:message', function(target, msg)
 	TriggerClientEvent('esx:showNotification', target, msg)
-end)
-
-RegisterServerEvent('esx_bennysjob:putStockItems')
-AddEventHandler('esx_bennysjob:putStockItems', function(itemName, count)
-	local xPlayer = ESX.GetPlayerFromId(source)
-
-	TriggerEvent('esx_addoninventory:getSharedInventory', 'society_bennys', function(inventory)
-		local item = inventory.getItem(itemName)
-		local playerItemCount = xPlayer.getInventoryItem(itemName).count
-
-		if item.count >= 0 and count <= playerItemCount then
-			xPlayer.removeInventoryItem(itemName, count)
-			inventory.addItem(itemName, count)
-		else
-			TriggerClientEvent('esx:showNotification', xPlayer.source, _U('invalid_quantity'))
-		end
-
-		TriggerClientEvent('esx:showNotification', xPlayer.source, _U('have_deposited', count, item.label))
-	end)
-end)
-
-ESX.RegisterServerCallback('esx_bennysjob:getPlayerInventory', function(source, cb)
-	local xPlayer    = ESX.GetPlayerFromId(source)
-	local items      = xPlayer.inventory
-
-	cb({items = items})
 end)
 
 RegisterServerEvent('esx_bennysjob:SVdestroyDoor')
@@ -256,8 +230,6 @@ function getPriceFromHash(hashKey, jobGrade, type)
 
 	return 0
 end
-
-TriggerEvent('esx_society:registerSociety', 'bennys', 'bennys', 'society_bennys', 'society_bennys', 'society_bennys', {type = 'private'})
 
 ESX.RegisterServerCallback('rtx_bennys:getPlayerInventory', function(source, cb)
 	local xPlayer    = ESX.GetPlayerFromId(source)
