@@ -39,8 +39,6 @@ AddEventHandler('rorp_pedagang:cooking', function(ingredients)
 					TriggerClientEvent('esx:showNotification', _source, _U('player_cannot_hold'))
 
 				end
-				
-				TriggerClientEvent('esx:showNotification', _source, '~y~Berhasil Memasak: ~w~' .. itemLabel(item, xPlayer.inventory))
 			else
 				TriggerClientEvent('esx:showNotification', _source, _U('RecipeNotEnough'))
 			end
@@ -53,7 +51,7 @@ AddEventHandler('rorp_pedagang:reward',function(_items)
 	
 	local xPlayer = source
 	local items = _items
-	xPlayer.addInventoryItem(items, 5)
+	print (items)
 
 end)
 
