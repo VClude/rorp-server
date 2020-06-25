@@ -20,13 +20,10 @@ Citizen.CreateThread(function()
         TriggerEvent("esx:getSharedObject",function(obj) ESX = obj end)
         Citizen.Wait(0)
     end
-
     while ESX.GetPlayerData().job == nil do
         Citizen.Wait(10)
     end
-
     ESX.PlayerData = ESX.GetPlayerData()
-
 end)
 
 RegisterNetEvent('esx:setJob')
@@ -34,51 +31,28 @@ AddEventHandler('esx:setJob', function(job)
 	ESX.PlayerData.job = job
 end)
 
-
 AddEventHandler("rorp_pedagang:hasEnteredMarker",function(zone)
-
     if zone == "Cloakrooms" then
-
         CurrentAction = "cloakrooms_menu"
-
         CurrentActionMsg = _U('cloakroom')
-
         CurrentActionData = {}
-
     elseif zone == "BossMenu" then
-
         CurrentAction = "boss_menu"
-
         CurrentActionMsg = _U('bossmenu')
-
         CurrentActionData = {}
-
     elseif zone == "InventoryMenu" then
-
         CurrentAction = "pedagang_inventory_menu"
-
         CurrentActionMsg = _U('inventory')
-
-        CurrentActionData = {}
-        
+        CurrentActionData = {}     
     elseif zone == "Cooking" then
-
         CurrentAction = "cooking_menu"
-
         CurrentActionMsg = _U('cooking')
-
         CurrentActionData = {}
-
     elseif zone == "Distributor" then
-
         CurrentAction = "distributor_menu"
-
         CurrentActionMsg = _U('distri')
-
         CurrentActionData = {}
-
     end
-
 end)
 
 AddEventHandler("rorp_pedagang:hasExitedMarker", function(zone)
@@ -88,6 +62,26 @@ AddEventHandler("rorp_pedagang:hasExitedMarker", function(zone)
     end
 end)
 
+-- Set Uniforms
+function setUniform(job, playerPed) TriggerEvent( "skinchanger:getSkin",
+    function(skin)
+        if skin.sex == 0 then
+            if Config.Uniforms[job].male then
+                TriggerEvent("skinchanger:loadClothes", skin, Config.Uniforms[job].male)
+            else
+                NotifError("Pakaian tidak tersedia!")
+            end
+        else
+            if Config.Uniforms[job].female then
+                TriggerEvent("skinchanger:loadClothes", skin, Config.Uniforms[job].female)
+            else
+                NotifError("Pakaian tidak tersedia!")
+            end
+        end
+    end)
+end
+
+-- Set DrawTex3D
 function DrawText3Ds(x, y, z, text)
 	local onScreen, _x, _y = World3dToScreen2d(x, y, z)
 	local px, py, pz = table.unpack(GetGameplayCamCoords())
@@ -104,8 +98,7 @@ function DrawText3Ds(x, y, z, text)
 	DrawRect(_x, _y + 0.0125, 0.015 + factor, 0.03, 0, 0, 0, 150)
 end
 
--- Create Blips
-
+-- Create Blips Pedagang
 Citizen.CreateThread(function()
     for _,v in pairs(Config.Blips) do
         local blip = AddBlipForCoord(v.Pos.x, v.Pos.y, v.Pos.z)
@@ -122,7 +115,6 @@ Citizen.CreateThread(function()
 end)
 
 -- Display markers
-
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
@@ -197,9 +189,13 @@ Citizen.CreateThread(function()
 
                 if IsControlJustReleased(0, Keys["E"]) then
                     if CurrentAction == "cloakrooms_menu" then
-                        NotifInformasi('WORK IN PROGRESS')
+                        OpenCloakRoomsMenu()
                     elseif CurrentAction == "boss_menu" then
-                        NotifInformasi('WORK IN PROGRESS')						
+                        if  ESX.PlayerData.job and ESX.PlayerData.job.name == "pedagang" and ESX.PlayerData.job.grade_name == 'boss' then
+                            TriggerEvent('esx_society:openBossMenu', 'bennys')
+                        else
+                            NotifInformasi('Tidak memiliki akses boss menu')
+                        end						
                     elseif CurrentAction == "pedagang_inventory_menu" then
                         NotifInformasi('WORK IN PROGRESS')				
                     elseif CurrentAction == 'cooking_menu' then
@@ -215,3 +211,39 @@ Citizen.CreateThread(function()
         end
     end
 end)
+
+function OpenCloakRoomsMenu()
+	local elements = {
+		{label = "Baju Kerja", value = "working"},
+		{label = "Baju Sipil", value = "citizen"}
+	}
+	ESX.UI.Menu.CloseAll()
+	ESX.UI.Menu.Open("default", GetCurrentResourceName(), "pedagang_cloakrooms",
+		{
+			title = "Pedagang Cloakroom",
+			align = "bottom-right",
+			elements = elements
+		},
+		function(data, menu)
+			if data.current.value == "citizen" then
+				menu.close()
+				ESX.TriggerServerCallback(
+					"esx_skin:getPlayerSkin",
+					function(skin, jobSkin)
+						TriggerEvent("skinchanger:loadSkin", skin)
+					end)
+			else
+				menu.close()
+				setUniform(data.current.value, PlayerPedId())
+			end
+
+			CurrentAction = "cloakrooms_menu"
+			CurrentActionMsg = _U('cloakroom')
+            CurrentActionData = {}
+		end,
+		function(data, menu)
+			CurrentAction = "cloakrooms_menu"
+			CurrentActionMsg = _U('cloakroom')
+            CurrentActionData = {}
+		end)
+end

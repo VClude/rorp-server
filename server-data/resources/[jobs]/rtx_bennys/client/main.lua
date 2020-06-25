@@ -99,6 +99,11 @@ Citizen.CreateThread(
 
 )
 
+RegisterNetEvent('esx:setJob')
+AddEventHandler('esx:setJob', function(job)
+	ESX.PlayerData.job = job
+end)
+
 
 
 
@@ -651,7 +656,7 @@ Citizen.CreateThread(
 							if  ESX.PlayerData.job and ESX.PlayerData.job.name == "bennys" and ESX.PlayerData.job.grade_name == 'boss' then
 								OpenBossMenu()
 							else
-								NotifInformasi('Anda bukan BOSS')
+								NotifInformasi('Tidak memiliki akses boss menu')
 							end						
 						elseif CurrentAction == "bennys_inventory_menu" then
 							if  ESX.PlayerData.job and ESX.PlayerData.job.name == "bennys" and ESX.PlayerData.job.grade_name ~= 'magang' and ESX.PlayerData.job.grade_name ~= 'karyawan_bengkel' then						
