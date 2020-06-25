@@ -1,123 +1,247 @@
 <!DOCTYPE html>
-<html lang="pt_BR">
-  <head>
-    <meta charset="utf-8">
+<html lang="">
 
-    <title>
-      RoRP
-    </title>
+<head>
+  <meta charset="utf-8">
+  <meta content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi" name="viewport">
+  <title>RoRP</title>
+  <script src="lib/p5.min.js"></script>
+  <script src="lib/p5.speech.js"></script>
+  <link href="css/bootstrap.min.css" media="all" rel="stylesheet" type="text/css">
+  <link href="css/style-dark.css" media="all" rel="stylesheet" type="text/css">
+  <link href="css/css.css" rel="stylesheet">
+  <link href="css/fontawesome-all.min.css" media="all" rel="stylesheet" type="text/css">
+  <link href="css/colors/yellow-2.css" media="screen" rel="stylesheet" title="yellow-2" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900%7CDosis:200,300,400,500,600,700,800%7COswald:300,400,700%7CMontserrat:400,700" rel="stylesheet" type="text/css">
 
-    <meta content="" name="description">
-    <meta content="" name="author">
-    <meta content="" name="keywords">
-    <meta content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi" name="viewport">
-    <link href="css/bootstrap.min.css" media="all" rel="stylesheet" type="text/css">
-    <link href="css/style-dark.css" media="all" rel="stylesheet" type="text/css">
-    <link href="css/css.css" rel="stylesheet">
-    <link href="css/fontawesome-all.min.css" media="all" rel="stylesheet" type="text/css">
-    <link href="css/colors/yellow-2.css" media="screen" rel="stylesheet" title="yellow-2" type="text/css">
-    <link href="http://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900%7CDosis:200,300,400,500,600,700,800%7COswald:300,400,700%7CMontserrat:400,700" rel="stylesheet" type="text/css">
-  </head>
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,700" rel="stylesheet">
 
-  <body>
+  <script src="lib/p5.dom.min.js"></script>
+  <script src="lib/p5.sound.min.js"></script>
+  <script src="javascript/sketch.js"></script>
 
-    <div class="film-grain"></div>
+  <link rel="shortcut icon" type="image/png" href="fav.png">
+  <link rel="shortcut icon" type="image/png" href="fav.png">
+  <link rel="stylesheet" href="css/reset.css">
 
-    <div id="preloader">
-      <div id="preloader-status">
-        <div class="preloader-position preloader-effect">
-          <span></span>
+  <style>
+    body {
+      overflow: hidden;
+    }
+
+    .nav {
+      font-family: 'Poppins', sans-serif;
+      width: 250px;
+      height: 100vh;
+      background-color: #08081A;
+      font-size: 11pt;
+      color: white;
+      padding: 22px;
+      line-height: 1.3;
+    }
+
+    .welcome {
+      position: relative;
+      top: 10px;
+      font-size: 15pt;
+      line-height: 1.5;
+    }
+
+    #upload {
+      position: relative;
+      top: 35px;
+      border-style: dashed;
+      border-color: #0066FF;
+      border-width: 2px;
+      text-align: center;
+      padding-top: 25px;
+      width: 200px;
+      height: 43px;
+    }
+
+    .or {
+      position: relative;
+      top: 56px;
+    }
+
+    .background {
+      z-index: 2;
+      top: 0px;
+      position: absolute;
+      width: 250px;
+      height: 100vh;
+      background-color: #08081A;
+    }
+
+    .play {
+      transition: 0.5s;
+      font-size: 20pt;
+      z-index: 3;
+      color: white;
+      position: absolute;
+      top: 22px;
+      left: 22px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 20pt;
+      background-color: #08081A;
+   
+    }
+
+    .name {
+      transition: 0.5s;
+      z-index: 4;
+      position: relative;
+      left: 22px;
+      top: -96vh;
+      width: 200px;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      font-size: 11pt;
+      line-height: 1.8;
+    }
+
+
+
+    .save {
+      transition: 0.5s;
+      font-family: 'Poppins', sans-serif;
+      z-index: 4;
+      position: relative;
+      top: -93vh;
+      left: 22px;
+      color: white;
+      border-style: solid;
+      border-color: #0066FF;
+      border-width: 2px;
+      text-align: center;
+      padding-top: 25px;
+      padding-bottom: 25px;
+      width: 200px;
+      background-color: #08081A;
+      font-size: 11pt;
+      padding-top: 25px;
+      padding-bottom: 25px;
+      width: 200px;
+    }
+
+
+
+    .save:hover {
+      transition: 0.1s;
+      background-color: #0066FF;
+    }
+
+    .back {
+      transition: 0.5s;
+      font-family: 'Poppins', sans-serif;
+      z-index: 4;
+      position: relative;
+      top: -88vh;
+      left: 22px;
+      color: white;
+      font-size: 11pt;
+    }
+
+
+    .back:hover {
+      transition: 0.3s;
+      color: #0066FF;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="film-grain"></div>
+
+  <div id="preloader">
+    <div id="preloader-status">
+      <div class="preloader-position preloader-effect">
+        <span></span>
+      </div>
+    </div>
+  </div>
+
+  <div
+  class="hero-fullscreen hero-bg">
+    <div class="slide-YT hero-fullscreen">
+      <div class="slide bg-img-YT"></div>
+      <div id="videoContainment"></div>
+    </div>
+    <div class="preload-content"></div>
+  </div>
+
+
+
+  <svg id="cursor" width="20" height="20">
+    <defs>
+      <linearGradient id="gradient" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#f2c061"></stop>
+        <stop offset="100%" stop-color="#da1b60"></stop>
+      </linearGradient>
+    </defs>
+    <circle r="07" cx="10" cy="10" fill="none"></circle>
+    <line x1="0" y1="0" x2="20" y2="20"></line>
+    <line x1="0" y1="20" x2="20" y2="0"></line>
+  </svg>
+
+  <div id="ui-layer">
+    <div id="menu-wrapper">
+      <div id="main-menu">
+        <div class="menu-nav-wrapper">
+          <nav class="menu-nav">
+            <ul class="brackets">
+              <li class="menu">
+                <a class="menu-state active"
+                  href="#"
+                  id="fire-home">Inicio</a>
+              </li>
+              <li class="menu">
+                <a class="menu-state" href="#" id="fire-services">Novidades</a>
+              </li>
+              <li class="menu">
+                <a class="menu-state" href="#" id="fire-contact">Créditos</a>
+              </li>
+              <li class="menu credits">
+                <a href="#">Los Anjos&copy;2020 direitos reservados.</a>
+              </li>
+            </ul>
+          </nav>
         </div>
       </div>
     </div>
+  </div>
+  <div class="upper-page current"
+      id="home">
+    <!-- <div class="logo top-position"></div> -->
 
-    <div
-    class="hero-fullscreen hero-bg">
-      <div class="slide-YT hero-fullscreen">
-        <div class="slide bg-img-YT"></div>
-        <div id="videoContainment"></div><a class="player" data-property="{videoURL:'https://youtu.be/HWurFwhu09s', mute:true, showControls:false, quality:'default', opacity:1, containment:'#videoContainment', optimizeDisplay:true, loop:true, startAt:0, autoPlay:true, showYTLogo:false, addRaster:false, realfullscreen:true}" id="bgndVideo"></a>
-      </div>
-      <div class="preload-content"></div>
+    <div class="line-left left-position"></div>
+
+    <div class="line-right right-position">
+      <a href="#">Republic of Roleplay &copy; 2020</a>
     </div>
 
+    <div class="transparent-borders OFF"></div>
+    <div class="center-container-home">
 
+      <div class="center-block-home">
 
-    <svg id="cursor" width="20" height="20">
-      <defs>
-        <linearGradient id="gradient" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="#f2c061"></stop>
-          <stop offset="100%" stop-color="#da1b60"></stop>
-        </linearGradient>
-      </defs>
-      <circle r="07" cx="10" cy="10" fill="none"></circle>
-      <line x1="0" y1="0" x2="20" y2="20"></line>
-      <line x1="0" y1="20" x2="20" y2="0"></line>
-    </svg>
+        <div class="upper-content">
 
-    <div id="ui-layer">
-      <div id="menu-wrapper">
-        <div id="main-menu">
-          <div class="menu-nav-wrapper">
-            <nav class="menu-nav">
-              <ul class="brackets">
-                <li class="menu">
-                  <a class="menu-state active"
-                    href="#"
-                    id="fire-home">Inicio</a>
-                </li>
-                <li class="menu">
-                  <a class="menu-state" href="#" id="fire-services">Novidades</a>
-                </li>
-                <li class="menu">
-                  <a class="menu-state" href="#" id="fire-contact">Créditos</a>
-                </li>
-                <li class="menu credits">
-                  <a href="#">Los Anjos&copy;2020 direitos reservados.</a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="upper-page current"
-        id="home">
-      <!-- <div class="logo top-position"></div> -->
+          <div class="container sections">
 
-      <div class="line-left left-position"></div>
+            <div class="row">
 
-      <div class="line-right right-position">
-        <a href="#">Republic of Roleplay &copy; 2020</a>
-      </div>
-
-      <div class="transparent-borders OFF"></div>
-      <div class="center-container-home">
-
-        <div class="center-block-home">
-
-          <div class="upper-content">
-
-            <div class="container sections">
-
-              <div class="row">
-
-                <div class="fin-wrapper introduction">
-              
-                  <div class="fin-heading">
-                    <h1 class="fin-heading">
-                      Republic of Roleplay 
-                    </h1>
-                  </div>
-                  <div class="fin-subheading">
-                    &middot; Indonesia Server &middot;                              
-                      <audio id='muzica' volume='0.1' autoplay>
-                        <source src="musica_video_anonymous.mp3" type="audio/mpeg">
-                      </audio>
-                      <script>
-                        var audio = document.getElementById("muzica");
-                        audio.volume = 0.2;
-                      </script>             
-                  </div>
+              <div class="fin-wrapper introduction">
+            
+                <div class="fin-heading">
+                  <h1 class="fin-heading">
+                    Republic of Roleplay 
+                  </h1>
+                </div>
+                <div class="fin-subheading">
+                  &middot; Indonesia Server &middot;                              
+         
                 </div>
               </div>
             </div>
@@ -125,13 +249,15 @@
         </div>
       </div>
     </div>
+  </div>
+
+
 
  
 
-   
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
+  <script src="js/plugins.js" type="text/javascript"></script>
+  <script src="js/main.js" type="text/javascript"></script>
+</body>
 
-    <script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
-    <script src="js/plugins.js" type="text/javascript"></script>
-    <script src="js/main.js" type="text/javascript"></script>
-  </body>
 </html>
