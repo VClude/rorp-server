@@ -26,22 +26,19 @@ RegisterServerEvent('rorp_pedagang:putStockItems')
 AddEventHandler('rorp_pedagang:putStockItems', function(itemName, count)
 	local xPlayer = ESX.GetPlayerFromId(source)
 
-	xPlayer.showNotification('BACOT')
+	TriggerEvent('esx_addoninventory:getSharedInventory', 'society_pedagang', function(inventory)
+		local item = inventory.getItem(itemName)
+		local playerItemCount = xPlayer.getInventoryItem(itemName).count
 
-	-- TriggerEvent('esx_addoninventory:getSharedInventory', 'society_pedagang', function(inventory)
-	-- 	local item = inventory.getItem(itemName)
-	-- 	local playerItemCount = xPlayer.getInventoryItem(itemName).count
+		if item.count >= 0 and count <= playerItemCount then
+			xPlayer.removeInventoryItem(itemName, count)
+			inventory.addItem(itemName, count)
+		else
+			xPlayer.showNotification(_U('invalid_quantity'))
+		end
 
-	-- 	if item.count >= 0 and count <= playerItemCount then
-	-- 		xPlayer.removeInventoryItem(itemName, count)
-	-- 		inventory.addItem(itemName, count)
-	-- 	else
-	-- 		xPlayer.showNotification(_U('invalid_quantity'))
-	-- 	end
-
-	-- 	xPlayer.showNotification(_U('have_deposite', count, item.label))
-	-- end)
-
+		xPlayer.showNotification(_U('have_deposite', count, item.label))
+	end)
 end)
 
 RegisterServerEvent('rorp_pedagang:getStockItems')
