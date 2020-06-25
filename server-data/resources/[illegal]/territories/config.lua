@@ -15,7 +15,7 @@ Config = {
   InfluenceTick     = 5000,           -- how long between influence gain/loss tick?
 
   DisplayZoneForAll = false,           -- Display territory zone blips for all?
-  DrugProcessBlip   = false,           -- Display drug process blip for gang members?
+  DrugProcessBlip   = true,           -- Display drug process blip for gang members?
 
   MaxPlayerCount    = 64,             -- Change if using onesync I guess?
   UseProgBars       = true,          -- Using ProgBars? (should be included inside mod folder)

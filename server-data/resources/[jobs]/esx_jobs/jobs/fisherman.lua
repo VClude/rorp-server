@@ -197,7 +197,7 @@ Config.Jobs.petani = {
 	Zones = {
 
 		CloakRoom = {
-			Pos = {x = 2402.97, y = 5021.44, z = 45.13},
+			Pos = {x = -885.35, y = -1070.57, z = 1.16},
 			Size = {x = 3.0, y = 3.0, z = 1.0},
 			Color = {r = 204, g = 204, b = 0},
 			Marker = 1,
@@ -205,7 +205,7 @@ Config.Jobs.petani = {
 			Name = _U('dd_dress_locker'),
 			Type = 'cloakroom',
 			Hint = _U('cloak_change'),
-			GPS = {x = 740.80, y = -970.06, z = 23.46}
+			GPS = {x = -1768.88, y = 2032.91, z = 121.92}
 		},
 
 		Jeruk = {
@@ -261,7 +261,7 @@ Config.Jobs.petani = {
 		},
 
 		VehicleSpawner = {
-			Pos = {x = 2404.81, y = 5037.68, z = 44.99},
+			Pos = {x = -875.44, y = -1071.77, z = 1.16},
 			Size = {x = 3.0, y = 3.0, z = 1.0},
 			Color = {r = 204, g = 204, b = 0},
 			Marker = 1,
@@ -275,19 +275,19 @@ Config.Jobs.petani = {
 		},
 
 		VehicleSpawnPoint = {
-			Pos = {x = 2421.24, y = 5031.01, z = 44.95},
+			Pos = {x = -866.57, y = -1070.7, z = 1.16},
 			Size = {x = 3.0, y = 3.0, z = 1.0},
 			Marker = -1,
 			Blip = false,
 			Name = _U('service_vh'),
 			Type = 'vehspawnpt',
 			Spawner = 1,
-			Heading = 270.1,
+			Heading = 25.97,
 			GPS = 0
 		},
 
 		VehicleDeletePoint = {
-			Pos = {x = 2400.07, y = 5053.74, z = 45.39},
+			Pos = {x = -858.59, y = -1086.02, z = 1.16},
 			Size = {x = 3.0, y = 3.0, z = 1.0},
 			Color = {r = 255, g = 0, b = 0},
 			Marker = 1,

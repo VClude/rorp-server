@@ -118,6 +118,7 @@ Config.Shops = {
         Weapons = {
             {name = "WEAPON_FLASHLIGHT", ammo = 1},
             {name = "WEAPON_STUNGUN", ammo = 1},
+            {name = "WEAPON_PETROLCAN", ammo = 4500},
             {name = "WEAPON_KNIFE", ammo = 1},
             {name = "WEAPON_BAT", ammo = 1},
             {name = "WEAPON_PISTOL", ammo = 45},
