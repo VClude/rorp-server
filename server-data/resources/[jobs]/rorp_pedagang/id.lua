@@ -5,4 +5,6 @@ Locales['id'] = {
     ['inventory']                  = 'Tekan ~b~[E]~w~ untuk membuka Inventory Pedagang',
     ['cooking']                    = 'Tekan ~b~[E]~w~ untuk Memasak',
     ['distri']                     = 'Tekan ~b~[E]~w~ untuk membuka menu Distributor',
+    ['quantity']                   = 'Jumlah',
+    ['invalid_quantity']           = 'Jumlah Salah',
 }

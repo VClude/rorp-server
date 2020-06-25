@@ -197,7 +197,7 @@ Citizen.CreateThread(function()
                             NotifInformasi('Tidak memiliki akses boss menu')
                         end						
                     elseif CurrentAction == "pedagang_inventory_menu" then
-                        NotifInformasi('WORK IN PROGRESS')				
+                        OpenBennysInventoryMenu()			
                     elseif CurrentAction == 'cooking_menu' then
                         NotifInformasi('WORK IN PROGRESS')
                     elseif CurrentAction == 'distributor_menu' then
@@ -246,4 +246,76 @@ function OpenCloakRoomsMenu()
 			CurrentActionMsg = _U('cloakroom')
             CurrentActionData = {}
 		end)
+end
+
+function OpenBennysInventoryMenu()
+
+	local elements = {
+		{label = "Deposit Barang", value = "deposit"},
+		{label = "Ambil Barang", value = "withdraw"}
+	}
+	ESX.UI.Menu.CloseAll()
+	ESX.UI.Menu.Open("default", GetCurrentResourceName(), "pedagang_inventory",
+		{
+			title = "Bennys Inventory",
+			align = "bottom-right",
+			elements = elements
+		},
+		function(data, menu)
+			if data.current.value == "deposit" then
+				OpenPutStocksMenu()
+			elseif data.current.value == "withdraw" then
+				OpenGetStocksMenu()
+			end
+		end,
+		function(data, menu)
+		    menu.close()
+			CurrentAction = "pedagang_inventory_menu"
+            CurrentActionMsg = _U('inventory')
+            CurrentActionData = {}  
+end
+
+function OpenPutStocksMenu()
+	ESX.TriggerServerCallback('rorp_pedagang:getPlayerInventory', function(inventory)
+		local elements = {}
+		for i=1, #inventory.items, 1 do
+			local item = inventory.items[i]
+
+			if item.count > 0 then
+				table.insert(elements, {
+					label = item.label .. ' x' .. item.count,
+					type  = 'item_standard',
+					value = item.name
+				})
+			end
+        end
+        
+		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'stocks_menu', {
+			title    = 'Pedagang Inventory',
+			align    = 'bottom-right',
+			elements = elements
+		}, function(data, menu)
+			local itemName = data.current.value
+			ESX.UI.Menu.Open('dialog', GetCurrentResourceName(), 'stocks_menu_put_item_count', {
+				title = _U('quantity')
+			}, function(data2, menu2)
+				local count = tonumber(data2.value)
+
+				if count == nil then
+					ESX.ShowNotification(_U('invalid_quantity'))
+				else
+					menu2.close()
+					menu.close()
+					TriggerServerEvent('rorp_pedagang:putStockItems', itemName, count)
+
+					Citizen.Wait(1000)
+					OpenPutStocksMenu()
+				end
+			end, function(data2, menu2)
+				menu2.close()
+			end)
+		end, function(data, menu)
+			menu.close()
+		end)
+	end)
 end
