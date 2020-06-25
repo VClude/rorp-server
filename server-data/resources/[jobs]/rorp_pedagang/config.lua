@@ -13,9 +13,6 @@ Config.Blips = {
     },
 }
 
-Config = {}
-
-
 Config.Recipes = {
 	-- Can be a normal ESX item
 	["lockpick"] = { 
