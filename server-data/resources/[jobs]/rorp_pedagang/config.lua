@@ -15,9 +15,9 @@ Config.Blips = {
 
 Config.Recipes = {
 	-- Can be a normal ESX item
-	["lockpick"] = { 
-		{item = "bobbypin", quantity = 4 }, 
-		{item = "rubberband", quantity = 1 },
+	["burger"] = { 
+		{item = "bread", quantity = 1 }, 
+		{item = "cashew", quantity = 4 },
 	}
 	
 }
