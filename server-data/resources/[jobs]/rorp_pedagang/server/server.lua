@@ -37,7 +37,7 @@ AddEventHandler('rorp_pedagang:putStockItems', function(itemName, count)
 			xPlayer.showNotification(_U('invalid_quantity'))
 		end
 
-		xPlayer.showNotification(_U('have_deposited', count, item.label))
+		xPlayer.showNotification(_U('have_deposite', count, item.label))
 	end)
 end)
 
