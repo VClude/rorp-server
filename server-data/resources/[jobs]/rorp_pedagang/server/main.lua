@@ -39,7 +39,7 @@ AddEventHandler('rorp_pedagang:cooking', function(ingredients)
 						TriggerClientEvent('esx:showNotification', _source, _U('RecipeNotEnough'))
 
 					end		
-				end,xPlayer,item)
+				end,item)
 				-- xPlayer.addInventoryItem(item, 1)
 
 				TriggerClientEvent('esx:showNotification', _source, '~y~Berhasil Memasak: ~w~' .. itemLabel(item, xPlayer.inventory))
@@ -61,9 +61,10 @@ function checkSpace(_target, _items, cb)
 end
 
 
-ESX.RegisterServerCallback('rorp_pedagang:checkSpace', function(source, cb, _target, _rewardItem)
+ESX.RegisterServerCallback('rorp_pedagang:checkSpace', function(source, cb,_rewardItem)
 	local rewardItem = _rewardItem
-	local target = _target
+	local target = source
+	print(target)
 	checkSpace(target, rewardItem, cb)
 end)
 
