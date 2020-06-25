@@ -43,7 +43,7 @@ AddEventHandler('rorp_pedagang:cooking', function(ingredients)
 	end
 end)
 
--- function checkSpace(item, cb)
+-- function checkSpace(source, item, cb)
 -- 	local xPlayer = ESX.GetPlayerFromId(source)
 -- 	if xPlayer.canCarryItem(item, 5) then
 -- 		cb(true)

@@ -111,7 +111,6 @@ AddEventHandler('rorp_pedagang:CookingEvent', function(_items)
     },
     function(status)
         if not status then
-            print(items)
             ESX.TriggerServerCallback('rorp_pedagang:checkSpace', function(hasSpace)
                 if hasSpace then
                     NotifInformasi('MASUK BRO')
@@ -122,7 +121,7 @@ AddEventHandler('rorp_pedagang:CookingEvent', function(_items)
                     ClearPedTasks(playerPed)
                     currentlyCooking = false
                 end
-            end, items)           
+            end, 'burger')           
         end
     end)
 end)
