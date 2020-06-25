@@ -87,12 +87,18 @@ AddEventHandler('rorp_pedagang:CookingEvent', function(_items)
     currentlyCooking = true
     local items = _items
     local playerPed = PlayerPedId()	
+
+    FreezeEntityPosition(playerPed, true)
 	SetCurrentPedWeapon(playerPed, GetHashKey('WEAPON_UNARMED'))
     Citizen.Wait(200)
+
     ClearPedTasks(GetPlayerPed(-1))
-    exports['progressBars']:startUI((10000), "MINING")
+    exports['progressBars']:startUI((120000), "COOKING")
     TaskStartScenarioInPlace(GetPlayerPed(-1), "PROP_HUMAN_BBQ", 0, true)
-	Citizen.Wait(10000)
+    Citizen.Wait(120000)
+    
+    ESX.ShowNotification(_U('CookingSuccess')..items)
+    TriggerServerEvent('rorp_pedagang:reward', items)
 	
 	ClearPedTasks(PlayerPedId(-1))
 	FreezeEntityPosition(playerPed, false)
