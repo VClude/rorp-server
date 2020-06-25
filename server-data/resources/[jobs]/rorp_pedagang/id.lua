@@ -1,4 +1,5 @@
 Locales['id'] = {
+    ['Pedagang']                   = 'Pedagang',
     ['Blip']                       = 'Kopi Secuan',
     ['cloakroom']                  = 'Tekan ~b~[E]~w~ untuk membuka Ruang Ganti',
     ['bossmenu']                   = 'Tekan ~b~[E]~w~ untuk membuka Boss Menu',
