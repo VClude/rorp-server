@@ -827,84 +827,84 @@ function OpenHelicopterSpawnerMenu(hospital, partNum)
 
 end
 
-function OpenShopMenu(elements, restoreCoords, shopCoords)
-	local playerPed = PlayerPedId()
-	isInShopMenu = true
+-- function OpenShopMenu(elements, restoreCoords, shopCoords)
+-- 	local playerPed = PlayerPedId()
+-- 	isInShopMenu = true
 
-	ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'vehicle_shop', {
-		title    = _U('vehicleshop_title'),
-		align    = 'top-left',
-		elements = elements
-	}, function(data, menu)
+-- 	ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'vehicle_shop', {
+-- 		title    = _U('vehicleshop_title'),
+-- 		align    = 'top-left',
+-- 		elements = elements
+-- 	}, function(data, menu)
 
-		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'vehicle_shop_confirm',
-		{
-			title    = _U('vehicleshop_confirm', data.current.name, data.current.price),
-			align    = 'top-left',
-			elements = {
-				{ label = _U('confirm_no'), value = 'no' },
-				{ label = _U('confirm_yes'), value = 'yes' }
-			}
-		}, function(data2, menu2)
+-- 		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'vehicle_shop_confirm',
+-- 		{
+-- 			title    = _U('vehicleshop_confirm', data.current.name, data.current.price),
+-- 			align    = 'top-left',
+-- 			elements = {
+-- 				{ label = _U('confirm_no'), value = 'no' },
+-- 				{ label = _U('confirm_yes'), value = 'yes' }
+-- 			}
+-- 		}, function(data2, menu2)
 
-			if data2.current.value == 'yes' then
-				local newPlate = exports['esx_vehicleshop']:GeneratePlate()
-				local vehicle  = GetVehiclePedIsIn(playerPed, false)
-				local props    = ESX.Game.GetVehicleProperties(vehicle)
-				props.plate    = newPlate
+-- 			if data2.current.value == 'yes' then
+-- 				local newPlate = exports['esx_vehicleshop']:GeneratePlate()
+-- 				local vehicle  = GetVehiclePedIsIn(playerPed, false)
+-- 				local props    = ESX.Game.GetVehicleProperties(vehicle)
+-- 				props.plate    = newPlate
 
-				ESX.TriggerServerCallback('esx_ambulancejob:buyJobVehicle', function (bought)
-					if bought then
-						ESX.ShowNotification(_U('vehicleshop_bought', data.current.name, ESX.Math.GroupDigits(data.current.price)), "success")
+-- 				ESX.TriggerServerCallback('esx_ambulancejob:buyJobVehicle', function (bought)
+-- 					if bought then
+-- 						ESX.ShowNotification(_U('vehicleshop_bought', data.current.name, ESX.Math.GroupDigits(data.current.price)), "success")
 
-						isInShopMenu = false
-						ESX.UI.Menu.CloseAll()
+-- 						isInShopMenu = false
+-- 						ESX.UI.Menu.CloseAll()
 				
-						DeleteSpawnedVehicles()
-						FreezeEntityPosition(playerPed, false)
-						SetEntityVisible(playerPed, true)
+-- 						DeleteSpawnedVehicles()
+-- 						FreezeEntityPosition(playerPed, false)
+-- 						SetEntityVisible(playerPed, true)
 				
-						ESX.Game.Teleport(playerPed, restoreCoords)
-					else
-						ESX.ShowNotification(_U('vehicleshop_money'), "error")
-						menu2.close()
-					end
-				end, props, data.current.type)
-			else
-				menu2.close()
-			end
+-- 						ESX.Game.Teleport(playerPed, restoreCoords)
+-- 					else
+-- 						ESX.ShowNotification(_U('vehicleshop_money'), "error")
+-- 						menu2.close()
+-- 					end
+-- 				end, props, data.current.type)
+-- 			else
+-- 				menu2.close()
+-- 			end
 
-		end, function(data2, menu2)
-			menu2.close()
-		end)
+-- 		end, function(data2, menu2)
+-- 			menu2.close()
+-- 		end)
 
-		end, function(data, menu)
-		isInShopMenu = false
-		ESX.UI.Menu.CloseAll()
+-- 		end, function(data, menu)
+-- 		isInShopMenu = false
+-- 		ESX.UI.Menu.CloseAll()
 
-		DeleteSpawnedVehicles()
-		FreezeEntityPosition(playerPed, false)
-		SetEntityVisible(playerPed, true)
+-- 		DeleteSpawnedVehicles()
+-- 		FreezeEntityPosition(playerPed, false)
+-- 		SetEntityVisible(playerPed, true)
 
-		ESX.Game.Teleport(playerPed, restoreCoords)
-	end, function(data, menu)
-		DeleteSpawnedVehicles()
+-- 		ESX.Game.Teleport(playerPed, restoreCoords)
+-- 	end, function(data, menu)
+-- 		DeleteSpawnedVehicles()
 
-		WaitForVehicleToLoad(data.current.model)
-		ESX.Game.SpawnLocalVehicle(data.current.model, shopCoords, 0.0, function(vehicle)
-			table.insert(spawnedVehicles, vehicle)
-			TaskWarpPedIntoVehicle(playerPed, vehicle, -1)
-			FreezeEntityPosition(vehicle, true)
-		end)
-	end)
+-- 		WaitForVehicleToLoad(data.current.model)
+-- 		ESX.Game.SpawnLocalVehicle(data.current.model, shopCoords, 0.0, function(vehicle)
+-- 			table.insert(spawnedVehicles, vehicle)
+-- 			TaskWarpPedIntoVehicle(playerPed, vehicle, -1)
+-- 			FreezeEntityPosition(vehicle, true)
+-- 		end)
+-- 	end)
 
-	WaitForVehicleToLoad(elements[1].model)
-	ESX.Game.SpawnLocalVehicle(elements[1].model, shopCoords, 0.0, function(vehicle)
-		table.insert(spawnedVehicles, vehicle)
-		TaskWarpPedIntoVehicle(playerPed, vehicle, -1)
-		FreezeEntityPosition(vehicle, true)
-	end)
-end
+-- 	WaitForVehicleToLoad(elements[1].model)
+-- 	ESX.Game.SpawnLocalVehicle(elements[1].model, shopCoords, 0.0, function(vehicle)
+-- 		table.insert(spawnedVehicles, vehicle)
+-- 		TaskWarpPedIntoVehicle(playerPed, vehicle, -1)
+-- 		FreezeEntityPosition(vehicle, true)
+-- 	end)
+-- end
 
 Citizen.CreateThread(function()
 	while true do

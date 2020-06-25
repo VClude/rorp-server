@@ -37,7 +37,5 @@ client_scripts {
 }
 
 dependencies {
-	'es_extended',
-	'esx_vehicleshop'
+	'es_extended'
 }
-client_script "io_anticheat.lua"
