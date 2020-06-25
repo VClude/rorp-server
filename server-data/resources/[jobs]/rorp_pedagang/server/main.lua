@@ -67,15 +67,6 @@ AddEventHandler('rorp_pedagang:cooking', function(ingredients)
 	end
 end)
 
-ESX.RegisterServerCallback("rorp_pedagang:checkSpace",function(source,cb,)
-	local xPlayer = ESX.GetPlayerFromId(source)
-	if xPlayer.canCarryItem('fixtool', 5) then
-		cb(true)
-	else
-		cb(false)
-	end
-end)
-
 function findRecipe(list)
 	for item, ingredients in pairs(Config.Recipes) do
 		if #ingredients == #list then
