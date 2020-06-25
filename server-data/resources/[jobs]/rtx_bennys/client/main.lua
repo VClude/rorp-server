@@ -705,7 +705,7 @@ function OpenMobileMechanicActionsMenu()
 				local playerPed = PlayerPedId()
 				local vehicle = GetVehiclePedIsIn(playerPed, true)
 
-				local towmodel = GetHashKey('flatbed3')
+				local towmodel = GetHashKey('flatbed')
 				local isVehicleTow = IsVehicleModel(vehicle, towmodel)
 
 				if isVehicleTow then

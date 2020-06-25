@@ -52,7 +52,7 @@ Config.CarDraw3DText = "Tekan ~g~[E]~s~ untuk membuka ~y~Garasi Bennys~s~"				--
 
 -- -- Mechanic Cars:
 Config.MechanicVehicles = {
-	{ model = 'flatbed3', label = 'FLATBED', price = 0 },
+	{ model = 'flatbed', label = 'FLATBED', price = 0 },
 	{ model = 'towtruck', label = 'TOWING Truck', price = 0 }
 }
 
