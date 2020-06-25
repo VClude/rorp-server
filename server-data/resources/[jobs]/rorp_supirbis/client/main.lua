@@ -264,6 +264,9 @@ function handleReturningBus()
         Events.RouteEnded()
         immediatelyEndRoute()
 
+        ESX.TriggerServerCallback("esx_skin:getPlayerSkin", function(skin, jobSkin)
+			TriggerEvent("skinchanger:loadSkin", skin)
+		end)
         Markers.ResetMarkers()
         Blips.ResetBlips()
     end
