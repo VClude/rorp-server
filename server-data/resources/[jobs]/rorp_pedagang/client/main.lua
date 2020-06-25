@@ -273,7 +273,8 @@ function OpenBennysInventoryMenu()
 			CurrentAction = "pedagang_inventory_menu"
             CurrentActionMsg = _U('inventory')
             CurrentActionData = {} 
-        end 
+        end
+    ) 
 end
 
 function OpenPutStocksMenu()
