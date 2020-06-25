@@ -122,7 +122,7 @@ function MFS:DamageCheck()
   local prevHealth = (self.plyHealth or GetEntityHealth(plyPed))
   self.plyHealth = GetEntityHealth(plyPed)
   if self.plyHealth < prevHealth then    
-    ESX.ShowNotification('You are injured! Check your damage by typing /openSkelly')
+    ESX.ShowNotification('Kamu terluka, cek lukamu dengan /cekLuka')
     local bone,bType = self:CheckBone()
     if bone and bType then
       self:DamageBone(bone,bType)
@@ -527,9 +527,9 @@ function MFS:UseItemOther(...)
   end)
 end
 
-RegisterCommand('useItemOther', function(...) MFS:UseItemOther(...); end)
-RegisterCommand('checkOther', function(...) MFS:CheckOther(...); end)
-RegisterCommand('openSkelly', function(...) if not MFS.ViewingOther then MFS:HandleMenu(true); end; end)
+RegisterCommand('pertolonganKorban', function(...) MFS:UseItemOther(...); end)
+RegisterCommand('cekLukaKorban', function(...) MFS:CheckOther(...); end)
+RegisterCommand('cekLuka', function(...) if not MFS.ViewingOther then MFS:HandleMenu(true); end; end)
 
 RegisterNetEvent('MF_SkeletalSystem:UseItem')
 AddEventHandler('MF_SkeletalSystem:UseItem', function(categories,medic) MFS:UseItem(categories,medic); end)
