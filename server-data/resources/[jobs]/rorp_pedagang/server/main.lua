@@ -25,15 +25,22 @@ AddEventHandler('rorp_pedagang:cooking', function(ingredients)
 	else
 		if xPlayer ~= nil then
 			if hasAllIngredients(xPlayer.inventory, Config.Recipes[item]) then
-				for _,ingredient in pairs(Config.Recipes[item]) do
-					if (ingredient.remove ~= nil and ingredient.remove) or (ingredient.remove == nil) then
-						xPlayer.removeInventoryItem(ingredient.item, ingredient.quantity)
-					end
-				end
-				-- xPlayer.addInventoryItem(item, 1)
-				-- TriggerClientEvent('rorp_pedagang:CookingEvent', item)
+				ESX.TriggerEventCallback('rorp_pedagang:checkSpace', function(hasSpace)
+					if hasSpace then
+						for _,ingredient in pairs(Config.Recipes[item]) do
+							if (ingredient.remove ~= nil and ingredient.remove) or (ingredient.remove == nil) then
+								xPlayer.removeInventoryItem(ingredient.item, ingredient.quantity)
+							end
+						end
 
-				TriggerClientEvent('rorp_pedagang:CookingEvent',source, item)
+						TriggerClientEvent('rorp_pedagang:CookingEvent',source, item)
+					else
+
+						TriggerClientEvent('esx:showNotification', _source, _U('RecipeNotEnough'))
+
+					end		
+				end,xPlayer,item)
+				-- xPlayer.addInventoryItem(item, 1)
 
 				TriggerClientEvent('esx:showNotification', _source, '~y~Berhasil Memasak: ~w~' .. itemLabel(item, xPlayer.inventory))
 			else
