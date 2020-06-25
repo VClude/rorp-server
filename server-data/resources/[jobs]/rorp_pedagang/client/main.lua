@@ -83,7 +83,7 @@ if Config.Keyboard.useKeyboard then
 end
 
 RegisterNetEvent('rorp_pedagang:CookingEvent')
-AddEventHandler('rorp_pedagang:CookingEvent', function(_item)
+AddEventHandler('rorp_pedagang:CookingEvent', function(_items)
     local items = _items
     
     print(items)
