@@ -35,9 +35,7 @@ AddEventHandler('rorp_pedagang:cooking', function(ingredients)
 
 					TriggerClientEvent('rorp_pedagang:CookingEvent',source, item)
 				else
-
 					TriggerClientEvent('esx:showNotification', _source, _U('player_cannot_hold'))
-
 				end
 			else
 				TriggerClientEvent('esx:showNotification', _source, _U('RecipeNotEnough'))
@@ -48,11 +46,11 @@ end)
 
 RegisterServerEvent('rorp_pedagang:reward')
 AddEventHandler('rorp_pedagang:reward',function(_items)
-	
-	local xPlayer = source
+	local _source = source
+	local xPlayer = ESX.GetPlayerFromId(_source)
 	local items = _items
-	print (items)
 
+	xPlayer.addInventoryItem(items, 5)
 end)
 
 
