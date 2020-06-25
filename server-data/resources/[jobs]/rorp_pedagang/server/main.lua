@@ -33,7 +33,7 @@ AddEventHandler('rorp_pedagang:cooking', function(ingredients)
 				-- xPlayer.addInventoryItem(item, 1)
 				-- TriggerClientEvent('rorp_pedagang:CookingEvent', item)
 
-				TriggerEvent("mythic_progbar:client:progress",
+				TriggerClientEvent("mythic_progbar:client:progress",
 				{
 					name = "cooking",
 					duration = 15000,
