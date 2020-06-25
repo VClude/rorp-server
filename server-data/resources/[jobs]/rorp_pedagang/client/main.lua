@@ -111,7 +111,10 @@ AddEventHandler('rorp_pedagang:CookingEvent', function(_items)
     },
     function(status)
         if not status then
-            NotifInformasi('WIP')          
+            ESX.ShowNotification(_U('CookingSuccess')..items)
+            TriggerServerEvent('rorp_pedagang:reward', items)
+            currentlyCooking = false
+            ClearPedTasks(playerPed)        
         end
     end)
 end)

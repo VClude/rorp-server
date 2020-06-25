@@ -13,5 +13,6 @@ Locales['id'] = {
     ['player_cannot_hold']         = 'Inventory kamu sudah ~r~penuh!',
     ['RecipeNotFound']             = 'Tidak menemukan resep dengan bahan itu!',
     ['RecipeNotEnough']            = 'Kamu tidak memiliki cukup bahan!',
+    ['CookingSuccess']             = 'Kamu berhasil memasak ~y~',
     
 }
