@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 <head>
     <title>ESX INVENTORY HUD BY TRSAK</title>
     <link href="https://fonts.googleapis.com/css?family=Signika" rel="stylesheet">
@@ -34,7 +34,6 @@
                     <input type="number" class="control" id="count" value="1">
                     <div class="control" id="use"></div>
                     <div class="control" id="give"></div>
-                    <div class="control" id="drop"></div>
                 </div>
             </div>
             <div id="otherInventory">
@@ -55,7 +54,7 @@
     $(document).ready(function () {
         $("#use").html(invLocale.useItem);
         $("#give").html(invLocale.giveItem);
-        $("#drop").html(invLocale.dropItem);
+   
         $("#noSecondInventoryMessage").html(invLocale.secondInventoryNotAvailable);
     });
 </script>
