@@ -11,4 +11,7 @@ Locales['id'] = {
     ['have_deposited']             = 'Kamu menyimpan ~y~x%s~s~ ~b~%s~s~',
     ['have_withdrawn']             = 'Kamu mengambil ~y~x%s~s~ ~b~%s~s~',
     ['player_cannot_hold']         = 'Inventory kamu sudah ~r~penuh!',
+    ['RecipeNotFound']             = 'Tidak menemukan resep dengan bahan itu!',
+    ['RecipeNotEnough']            = 'Kamu tidak memiliki cukup bahan!',
+    
 }

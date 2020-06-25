@@ -21,7 +21,7 @@ AddEventHandler('rorp_pedagang:cooking', function(ingredients)
 	local xPlayer = ESX.GetPlayerFromId(_source)
 	local item = findRecipe(ingredients)
 	if not item then
-		TriggerClientEvent('esx:showNotification', _source, 'No recipe found with these ingredients')
+		TriggerClientEvent('esx:showNotification', _source, _U('RecipeNotFound'))
 	else
 		if xPlayer ~= nil then
 			if hasAllIngredients(xPlayer.inventory, Config.Recipes[item]) then
@@ -31,9 +31,9 @@ AddEventHandler('rorp_pedagang:cooking', function(ingredients)
 					end
 				end
 				xPlayer.addInventoryItem(item, 1)
-				TriggerClientEvent('esx:showNotification', _source, '~y~Item Crafted: ~w~' .. itemLabel(item, xPlayer.inventory))
+				TriggerClientEvent('esx:showNotification', _source, '~y~Berhasil Memasak: ~w~' .. itemLabel(item, xPlayer.inventory))
 			else
-				TriggerClientEvent('esx:showNotification', _source, 'You do not have all of the ingredients')
+				TriggerClientEvent('esx:showNotification', _source, _U('RecipeNotEnough'))
 			end
 		end
 	end
