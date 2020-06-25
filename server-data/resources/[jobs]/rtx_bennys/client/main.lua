@@ -61,250 +61,26 @@ local Interior = GetInteriorAtCoords(-210.08, -1318.142, 30.89)
 
 LoadInterior(Interior)
 
-Citizen.CreateThread(
-
-	function()
-
-		while ESX == nil do
-
-			TriggerEvent(
-
-				"esx:getSharedObject",
-
-				function(obj)
-
-					ESX = obj
-
-				end
-
-			)
-
-			Citizen.Wait(0)
-
-		end
-
-
-
-		while ESX.GetPlayerData().job == nil do
-
-			Citizen.Wait(10)
-
-		end
-
-
-
-		ESX.PlayerData = ESX.GetPlayerData()
-
+Citizen.CreateThread( function()
+	while ESX == nil do 	
+		TriggerEvent("esx:getSharedObject", function(obj)
+			ESX = obj
+		end)	
+		Citizen.Wait(0)
 	end
 
-)
+	while ESX.GetPlayerData().job == nil do
+		Citizen.Wait(10)
+	end
+
+	ESX.PlayerData = ESX.GetPlayerData()
+
+end)
 
 RegisterNetEvent('esx:setJob')
 AddEventHandler('esx:setJob', function(job)
 	ESX.PlayerData.job = job
 end)
-
-
-
-
-------------------------------------------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------
---------------------------------------- ANIMATIONS PROPS ---------------------------------------
----------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-
--- Prop list, you can add as much as you want
-attachPropList = {
-
-	["prop_roadcone02a"] = { 
-        ["model"] = "prop_roadcone02a", ["bone"] = 28422, ["x"] = 0.6,["y"] = -0.15,["z"] = -0.1,["xR"] = 315.0,["yR"] = 288.0, ["zR"] = 0.0 
-    },
-    ["prop_cs_trolley_01"] = { 
-        ["model"] = "prop_cs_trolley_01", ["bone"] = 28422, ["x"] = 0.0,["y"] = -0.6,["z"] = -0.8,["xR"] = -180.0,["yR"] = -165.0, ["zR"] = 90.0 
-    },
-	["prop_cs_cardbox_01"] = { 
-        ["model"] = "prop_cs_cardbox_01", ["bone"] = 28422, ["x"] = 0.01,["y"] = 0.01,["z"] = 0.0,["xR"] = -255.0,["yR"] = -120.0, ["zR"] = 40.0 
-    },
-	["prop_tool_box_04"] = { 
-        ["model"] = "prop_tool_box_04", ["bone"] = 28422, ["x"] = 0.4,["y"] = -0.1,["z"] = -0.1,["xR"] = 315.0,["yR"] = 288.0, ["zR"] = 0.0
-    },
-	["prop_engine_hoist"] = { 
-        ["model"] = "prop_engine_hoist", ["bone"] = 28422, ["x"] = 0.0,["y"] = -0.5,["z"] = -1.3,["xR"] = -195.0,["yR"] = -180.0, ["zR"] = 180.0 
-    }
-}
-
-RegisterNetEvent('rtx_bennys:attachProp')
-AddEventHandler('rtx_bennys:attachProp', function(attachModelSent,boneNumberSent,x,y,z,xR,yR,zR)
-    closestEntity = 0
-    holdingPackage = true
-    local attachModel = GetHashKey(attachModelSent)
-    boneNumber = boneNumberSent
-    SetCurrentPedWeapon(GetPlayerPed(-1), 0xA2719263) 
-    local bone = GetPedBoneIndex(GetPlayerPed(-1), boneNumberSent)
-    RequestModel(attachModel)
-    while not HasModelLoaded(attachModel) do
-        Citizen.Wait(100)
-    end
-    closestEntity = CreateObject(attachModel, 1.0, 1.0, 1.0, 1, 1, 0)
-    AttachEntityToEntity(closestEntity, GetPlayerPed(-1), bone, x, y, z, xR, yR, zR, 1, 1, 0, true, 2, 1)
-
-    APPbone = bone
-    APPx = x
-    APPy = y
-    APPz = z
-    APPxR = xR
-    APPyR = yR
-    APPzR = zR
-end)
-
-function loadAnimDict( dict )
-    while ( not HasAnimDictLoaded( dict ) ) do
-        RequestAnimDict( dict )
-        Citizen.Wait( 10 )
-    end
-end
-
-function randPickupAnim()
-  local randAnim = math.random(7)
-    loadAnimDict('random@domestic')
-    TaskPlayAnim(GetPlayerPed(-1),'random@domestic', 'pickup_low',5.0, 1.0, 1.0, 48, 0.0, 0, 0, 0)
-end
-
-function holdAnim()
-    loadAnimDict( "anim@heists@box_carry@" )
-	TaskPlayAnim((GetPlayerPed(-1)),"anim@heists@box_carry@","idle",4.0, 1.0, -1,49,0, 0, 0, 0)
-end
-
-Citizen.CreateThread( function()
-    while true do 
-		Citizen.Wait(10)
-		if ((IsDisabledControlJustPressed(0, dropkey) or (GetHashKey("WEAPON_UNARMED") ~= GetSelectedPedWeapon(GetPlayerPed(-1)))) and (closestEntity ~= 0) and (PlayerData ~= nil) and (PlayerData.job.name == 'bennys')) then
-			local trackedEntities = {
-				'prop_roadcone02a',
-				'prop_tool_box_04',
-				'prop_cs_trolley_01',
-				'prop_engine_hoist',
-				'imp_prop_car_jack_01a',
-				'prop_cs_cardbox_01'
-			}
-
-			local playerPed = PlayerPedId()
-			local coords    = GetEntityCoords(playerPed)
-
-			local closestDistance = -1
-			closestEntity   = nil
-			local closestEntityName   = nil
-
-			for i=1, #trackedEntities, 1 do
-				local object = GetClosestObjectOfType(coords, 1.5, GetHashKey(trackedEntities[i]), false, false, false)
-				if DoesEntityExist(object) then
-					local objCoords = GetEntityCoords(object)
-					local distance  = GetDistanceBetweenCoords(coords, objCoords, true)
-
-					if closestDistance == -1 or closestDistance > distance then
-						closestDistance = distance
-						closestEntity   = object
-						closestEntityName = trackedEntities[i]
-					end
-				end
-			end
-			if not holdingPackage then
-				local dst = GetDistanceBetweenCoords(GetEntityCoords(closestEntity) ,GetEntityCoords(GetPlayerPed(-1)),true)                 
-				if dst < 2 then
-					holdingPackage = true
-					if (closestEntityName == 'prop_roadcone02a') or (closestEntityName == 'prop_tool_box_04') or (closestEntityName == 'prop_cs_cardbox_01') then
-						randPickupAnim()
-					end
-					Citizen.Wait(350)
-					ClearPedTasks(GetPlayerPed(-1))
-					ClearPedSecondaryTask(GetPlayerPed(-1))
-					if (closestEntityName == 'prop_cs_trolley_01') or (closestEntityName == 'prop_engine_hoist') or (closestEntityName == 'imp_prop_car_jack_01a') or (closestEntityName == 'prop_cs_cardbox_01') then
-						holdAnim()
-					end
-					Citizen.Wait(350)
-					AttachEntityToEntity(closestEntity, GetPlayerPed(-1),GetPedBoneIndex(GetPlayerPed(-1), attachPropList[closestEntityName]["bone"]), attachPropList[closestEntityName]["x"], attachPropList[closestEntityName]["y"], attachPropList[closestEntityName]["z"], attachPropList[closestEntityName]["xR"], attachPropList[closestEntityName]["yR"], attachPropList[closestEntityName]["zR"], 1, 1, 0, true, 2, 1)
-				end
-			else
-				holdingPackage = false
-				if (closestEntityName == 'prop_roadcone02a') or (closestEntityName == 'prop_tool_box_04') or (closestEntityName == 'prop_cs_cardbox_01')then
-					randPickupAnim()
-				end
-				Citizen.Wait(350)
-				DetachEntity(closestEntity)
-				ClearPedTasks(GetPlayerPed(-1))
-				ClearPedSecondaryTask(GetPlayerPed(-1))
-			end
-		end
-	end
-end)
-
-attachedProp = 0
-function removeAttachedProp()
-    if DoesEntityExist(attachedProp) then
-        DeleteEntity(attachedProp)
-        attachedProp = 0
-    end
-end
-
-RegisterNetEvent('rtx_bennys:attachItem')
-AddEventHandler('rtx_bennys:attachItem', function(item)
-    TriggerEvent("rtx_bennys:attachProp",attachPropList[item]["model"], attachPropList[item]["bone"], attachPropList[item]["x"], attachPropList[item]["y"], attachPropList[item]["z"], attachPropList[item]["xR"], attachPropList[item]["yR"], attachPropList[item]["zR"])
-end)
-
---prop_cs_trolley_01
-RegisterNetEvent('attach:prop_cs_trolley_01')
-AddEventHandler('attach:prop_cs_trolley_01', function()
-	holdAnim()
-    TriggerEvent("rtx_bennys:attachItem","prop_cs_trolley_01")
-end)
-
---prop_engine_hoist
-RegisterNetEvent('attach:prop_engine_hoist')
-AddEventHandler('attach:prop_engine_hoist', function()
-	holdAnim()
-    TriggerEvent("rtx_bennys:attachItem","prop_engine_hoist")
-end)
-
---prop_tool_box_04
-RegisterNetEvent('attach:prop_tool_box_04')
-AddEventHandler('attach:prop_tool_box_04', function()
-    TriggerEvent("rtx_bennys:attachItem","prop_tool_box_04")
-end)
-
---prop_roadcone02a
-RegisterNetEvent('attach:prop_roadcone02a')
-AddEventHandler('attach:prop_roadcone02a', function()
-    TriggerEvent("rtx_bennys:attachItem","prop_roadcone02a")
-end)
-
---prop_cs_cardbox_01
-RegisterNetEvent('attach:prop_cs_cardbox_01')
-AddEventHandler('attach:prop_cs_cardbox_01', function()
-	holdAnim()
-    TriggerEvent("rtx_bennys:attachItem","prop_cs_cardbox_01")
-end)
-
-RegisterNetEvent('rtx_bennys:removeall')
-AddEventHandler('rtx_bennys:removeall', function()
-    TriggerEvent("disabledWeapons",false)
-	ClearPedTasks(GetPlayerPed(-1))
-	ClearPedSecondaryTask(GetPlayerPed(-1))
-	Citizen.Wait(500)
-	DetachEntity(closestEntity)
-end)
-
-RegisterNetEvent("disabledWeapons")
-AddEventHandler("disabledWeapons", function(sentinfo)
-    SetCurrentPedWeapon(GetPlayerPed(-1), GetHashKey("weapon_unarmed"), 1)
-    disabledWeapons = sentinfo
-	removeAttachedProp()
-	holdingPackage = false
-end)
-
-
-
 
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -313,264 +89,124 @@ end)
 ---------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-AddEventHandler(
+AddEventHandler("esx_bennysjob:hasEnteredMarker", function(zone)
 
-	"esx_bennysjob:hasEnteredMarker",
-
-	function(zone)
-
-		if zone == "Cloakrooms" then
-
-			CurrentAction = "cloakrooms_menu"
-
-			CurrentActionMsg = "Tekan ~b~[E]~w~ untuk membuka Bennys Cloakroom"
-
-			CurrentActionData = {}
-
-		elseif zone == "BossMenu" then
-
-			CurrentAction = "boss_menu"
-
-			CurrentActionMsg = "Tekan ~b~[E]~w~ untuk membuka Boss Menu"
-
-			CurrentActionData = {}
-
-		elseif zone == "InventoryMenu" then
-
-			CurrentAction = "bennys_inventory_menu"
-
-			CurrentActionMsg = "Tekan ~b~[E]~w~ untuk membuka Inventory"
-
-			CurrentActionData = {}
-			
-		elseif zone == "CarLift" then
-
-			CurrentAction = "lslift1"
-
-			CurrentActionMsg = "Tekan ~b~[E]~w~ untuk kontrol lift"
-
-			CurrentActionData = {}
-
-		elseif zone == "CarLift2" then
-
-			CurrentAction = "lslift2"
-
-			CurrentActionMsg = "Tekan ~b~[E]~w~ untuk kontrol lift"
-
-			CurrentActionData = {}
-									
-			
-		elseif zone == "ls1" then
-
-			CurrentAction = "ls_custom"
-
-			CurrentActionMsg = "Tekan ~b~[E]~w~ untuk custom bodykit"
-
-			CurrentActionData = {}
-			
-		elseif zone == "ls2" then
-
-			CurrentAction = "ls_custom"
-
-			CurrentActionMsg = "Tekan ~b~[E]~w~ untuk cat kendaraan"
-
-			CurrentActionData = {}
-			
-		elseif zone == "ls3" then
-
-			CurrentAction = "ls_custom"
-
-			CurrentActionMsg = "Tekan ~b~[E]~w~ untuk upgrade mesin"
-
-			CurrentActionData = {}
-
-		end
-
+	if zone == "Cloakrooms" then
+		CurrentAction = "cloakrooms_menu"
+		CurrentActionMsg = "Tekan ~b~[E]~w~ untuk membuka Bennys Cloakroom"
+		CurrentActionData = {}
+	elseif zone == "BossMenu" then
+		CurrentAction = "boss_menu"
+		CurrentActionMsg = "Tekan ~b~[E]~w~ untuk membuka Boss Menu"
+		CurrentActionData = {}
+	elseif zone == "InventoryMenu" then
+		CurrentAction = "bennys_inventory_menu"
+		CurrentActionMsg = "Tekan ~b~[E]~w~ untuk membuka Inventory"
+		CurrentActionData = {}											
+	elseif zone == "ls1" then
+		CurrentAction = "ls_custom"
+		CurrentActionMsg = "Tekan ~b~[E]~w~ untuk custom bodykit"
+		CurrentActionData = {}		
+	elseif zone == "ls2" then
+		CurrentAction = "ls_custom"
+		CurrentActionMsg = "Tekan ~b~[E]~w~ untuk cat kendaraan"
+		CurrentActionData = {}	
+	elseif zone == "ls3" then
+		CurrentAction = "ls_custom"
+		CurrentActionMsg = "Tekan ~b~[E]~w~ untuk upgrade mesin"
+		CurrentActionData = {}
 	end
+end)
 
-)
-
-
-
-AddEventHandler(
-
-	"esx_bennysjob:hasExitedMarker",
-
-	function(zone)
+AddEventHandler("esx_bennysjob:hasExitedMarker", function(zone)
 
 		CurrentAction = nil
-
 		if not isInShopMenu then
-
 		  ESX.UI.Menu.CloseAll()
-
 		end
-
-	end
-
-)
+end)
 
 
 
 -- Create Blips
 
-Citizen.CreateThread(
+Citizen.CreateThread( function()
 
-	function()
+	local blip = AddBlipForCoord(-210.27520751953, -1320.5799560547, 29.890365600586)
+	SetBlipSprite(blip, 446)
+	SetBlipDisplay(blip, 4)
+	SetBlipScale(blip, 1.2)
+	SetBlipColour(blip, 48)
+	SetBlipAsShortRange(blip, true)
+	BeginTextCommandSetBlipName("STRING")
+	AddTextComponentSubstringPlayerName("Benny's Original Motor Works")
+	EndTextCommandSetBlipName(blip)
 
-		local blip = AddBlipForCoord(-210.27520751953, -1320.5799560547, 29.890365600586)
-
-
-
-		SetBlipSprite(blip, 446)
-
-		SetBlipDisplay(blip, 4)
-
-		SetBlipScale(blip, 1.2)
-
-		SetBlipColour(blip, 48)
-
-		SetBlipAsShortRange(blip, true)
-
-
-
-		BeginTextCommandSetBlipName("STRING")
-
-		AddTextComponentSubstringPlayerName("Benny's Original Motor Works")
-
-		EndTextCommandSetBlipName(blip)
-
-	end
-
-)
+end)
 
 
 
 -- Display markers
 
-Citizen.CreateThread(
+Citizen.CreateThread( function()
 
-	function()
-
-		while true do
-
-			Citizen.Wait(0)
-
-
-
-			if ESX.PlayerData.job and ESX.PlayerData.job.name == "bennys" then
-
-				local coords, letSleep = GetEntityCoords(PlayerPedId()), true
-
-
-
-				for k, v in pairs(Config.Zones) do
-
-					if v.Type ~= -1 and GetDistanceBetweenCoords(coords, v.Pos.x, v.Pos.y, v.Pos.z, true) < Config.DrawDistance then
-
-						if k == "Vehicles" then
-
-							DrawMarker(v.Type, v.Pos.x, v.Pos.y, v.Pos.z, 0.0, 0.0, 0.0, 0, 0.0, 0.0, v.Size.x, v.Size.y, v.Size.z, v.Color.r, v.Color.g, v.Color.b, 100, false, true, 2, true, false, false, false)
-
-						else
-
-							DrawMarker(v.Type, v.Pos.x, v.Pos.y, v.Pos.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, v.Size.x, v.Size.y, v.Size.z, v.Color.r, v.Color.g, v.Color.b, 100, false, true, 2, false, nil, nil, false)
-
-						end
-
-						letSleep = false
-
+	while true do
+		Citizen.Wait(0)
+		if ESX.PlayerData.job and ESX.PlayerData.job.name == "bennys" then
+			local coords, letSleep = GetEntityCoords(PlayerPedId()), true
+			for k, v in pairs(Config.Zones) do
+				if v.Type ~= -1 and GetDistanceBetweenCoords(coords, v.Pos.x, v.Pos.y, v.Pos.z, true) < Config.DrawDistance then
+					if k == "Vehicles" then
+						DrawMarker(v.Type, v.Pos.x, v.Pos.y, v.Pos.z, 0.0, 0.0, 0.0, 0, 0.0, 0.0, v.Size.x, v.Size.y, v.Size.z, v.Color.r, v.Color.g, v.Color.b, 100, false, true, 2, true, false, false, false)
+					else
+						DrawMarker(v.Type, v.Pos.x, v.Pos.y, v.Pos.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, v.Size.x, v.Size.y, v.Size.z, v.Color.r, v.Color.g, v.Color.b, 100, false, true, 2, false, nil, nil, false)
 					end
-
+					letSleep = false
 				end
-
-
-
-				if letSleep then
-
-					Citizen.Wait(500)
-
-				end
-
-			else
-
-				Citizen.Wait(500)
-
 			end
 
+			if letSleep then
+				Citizen.Wait(500)
+			end
+		else
+			Citizen.Wait(500)
 		end
-
 	end
-
-)
-
+end)
 
 
 -- Enter / Exit marker events
+Citizen.CreateThread(function()
 
-Citizen.CreateThread(
+	while true do
+		Citizen.Wait(10)
 
-	function()
+		if ESX.PlayerData.job and ESX.PlayerData.job.name == "bennys" then
+			local coords = GetEntityCoords(PlayerPedId())
+			local isInMarker = false
+			local currentZone = nil
 
-		while true do
-
-			Citizen.Wait(10)
-
-
-
-			if ESX.PlayerData.job and ESX.PlayerData.job.name == "bennys" then
-
-				local coords = GetEntityCoords(PlayerPedId())
-
-				local isInMarker = false
-
-				local currentZone = nil
-
-
-
-				for k, v in pairs(Config.Zones) do
-
-					if (GetDistanceBetweenCoords(coords, v.Pos.x, v.Pos.y, v.Pos.z, true) < v.Size.x) then
-
-						isInMarker = true
-
-						CurrentActionPos = v.Pos
-
-						currentZone = k
-
-					end
-
+			for k, v in pairs(Config.Zones) do
+				if (GetDistanceBetweenCoords(coords, v.Pos.x, v.Pos.y, v.Pos.z, true) < v.Size.x) then
+					isInMarker = true
+					CurrentActionPos = v.Pos
+					currentZone = k
 				end
-
-
-
-				if (isInMarker and not HasAlreadyEnteredMarker) or (isInMarker and LastZone ~= currentZone) then
-
-					HasAlreadyEnteredMarker = true
-
-					LastZone = currentZone
-
-					TriggerEvent("esx_bennysjob:hasEnteredMarker", currentZone)
-
-				end
-
-
-
-				if not isInMarker and HasAlreadyEnteredMarker then
-
-					HasAlreadyEnteredMarker = false
-
-					TriggerEvent("esx_bennysjob:hasExitedMarker", LastZone)
-
-				end
-
 			end
 
+			if (isInMarker and not HasAlreadyEnteredMarker) or (isInMarker and LastZone ~= currentZone) then
+				HasAlreadyEnteredMarker = true
+				LastZone = currentZone
+				TriggerEvent("esx_bennysjob:hasEnteredMarker", currentZone)
+			end
+
+			if not isInMarker and HasAlreadyEnteredMarker then
+				HasAlreadyEnteredMarker = false
+				TriggerEvent("esx_bennysjob:hasExitedMarker", LastZone)
+			end
 		end
-
 	end
-
-)
+end)
 
 -- function openMechanicPropsMenu()
 
@@ -611,115 +247,72 @@ Citizen.CreateThread(
 
 
 function NotifInformasi(text)
-
 	exports['mythic_notify']:SendAlert('inform', text, 5000)
-
 end
 
 function NotifSukses(text)
-
 	exports['mythic_notify']:SendAlert('success', text, 5000)
-
 end
 
 function NotifError(text)
-
 	exports['mythic_notify']:SendAlert('error', text, 5000)
-
 end
 
-Citizen.CreateThread(
+Citizen.CreateThread( function()
+	while true do
+		Citizen.Wait(2)
 
-	function()
-
-		while true do
-
-			Citizen.Wait(2)
-
-
-
-			if ESX.PlayerData.job and ESX.PlayerData.job.name == "bennys" then
-
-				if CurrentAction then
-
-					DrawText3Ds(CurrentActionPos.x, CurrentActionPos.y, CurrentActionPos.z, CurrentActionMsg)
-
-
-
-					if IsControlJustReleased(0, Keys["E"]) then
-
-						if CurrentAction == "cloakrooms_menu" then
-
-							OpenCloakRoomsMenu()
-
-						elseif CurrentAction == "boss_menu" then
-							if  ESX.PlayerData.job and ESX.PlayerData.job.name == "bennys" and ESX.PlayerData.job.grade_name == 'boss' then
-								OpenBossMenu()
-							else
-								NotifInformasi('Tidak memiliki akses boss menu')
-							end						
-						elseif CurrentAction == "bennys_inventory_menu" then
-							if  ESX.PlayerData.job and ESX.PlayerData.job.name == "bennys" and ESX.PlayerData.job.grade_name ~= 'magang' and ESX.PlayerData.job.grade_name ~= 'karyawan_bengkel' then						
-								OpenBennysInventoryMenu()
-							else
-								NotifInformasi('Anda tidak memiliki akses membuka inventory')
-							end							
-						elseif CurrentAction == 'ls_custom' then
-							if  ESX.PlayerData.job and ESX.PlayerData.job.name == "bennys" and ESX.PlayerData.job.grade_name ~= 'magang' then						
-								OpenLSAction()
-							else
-								NotifInformasi('Pengalaman anda kurang untuk modifikasi kendaraan')
-							end
+		if ESX.PlayerData.job and ESX.PlayerData.job.name == "bennys" then
+			if CurrentAction then
+				DrawText3Ds(CurrentActionPos.x, CurrentActionPos.y, CurrentActionPos.z, CurrentActionMsg)
+				if IsControlJustReleased(0, Keys["E"]) then
+					if CurrentAction == "cloakrooms_menu" then
+						OpenCloakRoomsMenu()
+					elseif CurrentAction == "boss_menu" then
+						if  ESX.PlayerData.job and ESX.PlayerData.job.name == "bennys" and ESX.PlayerData.job.grade_name == 'boss' then
+							OpenBossMenu()
+						else
+							NotifInformasi('Tidak memiliki akses boss menu')
+						end						
+					elseif CurrentAction == "bennys_inventory_menu" then
+						if  ESX.PlayerData.job and ESX.PlayerData.job.name == "bennys" and ESX.PlayerData.job.grade_name ~= 'magang' and ESX.PlayerData.job.grade_name ~= 'karyawan_bengkel' then						
+							OpenBennysInventoryMenu()
+						else
+							NotifInformasi('Anda tidak memiliki akses membuka inventory')
+						end							
+					elseif CurrentAction == 'ls_custom' then
+						if  ESX.PlayerData.job and ESX.PlayerData.job.name == "bennys" and ESX.PlayerData.job.grade_name ~= 'magang' then						
+							OpenLSAction()
+						else
+							NotifInformasi('Pengalaman anda kurang untuk modifikasi kendaraan')
 						end
-
-						CurrentAction = nil
-
 					end
-
+					CurrentAction = nil
 				end
-
-				if ( IsControlJustReleased( 0, 167 ) or IsDisabledControlJustReleased( 0, 167 ) ) and GetLastInputMethod( 0 ) and not IsDead and not ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'mobile_mechanic_actions') and (GetGameTimer() - GUI.Time) > 150 then
-					OpenMobileMechanicActionsMenu()
-				end
-
-			else
-
-				Citizen.Wait(500)
-
 			end
-
+			if ( IsControlJustReleased( 0, 167 ) or IsDisabledControlJustReleased( 0, 167 ) ) and GetLastInputMethod( 0 ) and not IsDead and not ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'mobile_mechanic_actions') and (GetGameTimer() - GUI.Time) > 150 then
+				OpenMobileMechanicActionsMenu()
+			end
+		else
+			Citizen.Wait(500)
 		end
-
 	end
-
-)
-
+end)
 
 
-AddEventHandler(
 
-	"esx:onPlayerDeath",
-
+AddEventHandler("esx:onPlayerDeath",
 	function(data)
-
 		isDead = true
-
 	end
-
 )
 
 
 
-AddEventHandler(
-
-	"playerSpawned",
-
+AddEventHandler("playerSpawned",
 	function(spawn)
-
 		isDead = false
-
 	end
-
 )
 
 function OpenBossMenu()
@@ -758,7 +351,6 @@ function OpenBossMenu()
 end
 
 function OpenRegLicense()
-
 	ESX.UI.Menu.Open('dialog', GetCurrentResourceName(), 'register_license', {
 		title = ('Player ID')
 	}, function(data, menu)
@@ -861,42 +453,22 @@ end
 
 function setUniform(job, playerPed)
 
-	TriggerEvent(
+	TriggerEvent("skinchanger:getSkin", function(skin)
 
-		"skinchanger:getSkin",
-
-		function(skin)
-
-			if skin.sex == 0 then
-
-				if Config.Uniforms[job].male then
-
-					TriggerEvent("skinchanger:loadClothes", skin, Config.Uniforms[job].male)
-
-				else
-
-					NotifError("Pakaian tidak tersedia!")
-
-				end
-
+		if skin.sex == 0 then
+			if Config.Uniforms[job].male then
+				TriggerEvent("skinchanger:loadClothes", skin, Config.Uniforms[job].male)
 			else
-
-				if Config.Uniforms[job].female then
-
-					TriggerEvent("skinchanger:loadClothes", skin, Config.Uniforms[job].female)
-
-				else
-
-					NotifError("Pakaian tidak tersedia!")
-
-				end
-
+				NotifError("Pakaian tidak tersedia!")
 			end
-
+		else
+			if Config.Uniforms[job].female then
+				TriggerEvent("skinchanger:loadClothes", skin, Config.Uniforms[job].female)
+			else
+				NotifError("Pakaian tidak tersedia!")
+			end
 		end
-
-	)
-
+	end)
 end
 
 function OpenPutStocksMenu()
@@ -992,338 +564,167 @@ end
 function OpenMobileMechanicActionsMenu()
 
 	ESX.UI.Menu.CloseAll()
-
-
-
-	ESX.UI.Menu.Open(
-
-		"default",
-
-		GetCurrentResourceName(),
-
-		"mobile_mechanic_actions",
-
+	ESX.UI.Menu.Open("default", GetCurrentResourceName(), "mobile_mechanic_actions",
 		{
-
 			title = "Menu Bennys",
-
 			align = "bottom-right",
-
 			elements = {
-
 				{label = "Tagihan", value = "billing"},
-
 				{label = "Perbaiki Kendaraan", value = "fix_vehicle"},
-
-				{label = "Cuci Kendaraan", value = "clean_vehicle"},
-					
+				{label = "Cuci Kendaraan", value = "clean_vehicle"},			
 				{label = "Ganti Ban", value = "ganti_ban"},				
-
 			}
-
 		},
 
 		function(data, menu)
-
 			if isBusy then
-
 				return
-
 			end
 
-
-
 			if data.current.value == "billing" then
-
-				ESX.UI.Menu.Open(
-
-					"dialog",
-
-					GetCurrentResourceName(),
-
-					"billing",
-
+				ESX.UI.Menu.Open( "dialog", GetCurrentResourceName(), "billing",
 					{
-
 						title = "Jumlah Tagihan"
-
 					},
-
 					function(data, menu)
-
 						local amount = tonumber(data.value)
 
-
-
 						if amount == nil or amount < 0 then
-
 							NotiError("Jumlah Salah!")
-
 						else
 
 							local closestPlayer, closestDistance = ESX.Game.GetClosestPlayer()
-
 							if closestPlayer == -1 or closestDistance > 3.0 then
-
 								NotifError("Tidak ada orang di sekitar!")
-
 							else
 
 								menu.close()
-
 								TriggerServerEvent("esx_billing:sendBill", GetPlayerServerId(closestPlayer), "society_mechanic", "Benny's", amount)
-
 							end
-
 						end
-
 					end,
 
 					function(data, menu)
-
 						menu.close()
-
 					end
-
-				)
-				
+				)				
 			elseif data.current.value == "ganti_ban" then	
 				menu.close()
 				gantiBan()
 				
 			elseif data.current.value == "fix_vehicle" then
-
 				local playerPed = PlayerPedId()
-
 				local vehicle = ESX.Game.GetVehicleInDirection()
-
 				local coords = GetEntityCoords(playerPed)
 
-
-
 				if IsPedSittingInAnyVehicle(playerPed) then
-
 					NotifInformasi("Tidak boleh di dalam kendaraan!")
-
 					return
-
 				end
 
-
-
 				if DoesEntityExist(vehicle) then
-
 					isBusy = true
-
 					TaskStartScenarioInPlace(playerPed, "PROP_HUMAN_BUM_BIN", 0, true)
 
-
-
-					TriggerEvent(
-
-						"mythic_progbar:client:progress",
-
+					TriggerEvent( "mythic_progbar:client:progress",
 						{
-
 							name = "fixing_vehicle",
-
 							duration = 15000,
-
 							label = "Perbaiki Kendaraan...",
-
 							useWhileDead = false,
-
 							canCancel = true,
-
 							controlDisables = {
-
 								disableMovement = true,
-
 								disableCarMovement = true,
-
 								disableMouse = false,
-
 								disableCombat = true
-
 							}
-
 						},
 
 						function(status)
-
 							ClearPedTasksImmediately(playerPed)
-
 							isBusy = false
-
 							if not status then
-
 								SetVehicleFixed(vehicle)
-
 								SetVehicleDeformationFixed(vehicle)
-
 								SetVehicleBodyHealth(vehicle, 1000.00)
-
 								SetVehicleEngineHealth(vehicle, 1000.00)
-
 								SetVehicleUndriveable(vehicle, false)
-
 								SetVehicleEngineOn(vehicle, true, true)
-
 								NotifSukses("Kendaraan sukses diperbaiki!")
-
 							end
-
 						end
-
 					)
-
 				else
-
 					NotifError("Tidak ada kendaraan!")
-
 				end
 					
 			elseif data.current.value == "clean_vehicle" then
-
 				local playerPed = PlayerPedId()
-
 				local vehicle = ESX.Game.GetVehicleInDirection()
-
 				local coords = GetEntityCoords(playerPed)
 
-
-
 				if IsPedSittingInAnyVehicle(playerPed) then
-
 					NotifInformasi("Tidak boleh di dalam kendaraan!")
-
 					return
-
 				end
 
-
-
 				if DoesEntityExist(vehicle) then
-
 					isBusy = true
-
 					TaskStartScenarioInPlace(playerPed, "WORLD_HUMAN_MAID_CLEAN", 0, true)
-
-
-
-					TriggerEvent(
-
-						"mythic_progbar:client:progress",
-
+					TriggerEvent( "mythic_progbar:client:progress",
 						{
-
 							name = "cleaning_vehicle",
-
 							duration = 5000,
-
 							label = "Mencuci Kendaraan...",
-
 							useWhileDead = false,
-
 							canCancel = true,
-
 							controlDisables = {
-
 								disableMovement = true,
-
 								disableCarMovement = true,
-
 								disableMouse = false,
-
 								disableCombat = true
-
 							}
-
 						},
 
 						function(status)
-
 							ClearPedTasksImmediately(playerPed)
-
 							isBusy = false
-
 							if not status then
-
 								SetVehicleDirtLevel(vehicle, 0)
-
 								ClearPedTasksImmediately(playerPed)
-
 								NotifSukses("Kendaraan telah dicuci!")
-
 							end
-
 						end
-
 					)
-
 				else
-
 					NotifError("Tidak ada kendaraan!")
-
 				end
-
 			end
-
 		end,
-
 		function(data, menu)
-
 			menu.close()
-
 		end
-
 	)
-
 end
 
-
-
-function loadAnimDict(dict)
-
-	while (not HasAnimDictLoaded(dict)) do
-
-		RequestAnimDict(dict)
-
-		Citizen.Wait(1)
-
-	end
-
-end
 
 function drawLoadingText(text, red, green, blue, alpha)
-
 	SetTextFont(6)
-
 	SetTextScale(0.0, 0.5)
-
 	SetTextColour(red, green, blue, alpha)
-
 	SetTextDropshadow(0, 0, 0, 0, 255)
-
 	SetTextEdge(1, 0, 0, 0, 255)
-
 	SetTextDropShadow()
-
 	SetTextOutline()
-
 	SetTextCentre(true)
 
-
-
 	BeginTextCommandDisplayText("STRING")
-
 	AddTextComponentSubstringPlayerName(text)
-
 	EndTextCommandDisplayText(0.5, 0.5)
-
 end
-function OpenLSAction()
 
+function OpenLSAction()
 	if IsControlJustReleased(0, 38) and not lsMenuIsShowed then
 		if ((PlayerData.job ~= nil and PlayerData.job.name == 'bennys') or Config.IsMechanicJobOnly == false) then
 			lsMenuIsShowed = true
@@ -1461,31 +862,17 @@ end
 function DrawText3Ds(x, y, z, text)
 
 	local onScreen, _x, _y = World3dToScreen2d(x, y, z)
-
 	local px, py, pz = table.unpack(GetGameplayCamCoords())
-
-
-
 	SetTextScale(0.35, 0.35)
-
 	SetTextProportional(1)
-
 	SetTextColour(255, 255, 255, 255)
-
 	SetTextEntry("STRING")
-
 	SetTextFont(6)
-
 	SetTextCentre(1)
-
 	AddTextComponentString(text)
-
 	DrawText(_x, _y)
-
 	local factor = (string.len(text)) / 240
-
 	DrawRect(_x, _y + 0.0125, 0.015 + factor, 0.03, 0, 0, 0, 150)
-
 end
 
 function UpdateMods(data)
@@ -1720,405 +1107,6 @@ function GetAction(data)
 end
 
 
-
-
-
---------------------------------------------------------------------------------------------------------------------------------
-
---------------------------------------------------------------------------------------------------------------------------------
-
---------------------------- CAR LIFT -------------------------------------------------------------------------------------------
-
---------------------------------------------------------------------------------------------------------------------------------
-
---------------------------------------------------------------------------------------------------------------------------------
-
--- Coords for the first elevator prop (doesnt need heading)
-local elevatorBaseX = -223.5853
-local elevatorBaseY = -1327.158
-local elevatorBaseZ = 29.8
-----
-
--- Coords for the second elevator prop
-local elevator2BaseX = -213.460
-local elevator2BaseY = -1313.18
-local elevator2BaseZ = 29.8
-local elevator2BaseHeading = 270.0
------
-
-
-local elevatorProp = nil
-local elevatorOn = false
-local elevatorUp = false
-local elevatorDown = false
-local elevator2Prop = nil
-local elevator2On = false
-local elevator2Up = false
-local elevator2Down = false
-local la_nacelle_estelle_la = false -- la nacelle n'est pas là par defaut
-
-Citizen.CreateThread(
-
-	function()
-
-		while ESX == nil do
-
-			TriggerEvent(
-
-				"esx:getSharedObject",
-
-				function(obj)
-
-					ESX = obj
-
-				end
-
-			)
-
-			Citizen.Wait(0)
-
-		end
-
-
-
-		while ESX.GetPlayerData().job == nil do
-
-			Citizen.Wait(10)
-
-		end
-
-
-
-		ESX.PlayerData = ESX.GetPlayerData()
-
-	end
-
-)
-
-
-RegisterNetEvent("esx:playerLoaded")
-
-AddEventHandler(
-
-	"esx:playerLoaded",
-
-	function(xPlayer)
-
-		ESX.PlayerData = xPlayer
-
-	end
-
-)
-
-RegisterNetEvent("esx:setJob")
-
-AddEventHandler(
-
-	"esx:setJob",
-
-	function(job)
-
-		ESX.PlayerData.job = job
-
-	end
-
-)
-
-function deleteObject(object)
-	return Citizen.InvokeNative(0x539E0AE3E6634B9F, Citizen.PointerValueIntInitialized(object))
-end
-
-function createObject(model, x, y, z)
-	RequestModel(model)
-	while (not HasModelLoaded(model)) do
-		Citizen.Wait(0)
-	end
-	return CreateObject(model, x, y, z, true, true, false)
-end
-
-function spawnProp(propName, x, y, z)
-	local model = GetHashKey(propName)
-	
-	if IsModelValid(model) then
-		local pos = GetEntityCoords(GetPlayerPed(-1), true)
-	
-		local forward = 5.0
-		local heading = GetEntityHeading(GetPlayerPed(-1))
-		local xVector = forward * math.sin(math.rad(heading)) * -1.0
-		local yVector = forward * math.cos(math.rad(heading))
-		
-		elevatorProp = createObject(model, x, y, z)
-		local propNetId = ObjToNet(elevatorProp)
-		SetNetworkIdExistsOnAllMachines(propNetId, true)
-		NetworkSetNetworkIdDynamic(propNetId, true)
-		SetNetworkIdCanMigrate(propNetId, false)
-		
-		SetEntityLodDist(elevatorProp, 0xFFFF)
-		SetEntityCollision(elevatorProp, true, true)
-		FreezeEntityPosition(elevatorProp, true)
-		SetEntityCoords(elevatorProp, x, y, z, false, false, false, false) -- Patch un bug pour certains props.
-
-		la_nacelle_estelle_la = true -- la nacelle est là
-		elevatorOn = true
-	end
-end
-
-function spawnProp2(propName, x, y, z)
-	local model = GetHashKey(propName)
-	
-	if IsModelValid(model) then
-		local pos = GetEntityCoords(GetPlayerPed(-1), true)
-	
-		local forward = 5.0
-		local heading = GetEntityHeading(GetPlayerPed(-1))
-		local xVector = forward * math.sin(math.rad(heading)) * -1.0
-		local yVector = forward * math.cos(math.rad(heading))
-		
-		elevator2Prop = createObject(model, x, y, z)
-		local propNetId = ObjToNet(elevator2Prop)
-		SetNetworkIdExistsOnAllMachines(propNetId, true)
-		NetworkSetNetworkIdDynamic(propNetId, true)
-		SetNetworkIdCanMigrate(propNetId, false)
-		
-		SetEntityLodDist(elevator2Prop, 0xFFFF)
-		SetEntityCollision(elevator2Prop, true, true)
-		FreezeEntityPosition(elevator2Prop, true)
-		SetEntityCoords(elevator2Prop, x, y, z, false, false, false, false) -- Patch un bug pour certains props.
-		SetEntityHeading(elevator2Prop, elevator2BaseHeading)
-
-		la_nacelle_estelle_la = true -- la nacelle est là
-		elevator2On = true
-	end
-end
-
--- Affichage menu du pont 
-
-
-Citizen.CreateThread(function()
-    while true do
-        Citizen.Wait(0)
-		--pont1
-		local elevatorCoords = GetEntityCoords(elevatorProp, false)
-		
-		if elevatorUp then
-			if elevatorCoords.z < Config.max then -- hauteur max de la nacelle
-				if (elevatorCoords.z > Config.beforemax) then -- juste avant la hauteur max de la nacelle
-					elevatorBaseZ = elevatorBaseZ + Config.speed_up_slow -- de combien de Z on monte à chaque fois (= vitesse de monte)
-					SetEntityCoords(elevatorProp, elevatorBaseX, elevatorBaseY, elevatorBaseZ, false, false, false, false)
-				else
-					elevatorBaseZ = elevatorBaseZ + Config.speed_up -- de combien de Z on monte à chaque fois (= vitesse de monte)
-					SetEntityCoords(elevatorProp, elevatorBaseX, elevatorBaseY, elevatorBaseZ, false, false, false, false)
-				end
-			end
-		end
-		
-		if elevatorDown then
-			if elevatorCoords.z > Config.min then -- hauteur min de la nacelle
-				if (elevatorCoords.z < Config.beforemin) then -- juste avant la hauteur min de la nacelle
-					elevatorBaseZ = elevatorBaseZ - Config.speed_down_slow -- de combien de Z on descend à chaque fois (= vitesse de monte)
-					SetEntityCoords(elevatorProp, elevatorBaseX, elevatorBaseY, elevatorBaseZ, false, false, false, false)
-				else
-					elevatorBaseZ = elevatorBaseZ - Config.speed_down -- de combien de Z on descend à chaque fois (= vitesse de monte)
-					SetEntityCoords(elevatorProp, elevatorBaseX, elevatorBaseY, elevatorBaseZ, false, false, false, false)
-				end 
-			end
-		end
-
-		--pont2
-		local elevator2Coords = GetEntityCoords(elevator2Prop, false)
-		
-		if elevator2Up then
-			-- TriggerServerEvent('InteractSound_CL:PlayOnOne', 'PontMecano_Monte', 1.0)
-			if elevator2Coords.z < Config.max then -- hauteur max de la nacelle
-				if (elevator2Coords.z > Config.beforemax) then -- juste avant la hauteur max de la nacelle
-					elevator2BaseZ = elevator2BaseZ + Config.speed_up_slow -- de combien de Z on monte à chaque fois (= vitesse de monte)
-					SetEntityCoords(elevator2Prop, elevator2BaseX, elevator2BaseY, elevator2BaseZ, false, false, false, false)
-				else
-					elevator2BaseZ = elevator2BaseZ + Config.speed_up -- de combien de Z on monte à chaque fois (= vitesse de monte)
-					SetEntityCoords(elevator2Prop, elevator2BaseX, elevator2BaseY, elevator2BaseZ, false, false, false, false)
-				end
-			end
-		elseif elevator2Down then
-			-- TriggerServerEvent('InteractSound_CL:PlayOnOne', 'PontMecano_Descente', 1.0)
-			if elevator2Coords.z > Config.min then -- hauteur min de la nacelle
-				if (elevator2Coords.z < Config.beforemin) then -- juste avant la hauteur min de la nacelle
-					elevator2BaseZ = elevator2BaseZ - Config.speed_down_slow -- de combien de Z on descend à chaque fois (= vitesse de monte)
-					SetEntityCoords(elevator2Prop, elevator2BaseX, elevator2BaseY, elevator2BaseZ, false, false, false, false)
-				else
-					elevator2BaseZ = elevator2BaseZ - Config.speed_up -- de combien de Z on descend à chaque fois (= vitesse de monte)
-					SetEntityCoords(elevator2Prop, elevator2BaseX, elevator2BaseY, elevator2BaseZ, false, false, false, false)
-				end
-			end
-		end
-    end
-end)
-
-
--- key controls
-Citizen.CreateThread(function()
-    while true do
-        Citizen.Wait(0)
-		
-		local pos = GetEntityCoords(GetPlayerPed(-1), false)
-		
-		if (Vdist(-219.3204, -1326.43, 29.89041, pos.x, pos.y, pos.z - 1) < 1.5) then -- Si on est a moins de 1.5 de distance de cette coordonnée
-			if IsControlJustReleased(1, 38) and ESX.PlayerData.job and ESX.PlayerData.job.name == "bennys" then -- Si on appuis sur E
-				garage_menu = not garage_menu -- on s'assure que le menu soit fermé
-				LiftBennysMenu1() -- ouverture du menu
-			end
-		elseif (Vdist(-212.798, -1317.543, 30.890, pos.x, pos.y, pos.z - 1) < 1.5) then -- Si on est a moins de 1.5 de distance de cette coordonnée
-			if IsControlJustReleased(1, 38) and ESX.PlayerData.job and ESX.PlayerData.job.name == "bennys" then -- Si on appuis sur E
-				garage_menu = not garage_menu -- on s'assure que le menu soit fermé
-				LiftBennysMenu2() -- ouverture du menu
-			end
-		end
-
-		-- On fait apparaitre la nacelle toute les demi seconde si jamais elle n'est pas là
-	    if not la_nacelle_estelle_la and (Vdist(-219.3204, -1326.43, 29.89041, pos.x, pos.y, pos.z - 1) < Config.spawndistance) then
-	    	spawnProp("nacelle", elevatorBaseX, elevatorBaseY, elevatorBaseZ)
-	    	spawnProp2("nacelle", elevator2BaseX, elevator2BaseY, elevator2BaseZ)
-	    	Wait(1000)
-	    end
-    end
-end)
-----------------------------
--- By K3rhos & DoluTattoo --
-----------------------------
-
-
-function LiftBennysMenu1()
-
-  ESX.UI.Menu.Open(
-    'default', GetCurrentResourceName(), 'lift_actions',
-    {
-      title    = 'Lift Kendaraan',
-      align    = 'bottom-right',
-		elements = {
-			{label = 'Naik', value = 'vytahup'},
-			{label = 'Berhenti', value = 'vytahstop'},
-			{label = 'Turun', value = 'vytahdown'},
-			{label = 'Pasang Lift', value = 'vytahzapnout'},
-			{label = 'Lepas Lift', value = 'vytahvypnout'},
-		}
-    },
-
-	function(data, menu)
-		local val = data.current.value
-
-		if val == 'vytahzapnout' then
-			if elevatorOn == false then
-				spawnProp("nacelle", elevatorBaseX, elevatorBaseY, elevatorBaseZ)
-				elevatorOn = true
-			end
-		elseif val == 'vytahvypnout' then
-			if elevatorOn == true then
-				DeleteObject(elevatorProp)
-				elevatorOn = false
-			end
-		end
-		
-		-- if val == 'vytahup' then
-		-- 	if elevatorProp ~= nil then
-		-- 		elevatorDown = false
-		-- 		elevatorUp = true
-		-- 		elevatorStop = false
-		-- 	end			
-		-- elseif val == 'vytahstop' then
-		-- 	if elevatorProp ~= nil then
-		-- 		elevatorUp = false
-		-- 		elevatorDown = false
-		-- 	end
-		-- elseif val == 'vytahdown' then
-		-- 	if elevatorProp ~= nil then
-		-- 		elevatorUp = false
-		-- 		elevatorDown = true
-		-- 		elevatorStop = false
-		-- 	end
-		-- elseif val == 'vytahzapnout' then
-		-- 	if elevatorOn == false then
-		-- 		spawnProp("nacelle", elevatorBaseX, elevatorBaseY, elevatorBaseZ)
-		-- 		elevatorOn = true
-		-- 	end
-		-- elseif val == 'vytahvypnout' then
-		-- 	if elevatorOn == true then
-		-- 		DeleteObject(elevatorProp)
-		-- 		elevatorOn = false
-		-- 	end
-		-- end
-	end,
-	function(data, menu)
-		menu.close()
-	end
-)
-end
-
-function LiftBennysMenu2()
-
-  ESX.UI.Menu.Open(
-    'default', GetCurrentResourceName(), 'lift2_actions',
-    {
-      title    = 'Lift Kendaraan',
-      align    = 'bottom-right',
-	  elements = {
-		{label = 'Naik', value = 'vytahup'},
-		{label = 'Berhenti', value = 'vytahstop'},
-		{label = 'Turun', value = 'vytahdown'},
-		{label = 'Pasang Lift', value = 'vytahzapnout'},
-		{label = 'Lepas Lift', value = 'vytahvypnout'},
-	}
-    },
-
-	function(data, menu)
-		local val = data.current.value
-
-		if val == 'vytahzapnout' then
-			if elevator2On == false then
-				spawnProp("nacelle", elevatorBaseX, elevatorBaseY, elevatorBaseZ)
-				elevator2On = true
-			end
-		elseif val == 'vytahvypnout' then
-			if elevator2On == true then
-				DeleteObject(elevatorProp)
-				elevator2On = false
-			end
-		end
-		
-		-- if val == 'vytahup' then
-		-- 	if elevator2Prop ~= nil then
-		-- 		elevator2Down = false
-		-- 		elevator2Up = true
-		-- 		elevator2Stop = false
-		-- 	end			
-		-- elseif val == 'vytahstop' then
-		-- 	if elevator2Prop ~= nil then
-		-- 		elevator2Up = false
-		-- 		elevator2Down = false
-		-- 	end
-		-- elseif val == 'vytahdown' then
-		-- 	if elevator2Prop ~= nil then
-		-- 		elevator2Up = false
-		-- 		elevator2Down = true
-		-- 		elevator2Stop = false
-		-- 	end
-		-- elseif val == 'vytahzapnout' then
-		-- 	if elevator2On == false then
-		-- 		spawnProp2("nacelle", elevator2BaseX, elevator2BaseY, elevator2BaseZ)
-		-- 		elevator2On = true
-		-- 	end
-		-- elseif val == 'vytahvypnout' then
-		-- 	if elevator2On == true then
-		-- 		DeleteObject(elevator2Prop)
-		-- 		elevator2On = false
-		-- 	end
-		-- end
-	end,
-	function(data, menu)
-		menu.close()
-	end
-)
-end
-
-
 function Nearbywheel(vehicle)
 	local tireBones = {"wheel_lf", "wheel_rf", "wheel_lm1", "wheel_rm1", "wheel_lm2", "wheel_rm2", "wheel_lm3", "wheel_rm3", "wheel_lr", "wheel_rr"}
 	local tireIndex = {
@@ -2208,42 +1196,23 @@ function gantiBan()
 			DeleteEntity(prop)
 			isBusy = true
 			TaskStartScenarioInPlace(playerPed, "CODE_HUMAN_MEDIC_KNEEL", 0, true)
-			TriggerEvent(
-
-				"mythic_progbar:client:progress",
-
+			TriggerEvent( "mythic_progbar:client:progress",
 				{
-
 					name = "wheelchange_vehicle",
-
 					duration = 15000,
-
 					label = "Mengganti Ban...",
-
 					useWhileDead = false,
-
 					canCancel = true,
-
 					controlDisables = {
-
 						disableMovement = true,
-
 						disableCarMovement = true,
-
 						disableMouse = false,
-
 						disableCombat = true
-
 					}
-
 				},
-
 				function(status)
-
 					ClearPedTasksImmediately(playerPed)
-
 					isBusy = false
-
 					if not status then
 						local closestTire = Nearbywheel(vehicle)
 						if closestTire ~= nil then
@@ -2255,7 +1224,6 @@ function gantiBan()
 					end
 
 				end
-
 			)
 		end
 	end
