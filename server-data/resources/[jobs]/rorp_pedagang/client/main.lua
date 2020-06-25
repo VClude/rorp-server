@@ -10,10 +10,10 @@ local Keys = {
     ["NENTER"] = 201, ["N4"] = 108, ["N5"] = 60, ["N6"] = 107, ["N+"] = 96, ["N-"] = 97, ["N7"] = 117, ["N8"] = 61, ["N9"] = 118
   }
 
-  ESX                           = nil
-
-  local isInShopMenu            = false
-  local currentlyCooking        = false
+  ESX                                     = nil
+  local HasAlreadyEnteredMarker, LastZone = false, nil
+  local isInShopMenu                      = false
+  local currentlyCooking                  = false
 
 Citizen.CreateThread(function()
     while ESX == nil do
@@ -109,7 +109,13 @@ Citizen.CreateThread(function()
             local coords, letSleep = GetEntityCoords(PlayerPedId()), true
             for k, v in pairs(Config.Zones) do
                 if v.Type ~= -1 and GetDistanceBetweenCoords(coords, v.Pos.x, v.Pos.y, v.Pos.z, true) < Config.DrawDistance then
-                    DrawMarker(v.Type, v.Pos.x, v.Pos.y, v.Pos.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, v.Size.x, v.Size.y, v.Size.z, v.Color.r, v.Color.g, v.Color.b, 100, false, true, 2, false, nil, nil, false)
+                    if k == "BossMenu" then
+                        if ESX.PlayerData.grade_name == "juragan" then
+                            DrawMarker(v.Type, v.Pos.x, v.Pos.y, v.Pos.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, v.Size.x, v.Size.y, v.Size.z, v.Color.r, v.Color.g, v.Color.b, 100, false, true, 2, false, nil, nil, false)
+                        end
+                    else   
+                        DrawMarker(v.Type, v.Pos.x, v.Pos.y, v.Pos.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, v.Size.x, v.Size.y, v.Size.z, v.Color.r, v.Color.g, v.Color.b, 100, false, true, 2, false, nil, nil, false)
+                    end
                     letSleep = false
                 end
             end
@@ -121,4 +127,99 @@ Citizen.CreateThread(function()
             Citizen.Wait(500)
         end
     end
+end)
+
+-- Enter / Exit marker events
+
+Citizen.CreateThread(function()
+    while true do
+        Citizen.Wait(10)
+        if ESX.PlayerData.job and ESX.PlayerData.job.name == "pedagang" then
+            local coords = GetEntityCoords(PlayerPedId())
+            local isInMarker = false
+            local currentZone = nil
+            for k, v in pairs(Config.Zones) do
+                if (GetDistanceBetweenCoords(coords, v.Pos.x, v.Pos.y, v.Pos.z, true) < v.Size.x) then
+                    isInMarker = true
+                    CurrentActionPos = v.Pos
+                    currentZone = k
+                end
+            end
+
+            if (isInMarker and not HasAlreadyEnteredMarker) or (isInMarker and LastZone ~= currentZone) then
+                HasAlreadyEnteredMarker = true
+                LastZone = currentZone
+                TriggerEvent("rorp_pedagang:hasEnteredMarker", currentZone)
+            end
+
+            if not isInMarker and HasAlreadyEnteredMarker then
+                HasAlreadyEnteredMarker = false
+                TriggerEvent("rorp_pedagang:hasExitedMarker", LastZone)
+            end
+        end
+    end
+end)
+
+function NotifInformasi(text)
+	exports['mythic_notify']:SendAlert('inform', text, 5000)
+end
+
+function NotifSukses(text)
+	exports['mythic_notify']:SendAlert('success', text, 5000)
+end
+
+function NotifError(text)
+	exports['mythic_notify']:SendAlert('error', text, 5000)
+end
+
+Citizen.CreateThread(function()
+    while true do
+        Citizen.Wait(2)
+
+        if ESX.PlayerData.job and ESX.PlayerData.job.name == "pedagang" then
+            if CurrentAction then
+                DrawText3Ds(CurrentActionPos.x, CurrentActionPos.y, CurrentActionPos.z, CurrentActionMsg)
+
+                if IsControlJustReleased(0, Keys["E"]) then
+                    if CurrentAction == "cloakrooms_menu" then
+                        OpenCloakRoomsMenu()
+
+                    elseif CurrentAction == "boss_menu" then
+                        if  ESX.PlayerData.job and ESX.PlayerData.job.name == "bennys" and ESX.PlayerData.job.grade_name == 'boss' then
+                            OpenBossMenu()
+                        else
+                            NotifInformasi('Anda bukan BOSS')
+                        end						
+                    elseif CurrentAction == "bennys_inventory_menu" then
+                        if  ESX.PlayerData.job and ESX.PlayerData.job.name == "bennys" and ESX.PlayerData.job.grade_name ~= 'magang' and ESX.PlayerData.job.grade_name ~= 'karyawan_bengkel' then						
+                            OpenBennysInventoryMenu()
+                        else
+                            NotifInformasi('Anda tidak memiliki akses membuka inventory')
+                        end							
+                    elseif CurrentAction == 'ls_custom' then
+                        if  ESX.PlayerData.job and ESX.PlayerData.job.name == "bennys" and ESX.PlayerData.job.grade_name ~= 'magang' then						
+                            OpenLSAction()
+                        else
+                            NotifInformasi('Pengalaman anda kurang untuk modifikasi kendaraan')
+                        end
+                    end
+
+                    CurrentAction = nil
+
+                end
+
+            end
+
+            if ( IsControlJustReleased( 0, 167 ) or IsDisabledControlJustReleased( 0, 167 ) ) and GetLastInputMethod( 0 ) and not IsDead and not ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'mobile_mechanic_actions') and (GetGameTimer() - GUI.Time) > 150 then
+                OpenMobileMechanicActionsMenu()
+            end
+
+        else
+
+            Citizen.Wait(500)
+
+        end
+
+    end
+
 end)

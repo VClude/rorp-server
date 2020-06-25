@@ -1,5 +1,6 @@
 Config                            = {}
-Config.Locale = 'id'
+Config.Locale           = 'id'
+Config.DrawDistance     = 20
 
 Config.Blips = {
     {
