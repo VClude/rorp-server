@@ -2,12 +2,15 @@ Config                            = {}
 Config.Locale = 'id'
 
 Config.Blips = {
-    Pos = {["x"] = -630.26, ["y"] = 234.47, ["z"] = 81.88},
-    Sprite  = 93,
-    Display = 4,
-    Scale   = 1.2,
-    Colour  = 32,
-    Name    = _U('Blip')
+    Pedagang = {
+        Pos = {["x"] = -630.26, ["y"] = 234.47, ["z"] = 81.88},
+        Sprite  = 93,
+        Display = 4,
+        Scale   = 1.2,
+        Colour  = 32,
+        Name    = _U('Blip')
+    },
+
 }
 
 Config.Zones = {
