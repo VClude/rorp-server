@@ -9,10 +9,10 @@ RegisterServerEvent('rorp_pedagang:setJob')
 AddEventHandler('rorp_pedagang:setJob', function(identifier,job,grade)
 	local xTarget = ESX.GetPlayerFromIdentifier(identifier)
 		
-		if xTarget then
-			xTarget.setJob(job, grade)
-		end
-
+		-- if xTarget then
+		-- 	xTarget.setJob(job, grade)
+		-- end
+	xPlayer.showNotification('BACOT')
 end)
 
 ESX.RegisterServerCallback('rorp_pedagang:getPlayerInventory', function(source, cb)
