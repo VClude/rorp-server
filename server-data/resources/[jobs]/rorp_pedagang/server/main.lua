@@ -41,8 +41,8 @@ AddEventHandler('rorp_pedagang:putStockItems', function(itemName, count)
 	end)
 end)
 
-RegisterServerEvent('rorp_pedagang:getStockItem')
-AddEventHandler('rorp_pedagang:getStockItem', function(itemName, count)
+RegisterServerEvent('rorp_pedagang:getStockItems')
+AddEventHandler('rorp_pedagang:getStockItems', function(itemName, count)
 	local xPlayer = ESX.GetPlayerFromId(source)
 
 	TriggerEvent('esx_addoninventory:getSharedInventory', 'society_pedagang', function(inventory)
