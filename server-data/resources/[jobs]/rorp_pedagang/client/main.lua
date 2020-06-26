@@ -43,7 +43,7 @@ function OpenShopMenu()
 	PlayerData = ESX.GetPlayerData()
 	
 	SendNUIMessage({
-		message		= "show",
+		message		= "loadshop",
 		clear = true
 	})
 	
@@ -113,6 +113,7 @@ AddEventHandler('rorp_pedagang:openMenu', function(playerInventory)
 		end
 	end
 	SendNUIMessage({
+		message  = 'cook',
 		inventory = preppedInventory,
 		display = true
 	})

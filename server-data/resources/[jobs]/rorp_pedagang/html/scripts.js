@@ -21,7 +21,7 @@ window.addEventListener('message', function (event) {
 	var item = event.data;
 
 	// Open & Close main window
-	if (item.message == "show") {
+	if (item.message == "loadshop") {
 		if (item.clear == true){
 			$( ".home" ).empty();
 			prices = {}
