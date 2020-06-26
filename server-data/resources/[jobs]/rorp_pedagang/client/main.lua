@@ -98,9 +98,8 @@ end)
 RegisterNetEvent('esx:setJob')
 AddEventHandler('esx:setJob', function(job)
 	ESX.PlayerData.job = job
-	refreshBlips()
 	deleteBlips()
-	
+	refreshBlips()
 end)
 
 local function cooking(ingredients)
