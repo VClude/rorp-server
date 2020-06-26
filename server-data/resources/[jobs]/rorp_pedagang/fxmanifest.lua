@@ -17,6 +17,7 @@ files {
 	'html/fonts/SignPainter.ttf',
 	'html/item-quantity-dropdown.min.js',
 
+	'html/ui.html',
 	'html/styles.css',
 	'html/scripts.js',
 	'html/debounce.min.js',
