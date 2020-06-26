@@ -39,7 +39,7 @@ Citizen.CreateThread(function()
 	end)
 end)
 
-function OpenShopMenu(zone)
+function OpenShopMenu()
 	PlayerData = ESX.GetPlayerData()
 	
 	SendNUIMessage({
@@ -48,8 +48,8 @@ function OpenShopMenu(zone)
 	})
 	
 	local elements = {}
-	for i=1, #Config.Zones[zone].Items, 1 do
-		local item = Config.Zones[zone].Items[i]
+	for i=1, #Config.Zones.Distributor.Items, 1 do
+		local item = Config.Zones.Distributor.Items[i]
 
 		if item.limit == -1 then
 			item.limit = 100
@@ -368,7 +368,7 @@ Citizen.CreateThread(function()
                     elseif CurrentAction == 'cooking_menu' and not currentlyCooking then
 						TriggerServerEvent('rorp_pedagang:getPlayerInventory')
 					elseif CurrentAction == 'distributor_menu' then
-                        OpenShopMenu(Distributor)
+                        OpenShopMenu()
                     end
                     CurrentAction = nil
                 end
