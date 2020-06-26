@@ -231,7 +231,7 @@ end
 
 
 RegisterCommand('hp', function()
-  if menuIsOpen == false then
+  if menuIsOpen == false and not isDead then
     TooglePhone()
   end
 end)
@@ -777,3 +777,6 @@ RegisterNUICallback('takePhoto', function(data, cb)
   Citizen.Wait(1000)
   PhonePlayAnim('text', false, true)
 end)
+
+AddEventHandler('esx:onPlayerDeath', function() isDead = true end)
+AddEventHandler('playerSpawned', function(spawn) isDead = false end)
