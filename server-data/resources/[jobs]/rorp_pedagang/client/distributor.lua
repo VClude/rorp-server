@@ -145,6 +145,7 @@ Citizen.CreateThread(function()
 			if IsControlJustReleased(0, 38) then
 
 				if CurrentAction == 'shop_menu' then
+					print(CurrentAction)
 					OpenShopMenu(CurrentActionData.zone)
 				end
 
