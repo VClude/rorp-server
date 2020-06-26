@@ -42,13 +42,13 @@ AddEventHandler('esx_status:loaded', function(status)
 	TriggerEvent('esx_status:registerStatus', 'hunger', 1000000, '#CFAD0F', function(status)
 		return true
 	end, function(status)
-		status.remove(3000)
+		status.remove(1800)
 	end)
 
 	TriggerEvent('esx_status:registerStatus', 'thirst', 1000000, '#0C98F1', function(status)
 		return true
 	end, function(status)
-		status.remove(3550)
+		status.remove(2150)
 	end)
 
 	Citizen.CreateThread(function()
