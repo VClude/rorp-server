@@ -6,6 +6,7 @@ Config.JailOOC = vector3(1641.6, 2571.0, 45.5)
 Config.JailIC1 = vector3(460.61, -993.92, 24.91)
 Config.JailIC2 = vector3(459.83, -997.74, 24.91)
 Config.JailIC3 = vector3(459.48, -1001.65, 24.91)
+Config.UnjailIC = vector3(441.89, -1015.83, 28.67)
 Config.JailTimeSyncInterval = 60000 * 5
 
 
