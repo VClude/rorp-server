@@ -14,7 +14,8 @@ local Keys = {
   local HasAlreadyEnteredMarker, LastZone = false, nil
   local isInShopMenu                      = false
   local currentlyCooking                  = false
-  local display = false
+  local display 						  = false
+  local PlayerData              	      = {}
 
 Citizen.CreateThread(function()
     while ESX == nil do
@@ -24,8 +25,53 @@ Citizen.CreateThread(function()
     while ESX.GetPlayerData().job == nil do
         Citizen.Wait(10)
     end
-    ESX.PlayerData = ESX.GetPlayerData()
+	ESX.PlayerData = ESX.GetPlayerData()
+
+	Citizen.Wait(5000)
+	PlayerData = ESX.GetPlayerData()
+
+	ESX.TriggerServerCallback('rorp_pedagang:requestDBItems', function(ShopItems)
+		for k,v in pairs(ShopItems) do
+			if (Config.ZonesDistributor[k] ~= nil) then
+				Config.ZonesDistributor[k].Items = v
+			end
+		end
+	end)
 end)
+
+function OpenShopMenu(zone)
+	PlayerData = ESX.GetPlayerData()
+	
+	SendNUIMessage({
+		message		= "show",
+		clear = true
+	})
+	
+	local elements = {}
+	for i=1, #Config.ZonesDistributor[zone].Items, 1 do
+		local item = Config.ZonesDistributor[zone].Items[i]
+
+		if item.limit == -1 then
+			item.limit = 100
+		end
+
+		SendNUIMessage({
+			message		= "add",
+			item		= item.item,
+			label      	= item.label,
+			item       	= item.item,
+			price      	= item.price,
+			max        	= item.limit,
+			loc			= zone
+		})
+
+	end
+	
+	ESX.SetTimeout(200, function()
+		SetNuiFocus(true, true)
+	end)
+
+end
 
 RegisterNetEvent('esx:setJob')
 AddEventHandler('esx:setJob', function(job)
@@ -467,3 +513,18 @@ function OpenGetStocksMenu()
 		end)
 	end)
 end
+
+function closeGui()
+  SetNuiFocus(false, false)
+  SendNUIMessage({message = "hide"})
+end
+
+RegisterNUICallback('quit', function(data, cb)
+  closeGui()
+  cb('ok')
+end)
+
+RegisterNUICallback('purchase', function(data, cb)
+	TriggerServerEvent('esx_shops:buyItem', data.item, data.count, data.loc)
+	cb('ok')
+end)

@@ -1,19 +1,6 @@
 Config                            = {}
 Config.Locale           = 'id'
 Config.DrawDistance     = 20
-Config.Size         	= {x = 1.5, y = 1.5, z = 1.5}
-Config.Color        	= {r = 0, g = 128, b = 255}
-Config.Type        		= 1
-
-Config.ZonesDistributor = {
-
-	Distributor = {
-		Items = {},
-		Pos = {
-			{x = -830.3,   y = -1255.77,  z = 5.58}
-		}
-	}
-}
 
 Config.Blips = {
     {
@@ -64,6 +51,14 @@ Config.Zones = {
     
     BossMenu = {
 		Pos = {["x"] = -627.59, ["y"] = 228.47, ["z"] = 82.88},
+		Size = {x = 1.5, y = 1.5, z = 1.0},
+		Color = {r = 204, g = 204, b = 0},
+		Type = -1
+	},
+
+	Distributor = {
+		Items = {}
+		Pos = {["x"] = -830.3, ["y"] = -1255.77, ["z"] = 5.58},
 		Size = {x = 1.5, y = 1.5, z = 1.0},
 		Color = {r = 204, g = 204, b = 0},
 		Type = -1
