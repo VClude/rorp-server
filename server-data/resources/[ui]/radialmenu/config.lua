@@ -72,7 +72,7 @@ menuConfigs = {
                     minRadiusPercent = 0.4,         -- Minimum radius of wheel in percentage
                     maxRadiusPercent = 0.9,         -- Maximum radius of wheel in percentage
                     labels = {"imgsrc:phone2.png","imgsrc:bag.png","imgsrc:engine.png","imgsrc:trunk.png", "imgsrc:hood.png"},
-                    commands = {"ambilHandphone","openinv","carengine","trunk", "hood"}
+                    commands = {"hp","openinv","engine","trunk", "hood"}
                 }
             }
         }

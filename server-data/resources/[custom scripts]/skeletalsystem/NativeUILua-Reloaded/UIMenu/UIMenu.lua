@@ -98,16 +98,16 @@ function UIMenu.New(Title, Subtitle, X, Y, TxtDictionary, TxtName, Heading, R, G
                 Enabled = false,
             },
             Left = {
-                Enabled = true,
+                Enabled = false,
             },
             Right = {
-                Enabled = true,
+                Enabled = false,
             },
             Up = {
-                Enabled = true,
+                Enabled = false,
             },
             Down = {
-                Enabled = true,
+                Enabled = false,
             },
         },
         ParentMenu = nil,
