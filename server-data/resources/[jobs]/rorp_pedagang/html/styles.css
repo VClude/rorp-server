@@ -17,10 +17,7 @@ html {
   font-family: 'Open Sans', sans-serif;
 }
 
-body{
-	display: none;
-	color: #a8a8aa;
-}
+
 
 .card {
   /* Add shadows to create the "card" effect */
@@ -164,7 +161,7 @@ input:focus {
 }
 
 /* Add some padding inside the card container */
-.container {
+.containerz {
   padding: 2px 16px;
 }
 

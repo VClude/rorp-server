@@ -13,7 +13,6 @@ ui_page {
 }
 
 files {
-	'html/index.html',
 	'html/index.css',
 	'html/fonts/SignPainter.ttf',
 	'html/item-quantity-dropdown.min.js',

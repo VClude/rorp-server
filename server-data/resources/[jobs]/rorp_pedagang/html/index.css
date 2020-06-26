@@ -161,7 +161,7 @@ body {
 	  padding: 11px 20px;
 }
 
-.iqdropdown .iqdropdown-menu li .iqdropdown-item-controls button {
+.iqdropdown .iqdropdown-menu li .iqdropdown-item-controls  {
 	color: #FFF;
 	font-family: "OpenSans", "Helvetica Neue", "Helvetica", sans-serif;
 	font-size: 15px;
