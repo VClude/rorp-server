@@ -98,7 +98,7 @@ end)
 RegisterNetEvent('esx:setJob')
 AddEventHandler('esx:setJob', function(job)
 	ESX.PlayerData.job = job
-	RemoveBlip(DistributorBlip)
+	deleteBlip()
 	refreshBlips()
 end)
 
@@ -289,6 +289,12 @@ Citizen.CreateThread(function()
 	end
 end)
 
+function deleteBlips()
+	for _,v in ipairs(DistributorBlip) do
+		RemoveBlip(v)
+		DistributorBlip = nil
+	end
+end
 
 -- Create Blips Distributor
 function refreshBlips()
