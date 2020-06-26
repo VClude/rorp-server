@@ -2,7 +2,7 @@ isInInventory = false
 ESX = nil
 local canOpenInventory = true
 local targetInventory = nil
-
+local isDead = false
 Citizen.CreateThread(
     function()
         while ESX == nil do
@@ -76,7 +76,9 @@ RegisterCommand('closeinv', function(source, args, raw)
     closeInventory()
 end)
 RegisterCommand('openinv', function()
-      openInventory()
+    if not isDead then
+        openInventory()
+      end
   end)
   
 
@@ -357,3 +359,7 @@ Citizen.CreateThread(
         end
     end
 )
+
+AddEventHandler('esx:onPlayerDeath', function() isDead = true end)
+AddEventHandler('playerSpawned', function(spawn) isDead = false end)
+
