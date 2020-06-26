@@ -16,6 +16,7 @@ local Keys = {
   local currentlyCooking                  = false
   local display 						  = false
   local PlayerData              	      = {}
+  local done							  = false
 
 Citizen.CreateThread(function()
     while ESX == nil do
@@ -29,6 +30,8 @@ Citizen.CreateThread(function()
 
 	Citizen.Wait(5000)
 	PlayerData = ESX.GetPlayerData()
+
+	done = true
 
 	ESX.TriggerServerCallback('rorp_pedagang:requestDBItems', function(ShopItems)
 		for k,v in pairs(ShopItems) do
@@ -264,20 +267,42 @@ function DrawText3Ds(x, y, z, text)
 	DrawRect(_x, _y + 0.0125, 0.015 + factor, 0.03, 0, 0, 0, 150)
 end
 
--- Create Blips Pedagang
+-- Create Blips Kopi Secuan
 Citizen.CreateThread(function()
-    for _,v in pairs(Config.Blips) do
-        local blip = AddBlipForCoord(v.Pos.x, v.Pos.y, v.Pos.z)
-        SetBlipSprite(blip, v.Sprite)
-        SetBlipDisplay(blip, v.Display)
-        SetBlipScale(blip, v.Scale)
-        SetBlipColour(blip, v.Colour)
-        SetBlipAsShortRange(blip, true)
-    
-        BeginTextCommandSetBlipName("STRING")
-        AddTextComponentSubstringPlayerName(v.Name)
-        EndTextCommandSetBlipName(blip)
-    end
+	for _,v in pairs(Config.Blips) do
+		local blip = AddBlipForCoord(v.Pos.x, v.Pos.y, v.Pos.z)
+		SetBlipSprite(blip, v.Sprite)
+		SetBlipDisplay(blip, v.Display)
+		SetBlipScale(blip, v.Scale)
+		SetBlipColour(blip, v.Colour)
+		SetBlipAsShortRange(blip, true)
+	
+		BeginTextCommandSetBlipName("STRING")
+		AddTextComponentSubstringPlayerName(v.Name)
+		EndTextCommandSetBlipName(blip)
+	end
+end)
+
+-- Create Blips Distributor
+Citizen.CreateThread(function()
+	while not done do
+		Citizen.Wait(10)
+	end
+
+	if PlayerData.job.name == 'pedagang' then
+		for _,v in pairs(Config.Blips.Zones.Distributor) do
+			local blip = AddBlipForCoord(v.Pos.x, v.Pos.y, v.Pos.z)
+			SetBlipSprite(blip, 355)
+			SetBlipDisplay(blip, 2)
+			SetBlipScale(blip, 1.0)
+			SetBlipColour(blip, 15)
+			SetBlipAsShortRange(blip, true)
+		
+			BeginTextCommandSetBlipName("STRING")
+			AddTextComponentSubstringPlayerName("Distributor Pedagang")
+			EndTextCommandSetBlipName(blip)
+		end
+	end
 end)
 
 -- Display markers
