@@ -10,7 +10,7 @@
 
 --]]
 
-lang = 'de' -- languages are: en = english, de = deutsch, fr = français
+lang = 'en' -- languages are: en = english, de = deutsch, fr = français
 local timebeforenextconnect = 15 --time in seconds before the next can connect after a planned restart
 userestartplanner = true --change to true to activate the table planner below:
 restarttimes = {'22:59:00', '22:59:30'} --add your restart times here. [FORMAT: HOUR:MINUTE:SECOND]
