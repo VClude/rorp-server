@@ -1,6 +1,7 @@
 var prices = {}
 var maxes = {}
 var zone = null
+var ingredients = {};
 
 // Partial Functions
 function closeMain() {
@@ -12,8 +13,49 @@ function openMain() {
 function closeAll() {
 	$(".body").css("display", "none");
 }
+function cooking() {
+	$.post('http://rorp_pedagang/cookingNUI', JSON.stringify(ingredients));
+	$.post('http://rorp_pedagang/NUIFocusOff');
+}
+$(document).ready(function () {
+			
+});
 $(".close").click(function(){
     $.post('http://rorp_pedagang/quit', JSON.stringify({}));
+});
+$(function(){
+	window.onload = function(e){
+		window.addEventListener('message', function(event){
+			var item = event.data;
+			console.log("Received data")
+			if (item.display === true) {
+				$( ".iqdropdown-menu" ).empty();
+				$(".ingredients").unbind();
+				ingredients = {};
+				for (var i = 0; i < item.inventory.length; i++) {
+					var obj = item.inventory[i]
+					$( ".iqdropdown-menu" ).append('<li data-id="' + obj.name + '" data-maxcount=' + obj.count + '><div> ' + obj.label + '<span>Tambahkan ' + obj.label + ' ke daftar bahan memasak.</span> </div></li>');
+					//Do something
+				}
+				$(".ingredients").iqDropdown({
+					selectionText: 'ingredient',
+					textPlural: 'ingredients',
+					onChange: function (id, count, totalItems) {
+						ingredients[id] = count
+					},
+				});
+				$('.container').show()
+			} else if (item.display === false) {
+				$('.container').hide();
+			}
+		});
+		
+		document.onkeyup = function (data) {
+			if (data.which == 27) { // Escape key
+				$.post('http://rorp_pedagang/NUIFocusOff');
+			}
+		};
+	};
 });
 // Listen for NUI Events
 window.addEventListener('message', function (event) {
