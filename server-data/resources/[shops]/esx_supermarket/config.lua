@@ -10,7 +10,7 @@ Config.Zones = {
 	Distributor = {
 		Items = {},
 		Pos = {
-			{x = -830.3,   y = -1255.77,  z = 6.58}
+			{x = -830.3,   y = -1255.77,  z = 5.58}
 		}
 	}
 }

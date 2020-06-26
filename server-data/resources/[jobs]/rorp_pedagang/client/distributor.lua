@@ -15,10 +15,10 @@ Citizen.CreateThread(function()
 	Citizen.Wait(5000)
 	PlayerData = ESX.GetPlayerData()
 
-	ESX.TriggerServerCallback('esx_shops:requestDBItems', function(ShopItems)
+	ESX.TriggerServerCallback('rorp_pedagang:requestDBItems', function(ShopItems)
 		for k,v in pairs(ShopItems) do
-			if (Config.Zones[k] ~= nil) then
-				Config.Zones[k].Items = v
+			if (Config.ZonesDistributor[k] ~= nil) then
+				Config.ZonesDistributor[k].Items = v
 			end
 		end
 	end)
@@ -33,8 +33,8 @@ function OpenShopMenu(zone)
 	})
 	
 	local elements = {}
-	for i=1, #Config.Zones[zone].Items, 1 do
-		local item = Config.Zones[zone].Items[i]
+	for i=1, #Config.ZonesDistributor[zone].Items, 1 do
+		local item = Config.ZonesDistributor[zone].Items[i]
 
 		if item.limit == -1 then
 			item.limit = 100
@@ -58,20 +58,20 @@ function OpenShopMenu(zone)
 
 end
 
-AddEventHandler('esx_shops:hasEnteredMarker', function(zone)
+AddEventHandler('rorp_pedagang:hasEnteredMarker', function(zone)
 	CurrentAction     = 'shop_menu'
 	CurrentActionMsg  = _U('press_menu')
 	CurrentActionData = {zone = zone}
 end)
 
-AddEventHandler('esx_shops:hasExitedMarker', function(zone)
+AddEventHandler('rorp_pedagang:hasExitedMarker', function(zone)
 	CurrentAction = nil
 	ESX.UI.Menu.CloseAll()
 end)
 
 -- Create Blips
 Citizen.CreateThread(function()
-	for k,v in pairs(Config.Zones) do
+	for k,v in pairs(Config.ZonesDistributor) do
 		for i = 1, #v.Pos, 1 do
 			local blip = AddBlipForCoord(v.Pos[i].x, v.Pos[i].y, v.Pos[i].z)
 			SetBlipSprite (blip, 52)
@@ -92,7 +92,7 @@ Citizen.CreateThread(function()
 		Citizen.Wait(10)
 		local coords = GetEntityCoords(GetPlayerPed(-1))
 
-		for k,v in pairs(Config.Zones) do
+		for k,v in pairs(Config.ZonesDistributor) do
 			for i = 1, #v.Pos, 1 do
 				if(Config.Type ~= -1 and GetDistanceBetweenCoords(coords, v.Pos[i].x, v.Pos[i].y, v.Pos[i].z, true) < Config.DrawDistance) then
 					DrawMarker(Config.Type, v.Pos[i].x, v.Pos[i].y, v.Pos[i].z, 0.0, 0.0, 0.0, 0, 0.0, 0.0, Config.Size.x, Config.Size.y, Config.Size.z, Config.Color.r, Config.Color.g, Config.Color.b, 100, false, true, 2, false, false, false, false)
@@ -110,7 +110,7 @@ Citizen.CreateThread(function()
 		local isInMarker  = false
 		local currentZone = nil
 
-		for k,v in pairs(Config.Zones) do
+		for k,v in pairs(Config.ZonesDistributor) do
 			for i = 1, #v.Pos, 1 do
 				if(GetDistanceBetweenCoords(coords, v.Pos[i].x, v.Pos[i].y, v.Pos[i].z, true) < Config.Size.x) then
 					isInMarker  = true
@@ -122,11 +122,11 @@ Citizen.CreateThread(function()
 		end
 		if isInMarker and not HasAlreadyEnteredMarker then
 			HasAlreadyEnteredMarker = true
-			TriggerEvent('esx_shops:hasEnteredMarker', currentZone)
+			TriggerEvent('rorp_pedagang:hasEnteredMarker', currentZone)
 		end
 		if not isInMarker and HasAlreadyEnteredMarker then
 			HasAlreadyEnteredMarker = false
-			TriggerEvent('esx_shops:hasExitedMarker', LastZone)
+			TriggerEvent('rorp_pedagang:hasExitedMarker', LastZone)
 		end
 	end
 end)

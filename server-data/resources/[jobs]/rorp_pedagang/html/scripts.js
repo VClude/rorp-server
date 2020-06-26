@@ -13,7 +13,7 @@ function closeAll() {
 	$(".body").css("display", "none");
 }
 $(".close").click(function(){
-    $.post('http://esx_supermarket/quit', JSON.stringify({}));
+    $.post('http://rorp_pedagang/quit', JSON.stringify({}));
 });
 // Listen for NUI Events
 window.addEventListener('message', function (event) {
@@ -91,7 +91,7 @@ $(".home").on("click", ".buy", function() {
 	var $button = $(this);
 	var $name = $button.attr('name')
 	var $count = parseFloat($button.parent().parent().find(".number").text());
-	$.post('http://esx_supermarket/purchase', JSON.stringify({
+	$.post('http://rorp_pedagang/purchase', JSON.stringify({
 		item: $name,
 		count: $count,
 		loc: zone
