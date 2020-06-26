@@ -15,9 +15,10 @@ end)
 
 RegisterNetEvent("charselect:register")
 AddEventHandler("charselect:register", function()
+    SetNuiFocus(true,false)
     Citizen.Wait(1000)
 	SetEntityCoords(PlayerPedId(), 409.42, -1001.14, -99.90, 0.0, 0.0, 0.0, true)
-	FreezeEntityPosition(PlayerPedId(), true)
+    FreezeEntityPosition(PlayerPedId(), true)
     TriggerEvent("charselect:animation")
     TriggerEvent("rtx_selector:camera")
 	Visible()
@@ -136,7 +137,8 @@ AddEventHandler("charselect:animation", function()
 	SetCamActive(cam2, false)
 	TriggerEvent("rtx_selector:camera2")
 	while enable == true do
-		if not notifytext == true then
+        if not notifytext == true then
+            SetNuiFocus(false,false)
 			notifytext = true
 			exports['mythic_notify']:PersistentAlert('start', '85848451521ddd', 'inform', 'Tekan [Enter] untuk memilih karakter', { ['background-color'] = '#000000' })
 		end
