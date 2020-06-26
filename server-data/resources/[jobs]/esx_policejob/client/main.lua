@@ -234,6 +234,7 @@ function OpenPoliceActionsMenu()
 				{label = _U('out_the_vehicle'), value = 'out_the_vehicle'},
 				{label = _U('fine'), value = 'fine'},
 				{label = _U('unpaid_bills'), value = 'unpaid_bills'}
+				{label = _U('jail_menu'),               value = 'jail_menu'}
 			}
 
 			if Config.EnableLicenses then
@@ -267,6 +268,8 @@ function OpenPoliceActionsMenu()
 						ShowPlayerLicense(closestPlayer)
 					elseif action == 'unpaid_bills' then
 						OpenUnpaidBillsMenu(closestPlayer)
+					elseif action == 'jail_menu' then
+						TriggerEvent("esx-qalle-jail:openJailMenu")
 					end
 				else
 					ESX.ShowNotification(_U('no_players_nearby'))
@@ -319,32 +322,6 @@ function OpenPoliceActionsMenu()
 						end
 
 						exports['hrp_pd_impound']:ShowImpoundMenu("store")
-
-						-- ESX.ShowHelpNotification(_U('impound_prompt'))
-						-- TaskStartScenarioInPlace(playerPed, 'CODE_HUMAN_MEDIC_TEND_TO_DEAD', 0, true)
-
-						-- currentTask.busy = true
-						-- currentTask.task = ESX.SetTimeout(10000, function()
-						-- 	ClearPedTasks(playerPed)
-						-- 	ImpoundVehicle(vehicle)
-						-- 	Citizen.Wait(100) -- sleep the entire script to let stuff sink back to reality
-						-- end)
-
-						-- -- keep track of that vehicle!
-						-- Citizen.CreateThread(function()
-						-- 	while currentTask.busy do
-						-- 		Citizen.Wait(1000)
-
-						-- 		vehicle = GetClosestVehicle(coords.x, coords.y, coords.z, 3.0, 0, 71)
-						-- 		if not DoesEntityExist(vehicle) and currentTask.busy then
-						-- 			ESX.ShowNotification(_U('impound_canceled_moved'))
-						-- 			ESX.ClearTimeout(currentTask.task)
-						-- 			ClearPedTasks(playerPed)
-						-- 			currentTask.busy = false
-						-- 			break
-						-- 		end
-						-- 	end
-						-- end)
 					end
 				else
 					ESX.ShowNotification(_U('no_vehicles_nearby'))
