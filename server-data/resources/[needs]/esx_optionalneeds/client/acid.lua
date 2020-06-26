@@ -189,66 +189,66 @@ DoAcid = function(time)
   MarioZAdd = 0.01
 end
 
-InitPed = function()
-  local plyPed = GetPlayerPed(-1)
-  local pos = GetEntityCoords(plyPed)
+-- InitPed = function()
+--   local plyPed = GetPlayerPed(-1)
+--   local pos = GetEntityCoords(plyPed)
 
-  local randomAlt     = math.random(0,359)
-  local randomDist    = math.random(50,80)
-  local spawnPos      = pos + PointOnSphere(0.0,randomAlt,randomDist)
+--   local randomAlt     = math.random(0,359)
+--   local randomDist    = math.random(50,80)
+--   local spawnPos      = pos + PointOnSphere(0.0,randomAlt,randomDist)
 
-  while World3dToScreen2d(spawnPos.x,spawnPos.y,spawnPos.z) and not IsPointOnRoad(spawnPos.x,spawnPos.y,spawnPos.z) do 
-    randomAlt   = math.random(0,359)
-    randomDist  = math.random(50,80)
-    spawnPos    = GetEntityCoords(GetPlayerPed(-1)) + PointOnSphere(0.0,randomAlt,randomSphere)
-    Citizen.Wait(0)
-  end 
+--   while World3dToScreen2d(spawnPos.x,spawnPos.y,spawnPos.z) and not IsPointOnRoad(spawnPos.x,spawnPos.y,spawnPos.z) do 
+--     randomAlt   = math.random(0,359)
+--     randomDist  = math.random(50,80)
+--     spawnPos    = GetEntityCoords(GetPlayerPed(-1)) + PointOnSphere(0.0,randomAlt,randomSphere)
+--     Citizen.Wait(0)
+--   end 
 
-  EvilPed = ClonePed(plyPed, GetEntityHeading(plyPed), false, false)
-  Wait(10)
-  SetEntityCoordsNoOffset(EvilPed, spawnPos.x,spawnPos.y,spawnPos.z + 1.0)
-  SetPedComponentVariation(EvilPed, 1, 60, 0, 0, 0)
+--   EvilPed = ClonePed(plyPed, GetEntityHeading(plyPed), false, false)
+--   Wait(10)
+--   SetEntityCoordsNoOffset(EvilPed, spawnPos.x,spawnPos.y,spawnPos.z + 1.0)
+--   SetPedComponentVariation(EvilPed, 1, 60, 0, 0, 0)
 
-  SetEntityInvincible(EvilPed,true)
-  SetBlockingOfNonTemporaryEvents(EvilPed,true)
+--   SetEntityInvincible(EvilPed,true)
+--   SetBlockingOfNonTemporaryEvents(EvilPed,true)
 
-  TrackEnt()
-end
+--   TrackEnt()
+-- end
 
-TrackEnt = function()
-  while true do
-    local dist = GetVecDist(GetEntityCoords(GetPlayerPed(-1)), GetEntityCoords(EvilPed))
-    if dist > 5.0 then
-      TaskGoToEntity(EvilPed, GetPlayerPed(-1), -1, 4.0, 100.0, 1073741824, 0)
-      Wait(1000)
-    else       
-      if not IsTaskMoveNetworkActive(EvilPed) then
-        RequestAnimDict("anim@mp_point")
-        while not HasAnimDictLoaded("anim@mp_point") do Wait(0); end
-        TaskMoveNetworkByName(EvilPed, "task_mp_pointing", 0.5, 0, "anim@mp_point", 24)
-        SetPedCurrentWeaponVisible(EvilPed, 0, 1, 1, 1)
-        SetPedConfigFlag(EvilPed, 36, 1)
-      end
+-- TrackEnt = function()
+--   while true do
+--     local dist = GetVecDist(GetEntityCoords(GetPlayerPed(-1)), GetEntityCoords(EvilPed))
+--     if dist > 5.0 then
+--       TaskGoToEntity(EvilPed, GetPlayerPed(-1), -1, 4.0, 100.0, 1073741824, 0)
+--       Wait(1000)
+--     else       
+--       if not IsTaskMoveNetworkActive(EvilPed) then
+--         RequestAnimDict("anim@mp_point")
+--         while not HasAnimDictLoaded("anim@mp_point") do Wait(0); end
+--         TaskMoveNetworkByName(EvilPed, "task_mp_pointing", 0.5, 0, "anim@mp_point", 24)
+--         SetPedCurrentWeaponVisible(EvilPed, 0, 1, 1, 1)
+--         SetPedConfigFlag(EvilPed, 36, 1)
+--       end
 
-      if not LastPedTurn or (GetGameTimer() - LastPedTurn) > 1000 then
-        LastPedTurn = GetGameTimer()
-        TaskTurnPedToFaceEntity(EvilPed, GetPlayerPed(-1), -1)
-      end
+--       if not LastPedTurn or (GetGameTimer() - LastPedTurn) > 1000 then
+--         LastPedTurn = GetGameTimer()
+--         TaskTurnPedToFaceEntity(EvilPed, GetPlayerPed(-1), -1)
+--       end
 
-      SetTaskMoveNetworkSignalFloat (EvilPed, "Pitch",          0.4)
-      SetTaskMoveNetworkSignalFloat (EvilPed, "Heading",        0.5)
-      SetTaskMoveNetworkSignalBool  (EvilPed, "isBlocked",      false)
-      SetTaskMoveNetworkSignalBool  (EvilPed, "isFirstPerson",  false)
+--       SetTaskMoveNetworkSignalFloat (EvilPed, "Pitch",          0.4)
+--       SetTaskMoveNetworkSignalFloat (EvilPed, "Heading",        0.5)
+--       SetTaskMoveNetworkSignalBool  (EvilPed, "isBlocked",      false)
+--       SetTaskMoveNetworkSignalBool  (EvilPed, "isFirstPerson",  false)
 
-      if IsPedRagdoll(EvilPed) then
-        while IsPedRagdoll(EvilPed) do Wait(0); end
-        ClearPedTasksImmediately(EvilPed)
-        Wait(10)
-      end
-      Wait(0)
-    end
-  end
-end
+--       if IsPedRagdoll(EvilPed) then
+--         while IsPedRagdoll(EvilPed) do Wait(0); end
+--         ClearPedTasksImmediately(EvilPed)
+--         Wait(10)
+--       end
+--       Wait(0)
+--     end
+--   end
+-- end
 
 InitCubes = function()
   for i=1,50,1 do
