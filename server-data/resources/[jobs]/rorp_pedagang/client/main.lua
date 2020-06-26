@@ -32,8 +32,8 @@ Citizen.CreateThread(function()
 
 	ESX.TriggerServerCallback('rorp_pedagang:requestDBItems', function(ShopItems)
 		for k,v in pairs(ShopItems) do
-			if (Config.ZonesDistributor[k] ~= nil) then
-				Config.ZonesDistributor[k].Items = v
+			if (Config.Zones[k] ~= nil) then
+				Config.Zones[k].Items = v
 			end
 		end
 	end)
