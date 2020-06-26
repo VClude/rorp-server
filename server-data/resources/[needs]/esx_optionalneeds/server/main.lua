@@ -22,7 +22,7 @@ ESX.RegisterUsableItem('heroin', function(source)
 
 	xPlayer.removeInventoryItem('heroin', 1)
 
-	TriggerClientEvent('esx_optionalneeds:doAcid', source, 240000)
+	exports["esx_optionalneeds"]:DoAcid(240000)
 	TriggerClientEvent('esx:showNotification', source, _U("used_heroin"))
 
 end)
