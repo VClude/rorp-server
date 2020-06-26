@@ -155,7 +155,7 @@ AddEventHandler('rorp_pedagang:CookingEvent', function(_items)
     Citizen.Wait(200)
 
     ClearPedTasks(GetPlayerPed(-1))
-    exports['progressBars']:startUI((120000), "COOKING")
+    exports['progressBars']:startUI((120000), "MEMASAK...")
     TaskStartScenarioInPlace(GetPlayerPed(-1), "PROP_HUMAN_BBQ", 0, true)
     Citizen.Wait(120000)
     

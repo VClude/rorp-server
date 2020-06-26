@@ -22,7 +22,7 @@
             <div class="shop-container">
                 <!-- header -->
                 <div class="header">
-                    <h1>Supermarket</h1>
+                    <h1>Distributor</h1>
                     <div class="btnQuit"><img class="close" src="img/close.png" alt="Quit" /></div>
                 </div>
                 <!-- home -->
@@ -32,7 +32,6 @@
                             <img src="img/bread.png" alt="Hambergur">
                         </div>
                         <div class="container">
-                            <h4><b>Hambergur</b><div class="price">500$</div></h4> 
                             <div class="quantity">
                                 <div class="plus-btn btnquantity" name="button" id="plus">
                                     <img src="img/plus.png" alt="" />
@@ -123,10 +122,12 @@
                 },
               });
               $('#yes').show();
-            } 
+            } else {
+              $('#yes').hide();
+            }
           }
           if (item.message == "loadshop") {
-              console.log('yes');
+              // console.log('yes');
               if (item.clear == true){
 			$( ".home" ).empty();
 			prices = {}
