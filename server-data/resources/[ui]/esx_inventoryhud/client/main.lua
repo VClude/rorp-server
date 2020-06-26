@@ -75,6 +75,10 @@ end)
 RegisterCommand('closeinv', function(source, args, raw)
     closeInventory()
 end)
+RegisterCommand('openinv', function()
+      openInventory()
+  end)
+  
 
 function closeInventory()
     if targetInventory ~= nil then -- checks if search inventory was open and target's inventory needs to be enabled
