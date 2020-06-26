@@ -10,19 +10,6 @@ Citizen.CreateThread(function()
   end
 end)
 
-AddEventHandler('playerSpawned', function()
-		
-  if DRUNK_ACTIVE == false then
-    exports.trew_hud_ui:createStatus({
-        status = 'drunk',
-        color = '#FF00CC',
-        icon = '<i class="fas fa-brain"></i>'
-    });
-    DRUNK_ACTIVE = true
-  end
-
-end)
-
 function Drunk(level, start)
   
   Citizen.CreateThread(function()
@@ -162,13 +149,6 @@ AddEventHandler('esx_status:loaded', function(status)
 				end
 
       end)
-    
-      DRUNK_STATUS = status.getPercent()
-
-      exports.trew_hud_ui:setStatus({
-        name = 'drunk',
-        value = DRUNK_STATUS
-    });
 
 		end
 
