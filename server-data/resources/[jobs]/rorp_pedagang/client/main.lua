@@ -298,7 +298,8 @@ end
 
 -- Create Blips Distributor
 function refreshBlips()
-	if PlayerData.job.name == 'pedagang' then
+	local jobPedagang = PlayerData.job.name
+	if jobPedagang then
 		for _,v in pairs(distibutorblip) do
 			local blip = AddBlipForCoord(v.x, v.y, v.z)
 			SetBlipSprite(blip, 355)
