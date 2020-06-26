@@ -236,7 +236,7 @@ RegisterCommand('hp', function()
       if qtty > 0 then
         TooglePhone()
       else
-        ESX.ShowNotification("Kamu tidak memeliki ~y~Handphone")
+        ESX.ShowNotification("Kamu tidak memiliki ~y~Handphone")
       end
     end, 'phone')
   end
