@@ -15,3 +15,14 @@ ESX.RegisterUsableItem('beer', function(source)
 	TriggerClientEvent('esx:showNotification', source, _U('used_beer'))
 
 end)
+
+ESX.RegisterUsableItem('heroin', function(source)
+
+	local xPlayer = ESX.GetPlayerFromId(source)
+
+	xPlayer.removeInventoryItem('heroin', 1)
+
+	TriggerClientEvent('esx_optionalneeds:doAcid', source, 240000)
+	TriggerClientEvent('esx:showNotification', source, _U("used_heroin"))
+
+end)

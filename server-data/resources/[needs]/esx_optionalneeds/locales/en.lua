@@ -1,5 +1,6 @@
 Locales['en'] = {
 	
-	['used_beer'] = 'you used 1x ~y~Beer~s~',
+	['used_beer'] = 'Kamu menggunakan 1x ~y~Beer~s~',
+	['used_heroin'] = 'Kamu menggunakan 1x ~y~Heroin~s~',
 
 }

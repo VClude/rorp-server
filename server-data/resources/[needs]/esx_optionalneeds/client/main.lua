@@ -106,8 +106,6 @@ AddEventHandler('esx_status:loaded', function(status)
 		while true do
 
       Wait(1000)
-      
-      local DRUNK_STATUS
 
 			TriggerEvent('esx_status:getStatus', 'drunk', function(status)
 				
