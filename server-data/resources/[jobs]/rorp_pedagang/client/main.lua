@@ -292,7 +292,6 @@ end)
 function deleteBlips()
 	for _,v in ipairs(DistributorBlip) do
 		RemoveBlip(v)
-		DistributorBlip = nil
 	end
 end
 
