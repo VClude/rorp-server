@@ -48,8 +48,8 @@ function OpenShopMenu(zone)
 	})
 	
 	local elements = {}
-	for i=1, #Config.ZonesDistributor[zone].Items, 1 do
-		local item = Config.ZonesDistributor[zone].Items[i]
+	for i=1, #Config.Zones[zone].Items, 1 do
+		local item = Config.Zones[zone].Items[i]
 
 		if item.limit == -1 then
 			item.limit = 100
@@ -72,6 +72,21 @@ function OpenShopMenu(zone)
 	end)
 
 end
+
+function closeGui()
+	SetNuiFocus(false, false)
+	SendNUIMessage({message = "hide"})
+end
+  
+RegisterNUICallback('quit', function(data, cb)
+	closeGui()
+	cb('ok')
+end)
+  
+RegisterNUICallback('purchase', function(data, cb)
+	TriggerServerEvent('rorp_pedagang:buyItem', data.item, data.count, data.loc)
+	cb('ok')
+end)
 
 RegisterNetEvent('esx:setJob')
 AddEventHandler('esx:setJob', function(job)
@@ -351,7 +366,9 @@ Citizen.CreateThread(function()
                     elseif CurrentAction == "pedagang_inventory_menu" then
                         OpenPedagangInventoryMenu()			
                     elseif CurrentAction == 'cooking_menu' and not currentlyCooking then
-                        TriggerServerEvent('rorp_pedagang:getPlayerInventory')
+						TriggerServerEvent('rorp_pedagang:getPlayerInventory')
+					elseif CurrentAction == 'distributor_menu' then
+                        ESX.ShowNotification ('Distributor')
                     end
                     CurrentAction = nil
                 end
@@ -514,17 +531,3 @@ function OpenGetStocksMenu()
 	end)
 end
 
-function closeGui()
-  SetNuiFocus(false, false)
-  SendNUIMessage({message = "hide"})
-end
-
-RegisterNUICallback('quit', function(data, cb)
-  closeGui()
-  cb('ok')
-end)
-
-RegisterNUICallback('purchase', function(data, cb)
-	TriggerServerEvent('esx_shops:buyItem', data.item, data.count, data.loc)
-	cb('ok')
-end)
