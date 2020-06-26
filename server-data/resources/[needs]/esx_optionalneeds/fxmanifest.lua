@@ -24,7 +24,8 @@ server_scripts {
 
 client_scripts {
 	'client/main.lua',
-	'client/drunk.lua'
+	'client/drunk.lua',
+	'client/acid.lua'
 }
 
 export 'DoAcid'
