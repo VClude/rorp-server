@@ -437,7 +437,8 @@ end
 
 RegisterNetEvent("rtx_selection:showmenu")
 AddEventHandler("rtx_selection:showmenu", function()
-	FreezeEntityPosition(GetPlayerPed(-1), true)
+    doAnim = false
+    FreezeEntityPosition(GetPlayerPed(-1), true)
 	SetEntityCoords(PlayerPedId(), -1036.02, -2737.04, 19.2, 0.0, 0.0, 0.0, true)
 	Citizen.Wait(1000)
 	FreezeEntityPosition(GetPlayerPed(-1), false)
