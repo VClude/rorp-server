@@ -869,6 +869,9 @@ function engineOnOutside(vehicle)
   ClearPedTasks(ped)
   playAnimation()
   SetVehicleEngineOn(vehicle, true, true, false)
+
+  local vehicleNetId = VehToNet(vehicle)
+  TriggerServerEvent("carremote:serverEngines", vehicleNetId, 1)
 end
 
 function engineOffOutside(vehicle)
@@ -876,6 +879,9 @@ function engineOffOutside(vehicle)
   ClearPedTasks(ped)
   playAnimation()
   SetVehicleEngineOn(vehicle, false, false, false)
+
+  local vehicleNetId = VehToNet(vehicle)
+  TriggerServerEvent("carremote:serverEngines", vehicleNetId, 0)
 end
 
 function flashLights(vehicle)
