@@ -2,7 +2,7 @@ local DRUNK_ACTIVE = false
 
 AddEventHandler('playerSpawned', function()
     
-    if STRESS_ACTIVE == false then
+    if DRUNK_ACTIVE == false then
         exports.trew_hud_ui:createStatus({
             status = 'drunk',
             color = '#FF00EA',
