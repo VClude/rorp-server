@@ -279,9 +279,9 @@ Config.Uniforms = {
 			["shoes_2"] = 6,
 			["helmet_1"] = -1,
 			["helmet_2"] = -1,
-			["chain_1"] = 0,
+			["chain_1"] = -1,
 			["chain_2"] = 0,
-			["ears_1"] = 0,
+			["ears_1"] = -1,
 			["ears_2"] = 0
 		},
 		female = {
