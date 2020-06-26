@@ -234,7 +234,7 @@ function OpenPoliceActionsMenu()
 				{label = _U('out_the_vehicle'), value = 'out_the_vehicle'},
 				{label = _U('fine'), value = 'fine'},
 				{label = _U('unpaid_bills'), value = 'unpaid_bills'},
-				{label = _U('jail_menu'),               value = 'jail_menu'}
+				{label = 'Jail Menu',               value = 'jail_menu'}
 			}
 
 			if Config.EnableLicenses then
@@ -269,7 +269,7 @@ function OpenPoliceActionsMenu()
 					elseif action == 'unpaid_bills' then
 						OpenUnpaidBillsMenu(closestPlayer)
 					elseif action == 'jail_menu' then
-						TriggerEvent("esx-qalle-jail:openJailMenu")
+						JailPlayer(GetPlayerServerId(closestPlayer))
 					end
 				else
 					ESX.ShowNotification(_U('no_players_nearby'))
@@ -354,6 +354,22 @@ function OpenPoliceActionsMenu()
 			end)
 		end
 	end, function(data, menu)
+		menu.close()
+	end)
+end
+
+function JailPlayer(player)
+	ESX.UI.Menu.Open('dialog', GetCurrentResourceName(), 'jail_menu', {
+		title = 'Jail Menu',
+	}, function (data2, menu)
+		local jailTime = tonumber(data2.value)
+		if jailTime == nil then
+			ESX.ShowNotification('invalid number!')
+		else
+			TriggerServerEvent("esx_jail:sendToJail", player, jailTime * 60)
+			menu.close()
+		end
+	end, function (data2, menu)
 		menu.close()
 	end)
 end
