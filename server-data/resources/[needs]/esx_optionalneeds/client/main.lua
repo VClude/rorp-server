@@ -1,12 +1,26 @@
 ESX                  = nil
 local IsAlreadyDrunk = false
 local DrunkLevel     = -1
+local DRUNK_ACTIVE   = false
 
 Citizen.CreateThread(function()
   while ESX == nil do
     TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
     Citizen.Wait(0)
   end
+end)
+
+AddEventHandler('playerSpawned', function()
+		
+  if DRUNK_ACTIVE == false then
+    exports.trew_hud_ui:createStatus({
+        status = 'drunk',
+        color = '#FF00CC',
+        icon = '<i class="fas fa-brain"></i>'
+    });
+    DRUNK_ACTIVE = true
+  end
+
 end)
 
 function Drunk(level, start)
@@ -104,7 +118,9 @@ AddEventHandler('esx_status:loaded', function(status)
 
 		while true do
 
-			Wait(1000)
+      Wait(1000)
+      
+      local DRUNK_STATUS
 
 			TriggerEvent('esx_status:getStatus', 'drunk', function(status)
 				
@@ -145,7 +161,14 @@ AddEventHandler('esx_status:loaded', function(status)
 
 				end
 
-			end)
+      end
+    
+      DRUNK_STATUS = status.getPercent())
+
+      exports.trew_hud_ui:setStatus({
+        name = 'drunk',
+        value = DRUNK_STATUS
+    });
 
 		end
 
