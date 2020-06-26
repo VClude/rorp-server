@@ -284,7 +284,7 @@ Citizen.CreateThread(function()
 end)
 
 local distibutorblip = {
-	{x = -627.59, y = 228.47, z = 82.88}
+	{x = -830.3, y = -1255.77, z = 6.58}
 }
 
 -- Create Blips Distributor
