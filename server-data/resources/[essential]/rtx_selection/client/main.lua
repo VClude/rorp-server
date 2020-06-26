@@ -1,4 +1,5 @@
 local PlayerData                = {}
+local doAnim                    = false
 ESX                             = nil
 
 Citizen.CreateThread(function()
@@ -8,6 +9,36 @@ Citizen.CreateThread(function()
     end
 end)
 
+Citizen.CreateThread(function()
+	while true do
+		Citizen.Wait(0)
+
+		if doAnim then
+			DisableControlAction(0, 1,   true) -- LookLeftRight
+			DisableControlAction(0, 2,   true) -- LookUpDown
+			DisableControlAction(0, 106, true) -- VehicleMouseControlOverride
+			DisableControlAction(0, 142, true) -- MeleeAttackAlternate
+			DisableControlAction(0, 30,  true) -- MoveLeftRight
+			DisableControlAction(0, 31,  true) -- MoveUpDown
+			DisableControlAction(0, 21,  true) -- disable sprint
+			DisableControlAction(0, 24,  true) -- disable attack
+			DisableControlAction(0, 25,  true) -- disable aim
+			DisableControlAction(0, 47,  true) -- disable weapon
+			DisableControlAction(0, 58,  true) -- disable weapon
+			DisableControlAction(0, 263, true) -- disable melee
+			DisableControlAction(0, 264, true) -- disable melee
+			DisableControlAction(0, 257, true) -- disable melee
+			DisableControlAction(0, 140, true) -- disable melee
+			DisableControlAction(0, 141, true) -- disable melee
+			DisableControlAction(0, 143, true) -- disable melee
+			DisableControlAction(0, 75,  true) -- disable exit vehicle
+			DisableControlAction(27, 75, true) -- disable exit vehicle
+		else
+			Citizen.Wait(500)
+		end
+	end
+end)
+
 RegisterNetEvent('esx:playerLoaded')
 AddEventHandler('esx:playerLoaded', function(xPlayer)
   PlayerData = xPlayer
@@ -15,8 +46,8 @@ end)
 
 RegisterNetEvent("charselect:register")
 AddEventHandler("charselect:register", function()
-    SetNuiFocus(true,true)
     Citizen.Wait(1000)
+    doAnim = true
 	SetEntityCoords(PlayerPedId(), 409.42, -1001.14, -99.90, 0.0, 0.0, 0.0, true)
     FreezeEntityPosition(PlayerPedId(), true)
     TriggerEvent("charselect:animation")
@@ -29,15 +60,15 @@ AddEventHandler("charselect:visibleplayer", function()
 	Visiblee()
 end)
 
-RegisterNetEvent("charselect:register2")
-AddEventHandler("charselect:register2", function(source)
-    Citizen.Wait(1000)
-	SetEntityCoords(PlayerPedId(), 409.42, -1001.14, -99.90, 0.0, 0.0, 0.0, true)
-	FreezeEntityPosition(PlayerPedId(), true)
-    TriggerEvent("charselect:animation2")
-    TriggerEvent("rtx_selector:camera")
-	Visible()
-end)
+-- RegisterNetEvent("charselect:register2")
+-- AddEventHandler("charselect:register2", function(source)
+--     Citizen.Wait(1000)
+-- 	SetEntityCoords(PlayerPedId(), 409.42, -1001.14, -99.90, 0.0, 0.0, 0.0, true)
+-- 	FreezeEntityPosition(PlayerPedId(), true)
+--     TriggerEvent("charselect:animation2")
+--     TriggerEvent("rtx_selector:camera")
+-- 	Visible()
+-- end)
 
 local heading = 360.00
 local signmodel = GetHashKey("prop_police_id_board")
@@ -144,7 +175,6 @@ AddEventHandler("charselect:animation", function()
 		Citizen.Wait(1)
         RequestAnimDict("mp_character_creation@customise@male_a")
         TaskPlayAnim(PlayerPedId(), "mp_character_creation@customise@male_a", "loop", 8.0, -8.0, -1, 0, 1, 0, 0, 0)
-        SetNuiFocus(true,true)
 		FreezeEntityPosition(PlayerPedId(), true)
         if IsControlJustReleased(1, 201) then
 			FreezeEntityPosition(GetPlayerPed(-1), false)

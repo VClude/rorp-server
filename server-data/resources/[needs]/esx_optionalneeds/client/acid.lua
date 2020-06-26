@@ -385,6 +385,6 @@ end
 RegisterNetEvent('esx_optionalneeds:heroin')
 AddEventHandler('esx_optionalneeds:heroin',function()
   local playerPed = GetPlayerPed(-1)
-  DoAcid(120000)
+  DoAcid(60000)
 
 end)
