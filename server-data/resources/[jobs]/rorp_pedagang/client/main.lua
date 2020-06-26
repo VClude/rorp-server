@@ -290,7 +290,7 @@ Citizen.CreateThread(function()
 	end
 
 	if PlayerData.job.name == 'pedagang' then
-		for _,v in pairs(Config.Blips.Zones.Distributor) do
+		for _,v in pairs(Config.Zones.Distributor) do
 			local blip = AddBlipForCoord(v.Pos.x, v.Pos.y, v.Pos.z)
 			SetBlipSprite(blip, 355)
 			SetBlipDisplay(blip, 2)
