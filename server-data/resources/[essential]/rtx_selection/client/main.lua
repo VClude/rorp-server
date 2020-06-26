@@ -15,7 +15,7 @@ end)
 
 RegisterNetEvent("charselect:register")
 AddEventHandler("charselect:register", function()
-    SetNuiFocus(true,false)
+    SetNuiFocus(true,true)
     Citizen.Wait(1000)
 	SetEntityCoords(PlayerPedId(), 409.42, -1001.14, -99.90, 0.0, 0.0, 0.0, true)
     FreezeEntityPosition(PlayerPedId(), true)
@@ -138,13 +138,13 @@ AddEventHandler("charselect:animation", function()
 	TriggerEvent("rtx_selector:camera2")
 	while enable == true do
         if not notifytext == true then
-            SetNuiFocus(false,false)
 			notifytext = true
 			exports['mythic_notify']:PersistentAlert('start', '85848451521ddd', 'inform', 'Tekan [Enter] untuk memilih karakter', { ['background-color'] = '#000000' })
 		end
 		Citizen.Wait(1)
         RequestAnimDict("mp_character_creation@customise@male_a")
         TaskPlayAnim(PlayerPedId(), "mp_character_creation@customise@male_a", "loop", 8.0, -8.0, -1, 0, 1, 0, 0, 0)
+        SetNuiFocus(true,true)
 		FreezeEntityPosition(PlayerPedId(), true)
         if IsControlJustReleased(1, 201) then
 			FreezeEntityPosition(GetPlayerPed(-1), false)
