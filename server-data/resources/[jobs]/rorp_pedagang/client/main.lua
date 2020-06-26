@@ -283,6 +283,10 @@ Citizen.CreateThread(function()
 	end
 end)
 
+local distibutorblip = {
+	{x = -627.59, y = 228.47, z = 82.88}
+}
+
 -- Create Blips Distributor
 Citizen.CreateThread(function()
 	while not done do
@@ -290,8 +294,8 @@ Citizen.CreateThread(function()
 	end
 
 	if PlayerData.job.name == 'pedagang' then
-		for _,v in pairs(Config.Zones.Distributor) do
-			local blip = AddBlipForCoord(v.Pos.x, v.Pos.y, v.Pos.z)
+		for _,v in pairs(distibutorblip) do
+			local blip = AddBlipForCoord(v.x, v.y, v.z)
 			SetBlipSprite(blip, 355)
 			SetBlipDisplay(blip, 2)
 			SetBlipScale(blip, 1.0)
