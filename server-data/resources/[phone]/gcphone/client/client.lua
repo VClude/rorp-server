@@ -65,15 +65,15 @@ Citizen.CreateThread(function()
   while true do
     Citizen.Wait(0)
     if takePhoto ~= true then
-      if IsControlJustPressed(1, KeyOpenClose) and GetLastInputMethod(2) and not simmenuopen then
-		TooglePhone()
+      -- if IsControlJustPressed(1, KeyOpenClose) and GetLastInputMethod(2) and not simmenuopen then
+		  --   TooglePhone()
       -- elseif IsControlJustPressed(1, KeySimMenu) and GetLastInputMethod(2) and not menuIsOpen then
-		-- OpenSimMenu()
+		  -- OpenSimMenu()
 			  
 								
 			 
 			
-      end
+      -- end
       if menuIsOpen == true then
         for _, value in ipairs(KeyToucheCloseEvent) do
           if IsControlJustPressed(1, value.code) and GetLastInputMethod(2) then
@@ -232,7 +232,13 @@ end
 
 RegisterCommand('hp', function()
   if menuIsOpen == false and not isDead then
-    TooglePhone()
+    ESX.TriggerServerCallback('gcphone:getItemAmount', function(qtty)
+      if qtty > 0 then
+        TooglePhone()
+      else
+        ESX.ShowNotification("Kamu tidak memeliki ~y~Handphone")
+      end
+    end, 'phone')
   end
 end)
 

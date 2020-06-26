@@ -17,16 +17,16 @@ Citizen.CreateThread(
     end
 )
 
-Citizen.CreateThread(
-    function()
-        while true do
-            Citizen.Wait(0)
-            if IsControlJustReleased(0, Config.OpenControl) and IsInputDisabled(0) then
-                openInventory()
-            end
-        end
-    end
-)
+-- Citizen.CreateThread(
+--     function()
+--         while true do
+--             Citizen.Wait(0)
+--             if IsControlJustReleased(0, Config.OpenControl) and IsInputDisabled(0) then
+--                 openInventory()
+--             end
+--         end
+--     end
+-- )
 
 function openInventory()
     ESX.UI.Menu.CloseAll()-- this also closes any esx menus to prevent from society inventory duping

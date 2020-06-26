@@ -8,6 +8,12 @@ TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 
 math.randomseed(os.time()) 
 
+ESX.RegisterServerCallback('gcphone:getItemAmount', function(source, cb, item)
+    local xPlayer = ESX.GetPlayerFromId(source)
+    local qtty = xPlayer.getInventoryItem(item).count
+    cb(qtty)
+end)
+
 --- Pour les numero du style XXX-XXXX
 function getPhoneRandomNumber()
     local numBase0 = math.random(100,999)
