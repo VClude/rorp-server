@@ -301,6 +301,7 @@ Citizen.CreateThread(function()
 			BeginTextCommandSetBlipName("STRING")
 			AddTextComponentSubstringPlayerName("Distributor Pedagang")
 			EndTextCommandSetBlipName(blip)
+			done = true
 		end
 	end
 end)
