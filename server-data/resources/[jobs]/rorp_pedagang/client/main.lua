@@ -84,7 +84,7 @@ RegisterNUICallback('quit', function(data, cb)
 end)
   
 RegisterNUICallback('purchase', function(data, cb)
-	TriggerServerEvent('rorp_pedagang:buyItem', data.item, data.count, data.loc)
+	TriggerServerEvent('rorp_pedagang:buyItem', data.item, data.count)
 	cb('ok')
 end)
 
