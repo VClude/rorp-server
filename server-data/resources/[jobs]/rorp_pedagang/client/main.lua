@@ -368,7 +368,7 @@ Citizen.CreateThread(function()
                     elseif CurrentAction == 'cooking_menu' and not currentlyCooking then
 						TriggerServerEvent('rorp_pedagang:getPlayerInventory')
 					elseif CurrentAction == 'distributor_menu' then
-                        ESX.ShowNotification ('Distributor')
+                        OpenShopMenu(Distributor)
                     end
                     CurrentAction = nil
                 end
