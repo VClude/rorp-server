@@ -161,9 +161,9 @@ AddEventHandler('esx_status:loaded', function(status)
 
 				end
 
-      end
+      end)
     
-      DRUNK_STATUS = status.getPercent())
+      DRUNK_STATUS = status.getPercent()
 
       exports.trew_hud_ui:setStatus({
         name = 'drunk',
