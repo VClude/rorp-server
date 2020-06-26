@@ -90,7 +90,7 @@ AddEventHandler('esx_status:loaded', function(status)
   TriggerEvent('esx_status:registerStatus', 'drunk', 0, '#8F15A5', 
     function(status)
       if status.val > 0 then
-        return true
+        return false
       else
         return false
       end
