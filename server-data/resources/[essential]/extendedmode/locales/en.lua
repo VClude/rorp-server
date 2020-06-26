@@ -47,9 +47,9 @@ Locales['en'] = {
   ['company_nomoney'] = 'the company you\'re employeed at is too poor to pay out your salary',
   ['received_paycheck'] = 'received paycheck',
   ['bank'] = 'maze Bank',
-  ['account_bank'] = 'bank',
-  ['account_black_money'] = 'dirty Money',
-  ['account_money'] = 'cash',
+  ['account_bank'] = 'Bank',
+  ['account_black_money'] = 'Uang Kotor',
+  ['account_money'] = 'Cash',
 
   ['act_imp'] = 'action impossible',
   ['in_vehicle'] = 'you can\'t give anything to someone in a vehicle',
