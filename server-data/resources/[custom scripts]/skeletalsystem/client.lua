@@ -113,7 +113,7 @@ function skeletalsystem:DamageCheck()
   local prevHealth = (self.plyHealth or GetEntityHealth(plyPed))
   self.plyHealth = GetEntityHealth(plyPed)
   if self.plyHealth < prevHealth then    
-    ESX.ShowNotification('Kamu terluka! Periksa lukamu dengan tekan "Z"')
+    ESX.ShowNotification('Kamu terluka! segera cari EMS !')
     local bone,bType = self:CheckBone()
     if bone and bType then
       self:DamageBone(bone,bType)
@@ -244,7 +244,7 @@ end
 
 function skeletalsystem:RefreshMenu()
   local resX,resY = GetActiveScreenResolution(resX,resY)
-  local str = "~r~Bone Damage  : " .. tostring(self.MenuOpen)  
+  local str = ""
 
   if self.UIPositions[resX .. "x" .. resY] then 
     xPos = resY + self.UIPositions[resX .. "x" .. resY].MenuX
@@ -267,11 +267,11 @@ function skeletalsystem:RefreshMenu()
   self.Menu.Settings.InstructionalButtons = false
 
   if self.Bones and type(self.Bones) == "table" then 
-    for k,v in pairs(self.Bones[self.MenuOpen]) do      
-      local newItem = NativeUI.CreateItem(k .. " : ", "", 1, false, 1, Colours.White, Colours.Red)
-      newItem:RightLabel("~r~"..v)
-      self.Menu:AddItem(newItem) 
-    end
+    -- for k,v in pairs(self.Bones[self.MenuOpen]) do      
+    --   local newItem = NativeUI.CreateItem(k .. " : ", "", 1, false, 1, Colours.White, Colours.Red)
+    --   newItem:RightLabel("~r~"..v)
+    --   self.Menu:AddItem(newItem) 
+    -- end
   end 
 
   self.MenuPool:Add(self.Menu)
