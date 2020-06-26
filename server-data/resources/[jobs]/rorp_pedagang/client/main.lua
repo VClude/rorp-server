@@ -98,9 +98,8 @@ end)
 RegisterNetEvent('esx:setJob')
 AddEventHandler('esx:setJob', function(job)
 	ESX.PlayerData.job = job
-	-- deleteBlips()
-	-- refreshBlips()
-	print(DistributorBlip)
+	RemoveBlip(DistributorBlip)
+	refreshBlips()
 end)
 
 local function cooking(ingredients)
@@ -308,13 +307,6 @@ function refreshBlips()
 
 			table.insert(DistributorBlip, blip)
 		end
-	end
-end
-
-
-function deleteBlips()
-	for k,v in ipairs(distibutorblip) do
-		RemoveBlip(v)
 	end
 end
 
