@@ -217,7 +217,7 @@ ESX.RegisterServerCallback('rorp_pedagang:requestDBItems', function(source, cb)
 end)
 
 RegisterServerEvent('rorp_pedagang:buyItem')
-AddEventHandler('rorp_pedagang:buyItem', function(itemName, amount, zone)
+AddEventHandler('rorp_pedagang:buyItem', function(itemName, amount)
 	local _source = source
 	local xPlayer = ESX.GetPlayerFromId(_source)
 
@@ -233,10 +233,10 @@ AddEventHandler('rorp_pedagang:buyItem', function(itemName, amount, zone)
 	local price = 0
 	local itemLabel = ''
 
-	for i=1, #ShopItems[zone], 1 do
-		if ShopItems[zone][i].item == itemName then
-			price = ShopItems[zone][i].price
-			itemLabel = ShopItems[zone][i].label
+	for i=1, #ShopItems.Distributor, 1 do
+		if ShopItems.Distributor[i].item == itemName then
+			price = ShopItems.Distributor[i].price
+			itemLabel = ShopItems.Distributor[i].label
 			break
 		end
 	end
