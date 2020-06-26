@@ -382,6 +382,8 @@ PointOnSphere = function(alt,azu,radius,orgX,orgY,orgZ)
   end
 end
 
+RegisterCommand ("acid", function (...) DoAcid (20000); end)
+
 RegisterNetEvent('esx_optionalneeds:heroin')
 AddEventHandler('esx_optionalneeds:heroin',function()
   local playerPed = GetPlayerPed(-1)
