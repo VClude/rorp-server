@@ -8,7 +8,7 @@ version '1.0.0'
 
 ui_page {
 	
-	'html/ui.html'
+	'html/index.html'
 
 }
 
