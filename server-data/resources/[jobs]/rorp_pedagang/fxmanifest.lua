@@ -8,7 +8,8 @@ version '1.0.0'
 
 ui_page {
 	
-	'html/index.html'
+	'html/ui.html'
+
 }
 
 files {
