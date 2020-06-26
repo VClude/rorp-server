@@ -102,37 +102,37 @@ Config.DoorList = {
 	},
 
 	-- Cell 1
-	{
-		objHash = GetHashKey('v_ilev_ph_cellgate'),
-		objHeading = 270.0,
-		objCoords = vector3(462.3, -993.6, 24.9),
-		textCoords = vector3(461.8, -993.3, 25.0),
-		authorizedJobs = {'police'},
-		locked = true,
-		maxDistance = 1.25
-	},
+	-- {
+	-- 	objHash = GetHashKey('v_ilev_ph_cellgate'),
+	-- 	objHeading = 270.0,
+	-- 	objCoords = vector3(462.3, -993.6, 24.9),
+	-- 	textCoords = vector3(461.8, -993.3, 25.0),
+	-- 	authorizedJobs = {'police'},
+	-- 	locked = true,
+	-- 	maxDistance = 1.25
+	-- },
 
 	-- Cell 2
-	{
-		objHash = GetHashKey('v_ilev_ph_cellgate'),
-		objHeading = 90.0,
-		objCoords = vector3(462.3, -998.1, 24.9),
-		textCoords = vector3(461.8, -998.8, 25.0),
-		authorizedJobs = {'police'},
-		locked = true,
-		maxDistance = 1.25
-	},
+	-- {
+	-- 	objHash = GetHashKey('v_ilev_ph_cellgate'),
+	-- 	objHeading = 90.0,
+	-- 	objCoords = vector3(462.3, -998.1, 24.9),
+	-- 	textCoords = vector3(461.8, -998.8, 25.0),
+	-- 	authorizedJobs = {'police'},
+	-- 	locked = true,
+	-- 	maxDistance = 1.25
+	-- },
 
 	-- Cell 3
-	{
-		objHash = GetHashKey('v_ilev_ph_cellgate'),
-		objHeading = 90.0,
-		objCoords = vector3(462.7, -1001.9, 24.9),
-		textCoords = vector3(461.8, -1002.4, 25.0),
-		authorizedJobs = {'police'},
-		locked = true,
-		maxDistance = 1.25
-	},
+	-- {
+	-- 	objHash = GetHashKey('v_ilev_ph_cellgate'),
+	-- 	objHeading = 90.0,
+	-- 	objCoords = vector3(462.7, -1001.9, 24.9),
+	-- 	textCoords = vector3(461.8, -1002.4, 25.0),
+	-- 	authorizedJobs = {'police'},
+	-- 	locked = true,
+	-- 	maxDistance = 1.25
+	-- },
 
 	-- To Back
 	{

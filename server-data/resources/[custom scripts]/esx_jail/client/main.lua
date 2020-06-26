@@ -9,6 +9,48 @@ Citizen.CreateThread(function()
 	end
 end)
 
+RegisterNetEvent('esx_jail:jailPlayerbyAdmin')
+AddEventHandler('esx_jail:jailPlayerbyAdmin', function(_jailTime)
+	jailTime = _jailTime
+
+	local playerPed = PlayerPedId()
+
+	TriggerEvent('skinchanger:getSkin', function(skin)
+		if skin.sex == 0 then
+			TriggerEvent('skinchanger:loadClothes', skin, Config.Uniforms.prison_wear.male)
+		else
+			TriggerEvent('skinchanger:loadClothes', skin, Config.Uniforms.prison_wear.female)
+		end
+	end)
+
+	SetPedArmour(playerPed, 0)
+	ESX.Game.Teleport(playerPed, Config.JailOOC)
+	isInJail, unjail = true, false
+
+	while not unjail do
+		playerPed = PlayerPedId()
+
+		if IsPedInAnyVehicle(playerPed, false) then
+			ClearPedTasksImmediately(playerPed)
+		end
+
+		Citizen.Wait(20000)
+
+		-- Is the player trying to escape?
+		if #(GetEntityCoords(playerPed) - Config.JailLocation) > 10 then
+			ESX.Game.Teleport(playerPed, Config.JailLocation)
+			TriggerEvent('chat:addMessage', {args = {_U('judge'), _U('escape_attempt')}, color = {147, 196, 109}})
+		end
+	end
+
+	ESX.Game.Teleport(playerPed, Config.JailBlip)
+	isInJail = false
+
+	ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin)
+		TriggerEvent('skinchanger:loadSkin', skin)
+	end)
+end)
+
 RegisterNetEvent('esx_jail:jailPlayer')
 AddEventHandler('esx_jail:jailPlayer', function(_jailTime)
 	jailTime = _jailTime
@@ -24,7 +66,7 @@ AddEventHandler('esx_jail:jailPlayer', function(_jailTime)
 	end)
 
 	SetPedArmour(playerPed, 0)
-	ESX.Game.Teleport(playerPed, Config.JailLocation)
+	ESX.Game.Teleport(playerPed, Config.JailIC1)
 	isInJail, unjail = true, false
 
 	while not unjail do
