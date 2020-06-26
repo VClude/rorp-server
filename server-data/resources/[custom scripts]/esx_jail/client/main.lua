@@ -1,4 +1,5 @@
 local isInJail, unjail = false, false
+local isInJailAdmin, unjailAdmin = false, false
 local jailTime, fastTimer = 0, 0
 ESX = nil
 
@@ -25,9 +26,9 @@ AddEventHandler('esx_jail:jailPlayerbyAdmin', function(_jailTime)
 
 	SetPedArmour(playerPed, 0)
 	ESX.Game.Teleport(playerPed, Config.JailOOC)
-	isInJail, unjail = true, false
+	isInJailAdmin, unjailAdmin = true, false
 
-	while not unjail do
+	while not unjailAdmin do
 		playerPed = PlayerPedId()
 
 		if IsPedInAnyVehicle(playerPed, false) then
@@ -37,14 +38,14 @@ AddEventHandler('esx_jail:jailPlayerbyAdmin', function(_jailTime)
 		Citizen.Wait(20000)
 
 		-- Is the player trying to escape?
-		if #(GetEntityCoords(playerPed) - Config.JailLocation) > 10 then
-			ESX.Game.Teleport(playerPed, Config.JailLocation)
+		if #(GetEntityCoords(playerPed) - Config.JailOOC) > 10 then
+			ESX.Game.Teleport(playerPed, Config.JailOOC)
 			TriggerEvent('chat:addMessage', {args = {_U('judge'), _U('escape_attempt')}, color = {147, 196, 109}})
 		end
 	end
 
 	ESX.Game.Teleport(playerPed, Config.JailBlip)
-	isInJail = false
+	isInJailAdmin = false
 
 	ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin)
 		TriggerEvent('skinchanger:loadSkin', skin)
@@ -111,14 +112,20 @@ Citizen.CreateThread(function()
 	end
 end)
 
-RegisterNetEvent('esx_jail:unjailPlayer')
-AddEventHandler('esx_jail:unjailPlayer', function()
-	unjail, jailTime, fastTimer = true, 0, 0
+RegisterNetEvent('esx_jail:unjailPlayerAdmin')
+AddEventHandler('esx_jail:unjailPlayerAdmin', function()
+	unjailAdmin, jailTime, fastTimer = true, 0, 0
 end)
 
 AddEventHandler('playerSpawned', function(spawn)
 	if isInJail then
-		ESX.Game.Teleport(PlayerPedId(), Config.JailLocation)
+		ESX.Game.Teleport(PlayerPedId(), Config.JailIC)
+	end
+end)
+
+AddEventHandler('playerSpawned', function(spawn)
+	if isInJailAdmin then
+		ESX.Game.Teleport(PlayerPedId(), Config.JailOOC)
 	end
 end)
 

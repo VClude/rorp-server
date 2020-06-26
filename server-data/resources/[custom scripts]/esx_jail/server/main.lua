@@ -43,7 +43,7 @@ end, true, {help = 'Jail a player', validate = true, arguments = {
 }})
 
 ESX.RegisterCommand('unjail', 'admin', function(xPlayer, args, showError)
-	unjailPlayer(args.playerId)
+	unjailPlayerAdmin(args.playerId)
 end, true, {help = 'Unjail a player', validate = true, arguments = {
 	{name = 'playerId', help = 'player id', type = 'playerId'}
 }})
@@ -93,6 +93,23 @@ AddEventHandler('esx_jail:sendToJail', function(playerId, jailTime, quiet)
 		end
 	end
 end)
+
+function unjailPlayerAdmin(playerId)
+	local xPlayer = ESX.GetPlayerFromId(playerId)
+
+	if xPlayer then
+		if playersInJail[playerId] then
+			MySQL.Async.execute('UPDATE users SET jail_time = 0 WHERE identifier = @identifier', {
+				['@identifier'] = xPlayer.identifier
+			}, function(rowsChanged)
+				TriggerClientEvent('chat:addMessage', -1, {args = {_U('judge'), _U('unjailed', xPlayer.getName())}, color = {147, 196, 109}})
+				playersInJail[playerId] = nil
+				xPlayer.triggerEvent('esx_jail:unjailPlayerAdmin')
+			end)
+		end
+	end
+end
+
 
 function unjailPlayer(playerId)
 	local xPlayer = ESX.GetPlayerFromId(playerId)
