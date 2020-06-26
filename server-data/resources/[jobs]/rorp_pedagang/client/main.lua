@@ -16,6 +16,7 @@ local Keys = {
   local currentlyCooking                  = false
   local display 						  = false
   local PlayerData              	      = {}
+  local DistributorBlip							  = {}
 
   local distibutorblip = {
 	{x = -830.3, y = -1255.77, z = 6.58}
@@ -97,8 +98,9 @@ end)
 RegisterNetEvent('esx:setJob')
 AddEventHandler('esx:setJob', function(job)
 	ESX.PlayerData.job = job
-	deleteBlips()
-	refreshBlips()
+	-- deleteBlips()
+	-- refreshBlips()
+	print(DistributorBlip)
 end)
 
 local function cooking(ingredients)
@@ -303,6 +305,8 @@ function refreshBlips()
 			BeginTextCommandSetBlipName("STRING")
 			AddTextComponentSubstringPlayerName("Distributor Pedagang")
 			EndTextCommandSetBlipName(blip)
+
+			table.insert(DistributorBlip, blip)
 		end
 	end
 end
