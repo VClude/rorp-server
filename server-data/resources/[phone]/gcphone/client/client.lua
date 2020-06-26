@@ -230,7 +230,11 @@ end
 
 
 
-
+RegisterCommand('hp', function()
+  if menuIsOpen == false then
+    TooglePhone()
+  end
+end)
 
 
 RegisterNetEvent("gcPhone:forceOpenPhone")
