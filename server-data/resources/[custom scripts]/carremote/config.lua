@@ -11,5 +11,5 @@ Config.MaxFobBeepDistance   = 10    -- Set max distance the fob beep audio can b
 Config.MaxFobBeepVolume     = .20   -- Set max volume for the fob beep audio
 
 Config.UseRemoteRange       = true  -- Set whether you want to use the maximum remote range feature
-Config.UseBattery           = false  -- Set whether you are using the battery on the keyfob or not
-Config.StealableMotorcycles = true  -- Set whether you want to be realistic and make motorcycles stealable
+Config.UseBattery           = true  -- Set whether you are using the battery on the keyfob or not
+Config.StealableMotorcycles = false  -- Set whether you want to be realistic and make motorcycles stealable
