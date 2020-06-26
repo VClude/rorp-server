@@ -16,7 +16,10 @@ local Keys = {
   local currentlyCooking                  = false
   local display 						  = false
   local PlayerData              	      = {}
-  local done							  = false
+
+  local distibutorblip = {
+	{x = -830.3, y = -1255.77, z = 6.58}
+}
 
 Citizen.CreateThread(function()
     while ESX == nil do
@@ -94,6 +97,8 @@ end)
 RegisterNetEvent('esx:setJob')
 AddEventHandler('esx:setJob', function(job)
 	ESX.PlayerData.job = job
+	deleteBlips()
+	refreshBlips()
 end)
 
 local function cooking(ingredients)
@@ -283,16 +288,9 @@ Citizen.CreateThread(function()
 	end
 end)
 
-local distibutorblip = {
-	{x = -830.3, y = -1255.77, z = 6.58}
-}
 
 -- Create Blips Distributor
-Citizen.CreateThread(function()
-	while not done do
-		Citizen.Wait(10)
-	end
-
+function refreshBlips()
 	if PlayerData.job.name == 'pedagang' then
 		for _,v in pairs(distibutorblip) do
 			local blip = AddBlipForCoord(v.x, v.y, v.z)
@@ -305,10 +303,16 @@ Citizen.CreateThread(function()
 			BeginTextCommandSetBlipName("STRING")
 			AddTextComponentSubstringPlayerName("Distributor Pedagang")
 			EndTextCommandSetBlipName(blip)
-			done = true
 		end
 	end
-end)
+end
+
+
+function deleteBlips()
+	for k,v in ipairs(distibutorblip) do
+		RemoveBlip(v)
+	end
+end
 
 -- Display markers
 Citizen.CreateThread(function()
