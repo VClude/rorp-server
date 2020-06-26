@@ -14,17 +14,9 @@ local Keys = {
 ESX                           = nil
 local HasAlreadyEnteredMarker, LastZone = false, nil
 local CurrentlyTowedVehicle, Blips = nil, {}
-local NPCTargetDeleterZone =  false
 local isDead, isBusy = false, false
 local PlayerData              = {}
-local LastPart                = nil
-local LastPartNum             = nil
-local LastEntity              = nil
-local CurrentTask             = {}
 local isInMarker  = false
-local registed = false
-local inArea = false
-local state = false
 local currentZone = nil
 local GUI           = {}
 GUI.Time = 0
@@ -37,29 +29,12 @@ local CurrentAction, CurrentActionPos, CurrentActionMsg, CurrentActionData = nil
 
 local Blips = {}
 
-local isDead, isBusy = false, false
-
-local spawnedVehicles, isInShopMenu = {}, false
+local isInShopMenu = false
 
 local Vehicles =		{}
 local lsMenuIsShowed	= false
 local isInLSMarker		= false
 local myCar				= {}
-local holdingPackage          = false
-local disabledWeapons         = false
-local APPbone	= 0
-local APPx 		= 0.0
-local APPy 		= 0.0
-local APPz 		= 0.0
-local APPxR 	= 0.0
-local APPyR 	= 0.0
-local APPzR 	= 0.0
-local dropkey 	= 161 -- Key to drop/get the props
-local closestEntity = 0
-
-local Interior = GetInteriorAtCoords(-210.08, -1318.142, 30.89)
-
-LoadInterior(Interior)
 
 Citizen.CreateThread( function()
 	while ESX == nil do 	
@@ -207,43 +182,6 @@ Citizen.CreateThread(function()
 		end
 	end
 end)
-
--- function openMechanicPropsMenu()
-
---   ESX.UI.Menu.Open(
---     'default', GetCurrentResourceName(), 'bennysprops_actions',
---     {
---       title    = 'Props',
---       align    = 'bottom-right',
--- 		elements = {
--- 			{label = '1', value = 'prop1'},
--- 			{label = '2', value = 'prop2'},
--- 			{label = '3', value = 'prop3'},
--- 			{label = 'Odstranit', value = 'odstraniitprop'},
--- 		}
---     },
-
--- 	function(data, menu)
--- 		local val = data.current.value
-		
--- 		if val == 'prop1' then
--- 			TriggerEvent("attach:prop_cs_trolley_01")
--- 		elseif val == 'prop2' then
--- 			TriggerEvent("attach:prop_engine_hoist")
--- 		elseif val == 'prop3' then
--- 			TriggerEvent("attach:prop_tool_box_04")
--- 		elseif val == 'odstraniitprop' then
--- 			TriggerEvent("rtx_bennys:removeall")
--- 			DeleteEntity(closestEntity)
--- 		end
--- 	end,
--- 	function(data, menu)
--- 		menu.close()
--- 		OpenMobileMechanicActionsMenu()
--- 	end
--- )
--- end
-
 
 
 function NotifInformasi(text)

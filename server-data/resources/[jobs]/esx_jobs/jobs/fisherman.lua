@@ -325,32 +325,6 @@ Config.Jobs.petani = {
 			Hint = _U('pet_b'),
 			GPS = {x = 1978.92, y = 5171.70, z = 46.63}
 		},
-
-		-- Pesugihan = {
-		-- 	Pos = {x = 887.39, y = 5698.89, z = 661.88},
-		-- 	Color = {r = 204, g = 204, b = 0},
-		-- 	Size = {x = 5.0, y = 5.0, z = 3.0},
-		-- 	Marker = 1,
-		-- 	Blip = true,
-		-- 	Name = 'Pesugihan',
-		-- 	Type = 'delivery',
-		-- 	Spawner = 1,
-		-- 	Item = {
-		-- 		{
-		-- 			name = 'Pesugihan',
-		-- 			time = 0.5,
-		-- 			remove = 1,
-		-- 			max = 100, -- if not present, probably an error at itemQtty >= item.max in esx_jobs_sv.lua
-		-- 			price = 40000,
-		-- 			requires = 'nothing',
-		-- 			requires_name = 'nothing',
-		-- 			drop = 100,
-		-- 			Duration = 10000,
-		-- 		}
-		-- 	},
-		-- 	Hint = _U('pet_c'),
-		-- 	GPS = {x = 1978.92, y = 5171.70, z = 46.63}
-		-- },
 	}
 }
 
