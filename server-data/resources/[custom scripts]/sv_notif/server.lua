@@ -92,7 +92,7 @@ AddEventHandler('chatMessage', function(source, name, msg)
 	if sm[1] == "/a" then
 		if IsPlayerAceAllowed(source, "fax.cmds") then
         CancelEvent()
-				TriggerClientEvent("chatMessage", -1, " \n —————————————————————— \n ADMINISTRATION ANNOUNCEMENT \n " .. string.sub(msg,3) .. " \n ——————————————————————", {239, 0, 0})
+				TriggerClientEvent("chatMessage", -1, " \n —————————————————————— \n " .. string.sub(msg,3) .. " \n ——————————————————————", {239, 0, 0})
 		else
 			TriggerClientEvent('AOP:NoPerms', source)
 		end
