@@ -18,7 +18,7 @@ Config.BedList = {
 	{
 		text = '[E] Berbaring di kasur',
 		heading = -20.0,
-		objCoords  = {x = 336.845856, y = -575.81, z = 43.10},---pillbox
+		objCoords  = {x = 336.845856, y = -575.47, z = 43.10},--pillbox ruang mri
 	},
 
 	{
