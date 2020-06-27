@@ -2,6 +2,7 @@ ESX = nil
 
 local playerCoords
 local currentPlant = 1
+local FarmerBlip					  = {}
 
 local jobStatus = {
 	onDuty = false,
@@ -35,6 +36,8 @@ end)
 RegisterNetEvent('esx:setJob')
 AddEventHandler('esx:setJob', function(job)
 	ESX.PlayerData.job = job
+	deleteBlips()
+	refreshBlips()
 end)
 
 Citizen.CreateThread(function()
@@ -44,15 +47,15 @@ Citizen.CreateThread(function()
 	end
 end)
 
-Citizen.CreateThread(function()
-	while true do
-	if ESX ~= nil then
-	playerJob = ESX.GetPlayerData().job.name
-	Citizen.Wait(60000)
-	end
-	Citizen.Wait(5)
-	end
-end)
+-- Citizen.CreateThread(function()
+-- 	while true do
+-- 	if ESX ~= nil then
+-- 	playerJob = ESX.GetPlayerData().job.name
+-- 	Citizen.Wait(60000)
+-- 	end
+-- 	Citizen.Wait(5)
+-- 	end
+-- end)
 
 Citizen.CreateThread(function()
 	while true do
@@ -177,13 +180,13 @@ Citizen.CreateThread(function()
 end)
 
 -- Blips
-Citizen.CreateThread(function()
-	if playerJob == "farmer" then
-		DrawBlip(Config.Management, 304, _U('civ_clothing_blip'), 2)
-		DrawBlip(Config.SellCrops, 431, _U('sell_crops_blip'), 2)
-		DrawBlip(Config.StartJob.pos, 210, _U('start_job_blip'), 2)
-	end
-end)
+-- Citizen.CreateThread(function()
+-- 	if playerJob == "farmer" then
+-- 		DrawBlip(Config.Management, 304, _U('civ_clothing_blip'), 2)
+-- 		DrawBlip(Config.SellCrops, 431, _U('sell_crops_blip'), 2)
+-- 		DrawBlip(Config.StartJob.pos, 210, _U('start_job_blip'), 2)
+-- 	end
+-- end)
 
 function DrawGameMarker(coords, id, colour)
 	DrawMarker(id, coords.x, coords.y, coords.z, 0.0, 0.0, 0.0, 0.0, 180.0, 0.0, 2.0, 2.0, 2.0, colour[1], colour[2], colour[3], colour[4], false, true, 2, nil, nil, false)
@@ -212,17 +215,40 @@ function MissionMarker(coords, sprite, title, colour)
 	return blip
 end
 
-function DrawBlip(coords, sprite, title, colour)
-	local blip = AddBlipForCoord(coords)
-	SetBlipSprite(blip, sprite)
-	SetBlipDisplay(blip, 4)
-	SetBlipScale(blip, 0.60)
-	SetBlipColour(blip, colour)
-	SetBlipAsShortRange(blip, true)
-	BeginTextCommandSetBlipName("STRING")
-	AddTextComponentString(title)
-	EndTextCommandSetBlipName(blip)
-	return blip
+-- function DrawBlip(coords, sprite, title, colour)
+-- 	local blip = AddBlipForCoord(coords)
+-- 	SetBlipSprite(blip, sprite)
+-- 	SetBlipDisplay(blip, 4)
+-- 	SetBlipScale(blip, 0.60)
+-- 	SetBlipColour(blip, colour)
+-- 	SetBlipAsShortRange(blip, true)
+-- 	BeginTextCommandSetBlipName("STRING")
+-- 	AddTextComponentString(title)
+-- 	EndTextCommandSetBlipName(blip)
+-- 	return blip
+-- end
+
+function deleteBlips()
+	for _,v in ipairs(FarmerBlip) do
+		RemoveBlip(v)
+	end
+end
+
+function refreshBlips()
+	if ESX.PlayerData.job and ESX.PlayerData.job.name == "farmer" then
+		local blip = AddBlipForCoord(Config.StartJob.pos)
+		SetBlipSprite(blip, 210)
+		SetBlipDisplay(blip, 2)
+		SetBlipScale(blip, 1.0)
+		SetBlipColour(blip, 15)
+		SetBlipAsShortRange(blip, true)
+	
+		BeginTextCommandSetBlipName("STRING")
+		AddTextComponentSubstringPlayerName(_U('start_job_blip'))
+		EndTextCommandSetBlipName(blip)
+
+		table.insert(FarmerBlip, blip)
+	end
 end
 
 function OpenJobMenu()

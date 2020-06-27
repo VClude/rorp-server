@@ -16,7 +16,7 @@ local Keys = {
   local currentlyCooking                  = false
   local display 						  = false
   local PlayerData              	      = {}
-  local DistributorBlip							  = {}
+  local DistributorBlip					  = {}
 
   local distibutorblip = {
 	{x = -830.3, y = -1255.77, z = 6.58}
