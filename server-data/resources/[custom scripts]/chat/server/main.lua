@@ -62,7 +62,7 @@ RegisterServerEvent('polisreport')
 AddEventHandler('polisreport', function(source, msg)
     local name = getIdentity(source)
     fal = name.firstname  .. '  ' .. name.lastname
-    TriggerClientEvent('chat:ReportSendPedagang', -1, source, fal, msg)
+    TriggerClientEvent('chat:ReportSendPolisi', -1, source, fal, msg)
 end)
 
 --==================================================================
@@ -73,7 +73,7 @@ RegisterServerEvent('pedagangreport')
 AddEventHandler('pedagangreport', function(source, msg)
     local name = getIdentity(source)
     fal = name.firstname  .. '  ' .. name.lastname
-    TriggerClientEvent('chat:ReportSendPolisi', -1, source, fal, msg)
+    TriggerClientEvent('chat:ReportSendPedagang', -1, source, fal, msg)
 end)
 
 --==================================================================
