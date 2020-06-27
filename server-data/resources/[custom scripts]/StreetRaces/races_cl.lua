@@ -65,7 +65,8 @@ RegisterCommand("race", function(source, args)
             local startDelay = tonumber(args[3])
             startDelay = startDelay and startDelay*1000 or config_cl.joinDuration
             local startCoords = GetEntityCoords(GetPlayerPed(-1))
-
+            print(startDelay)
+            print(startCoords)
             -- Create a race using checkpoints or waypoint if none set
             if #recordedCheckpoints > 0 then
                 -- Create race using custom checkpoints
