@@ -47,7 +47,7 @@ end)
 Citizen.CreateThread(function()
 	while true do
 	if ESX ~= nil then
-	playerJob = ESX.GetPlayerData().job.name
+	playerJob = ESX.PlayerData.job.name
 	Citizen.Wait(60000)
 	end
 	Citizen.Wait(5)
