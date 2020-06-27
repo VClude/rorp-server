@@ -4,15 +4,15 @@ Config.MaxDistance = 1.5
 Config.BedList = {
 
 	{
-		text = '[E] Lie on the bed',
+		text = '[E] Berbaring di kasur',
 		heading = -20.0,
-		objCoords  = {x = 315.5845, y = -566.36, z = 43.28},---pillbox 
+		objCoords  = {x = 315.5845, y = -566.36, z = 43.28},---pillbox ruang operasi
 	},
 	  ----451.3828 -356.163 -186.79572
 	{
-		text = '[E] Lie on the bed',
+		text = '[E] Berbaring di kasur',
 		heading = -20.0,
-		objCoords  = {x = 360.51, y = -586.66, z = 43.11},--pillbox
+		objCoords  = {x = 321.15868, y = -567.9, z = 43.28},--pillbox ruang operasi
 	},
 
 	{
