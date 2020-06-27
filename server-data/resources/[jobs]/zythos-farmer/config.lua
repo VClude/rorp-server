@@ -28,13 +28,13 @@ Config.StartJob = { pos = vector3(437.37, 6455.59, 28.74), heading = 327.41 }
 -- This is the options in the menu to select what crop you want to plant
 Config.Seeds = {
 	{label = 'Sugarcane Seeds', DBname = 'sugarcane'}, -- DBNAME IS THE ITEM YOU GET WHEN YOU HARVEST
-	{label = 'Poppy Seeds', DBname = 'poppresin'},
+	{label = 'Poppy Seeds', DBname = 'poppyresin'},
 	-- {label = 'TEST', DBname = 'test_item'},
 }
 
 -- This is the option for selling crops
 Config.Crops = {
-	{label = 'Poppy Resin', DBname = 'poppresin', price = 200}, -- DBNAME IS THE ITEM YOU WOULD LIKE TO SELL
+	{label = 'Poppy Resin', DBname = 'poppyresin', price = 200}, -- DBNAME IS THE ITEM YOU WOULD LIKE TO SELL
 	-- {label = 'TEST', DBname = 'test_item', price = 0},
 }
 -- The Vehicle that is spawned
