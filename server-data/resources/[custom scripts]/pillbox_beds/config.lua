@@ -27,39 +27,4 @@ Config.BedList = {
 		objCoords  = {x = 313.79, y = -578.95, z = 43.022},--pillbox ruang intensif
 	},
 
-	{
-		text = 'Tekan ~g~[E]~s~ Tidur di kasur',
-		heading = -20.0,
-		objCoords  = {x = 309.34, y = -577.42, z = 43.02},--pillbox ruang intensif
-	},
-
-	{
-		text = 'Tekan ~g~[E]~s~ Tidur di kasur',
-		heading = -20.0,
-		objCoords  = {x = 319.4, y = -581.02, z = 43.01},--pillbox ruang intensif
-	},
-
-	{
-		text = '[E] Lie on the bed',
-		heading = 160.0,
-		objCoords  = {x = 354.24, y = -592.74, z = 43.11},---pillbox blue bed
-	},
-
-	{
-		text = '[E] Lie on the bed',
-		heading = 160.0,
-		objCoords  = {x = 357.34, y = -594.45, z = 43.11}, ---pillbox bluebed
-	},
-
-	{
-		text = '[E] Lie on the bed',
-		heading = 160.0,
-		objCoords  = {x = 350.80, y = -591.72, z = 43.11}, ---pillbox bluebed 
-	},
-
-	{
-		text = '[E] Lie on the bed',
-		heading = 160.0,
-		objCoords  = {x = 346.89, y = -591.01, z = 42.58},   ---pillbox blue bed 
-	}
 }
