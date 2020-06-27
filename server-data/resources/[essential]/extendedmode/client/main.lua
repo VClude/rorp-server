@@ -24,7 +24,6 @@ AddEventHandler('esx:playerLoaded', function(playerData)
 	if Config.EnablePvP then
 		SetCanAttackFriendly(playerPed, true, false)
 		NetworkSetFriendlyFireOption(true)
-		SetPedConfigFlag(playerPed, 35, false)
 	end
 
 	if Config.EnableHud then

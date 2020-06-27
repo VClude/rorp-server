@@ -126,7 +126,7 @@ function OpenBikesMenu()
 	if data.current.value == 'bike' then
 		if Config.EnablePrice then
 			TriggerServerEvent("esx:bike:lowmoney", Config.PriceTriBike)
-			ESX.ShowNotification('Anda telah membayar : Rp.~y~'..Config.PriceTriBike)
+			ESX.ShowNotification('Anda telah membayar : Rp. ~y~'..Config.PriceTriBike)
 		end
 		
 		if Config.EnableEffects then
@@ -139,7 +139,7 @@ function OpenBikesMenu()
 	if data.current.value == 'bike2' then
 		if Config.EnablePrice then
 			TriggerServerEvent("esx:bike:lowmoney", Config.PriceScorcher)
-			ESX.ShowNotification('Anda telah membayar : Rp.~y~'..Config.PriceScorcher)
+			ESX.ShowNotification('Anda telah membayar : Rp. ~y~'..Config.PriceScorcher)
 		end
 		
 		if Config.EnableEffects then
@@ -153,7 +153,7 @@ function OpenBikesMenu()
 	if data.current.value == 'bike3' then
 		if Config.EnablePrice then
 			TriggerServerEvent("esx:bike:lowmoney", Config.PriceCruiser) 
-			ESX.ShowNotification('Anda telah membayar : Rp.~y~'..Config.PriceCruiser)
+			ESX.ShowNotification('Anda telah membayar : Rp. ~y~'..Config.PriceCruiser)
 		end
 		
 		if Config.EnableEffects then
@@ -166,7 +166,7 @@ function OpenBikesMenu()
 	if data.current.value == 'bike4' then
 		if Config.EnablePrice then
 			TriggerServerEvent("esx:bike:lowmoney", Config.PriceBmx) 
-			ESX.ShowNotification('Anda telah membayar : Rp.~y~'..Config.PriceBmx)
+			ESX.ShowNotification('Anda telah membayar : Rp. ~y~'..Config.PriceBmx)
 		end
 		
 		if Config.EnableEffects then
