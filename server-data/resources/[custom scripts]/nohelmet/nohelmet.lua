@@ -5,6 +5,6 @@ SetPedHelmet(GetPlayerPed(-1),false)
 	  local playerPed = GetPlayerPed(-1)
 	  local playerVeh = GetVehiclePedIsUsing(playerPed)
   
-	  if playerVeh ~= 30000 then RemovePedHelmet(playerPed,true) end
+	  if playerVeh ~= 0 then RemovePedHelmet(playerPed,true) end
 	end	
   end)
