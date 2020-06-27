@@ -31,6 +31,9 @@ Citizen.CreateThread(function()
 	end
 
 	ESX.PlayerData = ESX.GetPlayerData()
+
+	Citizen.Wait(5000)
+	PlayerData = ESX.GetPlayerData()
 end)
 
 RegisterNetEvent('esx:setJob')
