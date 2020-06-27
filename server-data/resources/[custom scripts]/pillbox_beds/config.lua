@@ -27,4 +27,15 @@ Config.BedList = {
 		objCoords  = {x = 313.79, y = -578.95, z = 43.022},--pillbox ruang intensif
 	},
 
+	{
+		text = 'Tekan ~g~[E]~s~ Tidur di kasur',
+		heading = -20.0,
+		objCoords  = {x = 319.4, y = -581.02, z = 43.01},--pillbox ruang intensif
+	},
+
+	{
+		text = 'Tekan ~g~[E]~s~ Tidur di kasur',
+		heading = 20.0,
+		objCoords  = {x = 317.8, y = -585.28, z = 43.01},--pillbox ruang intensif
+	}
 }
