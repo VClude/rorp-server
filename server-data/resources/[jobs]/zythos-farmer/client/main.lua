@@ -190,10 +190,12 @@ function DrawGameMarker(coords, id, colour)
 end
 
 function PlantCrops()
-	for k,v in ipairs(Config.CropLocations) do
-		Citizen.Wait(1500, 3500)
-		ESX.Game.SpawnLocalObject('prop_veg_corn_01', vector3(v.x, v.y, v.z - 1), function(crop)
-		end)
+	for i = 100, 1, -1 do
+		for k,v in ipairs(Config.CropLocations) do
+			Citizen.Wait(1500, 3500)
+			ESX.Game.SpawnLocalObject('prop_veg_corn_01', vector3(v.x, v.y, v.z - 1), function(crop)
+			end)
+		end
 	end
 end
 
