@@ -1,5 +1,4 @@
 -- StarBlazt Chat
-
 TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 
 
@@ -81,21 +80,12 @@ end)
 
 -- ======================= Chat Untuk Bennys =======================
 
-RegisterCommand('bennysr', function(source, args, rawCommand)
+RegisterServerEvent('bennysreport')
+AddEventHandler('bennysreport', function(source, msg)
     local name = getIdentity(source)
-    local msg = rawCommand:sub(4)
-    if name.job == 'bennys' then   
-        fal = name.firstname  .. '  ' .. name.lastname
-        TriggerClientEvent('chat:ReportSendBennys', -1, source, fal, msg)
-    end
-end, false)
-
--- RegisterServerEvent('bennysreport')
--- AddEventHandler('bennysreport', function(source, msg)
---     local name = getIdentity(source)
---     fal = name.firstname  .. '  ' .. name.lastname
---     TriggerClientEvent('chat:ReportSendBennys', -1, source, fal, msg)
--- end)
+    fal = name.firstname  .. '  ' .. name.lastname
+    TriggerClientEvent('chat:ReportSendBennys', -1, source, fal, msg)
+end)
 
 --==================================================================
 

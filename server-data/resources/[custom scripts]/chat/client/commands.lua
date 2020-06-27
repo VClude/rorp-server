@@ -87,14 +87,13 @@ end)
 
 -- ======================= Report Bennys ===========================
 
--- RegisterCommand('bennysr', function(source, args, rawCommand)
---     if PlayerData.job.name == 'bennys' then   
---         local source = GetPlayerServerId(PlayerId())
---         local name = GetPlayerName(PlayerId())
---         local msg = rawCommand:sub(12)
---         TriggerServerEvent('bennysreport', source, msg)
---     end
--- end, false)
+RegisterCommand('bennysr', function(source, args, rawCommand)
+    if PlayerData.job.name == 'bennys' then   
+        local source = GetPlayerServerId(PlayerId())
+        local msg = rawCommand:sub(12)
+        TriggerServerEvent('bennysreport', source, msg)
+    end
+end, false)
 
 RegisterNetEvent('chat:ReportSendBennys')
 AddEventHandler('chat:ReportSendBennys', function(fal, caller, msg)
