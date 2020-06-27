@@ -1,4 +1,5 @@
 Citizen.CreateThread( function()
+SetPedHelmet(GetPlayerPed(-1),false)
 	while true do
 	  Citizen.Wait(100)		
 	  local playerPed = GetPlayerPed(-1)
