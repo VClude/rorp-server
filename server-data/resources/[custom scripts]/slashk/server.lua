@@ -14,6 +14,6 @@
 --    You should have received a copy of the GNU General Public License
 --    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-TriggerEvent('es:addCommand', 'k', function(source, args, user)
+RegisterCommand('k', function(source, args, user)
 	TriggerClientEvent('KneelHU', source, {})
 end, {help = "Get down on your knees and put your hands on your head"})
