@@ -16,9 +16,9 @@ Config.BedList = {
 	},
 
 	{
-		text = '[E] Lie on the bed',
+		text = '[E] Berbaring di kasur',
 		heading = -20.0,
-		objCoords  = {x = 353.12, y = -584.66, z = 43.50},---pillbox
+		objCoords  = {x = 336.845856, y = -575.81, z = 43.10},---pillbox
 	},
 
 	{
