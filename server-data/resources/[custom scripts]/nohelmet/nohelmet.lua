@@ -1,5 +1,5 @@
 Citizen.CreateThread( function()
-	for i = 0 and i <= 10 do
+	for i = 0, i <= 10 do
 		print(PlayerPedId())
 		i = i + 1
 	end
