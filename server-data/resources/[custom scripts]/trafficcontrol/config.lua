@@ -1,6 +1,6 @@
-TrafficAmount = 0
+TrafficAmount = 100
 PedestrianAmount = 0
-ParkedAmount = 0
+ParkedAmount = 100
 EnableDispatch = false
 EnableBoats = false
 EnableTrains = false

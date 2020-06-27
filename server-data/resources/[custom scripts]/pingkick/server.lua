@@ -1,7 +1,7 @@
 -- CONFIG --
 
 -- Ping Limit
-pingLimit = 100
+pingLimit = 400
 
 -- CODE --
 
