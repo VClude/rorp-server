@@ -2,7 +2,7 @@ skeletalsystem = {}
 TriggerEvent('esx:getSharedObject', function(obj) ESX = obj; end)
 
 skeletalsystem.Version = '1.0.12'
-skeletalsystem.UseESCommand = true
+skeletalsystem.UseESCommand = false
 
 Citizen.CreateThread(function(...)
   while not ESX do
