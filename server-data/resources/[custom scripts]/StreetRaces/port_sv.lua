@@ -1,17 +1,27 @@
+ESX = nil
+
+TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
+
 -- Helper function for getting player money
 function getMoney(source)
     -- Add framework API's here (return large number by default)
-    return 1000000
+    local xPlayer = ESX.GetPlayerFromId(source)
+    local getmoney = xPlayer.getMoney()
+    return getmoney
 end
 
 -- Helper function for removing player money
 function removeMoney(source, amount)
     -- Add framework API's here
+    local xPlayer = ESX.GetPlayerFromId(source)
+    xPlayer.removeMoney(amount)
 end
 
 -- Helper function for adding player money
 function addMoney(source, amount)
     -- Add framework API's here
+    local xPlayer = ESX.GetPlayerFromId(source)
+    xPlayer.addMoney(amount)
 end
 
 -- Helper function for getting player name
