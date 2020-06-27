@@ -1,5 +1,6 @@
 Citizen.CreateThread( function()
-	if IsPedInAnyVehicle(PlayerPedId(), false) then
+	local playerPed = GetPlayerPed(-1)
+	if IsPedInAnyVehicle(playerPed, false) then
 		print('ada di dalam kendaraan')
 	end
 	-- local playerPed = GetPlayerPed(-1)
