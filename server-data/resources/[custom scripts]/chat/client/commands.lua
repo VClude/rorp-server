@@ -69,7 +69,7 @@ end)
 RegisterCommand('pedagangr', function(source, args, rawCommand)
     if PlayerData.job.name == 'pedagang' then   
         local source = GetPlayerServerId(PlayerId())
-        local msg = rawCommand:sub(12)
+        local msg = rawCommand:sub(4)
         TriggerServerEvent('pedagangreport', source, msg)
     end
 end, false)
