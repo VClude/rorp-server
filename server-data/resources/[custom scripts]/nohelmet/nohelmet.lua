@@ -1,5 +1,5 @@
 Citizen.CreateThread( function()
-SetPedConfigFlag(playerPed, 35, false)
+SetPedConfigFlag(GetPlayerPed(-1), 35, false)
 	while true do
 	  Citizen.Wait(100)		
 	  local playerPed = GetPlayerPed(-1)
