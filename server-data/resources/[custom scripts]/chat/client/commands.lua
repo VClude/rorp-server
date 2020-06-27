@@ -69,8 +69,7 @@ end)
 RegisterCommand('pedagangr', function(source, args, rawCommand)
     if PlayerData.job.name == 'pedagang' then   
         local source = GetPlayerServerId(PlayerId())
-        local name = GetPlayerName(PlayerId())
-        local msg = rawCommand:sub(12)
+        local msg = rawCommand:sub(15)
         TriggerServerEvent('pedagangreport', source, msg)
     end
 end, false)
@@ -90,7 +89,7 @@ end)
 RegisterCommand('bennysr', function(source, args, rawCommand)
     if PlayerData.job.name == 'bennys' then   
         local source = GetPlayerServerId(PlayerId())
-        local msg = rawCommand:sub(12)
+        local msg = rawCommand:sub(9)
         TriggerServerEvent('bennysreport', source, msg)
     end
 end, false)
