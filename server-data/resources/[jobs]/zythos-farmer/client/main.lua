@@ -60,7 +60,7 @@ end)
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(5)
-		if playerCoords ~= nil and jobStatus.onDuty and playerJob == Config.JobName then
+		if playerCoords ~= nil and jobStatus.onDuty and ESX.PlayerData.job.name == Config.JobName then
 			local distance = #(playerCoords - Config.PlantMarkers[currentPlant])
 			if  distance < 20.0 then
 				DrawGameMarker(Config.PlantMarkers[currentPlant], 2, {0, 250, 0, 50})
@@ -128,7 +128,7 @@ end)
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(5)
-		if playerJob == Config.JobName then
+		if ESX.PlayerData.job.name == Config.JobName then
 			local distance = #(playerCoords - Config.SellCrops)
 			if  distance < 10.0 then
 				DrawGameMarker(Config.SellCrops, Config.BlipID, {0, 250, 0, 50})
@@ -146,7 +146,7 @@ end)
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(5)
-		if playerCoords ~= nil and not jobStatus.onDuty and playerJob == Config.JobName then
+		if playerCoords ~= nil and not jobStatus.onDuty and ESX.PlayerData.job.name == Config.JobName then
 			local distance = #(playerCoords - Config.Management)
 			if  distance < 10.0 then
 				DrawGameMarker(Config.Management, Config.BlipID, {0, 250, 0, 50})
@@ -164,7 +164,7 @@ end)
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(5)
-		if playerCoords ~= nil and not jobStatus.onDuty and playerJob == Config.JobName then
+		if playerCoords ~= nil and not jobStatus.onDuty and ESX.PlayerData.job.name == Config.JobName then
 			local distance = #(playerCoords - Config.StartJob.pos)
 			if  distance < 10.0 then
 				DrawGameMarker(Config.StartJob.pos, Config.BlipID, {0, 250, 0, 50})
