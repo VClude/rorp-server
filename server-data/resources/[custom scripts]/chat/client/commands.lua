@@ -113,7 +113,7 @@ AddEventHandler('chat:bisik', function(fal, caller, msg)
         template = '<div class="chat-message bisik">[ BISIK ] {0} : {2} </div>',
         args = {caller, fal, msg}
         });
-    elseif GetDistanceBetweenCoords(GetEntityCoords(GetPlayerPed(myId)), GetEntityCoords(GetPlayerPed(pid)), true) < 19.999 then
+    elseif GetDistanceBetweenCoords(GetEntityCoords(GetPlayerPed(myId)), GetEntityCoords(GetPlayerPed(pid)), true) < 10.0 then
         TriggerEvent('chat:addMessage', {
             template = '<div class="chat-message bisik">[ BISIK ] {0} : {2} </div>',
             args = {caller, fal, msg}
