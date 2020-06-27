@@ -1,7 +1,9 @@
 Citizen.CreateThread( function()
-  while true do
-    Citizen.Wait(0)		--Edit this if the resource is using too much resources.   
-    local playerVeh = GetVehiclePedIsUsing(player)
-    if PlayerVeh ~= 0 then SetPedConfigFlag(player, 35, false) end
-  end	
-end)
+	while true do
+	  Citizen.Wait(100)		
+	  local playerPed = GetPlayerPed(-1)
+	  local playerVeh = GetVehiclePedIsUsing(playerPed)
+  
+	  if gPlayerVeh ~= 0 then RemovePedHelmet(playerPed,true) end
+	end	
+  end)
