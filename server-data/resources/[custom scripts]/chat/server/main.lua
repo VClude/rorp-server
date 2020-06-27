@@ -63,59 +63,41 @@ RegisterServerEvent('polisreport')
 AddEventHandler('polisreport', function(source, msg)
     local name = getIdentity(source)
     fal = name.firstname  .. '  ' .. name.lastname
+    TriggerClientEvent('chat:ReportSendPedagang', -1, source, fal, msg)
+end)
+
+--==================================================================
+
+-- ======================= Chat Untuk Pedagang =======================
+
+RegisterServerEvent('pedagangreport')
+AddEventHandler('pedagangreport', function(source, msg)
+    local name = getIdentity(source)
+    fal = name.firstname  .. '  ' .. name.lastname
     TriggerClientEvent('chat:ReportSendPolisi', -1, source, fal, msg)
 end)
 
 --==================================================================
 
--- RegisterServerEvent('chat:server:emsreportsource')
--- AddEventHandler('chat:server:emsreportsource', function(source, msg)
+-- ======================= Chat Untuk Bennys =======================
+
+RegisterCommand('bennysr', function(source, args, rawCommand)
+    local name = getIdentity(source)
+    local msg = rawCommand:sub(4)
+    if name.job == 'bennys' then   
+        fal = name.firstname  .. '  ' .. name.lastname
+        TriggerClientEvent('chat:ReportSendBennys', -1, source, fal, msg)
+    end
+end, false)
+
+-- RegisterServerEvent('bennysreport')
+-- AddEventHandler('bennysreport', function(source, msg)
 --     local name = getIdentity(source)
--- 	fal = name.firstname .. "  " .. name.lastname
---     TriggerClientEvent('chat:addMessage', source, {
---         template = '<div class="chat-message emergency">[ EMS ] {0} : {1} </div>',
---         args = { fal, msg }
---     })
---     CancelEvent()
+--     fal = name.firstname  .. '  ' .. name.lastname
+--     TriggerClientEvent('chat:ReportSendBennys', -1, source, fal, msg)
 -- end)
 
-RegisterServerEvent('911')
-AddEventHandler('911', function(source, caller, msg)
-    local name = getIdentity(source)
-    fal = name.firstname  .. '  ' .. name.lastname
-    TriggerClientEvent('chat:EmergencySend911', -1, source, fal, msg)
-end)
-
--- RegisterServerEvent('chat:server:911source')
--- AddEventHandler('chat:server:911source', function(source, caller, msg)
---     local name = getIdentity(source)
--- 	fal = name.firstname .. "  " .. name.lastname
---     TriggerClientEvent('chat:addMessage', source, {
---         template = '<div class="chat-message emergency">911 {0} ({1}): {2} </div>',
---         args = { fal, caller, msg }
---     })
---     CancelEvent()
--- end)
-
-RegisterServerEvent('911r')
-AddEventHandler('911r', function(target, source, msg)
-    local name = getIdentity(source)
-    fal = name.firstname  .. '  ' .. name.lastname
-    TriggerClientEvent('chat:EmergencySend911r', -1, source, fal, msg)
-end)
-
-RegisterServerEvent('chat:server:911r')
-AddEventHandler('chat:server:911r', function(target, caller, msg)
-    local name = getIdentity(source)
-	fal = name.firstname .. "  " .. name.lastname
-    TriggerClientEvent('chat:addMessage', target, {
-        template = '<div class="chat-message emergency">911r {0} : {1} </div>',
-        args = { fal, msg }
-    })
-    CancelEvent()
-    TriggerClientEvent('chat:EmergencySend911', fal, caller, msg)
-end)
-
+--==================================================================
 
 
 function stringsplit(inputstr, sep)

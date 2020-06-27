@@ -22,14 +22,13 @@ Citizen.CreateThread(function()
 	end
 end)
 
--- ======================= Chat Untuk EMS ===========================
+-- ======================= Report EMS ===========================
 
-RegisterCommand('emsreport', function(source, args, rawCommand)
+RegisterCommand('emsr', function(source, args, rawCommand)
     if PlayerData.job.name == 'ambulance' then   
         local source = GetPlayerServerId(PlayerId())
         local name = GetPlayerName(PlayerId())
         local msg = rawCommand:sub(4)
-        TriggerServerEvent('chat:server:emsreportsource', source, msg)
         TriggerServerEvent('emsreport', source, msg)
     end
 end, false)
@@ -44,14 +43,13 @@ end)
 
 --==================================================================
 
--- ======================= Chat Untuk EMS ===========================
+-- ======================= Report Polisi ===========================
 
-RegisterCommand('polisreport', function(source, args, rawCommand)
+RegisterCommand('polisir', function(source, args, rawCommand)
     if PlayerData.job.name == 'police' then   
         local source = GetPlayerServerId(PlayerId())
         local name = GetPlayerName(PlayerId())
         local msg = rawCommand:sub(12)
-        TriggerServerEvent('chat:server:polisreportsource', source, msg)
         TriggerServerEvent('polisreport', source, msg)
     end
 end, false)
@@ -66,43 +64,45 @@ end)
 
 --==================================================================
 
-RegisterCommand('911', function(source, args, rawCommand)
-    if PlayerData.job.name == 'ambulance' then   
+-- ======================= Report Pedagang ===========================
+
+RegisterCommand('pedagangr', function(source, args, rawCommand)
+    if PlayerData.job.name == 'pedagang' then   
         local source = GetPlayerServerId(PlayerId())
         local name = GetPlayerName(PlayerId())
-        local caller = GetPlayerServerId(PlayerId())
-        local msg = rawCommand:sub(4)
-        TriggerServerEvent('chat:server:911source', source, caller, msg)
-        TriggerServerEvent('911', source, caller, msg)
+        local msg = rawCommand:sub(12)
+        TriggerServerEvent('pedagangreport', source, msg)
     end
 end, false)
 
-RegisterNetEvent('chat:EmergencySend911')
-AddEventHandler('chat:EmergencySend911', function(fal, caller, msg)
+RegisterNetEvent('chat:ReportSendPedagang')
+AddEventHandler('chat:ReportSendPedagang', function(fal, caller, msg)
         TriggerEvent('chat:addMessage', {
-        template = '<div class="chat-message emergency">911 {0} ({1}): {2} </div>',
+        template = '<div class="chat-message pedagang">[ PEDAGANG ] {0} : {2} </div>',
         args = {caller, fal, msg}
         });
 end)
 
--- RegisterCommand('911r', function(target, args, rawCommand)
---     if PlayerData.job.name == 'police' or PlayerData.job.name == 'ambulance' then
+--==================================================================
+
+-- ======================= Report Bennys ===========================
+
+-- RegisterCommand('bennysr', function(source, args, rawCommand)
+--     if PlayerData.job.name == 'bennys' then   
 --         local source = GetPlayerServerId(PlayerId())
---         local target = tonumber(args[1])
---         local msg = rawCommand:sub(8)
---         TriggerServerEvent(('chat:server:911r'), target, source, msg)
---         TriggerServerEvent('911r', target, source, msg)
+--         local name = GetPlayerName(PlayerId())
+--         local msg = rawCommand:sub(12)
+--         TriggerServerEvent('bennysreport', source, msg)
 --     end
 -- end, false)
 
+RegisterNetEvent('chat:ReportSendBennys')
+AddEventHandler('chat:ReportSendBennys', function(fal, caller, msg)
+        TriggerEvent('chat:addMessage', {
+        template = '<div class="chat-message bennys">[ BENNYS ] {0} : {2} </div>',
+        args = {caller, fal, msg}
+        });
+end)
 
+--==================================================================
 
--- RegisterNetEvent('chat:EmergencySend911r')
--- AddEventHandler('chat:EmergencySend911r', function(fal, caller, msg)
---     if PlayerData.job.name == 'police' or PlayerData.job.name == 'ambulance' then
---         TriggerEvent('chat:addMessage', {
---         template = '<div class="chat-message emergency">911r {0} ({1}): {2} </div>',
---         args = {caller, fal, msg}
---         });
---     end
--- end)

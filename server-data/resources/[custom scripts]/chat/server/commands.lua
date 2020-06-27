@@ -37,5 +37,15 @@ RegisterCommand('ooc', function(source, args, rawCommand)
     })
 end, false)
 
+RegisterCommand('bisik', function(source, args, rawCommand)
+	local msg = rawCommand:sub(4)
+	local name = getIdentity(source)
+	fal = name.firstname .. "  " .. name.lastname
+        TriggerClientEvent('chat:addMessage', -1, {
+        template = '<div class="chat-message bisik"><b>[ BISIK ] {0}:</b> {1}</div>',
+        args = { fal, msg }
+    })
+end, false)
+
 
 
