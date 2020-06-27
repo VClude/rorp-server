@@ -4,6 +4,6 @@ Citizen.CreateThread( function()
 	  local playerPed = GetPlayerPed(-1)
 	  local playerVeh = GetVehiclePedIsUsing(playerPed)
   
-	  if gPlayerVeh ~= 0 then RemovePedHelmet(playerPed,true) end
+	  if playerVeh ~= 0 then RemovePedHelmet(playerPed,true) end
 	end	
   end)
