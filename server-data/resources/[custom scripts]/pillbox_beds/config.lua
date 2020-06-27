@@ -35,7 +35,7 @@ Config.BedList = {
 
 	{
 		text = 'Tekan ~g~[E]~s~ Tidur di kasur',
-		heading = 100.0,
+		heading = 120.0,
 		objCoords  = {x = 317.8, y = -585.28, z = 43.01},--pillbox ruang intensif
 	}
 }
