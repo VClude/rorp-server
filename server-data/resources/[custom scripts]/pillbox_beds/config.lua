@@ -12,7 +12,7 @@ Config.BedList = {
 	{
 		text = '[E] Berbaring di kasur',
 		heading = -20.0,
-		objCoords  = {x = 321.58868, y = -567.9, z = 42.28},--pillbox ruang operasi
+		objCoords  = {x = 321.58868, y = -567.9, z = 42.80},--pillbox ruang operasi
 	},
 
 	{
