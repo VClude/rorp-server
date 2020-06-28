@@ -3,9 +3,9 @@ ESX = nil
 local playerCoords
 local currentPlant = 1
 local currentPlants = 1
-local tebuCounter = 0
-local tebuThreshold = 5
-local totalTebu = 6
+local tebuCounter = 1
+local tebuThreshold = 99
+local totalTebu = 100
 local FarmerBlip					  = {}
 local tebu = {}
 local jobStatus = {
@@ -15,6 +15,7 @@ local jobStatus = {
 	vehicle = nil,
 	maxCrops = nil
 }
+
 local isPickingUp = false
 Citizen.CreateThread(function()
 	local count = 0
