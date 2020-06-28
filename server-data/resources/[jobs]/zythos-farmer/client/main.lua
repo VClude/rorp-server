@@ -6,7 +6,7 @@ local currentPlants = 1
 local tebuCounter = 1
 local tebuThreshold = 5
 local totalTebu = 6
-local spawnTebu = 1
+local spawnTebus = 1
 local FarmerBlip					  = {}
 local tebu = {}
 local jobStatus = {
@@ -149,9 +149,9 @@ Citizen.CreateThread(function()
 						if tebuCounter == tebuThreshold then
 							currentPlants = 0
 							tebuCounter = 0
-							while spawnTebu < 2 do
+							while spawnTebus < 2 do
 								spawnTebu()
-								spawnTebu = spawnTebu + 1
+								spawnTebus = spawnTebus + 1
 							end
 						end
 						isPickingUp = false
