@@ -19,10 +19,10 @@ Citizen.CreateThread( function()
                     end 
 
                     if ( crouched == true ) then 
-                        ResetPedMovementClipset( ped )
+                        ResetPedMovementClipset( ped, 0.2 )
                         crouched = false 
                     elseif ( crouched == false ) then
-                        SetPedMovementClipset( ped, "move_ped_crouched", 0.20 )
+                        SetPedMovementClipset( ped, "move_ped_crouched", 0.50 )
                         crouched = true 
                     end 
                 end
