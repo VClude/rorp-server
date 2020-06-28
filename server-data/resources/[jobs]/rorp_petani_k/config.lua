@@ -9,7 +9,7 @@ Config.TotalSpawnedTimes = 10
 Config.PlantMarkers = {
 	vector3(-1928.93, 1952.65, 156.57),
 	vector3(-1927.91, 1916.07, 170.89),
-	vector3(-1943.28, 1940.42, 164.32),
+	vector3(-1934.96, 1929.59, 167.52)
 }
 
 -- This is the locations of the crops that spawn, so if you want 10 crops to spawn you need add 10 points if that makes sense
