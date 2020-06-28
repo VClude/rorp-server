@@ -152,6 +152,8 @@ Citizen.CreateThread(function()
 							if spawnTebus < 20 then
 								spawnTebu()
 								spawnTebus = spawnTebus + 1
+							else
+								spawnTebus = 0
 							end
 						end
 						isPickingUp = false
