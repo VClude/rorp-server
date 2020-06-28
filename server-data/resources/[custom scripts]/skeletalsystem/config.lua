@@ -13,7 +13,7 @@ end)
 
 skeletalsystem.SqlSaveTime = 1.0
 skeletalsystem.MenuKey = "Z"
-skeletalsystem.OpenWithHotkey = true  -- open with openSkelly command if choosing not to use hotkey.
+skeletalsystem.OpenWithHotkey = false  -- open with openSkelly command if choosing not to use hotkey.
 skeletalsystem.UsingStress    = true   -- disables head damage timecycle modifier if using MF_Stress.
 
 skeletalsystem.UIOrder = 
