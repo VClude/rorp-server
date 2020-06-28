@@ -22,18 +22,6 @@ ESX.RegisterServerCallback('eden_garage:getVehicles', function(source, cb, KindO
 end)
 -- End - Retrieve vehicles $
 
---Recover vehicles
-ESX.RegisterServerCallback('eden_garage:getVehiclesMecano', function(source, cb)
-	MySQL.Async.fetchAll([[SELECT owned_vehicles.*, users.firstname, users.lastname, jobs.label as joblabel FROM owned_vehicles 
-		left JOIN users 
-		ON owned_vehicles.owner = users.identifier 
-		left outer JOIN jobs 
-		ON owned_vehicles.owner = jobs.name 
-		WHERE pound = TRUE]], { }, function(result)
-		cb(result)
-	end)
-end)
--- End - Recover vehicles
 
 --Stock vehicles
 ESX.RegisterServerCallback('eden_garage:stockv',function(source,cb, vehicleProps, KindOfVehicle, garage_name, vehicle_type)
@@ -69,32 +57,6 @@ ESX.RegisterServerCallback('eden_garage:stockv',function(source,cb, vehicleProps
 end)
 --End of vehicles
 
-ESX.RegisterServerCallback('eden_garage:stockvmecano',function(source,cb, vehicleProps)
-	local _source = source
-	local plate = vehicleProps.plate
-	local vehiclemodel = vehicleProps.model
-	local identifier = ESX.GetPlayerFromId(_source).identifier
-	MySQL.Async.fetchAll("SELECT vehicle FROM owned_vehicles where plate=@plate",{['@plate'] = plate}, function(result)
-		if result[1] ~= nil then
-			local vehprop = json.encode(vehicleProps)
-			local originalvehprops = json.decode(result[1].vehicle)
-			if originalvehprops.model == vehiclemodel then
-				MySQL.Async.execute("UPDATE owned_vehicles SET vehicle =@vehprop WHERE plate=@plate",{
-					['@vehprop'] = vehprop,
-					['@plate'] = plate
-				}, function(rowsChanged)
-					cb(true)
-				end)
-			else
-				TriggerEvent('nb_menuperso:bancheaterplayer', _source)
-				print("[esx_eden_garage] player "..identifier..' tried to spawn a vehicle with hash:'..vehiclemodel..". his original vehicle: "..originalvehprops.model)
-				cb(false)
-			end
-		else
-			cb(false)
-		end
-	end)
-end)
 
 --Change the state of the vehicle
 RegisterServerEvent('eden_garage:modifystate')
@@ -106,17 +68,6 @@ AddEventHandler('eden_garage:modifystate', function(plate, stored)
 end)	
 --End changes the state of the vehicle
 
-RegisterServerEvent('eden_garage:ChangeStateFrompound')
-AddEventHandler('eden_garage:ChangeStateFrompound', function(vehicleProps, pound)
-	local _source = source
-	local vehicleplate = vehicleProps.plate
-	local pound = pound
-	
-	MySQL.Async.execute("UPDATE owned_vehicles SET pound =@pound WHERE plate=@plate",{
-		['@pound'] = pound,
-		['@plate'] = vehicleplate
-	})
-end)
 
 RegisterServerEvent('esx_eden_garage:MoveGarage')
 AddEventHandler('esx_eden_garage:MoveGarage', function(vehicleplate, garage_name)
