@@ -235,12 +235,12 @@ function GenerateCrops()
 		local cX, cY
 
 		math.randomseed(GetGameTimer())
-		local modX = math.random(-20, 20)
+		local modX = math.random(-6, 6)
 
 		Citizen.Wait(100)
 
 		math.randomseed(GetGameTimer())
-		local modY = math.random(-20, 20)
+		local modY = math.random(-6, 6)
 
 		cX = Config.FarmFields.x + modX
 		cY = Config.FarmFields.y + modY
