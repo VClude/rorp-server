@@ -4,7 +4,7 @@ local playerCoords
 local currentPlant 			= 1
 local currentPlants 		= 1
 local cropsCounter 			= 0
-local cropsThreshold 		= 10
+local cropsThreshold 		= 5
 local spawnedCrops 			= 1
 local FarmerBlip			= {}
 local cropsObj		 		= {}
@@ -214,7 +214,7 @@ function DrawGameMarker(coords, id, colour)
 end
 
 function spawnCrops()
-	while currentPlants < Config.TotalSpawnedCorps do
+	while currentPlants < Config.TotalSpawnedCrops do
 		Citizen.Wait(0)
 		local tC = GenerateCrops()
 
@@ -259,7 +259,7 @@ function ValidateCrops(plantCoord)
 		local validate = true
 
 		for k, v in pairs(cropsObj) do
-			if GetDistanceBetweenCoords(plantCoord, GetEntityCoords(v), true) < Config.TotalSpawnedCorps then
+			if GetDistanceBetweenCoords(plantCoord, GetEntityCoords(v), true) < Config.TotalSpawnedCrops then
 				validate = false
 			end
 		end

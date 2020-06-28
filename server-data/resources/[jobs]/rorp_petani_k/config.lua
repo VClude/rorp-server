@@ -2,8 +2,8 @@ Config = {}
 
 Config.Locale = 'en' -- This is making it so that the script is in english if you wish to change the language goto the locales folder and edit en.lua and translate the lines
 
-Config.TotalSpawnedCorps = 10
-Config.TotalSpawnedTimes = 10
+Config.TotalSpawnedCrops = 10
+Config.TotalSpawnedTimes = 19
 
 -- The marker Locations of the Points you need to drive over
 Config.PlantMarkers = {
