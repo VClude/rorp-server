@@ -111,9 +111,9 @@ Citizen.CreateThread(function()
 					ESX.ShowHelpNotification("Tekan ~INPUT_CONTEXT~ untuk mengambil")
 				end
 
-				if IsControlJustReleased(0, 38) and DoesObjectOfTypeExistAtCoords(GetEntityCoords(PlayerPedId()), 5.0, GetHashKey('prop_cs_plant_01'), 0) then
+				if IsControlJustReleased(0, 38) and DoesObjectOfTypeExistAtCoords(GetEntityCoords(PlayerPedId()), 5.0, GetHashKey('prop_veg_crop_02'), 0) then
 				isPickingUp = true
-				local plant = GetClosestObjectOfType(GetEntityCoords(PlayerPedId()), 5.0, GetHashKey('prop_cs_plant_01'), 0, 1, 1)
+				local plant = GetClosestObjectOfType(GetEntityCoords(PlayerPedId()), 5.0, GetHashKey('prop_veg_crop_02'), 0, 1, 1)
 				TriggerEvent("mythic_progressbar:client:progress", {
 					name = "harvesting_crop",
 					duration = 5000,
@@ -131,18 +131,24 @@ Citizen.CreateThread(function()
 						anim = "idle_a",
 					}
 				}, function(status)
-						if not status then
-							cropsCounter = cropsCounter + 1
-							if cropsCounter == cropsThreshold then
-								currentPlants = 0
-								cropsCounter = 0
-								ESX.ShowNotification("anda sudah memanen semua Tebu, Silahkan Anda perlu Membajak kebun lagi")
+					if not status then
+						cropsCounter = cropsCounter + 1
+						if cropsCounter == cropsThreshold then
+							currentPlants = 1
+							cropsCounter = 0
+							if spawnedCrops < Config.TotalSpawnedTimes then
+								Citizen.Wait(2000)
+								spawnCrops()
+								spawnedCrops = spawnedCrops + 1
+							else
+								spawnedCrops = 1
 							end
-							isPickingUp = false
-							ESX.Game.DeleteObject(nearbyObject)
-							table.remove(cropsObj, nearbyID)
-							TriggerServerEvent('rorp_petani:GiveCrop', jobStatus.crop)
 						end
+						isPickingUp = false
+						ESX.Game.DeleteObject(nearbyObject)
+						table.remove(cropsObj, nearbyID)
+						TriggerServerEvent('rorp_petani:GiveCrop', jobStatus.crop)
+					end
 				end)
 			end
 			end
@@ -213,7 +219,7 @@ function spawnCrops()
 		Citizen.Wait(0)
 		local tC = GenerateCrops()
 
-		ESX.Game.SpawnLocalObject('prop_cs_plant_01', tC, function(obj)
+		ESX.Game.SpawnLocalObject('prop_veg_crop_02', tC, function(obj)
 			PlaceObjectOnGroundProperly(obj)
 			FreezeEntityPosition(obj, true)
 
@@ -230,14 +236,13 @@ function GenerateCrops()
 		local cX, cY
 
 		math.randomseed(GetGameTimer())
-		local modX = math.random(-46, 36)
+		local modX = math.random(-20, 20)
 
 		Citizen.Wait(100)
 
-		-- math.randomseed(GetGameTimer())
-		-- local modY = math.random(-21, 29)
-		local bY = modX / 2
-		local modY = 0 - bY
+		math.randomseed(GetGameTimer())
+		local modY = math.random(-20, 20)
+
 		cX = Config.FarmFields.x + modX
 		cY = Config.FarmFields.y + modY
 
@@ -271,7 +276,7 @@ function ValidateCrops(plantCoord)
 end
 
 function GetZ(x, y)
-	local groundCheckHeights = {148.0, 149.0, 150.0, 151.0, 152.0, 153.0, 154.0, 155.0, 156.0, 157.0, 158.0, 159.0, 160.0, 161.0, 162.0, 163.0, 164.0, 165.0, 166.0, 167.0, 168.0, 169.0, 170.0, 171.0, 172.0 }
+	local groundCheckHeights = { 156.0, 157.0, 158.0, 159.0, 160.0, 161.0, 162.0, 163.0, 164.0, 165.0, 166.0, 167.0, 168.0, 169.0, 170.0, 171.0 }
 
 	for i, height in ipairs(groundCheckHeights) do
 		local foundGround, z = GetGroundZFor_3dCoord(x, y, height)
