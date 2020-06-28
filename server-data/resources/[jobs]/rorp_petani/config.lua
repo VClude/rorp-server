@@ -56,12 +56,12 @@ Config.Uniform = {
 		bproof_1 = -1
 	}, 
 	female = {
-		tshirt_1 = 16,  tshirt_2 = 0,
-		torso_1 = 46,   torso_2 = 0,
+		tshirt_1 = 177,  tshirt_2 = 0,
+		torso_1 = 45,   torso_2 = 0,
 		decals_1 = 0,   decals_2 = 0,
-		arms = 74,
-		pants_1 = 94,   pants_2 = 0,
-		shoes_1 = 36,   shoes_2 = 0,
+		arms = 78,
+		pants_1 = 93,   pants_2 = 0,
+		shoes_1 = 5,   shoes_2 = 0,
 		helmet_1 = 1,  helmet_2 = 0,
 		chain_1 = 0,    chain_2 = 0,
 		ears_1 = -1,     ears_2 = 0,
