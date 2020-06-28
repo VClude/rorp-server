@@ -4,7 +4,7 @@ local playerCoords
 local currentPlant 			= 1
 local currentPlants 		= 1
 local cropsCounter 			= 0
-local cropsThreshold 		= 5
+local cropsThreshold 		= 10
 local spawnedCrops 			= 1
 local FarmerBlip			= {}
 local cropsObj		 		= {}
@@ -132,21 +132,23 @@ Citizen.CreateThread(function()
 					}
 				}, function(status)
 					if not status then
+						isPickingUp = false
+						ESX.Game.DeleteObject(nearbyObject)
+						table.remove(cropsObj, nearbyID)
+						TriggerServerEvent('rorp_petani:GiveCrop', jobStatus.crop)
+
 						cropsCounter = cropsCounter + 1
 						if cropsCounter == cropsThreshold then
 							currentPlants = 1
 							cropsCounter = 0
 							if spawnedCrops < Config.TotalSpawnedTimes then
-								spawnCrops()
 								spawnedCrops = spawnedCrops + 1
+								Citizen.Wait(2000)
+								spawnCrops()
 							else
 								spawnedCrops = 1
 							end
 						end
-						isPickingUp = false
-						ESX.Game.DeleteObject(nearbyObject)
-						table.remove(cropsObj, nearbyID)
-						TriggerServerEvent('rorp_petani:GiveCrop', jobStatus.crop)
 					end
 				end)
 			end
