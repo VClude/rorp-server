@@ -2,7 +2,9 @@ ESX = nil
 
 local playerCoords
 local currentPlant = 1
+local spawnedCorps = 0
 local FarmerBlip					  = {}
+local plants 						  = {}
 
 local jobStatus = {
 	onDuty = false,
@@ -34,6 +36,8 @@ Citizen.CreateThread(function()
 
 	Citizen.Wait(5000)
 	PlayerData = ESX.GetPlayerData()
+
+	refreshBlips()
 end)
 
 RegisterNetEvent('esx:setJob')
@@ -196,11 +200,89 @@ function DrawGameMarker(coords, id, colour)
 end
 
 function PlantCrops()
-	for k,v in ipairs(Config.CropLocations) do
+	while spawnedCorps <= 10 do
+		Citizen.Wait(0)
+		local coordsPlants = GenerateCorpsCoords()
 		Citizen.Wait(1500, 3500)
 		ESX.Game.SpawnLocalObject('prop_veg_corn_01', vector3(v.x, v.y, v.z - 1), function(crop)
+			PlaceObjectOnGroundProperly(crop)
+
+			table.insert(plants, crop)
+			spawnedCorps = spawnedCorps + 1			
 		end)
+
+		-- for k,v in ipairs(Config.CropLocations) do
+		-- 	Citizen.Wait(1500, 3500)
+		-- 	ESX.Game.SpawnLocalObject('prop_veg_corn_01', vector3(v.x, v.y, v.z - 1), function(crop)
+		-- 		PlaceObjectOnGroundProperly(crop)
+
+		-- 		table.insert(plants, crop)
+		-- 		spawnedCorps = spawnedCorps + 1			
+		-- 	end)
+		-- end
 	end
+end
+
+function ValidateCorpsCoord(plantCoord)
+	if spawnedCorps > 0 then
+		local validate = true
+
+		for k, v in pairs(plants) do
+			if GetDistanceBetweenCoords(plantCoord, GetEntityCoords(v), true) < 5 then
+				validate = false
+			end
+		end
+
+	
+		if GetDistanceBetweenCoords(plantCoord, Config.CropLocations.coords, false) > 50 then
+			validate = false
+		end
+	
+
+		return validate
+	else
+		return true
+	end
+end
+
+function GenerateCorpsCoords()
+	while true do
+		Citizen.Wait(1)
+
+		local corps2CoordX, corps2CoordY
+
+		math.randomseed(GetGameTimer())
+		local modX2 = math.random(-7, 7)
+
+		Citizen.Wait(100)
+
+		math.randomseed(GetGameTimer())
+		local modY2 = math.random(-7, 7)
+
+		weed2CoordX = Config.CropLocations.coords.x + modX2
+		weed2CoordY = Config.CropLocations.coords.y + modY2
+
+		local coordZ2 = GetCoordCorps(weed2CoordX, weed2CoordY)
+		local coord2 = vector3(weed2CoordX, weed2CoordY, coordZ2)
+
+		if ValidateHydrochloricAcidCoord(coord2) then
+			return coord2
+		end
+	end
+end
+
+function GetCoordCorps(x, y)
+	local groundCheckHeights = { 28.0, 29.0, 30.0, 31.0, 32.0 }
+
+	for i, height in ipairs(groundCheckHeights) do
+		local found2Ground, z = GetGroundZFor_3dCoord(x, y, height)
+
+		if found2Ground then
+			return z
+		end
+	end
+
+	return 30.0
 end
 
 function MissionMarker(coords, sprite, title, colour)
