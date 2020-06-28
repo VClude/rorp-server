@@ -11,11 +11,15 @@ Config.PlantMarkers = {
 
 -- This is the locations of the crops that spawn, so if you want 10 crops to spawn you need add 10 points if that makes sense
 Config.CropLocations = {
-	vector3(714.31, 6459.42, 30.89),
-	vector3(719.9, 6480.5, 28.40),
-	vector3(652.99, 6485.8, 29.62),
-	vector3(653.7, 6480.58, 30.12),
+	-- vector3(714.31, 6459.42, 30.89),
+	-- vector3(719.9, 6480.5, 28.40),
+	-- vector3(652.99, 6485.8, 29.62),
+	-- vector3(653.7, 6480.58, 30.12),
+	vector3(664.95, 6474.08, 30.31)
 }
+
+Config.LokasiTebu = vector3(664.95, 6474.08, 30.31)
+
 
 -- Marker to take off uniform
 Config.Management = vector3(443.03, 6459.09, 28.79)

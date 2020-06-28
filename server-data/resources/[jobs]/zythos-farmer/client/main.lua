@@ -2,8 +2,12 @@ ESX = nil
 
 local playerCoords
 local currentPlant = 1
+local currentPlants = 1
+local tebuCounter = 0
+local tebuThreshold = 5
+local totalTebu = 6
 local FarmerBlip					  = {}
-
+local tebu = {}
 local jobStatus = {
 	onDuty = false,
 	crop   = nil,
@@ -11,7 +15,7 @@ local jobStatus = {
 	vehicle = nil,
 	maxCrops = nil
 }
-
+local isPickingUp = false
 Citizen.CreateThread(function()
 	local count = 0
 	for _, v in ipairs(Config.CropLocations) do
@@ -91,7 +95,8 @@ Citizen.CreateThread(function()
 				plantBlip = nil,
 				vehicle   = nil
 			}
-			PlantCrops()
+			spawnTebu()
+			-- PlantCrops()
 		end
 	end
 end)
@@ -99,31 +104,58 @@ end)
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(10)
+		local playerPed = PlayerPedId()
+		local coords = GetEntityCoords(playerPed)
+		local nearbyObject, nearbyID
+
+		for i=1, #tebu, 1 do
+			if GetDistanceBetweenCoords(coords, GetEntityCoords(tebu[i]), false) < 1 then
+				nearbyObject, nearbyID = tebu[i], i
+			end
+		end
+
 		if not jobStatus.onDuty and jobStatus.crop then 
-			if IsControlJustReleased(0, 38) and DoesObjectOfTypeExistAtCoords(GetEntityCoords(PlayerPedId()), 5.0, GetHashKey('prop_veg_corn_01'), 0) then
-			local plant = GetClosestObjectOfType(GetEntityCoords(PlayerPedId()), 5.0, GetHashKey('prop_veg_corn_01'), 0, 1, 1)
-			TriggerEvent("mythic_progressbar:client:progress", {
-				name = "harvesting_crop",
-				duration = 5000,
-				label = _U("harvesting_crop"),
-				useWhileDead = false,
-				canCancel = false,
-				controlDisables = {
-					disableMovement = true,
-					disableCarMovement = true,
-					disableMouse = false,
-					disableCombat = true,
-				},
-				animation = {
-					animDict = "amb@world_human_gardener_plant@male@idle_a",
-					anim = "idle_a",
-				}
-			}, function(status)
-				if not status then
-					DeleteEntity(plant)
-					TriggerServerEvent('zythos-farming:GiveCrop', jobStatus.crop)
+			
+			if nearbyObject and IsPedOnFoot(playerPed) then
+
+				if not isPickingUp then
+					ESX.ShowHelpNotification("Tekan E untuk mengambil")
 				end
-			end)
+
+				if IsControlJustReleased(0, 38) and DoesObjectOfTypeExistAtCoords(GetEntityCoords(PlayerPedId()), 5.0, GetHashKey('prop_veg_corn_01'), 0) then
+				isPickingUp = true
+				local plant = GetClosestObjectOfType(GetEntityCoords(PlayerPedId()), 5.0, GetHashKey('prop_veg_corn_01'), 0, 1, 1)
+				TriggerEvent("mythic_progressbar:client:progress", {
+					name = "harvesting_crop",
+					duration = 5000,
+					label = _U("harvesting_crop"),
+					useWhileDead = false,
+					canCancel = false,
+					controlDisables = {
+						disableMovement = true,
+						disableCarMovement = true,
+						disableMouse = false,
+						disableCombat = true,
+					},
+					animation = {
+						animDict = "amb@world_human_gardener_plant@male@idle_a",
+						anim = "idle_a",
+					}
+				}, function(status)
+					if not status then
+						tebuCounter = tebuCounter + 1
+						if tebuCounter == tebuThreshold then
+							currentPlants = 0
+							tebuCounter = 0
+						end
+						isPickingUp = false
+						ESX.Game.DeleteObject(nearbyObject)
+						table.remove(tebu, nearbyID)
+						-- DeleteEntity(plant)
+						TriggerServerEvent('zythos-farming:GiveCrop', jobStatus.crop)
+					end
+				end)
+			end
 			end
 		end
 	end
@@ -202,6 +234,81 @@ function PlantCrops()
 		ESX.Game.SpawnLocalObject('prop_veg_corn_01', vector3(v.x, v.y, v.z - 1), function(crop)
 		end)
 	end
+end
+
+function spawnTebu()
+	while currentPlants < totalTebu do
+		Citizen.Wait(0)
+		local tC = GenerateTebu()
+
+		ESX.Game.SpawnLocalObject('prop_veg_corn_01', tC, function(obj)
+			PlaceObjectOnGroundProperly(obj)
+			FreezeEntityPosition(obj, true)
+
+			table.insert(tebu, obj)
+			currentPlants = currentPlants + 1
+		end)
+	end
+end
+
+function GenerateTebu()
+	while true do
+		Citizen.Wait(1)
+
+		local cX, cY
+
+		math.randomseed(GetGameTimer())
+		local modX = math.random(-20, 20)
+
+		Citizen.Wait(100)
+
+		math.randomseed(GetGameTimer())
+		local modY = math.random(-20, 20)
+
+		cX = Config.LokasiTebu.x + modX
+		cY = Config.LokasiTebu.y + modY
+
+		local coordZ = GetZ(cX, cY)
+		local coord = vector3(cX, cY, coordZ)
+
+		if ValidasiTebu(coord) then
+			return coord
+		end
+	end
+end
+
+function ValidasiTebu(plantCoord)
+	if currentPlants > 0 then
+		local validate = true
+
+		for k, v in pairs(tebu) do
+			if GetDistanceBetweenCoords(plantCoord, GetEntityCoords(v), true) < totalTebu then
+				validate = false
+			end
+		end
+
+		if GetDistanceBetweenCoords(plantCoord, Config.LokasiTebu, false) > 50 then
+			validate = false
+		end
+
+		return validate
+	else
+		return true
+	end
+end
+
+function GetZ(x, y)
+	local groundCheckHeights = { 28.0, 29.0, 30.0, 31.0, 32.0}
+
+	for i, height in ipairs(groundCheckHeights) do
+		local foundGround, z = GetGroundZFor_3dCoord(x, y, height)
+
+		if foundGround then
+			return z
+		end
+	end
+
+	return 30
 end
 
 function MissionMarker(coords, sprite, title, colour)
