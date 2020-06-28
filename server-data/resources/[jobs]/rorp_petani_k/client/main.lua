@@ -4,7 +4,7 @@ local playerCoords
 local currentPlant 			= 1
 local currentPlants 		= 1
 local cropsCounter 			= 0
-local cropsThreshold 		= 5
+local cropsThreshold 		= 10
 local spawnedCrops 			= 1
 local FarmerBlip			= {}
 local cropsObj		 		= {}
