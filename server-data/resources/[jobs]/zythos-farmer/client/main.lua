@@ -4,7 +4,7 @@ local playerCoords
 local currentPlant = 1
 local currentPlants = 1
 local tebuCounter = 1
-local tebuThreshold = 99
+local tebuThreshold = 5
 local totalTebu = 100
 local FarmerBlip					  = {}
 local tebu = {}
