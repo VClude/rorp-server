@@ -61,7 +61,7 @@ end)
 
 function ShowRewardListingMenu()
 ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'rewardmenu', {
-	title    = 'Pengambilan Hadiah',
+	title    = 'VIP Menu',
 	align    = 'bottom-right',
 	elements = {
 		{label = 'Belum ada data', value = 'test'},
