@@ -1,30 +1,28 @@
-ESX = nil
+ESX 						= nil
 
 local playerCoords
-local currentPlant = 1
-local currentPlants = 1
-local tebuCounter = 0
-local tebuThreshold = 5
-local totalTebu = 5
-local spawnTebus = 1
-local FarmerBlip					  = {}
-local tebu = {}
+local currentPlant 			= 1
+local currentPlants 		= 1
+local cropsCounter 			= 0
+local cropsThreshold 		= 5
+local spawnedCrops 			= 1
+local FarmerBlip			= {}
+local cropsObj		 		= {}
+local isPickingUp 			= false
 local jobStatus = {
 	onDuty = false,
 	crop   = nil,
 	plantBlip = nil,
 	vehicle = nil,
-	maxCrops = nil
 }
 
-local isPickingUp = false
-Citizen.CreateThread(function()
-	local count = 0
-	for _, v in ipairs(Config.CropLocations) do
-		count = count + 1
-	end
-	jobStatus.maxCrops = count
-end)
+-- Citizen.CreateThread(function()
+-- 	local count = 0
+-- 	for _, v in ipairs(Config.CropLocations) do
+-- 		count = count + 1
+-- 	end
+-- 	jobStatus.maxCrops = count
+-- end)
 
 Citizen.CreateThread(function()
 	while ESX == nil do
@@ -57,16 +55,6 @@ Citizen.CreateThread(function()
 	end
 end)
 
--- Citizen.CreateThread(function()
--- 	while true do
--- 	if ESX ~= nil then
--- 	playerJob = ESX.GetPlayerData().job.name
--- 	Citizen.Wait(60000)
--- 	end
--- 	Citizen.Wait(5)
--- 	end
--- end)
-
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(5)
@@ -97,8 +85,7 @@ Citizen.CreateThread(function()
 				plantBlip = nil,
 				vehicle   = nil
 			}
-			spawnTebu()
-			-- PlantCrops()
+			spawnCrops()
 		end
 	end
 end)
@@ -110,9 +97,9 @@ Citizen.CreateThread(function()
 		local coords = GetEntityCoords(playerPed)
 		local nearbyObject, nearbyID
 
-		for i=1, #tebu, 1 do
-			if GetDistanceBetweenCoords(coords, GetEntityCoords(tebu[i]), false) < 1 then
-				nearbyObject, nearbyID = tebu[i], i
+		for i=1, #cropsObj, 1 do
+			if GetDistanceBetweenCoords(coords, GetEntityCoords(cropsObj[i]), false) < 1 then
+				nearbyObject, nearbyID = cropsObj[i], i
 			end
 		end
 
@@ -145,22 +132,22 @@ Citizen.CreateThread(function()
 					}
 				}, function(status)
 					if not status then
-						tebuCounter = tebuCounter + 1
-						if tebuCounter == tebuThreshold then
+						cropsCounter = cropsCounter + 1
+						if cropsCounter == cropsThreshold then
 							currentPlants = 1
-							tebuCounter = 0
-							if spawnTebus < 2 then
-								spawnTebu()
-								spawnTebus = spawnTebus + 1
+							cropsCounter = 0
+							if spawnedCrops < Config.TotalSpawnedTimes then
+								Citizen.Wait(2000)
+								spawnCrops()
+								spawnedCrops = spawnedCrops + 1
 							else
-								spawnTebus = 0
+								spawnedCrops = 1
 							end
 						end
 						isPickingUp = false
 						ESX.Game.DeleteObject(nearbyObject)
-						table.remove(tebu, nearbyID)
-						-- DeleteEntity(plant)
-						TriggerServerEvent('zythos-farming:GiveCrop', jobStatus.crop)
+						table.remove(cropsObj, nearbyID)
+						TriggerServerEvent('rorp_petani:GiveCrop', jobStatus.crop)
 					end
 				end)
 			end
@@ -223,44 +210,26 @@ Citizen.CreateThread(function()
 	end
 end)
 
--- Blips
--- Citizen.CreateThread(function()
--- 	if playerJob == "farmer" then
--- 		DrawBlip(Config.Management, 304, _U('civ_clothing_blip'), 2)
--- 		DrawBlip(Config.SellCrops, 431, _U('sell_crops_blip'), 2)
--- 		DrawBlip(Config.StartJob.pos, 210, _U('start_job_blip'), 2)
--- 	end
--- end)
-
 function DrawGameMarker(coords, id, colour)
 	DrawMarker(id, coords.x, coords.y, coords.z, 0.0, 0.0, 0.0, 0.0, 180.0, 0.0, 2.0, 2.0, 2.0, colour[1], colour[2], colour[3], colour[4], false, true, 2, nil, nil, false)
 end
 
-function PlantCrops()
-	for k,v in ipairs(Config.CropLocations) do
-		Citizen.Wait(1500, 3500)
-		ESX.Game.SpawnLocalObject('prop_veg_corn_01', vector3(v.x, v.y, v.z - 1), function(crop)
-		end)
-	end
-end
-
-
-function spawnTebu()
-	while currentPlants < totalTebu do
+function spawnCrops()
+	while currentPlants < Config.TotalSpawnedCorps do
 		Citizen.Wait(0)
-		local tC = GenerateTebu()
+		local tC = GenerateCrops()
 
 		ESX.Game.SpawnLocalObject('prop_veg_corn_01', tC, function(obj)
 			PlaceObjectOnGroundProperly(obj)
 			FreezeEntityPosition(obj, true)
 
-			table.insert(tebu, obj)
+			table.insert(cropsObj, obj)
 			currentPlants = currentPlants + 1
 		end)
 	end
 end
 
-function GenerateTebu()
+function GenerateCrops()
 	while true do
 		Citizen.Wait(1)
 
@@ -274,29 +243,29 @@ function GenerateTebu()
 		math.randomseed(GetGameTimer())
 		local modY = math.random(-20, 20)
 
-		cX = Config.LokasiTebu.x + modX
-		cY = Config.LokasiTebu.y + modY
+		cX = Config.FarmFields.x + modX
+		cY = Config.FarmFields.y + modY
 
 		local coordZ = GetZ(cX, cY)
 		local coord = vector3(cX, cY, coordZ)
 
-		if ValidasiTebu(coord) then
+		if ValidateCrops(coord) then
 			return coord
 		end
 	end
 end
 
-function ValidasiTebu(plantCoord)
+function ValidateCrops(plantCoord)
 	if currentPlants > 0 then
 		local validate = true
 
-		for k, v in pairs(tebu) do
-			if GetDistanceBetweenCoords(plantCoord, GetEntityCoords(v), true) < totalTebu then
+		for k, v in pairs(cropsObj) do
+			if GetDistanceBetweenCoords(plantCoord, GetEntityCoords(v), true) < Config.TotalSpawnedCorps then
 				validate = false
 			end
 		end
 
-		if GetDistanceBetweenCoords(plantCoord, Config.LokasiTebu, false) > 50 then
+		if GetDistanceBetweenCoords(plantCoord, Config.FarmFields, false) > 50 then
 			validate = false
 		end
 
@@ -335,19 +304,6 @@ function MissionMarker(coords, sprite, title, colour)
 	return blip
 end
 
--- function DrawBlip(coords, sprite, title, colour)
--- 	local blip = AddBlipForCoord(coords)
--- 	SetBlipSprite(blip, sprite)
--- 	SetBlipDisplay(blip, 4)
--- 	SetBlipScale(blip, 0.60)
--- 	SetBlipColour(blip, colour)
--- 	SetBlipAsShortRange(blip, true)
--- 	BeginTextCommandSetBlipName("STRING")
--- 	AddTextComponentString(title)
--- 	EndTextCommandSetBlipName(blip)
--- 	return blip
--- end
-
 function deleteBlips()
 	for _,v in ipairs(FarmerBlip) do
 		RemoveBlip(v)
@@ -355,7 +311,7 @@ function deleteBlips()
 end
 
 function refreshBlips()
-	if ESX.PlayerData.job and ESX.PlayerData.job.name == "farmer" then
+	if ESX.PlayerData.job and ESX.PlayerData.job.name == Config.JobName then
 		local blip = AddBlipForCoord(Config.StartJob.pos)
 		SetBlipSprite(blip, 210)
 		SetBlipDisplay(blip, 2)
@@ -425,7 +381,7 @@ function OpenCropMenu()
 	function(data, menu)
 		if data.current.value then
 			menu.close()
-			TriggerServerEvent('zythos-farming:SellCrop', data.current.value, data.current.price)
+			TriggerServerEvent('rorp_petani:SellCrop', data.current.value, data.current.price)
 		end
 	end,
 	function(data, menu)

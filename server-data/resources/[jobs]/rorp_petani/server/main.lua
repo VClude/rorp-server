@@ -2,14 +2,14 @@ ESX = nil
 
 TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 
-RegisterServerEvent('zythos-farming:GiveCrop')
-AddEventHandler('zythos-farming:GiveCrop', function(crop)
+RegisterServerEvent('rorp_petani:GiveCrop')
+AddEventHandler('rorp_petani:GiveCrop', function(crop)
     local xPlayer = ESX.GetPlayerFromId(source)
     xPlayer.addInventoryItem(crop, 1)
 end)
 
-RegisterServerEvent('zythos-farming:SellCrop')
-AddEventHandler('zythos-farming:SellCrop', function(crop, price)
+RegisterServerEvent('rorp_petani:SellCrop')
+AddEventHandler('rorp_petani:SellCrop', function(crop, price)
     local xPlayer = ESX.GetPlayerFromId(source)
 
     local itemCount = xPlayer.getInventoryItem(crop).count
