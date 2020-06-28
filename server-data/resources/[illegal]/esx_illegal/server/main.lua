@@ -32,40 +32,9 @@ AddEventHandler('esx_illegal:sellDrug', function(itemName, amount)
 	TriggerClientEvent('esx:showNotification', source, _U('dealer_sold', amount, xItem.label, ESX.Math.GroupDigits(price)))
 end)
 
-ESX.RegisterServerCallback('esx_illegal:buyLicense', function(source, cb, licenseName)
-	local xPlayer = ESX.GetPlayerFromId(source)
-	local license = Config.LicensePrices[licenseName]
-
-	if license == nil then
-		print(('esx_illegal: %s attempted to buy an invalid license!'):format(xPlayer.identifier))
-		cb(false)
-	end
-
-	if xPlayer.getMoney() >= license.price then
-		xPlayer.removeMoney(license.price)
-
-		TriggerEvent('esx_license:addLicense', source, licenseName, function()
-			cb(true)
-		end)
-	else
-		cb(false)
-	end
-end)
-
 ESX.RegisterServerCallback('esx_illegal:canPickUp', function(source, cb, item)
 	local xPlayer = ESX.GetPlayerFromId(source)
 	cb(xPlayer.canCarryItem(item, 1))
-end)
-
-ESX.RegisterServerCallback('esx_illegal:CheckLisense', function(source, cb, itemName)
-	local xPlayer = ESX.GetPlayerFromId(source)
-	local xLisence = xPlayer.getInventoryItem(itemName)
-
-	if xLisence.count == 1 then
-		cb(true)
-	else
-		cb(false)
-	end
 end)
 
 ESX.RegisterServerCallback('esx_illegal:EnoughCops', function(source, cb, configvalue)	

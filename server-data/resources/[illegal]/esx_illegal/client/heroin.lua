@@ -1,6 +1,6 @@
 local spawnedPoppys = 0
 local PoppyPlants = {}
-local isPickingUp, isProcessing = false, false
+local isPickingUp = false
 
 
 Citizen.CreateThread(function()
@@ -50,28 +50,6 @@ end)
 -- 		end
 -- 	end
 -- end)
-
-function ProcessHeroin()
-	isProcessing = true
-
-	ESX.ShowNotification(_U('heroin_processingstarted'))
-	TriggerServerEvent('esx_illegal:processPoppyResin')
-	local timeLeft = Config.Delays.HeroinProcessing / 1000
-	local playerPed = PlayerPedId()
-
-	while timeLeft > 0 do
-		Citizen.Wait(1000)
-		timeLeft = timeLeft - 1
-
-		if GetDistanceBetweenCoords(GetEntityCoords(playerPed), Config.CircleZones.HeroinProcessing.coords, false) > 5 then
-			ESX.ShowNotification(_U('heroin_processingtoofar'))
-			TriggerServerEvent('esx_illegal:cancelProcessing')
-			break
-		end
-	end
-
-	isProcessing = false
-end
 
 Citizen.CreateThread(function()
 	while true do

@@ -49,7 +49,7 @@ Citizen.CreateThread(function()
 								end
 							end, Config.Cops.DrugDealer)
 						else
-							if ESX.PlayerData.job.name ~= 'petani' then
+							if ESX.PlayerData.job.name ~= 'kartel' or ESX.PlayerData.job.name ~= 'mafia' then
 								ESX.ShowNotification("Anda tidak punya hak untuk menjual barang illegal")
 							else
 							wasOpen = true
@@ -157,10 +157,6 @@ Citizen.CreateThread(function()
 		for k,zone in pairs(Config.CircleZones) do
 			if zone.enabled and zone.illegal and ESX.GetPlayerData().job.name == 'police' then
 				CreateBlipCircle(zone.blimpcoords, zone.name, zone.radius, zone.color, zone.sprite)
-			elseif zone.enabled and zone.illegal == false and ESX.GetPlayerData().job.name == 'petani' then
-				CreateBlipCircle(zone.blimpcoords, zone.name, zone.radius, zone.color, zone.sprite)
-			else
-
 			end
 		end
 	end
