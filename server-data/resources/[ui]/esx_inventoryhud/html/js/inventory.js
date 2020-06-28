@@ -118,7 +118,7 @@ function inventorySetup(items) {
 function secondInventorySetup(items) {
     $("#otherInventory").html("");
     $.each(items, function (index, item) {
-        count = setCount(item);
+        count = setCountSecond(item);
 
         $("#otherInventory").append('<div class="slot"><div id="itemOther-' + index + '" class="item" style = "background-image: url(\'img/items/' + item.name + '.png\')">' +
             '<div class="item-count">' + count + '</div> <div class="item-name">' + item.label + '</div> </div ><div class="item-name-bg"></div></div>');
@@ -178,11 +178,9 @@ function disableInventory(ms) {
 }
 
 function setCount(item) {
-    count = item.count
 
-    if (item.limit > 0) {
-        count = item.count + " (" + (item.weight * item.count / 1000) + " KG)"
-    }
+        count = item.count + " <p style='color:orange;'>" + (item.weight * item.count / 1000) + " KG</p>"
+    
 
     if (item.type === "item_weapon") {
         if (count == 0) {
@@ -197,6 +195,26 @@ function setCount(item) {
     }
 
     return count;
+}
+
+function setCountSecond(item) {
+
+    count = item.count;
+
+
+if (item.type === "item_weapon") {
+    if (count == 0) {
+        count = "";
+    } else {
+        count = '<img src="img/bullet.png" class="ammoIcon"> ' + item.count;
+    }
+}
+
+if (item.type === "item_account" || item.type === "item_money") {
+    count = formatMoney(item.count);
+}
+
+return count;
 }
 
 function setCost(item) {

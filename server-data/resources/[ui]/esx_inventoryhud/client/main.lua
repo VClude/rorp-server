@@ -170,7 +170,15 @@ RegisterNUICallback(
         if type(data.number) == "number" and math.floor(data.number) == data.number then
 			if data.item.type == "item_money" then
 				TriggerServerEvent("esx:removeInventoryItem", "item_account", "money", data.number)
-			else
+            elseif data.item.name:match "%gbag" then
+                ESX.TriggerServerCallback('esx_inventoryhud:dropBag', function(dv)
+                    if dv then
+                        ESX.ShowNotification("Kapasitas Inventory anda Berlebihan muatan")
+                    else
+                        TriggerServerEvent("esx:removeInventoryItem", data.item.type, data.item.name, data.number)
+                    end
+                end)
+            else
 				TriggerServerEvent("esx:removeInventoryItem", data.item.type, data.item.name, data.number)
 			end
         end
@@ -198,14 +206,21 @@ RegisterNUICallback(
 
         if foundPlayer then
             local count = tonumber(data.number)
-
             if data.item.type == "item_weapon" then
                 count = GetAmmoInPedWeapon(PlayerPedId(), GetHashKey(data.item.name))
             end
 
             if data.item.type == "item_money" then
 				TriggerServerEvent("esx:giveInventoryItem", data.player, "item_account", "money", count)
-			else
+			elseif data.item.name:match "%gbag" then
+                ESX.TriggerServerCallback('esx_inventoryhud:giveBag', function(dv)
+                    if dv then
+                        ESX.ShowNotification("Kapasitas Inventory anda Berlebihan muatan")
+                    else
+                        TriggerServerEvent("esx:giveInventoryItem", data.player, data.item.type, data.item.name, count)
+                    end
+                end)
+            else
 				TriggerServerEvent("esx:giveInventoryItem", data.player, data.item.type, data.item.name, count)
 			end
             Wait(250)

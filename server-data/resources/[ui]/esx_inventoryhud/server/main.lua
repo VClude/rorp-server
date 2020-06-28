@@ -8,13 +8,53 @@ TriggerEvent(
 	end
 )
 
+ESX.RegisterServerCallback('esx_inventoryhud:giveBag', function(source, cb, target)
+	local playerId = source
+	local tPl = ESX.GetPlayerFromId(playerId)
+	local h1 = tPl.getInventoryItem('1gbag').count > 0 or false
+	local h2 = tPl.getInventoryItem('5gbag').count > 0 or false
+	local h3 = tPl.getInventoryItem('50gbag').count > 0 or false
+	local h4 = tPl.getInventoryItem('100gbag').count > 0 or false
+	local plW = tPl.maxWeight
+	local weighter = (h4) and plW - 54999 or (h3) and plW - 25000 or (h2) and plW - 20000 or (h1) and plW - 15000 or plW
+	if weighter < tPl.getWeight() then
+		cb(true)
+	else
+		cb(false)
+	end
+end)
+
+ESX.RegisterServerCallback('esx_inventoryhud:dropBag', function(source, cb)
+	local tPl = ESX.GetPlayerFromId(source)
+	local h1 = tPl.getInventoryItem('1gbag').count > 0 or false
+	local h2 = tPl.getInventoryItem('5gbag').count > 0 or false
+	local h3 = tPl.getInventoryItem('50gbag').count > 0 or false
+	local h4 = tPl.getInventoryItem('100gbag').count > 0 or false
+	local plW = tPl.maxWeight
+	local weighter = (h4) and plW - 54999 or (h3) and plW - 25000 or (h2) and plW - 20000 or (h1) and plW - 15000 or plW
+	if weighter < tPl.getWeight() then
+		cb(true)
+	else
+		cb(false)
+	end
+end)
+
+
 ESX.RegisterServerCallback(
 	"esx_inventoryhud:getPlayerInventory",
 	function(source, cb, target)
 		local targetXPlayer = ESX.GetPlayerFromId(target)
-
+		-- inventory backpack
+		local h1 = targetXPlayer.getInventoryItem('1gbag').count > 0 or false
+		local h2 = targetXPlayer.getInventoryItem('5gbag').count > 0 or false
+		local h3 = targetXPlayer.getInventoryItem('50gbag').count > 0 or false
+		local h4 = targetXPlayer.getInventoryItem('100gbag').count > 0 or false
+		local plW = ESX.GetConfig().MaxWeight
+		local weighter = (h4) and plW + 54999 or (h3) and plW + 25000 or (h2) and plW + 20000 or (h1) and plW + 15000 or plW
+		
 		if targetXPlayer ~= nil then
-			cb({inventory = targetXPlayer.inventory, money = targetXPlayer.getMoney(), accounts = targetXPlayer.accounts, weapons = targetXPlayer.loadout, weight = targetXPlayer.getWeight(), maxWeight = targetXPlayer.maxWeight})
+			targetXPlayer.setMaxWeight(weighter)
+			cb({inventory = targetXPlayer.inventory, money = targetXPlayer.getMoney(), accounts = targetXPlayer.accounts, weapons = targetXPlayer.loadout, weight = targetXPlayer.getWeight(), maxWeight = weighter})
 		else
 			cb(nil)
 		end
