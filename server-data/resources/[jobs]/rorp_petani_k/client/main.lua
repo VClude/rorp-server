@@ -131,37 +131,18 @@ Citizen.CreateThread(function()
 						anim = "idle_a",
 					}
 				}, function(status)
-						if not status then
-							if cropsCounter == cropsThreshold and spawnedCrops < Config.TotalSpawnedTimes then
-								Citizen.Wait(2000)
-								isPickingUp = false
-								ESX.Game.DeleteObject(nearbyObject)
-								table.remove(cropsObj, nearbyID)
-								TriggerServerEvent('rorp_petani:GiveCrop', jobStatus.crop)
-								Citizen.Wait(2000)
-								currentPlants = 0
-								cropsCounter = 0
-								spawnedCrops = spawnedCrops + 1
-								spawnCrops()
-							elseif cropsCounter == cropsThreshold and spawnedCrops == Config.TotalSpawnedTimes then
-								Citizen.Wait(2000)
-								isPickingUp = false
-								currentPlants = 0
-								cropsCounter = 0
-								spawnedCrops = 1
-								ESX.Game.DeleteObject(nearbyObject)
-								table.remove(cropsObj, nearbyID)
-								TriggerServerEvent('rorp_petani:GiveCrop', jobStatus.crop)
-								ESX.ShowNotification("Kuota Anda sudah habis silahkan membajak kembali")
-							else
-								Citizen.Wait(2000)
-								cropsCounter = cropsCounter + 1
-								isPickingUp = false
-								ESX.Game.DeleteObject(nearbyObject)
-								table.remove(cropsObj, nearbyID)
-								TriggerServerEvent('rorp_petani:GiveCrop', jobStatus.crop)
-							end
+					if not status then
+						cropsCounter = cropsCounter + 1
+						if cropsCounter == cropsThreshold then
+							currentPlants = 0
+							cropsCounter = 0
+							ESX.ShowNotification("anda sudah memanen semua Tebu, Silahkan Anda perlu Membajak kebun lagi")
 						end
+						isPickingUp = false
+						ESX.Game.DeleteObject(nearbyObject)
+						table.remove(cropsObj, nearbyID)
+						TriggerServerEvent('rorp_petani:GiveCrop', jobStatus.crop)
+					end
 				end)
 			end
 			end
