@@ -137,7 +137,6 @@ Citizen.CreateThread(function()
 						table.remove(cropsObj, nearbyID)
 						TriggerServerEvent('rorp_petani:GiveCrop', jobStatus.crop)
 
-						cropsCounter = cropsCounter + 1
 						if cropsCounter == cropsThreshold then
 							currentPlants = 1
 							cropsCounter = 0
@@ -149,6 +148,7 @@ Citizen.CreateThread(function()
 								spawnedCrops = 1
 							end
 						end
+						cropsCounter = cropsCounter + 1
 					end
 				end)
 			end
@@ -216,7 +216,7 @@ function DrawGameMarker(coords, id, colour)
 end
 
 function spawnCrops()
-	while currentPlants < Config.TotalSpawnedCrops do
+	while currentPlants <= Config.TotalSpawnedCrops do
 		Citizen.Wait(0)
 		local tC = GenerateCrops()
 
