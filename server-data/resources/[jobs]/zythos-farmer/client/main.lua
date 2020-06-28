@@ -237,18 +237,23 @@ function PlantCrops()
 	end
 end
 
+local spawnLagi = 1
+
 function spawnTebu()
-	while currentPlants < totalTebu do
-		Citizen.Wait(0)
-		local tC = GenerateTebu()
+	while spawnLagi < 10 do
+		while currentPlants < totalTebu do
+			Citizen.Wait(0)
+			local tC = GenerateTebu()
 
-		ESX.Game.SpawnLocalObject('prop_veg_corn_01', tC, function(obj)
-			PlaceObjectOnGroundProperly(obj)
-			FreezeEntityPosition(obj, true)
+			ESX.Game.SpawnLocalObject('prop_veg_corn_01', tC, function(obj)
+				PlaceObjectOnGroundProperly(obj)
+				FreezeEntityPosition(obj, true)
 
-			table.insert(tebu, obj)
-			currentPlants = currentPlants + 1
-		end)
+				table.insert(tebu, obj)
+				currentPlants = currentPlants + 1
+			end)
+		end
+		spawnLagi = spawnLagi + 1
 	end
 end
 
