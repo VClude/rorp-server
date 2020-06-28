@@ -45,14 +45,14 @@ Config.JobName = 'petani'
 Config.Uniform = {
 	male = {
 		tshirt_1 = 16,  tshirt_2 = 0,
-		torso_1 = 53,   torso_2 = 0,
+		torso_1 = 52,   torso_2 = 0,
 		decals_1 = 0,   decals_2 = 0,
-		arms = 65,
-		pants_1 = 91,   pants_2 = 0,
-		shoes_1 = 35,   shoes_2 = 0,
-		helmet_1 = 22,  helmet_2 = 0,
-		chain_1 = 0,    chain_2 = 0,
-		ears_1 = -1,     ears_2 = 0,
+		arms = 64,
+		pants_1 = 90,   pants_2 = 0,
+		shoes_1 = 34,   shoes_2 = 0,
+		helmet_1 = 3,   helmet_2 = 2,
+		chain_1 = -1,   chain_2 = -1,
+		ears_1 = -1,    ears_2 = -1,
 		bproof_1 = -1
 	}, 
 	female = {
