@@ -149,7 +149,7 @@ Citizen.CreateThread(function()
 						if tebuCounter == tebuThreshold then
 							currentPlants = 1
 							tebuCounter = 0
-							if spawnTebus < 20 then
+							if spawnTebus < 2 then
 								spawnTebu()
 								spawnTebus = spawnTebus + 1
 							else
