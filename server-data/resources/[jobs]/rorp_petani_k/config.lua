@@ -38,7 +38,10 @@ Config.StartJob = { pos = vector3(-1920.96, 2048.85, 140.74), heading = 256.2 }
 
 -- This is the options in the menu to select what crop you want to plant
 Config.Seeds = {
-	{label = 'Sugarcane Seeds', DBname = 'sugarcane'}, -- DBNAME IS THE ITEM YOU GET WHEN YOU HARVEST
+	{label = 'Bibit Kedelai', DBname = 'kedelai'}, -- DBNAME IS THE ITEM YOU GET WHEN YOU HARVEST
+	{label = 'Bibit Cocoa', DBname = 'cocoa'},
+	{label = 'Bibit Teh', DBname = 'teh'},
+	{label = 'Bitbit Kopi', DBname = 'bijikopi'},
 	-- {label = 'TEST', DBname = 'test_item'},
 }
 

@@ -112,9 +112,9 @@ Citizen.CreateThread(function()
 					ESX.ShowHelpNotification("Tekan ~INPUT_CONTEXT~ untuk mengambil")
 				end
 
-				if IsControlJustReleased(0, 38) and DoesObjectOfTypeExistAtCoords(GetEntityCoords(PlayerPedId()), 5.0, GetHashKey('prop_cs_plant_01'), 0) then
+				if IsControlJustReleased(0, 38) and DoesObjectOfTypeExistAtCoords(GetEntityCoords(PlayerPedId()), 5.0, GetHashKey('prop_veg_crop_02'), 0) then
 					isPickingUp = true
-					local plant = GetClosestObjectOfType(GetEntityCoords(PlayerPedId()), 5.0, GetHashKey('prop_cs_plant_01'), 0, 1, 1)
+					local plant = GetClosestObjectOfType(GetEntityCoords(PlayerPedId()), 5.0, GetHashKey('prop_veg_crop_02'), 0, 1, 1)
 					TriggerEvent("mythic_progressbar:client:progress", {
 						name = "harvesting_crop",
 						duration = 5000,
@@ -235,7 +235,7 @@ end
 function spawnCrops()
 	for k,v in ipairs(Config.CropLocations) do
 		Citizen.Wait(1500, 3500)
-		ESX.Game.SpawnLocalObject('prop_cs_plant_01', vector3(v.x, v.y, v.z - 1), function(obj)
+		ESX.Game.SpawnLocalObject('prop_veg_crop_02', vector3(v.x, v.y, v.z - 1), function(obj)
 			PlaceObjectOnGroundProperly(obj)
 			FreezeEntityPosition(obj, true)
 
