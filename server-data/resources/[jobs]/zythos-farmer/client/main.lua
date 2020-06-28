@@ -6,6 +6,7 @@ local currentPlants = 1
 local tebuCounter = 1
 local tebuThreshold = 5
 local totalTebu = 6
+local spawnTebu = 1
 local FarmerBlip					  = {}
 local tebu = {}
 local jobStatus = {
@@ -148,6 +149,10 @@ Citizen.CreateThread(function()
 						if tebuCounter == tebuThreshold then
 							currentPlants = 0
 							tebuCounter = 0
+							while spawnTebu < 2 do
+								spawnTebu()
+								spawnTebu = spawnTebu + 1
+							end
 						end
 						isPickingUp = false
 						ESX.Game.DeleteObject(nearbyObject)
@@ -237,23 +242,19 @@ function PlantCrops()
 	end
 end
 
-local spawnLagi = 1
 
 function spawnTebu()
-	while spawnLagi < 10 do
-		while currentPlants < totalTebu do
-			Citizen.Wait(0)
-			local tC = GenerateTebu()
+	while currentPlants < totalTebu do
+		Citizen.Wait(0)
+		local tC = GenerateTebu()
 
-			ESX.Game.SpawnLocalObject('prop_veg_corn_01', tC, function(obj)
-				PlaceObjectOnGroundProperly(obj)
-				FreezeEntityPosition(obj, true)
+		ESX.Game.SpawnLocalObject('prop_veg_corn_01', tC, function(obj)
+			PlaceObjectOnGroundProperly(obj)
+			FreezeEntityPosition(obj, true)
 
-				table.insert(tebu, obj)
-				currentPlants = currentPlants + 1
-			end)
-		end
-		spawnLagi = spawnLagi + 1
+			table.insert(tebu, obj)
+			currentPlants = currentPlants + 1
+		end)
 	end
 end
 
