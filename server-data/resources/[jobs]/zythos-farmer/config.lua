@@ -38,7 +38,8 @@ Config.Seeds = {
 
 -- This is the option for selling crops
 Config.Crops = {
-	{label = 'Poppy Resin', DBname = 'poppyresin', price = 200}, -- DBNAME IS THE ITEM YOU WOULD LIKE TO SELL
+	{label = 'Sugarcane Seeds', DBname = 'sugarcane', price = 200},
+	 -- DBNAME IS THE ITEM YOU WOULD LIKE TO SELL
 	-- {label = 'TEST', DBname = 'test_item', price = 0},
 }
 -- The Vehicle that is spawned

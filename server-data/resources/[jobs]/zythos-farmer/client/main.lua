@@ -3,9 +3,9 @@ ESX = nil
 local playerCoords
 local currentPlant = 1
 local currentPlants = 1
-local tebuCounter = 1
+local tebuCounter = 0
 local tebuThreshold = 5
-local totalTebu = 6
+local totalTebu = 5
 local spawnTebus = 1
 local FarmerBlip					  = {}
 local tebu = {}
@@ -121,7 +121,7 @@ Citizen.CreateThread(function()
 			if nearbyObject and IsPedOnFoot(playerPed) then
 
 				if not isPickingUp then
-					ESX.ShowHelpNotification("Tekan E untuk mengambil")
+					ESX.ShowHelpNotification("Tekan ~INPUT_CONTEXT~ untuk mengambil")
 				end
 
 				if IsControlJustReleased(0, 38) and DoesObjectOfTypeExistAtCoords(GetEntityCoords(PlayerPedId()), 5.0, GetHashKey('prop_veg_corn_01'), 0) then
@@ -149,7 +149,7 @@ Citizen.CreateThread(function()
 						if tebuCounter == tebuThreshold then
 							currentPlants = 0
 							tebuCounter = 0
-							while spawnTebus < 2 do
+							while spawnTebus < 20 do
 								spawnTebu()
 								spawnTebus = spawnTebus + 1
 							end
