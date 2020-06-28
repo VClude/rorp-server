@@ -68,13 +68,13 @@ Config.Garages = {
 	Garasi_Pelabuhan = {
 		Name = "Garasi Pelabuhan",
 		SpawnPoint = {
-			Pos = {x = -783.83,y = -1333.2,z = 6.0 },
+			Pos = {x = -783.83,y = -1333.2,z = 5.0 },
 			Heading = 69.59,
 			Marker = { w= 1.5, h= 1.0,r=0,g=255,b=0},
 			HelpPrompt = _U('spawn_car')
 		},
 		DeletePoint = {
-			Pos = {x = -763.06,y = -1321.89,z = 6.0 },
+			Pos = {x = -763.06,y = -1321.89,z = 5.0 },
 			Marker = { w= 1.5, h= 1.0,r=255,g=0,b=0},
 			HelpPrompt = _U('store_car')
 		}, 	
