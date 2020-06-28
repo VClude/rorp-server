@@ -2,8 +2,8 @@ fx_version 'bodacious'
 
 game 'gta5'
 
-description 'Farmer Job'
-author 'Zythos'
+description 'Job Petani'
+author 'Republic of RolePlay'
 
 version '1.1.0'
 
