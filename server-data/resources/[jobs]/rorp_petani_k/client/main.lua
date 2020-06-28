@@ -9,6 +9,7 @@ local spawnedCrops 			= 1
 local FarmerBlip			= {}
 local cropsObj		 		= {}
 local isPickingUp 			= false
+local spawnCounter			= 0
 local jobStatus = {
 	onDuty = false,
 	crop   = nil,
@@ -60,7 +61,7 @@ Citizen.CreateThread(function()
 		Citizen.Wait(5)
 		if playerCoords ~= nil and jobStatus.onDuty and ESX.PlayerData.job.name == Config.JobName then
 			local distance = #(playerCoords - Config.PlantMarkers[currentPlant])
-			if  distance < 20.0 then
+			if  distance < 40.0 then
 				DrawGameMarker(Config.PlantMarkers[currentPlant], 2, {0, 250, 0, 50})
 				if distance < 3.0 then
 					currentPlant = currentPlant + 1
@@ -112,39 +113,47 @@ Citizen.CreateThread(function()
 				end
 
 				if IsControlJustReleased(0, 38) and DoesObjectOfTypeExistAtCoords(GetEntityCoords(PlayerPedId()), 5.0, GetHashKey('prop_cs_plant_01'), 0) then
-				isPickingUp = true
-				local plant = GetClosestObjectOfType(GetEntityCoords(PlayerPedId()), 5.0, GetHashKey('prop_cs_plant_01'), 0, 1, 1)
-				TriggerEvent("mythic_progressbar:client:progress", {
-					name = "harvesting_crop",
-					duration = 5000,
-					label = _U("harvesting_crop"),
-					useWhileDead = false,
-					canCancel = false,
-					controlDisables = {
-						disableMovement = true,
-						disableCarMovement = true,
-						disableMouse = false,
-						disableCombat = true,
-					},
-					animation = {
-						animDict = "amb@world_human_gardener_plant@male@idle_a",
-						anim = "idle_a",
-					}
-				}, function(status)
-					if not status then
-						cropsCounter = cropsCounter + 1
-						if cropsCounter == cropsThreshold then
-							currentPlants = 0
-							cropsCounter = 0
-							ESX.ShowNotification("anda sudah memanen semua Tebu, Silahkan Anda perlu Membajak kebun lagi")
+					isPickingUp = true
+					local plant = GetClosestObjectOfType(GetEntityCoords(PlayerPedId()), 5.0, GetHashKey('prop_cs_plant_01'), 0, 1, 1)
+					TriggerEvent("mythic_progressbar:client:progress", {
+						name = "harvesting_crop",
+						duration = 5000,
+						label = _U("harvesting_crop"),
+						useWhileDead = false,
+						canCancel = false,
+						controlDisables = {
+							disableMovement = true,
+							disableCarMovement = true,
+							disableMouse = false,
+							disableCombat = true,
+						},
+						animation = {
+							animDict = "amb@world_human_gardener_plant@male@idle_a",
+							anim = "idle_a",
+						}
+					}, function(status)
+							if not status then								
+								isPickingUp = false
+								ESX.Game.DeleteObject(nearbyObject)
+								table.remove(cropsObj, nearbyID)
+								TriggerServerEvent('rorp_petani:GiveCrop', jobStatus.crop)
+								cropsCounter = cropsCounter + 1
+								if cropsCounter == cropsThreshold then
+									-- currentPlants = 0
+									cropsCounter = 0
+									-- ESX.ShowNotification("anda sudah memanen semua Tebu, Silahkan Anda perlu Membajak kebun lagi")
+									spawnCounter = spawnCounter + 1
+									if spawnCounter < 10 then
+										Citizen.Wait(2000)
+										spawnCrops()
+									else
+										spawnCounter = 0
+									end
+								end
+							end
 						end
-						isPickingUp = false
-						ESX.Game.DeleteObject(nearbyObject)
-						table.remove(cropsObj, nearbyID)
-						TriggerServerEvent('rorp_petani:GiveCrop', jobStatus.crop)
-					end
-				end)
-			end
+					)
+				end
 			end
 		end
 	end
@@ -208,17 +217,29 @@ function DrawGameMarker(coords, id, colour)
 	DrawMarker(id, coords.x, coords.y, coords.z, 0.0, 0.0, 0.0, 0.0, 180.0, 0.0, 2.0, 2.0, 2.0, colour[1], colour[2], colour[3], colour[4], false, true, 2, nil, nil, false)
 end
 
-function spawnCrops()
-	while currentPlants < Config.TotalSpawnedCorps do
-		Citizen.Wait(0)
-		local tC = GenerateCrops()
+-- function spawnCrops()
+-- 	while currentPlants < Config.TotalSpawnedCorps do
+-- 		Citizen.Wait(0)
+-- 		local tC = GenerateCrops()
 
-		ESX.Game.SpawnLocalObject('prop_cs_plant_01', tC, function(obj)
+-- 		ESX.Game.SpawnLocalObject('prop_cs_plant_01', tC, function(obj)
+-- 			PlaceObjectOnGroundProperly(obj)
+-- 			FreezeEntityPosition(obj, true)
+
+-- 			table.insert(cropsObj, obj)
+-- 			currentPlants = currentPlants + 1
+-- 		end)
+-- 	end
+-- end
+
+function spawnCrops()
+	for k,v in ipairs(Config.CropLocations) do
+		Citizen.Wait(1500, 3500)
+		ESX.Game.SpawnLocalObject('prop_veg_corn_01', vector3(v.x, v.y, v.z - 1), function(obj)
 			PlaceObjectOnGroundProperly(obj)
 			FreezeEntityPosition(obj, true)
 
 			table.insert(cropsObj, obj)
-			currentPlants = currentPlants + 1
 		end)
 	end
 end

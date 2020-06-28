@@ -13,7 +13,19 @@ Config.PlantMarkers = {
 }
 
 -- This is the locations of the crops that spawn, so if you want 10 crops to spawn you need add 10 points if that makes sense
-Config.FarmFields = vector3(-1934.96, 1929.59, 167.52)
+-- Config.FarmFields = vector3(-1934.96, 1929.59, 167.52)
+Config.CropLocations = {
+	vector3(-1937.14, 1941.36, 162.78),
+	vector3(-1888.37, 1912.65, 162.13),
+	vector3(-1906.66, 1913.3, 166.75),
+	vector3(-1925.4, 1924.18, 167.36),
+	vector3(-1965.32, 1946.65, 165.13),
+	vector3(-1975.29, 1942.9, 169.68),
+	vector3(-1944.77, 1926.31, 170.6),
+	vector3(-1915.73, 1907.24, 169.92),
+	vector3(-1892.01, 1921.36, 160.64),
+	vector3(-1944.65, 1949.94, 159.5),
+}
 
 -- Marker to take off uniform
 Config.Management = vector3(443.03, 6459.09, 28.79)
