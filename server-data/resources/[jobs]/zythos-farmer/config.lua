@@ -15,7 +15,7 @@ Config.CropLocations = {
 	vector3(714.31, 6459.42, 30.89),
 	vector3(719.9, 6480.5, 28.40),
 	vector3(652.99, 6485.8, 29.62),
-	vector3(653.7, 6480.58, 30.12),
+	vector3(653.7, 6480.58, 30.12)
 }
 
 -- Marker to take off uniform
