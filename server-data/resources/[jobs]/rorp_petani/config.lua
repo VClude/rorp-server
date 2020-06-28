@@ -44,27 +44,27 @@ Config.JobName = 'petani'
 -- The Uniform for male and female, You need to change this to the uniform of your liking
 Config.Uniform = {
 	male = {
-		tshirt_1 = 59,  tshirt_2 = 1,
-		torso_1 = 55,   torso_2 = 0,
+		tshirt_1 = 16,  tshirt_2 = 0,
+		torso_1 = 53,   torso_2 = 0,
 		decals_1 = 0,   decals_2 = 0,
-		arms = 41,
-		pants_1 = 25,   pants_2 = 0,
-		shoes_1 = 25,   shoes_2 = 0,
-		helmet_1 = 46,  helmet_2 = 0,
+		arms = 65,
+		pants_1 = 91,   pants_2 = 0,
+		shoes_1 = 35,   shoes_2 = 0,
+		helmet_1 = 22,  helmet_2 = 0,
 		chain_1 = 0,    chain_2 = 0,
-		ears_1 = 2,     ears_2 = 0,
+		ears_1 = 1,     ears_2 = 0,
 		bproof_1 = -1
 	}, 
 	female = {
-		tshirt_1 = 59,  tshirt_2 = 1,
-		torso_1 = 55,   torso_2 = 0,
+		tshirt_1 = 16,  tshirt_2 = 0,
+		torso_1 = 46,   torso_2 = 0,
 		decals_1 = 0,   decals_2 = 0,
-		arms = 41,
-		pants_1 = 25,   pants_2 = 0,
-		shoes_1 = 25,   shoes_2 = 0,
-		helmet_1 = 46,  helmet_2 = 0,
+		arms = 74,
+		pants_1 = 94,   pants_2 = 0,
+		shoes_1 = 36,   shoes_2 = 0,
+		helmet_1 = 1,  helmet_2 = 0,
 		chain_1 = 0,    chain_2 = 0,
-		ears_1 = 2,     ears_2 = 0,
+		ears_1 = 1,     ears_2 = 0,
 		bproof_1 = -1
 	}
 }
