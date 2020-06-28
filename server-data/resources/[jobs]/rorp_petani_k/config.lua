@@ -19,7 +19,7 @@ Config.FarmFields = vector3(-1934.96, 1929.59, 167.52)
 Config.Management = vector3(443.03, 6459.09, 28.79)
 
 -- Marker to sell the crops
-Config.SellCrops = vector3(442.31, 6506.72, 28.77)
+Config.SellCrops = vector3(-1923.9, 2059.66, 140.83)
 
 -- The Marker to start the job
 Config.StartJob = { pos = vector3(-1920.96, 2048.85, 140.74), heading = 256.2 }
