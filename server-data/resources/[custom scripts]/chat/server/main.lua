@@ -1,7 +1,19 @@
 -- StarBlazt Chat
 TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
+local whitelisted = {
+	{job='bennys',alias='Benny'},
+	{job='pedagang',alias='Pedagang'},
+	{job='police',alias='Polisi'},
+	{job='ambulance',alias='EMS'},
+  }
 
-
+  function getIdentityZ(source)
+	local xPlayer = ESX.GetPlayerFromId(source)
+	return {
+		name = xPlayer.getName(),
+		job = xPlayer.getJob().name
+	}
+  end
 function getIdentity(source)
 	local identifier = GetPlayerIdentifiers(source)[1]
 	local result = MySQL.Sync.fetchAll("SELECT * FROM users WHERE identifier = @identifier", {['@identifier'] = identifier})
@@ -45,48 +57,21 @@ AddEventHandler('chat:server:ServerPSA', function(message)
     CancelEvent()
 end)
 
--- ======================= Chat Untuk EMS ===========================
 
-RegisterServerEvent('emsreport')
-AddEventHandler('emsreport', function(source, msg)
-    local name = getIdentity(source)
-    fal = name.firstname  .. '  ' .. name.lastname
-    TriggerClientEvent('chat:ReportSendEms', -1, source, fal, msg)
-end)
-
---==================================================================
-
--- ======================= Chat Untuk Polisi =======================
-
-RegisterServerEvent('polisreport')
-AddEventHandler('polisreport', function(source, msg)
-    local name = getIdentity(source)
-    fal = name.firstname  .. '  ' .. name.lastname
-    TriggerClientEvent('chat:ReportSendPolisi', -1, source, fal, msg)
-end)
-
---==================================================================
-
--- ======================= Chat Untuk Pedagang =======================
-
-RegisterServerEvent('pedagangreport')
-AddEventHandler('pedagangreport', function(source, msg)
-    local name = getIdentity(source)
-    fal = name.firstname  .. '  ' .. name.lastname
-    TriggerClientEvent('chat:ReportSendPedagang', -1, source, fal, msg)
-end)
-
---==================================================================
-
--- ======================= Chat Untuk Bennys =======================
-
-RegisterServerEvent('bennysreport')
-AddEventHandler('bennysreport', function(source, msg)
-    local name = getIdentity(source)
-    fal = name.firstname  .. '  ' .. name.lastname
-    TriggerClientEvent('chat:ReportSendBennys', -1, source, fal, msg)
-end)
-
+RegisterCommand('info', function(source, args, rawCommand)
+	local msg = rawCommand:sub(5)
+	local name = getIdentityZ(source)
+	for _k, _v in ipairs(whitelisted) do
+		if _v.job == name.job then
+			fal = _v.alias
+			nama = name.name
+			TriggerClientEvent('chat:addMessage', -1, {
+			template = '<div class="chat-message ' .. _v.job .. '"><b>{0} | {1} :</b> {2}</div>',
+			args = { fal, nama, msg }
+		})
+		end
+	  end
+end, false)
 --==================================================================
 
 -- ======================= Chat Untuk OOC =======================
@@ -94,9 +79,9 @@ end)
 RegisterCommand('ooc', function(source, args, rawCommand)
 	local msg = rawCommand:sub(4)
 	local name = getIdentity(source)
-	fal = name.firstname .. "  " .. name.lastname
+	fal = 'ID ' .. source
         TriggerClientEvent('chat:addMessage', -1, {
-        template = '<div class="chat-message"><b>[ OOC ] {0}:</b> {1}</div>',
+        template = '<div class="chat-message"><b>[ OOC ] {0} :</b> {1}</div>',
         args = { fal, msg }
     })
 end, false)

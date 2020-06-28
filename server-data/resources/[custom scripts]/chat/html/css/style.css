@@ -30,7 +30,7 @@
 /*src: url("../BarlowCondensed.ttf");*/
 
 * {
-  font-family: "Lato", sans-serif;
+  font-family: "Segoe UI", sans-serif;
   margin: 0;
   padding: 0;
   font-size: 1rem;
@@ -188,16 +188,20 @@ input:focus {
   background-color: rgba(77, 189, 77, 0.705);
 }
 
-.chat-message.polisi {
+.chat-message.ambulance {
+  background-color: rgba(77, 189, 77, 0.705);
+}
+
+.chat-message.police {
   background-color: rgba(29, 15, 223, 0.678);
 }
 
 .chat-message.pedagang {
-  background-color: rgba(255, 115, 0, 0.678);
+  background-color: rgba(0, 0, 0, 0.678);
 }
 
 .chat-message.bennys {
-  background-color: rgb(255, 0, 149);
+  background-color: rgb(224, 150, 14);
 }
 
 .chat-message.bisik {
