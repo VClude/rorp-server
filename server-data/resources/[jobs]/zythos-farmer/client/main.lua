@@ -147,7 +147,7 @@ Citizen.CreateThread(function()
 					if not status then
 						tebuCounter = tebuCounter + 1
 						if tebuCounter == tebuThreshold then
-							currentPlants = 0
+							currentPlants = 1
 							tebuCounter = 0
 							while spawnTebus < 20 do
 								spawnTebu()
