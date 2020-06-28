@@ -74,7 +74,7 @@
 
     function cooking() {
       $.post('http://rorp_pedagang/cookingNUI', JSON.stringify(ingredients));
-      $.post('http://rorp_pedagang/NUIFocusOff');
+      $.post('http://rorp_pedagang/quit', JSON.stringify({}));
     }
 
     function closeMain() {
