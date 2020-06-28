@@ -1,7 +1,7 @@
 Config = {
 	Language = "en",					-- You can change the language here. I translated some with a tool online so they might not be 100% accurate. Let me know!
 	ExtrasEnabled = true,				-- This toggles the extra commands (Shirt, Pants) in case you dont want your players stripping their clothes for whatever reason.
-	Debug = false,						-- Enables logging and on screen display of what your character is wearing.
+	Debug = true,						-- Enables logging and on screen display of what your character is wearing.
 	GUI = {
 		Position = {x = 0.5, y = 0.5},	-- 0.5 is the middle!
 		AllowInCars = false,			-- Allow the GUI in cars?
