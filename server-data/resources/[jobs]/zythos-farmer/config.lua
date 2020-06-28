@@ -12,10 +12,10 @@ HydrochloricAcidFarm = {coords = vector3(2724.12, 1583.03, 24.5)
 
 -- This is the locations of the crops that spawn, so if you want 10 crops to spawn you need add 10 points if that makes sense
 Config.CropLocations = {
-	coords = vector3(714.31, 6459.42, 30.89),
-	-- vector3(719.9, 6480.5, 28.40),
-	-- vector3(652.99, 6485.8, 29.62),
-	-- vector3(653.7, 6480.58, 30.12),
+	vector3(714.31, 6459.42, 30.89),
+	vector3(719.9, 6480.5, 28.40),
+	vector3(652.99, 6485.8, 29.62),
+	vector3(653.7, 6480.58, 30.12),
 }
 
 -- Marker to take off uniform
