@@ -137,7 +137,6 @@ Citizen.CreateThread(function()
 							currentPlants = 1
 							cropsCounter = 0
 							if spawnedCrops < Config.TotalSpawnedTimes then
-								Citizen.Wait(2000)
 								spawnCrops()
 								spawnedCrops = spawnedCrops + 1
 							else
