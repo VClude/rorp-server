@@ -2,14 +2,13 @@ ESX = nil
 
 TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 
-RegisterServerEvent('rorp_petani:GiveCrop')
-AddEventHandler('rorp_petani:GiveCrop', function(crop)
+ESX.RegisterServerCallback('rorp_petani:GiveCrop', function(source,cb,crop)
     local xPlayer = ESX.GetPlayerFromId(source)
-
     if xPlayer.canCarryItem(crop, 1) then
         xPlayer.addInventoryItem(crop, 1)
+        cb(true)
     else
-        TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'error', text = 'Tas kamu sudah penuh', duration = 2500})
+        cb(false)
     end
 end)
 

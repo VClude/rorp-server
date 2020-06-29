@@ -124,22 +124,27 @@ Citizen.CreateThread(function()
 							anim = "idle_a",
 						}
 					}, function(status)
-							if not status then								
-								isPickingUp = false
-								ESX.Game.DeleteObject(nearbyObject)
-								table.remove(cropsObj, nearbyID)
-								TriggerServerEvent('rorp_petani:GiveCrop', jobStatus.crop)
-								cropsCounter = cropsCounter + 1
-								if cropsCounter == Config.cropsThreshold then
-									cropsCounter = 0
-									spawnCounter = spawnCounter + 1
-									if spawnCounter < 10 then
-										Citizen.Wait(2000)
-										spawnCrops()
+							if not status then
+								ESX.TriggerServerCallback('rorp_petani:GiveCrop', function(kosong)
+									if kosong then
+										isPickingUp = false
+										ESX.Game.DeleteObject(nearbyObject)
+										table.remove(cropsObj, nearbyID)
+										cropsCounter = cropsCounter + 1
+										if cropsCounter == Config.cropsThreshold then
+											cropsCounter = 0
+											spawnCounter = spawnCounter + 1
+											if spawnCounter < 10 then
+												Citizen.Wait(2000)
+												spawnCrops()
+											else
+												spawnCounter = 0
+											end
+										end
 									else
-										spawnCounter = 0
-									end
-								end
+										exports['mythic_notify']:SendAlert('error', 'Tas kamu penuh')	
+									end									
+								end,jobStatus.crop)															
 							end
 						end
 					)
