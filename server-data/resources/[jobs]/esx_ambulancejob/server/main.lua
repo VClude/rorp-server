@@ -369,3 +369,8 @@ AddEventHandler('esx_ambulancejob:server:EnteredBed', function()
     -- TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'success', text = 'You were billed for $' .. totalBill ..'.' })
     TriggerClientEvent('esx_ambulancejob:client:FinishServices', src)
 end)
+
+RegisterServerEvent('esx_ambulancejob:server:LeaveBed')
+AddEventHandler('esx_ambulancejob:server:LeaveBed', function(id)
+    beds[id].taken = false
+end)
