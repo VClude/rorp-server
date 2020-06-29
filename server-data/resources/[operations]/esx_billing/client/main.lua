@@ -45,7 +45,7 @@ AddEventHandler('esx_billing:ShowBillMenu', function()
 	if not isDead and not ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'billing') then
 		ShowBillsMenu()
 	end
-)
+end)
 
 
 -- RegisterKeyMapping('showbills', _U('keymap_showbills'), 'keyboard', 'F7')
