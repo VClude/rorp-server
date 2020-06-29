@@ -28,18 +28,18 @@ Config.Jobs.slaughterer = {
 			Hint = _U('cloak_change')
 		},
 
-		AliveChicken = {
+		CowsMeat = {
 			Pos = {x = 997.49, y = -2107.24, z = 29.48},
 			Size = {x = 3.0, y = 3.0, z = 1.0},
 			Color = {r = 204, g = 204, b = 0},
 			Marker = 1,
 			Blip = true,
-			Name = _U('s_hen'),
+			Name = _U('s_cow'),
 			Type = 'work',
 			Duration = 30000,
 			Item = {
 				{
-					name = _U('s_alive_chicken'),
+					name = _U('s_meat_cow'),
 					db_name = 'meats',
 					time = 1,
 					max = 1,
@@ -50,7 +50,7 @@ Config.Jobs.slaughterer = {
 					drop = 100
 				}
 			},
-			Hint = _U('s_catch_hen')
+			Hint = _U('s_get_meat')
 		},
 
 		SlaughterHouse = {
@@ -64,14 +64,14 @@ Config.Jobs.slaughterer = {
 			Duration = 30000,
 			Item = {
 				{
-					name = _U('s_slaughtered_chicken'),
+					name = _U('s_slaughtered_cow'),
 					db_name = 'meat_cincang',
 					time = 5,
 					max = 20,
 					add = 1,
 					remove = 1,
 					requires = 'meats',
-					requires_name = _U('s_alive_chicken'),
+					requires_name = _U('s_meat_cow'),
 					drop = 100
 				}
 			},
@@ -89,14 +89,14 @@ Config.Jobs.slaughterer = {
 			Duration = 30000,
 			Item = {
 				{
-					name = _U('s_packagechicken'),
-					db_name = 'sosis',
+					name = _U('s_packagecowmeat'),
+					db_name = 'dagingkemasan',
 					time = 4,
 					max = 100,
 					add = 10,
 					remove = 1,
 					requires = 'meat_cincang',
-					requires_name = _U('s_unpackaged'),
+					requires_name = _U('s_slaughtered_cow'),
 					drop = 100
 				}
 			},
@@ -158,8 +158,8 @@ Config.Jobs.slaughterer = {
 					remove = 1,
 					max = 100, -- if not present, probably an error at itemQtty >= item.max in esx_jobs_sv.lua
 					price = 230,
-					requires = 'sosis',
-					requires_name = _U('s_packagechicken'),
+					requires = 'dagingkemasan',
+					requires_name = _U('s_packagecowmeat'),
 					drop = 100
 				}
 			},
