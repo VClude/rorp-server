@@ -38,6 +38,7 @@ ESX.RegisterServerCallback('rorp_petani:checkBahan', function(source,cb,bahan1,b
         cb(true)
     else
         cb(false)
+    end
 end)
 
 RegisterServerEvent('rorp_petani:GivePackagedCrop')
