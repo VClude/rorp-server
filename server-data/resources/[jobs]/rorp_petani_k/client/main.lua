@@ -324,7 +324,7 @@ function OpenPackageMenu()
 	local elements = {}
 
 	for k,v in ipairs(Config.PackagingCrop) do
-		table.insert(elements, {label = v.label, value = v.DBname, _bahan1 = v.bahan1, _bahan2 = v._bahan2})
+		table.insert(elements, {label = v.label, value = v.DBname, req1 = v.bahan1, req2 = v._bahan2})
 	end
 
 	ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'job_packaging',
@@ -339,9 +339,9 @@ function OpenPackageMenu()
 				if hasAllReq then
 					packagingEvent(data.current.value)
 				else
-					exports['mythic_notify']:SendAlert('error', 'Kamu membutuhkan '..data.current._bahan1..' x4 dan '..data.current._bahan2.. ' x1')
+					exports['mythic_notify']:SendAlert('error', 'Kamu membutuhkan '..data.current.req1..' x4 dan '..data.current.req2.. ' x1')
 				end	
-			end,data.current._bahan1,data.current._bahan2)
+			end,data.current.req1,data.current.req2)
 		end
 	end,
 	function(data, menu)
