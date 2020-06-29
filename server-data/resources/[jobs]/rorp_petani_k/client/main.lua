@@ -324,7 +324,7 @@ function OpenPackageMenu()
 	local elements = {}
 
 	for k,v in ipairs(Config.PackagingCrop) do
-		table.insert(elements, {label = v.label, value = v.DBname, req1 = v.bahan1, req2 = v._bahan2})
+		table.insert(elements, {label = v.label, value = v.DBname, req1 = v.bahan1, req2 = v.bahan2})
 	end
 
 	ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'job_packaging',
