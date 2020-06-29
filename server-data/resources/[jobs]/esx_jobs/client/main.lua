@@ -128,13 +128,7 @@ Citizen.CreateThread(function()
 			if distance <= 1.2 and not currentlyWashing then
 				DrawText3Ds(v.x, v.y, v.z, Config.DrawWasher3DText)
 				if IsControlJustPressed(0, Config.KeyToStartWashing) then
-					ESX.TriggerServerCallback("esx_jobs:getWashPan", function(washPan)
-						if washPan then
-							WasherEvent()
-						else
-							ESX.ShowNotification("Kamu harus  Menjadi Penambang untuk ~b~Mencuci~s~ disini!")
-						end
-					end)
+					WasherEvent()
 					Citizen.Wait(300)
 				end
 			end
@@ -187,11 +181,7 @@ Citizen.CreateThread(function()
 					local closestPlayer, closestDistance = ESX.Game.GetClosestPlayer()
                     if closestPlayer == -1 or closestDistance >= 0.7 then
 						ESX.TriggerServerCallback("esx_jobs:getWashedStone", function(WashedStone)
-							if WashedStone then
-								SmeltingEvent()	
-							else
-								ESX.ShowNotification("Kamu membutuhkan sekiranya ~y~10x Batu Bersih~s~ serta Menjadi Penambang untuk di ~b~Lebur~s~ disini!")
-							end
+							SmeltingEvent()
 						end)
 					else
 						ESX.ShowNotification("Kamu terlalu dekat dengan yang lain")
@@ -274,11 +264,12 @@ AddEventHandler('esx_jobs:action', function(job, zone, zoneIndex)
 					disableCombat = true,
 				},
 				animation = {
-					animDict = "missheistdockssetup1clipboard@idle_a",
-					anim = "idle_a",
+					-- animDict = "missheistdockssetup1clipboard@idle_a",
+					-- anim = "idle_a",
+					task = "CODE_HUMAN_MEDIC_TIME_OF_DEATH",
 				},
 				prop = {
-					model = "prop_paper_bag_small",
+					-- model = "prop_paper_bag_small",
 				},
 			}, function(status)
 				if not status then
@@ -395,11 +386,11 @@ AddEventHandler('esx_jobs:action', function(job, zone, zoneIndex)
 				disableCombat = true,
 			},
 			animation = {
-				animDict = "missheistdockssetup1clipboard@idle_a",
-				anim = "idle_a",
+				animDict = "missheistdockssetup1clipboard@base",
+				anim = "base",
 			},
 			prop = {
-				model = "prop_paper_bag_small",
+				model = "prop_notepad_01",
 			},
 		}, function(status)
 			if not status then

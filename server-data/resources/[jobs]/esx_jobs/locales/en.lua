@@ -67,23 +67,23 @@ Locales['en'] = {
   -- Miner
   ['m_miner_locker']            = '1. Ruang Ganti Pekerja',
   ['m_rock']                    = '2. Pengambilan Batu',
-  ['m_pickrocks']               = 'press ~INPUT_PICKUP~ to retrieve rocks.',
+  ['m_pickrocks']               = 'tekan ~INPUT_PICKUP~ untuk mengambil Batu.',
   ['m_washrock']                = '3. Pencucian Batu',
-  ['m_rock_button']             = 'press ~INPUT_PICKUP~ to wash the rocks.',
+  ['m_rock_button']             = 'tekan ~INPUT_PICKUP~ untuk mencucui Batu.',
   ['m_rock_smelting']           = '4. Peleburan Batu',
   ['m_copper']                  = 'copper',
   ['m_sell_copper']             = '5. Penjualan Tembaga',
-  ['m_deliver_copper']          = 'Press ~INPUT_PICKUP~ to deliver the copper.',
+  ['m_deliver_copper']          = 'tekan ~INPUT_PICKUP~ untuk mengirim Tembaga.',
   ['m_iron']                    = 'iron',
   ['m_sell_iron']               = '5. Penjualan Besi',
-  ['m_deliver_iron']            = 'press ~INPUT_PICKUP~ to deliver the iron.',
+  ['m_deliver_iron']            = 'tekan ~INPUT_PICKUP~ untuk mengirim Besi.',
   ['m_gold']                    = 'gold',
   ['m_sell_gold']               = '5. Penjualan Emas',
-  ['m_deliver_gold']            = 'press ~INPUT_PICKUP~ to deliver the gold.',
+  ['m_deliver_gold']            = 'tekan ~INPUT_PICKUP~ untuk menjual Emas.',
   ['m_diamond']                 = 'diamond',
   ['m_sell_diamond']            = '5. Penjualan Berlian',
-  ['m_deliver_diamond']         = 'press ~INPUT_PICKUP~ to deliver the diamonds.',
-  ['m_melt_button']             = 'press ~INPUT_PICKUP~ to melt the rocks.',
+  ['m_deliver_diamond']         = 'tekan ~INPUT_PICKUP~ untuk menjual Berlian.',
+  ['m_melt_button']             = 'tekan ~INPUT_PICKUP~ untuk meleburkan Batu.',
 
   -- Reporter
   ['reporter_name']             = 'san Andreas Times',
@@ -91,17 +91,16 @@ Locales['en'] = {
 
   -- Slaughterer
   ['s_slaughter_locker']        = '1. Ruang Ganti Baju',
-  ['s_hen']                     = '2. Pemotongan Sapi',
-  ['s_alive_chicken']           = 'Sapi Potong',
-  ['s_catch_hen']               = 'Tekan ~INPUT_PICKUP~ untuk memotong Sapi.',
-  ['s_slaughtered_chicken']     = 'Penggilingan Daging',
+  ['s_cow']                     = '2. Pemotongan Sapi',
+  ['s_meat_cow']                = 'Sapi Potong',
+  ['s_get_meat']                = 'Tekan ~INPUT_PICKUP~ untuk memotong Daging Sapi.',
+  ['s_slaughtered_cow']         = 'Daging Cincang',
   ['s_chop_animal']             = 'Tekan ~INPUT_PICKUP~ untuk menggiling Daging.',
   ['s_slaughtered']             = 'Penggilingan Daging',
   ['s_package']                 = 'Mengemas Daging Cincang',
-  ['s_packagechicken']          = 'Daging Cincang',
-  ['s_unpackaged']              = 'chicken to be packed',
+  ['s_packagecowmeat']          = 'Daging Sapi Kemasan',
   ['s_unpackaged_button']       = 'Tekan ~INPUT_PICKUP~ untuk mengemas Daging Cincang.',
-  ['s_deliver']                 = 'Tekan ~INPUT_PICKUP~ untuk mengirim sosis.',
+  ['s_deliver']                 = 'Tekan ~INPUT_PICKUP~ untuk mengirim Daging Kemasan.',
 
   -- Dress Designer
   ['dd_dress_locker']           = '1. Ruang Kerja & Ganti Baju',
@@ -112,9 +111,5 @@ Locales['en'] = {
   ['dd_clothing']               = '4. Pembuatan Baju',
   ['dd_makeclothing']           = 'tekan ~INPUT_PICKUP~ untuk membuat baju.',
   ['dd_deliver_clothes']        = 'tekan ~INPUT_PICKUP~ untuk mengirim baju.',
-  
-  ['pet_a']                     = 'tekan ~INPUT_PICKUP~ untuk mengambil jeruk.',
-  ['pet_b']                     = 'tekan ~INPUT_PICKUP~ untuk menjual jeruk.',
-  ['pet_c']                     = 'tekan ~INPUT_PICKUP~ untuk melakukan pesugihan.',
 
 }
