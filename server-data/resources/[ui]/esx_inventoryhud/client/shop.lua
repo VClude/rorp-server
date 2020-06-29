@@ -39,24 +39,6 @@ Citizen.CreateThread(function()
                     end
                 end
             end
-            -- if IsInYouToolZone(coords) then
-            --     if currentAction then
-            --         ESX.ShowHelpNotification(currentActionMsg)
-            --         if IsControlJustReleased(0, Keys["E"]) then
-            --             OpenShopInv("youtool")
-            --             Citizen.Wait(2000)
-            --         end
-            --     end
-            -- end
-            -- if IsInPrisonShopZone(coords) then
-            --     if currentAction then
-            --         ESX.ShowHelpNotification(currentActionMsg)
-            --         if IsControlJustReleased(0, Keys["E"]) then
-            --             OpenShopInv("prison")
-            --             Citizen.Wait(2000)
-            --         end
-            --     end
-            -- end
             if IsInWeaponShopZone(coords) then
                 if currentAction then
                     ESX.ShowHelpNotification(currentActionMsg)
@@ -66,7 +48,7 @@ Citizen.CreateThread(function()
                                 OpenShopInv("weaponshop")
                                 Citizen.Wait(2000)
                             else
-                                exports['mythic_notify']:DoHudText('error', _U('license_check_fail'))
+                                OpenBuyLicenseMenu()
                             end
                         end, GetPlayerServerId(PlayerId()), 'weapon')
                     end
@@ -192,26 +174,6 @@ function IsInRobsLiquorZone(coords)
     return false
 end
 
--- function IsInYouToolZone(coords)
---     YouTool = Config.Shops.YouTool.Locations
---     for i = 1, #YouTool, 1 do
---         if GetDistanceBetweenCoords(coords, YouTool[i].x, YouTool[i].y, YouTool[i].z, true) < 1.5 then
---             return true
---         end
---     end
---     return false
--- end
-
--- function IsInPrisonShopZone(coords)
---     PrisonShop = Config.Shops.PrisonShop.Locations
---     for i = 1, #PrisonShop, 1 do
---         if GetDistanceBetweenCoords(coords, PrisonShop[i].x, PrisonShop[i].y, PrisonShop[i].z, true) < 1.5 then
---             return true
---         end
---     end
---     return false
--- end
-
 function IsInWeaponShopZone(coords)
     WeaponShop = Config.Shops.WeaponShop.Locations
     for i = 1, #WeaponShop, 1 do
@@ -254,8 +216,8 @@ function OpenBuyLicenseMenu()
     ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'shop_license',{
         title = _U('license_shop_title'), --Register a License
         elements = {
-          { label = 'yes' ..' ($' .. Config.LicensePrice ..')', value = 'yes' }, --yes
-          { label = 'no', value = 'no' },
+          { label = 'Ya' ..' (<span style="color:red;">$' .. Config.LicensePrice ..'</span>)', value = 'yes' }, --yes
+          { label = 'Tidak', value = 'no' },
         }
       },
       function (data, menu)		
@@ -282,14 +244,6 @@ Citizen.CreateThread(function()
     for k, v in pairs(Config.Shops.RobsLiquor.Locations) do
         CreateBlip(vector3(Config.Shops.RobsLiquor.Locations[k].x, Config.Shops.RobsLiquor.Locations[k].y, Config.Shops.RobsLiquor.Locations[k].z ), _U('robs_liquor_name'), 3.0, Config.Color, Config.LiquorBlipID)
     end
-
-    -- for k, v in pairs(Config.Shops.YouTool.Locations) do
-    --     CreateBlip(vector3(Config.Shops.YouTool.Locations[k].x, Config.Shops.YouTool.Locations[k].y, Config.Shops.YouTool.Locations[k].z ), _U('you_tool_name'), 3.0, Config.Color, Config.YouToolBlipID)
-    -- end
-
-    -- for k, v in pairs(Config.Shops.YouTool.Locations) do
-    --     CreateBlip(vector3(Config.Shops.PrisonShop.Locations[k].x, Config.Shops.PrisonShop.Locations[k].y, Config.Shops.PrisonShop.Locations[k].z), _U('prison_shop_name'), 3.0, Config.Color, Config.PrisonShopBlipID)
-    -- end
 
     for k, v in pairs(Config.Shops.WeaponShop.Locations) do
         CreateBlip(vector3(Config.Shops.WeaponShop.Locations[k].x, Config.Shops.WeaponShop.Locations[k].y, Config.Shops.WeaponShop.Locations[k].z), _U('weapon_shop_name'), 3.0, Config.WeaponColor, Config.WeaponShopBlipID)
@@ -361,18 +315,6 @@ Citizen.CreateThread(function()
                 DrawMarker(25, Config.Shops.RobsLiquor.Locations[k].x, Config.Shops.RobsLiquor.Locations[k].y, Config.Shops.RobsLiquor.Locations[k].z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.MarkerSize.x, Config.MarkerSize.y, Config.MarkerSize.z, Config.MarkerColor.r, Config.MarkerColor.g, Config.MarkerColor.b, 100, false, true, 2, false, nil, nil, false)
             end
         end
-
-        -- for k, v in pairs(Config.Shops.YouTool.Locations) do
-        --     if GetDistanceBetweenCoords(coords, Config.Shops.YouTool.Locations[k].x, Config.Shops.YouTool.Locations[k].y, Config.Shops.YouTool.Locations[k].z + 0.01, true) < 12.0 then
-        --         DrawMarker(25, Config.Shops.YouTool.Locations[k].x, Config.Shops.YouTool.Locations[k].y, Config.Shops.YouTool.Locations[k].z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.MarkerSize.x, Config.MarkerSize.y, Config.MarkerSize.z, Config.MarkerColor.r, Config.MarkerColor.g, Config.MarkerColor.b, 100, false, true, 2, false, nil, nil, false)
-        --     end
-        -- end
-
-        -- for k, v in pairs(Config.Shops.PrisonShop.Locations) do
-        --     if GetDistanceBetweenCoords(coords, Config.Shops.PrisonShop.Locations[k].x, Config.Shops.PrisonShop.Locations[k].y, Config.Shops.PrisonShop.Locations[k].z + 0.01, true) < 12.0 then
-        --         DrawMarker(25, Config.Shops.PrisonShop.Locations[k].x, Config.Shops.PrisonShop.Locations[k].y, Config.Shops.PrisonShop.Locations[k].z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.MarkerSize.x, Config.MarkerSize.y, Config.MarkerSize.z, Config.MarkerColor.r, Config.MarkerColor.g, Config.MarkerColor.b, 100, false, true, 2, false, nil, nil, false)
-        --     end
-        -- end
 
         for k, v in pairs(Config.Shops.WeaponShop.Locations) do
             if GetDistanceBetweenCoords(coords, Config.Shops.WeaponShop.Locations[k].x, Config.Shops.WeaponShop.Locations[k].y, Config.Shops.WeaponShop.Locations[k].z + 0.01, true) < 12.0 then
