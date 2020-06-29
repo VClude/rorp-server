@@ -88,7 +88,7 @@ AddEventHandler('mythic_hospital:server:EnteredBed', function()
 
     -- YOU NEED TO IMPLEMENT YOUR FRAMEWORKS BILLING HERE
 	local xPlayer = ESX.GetPlayerFromId(src)
-    xPlayer.removeBank(totalBill)
+    xPlayer.removeAccountMoney('bank', totalBill)
     TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'success', text = 'You were billed for $' .. totalBill ..'.' })
     TriggerClientEvent('mythic_hospital:client:FinishServices', src)
 end)
