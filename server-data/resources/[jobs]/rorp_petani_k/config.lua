@@ -35,7 +35,7 @@ Config.ChangeClothes = vector3(443.03, 6459.09, 28.79)
 Config.SellCrops = vector3(-1923.9, 2059.66, 140.83)
 
 -- Marker to packaging the crops
-Config.PackagingCrop = vector3(-1931.47, 2062.42, 140.94)
+Config.PackagingCropCoords = vector3(-1931.47, 2062.42, 140.94)
 
 -- The Marker to start the job
 Config.StartJob = { pos = vector3(-1920.96, 2048.85, 140.74), heading = 256.2 }
