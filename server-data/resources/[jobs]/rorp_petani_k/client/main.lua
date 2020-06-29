@@ -339,7 +339,7 @@ function OpenPackageMenu()
 				if hasAllReq then
 					packagingEvent(data.current.value)
 				else
-					exports['mythic_notify']:SendAlert('error', 'Kamu membutuhkan '..data.current.req1..' x4 dan '..data.current.req2.. ' x1')
+					exports['mythic_notify']:SendAlert('error', 'kamu membutuhkan '..data.current.req1..' x4 dan '..data.current.req2.. ' x1')
 				end	
 			end,data.current.req1,data.current.req2)
 		end
