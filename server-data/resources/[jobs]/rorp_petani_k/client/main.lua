@@ -370,8 +370,7 @@ function packagingEvent(packaged)
 			disableCombat = true,
 		},
 		animation = {
-			animDict = "amb@world_human_gardener_plant@male@idle_a",
-			anim = "idle_a",
+			
 		}
 	}, function(status)
 			if not status then								
