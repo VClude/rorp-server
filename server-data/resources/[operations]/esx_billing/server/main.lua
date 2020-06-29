@@ -2,10 +2,6 @@ ESX = nil
 
 TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 
-RegisterCommand('showbills', function(source, args, rawCommand)
-	TriggerClientEvent('esx_billing:ShowBillMenu')
-end, false)
-
 RegisterServerEvent('esx_billing:sendBill')
 AddEventHandler('esx_billing:sendBill', function(playerId, sharedAccountName, label, amount)
 	local xPlayer = ESX.GetPlayerFromId(source)
