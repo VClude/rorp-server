@@ -1,18 +1,19 @@
 Locales['en'] = {
   -- Notifications
-  ['start_job'] = 'Press ~INPUT_CONTEXT~ to start the job',
-  ['sell_crops'] = 'Press ~INPUT_CONTEXT~ to sell your crops',
-  ['civ_clothes'] = 'Press ~INPUT_CONTEXT~ to take off uniform',
-  ['sold_crops'] = 'You Have Sold ~g~%s~w~ for $%s',
-  ['no_crop'] = 'You Dont Have Any %s On You',
+  ['start_job'] = 'Tekan ~INPUT_CONTEXT~ memulai pekerjaan',
+  ['sell_crops'] = 'Tekan ~INPUT_CONTEXT~ menjual hasil tani',
+  ['pack_crops'] = 'Tekan ~INPUT_CONTEXT~ packing hasil tani',
+  ['sold_crops'] = 'Kamu menjual ~g~%s~w~ sebesar $%s',
+  [''] = 'Kamu tidak mempunyai %s',
   -- Menus
-  ['job_menu'] = 'Select The Crop You Want To Plant',
-  ['crop_menu'] = 'Select The Crop You Want To Sell',
+  ['job_menu'] = 'Pilih bibit tanaman untuk di tanam',
+  ['crop_menu'] = 'Pilih hasil tani yang mau di jual',
+  ['packaging_menu'] = 'Pilih hasil tani yang mau di packing',
   -- Progress Bar
-  ['harvesting_crop'] = 'Harvesting The Crop',
+  ['harvesting_crop'] = 'Mengambil Hasil Tani...',
+  ['packaging_crop'] = 'Packing Hasil Tani...',
   -- Blips
-  ['plant_blip'] = 'Plant Seeds',
-  ['civ_clothing_blip'] = 'Change Clothes',
-  ['sell_crops_blip'] = 'Sell Crops',
-  ['start_job_blip'] = 'Start Farming',
+  ['plant_blip'] = 'Bibit Tanaman',
+  ['sell_crops_blip'] = 'Mengirim Hasil Tani',
+  ['start_job_blip'] = 'Ladang Petani',
 }

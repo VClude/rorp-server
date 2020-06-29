@@ -22,7 +22,7 @@ AddEventHandler('rorp_petani:SellCrop', function(crop, price)
     if itemCount > 0 then
         local sellValue = price * itemCount
         xPlayer.addMoney(sellValue)
-        xPlayer.showNotification(_U('sold_crops', itemCount .. " " .. crop, sellValue))
+        xPlayer.showNotification(_U('sold_crops', itemCount .. "x " .. crop, sellValue))
         xPlayer.removeInventoryItem(crop, itemCount)
     else
         xPlayer.showNotification(_U('no_crop', crop))

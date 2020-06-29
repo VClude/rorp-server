@@ -154,12 +154,11 @@ Citizen.CreateThread(function()
 		Citizen.Wait(5)
 		if ESX.PlayerData.job and ESX.PlayerData.job.name == Config.JobName then
 			local distance = #(playerCoords - Config.SellCrops)
-			if  distance < 10.0 then
-				DrawGameMarker(Config.SellCrops, Config.BlipID, {0, 250, 0, 50})
+			if  distance < 5.0 then
+				DrawGameMarker(Config.PackagingCrop , 24, {0, 250, 0, 50})
 				if distance < 2.0 then
-					ESX.ShowHelpNotification(_U('sell_crops'))
+					ESX.ShowHelpNotification(_U('pack_crops'))
 					if IsControlJustReleased(0, 38) then
-						-- OpenCropMenu()
 						if not isPackaging then
 							OpenPackageMenu()
 						end
@@ -174,27 +173,9 @@ Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(5)
 		if playerCoords ~= nil and not jobStatus.onDuty and ESX.PlayerData.job and ESX.PlayerData.job.name == Config.JobName then
-			local distance = #(playerCoords - Config.Management)
-			if  distance < 10.0 then
-				DrawGameMarker(Config.Management, Config.BlipID, {0, 250, 0, 50})
-				if distance < 2.0 then
-					ESX.ShowHelpNotification(_U('civ_clothes'))
-					if IsControlJustReleased(0, 38) then
-						CivClothing()
-					end
-				end
-			end
-		end
-	end
-end)
-
-Citizen.CreateThread(function()
-	while true do
-		Citizen.Wait(5)
-		if playerCoords ~= nil and not jobStatus.onDuty and ESX.PlayerData.job and ESX.PlayerData.job.name == Config.JobName then
 			local distance = #(playerCoords - Config.StartJob.pos)
-			if  distance < 10.0 then
-				DrawGameMarker(Config.StartJob.pos, Config.BlipID, {0, 250, 0, 50})
+			if  distance < 5.0 then
+				DrawGameMarker(Config.StartJob.pos, 39, {0, 250, 0, 50})
 				if distance < 2.0 then
 					ESX.ShowHelpNotification(_U('start_job'))
 					if IsControlJustReleased(0, 38) then
@@ -245,9 +226,9 @@ end
 function refreshBlips()
 	if ESX.PlayerData.job and ESX.PlayerData.job.name == Config.JobName then
 		local blip = AddBlipForCoord(Config.StartJob.pos)
-		SetBlipSprite(blip, 210)
+		SetBlipSprite(blip, 140)
 		SetBlipDisplay(blip, 2)
-		SetBlipScale(blip, 1.0)
+		SetBlipScale(blip, 0.6)
 		SetBlipColour(blip, 15)
 		SetBlipAsShortRange(blip, true)
 	
@@ -358,9 +339,9 @@ function packagingEvent(packaged)
 	local _packaged = packaged
 
 	TriggerEvent("mythic_progressbar:client:progress", {
-		name = "harvesting_crop",
+		name = "packaging_crop",
 		duration = 5000,
-		label = _U("harvesting_crop"),
+		label = _U("packaging_crop"),
 		useWhileDead = false,
 		canCancel = false,
 		controlDisables = {
@@ -394,11 +375,5 @@ function setUniform()
 		if uniform then
 			TriggerEvent('skinchanger:loadClothes', skin, uniform)
 		end
-	end)
-end
-
-function CivClothing()
-	ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin)
-		TriggerEvent('skinchanger:loadSkin', skin)
 	end)
 end

@@ -29,10 +29,13 @@ Config.CropLocations = {
 }
 
 -- Marker to take off uniform
-Config.Management = vector3(443.03, 6459.09, 28.79)
+Config.ChangeClothes = vector3(443.03, 6459.09, 28.79)
 
 -- Marker to sell the crops
 Config.SellCrops = vector3(-1923.9, 2059.66, 140.83)
+
+-- Marker to packaging the crops
+Config.PackagingCrop = vector3(-1931.95, 2062.06, 140.94)
 
 -- The Marker to start the job
 Config.StartJob = { pos = vector3(-1920.96, 2048.85, 140.74), heading = 256.2 }

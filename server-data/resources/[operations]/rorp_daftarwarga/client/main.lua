@@ -52,7 +52,7 @@ function BukaMenuDaftarPenduduk()
                 end
             )
 		end
-	end, GetPlayerServerId(PlayerId()), 'KTP')
+	end, GetPlayerServerId(PlayerId()), 'ktp')
     
 end
 
@@ -78,7 +78,7 @@ function StopTheoryTest(success)
 	SetNuiFocus(false)
 
     if success then
-        TriggerServerEvent('rorp_daftarwarga:addKTP','KTP', Config.UangTunjangan)
+        TriggerServerEvent('rorp_daftarwarga:addKTP','ktp', Config.UangTunjangan)
 	else
 		ESX.ShowNotification(_U('test_gagal'))
 	end
