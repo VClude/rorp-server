@@ -4,6 +4,7 @@ Config.Locale = 'en' -- This is making it so that the script is in english if yo
 
 Config.TotalSpawnedCorps = 10
 Config.TotalSpawnedTimes = 10
+Config.cropsThreshold = 10
 
 -- The marker Locations of the Points you need to drive over
 Config.PlantMarkers = {
@@ -50,6 +51,16 @@ Config.Crops = {
 	{label = 'Sugarcane Seeds', DBname = 'sugarcane', price = 200},-- DBNAME IS THE ITEM YOU WOULD LIKE TO SELL
 	-- {label = 'TEST', DBname = 'test_item', price = 0},
 }
+
+-- This is the option for selling crops
+Config.PackagingCrop = {
+	{label = 'Botol Kecap', DBname = 'botolkecap', bahan1 = 'kedelai', bahan2 = 'kaca'},
+	{label = 'Botol Coklat', DBname = 'botolcoklat', bahan1 = 'cocoa', bahan2 = 'kaca'},
+	{label = 'Teh Celup', DBname = 'tehcelup', bahan1 = 'teh', bahan2 = 'kain'},
+	{label = 'Botol Kopi', DBname = 'botolkopi', bahan1 = 'bijikopi', bahan2 = 'kaca'},-- DBNAME IS THE ITEM YOU WOULD LIKE TO SELL
+	-- {label = 'TEST', DBname = 'test_item', price = 0},
+}
+
 -- The Vehicle that is spawned
 Config.WorkVehicle = 'Tractor2'
 
