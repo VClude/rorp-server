@@ -6,9 +6,9 @@ Locales['en'] = {
   ['sold_crops'] = 'Kamu menjual ~g~%s~w~ sebesar $%s',
   [''] = 'Kamu tidak mempunyai %s',
   -- Menus
-  ['job_menu'] = 'Pilih bibit tanaman untuk di tanam',
-  ['crop_menu'] = 'Pilih hasil tani yang mau di jual',
-  ['packaging_menu'] = 'Pilih hasil tani yang mau di packing',
+  ['job_menu'] = 'Bibit Tanaman',
+  ['crop_menu'] = 'Jual Hasil Tani',
+  ['packaging_menu'] = 'Packing Hasil Tani',
   -- Progress Bar
   ['harvesting_crop'] = 'Mengambil Hasil Tani...',
   ['packaging_crop'] = 'Packing Hasil Tani...',
