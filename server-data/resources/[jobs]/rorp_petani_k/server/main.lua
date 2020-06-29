@@ -9,7 +9,7 @@ AddEventHandler('rorp_petani:GiveCrop', function(crop)
     if xPlayer.canCarryItem(crop, 1) then
         xPlayer.addInventoryItem(crop, 1)
     else
-        TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'error', text = 'Tas kamu sudah penuh', duration = 2500)
+        TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'error', text = 'Tas kamu sudah penuh', duration = 2500})
     end
 end)
 
