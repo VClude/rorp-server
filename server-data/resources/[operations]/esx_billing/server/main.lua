@@ -2,8 +2,8 @@ ESX = nil
 
 TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 
-RegisterCommand('showbills', function()
-	TriggerClientEvent('esx_billing:ShowBillMenu',source)
+RegisterCommand('showbills', function(source, args, rawCommand)
+	TriggerClientEvent('esx_billing:ShowBillMenu')
 end, false)
 
 RegisterServerEvent('esx_billing:sendBill')
