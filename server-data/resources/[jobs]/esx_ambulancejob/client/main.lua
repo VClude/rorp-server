@@ -371,11 +371,6 @@ AddEventHandler('esx_ambulancejob:revive', function()
 	DoScreenFadeIn(800)
 end)
 
--- Load unloaded IPLs
-if Config.LoadIpl then
-	RequestIpl('Coroner_Int_on') -- Morgue
-end
-
 function GetDeath()
     if IsDead then
         return true
