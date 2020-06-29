@@ -150,17 +150,8 @@ ESX.RegisterServerCallback("esx_jobs:getPickaxe",function(source,cb)
 	end
 end)
 
-ESX.RegisterServerCallback("esx_jobs:checkPetani",function(source,cb)
-	local xPlayer = ESX.GetPlayerFromId(source)
-	if xPlayer.getJob().name == 'petani' then
-		cb(true)
-	else
-		cb(false)
-	end
-end)
-
 -- Server Callback to get inventory washing pan:
-ESX.RegisterServerCallback("esx_jobs:getWashPan",function(source,cb)
+ESX.RegisterServerCallback("esx_jobs:cekMiner",function(source,cb)
 	local xPlayer = ESX.GetPlayerFromId(source)
 	if xPlayer.getJob().name == 'miner' then
 		cb(true)

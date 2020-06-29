@@ -128,7 +128,13 @@ Citizen.CreateThread(function()
 			if distance <= 1.2 and not currentlyWashing then
 				DrawText3Ds(v.x, v.y, v.z, Config.DrawWasher3DText)
 				if IsControlJustPressed(0, Config.KeyToStartWashing) then
-					WasherEvent()
+					ESX.RegisterServerCallback("esx_jobs:getPickaxe",function(isMiner)
+						if isMiner then
+							WasherEvent()
+						else
+							ESX.ShowNotification('Kamu bukan penambang batu')
+						end
+					end)					
 					Citizen.Wait(300)
 				end
 			end
@@ -264,12 +270,10 @@ AddEventHandler('esx_jobs:action', function(job, zone, zoneIndex)
 					disableCombat = true,
 				},
 				animation = {
-					-- animDict = "missheistdockssetup1clipboard@idle_a",
-					-- anim = "idle_a",
 					task = "CODE_HUMAN_MEDIC_TIME_OF_DEATH",
 				},
 				prop = {
-					-- model = "prop_paper_bag_small",
+
 				},
 			}, function(status)
 				if not status then
@@ -386,11 +390,10 @@ AddEventHandler('esx_jobs:action', function(job, zone, zoneIndex)
 				disableCombat = true,
 			},
 			animation = {
-				animDict = "missheistdockssetup1clipboard@base",
-				anim = "base",
+				task = "WORLD_HUMAN_CLIPBOARD",
 			},
 			prop = {
-				model = "prop_notepad_01",
+				
 			},
 		}, function(status)
 			if not status then
