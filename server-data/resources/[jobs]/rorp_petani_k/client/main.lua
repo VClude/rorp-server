@@ -8,6 +8,7 @@ local spawnedCrops 			= 1
 local FarmerBlip			= {}
 local cropsObj		 		= {}
 local isPickingUp 			= false
+local isPackaging			= false
 local spawnCounter			= 0
 local jobStatus = {
 	onDuty = false,
@@ -320,7 +321,6 @@ function OpenCropMenu()
 end
 
 function OpenPackageMenu()
-
 	local elements = {}
 
 	for k,v in ipairs(Config.PackagingCrop) do
@@ -335,13 +335,17 @@ function OpenPackageMenu()
 	},
 	function(data, menu)
 		if data.current.value then
-			ESX.TriggerServerCallback('rorp_petani:checkBahan', function(hasAllReq)		
-				if hasAllReq then
-					packagingEvent(data.current.value)
-				else
-					exports['mythic_notify']:SendAlert('error', 'kamu membutuhkan '..data.current.req1..' x4 dan '..data.current.req2.. ' x1')
-				end	
-			end,data.current.req1,data.current.req2)
+			if not isPackaging then
+				ESX.TriggerServerCallback('rorp_petani:checkBahan', function(hasAllReq)		
+					if hasAllReq then
+						packagingEvent(data.current.value)
+						isPackaging = true
+						menu.close()
+					else
+						exports['mythic_notify']:SendAlert('error', 'kamu membutuhkan '..data.current.req1..' x4 dan '..data.current.req2.. ' x1')
+					end	
+				end,data.current.req1,data.current.req2)
+			end
 		end
 	end,
 	function(data, menu)
@@ -372,6 +376,7 @@ function packagingEvent(packaged)
 	}, function(status)
 			if not status then								
 				TriggerServerEvent('rorp_petani:GivePackagedCrop', _packaged)
+				isPackaging = false
 			end
 		end
 	)
