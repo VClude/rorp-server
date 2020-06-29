@@ -22,6 +22,7 @@ local Keys = {
 	{x = -830.3, y = -1255.77, z = 6.58}
 }
 
+
 Citizen.CreateThread(function()
     while ESX == nil do
         TriggerEvent("esx:getSharedObject",function(obj) ESX = obj end)
@@ -164,46 +165,36 @@ AddEventHandler('rorp_pedagang:CookingEvent', function(_items)
     Citizen.Wait(200)
 
     ClearPedTasks(GetPlayerPed(-1))
-    exports['progressBars']:startUI((120000), "MEMASAK...")
-    TaskStartScenarioInPlace(GetPlayerPed(-1), "PROP_HUMAN_BBQ", 0, true)
-    Citizen.Wait(120000)
-    
-    ESX.ShowNotification(_U('CookingSuccess')..items)
-    TriggerServerEvent('rorp_pedagang:reward', items)
-	
-	ClearPedTasks(PlayerPedId(-1))
-	FreezeEntityPosition(playerPed, false)
-	currentlyCooking = false
-    -- TriggerEvent("mythic_progbar:client:progress",
-	-- {
-	-- 	name = "cooking",
-	-- 	duration = 15000,
-	-- 	label = "Memasak...",
-	-- 	useWhileDead = false,
-	-- 	canCancel = false,
-	-- 	controlDisables = {
-	-- 		disableMovement = true,
-	-- 		disableCarMovement = true,
-	-- 		disableMouse = false,
-	-- 		disableCombat = true
-	-- 	},
-	-- 	animation = {
-    --         animDict = "amb@prop_human_bbq@male@idle_a",
-    --         anim = "idle_a",
+    TriggerEvent("mythic_progbar:client:progress",
+	{
+		name = "cooking",
+		duration = 120000,
+		label = "Memasak...",
+		useWhileDead = false,
+		canCancel = false,
+		controlDisables = {
+			disableMovement = true,
+			disableCarMovement = true,
+			disableMouse = false,
+			disableCombat = true
+		},
+		animation = {
+            task = "PROP_HUMAN_BBQ",
 
-    --     },
-    --     prop = {
-    --         model = "prop_bbq_2",
-	-- 	},
-    -- },
-    -- function(status)
-    --     if not status then
-    --         ESX.ShowNotification(_U('CookingSuccess')..items)
-    --         TriggerServerEvent('rorp_pedagang:reward', items)
-    --         currentlyCooking = false
-    --         ClearPedTasks(playerPed)        
-    --     end
-    -- end)
+        },
+        prop = {
+
+		},
+    },
+    function(status)
+        if not status then
+            ESX.ShowNotification(_U('CookingSuccess')..items)
+            TriggerServerEvent('rorp_pedagang:reward', items)
+            currentlyCooking = false
+			ClearPedTasks(playerPed)
+			FreezeEntityPosition(playerPed, false)        
+        end
+    end)
 end)
 
 AddEventHandler("rorp_pedagang:hasEnteredMarker",function(zone)
@@ -401,8 +392,13 @@ Citizen.CreateThread(function()
                         end						
                     elseif CurrentAction == "pedagang_inventory_menu" then
                         OpenPedagangInventoryMenu()			
-                    elseif CurrentAction == 'cooking_menu' and not currentlyCooking then
-						TriggerServerEvent('rorp_pedagang:getPlayerInventory')
+					elseif CurrentAction == 'cooking_menu' and not currentlyCooking then
+						local closestPlayer, closestDistance = ESX.Game.GetClosestPlayer()
+						if closestPlayer == -1 or closestDistance >= 0.7 then
+							TriggerServerEvent('rorp_pedagang:getPlayerInventory')
+						else
+							NotifError('Sedang ada yang memasak')
+						end
 					elseif CurrentAction == 'distributor_menu' then
                         OpenShopMenu()
                     end
