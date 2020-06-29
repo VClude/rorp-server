@@ -215,6 +215,7 @@ function OpenBuyLicenseMenu()
     ESX.UI.Menu.CloseAll()
     ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'shop_license',{
         title = _U('license_shop_title'), --Register a License
+        align    = 'bottom-right',
         elements = {
           { label = 'Ya' ..' (<span style="color:red;">$' .. Config.LicensePrice ..'</span>)', value = 'yes' }, --yes
           { label = 'Tidak', value = 'no' },
