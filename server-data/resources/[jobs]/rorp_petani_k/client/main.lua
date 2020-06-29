@@ -153,9 +153,9 @@ Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(5)
 		if ESX.PlayerData.job and ESX.PlayerData.job.name == Config.JobName then
-			local distance = #(playerCoords - Config.SellCrops)
+			local distance = #(playerCoords - Config.PackagingCrop)
 			if  distance < 5.0 then
-				DrawGameMarker(Config.PackagingCrop , 24, {0, 250, 0, 50})
+				DrawMarker(24, coordPos.x, coordPos.y, coordPos.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 0, 250, 0, 50, false, false, 2, nil, nil, false)
 				if distance < 2.0 then
 					ESX.ShowHelpNotification(_U('pack_crops'))
 					if IsControlJustReleased(0, 38) then
@@ -175,7 +175,8 @@ Citizen.CreateThread(function()
 		if playerCoords ~= nil and not jobStatus.onDuty and ESX.PlayerData.job and ESX.PlayerData.job.name == Config.JobName then
 			local distance = #(playerCoords - Config.StartJob.pos)
 			if  distance < 5.0 then
-				DrawGameMarker(Config.StartJob.pos, 39, {0, 250, 0, 50})
+				local coordPos = Config.StartJob.pos
+				DrawMarker(39, coordPos.x, coordPos.y, coordPos.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 0, 250, 0, 50, false, false, 2, nil, nil, false)
 				if distance < 2.0 then
 					ESX.ShowHelpNotification(_U('start_job'))
 					if IsControlJustReleased(0, 38) then
