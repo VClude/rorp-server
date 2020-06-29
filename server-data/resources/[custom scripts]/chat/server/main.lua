@@ -88,16 +88,6 @@ end, false)
 
 --==================================================================
 
--- ======================= Chat Untuk Bisik =======================
-
-RegisterCommand('bisik', function(source, args, rawCommand)
-	local msg = rawCommand:sub(6)
-	local name = getIdentity(source)
-	fal = name.firstname .. "  " .. name.lastname
-    TriggerClientEvent('chat:bisik', -1, source, fal, msg)
-end, false)
-
-
 
 
 function stringsplit(inputstr, sep)
