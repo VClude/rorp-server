@@ -90,7 +90,7 @@ function OpenMobileAmbulanceActionsMenu()
 
 	ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'mobile_ambulance_actions', {
 		title    = _U('ambulance'),
-		align    = 'top-right',
+		align    = 'bottom-right',
 		elements = {
 			{label = _U('ems_menu'), value = 'citizen_interaction'}
 		}

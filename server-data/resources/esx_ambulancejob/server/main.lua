@@ -22,7 +22,7 @@ AddEventHandler('esx_ambulancejob:revive', function(playerId)
 				TriggerClientEvent('mythic_hospital:client:ResetLimbs', xTarget)
 				TriggerClientEvent('mythic_hospital:client:RemoveBleed', xTarget)
 				
-				deadPlayers[playerId] = nil
+				deadPlayers[source] = nil
 			else
 				xPlayer.showNotification(_U('player_not_unconscious'))
 			end
