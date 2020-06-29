@@ -59,16 +59,10 @@ AddEventHandler('CUSTOM_esx_ambulance:playCPR', function(playerheading, playerco
 
     local heading = 0.0
 
-    -- SetEntityCoordsNoOffset(playerPed, coords.x, coords.y, coords.z, false, false, false, true)
     local coords = GetEntityCoords(playerPed)
-	-- NetworkResurrectLocalPlayer(coords.x, coords.y, coords.z, heading, true, false)
-    --local x, y, z = table.unpack(playercoords + playerlocation * 1.0)
     local x, y, z = table.unpack(playercoords + playerlocation)
 	NetworkResurrectLocalPlayer(x, y, z, playerheading, true, false)
-	-- SetPlayerInvincible(playerPed, false)
-	-- TriggerEvent('playerSpawned', coords.x, coords.y, coords.z)
 
-    -- SetEntityCoords(playerPed, x, y, z)
     SetEntityHeading(playerPed, playerheading - 270.0)
 
 
@@ -115,7 +109,7 @@ function OpenMobileAmbulanceActionsMenu()
 				if data.current.value == 'search' then
 					TriggerServerEvent('esx_ambulancejob:svsearch')
 				elseif closestPlayer == -1 or closestDistance > 1.0 then
-					--ESX.ShowNotification(_U('no_players'))
+
 					exports['mythic_notify']:DoCustomHudText('inform', _U('no_players'), 2500, { ['background-color'] = '#FF0000', ['color'] = '#ffffff' })
 				else
 

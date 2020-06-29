@@ -1,5 +1,14 @@
 ESX = nil
+
+local beds = {
+    { x = 359.6, y = -586.13, z = 43.28, h = -20.0, taken = false, model = 1631638868 },
+ 
+}
+
 local playersHealing, deadPlayers = {}, {}
+local bedsTaken = {}
+
+local injuryBasePrice = 100
 
 TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 
@@ -19,8 +28,6 @@ AddEventHandler('esx_ambulancejob:revive', function(playerId)
 				xPlayer.showNotification(_U('revive_complete_award', xTarget.name, Config.ReviveReward))
 				xPlayer.addMoney(Config.ReviveReward)
 				xTarget.triggerEvent('esx_ambulancejob:revive')
-				TriggerClientEvent('mythic_hospital:client:ResetLimbs', xTarget)
-				TriggerClientEvent('mythic_hospital:client:RemoveBleed', xTarget)
 				
 				deadPlayers[source] = nil
 			else
@@ -79,8 +86,6 @@ AddEventHandler('esx_ambulancejob:heal', function(target, type)
 
 	if xPlayer.job.name == 'ambulance' then
 		TriggerClientEvent('esx_ambulancejob:heal', target, type)
-		TriggerClientEvent('mythic_hospital:client:ResetLimbs', target, type)
-        TriggerClientEvent('mythic_hospital:client:RemoveBleed', target, type)
 	end
 end)
 
@@ -269,21 +274,17 @@ end)
 
 ESX.RegisterCommand('revive', 'admin', function(source, args, showError)
 	args.playerId.triggerEvent('esx_ambulancejob:revive')
-    args.playerId.triggerEvent('mythic_hospital:client:ResetLimbs')
-    args.playerId.triggerEvent('mythic_hospital:client:RemoveBleed')
 end, true, {help = _U('revive_help'), validate = true, arguments = {
 	{name = 'playerId', help = 'The player id', type = 'player'}
 }})
 
---[[ESX.RegisterUsableItem('medikit', function(source)
+ESX.RegisterUsableItem('medikit', function(source)
 	if not playersHealing[source] then
 		local xPlayer = ESX.GetPlayerFromId(source)
 		xPlayer.removeInventoryItem('medikit', 1)
 
 		playersHealing[source] = true
 		TriggerClientEvent('esx_ambulancejob:useItem', source, 'medikit')
-		TriggerClientEvent('mythic_hospital:client:ResetLimbs', source)
-        TriggerClientEvent('mythic_hospital:client:RemoveBleed', source)
 
 		Citizen.Wait(10000)
 		playersHealing[source] = nil
@@ -297,59 +298,10 @@ ESX.RegisterUsableItem('bandage', function(source)
 
 		playersHealing[source] = true
 		TriggerClientEvent('esx_ambulancejob:useItem', source, 'bandage')
-		TriggerClientEvent('mythic_hospital:client:ResetLimbs', source)
-        TriggerClientEvent('mythic_hospital:client:RemoveBleed', source)
 
 		Citizen.Wait(10000)
 		playersHealing[source] = nil
 	end
-end)]]
-
-ESX.RegisterUsableItem('gauze', function(source)
-	local xPlayer = ESX.GetPlayerFromId(source)
-	xPlayer.removeInventoryItem('gauze', 1)
-	TriggerClientEvent('mythic_hospital:items:gauze', source)
-end)
-
-ESX.RegisterUsableItem('firstaid', function(source)
-	local xPlayer = ESX.GetPlayerFromId(source)
-	xPlayer.removeInventoryItem('firstaid', 1)
-	TriggerClientEvent('mythic_hospital:items:firstaid', source)
-end)
-
-ESX.RegisterUsableItem('medikit', function(source)
-	local xPlayer = ESX.GetPlayerFromId(source)
-	TriggerClientEvent('mythic_hospital:items:medkit', source)
-	xPlayer.removeInventoryItem('medikit', 1)
-end)
-ESX.RegisterUsableItem('bandage', function(source)
-	local xPlayer = ESX.GetPlayerFromId(source)
-	xPlayer.removeInventoryItem('bandage', 1)
-	TriggerClientEvent('mythic_hospital:items:bandage', source)
-end)
-
-ESX.RegisterUsableItem('vicodin', function(source)
-	local xPlayer = ESX.GetPlayerFromId(source)
-	xPlayer.removeInventoryItem('vicodin', 1)
-	TriggerClientEvent('mythic_hospital:items:vicodin', source)
-end)
-
-ESX.RegisterUsableItem('hydrocodone', function(source)
-	local xPlayer = ESX.GetPlayerFromId(source)
-	xPlayer.removeInventoryItem('hydrocodone', 1)
-	TriggerClientEvent('mythic_hospital:items:hydrocodone', source)
-end)
-
-ESX.RegisterUsableItem('morphine', function(source)
-	local xPlayer = ESX.GetPlayerFromId(source)
-	xPlayer.removeInventoryItem('morphine', 1)
-	TriggerClientEvent('mythic_hospital:items:morphine', source)
-end)
-
-ESX.RegisterUsableItem('adrenaline', function(source)
-	local xPlayer = ESX.GetPlayerFromId(source)
-	xPlayer.removeInventoryItem('adrenaline', 1)
-	TriggerClientEvent('mythic_hospital:items:adrenaline', source)
 end)
 
 ESX.RegisterServerCallback('esx_ambulancejob:getDeathStatus', function(source, cb)
@@ -376,4 +328,44 @@ AddEventHandler('esx_ambulancejob:setDeathStatus', function(isDead)
 			['@isDead'] = isDead
 		})
 	end
+end)
+
+RegisterServerEvent('esx_ambulancejob:server:RequestBed')
+AddEventHandler('esx_ambulancejob:server:RequestBed', function()
+    for k, v in pairs(beds) do
+        if not v.taken then
+            v.taken = true
+            bedsTaken[source] = k
+            TriggerClientEvent('esx_ambulancejob:client:SendToBed', source, k, v)
+            return
+        end
+    end
+
+    TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'error', text = 'No beds available.' })
+end)
+
+RegisterServerEvent('esx_ambulancejob:server:EnteredBed')
+AddEventHandler('esx_ambulancejob:server:EnteredBed', function()
+    local src = source
+    -- local injuries = GetCharsInjuries(src)
+
+    -- local totalBill = injuryBasePrice
+
+    -- if injuries ~= nil then
+    --     for k, v in pairs(injuries.limbs) do
+    --         if v.isDamaged then
+    --             totalBill = totalBill + (injuryBasePrice * v.severity)
+    --         end
+    --     end
+
+    --     if injuries.isBleeding > 0 then
+    --         totalBill = totalBill + (injuryBasePrice * injuries.isBleeding)
+    --     end
+    -- end
+
+    -- YOU NEED TO IMPLEMENT YOUR FRAMEWORKS BILLING HERE
+	-- local xPlayer = ESX.GetPlayerFromId(src)
+    -- xPlayer.removeBank(totalBill)
+    -- TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'success', text = 'You were billed for $' .. totalBill ..'.' })
+    TriggerClientEvent('esx_ambulancejob:client:FinishServices', src)
 end)
