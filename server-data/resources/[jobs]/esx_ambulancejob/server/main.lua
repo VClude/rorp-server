@@ -34,7 +34,6 @@ end)
 
 RegisterServerEvent('CUSTOM_esx_ambulance:requestCPR')
 AddEventHandler('CUSTOM_esx_ambulance:requestCPR', function(target, playerheading, playerCoords, playerlocation)
-    print(target)
     TriggerClientEvent("CUSTOM_esx_ambulance:playCPR", target, playerheading, playerCoords, playerlocation)
 end)
 
