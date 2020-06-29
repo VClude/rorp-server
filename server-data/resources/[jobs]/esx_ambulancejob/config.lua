@@ -12,7 +12,7 @@ Config.LoadIpl                    = true -- disable if you're using fivem-ipl or
 
 Config.Locale                     = 'en'
 
-Config.EarlyRespawnTimer          = 60000 * 5  -- time til respawn is available
+Config.EarlyRespawnTimer          = 0  -- time til respawn is available
 Config.BleedoutTimer              = 60000 * 10 -- time til the player bleeds out
 
 Config.EnablePlayerManagement     = true
