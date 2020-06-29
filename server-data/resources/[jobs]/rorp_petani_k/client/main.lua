@@ -160,7 +160,9 @@ Citizen.CreateThread(function()
 					ESX.ShowHelpNotification(_U('sell_crops'))
 					if IsControlJustReleased(0, 38) then
 						-- OpenCropMenu()
-						OpenPackageMenu()
+						if not isPackaging then
+							OpenPackageMenu()
+						end
 					end
 				end
 			end
@@ -335,17 +337,15 @@ function OpenPackageMenu()
 	},
 	function(data, menu)
 		if data.current.value then
-			if not isPackaging then
-				ESX.TriggerServerCallback('rorp_petani:checkBahan', function(hasAllReq)		
-					if hasAllReq then
-						packagingEvent(data.current.value)
-						isPackaging = true
-						menu.close()
-					else
-						exports['mythic_notify']:SendAlert('error', 'kamu membutuhkan '..data.current.req1..' x4 dan '..data.current.req2.. ' x1')
-					end	
-				end,data.current.req1,data.current.req2)
-			end
+			ESX.TriggerServerCallback('rorp_petani:checkBahan', function(hasAllReq)		
+				if hasAllReq then
+					packagingEvent(data.current.value)
+					isPackaging = true
+					menu.close()
+				else
+					exports['mythic_notify']:SendAlert('error', 'kamu membutuhkan '..data.current.req1..' x4 dan '..data.current.req2.. ' x1')
+				end	
+			end,data.current.req1,data.current.req2)
 		end
 	end,
 	function(data, menu)
@@ -370,7 +370,7 @@ function packagingEvent(packaged)
 			disableCombat = true,
 		},
 		animation = {
-			
+
 		}
 	}, function(status)
 			if not status then								
