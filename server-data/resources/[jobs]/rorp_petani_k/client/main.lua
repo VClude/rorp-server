@@ -229,7 +229,7 @@ function refreshBlips()
 		local blip = AddBlipForCoord(Config.StartJob.pos)
 		SetBlipSprite(blip, 140)
 		SetBlipDisplay(blip, 2)
-		SetBlipScale(blip, 0.6)
+		SetBlipScale(blip, 0.8)
 		SetBlipColour(blip, 15)
 		SetBlipAsShortRange(blip, true)
 	
