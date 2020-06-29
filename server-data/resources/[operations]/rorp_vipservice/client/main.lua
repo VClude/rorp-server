@@ -15,7 +15,7 @@ Citizen.CreateThread(function()
 	while ESX.GetPlayerData() == nil do
         Citizen.Wait(10)
 	end
-
+	while not ESX.IsPlayerLoaded() do Citizen.Wait(0); end
 	RequestModel(2705543429)
 	while ( not HasModelLoaded( 2705543429 ) ) do
 		Citizen.Wait( 1 )
@@ -55,7 +55,7 @@ end)
 
 RegisterNetEvent('esx:playerLoaded')
 AddEventHandler('esx:playerLoaded', function(xPlayer)
-    PlayerData = xPlayer
+	PlayerData = xPlayer
 end)
 
 
@@ -74,6 +74,8 @@ end
 AddEventHandler('rorp_vipservice:hasExitedMarker', function(zone)
 	ESX.UI.Menu.CloseAll()
 end)
+
+
 
 -- Activate menu when player is inside marker, and draw markers
 Citizen.CreateThread(function()

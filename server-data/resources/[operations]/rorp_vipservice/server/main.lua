@@ -64,3 +64,45 @@ RegisterCommand('addvip', function(source, args, rawCommand)
     end
 
 end, false)
+--debug VV
+RegisterCommand('getvip', function(source, args, rawCommand)
+
+    local playerId = source
+    local xPlayer = ESX.GetPlayerFromId(source)
+    local ident = xPlayer.getIdentifier()
+    local result = MySQL.Sync.fetchAll("SELECT cast(expiredate as CHAR) as xd FROM vip WHERE identifier = @identifier and expiredate > CURRENT_DATE", {['@identifier'] = ident})
+
+	if result[1] ~= nil then
+		local identity = result[1]
+        TriggerClientEvent('esx:showAdvancedNotification', source, '- RoRP VIP -', 'Hingga ' .. tostring(identity['xd']), 'Fitur VIP pada server telah aktif, Terimakasih atas dukungan anda', 'CHAR_LESTER_DEATHWISH', 9)
+	end
+
+end, false)
+
+ESX.RegisterServerCallback('vip:isVip', function(source, cb)
+    local tPl = ESX.GetPlayerFromId(source)
+    local ident = tPl.getIdentifier()
+    local result = MySQL.Sync.fetchAll("SELECT expiredate FROM vip WHERE identifier = @identifier and expiredate > CURRENT_DATE", {['@identifier'] = ident})
+
+	if result[1] ~= nil then
+		cb(true)
+	else
+		cb(false)
+	end
+end)
+AddEventHandler('esx:playerLoaded', function(source, xPlayer)
+    local ident = xPlayer.identifier
+    local result = MySQL.Sync.fetchAll("SELECT cast(expiredate as CHAR) as xd FROM vip WHERE identifier = @identifier and expiredate > CURRENT_DATE", {['@identifier'] = ident})
+
+	if result[1] ~= nil then
+		local identity = result[1]
+        TriggerClientEvent('esx:showAdvancedNotification', source, '- RoRP VIP -', 'Hingga ' .. tostring(identity['xd']), 'Fitur VIP pada server telah aktif, Terimakasih atas dukungan anda', 'CHAR_LESTER_DEATHWISH', 9)
+	end
+
+end)
+-- RegisterNetEvent('vip:duration')
+-- AddEventHandler('vip:duration', function(sv)
+
+-- end)
+
+

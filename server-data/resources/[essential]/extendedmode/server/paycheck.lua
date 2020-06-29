@@ -26,6 +26,7 @@ ESX.StartPayCheck = function()
 							end)
 						else -- not a society
 							xPlayer.addAccountMoney('bank', salary)
+							TriggerClientEvent('vip:getBonus', xPlayer.source)
 							TriggerClientEvent('esx:showAdvancedNotification', xPlayer.source, _U('bank'), _U('received_paycheck'), _U('received_salary', salary), 'CHAR_BANK_MAZE', 9)
 						end
 					end)
