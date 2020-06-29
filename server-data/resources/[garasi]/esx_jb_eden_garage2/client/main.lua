@@ -55,7 +55,7 @@ function OpenMenuGarage(garage, KindOfVehicle, garage_name, vehicle_type)
 
 				elseif v.stored == false and v.pound == false then
 
-					vehicleLabel = vehicleName..' '..'('..vehicleProps.plate..' ) - <span style="color:red;">Rp.'..Config.Price..'</span>'
+					vehicleLabel = vehicleName..' '..'('..vehicleProps.plate..' ) - <span style="color:red;">$'..Config.Price..'</span>'
 					table.insert(elements, {
 						label = vehicleLabel,
 						plate = vehicleProps.plate,
@@ -104,7 +104,7 @@ function OpenMenuGarage(garage, KindOfVehicle, garage_name, vehicle_type)
 						if hasEnoughMoney then
 							menu.close()
 							SpawnVehicle(vehicleProps, garage, KindOfVehicle)
-							ESX.ShowNotification('Kamu telah membayar: Rp. ~y~'..Config.Price)
+							ESX.ShowNotification('Kamu telah membayar: ~y~$'..Config.Price)
 						else
 							ESX.ShowNotification(_U('not_enough_money'))						
 						end
