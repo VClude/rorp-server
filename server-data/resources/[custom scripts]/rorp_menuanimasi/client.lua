@@ -76,8 +76,6 @@ function OpenGetMenuAnimasi()
                 ExecuteCommand('e notepad')
             elseif data.current.value == 'memotret' then
                 ExecuteCommand('e camera')
-            elseif data.current.value == 'memalu_paku' then
-                return
             end   
         end, function(data,menu)       
             menu.close()    
