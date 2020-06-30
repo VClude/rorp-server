@@ -49,7 +49,7 @@ Config.Hospitals = {
 
 		Vehicles = {
 			{
-				Spawner = vector3(295.9, -590.41, 42.26),
+				Spawner = vector3(295.9, -590.41, 43.26),
 				InsideShop = vector3(446.7, -1355.6, 43.5),
 				Marker = {type = 36, x = 1.0, y = 1.0, z = 1.0, r = 100, g = 50, b = 200, a = 100, rotate = true},
 				SpawnPoints = {
@@ -60,7 +60,7 @@ Config.Hospitals = {
 
 		Helicopters = {
 			{
-				Spawner = vector3(341.65, -580.75, 73.16),
+				Spawner = vector3(341.65, -580.75, 74.16),
 				InsideShop = vector3(351.11, -587.95, 74.16),
 				Marker = {type = 34, x = 1.5, y = 1.5, z = 1.5, r = 100, g = 150, b = 150, a = 100, rotate = true},
 				SpawnPoints = {

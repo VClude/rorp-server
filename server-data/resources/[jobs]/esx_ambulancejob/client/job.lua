@@ -400,7 +400,7 @@ Citizen.CreateThread(function()
 					end
 				end
 
-				--[[ Fast Travels (Prompt)
+				-- Fast Travels (Prompt)
 				for k,v in ipairs(hospital.FastTravelsPrompt) do
 					local distance = #(playerCoords - v.From)
 
@@ -412,7 +412,7 @@ Citizen.CreateThread(function()
 							isInMarker, currentHospital, currentPart, currentPartNum = true, hospitalNum, 'FastTravelsPrompt', k
 						end
 					end
-				end--]]
+				end
 			end
 
 			-- Logic for exiting & entering markers
@@ -451,7 +451,7 @@ Citizen.CreateThread(function()
 		local playerCoords, letSleep = GetEntityCoords(PlayerPedId()), true
 
 		for hospitalNum,hospital in pairs(Config.Hospitals) do
-			--[[ Fast Travels
+			--Fast Travels
 			for k,v in ipairs(hospital.FastTravels) do
 				local distance = #(playerCoords - v.From)
 
@@ -463,7 +463,7 @@ Citizen.CreateThread(function()
 						FastTravel(v.To.coords, v.To.heading)
 					end
 				end
-			end --]]
+			end
 		end
 
 		if letSleep then
