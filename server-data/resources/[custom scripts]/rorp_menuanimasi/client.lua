@@ -14,16 +14,16 @@ local Keys = {
   }
 
 local elements = {
-    {label = _U('menu_menyerah'), value = 'menyerah'},
-    {label = _U('menu_mancing'), value = 'mancing'},
-    {label = _U('menu_polisi_investigasi'), value = 'investigasi'},
-    {label = _U('menu_polisi_mengatur_jalan'), value = 'mengatur_jalan'},
-    {label = _U('menu_memperbaiki_kolong_mobil'), value = 'memperbaiki_kolong_mobil'},
-    {label = _U('menu_memperbaiki_kolong_mesin'), value = 'memperbaiki_kolong_mesin'},
-    {label = _U('menu_taxi_memberi_tagihan'), value = 'memberi_tagihan'},
-    {label = _U('menu_membuat_catatan'), value = 'membuat_catatan'},
-    {label = _U('menu_memotret'), value = 'memotret'},
-    {label = _U('menu_memalu_paku'), value = 'memalu_paku'},
+    {label = 'Menyerah', value = 'menyerah'},
+    {label ='Mancing', value = 'mancing'},
+    {label = 'Polisi: Investigasi', value = 'investigasi'},
+    {label = 'Polisi: Mengatur jalan', value = 'mengatur_jalan'},
+    {label = 'Memperbaiki kolong mobil', value = 'memperbaiki_kolong_mobil'},
+    {label = 'Memperbaiki kolong mesin', value = 'memperbaiki_kolong_mesin'},
+    {label = 'Taxi: Memberi tagihan', value = 'memberi_tagihan'},
+    {label = 'Membuat catatan', value = 'membuat_catatan'},
+    {label = 'Memotret', value = 'memotret'},
+    {label = 'Memalu paku', value = 'memalu_paku'},
 }
 
 Citizen.CreateThread(function()
