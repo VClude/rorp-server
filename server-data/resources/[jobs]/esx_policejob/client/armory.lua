@@ -51,7 +51,7 @@ Citizen.CreateThread(function()
 		Citizen.Wait(5)
 		local coords = GetEntityCoords(PlayerPedId())
 		
-		if (ESX.PlayerData.job and ESX.PlayerData.job.name == Config.PoliceDatabaseName) then
+		if (ESX.PlayerData.job and ESX.PlayerData.job.name == 'police') then
 		
 			for k,v in pairs(Config.ArmoryZones) do
 				for i = 1, #v.Pos, 1 do
