@@ -387,7 +387,7 @@ function RemoveItemsAfterRPDeath()
 			Citizen.Wait(10)
 			StopScreenEffect('DeathFailOut')
 			DoScreenFadeIn(800)
-			ShakeGameplayCam("SMALL_EXPLOSION_SHAKE", 1.0)
+			-- ShakeGameplayCam("SMALL_EXPLOSION_SHAKE", 1.0)
 		end)
 	end)
 end
@@ -444,7 +444,7 @@ AddEventHandler('esx_ambulancejob:revive', function()
 	ClearTimecycleModifier()
 
 	StopGameplayCamShaking(true)
-	ShakeGameplayCam("SMALL_EXPLOSION_SHAKE", 1.0)
+	-- ShakeGameplayCam("SMALL_EXPLOSION_SHAKE", 1.0)
 	ResetPedMovementClipset(playerPed, 0.0)
 	
 end)

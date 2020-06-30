@@ -92,7 +92,7 @@ function OpenMobileAmbulanceActionsMenu()
 	if data.current.value == 'citizen_interaction' then
 			ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'citizen_interaction', {
 				title    = _U('ems_menu_title'),
-				align    = 'top-right',
+				align    = 'bottom-right',
 				elements = {
 					{label = _U('ems_menu_revive'), value = 'revive'},
 					{label = _U('ems_menu_billing'), value = 'billing'},
