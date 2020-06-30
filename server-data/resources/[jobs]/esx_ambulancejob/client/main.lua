@@ -415,7 +415,7 @@ AddEventHandler('esx_phone:loaded', function(phoneNumber, contacts)
 end)
 
 AddEventHandler('esx:onPlayerDeath', function(data)
-	-- OnPlayerDeath()
+	OnPlayerDeath()
 end)
 
 RegisterNetEvent('esx_ambulancejob:revive')
