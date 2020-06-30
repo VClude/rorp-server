@@ -78,7 +78,8 @@ function OpenGetMenuAnimasi()
                 ExecuteCommand('e camera')
             elseif data.current.value == 'memalu_paku' then
                 return
-            end   
+            end
+            menu.close()    
         end, function(data,menu)       
             menu.close()    
         end)
