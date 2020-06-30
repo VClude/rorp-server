@@ -48,7 +48,7 @@ function OpenVehicleSpawnerMenu(type, station, part, partNum)
 		elseif data.current.action == 'garage' then
 			local garage = {}
 
-			ESX.TriggerServerCallback('esx_vehicleshop:retrieveJobVehicles', function(jobVehicles)
+			ESX.TriggerServerCallback('t1ger_cardealer:retrieveJobVehicles', function(jobVehicles)
 				if #jobVehicles > 0 then
 					local allVehicleProps = {}
 
@@ -92,7 +92,7 @@ function OpenVehicleSpawnerMenu(type, station, part, partNum)
 										local vehicleProps = allVehicleProps[data2.current.plate]
 										ESX.Game.SetVehicleProperties(vehicle, vehicleProps)
 
-										TriggerServerEvent('esx_vehicleshop:setJobVehicleState', data2.current.plate, false)
+										TriggerServerEvent('t1ger_cardealer:setJobVehicleState', data2.current.plate, false)
 										ESX.ShowNotification(_U('garage_released'))
 									end)
 								end
@@ -220,7 +220,7 @@ function OpenShopMenu(elements, restoreCoords, shopCoords)
 				{label = _U('confirm_yes'), value = 'yes'}
 		}}, function(data2, menu2)
 			if data2.current.value == 'yes' then
-				local newPlate = exports['esx_vehicleshop']:GeneratePlate()
+				local newPlate = exports['t1ger_cardealer']:ProduceNumberPlate()
 				local vehicle  = GetVehiclePedIsIn(playerPed, false)
 				local props    = ESX.Game.GetVehicleProperties(vehicle)
 				props.plate    = newPlate
