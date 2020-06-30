@@ -351,7 +351,7 @@ ESX.RegisterServerCallback('t1ger_cardealer:ShopGetPlyMoney', function(source, c
 	-- Check Player Money & commission:
 	local gotMoney = false
 	local payment = 0
-	local priceZ = (vip) and price * 0.9 or price
+	local priceZ = (vip) and price * 0.75 or price
 	if Config.PayWithCash then
 		local money = xPlayer.getMoney()
 		payment = money
@@ -403,7 +403,7 @@ ESX.RegisterServerCallback("t1ger_cardealer:FetchData", function(source, cb)
 				end
 				
 				for k,v in pairs(data1) do
-					table.insert(vehicles,{name = v.name, model = v.model, price = (vip) and v.price * 0.9 or v.price, category = v.category, stock = v.stock})
+					table.insert(vehicles,{name = v.name, model = v.model, price = (vip) and v.price * 0.75 or v.price, category = v.category, stock = v.stock})
 				end
 				
 				-- display:
