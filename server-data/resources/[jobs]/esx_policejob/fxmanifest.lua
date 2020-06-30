@@ -37,11 +37,11 @@ client_scripts {
 	'locales/cs.lua',
 	'config.lua',
 	'client/main.lua',
-	'client/vehicle.lua',
-	'client/PoliceArmory.lua'
+	'client/vehicle.lua'
 }
 
 dependencies {
 	'es_extended',
-	'esx_billing'
+	'esx_billing',
+	'esx_vehicleshop'
 }
