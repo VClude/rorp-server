@@ -1,5 +1,15 @@
 local crouched = false
 
+ESX = nil
+
+Citizen.CreateThread(function()
+	while ESX == nil do
+		TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
+		Citizen.Wait(0)
+	end
+end
+
+
 local gates = {
 	"p_barier_test_s",
 	"prop_sec_barier_01a",
