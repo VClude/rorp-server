@@ -401,7 +401,7 @@ Citizen.CreateThread(function()
 				end
 
 				-- Fast Travels (Prompt)
-				for k,v in ipairs(hospital.FastTravelsPrompt) do
+				for k,v in ipairs(hospital.FastTravels) do
 					local distance = #(playerCoords - v.From)
 
 					if distance < Config.DrawDistance then
@@ -409,7 +409,7 @@ Citizen.CreateThread(function()
 						letSleep = false
 
 						if distance < v.Marker.x then
-							isInMarker, currentHospital, currentPart, currentPartNum = true, hospitalNum, 'FastTravelsPrompt', k
+							isInMarker, currentHospital, currentPart, currentPartNum = true, hospitalNum, 'FastTravels', k
 						end
 					end
 				end
@@ -489,7 +489,7 @@ AddEventHandler('esx_ambulancejob:hasEnteredMarker', function(hospital, part, pa
 		CurrentAction = part
 		CurrentActionMsg = _U('helicopter_prompt')
 		CurrentActionData = {hospital = hospital, partNum = partNum}
-	elseif part == 'FastTravelsPrompt' then
+	elseif part == 'FastTravels' then
 		local travelItem = Config.Hospitals[hospital][part][partNum]
 
 		CurrentAction = part
@@ -523,7 +523,7 @@ Citizen.CreateThread(function()
 					OpenVehicleSpawnerMenu('car', CurrentActionData.hospital, CurrentAction, CurrentActionData.partNum)
 				elseif CurrentAction == 'Helicopters' then
 					OpenVehicleSpawnerMenu('helicopter', CurrentActionData.hospital, CurrentAction, CurrentActionData.partNum)
-				elseif CurrentAction == 'FastTravelsPrompt' then
+				elseif CurrentAction == 'FastTravels' then
 					FastTravel(CurrentActionData.to, CurrentActionData.heading)
 				end
 
