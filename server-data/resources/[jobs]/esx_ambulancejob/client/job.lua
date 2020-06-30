@@ -458,10 +458,6 @@ Citizen.CreateThread(function()
 				if distance < Config.DrawDistance then
 					DrawMarker(v.Marker.type, v.From, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, v.Marker.x, v.Marker.y, v.Marker.z, v.Marker.r, v.Marker.g, v.Marker.b, v.Marker.a, false, false, 2, v.Marker.rotate, nil, nil, false)
 					letSleep = false
-
-					if distance < v.Marker.x then
-						FastTravel(v.To.coords, v.To.heading)
-					end
 				end
 			end
 		end
