@@ -112,7 +112,7 @@ Citizen.CreateThread(function()
 				local currentName, currentPriceStr, currentModel, currentPrice, currentCommission, currentDownpayment, currentCategory, currentID, swapCar = '', '', nil, 0, 0, 0, nil, 0, ''
 				local waitTimer = GetGameTimer()
 				-- Get Type of closest Display Vehicle:
-				for k,v in pairs(display) do 
+				for k,v in pairs(display) do
 					if v.model == carModel then 
 						currentName 		= v.name
 						currentPriceStr 	= tostring(v.price)
@@ -328,7 +328,7 @@ Citizen.CreateThread(function()
 					
 				-- DRAW TEXTS:		
 				else
-					DrawTextOptions(carPos,currentName,currentDownpayment,currentCommission,swapCar,currentPrice,currentStock)
+					DrawTextOptions(carPos,currentName,currentDownpayment,currentCommission,swapCar,currentPrice,currentStock, vip)
 				end	
 			end
 		end
@@ -869,9 +869,11 @@ function GetCarDealerData()
 	ESX.TriggerServerCallback("t1ger_cardealer:FetchData", function(data1, data2, data3)
 		vehicles = nil
 		display = nil
+		vip = false
 		Wait(0)
 		vehicles = data1
 		display = data2
+		vip = data3
 	end)
 end	
 

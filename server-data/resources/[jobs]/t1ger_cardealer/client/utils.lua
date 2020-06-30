@@ -180,25 +180,26 @@ RegisterCommand('registration', function(source, args)
 end, false)
 
 -- Change text / pos inside the DrawText3Ds functions:
-function DrawTextOptions(carPos,currentName,currentDownpayment,currentCommission,swapCar,currentPrice,currentStock)
+function DrawTextOptions(carPos,currentName,currentDownpayment,currentCommission,swapCar,currentPrice,currentStock, vip)
+	local isVip = (vip) and 'VIP' or ''
 	if (PlayerData.job ~= nil and PlayerData.job.name == Config.CarDealerJobLabel) then
 		-- info
-		DrawText3Ds(carPos[1],carPos[2],carPos[3] + 0.6, "~c~"..currentName.."~s~ | ~o~$"..comma_value(math.floor(currentPrice + (currentPrice * (currentCommission / 100)))).."~s~ | ~p~"..currentCommission.."%~s~ Commission ~p~[Z]~s~ | ~b~"..currentStock.."~s~ PCS")
+		DrawText3Ds(carPos[1],carPos[2],carPos[3] + 0.6, "~c~"..currentName.."~s~ | " .. isVip .. " ~o~$"..comma_value(math.floor(currentPrice + (currentPrice * (currentCommission / 100)))).."~s~ | ~p~"..currentCommission.."%~s~ Komisi ~p~[Z]~s~ | ~b~"..currentStock.."~s~ PCS")
 		-- buttons:
-		DrawText3Ds(carPos[1],carPos[2],carPos[3] + 0.54, "~g~[E]~s~ Buy | ~y~[H]~s~ Test-Drive | "..swapCar)
+		DrawText3Ds(carPos[1],carPos[2],carPos[3] + 0.54, "~g~[E]~s~ Beli | ~y~[H]~s~ Test-Drive | "..swapCar)
 		-- finance:
-		DrawText3Ds(carPos[1],carPos[2],carPos[3] + 0.48, "~g~[K]~s~ Finance | ~r~"..currentDownpayment.."%~s~ Downpayment ~r~[X]~s~ | ~o~$"..comma_value(math.floor((currentPrice + (currentPrice * (currentCommission / 100))) * (currentDownpayment/100))).."~s~")
+		DrawText3Ds(carPos[1],carPos[2],carPos[3] + 0.48, "~g~[K]~s~ Cicilan | ~r~"..currentDownpayment.."%~s~ Downpayment ~r~[X]~s~ | ~o~$"..comma_value(math.floor((currentPrice + (currentPrice * (currentCommission / 100))) * (currentDownpayment/100))).."~s~")
 		-- cost display:
-		DrawText3Ds(carPos[1],carPos[2],carPos[3] + 0.42, "~y~"..Config.InterestRate.."%~s~ Interest Rate | ~o~$"..comma_value(math.floor((currentPrice + (currentPrice * (currentCommission / 100))) * ((Config.InterestRate/100)+1))).."~s~ Total Cost ")
+		DrawText3Ds(carPos[1],carPos[2],carPos[3] + 0.42, "~y~"..Config.InterestRate.."%~s~ Bunga | ~o~$"..comma_value(math.floor((currentPrice + (currentPrice * (currentCommission / 100))) * ((Config.InterestRate/100)+1))).."~s~ Total Cost ")
 	else
 		-- info
-		DrawText3Ds(carPos[1],carPos[2],carPos[3] + 0.6, "~c~"..currentName.."~s~ | ~o~$"..comma_value(math.floor(currentPrice + (currentPrice * (currentCommission / 100)))).."~s~ | ~b~"..currentStock.."~s~ PCS")
+		DrawText3Ds(carPos[1],carPos[2],carPos[3] + 0.6, "~c~"..currentName.."~s~ | " .. isVip .. " ~o~$"..comma_value(math.floor(currentPrice + (currentPrice * (currentCommission / 100)))).."~s~ | ~b~"..currentStock.."~s~ PCS")
 		-- buttons:
-		DrawText3Ds(carPos[1],carPos[2],carPos[3] + 0.54, " ~g~[E]~s~ Buy | ~p~"..currentCommission.."%~s~ Commission~s~")
+		DrawText3Ds(carPos[1],carPos[2],carPos[3] + 0.54, " ~g~[E]~s~ Beli | ~p~"..currentCommission.."%~s~ Komisi ~s~")
 		-- finance:
-		DrawText3Ds(carPos[1],carPos[2],carPos[3] + 0.48, "~g~[K]~s~ Finance | ~r~"..currentDownpayment.."%~s~ Downpayment | ~o~$"..comma_value(math.floor((currentPrice + (currentPrice * (currentCommission / 100))) * (currentDownpayment/100))).."~s~")
+		DrawText3Ds(carPos[1],carPos[2],carPos[3] + 0.48, "~g~[K]~s~ Cicilan | ~r~"..currentDownpayment.."%~s~ Downpayment | ~o~$"..comma_value(math.floor((currentPrice + (currentPrice * (currentCommission / 100))) * (currentDownpayment/100))).."~s~")
 		-- cost display:
-		DrawText3Ds(carPos[1],carPos[2],carPos[3] + 0.42, "~y~"..Config.InterestRate.."%~s~ Interest Rate | ~o~$"..comma_value(math.floor((currentPrice + (currentPrice * (currentCommission / 100))) * ((Config.InterestRate/100)+1))).."~s~ Total Cost ")
+		DrawText3Ds(carPos[1],carPos[2],carPos[3] + 0.42, "~y~"..Config.InterestRate.."%~s~ Bunga | ~o~$"..comma_value(math.floor((currentPrice + (currentPrice * (currentCommission / 100))) * ((Config.InterestRate/100)+1))).."~s~ Total Cost ")
 	end
 end
 

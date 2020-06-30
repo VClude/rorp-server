@@ -351,7 +351,7 @@ ESX.RegisterServerCallback('t1ger_cardealer:ShopGetPlyMoney', function(source, c
 	-- Check Player Money & commission:
 	local gotMoney = false
 	local payment = 0
-	
+	local priceZ = (vip) and price * 0.9 or price
 	if Config.PayWithCash then
 		local money = xPlayer.getMoney()
 		payment = money
@@ -360,7 +360,7 @@ ESX.RegisterServerCallback('t1ger_cardealer:ShopGetPlyMoney', function(source, c
 		payment = bank
 	end
 	
-	if payment >= price then 
+	if payment >= priceZ then 
 		gotMoney = true
 	end	
 	
@@ -383,17 +383,27 @@ end)
 
 -- Fetch Car Dealer Core Data:
 ESX.RegisterServerCallback("t1ger_cardealer:FetchData", function(source, cb)
+	local xPlayer = ESX.GetPlayerFromId(source)
 	vehicles = {}
 	display = {}
+	vip = {}
 	--categories = {}
 	
 	-- Fetch Data:
+	-- MySQL.Async.fetchAll('SELECT * FROM ?? WHERE ?', {'users', {['id'] = id}})
 	MySQL.Async.fetchAll('SELECT * FROM vehicles',{},function(data1)
 		MySQL.Async.fetchAll('SELECT * FROM vehicle_display',{},function(data2)
+			MySQL.Async.fetchAll('SELECT identifier FROM vip where identifier = @identifier',{['@identifier'] = xPlayer.getIdentifier()},function(data3)
 			--MySQL.Async.fetchAll('SELECT * FROM vehicle_categories',{},function(data3)	
 				-- vehicles:
+				if data3 ~= nil then
+					vip = true
+				else
+					vip = false
+				end
+				
 				for k,v in pairs(data1) do
-					table.insert(vehicles,{name = v.name, model = v.model, price = v.price, category = v.category, stock = v.stock})
+					table.insert(vehicles,{name = v.name, model = v.model, price = (vip) and v.price * 0.9 or v.price, category = v.category, stock = v.stock})
 				end
 				
 				-- display:
@@ -417,8 +427,8 @@ ESX.RegisterServerCallback("t1ger_cardealer:FetchData", function(source, cb)
 					table.insert(categories,{name = v.name, label = v.label})
 				end]]
 				
-				cb(vehicles, display)
-			--end)
+				cb(vehicles, display, vip)
+			end)
 		end)
 	end)	
 end)
