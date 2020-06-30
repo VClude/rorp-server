@@ -237,7 +237,7 @@ function RestockMenu()
 	ESX.TriggerServerCallback("esx_policejob:checkPoliceOnline", function(list) police = list end)
 	Citizen.Wait(600)
 	for k,v in pairs(police) do
-		if v.job.name == Config.PoliceDatabaseName then
+		if v.job.name == 'police' then
 			table.insert(elements,{label = v.name, id = v.id})
 		end
 	end
