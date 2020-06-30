@@ -23,7 +23,6 @@ local elements = {
     {label = 'Mengambil belanjaan', value = 'mengambil_belanjaan'},
     {label = 'Membuat catatan', value = 'membuat_catatan'},
     {label = 'Memotret', value = 'memotret'},
-    {label = 'Memalu paku', value = 'memalu_paku'},
 }
 
 Citizen.CreateThread(function()

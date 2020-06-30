@@ -37,10 +37,6 @@ function setUniform(uniform, playerPed)
 
 		if uniformObject then
 			TriggerEvent('skinchanger:loadClothes', skin, uniformObject)
-
-			if uniform == 'bullet_wear' then
-				SetPedArmour(playerPed, 100)
-			end
 		else
 			ESX.ShowNotification(_U('no_outfit'))
 		end
@@ -53,7 +49,6 @@ function OpenCloakroomMenu()
 
 	local elements = {
 		{label = _U('citizen_wear'), value = 'citizen_wear'},
-		{label = _U('bullet_wear'), uniform = 'bullet_wear'},
 		{label = _U('gilet_wear'), uniform = 'gilet_wear'},
 		{label = _U('police_wear'), uniform = grade}
 	}
