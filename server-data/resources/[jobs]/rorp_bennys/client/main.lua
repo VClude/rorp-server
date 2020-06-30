@@ -64,7 +64,7 @@ end)
 ---------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-AddEventHandler("esx_bennysjob:hasEnteredMarker", function(zone)
+AddEventHandler("rorp_bennys:hasEnteredMarker", function(zone)
 
 	if zone == "Cloakrooms" then
 		CurrentAction = "cloakrooms_menu"
@@ -93,7 +93,7 @@ AddEventHandler("esx_bennysjob:hasEnteredMarker", function(zone)
 	end
 end)
 
-AddEventHandler("esx_bennysjob:hasExitedMarker", function(zone)
+AddEventHandler("rorp_bennys:hasExitedMarker", function(zone)
 
 		CurrentAction = nil
 		if not isInShopMenu then
@@ -172,12 +172,12 @@ Citizen.CreateThread(function()
 			if (isInMarker and not HasAlreadyEnteredMarker) or (isInMarker and LastZone ~= currentZone) then
 				HasAlreadyEnteredMarker = true
 				LastZone = currentZone
-				TriggerEvent("esx_bennysjob:hasEnteredMarker", currentZone)
+				TriggerEvent("rorp_bennys:hasEnteredMarker", currentZone)
 			end
 
 			if not isInMarker and HasAlreadyEnteredMarker then
 				HasAlreadyEnteredMarker = false
-				TriggerEvent("esx_bennysjob:hasExitedMarker", LastZone)
+				TriggerEvent("rorp_bennys:hasExitedMarker", LastZone)
 			end
 		end
 	end
@@ -410,7 +410,7 @@ function setUniform(job, playerPed)
 end
 
 function OpenPutStocksMenu()
-	ESX.TriggerServerCallback('rtx_bennys:getPlayerInventory', function(inventory)
+	ESX.TriggerServerCallback('rorp_bennys:getPlayerInventory', function(inventory)
 		local elements = {}
 
 		for i=1, #inventory.items, 1 do
@@ -442,7 +442,7 @@ function OpenPutStocksMenu()
 				else
 					menu2.close()
 					menu.close()
-					TriggerServerEvent('rtx_bennys:putStockItems', itemName, count)
+					TriggerServerEvent('rorp_bennys:putStockItems', itemName, count)
 
 					Citizen.Wait(1000)
 					OpenPutStocksMenu()
@@ -457,7 +457,7 @@ function OpenPutStocksMenu()
 end
 
 function OpenGetStocksMenu()
-	ESX.TriggerServerCallback('rtx_bennys:getStockItems', function(items)
+	ESX.TriggerServerCallback('rorp_bennys:getStockItems', function(items)
 		local elements = {}
 
 		for i=1, #items, 1 do
@@ -484,7 +484,7 @@ function OpenGetStocksMenu()
 				else
 					menu2.close()
 					menu.close()
-					TriggerServerEvent('rtx_bennys:getStockItem', itemName, count)
+					TriggerServerEvent('rorp_bennys:getStockItem', itemName, count)
 
 					Citizen.Wait(1000)
 					OpenGetStocksMenu()
@@ -740,21 +740,21 @@ end)
 RegisterNetEvent('esx:playerLoaded')
 AddEventHandler('esx:playerLoaded', function(xPlayer)
 	PlayerData = xPlayer
-	ESX.TriggerServerCallback('esx_bennysjob:getVehiclesPrices', function(vehicles)
+	ESX.TriggerServerCallback('rorp_bennys:getVehiclesPrices', function(vehicles)
 		Vehicles = vehicles
 	end)
 end)
 
-RegisterNetEvent('esx_bennysjob:installMod')
-AddEventHandler('esx_bennysjob:installMod', function()
+RegisterNetEvent('rorp_bennys:installMod')
+AddEventHandler('rorp_bennys:installMod', function()
 	local coords 		= GetEntityCoords(GetPlayerPed(-1))
 	local vehicle = GetClosestVehicle(coords.x, coords.y, coords.z, 3.0, false, 23)
 	myCar = ESX.Game.GetVehicleProperties(vehicle)
-	TriggerServerEvent('esx_bennysjob:refreshOwnedVehicle', myCar)
+	TriggerServerEvent('rorp_bennys:refreshOwnedVehicle', myCar)
 end)
 
-RegisterNetEvent('esx_bennysjob:cancelInstallMod')
-AddEventHandler('esx_bennysjob:cancelInstallMod', function()
+RegisterNetEvent('rorp_bennys:cancelInstallMod')
+AddEventHandler('rorp_bennys:cancelInstallMod', function()
 	local coords 		= GetEntityCoords(GetPlayerPed(-1))
 	local vehicle  		= GetClosestVehicle(coords.x, coords.y, coords.z, 3.0, false, 23)
 	ESX.Game.SetVehicleProperties(vehicle, myCar)
@@ -779,7 +779,7 @@ function OpenLSMenu(elems, menuName, menuTitle, parent)
 			if k == data.current.modType or isRimMod then
 				if data.current.label == _U('by_default') or string.match(data.current.label, _U('installed')) then
 					ESX.ShowNotification(_U('already_own', data.current.label))
-					TriggerEvent('esx_bennysjob:installMod')
+					TriggerEvent('rorp_bennys:installMod')
 				else
 					local vehiclePrice = 80000
 					for i=1, #Vehicles, 1 do
@@ -791,16 +791,16 @@ function OpenLSMenu(elems, menuName, menuTitle, parent)
 					if data.current.price ~= nil then
 						if isRimMod then
 							price = math.floor(vehiclePrice * data.current.price / 100)
-							TriggerServerEvent("esx_bennysjob:buyMod", price)
+							TriggerServerEvent("rorp_bennys:buyMod", price)
 						elseif v.modType == 11 or v.modType == 12 or v.modType == 13 or v.modType == 15 or v.modType == 16 then
 							price = math.floor(vehiclePrice * v.price[data.current.modNum + 1] / 100)
-							TriggerServerEvent("esx_bennysjob:buyMod", price)
+							TriggerServerEvent("rorp_bennys:buyMod", price)
 						elseif v.modType == 17 then
 							price = math.floor(vehiclePrice * v.price[1] / 100)
-							TriggerServerEvent("esx_bennysjob:buyMod", price)
+							TriggerServerEvent("rorp_bennys:buyMod", price)
 						else
 							price = math.floor(vehiclePrice * v.price / 100)
-							TriggerServerEvent("esx_bennysjob:buyMod", price)
+							TriggerServerEvent("rorp_bennys:buyMod", price)
 						end
 					end
 				end
@@ -814,7 +814,7 @@ function OpenLSMenu(elems, menuName, menuTitle, parent)
 		end
 	end, function(data, menu) -- on cancel
 		menu.close()
-		TriggerEvent('esx_bennysjob:cancelInstallMod')
+		TriggerEvent('rorp_bennys:cancelInstallMod')
 		local playerPed = PlayerPedId()
 		local coords 		= GetEntityCoords(GetPlayerPed(-1))
 		local vehicle  		= GetClosestVehicle(coords.x, coords.y, coords.z, 3.0, false, 23)
@@ -1430,9 +1430,9 @@ function GetItemEvent()
 	
 	function(status)
 		if not status then
-			ESX.TriggerServerCallback("rtx_bennys:checkSpaceForFixtool",function(hasSpace)
+			ESX.TriggerServerCallback("rorp_bennys:checkSpaceForFixtool",function(hasSpace)
 				if hasSpace then
-					TriggerServerEvent("rtx_bennys:reward",'fixtool',5)
+					TriggerServerEvent("rorp_bennys:reward",'fixtool',5)
 					ClearPedTasks(playerPed)
 					currentlyItem = false
 				else
@@ -1480,7 +1480,7 @@ function CraftingEvent()
 	SetCurrentPedWeapon(playerPed, GetHashKey('WEAPON_UNARMED'))
 	Citizen.Wait(200)
 
-	ESX.TriggerServerCallback("rtx_bennys:removeFixtool", function(fixtoolcount)
+	ESX.TriggerServerCallback("rorp_bennys:removeFixtool", function(fixtoolcount)
 		if fixtoolcount then
 			TriggerEvent("mythic_progbar:client:progress",
 				{
@@ -1505,15 +1505,15 @@ function CraftingEvent()
 			},			
 			function(status)
 				if not status then
-					ESX.TriggerServerCallback("rtx_bennys:checkSpaceForFixkit", function(hasSpace)
+					ESX.TriggerServerCallback("rorp_bennys:checkSpaceForFixkit", function(hasSpace)
 						if hasSpace then
-							TriggerServerEvent("rtx_bennys:reward",'fixkit',1)
+							TriggerServerEvent("rorp_bennys:reward",'fixkit',1)
 							ClearPedTasks(playerPed)
 							currentlyCrafting = false
 						else
 							ESX.ShowNotification("Inventory kamu sudah penuh")
 							Citizen.Wait(1000)
-							TriggerServerEvent("rtx_bennys:reward",'fixtool',2)
+							TriggerServerEvent("rorp_bennys:reward",'fixtool',2)
 							ClearPedTasks(playerPed)
 							currentlyCrafting = false				
 						end
@@ -1583,9 +1583,9 @@ function GetTireEvent()
 	},			
 	function(status)
 		if not status then
-			ESX.TriggerServerCallback("rtx_bennys:checkSpaceForTire", function(hasSpace)
+			ESX.TriggerServerCallback("rorp_bennys:checkSpaceForTire", function(hasSpace)
 				if hasSpace then
-					TriggerServerEvent("rtx_bennys:reward",'ban',1)
+					TriggerServerEvent("rorp_bennys:reward",'ban',1)
 					ClearPedTasks(playerPed)
 					currentlyGetTire = false
 				else
@@ -1601,8 +1601,8 @@ end
 --////////////////////////////////////////
 -- USABLE ITEM
 --///////////////////////////////////////
-RegisterNetEvent('rtx_bennys:GantiBan')
-AddEventHandler('rtx_bennys:GantiBan', function()
+RegisterNetEvent('rorp_bennys:GantiBan')
+AddEventHandler('rorp_bennys:GantiBan', function()
 
 	local playerPed = PlayerPedId()
 	if IsPedSittingInAnyVehicle(playerPed) then
@@ -1661,7 +1661,7 @@ AddEventHandler('rtx_bennys:GantiBan', function()
 								if closestTire ~= nil then
 									SetVehicleTyreFixed(vehicle, closestTire.tireIndex)
 									ClearPedTasksImmediately(playerPed)
-									TriggerServerEvent('rtx_bennys:removeItem','ban', 1)
+									TriggerServerEvent('rorp_bennys:removeItem','ban', 1)
 									NotifSukses("Ban telah diganti!")
 								end
 							end
@@ -1674,8 +1674,8 @@ AddEventHandler('rtx_bennys:GantiBan', function()
 	end, GetPlayerServerId(PlayerId()), 'repair')
 end)
 
-RegisterNetEvent('rtx_bennys:RepairWithFixkit')
-AddEventHandler('rtx_bennys:RepairWithFixkit', function()
+RegisterNetEvent('rorp_bennys:RepairWithFixkit')
+AddEventHandler('rorp_bennys:RepairWithFixkit', function()
 
 	local playerPed = PlayerPedId()
 	local vehicle   = ESX.Game.GetVehicleInDirection()
@@ -1719,7 +1719,7 @@ AddEventHandler('rtx_bennys:RepairWithFixkit', function()
 								SetVehicleUndriveable(vehicle, false)
 								SetVehicleEngineOn(vehicle, true, true)
 								NotifSukses("Kendaraan sukses diperbaiki!")
-								TriggerServerEvent('rtx_bennys:removeItem','fixkit',1)
+								TriggerServerEvent('rorp_bennys:removeItem','fixkit',1)
 							end
 					end)				
 				end)

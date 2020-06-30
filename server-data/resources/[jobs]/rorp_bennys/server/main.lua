@@ -6,8 +6,8 @@ TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 TriggerEvent('esx_phone:registerNumber', 'bennys', _U('bennys'), true, true)
 TriggerEvent('esx_society:registerSociety', 'bennys', 'Bennys', 'society_bennys', 'society_bennys', 'society_bennys', {type = 'public'})
 
-RegisterServerEvent('esx_bennysjob:setJob')
-AddEventHandler('esx_bennysjob:setJob', function(identifier,job,grade)
+RegisterServerEvent('rorp_bennys:setJob')
+AddEventHandler('rorp_bennys:setJob', function(identifier,job,grade)
 	local xTarget = ESX.GetPlayerFromIdentifier(identifier)
 		
 		if xTarget then
@@ -16,8 +16,8 @@ AddEventHandler('esx_bennysjob:setJob', function(identifier,job,grade)
 
 end)
 
-RegisterServerEvent('esx_bennysjob:getStockItem')
-AddEventHandler('esx_bennysjob:getStockItem', function(itemName, count)
+RegisterServerEvent('rorp_bennys:getStockItem')
+AddEventHandler('rorp_bennys:getStockItem', function(itemName, count)
 	local xPlayer = ESX.GetPlayerFromId(source)
 
 	TriggerEvent('esx_addoninventory:getSharedInventory', 'society_bennys', function(inventory)
@@ -41,21 +41,21 @@ AddEventHandler('esx_bennysjob:getStockItem', function(itemName, count)
 	end)
 end)
 
-ESX.RegisterServerCallback('esx_bennysjob:getStockItems', function(source, cb)
+ESX.RegisterServerCallback('rorp_bennys:getStockItems', function(source, cb)
 	TriggerEvent('esx_addoninventory:getSharedInventory', 'society_bennys', function(inventory)
 		cb(inventory.items)
 	end)
 end)
 
-RegisterServerEvent('esx_bennysjob:forceBlip')
-AddEventHandler('esx_bennysjob:forceBlip', function()
-	TriggerClientEvent('esx_bennysjob:updateBlip', -1)
+RegisterServerEvent('rorp_bennys:forceBlip')
+AddEventHandler('rorp_bennys:forceBlip', function()
+	TriggerClientEvent('rorp_bennys:updateBlip', -1)
 end)
 
 AddEventHandler('onResourceStart', function(resource)
 	if resource == GetCurrentResourceName() then
 		Citizen.Wait(5000)
-		TriggerClientEvent('esx_bennysjob:updateBlip', -1)
+		TriggerClientEvent('rorp_bennys:updateBlip', -1)
 	end
 end)
 
@@ -65,19 +65,19 @@ AddEventHandler('onResourceStop', function(resource)
 	end
 end)
 
-RegisterServerEvent('esx_bennysjob:message')
-AddEventHandler('esx_bennysjob:message', function(target, msg)
+RegisterServerEvent('rorp_bennys:message')
+AddEventHandler('rorp_bennys:message', function(target, msg)
 	TriggerClientEvent('esx:showNotification', target, msg)
 end)
 
-RegisterServerEvent('esx_bennysjob:SVdestroyDoor')
-AddEventHandler('esx_bennysjob:SVdestroyDoor', function()
+RegisterServerEvent('rorp_bennys:SVdestroyDoor')
+AddEventHandler('rorp_bennys:SVdestroyDoor', function()
 	local id = source
-	TriggerClientEvent('esx_bennysjob:destroyDoor', id)
+	TriggerClientEvent('rorp_bennys:destroyDoor', id)
 end)
 
-RegisterServerEvent('esx_bennysjob:buyMod')
-AddEventHandler('esx_bennysjob:buyMod', function(price)
+RegisterServerEvent('rorp_bennys:buyMod')
+AddEventHandler('rorp_bennys:buyMod', function(price)
 	local _source = source
 	local xPlayer = ESX.GetPlayerFromId(_source)
 	price = tonumber(price)
@@ -87,17 +87,17 @@ AddEventHandler('esx_bennysjob:buyMod', function(price)
 			societyAccount = account
 		end)
 		if price < societyAccount.money then
-			TriggerClientEvent('esx_bennysjob:installMod', _source)
+			TriggerClientEvent('rorp_bennys:installMod', _source)
 			TriggerClientEvent('esx:showNotification', _source, _U('purchased'))
 			societyAccount.removeMoney(price)
 		else
-			TriggerClientEvent('esx_bennysjob:cancelInstallMod', _source)
+			TriggerClientEvent('rorp_bennys:cancelInstallMod', _source)
 			TriggerClientEvent('esx:showNotification', _source, _U('not_enough_money'))
 		end
 end)
 
-RegisterServerEvent('esx_bennysjob:refreshOwnedVehicle')
-AddEventHandler('esx_bennysjob:refreshOwnedVehicle', function(vehicleProps)
+RegisterServerEvent('rorp_bennys:refreshOwnedVehicle')
+AddEventHandler('rorp_bennys:refreshOwnedVehicle', function(vehicleProps)
 	local xPlayer = ESX.GetPlayerFromId(source)
 
 	MySQL.Async.fetchAll('SELECT vehicle FROM owned_vehicles WHERE plate = @plate', {
@@ -112,13 +112,13 @@ AddEventHandler('esx_bennysjob:refreshOwnedVehicle', function(vehicleProps)
 					['@vehicle'] = json.encode(vehicleProps)
 				})
 			else
-				print(('esx_bennysjob: %s attempted to upgrade vehicle with mismatching vehicle model!'):format(xPlayer.identifier))
+				print(('rorp_bennys: %s attempted to upgrade vehicle with mismatching vehicle model!'):format(xPlayer.identifier))
 			end
 		end
 	end)
 end)
 
-ESX.RegisterServerCallback('esx_bennysjob:getVehiclesPrices', function(source, cb)
+ESX.RegisterServerCallback('rorp_bennys:getVehiclesPrices', function(source, cb)
 	if not Vehicles then
 		MySQL.Async.fetchAll('SELECT * FROM vehicles', {}, function(result)
 			local vehicles = {}
@@ -138,13 +138,13 @@ ESX.RegisterServerCallback('esx_bennysjob:getVehiclesPrices', function(source, c
 	end
 end)
 
-ESX.RegisterServerCallback('rtx_bennys:buyJobVehicle', function(source, cb, vehicleProps, type)
+ESX.RegisterServerCallback('rorp_bennys:buyJobVehicle', function(source, cb, vehicleProps, type)
 	local xPlayer = ESX.GetPlayerFromId(source)
 	local price = getPriceFromHash(vehicleProps.model, xPlayer.job.grade_name, type)
 
 	-- vehicle model not found
 	if price == 0 then
-		print(('rtx_bennys: %s attempted to exploit the shop! (invalid vehicle model)'):format(xPlayer.identifier))
+		print(('rorp_bennys: %s attempted to exploit the shop! (invalid vehicle model)'):format(xPlayer.identifier))
 		cb(false)
 	end
 
@@ -166,7 +166,7 @@ ESX.RegisterServerCallback('rtx_bennys:buyJobVehicle', function(source, cb, vehi
 	end
 end)
 
-ESX.RegisterServerCallback('rtx_bennys:storeNearbyVehicle', function(source, cb, nearbyVehicles)
+ESX.RegisterServerCallback('rorp_bennys:storeNearbyVehicle', function(source, cb, nearbyVehicles)
 	local xPlayer = ESX.GetPlayerFromId(source)
 	local foundPlate, foundNum
 
@@ -192,7 +192,7 @@ ESX.RegisterServerCallback('rtx_bennys:storeNearbyVehicle', function(source, cb,
 			['@job'] = xPlayer.job.name
 		}, function (rowsChanged)
 			if rowsChanged == 0 then
-				print(('rtx_bennys: %s has exploited the garage!'):format(xPlayer.identifier))
+				print(('rorp_bennys: %s has exploited the garage!'):format(xPlayer.identifier))
 				cb(false)
 			else
 				cb(true, foundNum)
@@ -231,15 +231,15 @@ function getPriceFromHash(hashKey, jobGrade, type)
 	return 0
 end
 
-ESX.RegisterServerCallback('rtx_bennys:getPlayerInventory', function(source, cb)
+ESX.RegisterServerCallback('rorp_bennys:getPlayerInventory', function(source, cb)
 	local xPlayer    = ESX.GetPlayerFromId(source)
 	local items      = xPlayer.inventory
 
 	cb({items = items})
 end)
 
-RegisterServerEvent('rtx_bennys:getStockItem')
-AddEventHandler('rtx_bennys:getStockItem', function(itemName, count)
+RegisterServerEvent('rorp_bennys:getStockItem')
+AddEventHandler('rorp_bennys:getStockItem', function(itemName, count)
 	local xPlayer = ESX.GetPlayerFromId(source)
 
 	TriggerEvent('esx_addoninventory:getSharedInventory', 'society_bennys', function(inventory)
@@ -262,14 +262,14 @@ AddEventHandler('rtx_bennys:getStockItem', function(itemName, count)
 	end)
 end)
 
-ESX.RegisterServerCallback('rtx_bennys:getStockItems', function(source, cb)
+ESX.RegisterServerCallback('rorp_bennys:getStockItems', function(source, cb)
 	TriggerEvent('esx_addoninventory:getSharedInventory', 'society_bennys', function(inventory)
 		cb(inventory.items)
 	end)
 end)
 
-RegisterServerEvent('rtx_bennys:putStockItems')
-AddEventHandler('rtx_bennys:putStockItems', function(itemName, count)
+RegisterServerEvent('rorp_bennys:putStockItems')
+AddEventHandler('rorp_bennys:putStockItems', function(itemName, count)
 	local xPlayer = ESX.GetPlayerFromId(source)
 
 	TriggerEvent('esx_addoninventory:getSharedInventory', 'society_bennys', function(inventory)
@@ -287,7 +287,7 @@ AddEventHandler('rtx_bennys:putStockItems', function(itemName, count)
 	end)
 end)
 
-ESX.RegisterServerCallback("rtx_bennys:checkSpaceForFixkit",function(source,cb)
+ESX.RegisterServerCallback("rorp_bennys:checkSpaceForFixkit",function(source,cb)
 	local xPlayer = ESX.GetPlayerFromId(source)
 	if xPlayer.canCarryItem('fixkit', 1) then
 		cb(true)
@@ -296,7 +296,7 @@ ESX.RegisterServerCallback("rtx_bennys:checkSpaceForFixkit",function(source,cb)
 	end
 end)
 
-ESX.RegisterServerCallback("rtx_bennys:checkSpaceForFixtool",function(source,cb)
+ESX.RegisterServerCallback("rorp_bennys:checkSpaceForFixtool",function(source,cb)
 	local xPlayer = ESX.GetPlayerFromId(source)
 	if xPlayer.canCarryItem('fixtool', 5) then
 		cb(true)
@@ -305,7 +305,7 @@ ESX.RegisterServerCallback("rtx_bennys:checkSpaceForFixtool",function(source,cb)
 	end
 end)
 
-ESX.RegisterServerCallback("rtx_bennys:checkSpaceForTire",function(source,cb)
+ESX.RegisterServerCallback("rorp_bennys:checkSpaceForTire",function(source,cb)
 	local xPlayer = ESX.GetPlayerFromId(source)
 	if xPlayer.canCarryItem('ban', 1) then
 		cb(true)
@@ -314,8 +314,8 @@ ESX.RegisterServerCallback("rtx_bennys:checkSpaceForTire",function(source,cb)
 	end
 end)
 
-RegisterServerEvent("rtx_bennys:reward")
-AddEventHandler("rtx_bennys:reward", function(itemName,itemAmount)
+RegisterServerEvent("rorp_bennys:reward")
+AddEventHandler("rorp_bennys:reward", function(itemName,itemAmount)
 	local xPlayer = ESX.GetPlayerFromId(source)
 	local itemLabel = ESX.GetItemLabel(itemName)
 	xPlayer.addInventoryItem(itemName, itemAmount)
@@ -323,7 +323,7 @@ AddEventHandler("rtx_bennys:reward", function(itemName,itemAmount)
 end)
 
 -- Server Callback to get fixtool count & remove fixtool:
-ESX.RegisterServerCallback("rtx_bennys:removeFixtool",function(source,cb)
+ESX.RegisterServerCallback("rorp_bennys:removeFixtool",function(source,cb)
 	local xPlayer = ESX.GetPlayerFromId(source)
 	if xPlayer.getInventoryItem("fixtool").count >= 2 then
 		xPlayer.removeInventoryItem("fixtool", 2)
@@ -336,17 +336,17 @@ end)
 ESX.RegisterUsableItem('fixkit', function(source)
 	local _source = source
 	local xPlayer  = ESX.GetPlayerFromId(source)
-	TriggerClientEvent('rtx_bennys:RepairWithFixkit', _source)
+	TriggerClientEvent('rorp_bennys:RepairWithFixkit', _source)
 end)
 
 ESX.RegisterUsableItem('ban', function(source)
 	local _source = source
 	local xPlayer  = ESX.GetPlayerFromId(source)
-	TriggerClientEvent('rtx_bennys:GantiBan', _source)
+	TriggerClientEvent('rorp_bennys:GantiBan', _source)
 end)
 
-RegisterServerEvent('rtx_bennys:removeItem')
-AddEventHandler('rtx_bennys:removeItem', function(itemName,itemAmount)
+RegisterServerEvent('rorp_bennys:removeItem')
+AddEventHandler('rorp_bennys:removeItem', function(itemName,itemAmount)
 	local xPlayer = ESX.GetPlayerFromId(source)
 	local itemLabel = ESX.GetItemLabel(itemName)
 	xPlayer.removeInventoryItem(itemName, itemAmount)
