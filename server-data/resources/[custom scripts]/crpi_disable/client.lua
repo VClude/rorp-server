@@ -15,7 +15,7 @@ local gates = {
 }
 
 RegisterCommand('stuck', function(source)
-	ClearPedTasksImmediately(GetPlayerPed(-1))
+	ESX.UI.Menu.CloseAll()
 	SetNuiFocus(false, false)
 end,false)
 
