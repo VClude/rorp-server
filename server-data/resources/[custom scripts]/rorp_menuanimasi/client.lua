@@ -58,6 +58,10 @@ function OpenGetMenuAnimasi()
 			elements = elements
         }, function(data, menu)
             
+            if data.current.value == 'menyerah' then
+                ExecuteCommand('k')
+            end
+            
 
             
         end, function(data,menu)       
