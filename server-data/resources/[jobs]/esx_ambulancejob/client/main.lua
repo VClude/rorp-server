@@ -56,8 +56,8 @@ AddEventHandler('esx:onPlayerSpawn', function()
 					local playerPed = PlayerPedId()
 					exports['mythic_notify']:DoCustomHudText('inform', _U('combatlog_message'), 5000)
 					-- RemoveItemsAfterRPDeath()
-					-- ExplodePedHead(player, 0x1D073A89)
-					SetEntityHealth(playerPed, 0)
+					ExplodePedHead(playerPed, 0x1D073A89)
+					-- SetEntityHealth(playerPed, 0)
 				end
 			end)
 		end
