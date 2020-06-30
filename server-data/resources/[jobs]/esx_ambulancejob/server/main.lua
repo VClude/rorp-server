@@ -2,10 +2,10 @@ ESX = nil
 
 local beds = {
 	{ x = 359.6, y = -586.13, z = 43.28, h = 247.79, taken = false, model = 1631638868 },
-	-- { x = 360.87, y = -581.12, z = 43.28, h = 248.75, taken = false, model = 1631638868 },
-	-- { x = 366.22, y = -581.55, z = 43.28, h = 246.63, taken = false, model = 1631638868 },
-	-- { x = 363.59, y = -588.95, z = 43.28, h = 250.54, taken = false, model = 1631638868 },
-	-- { x = 354.12, y = -600.05, z = 43.28, h = 250.24, taken = false, model = 1631638868 },
+	{ x = 360.87, y = -581.12, z = 43.28, h = 248.75, taken = false, model = 1631638868 },
+	{ x = 366.22, y = -581.55, z = 43.28, h = 246.63, taken = false, model = 1631638868 },
+	{ x = 363.59, y = -588.95, z = 43.28, h = 250.54, taken = false, model = 1631638868 },
+	{ x = 354.12, y = -600.05, z = 43.28, h = 250.24, taken = false, model = 1631638868 },
  
 }
 
@@ -345,7 +345,7 @@ AddEventHandler('esx_ambulancejob:server:RequestBed', function()
         end
     end
 
-    TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'error', text = 'No beds available.' })
+    TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'error', text = 'Tidak ada ruangan yang tersedia.' })
 end)
 
 RegisterServerEvent('esx_ambulancejob:server:EnteredBed')

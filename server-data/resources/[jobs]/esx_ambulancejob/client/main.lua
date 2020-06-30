@@ -60,6 +60,28 @@ AddEventHandler('esx:onPlayerSpawn', function()
 	end
 end)
 
+-- Create blips
+Citizen.CreateThread(function()
+	for k,v in pairs(Config.Hospitals) do
+		local blip = AddBlipForRadius(v.Blip.coords, 50.0)
+		
+		SetBlipHighDetail(blip, true)
+		SetBlipColour(blip, 2)
+		SetBlipAlpha (blip, 128)
+
+		local blip = AddBlipForCoord(v.Blip.coords)
+
+		SetBlipSprite(blip, v.Blip.sprite)
+		SetBlipScale(blip, v.Blip.scale)
+		SetBlipColour(blip, v.Blip.color)
+		SetBlipAsShortRange(blip, true)
+
+		BeginTextCommandSetBlipName('STRING')
+		AddTextComponentSubstringPlayerName(_U('blip_hospital'))
+		EndTextCommandSetBlipName(blip)
+	end
+end)
+
 
 -- Disable most inputs when dead
 Citizen.CreateThread(function()
@@ -104,7 +126,7 @@ function LeaveBed()
     Citizen.Wait(5000)
     ClearPedTasks(PlayerPedId())
     FreezeEntityPosition(PlayerPedId(), false)
-    -- TriggerServerEvent('esx_ambulancejob:server:LeaveBed', bedOccupying)
+    TriggerServerEvent('esx_ambulancejob:server:LeaveBed', bedOccupying)
 
     FreezeEntityPosition(bedObject, false)
 
@@ -217,27 +239,12 @@ function StartDistressSignal()
 	end)
 end
 
---[[function SendDistressSignal()
-	local playerPed = PlayerPedId()
-	local coords	= GetEntityCoords(playerPed)
-
-	--ESX.ShowNotification(_U('distress_sent'))
-	exports['mythic_notify']:DoCustomHudText('inform', _U('distress_sent'), 5000)
-	TriggerServerEvent('esx_phone:send', 'ambulance', _U('distress_message'), false, {
-		x = coords.x,
-		y = coords.y,
-		z = coords.z
-	})
-end]]
-
-
 function SendDistressSignal()
 	local playerPed = PlayerPedId()
 	PedPosition		= GetEntityCoords(playerPed)
 	
 	local PlayerCoords = { x = PedPosition.x, y = PedPosition.y, z = PedPosition.z }
 
-	--ESX.ShowNotification(_U('distress_sent'))
 	exports['mythic_notify']:DoCustomHudText('inform', _U('distress_sent'), 5000)
 
     TriggerServerEvent('esx_addons_gcphone:startCall', 'ambulance', _U('distress_message'), PlayerCoords, {
@@ -380,6 +387,7 @@ function RemoveItemsAfterRPDeath()
 			Citizen.Wait(10)
 			StopScreenEffect('DeathFailOut')
 			DoScreenFadeIn(800)
+			ShakeGameplayCam("SMALL_EXPLOSION_SHAKE", 1.0)
 		end)
 	end)
 end
@@ -474,7 +482,7 @@ AddEventHandler('esx_ambulancejob:client:SendToBed', function(id, data)
         Citizen.Wait(5)
         local player = PlayerPedId()
 
-        exports['mythic_notify']:SendAlert('inform', 'Doctors are treating you.')
+        exports['mythic_notify']:SendAlert('inform', 'Dokter sedang menyembuhkan anda.')
         Citizen.Wait(5000)
         TriggerServerEvent('esx_ambulancejob:server:EnteredBed')
     end)
@@ -493,6 +501,6 @@ AddEventHandler('esx_ambulancejob:client:FinishServices', function()
     ClearPedBloodDamage(player)
     SetPlayerSprint(PlayerId(), true)
     TriggerEvent('esx_ambulancejob:revive')
-    exports['mythic_notify']:SendAlert('inform', 'You\'ve been treated.')
+    exports['mythic_notify']:SendAlert('inform', 'Kamu telah di sembuhkan.')
     LeaveBed()
 end)
