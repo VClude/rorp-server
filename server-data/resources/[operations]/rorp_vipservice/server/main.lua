@@ -68,10 +68,21 @@ end, false)
 --debug VV
 RegisterCommand('getvip', function(source, args, rawCommand)
 
-    local tPl = ESX.GetPlayerFromId(source)
-    local ident = tPl.getIdentifier()
-    local xPlayer = ESX.GetPlayerFromId(source)
-    print(xPlayer.getVip())
+    local _source = source
+    local xPlayer = ESX.GetPlayerFromId(_source)
+    if xPlayer ~= nil then
+        local ident = xPlayer.getIdentifier()
+        local result = MySQL.Sync.fetchAll("SELECT accounts, job, job_grade, `group`, loadout, position, inventory, COALESCE(expiredate, false) AS expiredate FROM users left join vip on users.identifier = vip.identifier WHERE users.identifier = @identifier", {['@identifier'] = ident})
+    
+        if tonumber(result[1].expiredate) ~= 0 then
+            print(xPlayer.getVip())
+            print(result[1]['expiredate'])
+        else
+            print('false')
+        end
+    else
+        print('nil')
+    end
 
 end, false)
 

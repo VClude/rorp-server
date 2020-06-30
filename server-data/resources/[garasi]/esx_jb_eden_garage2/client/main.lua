@@ -35,7 +35,7 @@ function OpenMenuGarage(garage, KindOfVehicle, garage_name, vehicle_type)
 	ESX.UI.Menu.CloseAll()
 	ESX.TriggerServerCallback('vip:isVip', function(yes)
 		if yes then
-			hargakeluar = Config.Price * 0.6
+			hargakeluar = Config.Price * 60 / 100
 		end
 	end)
 	ESX.TriggerServerCallback('eden_garage:getOutVehicles', function(vehicles)

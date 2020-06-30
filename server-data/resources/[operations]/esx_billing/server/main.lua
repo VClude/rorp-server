@@ -49,7 +49,11 @@ end)
 
 ESX.RegisterServerCallback('esx_billing:getVip', function(source, cb)
 	local xPlayer = ESX.GetPlayerFromId(source)
-	cb(xPlayer.getVip())
+	if xPlayer ~= nil then
+		cb(xPlayer.getVip())
+	else
+		cb(false)
+	end
 end)
 
 ESX.RegisterServerCallback('esx_billing:getTargetBills', function(source, cb, target)

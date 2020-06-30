@@ -93,7 +93,7 @@ function loadESXPlayer(identifier, playerId)
 		weight = 0
 	}
 
-	MySQL.Async.fetchAll('SELECT accounts, job, job_grade, `group`, loadout, position, inventory, vip.expiredate FROM users left join vip on users.identifier = vip.identifier WHERE users.identifier = @identifier and vip.expiredate > CURRENT_DATE', {
+	MySQL.Async.fetchAll('SELECT accounts, job, job_grade, `group`, loadout, position, inventory, COALESCE(cast(expiredate as UNSIGNED), false) AS expiredate FROM users left join vip on users.identifier = vip.identifier WHERE users.identifier = @identifier', {
 		['@identifier'] = identifier
 	}, function(result)
 		local job, grade, jobObject, gradeObject = result[1].job, tostring(result[1].job_grade)
@@ -155,7 +155,7 @@ function loadESXPlayer(identifier, playerId)
 			end
 		end
 
-		if result[1].expiredate ~= nil then
+		if tonumber(result[1].expiredate) ~= 0 then
 			userData.vip = true
 		end
 

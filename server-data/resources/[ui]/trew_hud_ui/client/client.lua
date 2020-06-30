@@ -367,7 +367,7 @@ end)
 -- Overall Info
 RegisterNetEvent('trew_hud_ui:setInfo')
 AddEventHandler('trew_hud_ui:setInfo', function(info)
-	if info['vip'] then
+	if info['vip'] == true then
 		SendNUIMessage({ action = 'element', task = 'enable', value = 'vip' })
 	end
 		SendNUIMessage({ action = 'setText', id = 'job', value = info['job'] })
