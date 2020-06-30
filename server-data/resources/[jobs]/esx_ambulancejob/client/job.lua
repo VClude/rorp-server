@@ -524,7 +524,7 @@ Citizen.CreateThread(function()
 				elseif CurrentAction == 'Helicopters' then
 					OpenVehicleSpawnerMenu('helicopter', CurrentActionData.hospital, CurrentAction, CurrentActionData.partNum)
 				elseif CurrentAction == 'FastTravels' then
-					FastTravel(CurrentActionData.to, CurrentActionData.heading)
+					FastTravel(CurrentActionData.To.coords, CurrentActionData.To.heading)
 				end
 
 				CurrentAction = nil
