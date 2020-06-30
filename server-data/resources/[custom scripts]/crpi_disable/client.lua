@@ -25,7 +25,7 @@ local gates = {
 }
 
 RegisterCommand('stuck', function(source)
-	ESX.UI.Menu.CloseAll()
+	ESX.UI.CloseAll()
 	SetNuiFocus(false, false)
 end,false)
 
