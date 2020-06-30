@@ -12,6 +12,7 @@ Config.DamageNeeded = 100.0 -- 100.0 being broken and 1000.0 being fixed a lower
 Config.MaxWidth = 5.0 -- Will complete soon
 Config.MaxHeight = 5.0
 Config.MaxLength = 5.0
+Config.FuelNeeded = 20
 
 local Keys = {
   ["ESC"] = 322, ["F1"] = 288, ["F2"] = 289, ["F3"] = 170, ["F5"] = 166, ["F6"] = 167, ["F7"] = 168, ["F8"] = 169, ["F9"] = 56, ["F10"] = 57,
@@ -60,7 +61,7 @@ Citizen.CreateThread(function()
         local ped = PlayerPedId()
         if Vehicle.Vehicle ~= nil then
  
-                if IsVehicleSeatFree(Vehicle.Vehicle, -1) and (GetVehicleEngineHealth(Vehicle.Vehicle) <= Config.DamageNeeded or exports["LegacyFuel"]:GetFuel(Vehicle.Vehicle) <= 5) then
+                if IsVehicleSeatFree(Vehicle.Vehicle, -1) and (GetVehicleEngineHealth(Vehicle.Vehicle) <= Config.DamageNeeded or exports["LegacyFuel"]:GetFuel(Vehicle.Vehicle) <= Config.FuelNeeded) then
                     ESX.Game.Utils.DrawText3D({x = Vehicle.Coords.x, y = Vehicle.Coords.y, z = Vehicle.Coords.z}, 'Tekan [~g~SHIFT~w~] dan [~g~E~w~] untuk mendorong kendaraan', 0.4)
                 end
      
