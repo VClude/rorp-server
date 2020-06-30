@@ -8,7 +8,7 @@ Config.Marker                     = {type = 1, x = 1.5, y = 1.5, z = 0.5, r = 10
 
 Config.ReviveReward               = 50  -- revive reward, set to 0 if you don't want it enabled
 Config.AntiCombatLog              = true -- enable anti-combat logging?
-Config.LoadIpl                    = true -- disable if you're using fivem-ipl or other IPL loaders
+Config.LoadIpl                    = false -- disable if you're using fivem-ipl or other IPL loaders
 
 Config.Locale                     = 'en'
 
@@ -92,21 +92,21 @@ Config.Hospitals = {
 Config.AuthorizedVehicles = {
 	car = {
 		ambulance = {
-			{model = 'ambulance', price = 1}
+			{model = 'ambulance', price = 100}
 		},
 
 		doctor = {
-			{model = 'ambulance', price = 1}
+			{model = 'ambulance', price = 100}
 		},
 
 		chief_doctor = {
-			{model = 'ambulance', price = 1}
+			{model = 'ambulance', price = 100}
 		},
 
 		boss = {
-			{model = 'ambulance', price = 1},
-			{model = 'ambulance', price = 1},
-			{model = 'ambulance', price = 1}
+			{model = 'ambulance', price = 100},
+			{model = 'ambulance', price = 100},
+			{model = 'ambulance', price = 100}
 		}
 	},
 
@@ -117,11 +117,11 @@ Config.AuthorizedVehicles = {
 
 
 		chief_doctor = {
-			{model = 'ambuheli', price = 1}
+			{model = 'ambuheli', price = 100}
 		},
 
 		boss = {
-			{model = 'ambuheli', price = 1}
+			{model = 'ambuheli', price = 100}
 		}
 	}
 }
