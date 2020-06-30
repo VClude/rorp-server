@@ -95,11 +95,13 @@ function OpenMobileAmbulanceActionsMenu()
 				align    = 'top-right',
 				elements = {
 					{label = _U('ems_menu_revive'), value = 'revive'},
+					{label = _U('ems_menu_billing'), value = 'billing'},
 					{label = _U('ems_menu_small'), value = 'small'},
 					{label = _U('ems_menu_big'), value = 'big'},
+					{label = _U('ems_menu_carry'), value = 'carry'},
 					{label = _U('ems_menu_putincar'), value = 'put_in_vehicle'},
-					{label = _U('ems_menu_search'), value = 'search'},
-					{label = _U('ems_menu_billing'), value = 'billing'}
+					{label = _U('ems_menu_outthecar'), value = 'out_the_vehicle'},
+					{label = _U('ems_menu_search'), value = 'search'}
 				}
 			}, function(data, menu)
 				if IsBusy then return end
@@ -203,7 +205,7 @@ function OpenMobileAmbulanceActionsMenu()
 
 									TriggerServerEvent('esx_ambulancejob:removeItem', 'bandage')
 									TriggerServerEvent('esx_ambulancejob:heal', GetPlayerServerId(closestPlayer), 'small')
-									ESX.ShowNotification(_U('heal_complete', GetPlayerName(closestPlayer)))
+									exports['mythic_notify']:DoCustomHudText('inform', _U('heal_complete', GetPlayerName(closestPlayer)), 2500, { ['background-color'] = '#FF0000', ['color'] = '#ffffff' })
 									IsBusy = false
 								else
 									--ESX.ShowNotification(_U('player_not_conscious'))
@@ -241,13 +243,17 @@ function OpenMobileAmbulanceActionsMenu()
 								end
 							else
 								--ESX.ShowNotification(_U('not_enough_medikit'))
-									exports['mythic_notify']:DoCustomHudText('inform', _U('not_enough_medikit'), 2500, { ['background-color'] = '#FF0000', ['color'] = '#ffffff' })
+								exports['mythic_notify']:DoCustomHudText('inform', _U('not_enough_medikit'), 2500, { ['background-color'] = '#FF0000', ['color'] = '#ffffff' })
 							end
 						end, 'medikit')
 
 					elseif data.current.value == 'put_in_vehicle' then
 						TriggerServerEvent('esx_ambulancejob:putInVehicle', GetPlayerServerId(closestPlayer))
---start billing or invoice					
+					elseif data.current.value == 'out_the_vehicle' then
+						TriggerServerEvent('esx_ambulancejob:OutVehicle', GetPlayerServerId(closestPlayer))
+					elseif data.current.value == 'carry' then
+						ExecuteCommand('carry')
+					--start billing or invoice					
 					elseif data.current.value == 'billing' then
 
 						ESX.UI.Menu.Open('dialog', GetCurrentResourceName(), 'billing', {
@@ -270,7 +276,7 @@ function OpenMobileAmbulanceActionsMenu()
 						end, function(data, menu)
 							menu.close()
 						end)
---end billing or invoice
+					--end billing or invoice
 					end
 				end
 			end, function(data, menu)
@@ -533,6 +539,16 @@ Citizen.CreateThread(function()
 		else
 			Citizen.Wait(500)
 		end
+	end
+end)
+
+RegisterNetEvent('esx_ambulancejob:OutVehicle')
+AddEventHandler('esx_ambulancejob:OutVehicle', function()
+	local playerPed = PlayerPedId()
+
+	if IsPedSittingInAnyVehicle(playerPed) then
+		local vehicle = GetVehiclePedIsIn(playerPed, false)
+		TaskLeaveVehicle(playerPed, vehicle, 16)
 	end
 end)
 

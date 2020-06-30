@@ -33,7 +33,7 @@ AddEventHandler('esx_ambulancejob:revive', function(playerId)
 				xPlayer.addMoney(Config.ReviveReward)
 				xTarget.triggerEvent('esx_ambulancejob:revive')
 				
-				deadPlayers[source] = nil
+				deadPlayers[playerId] = nil
 			else
 				xPlayer.showNotification(_U('player_not_unconscious'))
 			end
@@ -99,6 +99,19 @@ AddEventHandler('esx_ambulancejob:putInVehicle', function(target)
 
 	if xPlayer.job.name == 'ambulance' then
 		TriggerClientEvent('esx_ambulancejob:putInVehicle', target)
+	else
+		print(('esx_policejob: %s attempted to put in vehicle (not ambulance)!'):format(xPlayer.identifier))
+	end
+end)
+
+RegisterNetEvent('esx_ambulancejob:OutVehicle')
+AddEventHandler('esx_ambulancejob:OutVehicle', function(target)
+	local xPlayer = ESX.GetPlayerFromId(source)
+
+	if xPlayer.job.name == 'ambulance' then
+		TriggerClientEvent('esx_ambulancejob:OutVehicle', target)
+	else
+		print(('esx_ambulancejob: %s attempted to drag out from vehicle (not ambulance)!'):format(xPlayer.identifier))
 	end
 end)
 

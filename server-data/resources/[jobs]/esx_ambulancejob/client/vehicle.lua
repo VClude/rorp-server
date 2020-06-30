@@ -213,8 +213,7 @@ function OpenShopMenu(elements, restoreCoords, shopCoords)
 
 				ESX.TriggerServerCallback('esx_ambulancejob:buyJobVehicle', function(bought)
 					if bought then
-						exports['mythic_notify']:DoCustomHudText('error', _U('vehicleshop_bought', data.current.name, ESX.Math.GroupDigits(data.current.price)), 2500)
-						-- ESX.ShowNotification(_U('vehicleshop_bought', data.current.name, ESX.Math.GroupDigits(data.current.price)))
+						exports['mythic_notify']:DoCustomHudText('success', _U('vehicleshop_bought', data.current.name, ESX.Math.GroupDigits(data.current.price)), 2500)
 
 						isInShopMenu = false
 						ESX.UI.Menu.CloseAll()
@@ -225,7 +224,7 @@ function OpenShopMenu(elements, restoreCoords, shopCoords)
 
 						ESX.Game.Teleport(playerPed, restoreCoords)
 					else
-						ESX.ShowNotification(_U('vehicleshop_money'))
+						exports['mythic_notify']:DoCustomHudText('error', _U('vehicleshop_money'), 2500)
 						menu2.close()
 					end
 				end, props, data.current.type)
