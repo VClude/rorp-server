@@ -191,7 +191,7 @@ end
 
 function OpenArmoryMenu(station)
 	local elements = {
-		{label = _U('buy_weapons'), value = 'buy_weapons'}
+		
 	}
 
 	if Config.EnableArmoryManagement then

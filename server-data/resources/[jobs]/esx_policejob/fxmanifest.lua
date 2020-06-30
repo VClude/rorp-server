@@ -35,10 +35,10 @@ client_scripts {
 	'locales/sv.lua',
 	'locales/ko.lua',
 	'locales/cs.lua',
-	'armory.lua',
 	'config.lua',
 	'client/main.lua',
-	'client/vehicle.lua'
+	'client/vehicle.lua',
+	'client/armory.lua'
 }
 
 dependencies {
