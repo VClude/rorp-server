@@ -15,12 +15,12 @@ local Keys = {
 
 local elements = {
     {label = 'Menyerah', value = 'menyerah'},
-    {label ='Mancing', value = 'mancing'},
     {label = 'Polisi: Investigasi', value = 'investigasi'},
     {label = 'Polisi: Mengatur jalan', value = 'mengatur_jalan'},
-    {label = 'Memperbaiki kolong mobil', value = 'memperbaiki_kolong_mobil'},
-    {label = 'Memperbaiki kolong mesin', value = 'memperbaiki_kolong_mesin'},
+    {label = 'Memperbaiki kolong kendaraan', value = 'memperbaiki_kolong_kendaraan'},
+    {label = 'Memperbaiki mesin', value = 'memperbaiki_mesin'},
     {label = 'Taxi: Memberi tagihan', value = 'memberi_tagihan'},
+    {label = 'Mengambil belanjaan', value = 'mengambil_belanjaan'},
     {label = 'Membuat catatan', value = 'membuat_catatan'},
     {label = 'Memotret', value = 'memotret'},
     {label = 'Memalu paku', value = 'memalu_paku'},
@@ -60,10 +60,26 @@ function OpenGetMenuAnimasi()
             
             if data.current.value == 'menyerah' then
                 ExecuteCommand('k')
+            elseif data.current.value == 'investigasi' then
+                ExecuteCommand('tablet2')
+            elseif data.current.value == 'mengatur_jalan' then
+                ExecuteCommand('copbeacon')
+            elseif data.current.value == 'memperbaiki_kolong_kendaraan' then
+                ExecuteCommand('mechanic3') 
+            elseif data.current.value == 'memperbaiki_mesin' then
+                ExecuteCommand('mechanic')               
+            elseif data.current.value == 'memberi_tagihan' then
+                ExecuteCommand('clipboard')
+            elseif data.current.value == 'mengambil_belanjaan' then
+                ExecuteCommand('box')
+            elseif data.current.value == 'membuat_catatan' then
+                ExecuteCommand('notepad')
+            elseif data.current.value == 'memotret' then
+                ExecuteCommand('camera')
+            elseif data.current.value == 'memalu_paku' then
+                return
             end
-            
-
-            
+            menu.close()     
         end, function(data,menu)       
             menu.close()    
         end)
