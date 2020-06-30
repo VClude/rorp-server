@@ -104,7 +104,7 @@ function LeaveBed()
     Citizen.Wait(5000)
     ClearPedTasks(PlayerPedId())
     FreezeEntityPosition(PlayerPedId(), false)
-    TriggerServerEvent('esx_ambulancejob:server:LeaveBed', bedOccupying)
+    -- TriggerServerEvent('esx_ambulancejob:server:LeaveBed', bedOccupying)
 
     FreezeEntityPosition(bedObject, false)
 
@@ -369,7 +369,7 @@ function RemoveItemsAfterRPDeath()
 		end
 
 		ESX.TriggerServerCallback('esx_ambulancejob:removeItemsAfterRPDeath', function()
-			local playerpos = GetEntityCoords( GetPlayerPed(-1) )
+			local playerpos = Config.RespawnPoint.coords
 				
 			ESX.SetPlayerData('lastPosition', playerpos)
 			ESX.SetPlayerData('loadout', {})
