@@ -60,8 +60,9 @@ function OpenGetMenuAnimasi()
             
 
             
+        end, function(data,menu)       
+            menu.close()    
         end)
-
 end
 
 Citizen.CreateThread(function()
