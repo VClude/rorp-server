@@ -1,4 +1,4 @@
-function CreateExtendedPlayer(playerId, identifier, group, accounts, inventory, weight, job, loadout, name, coords)
+function CreateExtendedPlayer(playerId, identifier, group, accounts, inventory, weight, job, loadout, name, coords, vip)
 	local self = {}
 
 	self.accounts = accounts
@@ -13,6 +13,7 @@ function CreateExtendedPlayer(playerId, identifier, group, accounts, inventory, 
 	self.source = playerId
 	self.variables = {}
 	self.weight = weight
+	self.vip = vip
 	self.maxWeight = Config.MaxWeight
 
 	ExecuteCommand(('add_principal identifier.%s group.%s'):format(self.identifier, self.group))
@@ -310,6 +311,10 @@ function CreateExtendedPlayer(playerId, identifier, group, accounts, inventory, 
 
 	self.getMaxWeight = function()
 		return self.maxWeight
+	end
+
+	self.getVip = function()
+		return self.vip
 	end
 
 	self.canCarryItem = function(name, count)

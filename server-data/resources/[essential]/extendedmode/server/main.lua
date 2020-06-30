@@ -88,11 +88,12 @@ function loadESXPlayer(identifier, playerId)
 		inventory = {},
 		job = {},
 		loadout = {},
+		vip = false,
 		playerName = GetPlayerName(playerId),
 		weight = 0
 	}
 
-	MySQL.Async.fetchAll('SELECT accounts, job, job_grade, `group`, loadout, position, inventory FROM users WHERE identifier = @identifier', {
+	MySQL.Async.fetchAll('SELECT accounts, job, job_grade, `group`, loadout, position, inventory, vip.expiredate FROM users left join vip on users.identifier = vip.identifier WHERE users.identifier = @identifier and vip.expiredate > CURRENT_DATE', {
 		['@identifier'] = identifier
 	}, function(result)
 		local job, grade, jobObject, gradeObject = result[1].job, tostring(result[1].job_grade)
@@ -152,6 +153,10 @@ function loadESXPlayer(identifier, playerId)
 					print(('[ExtendedMode] [^3WARNING^7] Ignoring invalid item "%s" for "%s"'):format(name, identifier))
 				end
 			end
+		end
+
+		if result[1].expiredate ~= nil then
+			userData.vip = true
 		end
 
 		for name,item in pairs(ESX.Items) do
@@ -214,7 +219,7 @@ function loadESXPlayer(identifier, playerId)
 		end
 
 		-- Create Extended Player Object
-		local xPlayer = CreateExtendedPlayer(playerId, identifier, userData.group, userData.accounts, userData.inventory, userData.weight, userData.job, userData.loadout, userData.playerName, userData.coords)
+		local xPlayer = CreateExtendedPlayer(playerId, identifier, userData.group, userData.accounts, userData.inventory, userData.weight, userData.job, userData.loadout, userData.playerName, userData.coords, userData.vip)
 		ESX.Players[playerId] = xPlayer
 		TriggerEvent('esx:playerLoaded', playerId, xPlayer)
 
@@ -226,7 +231,8 @@ function loadESXPlayer(identifier, playerId)
 			job = xPlayer.getJob(),
 			loadout = xPlayer.getLoadout(),
 			maxWeight = xPlayer.maxWeight,
-			money = xPlayer.getMoney()
+			money = xPlayer.getMoney(),
+			vip = xPlayer.getVip()
 		})
 
 		xPlayer.triggerEvent('esx:createMissingPickups', ESX.Pickups)

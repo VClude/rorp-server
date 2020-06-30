@@ -1,10 +1,17 @@
 ESX = nil
 local isDead = false
-
+local isVip = false
 Citizen.CreateThread(function()
 	while ESX == nil do
 		TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 		Citizen.Wait(0)
+	end
+	if ESX ~= nil then
+		ESX.TriggerServerCallback('esx_billing:getVip', function(vip)
+			if vip then
+				isVip = true
+			end
+	end)
 	end
 end)
 
@@ -15,8 +22,9 @@ function ShowBillsMenu()
 			local elements = {}
 
 			for k,v in ipairs(bills) do
+				local vipprice = (isVip) and v.amount * 0.8 or v.amount
 				table.insert(elements, {
-					label  = ('%s - <span style="color:red;">%s</span>'):format(v.label, _U('invoices_item', ESX.Math.GroupDigits(v.amount))),
+					label  = ('%s - <span style="color:red;">%s</span>'):format(v.label, _U('invoices_item', ESX.Math.GroupDigits(vipprice))),
 					billId = v.id
 				})
 			end

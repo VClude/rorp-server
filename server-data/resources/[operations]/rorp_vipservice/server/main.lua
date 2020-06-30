@@ -70,15 +70,8 @@ RegisterCommand('getvip', function(source, args, rawCommand)
 
     local tPl = ESX.GetPlayerFromId(source)
     local ident = tPl.getIdentifier()
-    local result = MySQL.Sync.fetchAll("SELECT expiredate FROM vip WHERE identifier = @identifier and expiredate > CURRENT_DATE", {['@identifier'] = ident})
-
-	if result[1] ~= nil then
-        TriggerClientEvent('chat:addMessage', -1, {
-            template = '<div class="chat-messagez vip">Da atuh urang mah vip</div>',			
-        })	
-    else
-
-	end
+    local xPlayer = ESX.GetPlayerFromId(source)
+    print(xPlayer.getVip())
 
 end, false)
 

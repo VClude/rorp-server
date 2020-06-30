@@ -367,12 +367,13 @@ end)
 -- Overall Info
 RegisterNetEvent('trew_hud_ui:setInfo')
 AddEventHandler('trew_hud_ui:setInfo', function(info)
-
-	SendNUIMessage({ action = 'setText', id = 'job', value = info['job'] })
-	SendNUIMessage({ action = 'setMoney', id = 'wallet', value = info['money'] })
-	SendNUIMessage({ action = 'setMoney', id = 'bank', value = info['bankMoney'] })
-	SendNUIMessage({ action = 'setMoney', id = 'blackMoney', value = info['blackMoney'] })
-
+	if info['vip'] then
+		SendNUIMessage({ action = 'element', task = 'enable', value = 'vip' })
+	end
+		SendNUIMessage({ action = 'setText', id = 'job', value = info['job'] })
+		SendNUIMessage({ action = 'setMoney', id = 'wallet', value = info['money'] })
+		SendNUIMessage({ action = 'setMoney', id = 'bank', value = info['bankMoney'] })
+		SendNUIMessage({ action = 'setMoney', id = 'blackMoney', value = info['blackMoney'] })
 	TriggerEvent('esx:getSharedObject', function(obj)
 		ESX = obj
 		ESX.PlayerData = ESX.GetPlayerData()

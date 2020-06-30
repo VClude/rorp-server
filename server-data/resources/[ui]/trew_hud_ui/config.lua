@@ -46,7 +46,7 @@ Config.ui = {
 	showServerLogo		= false,
 
 	showJob		 		= true,
-
+	showVip				= true,
 	showWalletMoney 	= true,
 	showBankMoney 		= true,
 	showBlackMoney 		= true,

@@ -47,6 +47,11 @@ ESX.RegisterServerCallback('esx_billing:getBills', function(source, cb)
 	end)
 end)
 
+ESX.RegisterServerCallback('esx_billing:getVip', function(source, cb)
+	local xPlayer = ESX.GetPlayerFromId(source)
+	cb(xPlayer.getVip())
+end)
+
 ESX.RegisterServerCallback('esx_billing:getTargetBills', function(source, cb, target)
 	local xPlayer = ESX.GetPlayerFromId(target)
 
@@ -63,12 +68,13 @@ end)
 
 ESX.RegisterServerCallback('esx_billing:payBill', function(source, cb, billId)
 	local xPlayer = ESX.GetPlayerFromId(source)
-
+	local vip = xPlayer.getVip()
 	MySQL.Async.fetchAll('SELECT sender, target_type, target, amount FROM billing WHERE id = @id', {
 		['@id'] = billId
 	}, function(result)
 		if result[1] then
 			local amount = result[1].amount
+			local vipamount = (vip) and amount * 80 / 100 or amount
 			local xTarget = ESX.GetPlayerFromIdentifier(result[1].sender)
 
 			if result[1].target_type == 'player' then
@@ -78,10 +84,10 @@ ESX.RegisterServerCallback('esx_billing:payBill', function(source, cb, billId)
 							['@id'] = billId
 						}, function(rowsChanged)
 							if rowsChanged == 1 then
-								xPlayer.removeMoney(amount)
+								xPlayer.removeMoney(vipamount)
 								xTarget.addMoney(amount)
 
-								xPlayer.showNotification(_U('paid_invoice', ESX.Math.GroupDigits(amount)))
+								xPlayer.showNotification(_U('paid_invoice', ESX.Math.GroupDigits(vipamount)))
 								xTarget.showNotification(_U('received_payment', ESX.Math.GroupDigits(amount)))
 							end
 
@@ -92,10 +98,10 @@ ESX.RegisterServerCallback('esx_billing:payBill', function(source, cb, billId)
 							['@id'] = billId
 						}, function(rowsChanged)
 							if rowsChanged == 1 then
-								xPlayer.removeAccountMoney('bank', amount)
+								xPlayer.removeAccountMoney('bank', vipamount)
 								xTarget.addAccountMoney('bank', amount)
 
-								xPlayer.showNotification(_U('paid_invoice', ESX.Math.GroupDigits(amount)))
+								xPlayer.showNotification(_U('paid_invoice', ESX.Math.GroupDigits(vipamount)))
 								xTarget.showNotification(_U('received_payment', ESX.Math.GroupDigits(amount)))
 							end
 
@@ -117,10 +123,10 @@ ESX.RegisterServerCallback('esx_billing:payBill', function(source, cb, billId)
 							['@id'] = billId
 						}, function(rowsChanged)
 							if rowsChanged == 1 then
-								xPlayer.removeMoney(amount)
+								xPlayer.removeMoney(vipamount)
 								account.addMoney(amount)
 
-								xPlayer.showNotification(_U('paid_invoice', ESX.Math.GroupDigits(amount)))
+								xPlayer.showNotification(_U('paid_invoice', ESX.Math.GroupDigits(vipamount)))
 								if xTarget then
 									xTarget.showNotification(_U('received_payment', ESX.Math.GroupDigits(amount)))
 								end
@@ -133,9 +139,9 @@ ESX.RegisterServerCallback('esx_billing:payBill', function(source, cb, billId)
 							['@id'] = billId
 						}, function(rowsChanged)
 							if rowsChanged == 1 then
-								xPlayer.removeAccountMoney('bank', amount)
+								xPlayer.removeAccountMoney('bank', vipamount)
 								account.addMoney(amount)
-								xPlayer.showNotification(_U('paid_invoice', ESX.Math.GroupDigits(amount)))
+								xPlayer.showNotification(_U('paid_invoice', ESX.Math.GroupDigits(vipamount)))
 
 								if xTarget then
 									xTarget.showNotification(_U('received_payment', ESX.Math.GroupDigits(amount)))
