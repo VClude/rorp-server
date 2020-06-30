@@ -1,7 +1,7 @@
 ESX = nil
 
 local beds = {
-    { x = 359.6, y = -586.13, z = 43.28, h = 67.67, taken = false, model = 1631638868 },
+    { x = 359.6, y = -586.13, z = 43.28, h = 247.79, taken = false, model = 1631638868 },
  
 }
 
