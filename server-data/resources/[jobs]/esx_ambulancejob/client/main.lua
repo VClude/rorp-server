@@ -53,12 +53,11 @@ AddEventHandler('esx:onPlayerSpawn', function()
 			ESX.TriggerServerCallback('esx_ambulancejob:getDeathStatus', function(shouldDie)
 				if shouldDie then
 					local player = GetPlayerPed(-1)
+					local playerPed = PlayerPedId()
 					exports['mythic_notify']:DoCustomHudText('inform', _U('combatlog_message'), 5000)
 					-- RemoveItemsAfterRPDeath()
-					ExplodePedHead(
-						player, 
-						0x1D073A89
-					)
+					-- ExplodePedHead(player, 0x1D073A89)
+					SetEntityHealth(playerPed, 0)
 				end
 			end)
 		end
