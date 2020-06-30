@@ -88,7 +88,7 @@ Citizen.CreateThread(function()
 
     while true do
         Citizen.Wait(0)
-            if ESX.PlayerData.job and ESX.PlayerData.job.name == "police" then
+            if ESX.PlayerData.job and ( ESX.PlayerData.job.name == "police" or ESX.PlayerData.job.name == "ambulance" or ESX.PlayerData.job.name == "pedagang" or ESX.PlayerData.job.name == "bennys" ) then
                 if IsControlJustReleased(0, Keys["F5"]) then
                     OpenGetMenuAnimasi()
                 end
