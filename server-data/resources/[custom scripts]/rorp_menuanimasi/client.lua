@@ -61,21 +61,21 @@ function OpenGetMenuAnimasi()
             if data.current.value == 'menyerah' then
                 ExecuteCommand('k')
             elseif data.current.value == 'investigasi' then
-                ExecuteCommand('tablet2')
+                ExecuteCommand('e tablet2')
             elseif data.current.value == 'mengatur_jalan' then
-                ExecuteCommand('copbeacon')
+                ExecuteCommand('e copbeacon')
             elseif data.current.value == 'memperbaiki_kolong_kendaraan' then
-                ExecuteCommand('mechanic3') 
+                ExecuteCommand('e mechanic3') 
             elseif data.current.value == 'memperbaiki_mesin' then
-                ExecuteCommand('mechanic')               
+                ExecuteCommand('e mechanic')               
             elseif data.current.value == 'memberi_tagihan' then
-                ExecuteCommand('clipboard')
+                ExecuteCommand('e clipboard')
             elseif data.current.value == 'mengambil_belanjaan' then
-                ExecuteCommand('box')
+                ExecuteCommand('e box')
             elseif data.current.value == 'membuat_catatan' then
-                ExecuteCommand('notepad')
+                ExecuteCommand('e notepad')
             elseif data.current.value == 'memotret' then
-                ExecuteCommand('camera')
+                ExecuteCommand('e camera')
             elseif data.current.value == 'memalu_paku' then
                 return
             end   
