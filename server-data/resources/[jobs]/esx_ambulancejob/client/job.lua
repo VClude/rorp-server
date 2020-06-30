@@ -533,7 +533,7 @@ Citizen.CreateThread(function()
 			end
 
 		elseif ESX.PlayerData.job and ESX.PlayerData.job.name == 'ambulance' and not isDead then
-			if IsControlJustReleased(0, 166) then
+			if IsControlJustReleased(0, 167) then
 				OpenMobileAmbulanceActionsMenu()
 			end
 		else
