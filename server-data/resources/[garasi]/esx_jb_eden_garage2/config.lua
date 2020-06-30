@@ -1,7 +1,7 @@
 Config = {}
 Config.Blip			= {sprite= 524, color = 30}
 Config.InpoundBlip	= {sprite= 524, color = 20}
-Config.Price		= 500 -- pound price to get vehicle back
+Config.Price		= 2000 -- pound price to get vehicle back
 Config.SwitchGaragePrice		= 2000 -- price to pay to switch vehicles in garage
 Config.StoreOnServerStart = true -- Store all vehicles in garage on server start?
 Config.Locale = 'en'

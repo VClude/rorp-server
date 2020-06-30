@@ -771,9 +771,10 @@ end
 
 function OpenShopCategoryMenu(category)
 	local elements = {}
+	local isVip = (vip) and '(VIP) ' or ''
 	for k,v in pairs(vehicles) do
 		if v.category == category.name then
-			table.insert(elements,{label = v.name..": [$"..tonumber(math.floor(v.price*((Config.CommissionPercent/100)+1))).."]", model = v.model, name = v.name, price = tonumber(math.floor(v.price*((Config.CommissionPercent/100)+1))), category = v.category, stock = v.stock})
+			table.insert(elements,{label = isVip .. v.name ..": [$"..tonumber(math.floor(v.price*((Config.CommissionPercent/100)+1))).."]", model = v.model, name = v.name, price = tonumber(math.floor(v.price*((Config.CommissionPercent/100)+1))), category = v.category, stock = v.stock})
 		end
 	end
 	ESX.UI.Menu.Open('default', GetCurrentResourceName(), "cardealer_shop_vehicle_list",

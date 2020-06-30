@@ -13,7 +13,7 @@ local Keys = {
 
 local carInstance = {}
 
-
+local hargakeluar = Config.Price
 
 -- Fin Local
 
@@ -28,11 +28,16 @@ Citizen.CreateThread(function()
 	end
 end)
 
+
 --Menu function
 
 function OpenMenuGarage(garage, KindOfVehicle, garage_name, vehicle_type)
 	ESX.UI.Menu.CloseAll()
-
+	ESX.TriggerServerCallback('vip:isVip', function(yes)
+		if yes then
+			hargakeluar = Config.Price * 0.6
+		end
+	end)
 	ESX.TriggerServerCallback('eden_garage:getOutVehicles', function(vehicles)
 		local elements, vehiclePropsList = {}, {}
 		if not table.empty(vehicles) then
@@ -55,7 +60,7 @@ function OpenMenuGarage(garage, KindOfVehicle, garage_name, vehicle_type)
 
 				elseif v.stored == false and v.pound == false then
 
-					vehicleLabel = vehicleName..' '..'('..vehicleProps.plate..' ) - <span style="color:red;">$'..Config.Price..'</span>'
+					vehicleLabel = vehicleName..' '..'('..vehicleProps.plate..' ) - <span style="color:red;">$'..hargakeluar..'</span>'
 					table.insert(elements, {
 						label = vehicleLabel,
 						plate = vehicleProps.plate,
@@ -104,11 +109,11 @@ function OpenMenuGarage(garage, KindOfVehicle, garage_name, vehicle_type)
 						if hasEnoughMoney then
 							menu.close()
 							SpawnVehicle(vehicleProps, garage, KindOfVehicle)
-							ESX.ShowNotification('Kamu telah membayar: ~y~$'..Config.Price)
+							ESX.ShowNotification('Kamu telah membayar: ~y~$'..hargakeluar)
 						else
 							ESX.ShowNotification(_U('not_enough_money'))						
 						end
-					end, Config.Price)
+					end, hargakeluar)
 				else
 					ESX.ShowNotification(_U('cannot_take_out'))
 				end				
@@ -400,7 +405,6 @@ end
 
 RegisterNetEvent("ft_libs:OnClientReady")
 AddEventHandler('ft_libs:OnClientReady', function()
-
 	-- INPOUND
 	for k,v in pairs (Config.Inpounds) do
 		exports.ft_libs:AddArea("esx_eden_garage_area_"..k.."_garage", {
