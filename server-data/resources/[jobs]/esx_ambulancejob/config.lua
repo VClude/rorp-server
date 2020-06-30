@@ -50,7 +50,7 @@ Config.Hospitals = {
 		Vehicles = {
 			{
 				Spawner = vector3(295.9, -590.41, 43.26),
-				InsideShop = vector3(446.7, -1355.6, 43.5),
+				InsideShop = vector3(327.1, -547.31, 28.74),
 				Marker = {type = 36, x = 1.0, y = 1.0, z = 1.0, r = 100, g = 50, b = 200, a = 100, rotate = true},
 				SpawnPoints = {
 					{coords = vector3(290.61, -590.51, 43.18), heading = 338.03, radius = 4.0}
@@ -117,11 +117,11 @@ Config.AuthorizedVehicles = {
 
 
 		chief_doctor = {
-			{model = 'ambuheli', price = 100}
+			{model = 'maverick', price = 100}
 		},
 
 		boss = {
-			{model = 'ambuheli', price = 100}
+			{model = 'maverick', price = 100}
 		}
 	}
 }
