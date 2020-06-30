@@ -104,8 +104,6 @@ Config.AuthorizedVehicles = {
 		},
 
 		boss = {
-			{model = 'ambulance', price = 100},
-			{model = 'ambulance', price = 100},
 			{model = 'ambulance', price = 100}
 		}
 	},
@@ -117,11 +115,11 @@ Config.AuthorizedVehicles = {
 
 
 		chief_doctor = {
-			{model = 'maverick', price = 100}
+			{model = 'buzzard2', price = 100}
 		},
 
 		boss = {
-			{model = 'maverick', price = 100}
+			{model = 'buzzard2', price = 100}
 		}
 	}
 }

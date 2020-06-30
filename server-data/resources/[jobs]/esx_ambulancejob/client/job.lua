@@ -607,12 +607,10 @@ function OpenPharmacyMenu()
 		elements = {
 			{label = _U('pharmacy_take', _U('medikit')), item = 'medikit', type = 'slider', value = 1, min = 1, max = 100},
 			{label = _U('pharmacy_take', _U('bandage')), item = 'bandage', type = 'slider', value = 1, min = 1, max = 100},
-			{label = _U('pharmacy_take', _U('gauze')), item = 'gauze', type = 'slider', value = 1, min = 1, max = 100},
-			{label = _U('pharmacy_take', _U('firstaid')), item = 'firstaid', type = 'slider', value = 1, min = 1, max = 100},
-			{label = _U('pharmacy_take', _U('vicodin')), item = 'vicodin', type = 'slider', value = 1, min = 1, max = 100},
-			{label = _U('pharmacy_take', _U('hydrocodone')), item = 'hydrocodone', type = 'slider', value = 1, min = 1, max = 100},
-			{label = _U('pharmacy_take', _U('morphine')), item = 'morphine', type = 'slider', value = 1, min = 1, max = 100},
-			{label = _U('pharmacy_take', _U('adrenaline')), item = 'adrenaline', type = 'slider', value = 1, min = 1, max = 100}
+			{label = _U('pharmacy_take', _U('bodybandage')), item = 'bodybandage', type = 'slider', value = 1, min = 1, max = 100},
+			{label = _U('pharmacy_take', _U('neckbrace')), item = 'neckbrace', type = 'slider', value = 1, min = 1, max = 100},
+			{label = _U('pharmacy_take', _U('armbrace')), item = 'armbrace', type = 'slider', value = 1, min = 1, max = 100},
+			{label = _U('pharmacy_take', _U('legbrace')), item = 'legbrace', type = 'slider', value = 1, min = 1, max = 100},
 	}}, function(data, menu)
 		TriggerServerEvent('esx_ambulancejob:giveItem', data.current.item, data.current.value)
 	end, function(data, menu)
