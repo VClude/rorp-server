@@ -986,11 +986,17 @@ end)
 -- Create blips
 Citizen.CreateThread(function()
 	for k,v in pairs(Config.PoliceStations) do
+		local blip = AddBlipForRadius(v.Blip.Coords, 50.0)
+		
+		SetBlipHighDetail(blip, true)
+		SetBlipColour(blip, 2)
+		SetBlipAlpha (blip, 128)
+
 		local blip = AddBlipForCoord(v.Blip.Coords)
 
 		SetBlipSprite (blip, v.Blip.Sprite)
 		SetBlipDisplay(blip, v.Blip.Display)
-		SetBlipScale  (blip, v.Blip.Scale)
+		SetBlipScale  (blip, 1.2)
 		SetBlipColour (blip, v.Blip.Colour)
 		SetBlipAsShortRange(blip, true)
 

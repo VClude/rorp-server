@@ -34,7 +34,7 @@ function notifyAlertSMS (number, alert, listSrc)
 end
 
 AddEventHandler('esx_phone:registerNumber', function(number, type, sharePos, hasDispatch, hideNumber, hidePosIfAnon)
-  print('= INFO = Enregistrement du telephone ' .. number .. ' => ' .. type)
+  print('= INFO = Phone registration ' .. number .. ' => ' .. type)
 	local hideNumber    = hideNumber    or false
 	local hidePosIfAnon = hidePosIfAnon or false
 
@@ -89,7 +89,7 @@ AddEventHandler('esx_addons_gcphone:startCall', function (number, message, coord
       }, PhoneNumbers[number].sources)
     end)
   else
-    print('= WARNING = Appels sur un service non enregistre => numero : ' .. number)
+    print('= WARNING = Calls to an unregistered service => Number : ' .. number)
   end
 end)
 

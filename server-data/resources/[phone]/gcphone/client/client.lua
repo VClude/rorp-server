@@ -223,13 +223,6 @@ function StopSoundJS (sound)
 end
 
 
-
-
-
-
-
-
-
 RegisterCommand('hp', function()
   if menuIsOpen == false and not isDead then
     ESX.TriggerServerCallback('gcphone:getItemAmount', function(qtty)

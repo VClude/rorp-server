@@ -17,6 +17,8 @@ Config = {
   DisplayZoneForAll = false,           -- Display territory zone blips for all?
   DrugProcessBlip   = true,           -- Display drug process blip for gang members?
 
+  ExtendedMode      = true,
+
   MaxPlayerCount    = 64,             -- Change if using onesync I guess?
   UseProgBars       = true,          -- Using ProgBars? (should be included inside mod folder)
   StartEvent        = 'Thread',       -- If you don't want to start the mod by Citizen.CreateThread, change from "Thread" to your event name.
