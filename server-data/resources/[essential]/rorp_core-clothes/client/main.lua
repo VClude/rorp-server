@@ -21,21 +21,8 @@ local heading = 332.219879				-- Heading coord
 local zoom = "vetements"					-- Define which tab is shown first (Default: Head)
 local isCameraActive, isCameraActiveOld, lastSkinOld
 local zoomOffsetOld, camOffsetOld, headingOld = 0.0, 0.0, 90.0
-local NewPlayer		 = true
 local PrevHat, PrevGlasses, PrevEars, PrevWatches, PrevBracelets, PrevBags, PrevChains, PrevMask, PrevPants, PrevShirt, PrevShirt2, PrevShoes
 
---                          SHOP
-------------------------------------------------------------------
-
-local GUI                     = {}
-GUI.Time                      = 0
-local HasAlreadyEnteredMarker = false
-local LastZone                = nil
-local CurrentAction           = nil
-local CurrentActionMsg        = ''
-local CurrentActionData       = {}
-local HasPayed                = false
-local HasLoadCloth			  = false
 
 Citizen.CreateThread(function()
 	while ESX == nil do
@@ -130,7 +117,7 @@ RegisterNUICallback('updateSkinSave', function(data)
 		local prop_chain = GetPedDrawableVariation(ped, 7)
 		local prop_chain_text = GetPedTextureVariation(ped, 7)
 			
-		TriggerServerEvent('rtx_clotheshops:saveclothe', torso, torsotext, leg, legtext, shoes, shoestext, accessory, accessorytext, undershirt, undershirttext, torso2, torso2text, prop_hat, prop_hat_text, prop_glasses, prop_glasses_text, prop_earrings, prop_earrings_text, prop_watches, prop_watches_text, prop_mask, prop_mask_text, prop_bracelets, prop_bracelets_text, prop_bag, prop_bag_text, prop_chain, prop_chain_text)
+		TriggerServerEvent('rorp_core-clothes:saveclothe', torso, torsotext, leg, legtext, shoes, shoestext, accessory, accessorytext, undershirt, undershirttext, torso2, torso2text, prop_hat, prop_hat_text, prop_glasses, prop_glasses_text, prop_earrings, prop_earrings_text, prop_watches, prop_watches_text, prop_mask, prop_mask_text, prop_bracelets, prop_bracelets_text, prop_bag, prop_bag_text, prop_chain, prop_chain_text)
 		
 		CloseClotheCreator()
 	else
@@ -3882,11 +3869,8 @@ function CloseClotheCreator()
 	
 	if firstclothe == true then
 		Citizen.Wait(550)
-		TriggerEvent('rtx_selection:showmenu')
+		TriggerEvent('rorp_character:showmenu')
 		firstclothe = false
-	elseif firstclothe == false then
-		SetPlayerInvincible(ped, false)
-		TriggerEvent("rtx_property:SaveClothesToWardrobe")
 	end
 end
 
@@ -3931,12 +3915,12 @@ local elements    = {}
 		if skin.sex == 0 then
 			SendNUIMessage({
 				openClotheCreator = enable,
-				gender = "muz"
+				gender = "male"
 			})
 		else
 			SendNUIMessage({
 				openClotheCreator = enable,
-				gender = "zena"
+				gender = "female"
 			})
 		end
 	end)
@@ -3962,13 +3946,8 @@ local elements    = {}
 	end
 end
 
-RegisterNetEvent('hud:loadMenuClothe')
-AddEventHandler('hud:loadMenuClothe', function()
-	ShowClotheCreator(true)
-end)
-
-RegisterNetEvent('hud:loadMenuClotheFIRST')
-AddEventHandler('hud:loadMenuClotheFIRST', function()
+RegisterNetEvent('rorp_core-clothes:loadMenuClothe')
+AddEventHandler('rorp_core-clothes:loadMenuClothe', function()
 	firstclothe = true
 	ShowClotheCreator(true)
 end)
@@ -4023,131 +4002,131 @@ Citizen.CreateThread(function()
 
 end)
 
---esx_clotheskin code--
-function OpenMenuClothe(submitCb, cancelCb, restrict)
-	local playerPed = PlayerPedId()
+-- --esx_clotheskin code--
+-- function OpenMenuClothe(submitCb, cancelCb, restrict)
+-- 	local playerPed = PlayerPedId()
 
-	TriggerEvent('skinchanger:getSkin', function(skin)
-		lastSkinOld = skin
-	end)
+-- 	TriggerEvent('skinchanger:getSkin', function(skin)
+-- 		lastSkinOld = skin
+-- 	end)
 
-	TriggerEvent('skinchanger:getData', function(components, maxVals)
-		local elements    = {}
-		local _components = {}
+-- 	TriggerEvent('skinchanger:getData', function(components, maxVals)
+-- 		local elements    = {}
+-- 		local _components = {}
 
-		-- Restrict MenuClothe
-		if restrict == nil then
-			for i=1, #components, 1 do
-				_components[i] = components[i]
-			end
-		else
-			for i=1, #components, 1 do
-				local found = false
+-- 		-- Restrict MenuClothe
+-- 		if restrict == nil then
+-- 			for i=1, #components, 1 do
+-- 				_components[i] = components[i]
+-- 			end
+-- 		else
+-- 			for i=1, #components, 1 do
+-- 				local found = false
 
-				for j=1, #restrict, 1 do
-					if components[i].name == restrict[j] then
-						found = true
-					end
-				end
+-- 				for j=1, #restrict, 1 do
+-- 					if components[i].name == restrict[j] then
+-- 						found = true
+-- 					end
+-- 				end
 
-				if found then
-					table.insert(_components, components[i])
-				end
-			end
-		end
+-- 				if found then
+-- 					table.insert(_components, components[i])
+-- 				end
+-- 			end
+-- 		end
 
-		-- Insert elements
-		for i=1, #_components, 1 do
-			local value       = _components[i].value
-			local componentId = _components[i].componentId
+-- 		-- Insert elements
+-- 		for i=1, #_components, 1 do
+-- 			local value       = _components[i].value
+-- 			local componentId = _components[i].componentId
 
-			if componentId == 0 then
-				value = GetPedPropIndex(playerPed, _components[i].componentId)
-			end
+-- 			if componentId == 0 then
+-- 				value = GetPedPropIndex(playerPed, _components[i].componentId)
+-- 			end
 
-			local data = {
-				label     = _components[i].label,
-				name      = _components[i].name,
-				value     = value,
-				min       = _components[i].min,
-				textureof = _components[i].textureof,
-				zoomOffset= _components[i].zoomOffset,
-				camOffset = _components[i].camOffset,
-				type      = 'slider'
-			}
+-- 			local data = {
+-- 				label     = _components[i].label,
+-- 				name      = _components[i].name,
+-- 				value     = value,
+-- 				min       = _components[i].min,
+-- 				textureof = _components[i].textureof,
+-- 				zoomOffset= _components[i].zoomOffset,
+-- 				camOffset = _components[i].camOffset,
+-- 				type      = 'slider'
+-- 			}
 
-			for k,v in pairs(maxVals) do
-				if k == _components[i].name then
-					data.max = v
-					break
-				end
-			end
+-- 			for k,v in pairs(maxVals) do
+-- 				if k == _components[i].name then
+-- 					data.max = v
+-- 					break
+-- 				end
+-- 			end
 
-			table.insert(elements, data)
-		end
+-- 			table.insert(elements, data)
+-- 		end
 
-		CreateSkinCam()
-		zoomOffsetOld = _components[1].zoomOffset
-		camOffsetOld = _components[1].camOffset
+-- 		CreateSkinCam()
+-- 		zoomOffsetOld = _components[1].zoomOffset
+-- 		camOffsetOld = _components[1].camOffset
 
-		ESX.UI.MenuClothe.Open('default', GetCurrentResourceName(), 'skin', {
-			title    = _U('skin_MenuClothe'),
-			align    = 'top-left',
-			elements = elements
-		}, function(data, MenuClothe)
-			TriggerEvent('skinchanger:getSkin', function(skin)
-				lastSkinOld = skin
-			end)
+-- 		ESX.UI.MenuClothe.Open('default', GetCurrentResourceName(), 'skin', {
+-- 			title    = _U('skin_MenuClothe'),
+-- 			align    = 'top-left',
+-- 			elements = elements
+-- 		}, function(data, MenuClothe)
+-- 			TriggerEvent('skinchanger:getSkin', function(skin)
+-- 				lastSkinOld = skin
+-- 			end)
 
-			submitCb(data, MenuClothe)
-			DeleteSkinCam()
-		end, function(data, MenuClothe)
-			MenuClothe.close()
-			DeleteSkinCam()
-			TriggerEvent('skinchanger:loadSkin', lastSkinOld)
+-- 			submitCb(data, MenuClothe)
+-- 			DeleteSkinCam()
+-- 		end, function(data, MenuClothe)
+-- 			MenuClothe.close()
+-- 			DeleteSkinCam()
+-- 			TriggerEvent('skinchanger:loadSkin', lastSkinOld)
 
-			if cancelCb ~= nil then
-				cancelCb(data, MenuClothe)
-			end
-		end, function(data, MenuClothe)
-			local skin, components, maxVals
+-- 			if cancelCb ~= nil then
+-- 				cancelCb(data, MenuClothe)
+-- 			end
+-- 		end, function(data, MenuClothe)
+-- 			local skin, components, maxVals
 
-			TriggerEvent('skinchanger:getSkin', function(getSkin)
-				skin = getSkin
-			end)
+-- 			TriggerEvent('skinchanger:getSkin', function(getSkin)
+-- 				skin = getSkin
+-- 			end)
 
-			zoomOffsetOld = data.current.zoomOffset
-			camOffsetOld = data.current.camOffset
+-- 			zoomOffsetOld = data.current.zoomOffset
+-- 			camOffsetOld = data.current.camOffset
 
-			if skin[data.current.name] ~= data.current.value then
-				-- Change skin element
-				TriggerEvent('skinchanger:change', data.current.name, data.current.value)
+-- 			if skin[data.current.name] ~= data.current.value then
+-- 				-- Change skin element
+-- 				TriggerEvent('skinchanger:change', data.current.name, data.current.value)
 
-				-- Update max values
-				TriggerEvent('skinchanger:getData', function(comp, max)
-					components, maxVals = comp, max
-				end)
+-- 				-- Update max values
+-- 				TriggerEvent('skinchanger:getData', function(comp, max)
+-- 					components, maxVals = comp, max
+-- 				end)
 
-				local newData = {}
+-- 				local newData = {}
 
-				for i=1, #elements, 1 do
-					newData = {}
-					newData.max = maxVals[elements[i].name]
+-- 				for i=1, #elements, 1 do
+-- 					newData = {}
+-- 					newData.max = maxVals[elements[i].name]
 
-					if elements[i].textureof ~= nil and data.current.name == elements[i].textureof then
-						newData.value = 0
-					end
+-- 					if elements[i].textureof ~= nil and data.current.name == elements[i].textureof then
+-- 						newData.value = 0
+-- 					end
 
-					MenuClothe.update({name = elements[i].name}, newData)
-				end
+-- 					MenuClothe.update({name = elements[i].name}, newData)
+-- 				end
 
-				MenuClothe.refresh()
-			end
-		end, function(data, MenuClothe)
-			DeleteSkinCam()
-		end)
-	end)
-end
+-- 				MenuClothe.refresh()
+-- 			end
+-- 		end, function(data, MenuClothe)
+-- 			DeleteSkinCam()
+-- 		end)
+-- 	end)
+-- end
 
 function CreateSkinCam()
 	if not DoesCamExist(cam) then
@@ -4251,198 +4230,60 @@ Citizen.CreateThread(function()
 	end
 end)
 
-function OpenSaveableMenuClothe(submitCb, cancelCb, restrict)
-	TriggerEvent('skinchanger:getSkin', function(skin)
-		lastSkinOld = skin
-	end)
+-- function OpenSaveableMenuClothe(submitCb, cancelCb, restrict)
+-- 	TriggerEvent('skinchanger:getSkin', function(skin)
+-- 		lastSkinOld = skin
+-- 	end)
 
-	OpenMenuClothe(function(data, MenuClothe)
-		MenuClothe.close()
-		DeleteSkinCam()
+-- 	OpenMenuClothe(function(data, MenuClothe)
+-- 		MenuClothe.close()
+-- 		DeleteSkinCam()
 
-		TriggerEvent('skinchanger:getSkin', function(skin)
-			TriggerServerEvent('esx_clotheskin:save', skin)
+-- 		TriggerEvent('skinchanger:getSkin', function(skin)
+-- 			TriggerServerEvent('esx_clotheskin:save', skin)
 
-			if submitCb ~= nil then
-				submitCb(data, MenuClothe)
-			end
-		end)
+-- 			if submitCb ~= nil then
+-- 				submitCb(data, MenuClothe)
+-- 			end
+-- 		end)
 
-	end, cancelCb, restrict)
-end
+-- 	end, cancelCb, restrict)
+-- end
 
-AddEventHandler('esx_clotheskin:getLastSkin', function(cb)
-	cb(lastSkinOld)
-end)
+-- AddEventHandler('esx_clotheskin:getLastSkin', function(cb)
+-- 	cb(lastSkinOld)
+-- end)
 
-AddEventHandler('esx_clotheskin:setLastSkin', function(skin)
-	lastSkinOld = skin
-end)
+-- AddEventHandler('esx_clotheskin:setLastSkin', function(skin)
+-- 	lastSkinOld = skin
+-- end)
 
-RegisterNetEvent('esx_clotheskin:openMenuClothe')
-AddEventHandler('esx_clotheskin:openMenuClothe', function(submitCb, cancelCb)
-	OpenMenuClothe(submitCb, cancelCb, nil)
-end)
+-- RegisterNetEvent('esx_clotheskin:openMenuClothe')
+-- AddEventHandler('esx_clotheskin:openMenuClothe', function(submitCb, cancelCb)
+-- 	OpenMenuClothe(submitCb, cancelCb, nil)
+-- end)
 
-RegisterNetEvent('esx_clotheskin:openRestrictedMenuClothe')
-AddEventHandler('esx_clotheskin:openRestrictedMenuClothe', function(submitCb, cancelCb, restrict)
-	OpenMenuClothe(submitCb, cancelCb, restrict)
-end)
+-- RegisterNetEvent('esx_clotheskin:openRestrictedMenuClothe')
+-- AddEventHandler('esx_clotheskin:openRestrictedMenuClothe', function(submitCb, cancelCb, restrict)
+-- 	OpenMenuClothe(submitCb, cancelCb, restrict)
+-- end)
 
-RegisterNetEvent('esx_clotheskin:openSaveableMenuClothe')
-AddEventHandler('esx_clotheskin:openSaveableMenuClothe', function(submitCb, cancelCb)
-	ShowClotheCreator(true)
-end)
+-- RegisterNetEvent('esx_clotheskin:openSaveableMenuClothe')
+-- AddEventHandler('esx_clotheskin:openSaveableMenuClothe', function(submitCb, cancelCb)
+-- 	ShowClotheCreator(true)
+-- end)
 
-RegisterNetEvent('esx_clotheskin:openSaveableRestrictedMenuClothe')
-AddEventHandler('esx_clotheskin:openSaveableRestrictedMenuClothe', function(submitCb, cancelCb, restrict)
-	OpenSaveableMenuClothe(submitCb, cancelCb, restrict)
-end)
+-- RegisterNetEvent('esx_clotheskin:openSaveableRestrictedMenuClothe')
+-- AddEventHandler('esx_clotheskin:openSaveableRestrictedMenuClothe', function(submitCb, cancelCb, restrict)
+-- 	OpenSaveableMenuClothe(submitCb, cancelCb, restrict)
+-- end)
 
-RegisterNetEvent('esx_clotheskin:requestSaveSkin')
-AddEventHandler('esx_clotheskin:requestSaveSkin', function()
-	TriggerEvent('skinchanger:getSkin', function(skin)
-		TriggerServerEvent('esx_clotheskin:responseSaveSkin', skin)
-	end)
-end)
-
-function OpenShopMenu()
-  
-  local price = Config.price
-  
-  ESX.UI.Menu.CloseAll()
-
-  ESX.UI.Menu.Open(
-    'default', GetCurrentResourceName(), 'shop_clothes',
-    {
-      title = _U('shop_clothes'),
-	  align    = 'bottom-right',
-      elements = {
-        { label = _U('yes') .. ' (<span style="color:red;">$' .. price .. '</span>)', value = 'yes' },
-        { label = _U('no'), value = 'no' },
-      }
-    },
-    function (data, menu)
-      if data.current.value == 'yes' then
-        TriggerServerEvent('rtx_clotheshops:buyclothes', price)
-      end
-      menu.close()
-    end,
-    function (data, menu)
-      menu.close()
-    end
-  )
-
-end
-
-AddEventHandler('rtx_clotheshopsshop:hasEnteredMarker', function(zone)
-	CurrentAction     = 'shop_menu'
-	CurrentActionMsg  = _U('press_menu')
-	CurrentActionData = {}
-end)
-
-AddEventHandler('rtx_clotheshopsshop:hasExitedMarker', function(zone)
-	
-	ESX.UI.Menu.CloseAll()
-	CurrentAction = nil
-
-end)
-
--- Create Blips
-Citizen.CreateThread(function()
-
-	for i=1, #Config.Shops, 1 do
-
-		local blip = AddBlipForCoord(Config.Shops[i].x, Config.Shops[i].y, Config.Shops[i].z)
-
-		SetBlipSprite (blip, 73)
-		SetBlipDisplay(blip, 4)
-		SetBlipScale  (blip, 1.0)
-		SetBlipColour (blip, 48)
-		SetBlipAsShortRange(blip, true)
-
-		BeginTextCommandSetBlipName("STRING")
-		AddTextComponentString(_U('clothes'))
-		EndTextCommandSetBlipName(blip)
-	end
-
-end)
-
--- Display markers
-Citizen.CreateThread(function()
-	while true do
-
-		Wait(0)
-
-		local coords = GetEntityCoords(GetPlayerPed(-1))
-
-		for k,v in pairs(Config.Zones) do
-			if(v.Type ~= -1 and GetDistanceBetweenCoords(coords, v.Pos.x, v.Pos.y, v.Pos.z, true) < Config.DrawDistance) then
-				DrawMarker(v.Type, v.Pos.x, v.Pos.y, v.Pos.z, 0.0, 0.0, 0.0, 0, 0.0, 0.0, v.Size.x, v.Size.y, v.Size.z, v.Color.r, v.Color.g, v.Color.b, 100, false, true, 2, false, false, false, false)
-			end
-		end
-
-	end
-end)
-
--- Enter / Exit marker events
-Citizen.CreateThread(function()
-	while true do
-
-		Wait(0)
-
-		local coords      = GetEntityCoords(GetPlayerPed(-1))
-		local isInMarker  = false
-		local currentZone = nil
-
-		for k,v in pairs(Config.Zones) do
-			if(GetDistanceBetweenCoords(coords, v.Pos.x, v.Pos.y, v.Pos.z, true) < v.Size.x) then
-				isInMarker  = true
-				currentZone = k
-			end
-		end
-
-		if (isInMarker and not HasAlreadyEnteredMarker) or (isInMarker and LastZone ~= currentZone) then
-			HasAlreadyEnteredMarker = true
-			LastZone                = currentZone
-			TriggerEvent('rtx_clotheshopsshop:hasEnteredMarker', currentZone)
-		end
-
-		if not isInMarker and HasAlreadyEnteredMarker then
-			HasAlreadyEnteredMarker = false
-			TriggerEvent('rtx_clotheshopsshop:hasExitedMarker', LastZone)
-		end
-
-	end
-end)
-
--- Key controls
-Citizen.CreateThread(function()
-	while true do
-
-		Citizen.Wait(0)
-
-		if CurrentAction ~= nil then
-
-			SetTextComponentFormat('STRING')
-			AddTextComponentString(CurrentActionMsg)
-			DisplayHelpTextFromStringLabel(0, 0, 1, -1)
-
-			if IsControlPressed(0,  Keys['E']) and (GetGameTimer() - GUI.Time) > 300 then
-
-				if CurrentAction == 'shop_menu' then
-					OpenShopMenu()
-				end
-
-				CurrentAction = nil
-				GUI.Time      = GetGameTimer()
-
-			end
-
-		end
-
-	end
-end)
+-- RegisterNetEvent('esx_clotheskin:requestSaveSkin')
+-- AddEventHandler('esx_clotheskin:requestSaveSkin', function()
+-- 	TriggerEvent('skinchanger:getSkin', function(skin)
+-- 		TriggerServerEvent('esx_clotheskin:responseSaveSkin', skin)
+-- 	end)
+-- end)
 
 Citizen.CreateThread(function()
     while true do

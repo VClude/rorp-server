@@ -1,5 +1,6 @@
--- Manifest Version
-resource_manifest_version '77731fab-63ca-442c-a67b-abc70f28dfa5'
+fx_version 'adamant'
+
+game 'gta5'
 
 -- UI
 ui_page "ui/index.html"
@@ -72,18 +73,11 @@ files {
 	"ui/tabs.css"
 }
 
--- Server Scripts
 server_scripts {
     '@mysql-async/lib/MySQL.lua',     -- MySQL init
-	'@es_extended/locale.lua',
+    '@es_extended/locale.lua',
     'utils.lua',
-	'locales/de.lua',
-	'locales/br.lua',
-	'locales/en.lua',
-	'locales/fi.lua',
-	'locales/fr.lua',
-	'locales/sv.lua',
-	'locales/pl.lua',
+    'locales/en.lua',
 	'config.lua',
     'server/main.lua',
 }
@@ -92,14 +86,8 @@ server_scripts {
 client_scripts {
 	'@es_extended/locale.lua',
     'utils.lua',
-	'locales/de.lua',
-	'locales/br.lua',
 	'locales/en.lua',
-	'locales/fi.lua',
-	'locales/fr.lua',
-	'locales/sv.lua',
-	'locales/pl.lua',
-	'config.lua',
+    'config.lua',
 	'client/main.lua'
 }
 

@@ -213,7 +213,7 @@ function CloseSkinCreator()
 	
 	-- Player
 	SetPlayerInvincible(ped, false)
-	TriggerEvent('rtx_selection:phase2')
+	TriggerEvent('rorp_character:phase2')
 end
 
 function ShowSkinCreator(enable)
@@ -288,8 +288,8 @@ local elements    = {}
 	end
 end
 
-RegisterNetEvent('hud:loadMenu')
-AddEventHandler('hud:loadMenu', function()
+RegisterNetEvent('rorp_core-skin:loadMenu')
+AddEventHandler('rorp_core-skin:loadMenu', function()
 	ShowSkinCreator(true)
 end)
 

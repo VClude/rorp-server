@@ -94,7 +94,7 @@ RegisterNUICallback('register', function(data, cb)
 		TriggerEvent('skinchanger:loadSkin', skinmale)
 		end
 		Citizen.Wait(500)
-		TriggerEvent('charselect:register')
+		TriggerEvent('rorp_character:register')
 	else
 		ESX.ShowNotification(reason)
 	end

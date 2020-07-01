@@ -35,7 +35,7 @@ $(document).ready(function(){
 
   // Form update
   $('input').change(function(){
-    $.post('http://rtx_core/updateSkin', JSON.stringify({
+    $.post('http://rorp_core-skin/updateSkin', JSON.stringify({
       value: false,
       // Face
       dad: $('input[name=pere]:checked', '#formSkinCreator').val(),
@@ -70,7 +70,7 @@ $(document).ready(function(){
   });
   $('.arrow').on('click', function(e){
     e.preventDefault();
-    $.post('http://rtx_core/updateSkin', JSON.stringify({
+    $.post('http://rorp_core-skin/updateSkin', JSON.stringify({
       value: false,
       // Face
       dad: $('input[name=pere]:checked', '#formSkinCreator').val(),
@@ -107,7 +107,7 @@ $(document).ready(function(){
   // Form submited
   $('.yes').on('click', function(e){
     e.preventDefault();
-    $.post('http://rtx_core/updateSkin', JSON.stringify({
+    $.post('http://rorp_core-skin/updateSkin', JSON.stringify({
       value: true,
       // Face
       dad: $('input[name=pere]:checked', '#formSkinCreator').val(),
@@ -144,12 +144,12 @@ $(document).ready(function(){
   // Rotate player
   $(document).keypress(function(e) {
     if(e.which == 97){ // A pressed
-      $.post('http://rtx_core/rotaterightheading', JSON.stringify({
+      $.post('http://rorp_core-skin/rotaterightheading', JSON.stringify({
         value: 10
       }));
     }
     if(e.which == 101){ // E pressed
-      $.post('http://rtx_core/rotateleftheading', JSON.stringify({
+      $.post('http://rorp_core-skin/rotateleftheading', JSON.stringify({
         value: 10
       }));
     }

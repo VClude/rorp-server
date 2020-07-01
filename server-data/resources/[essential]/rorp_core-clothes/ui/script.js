@@ -6,11 +6,11 @@ $(document).ready(function(){
       $(".ClotheCreator").css("display","block");
 	  $(".rotation").css("display","flex");
       
-	  if (event.data.gender == "muz") {
+	  if (event.data.gender == "male") {
 		$('#female').remove();
 		$('#male').show();
 	  }
-	  if (event.data.gender == "zena") {
+	  if (event.data.gender == "female") {
 		$('#male').remove();
 		$('#female').show();
 	  }
@@ -31,7 +31,7 @@ $(document).ready(function(){
 
   // Form update
   $('input').change(function(){
-    $.post('http://rtx_clotheshops/updateSkinSave', JSON.stringify({
+    $.post('http://rorp_core-clothes/updateSkinSave', JSON.stringify({
       value: false,
 // Face
       // Clothes
@@ -62,7 +62,7 @@ $(document).ready(function(){
   });
   $('.arrow').on('click', function(e){
     e.preventDefault();
-    $.post('http://rtx_clotheshops/updateSkinSave', JSON.stringify({
+    $.post('http://rorp_core-clothes/updateSkinSave', JSON.stringify({
       value: false,
       // Face
       // Clothes
@@ -95,7 +95,7 @@ $(document).ready(function(){
   // Form submited
   $('.yes').on('click', function(e){
     e.preventDefault();
-    $.post('http://rtx_clotheshops/updateSkinSave', JSON.stringify({
+    $.post('http://rorp_core-clothes/updateSkinSave', JSON.stringify({
       value: true,
       // Clothes
       hats: $('.chapeaux .active').attr('data'),
@@ -126,12 +126,12 @@ $(document).ready(function(){
   // Rotate player
   $(document).keypress(function(e) {
     if(e.which == 97){ // A pressed
-      $.post('http://rtx_clotheshops/rotaterightheading', JSON.stringify({
+      $.post('http://rorp_core-clothes/rotaterightheading', JSON.stringify({
         value: 10
       }));
     }
     if(e.which == 101){ // E pressed
-      $.post('http://rtx_clotheshops/rotateleftheading', JSON.stringify({
+      $.post('http://rorp_core-clothes/rotateleftheading', JSON.stringify({
         value: 10
       }));
     }
@@ -140,7 +140,7 @@ $(document).ready(function(){
   // Zoom out camera for clothes
   $('#tabs label').on('click', function(e){
     //e.preventDefault();
-    $.post('http://rtx_clotheshops/zoom', JSON.stringify({
+    $.post('http://rorp_core-clothes/zoom', JSON.stringify({
       zoom: $(this).attr('data-link')
     }));
   });

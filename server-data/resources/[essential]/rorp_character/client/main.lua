@@ -44,19 +44,19 @@ AddEventHandler('esx:playerLoaded', function(xPlayer)
   PlayerData = xPlayer
 end)
 
-RegisterNetEvent("charselect:register")
-AddEventHandler("charselect:register", function()
+RegisterNetEvent("rorp_character:register")
+AddEventHandler("rorp_character:register", function()
     Citizen.Wait(1000)
     doAnim = true
 	SetEntityCoords(PlayerPedId(), 409.42, -1001.14, -99.90, 0.0, 0.0, 0.0, true)
     FreezeEntityPosition(PlayerPedId(), true)
-    TriggerEvent("charselect:animation")
-    TriggerEvent("rtx_selector:camera")
+    TriggerEvent("rorp_character:animation")
+    TriggerEvent("rorp_character:camera")
 	Visible()
 end)
 
-RegisterNetEvent("charselect:visibleplayer")
-AddEventHandler("charselect:visibleplayer", function()
+RegisterNetEvent("rorp_character:visibleplayer")
+AddEventHandler("rorp_character:visibleplayer", function()
 	Visiblee()
 end)
 
@@ -104,8 +104,8 @@ Citizen.CreateThread(function()
   end
 end)
 
-RegisterNetEvent('rtx_selector:camera')
-AddEventHandler('rtx_selector:camera', function()
+RegisterNetEvent('rorp_character:camera')
+AddEventHandler('rorp_character:camera', function()
 	local playerPed = GetPlayerPed(-1)
 	Citizen.Wait(2000) 
 	SetFocusEntity(playerPed)
@@ -114,8 +114,8 @@ AddEventHandler('rtx_selector:camera', function()
     RenderScriptCams(true, false, 2000, true, true)
 end)
 
-RegisterNetEvent('rtx_selector:camera2')
-AddEventHandler('rtx_selector:camera2', function()
+RegisterNetEvent('rorp_character:camera2')
+AddEventHandler('rorp_character:camera2', function()
 	local playerPed = GetPlayerPed(-1)
 	SetFocusEntity(playerPed)
     cam3 = CreateCamWithParams("DEFAULT_SCRIPTED_CAMERA", 413.40, -998.43, -99.01, 0.00, 0.00, 89.75, 50.00, false, 0)
@@ -154,23 +154,23 @@ AddEventHandler('rtx_selector:camera3', function()
 	Collision(false)
 end)
 
-RegisterNetEvent("charselect:animation")
-AddEventHandler("charselect:animation", function()
+RegisterNetEvent("rorp_character:animation")
+AddEventHandler("rorp_character:animation", function()
 	local ped = PlayerPedId()
 	local playerPed = GetPlayerPed()
 	enable = true
 	SetEntityHeading(PlayerPedId(), 350.0)
 	Citizen.Wait(2000) 
-    TriggerServerEvent("charselect:createsign") 
+    TriggerServerEvent("rorp_character:createsign") 
 	DoScreenFadeIn(1000)
     AnimationIntro()
     Citizen.Wait(1000)
 	SetCamActive(cam2, false)
-	TriggerEvent("rtx_selector:camera2")
+	TriggerEvent("rorp_character:camera2")
 	while enable == true do
         if not notifytext == true then
 			notifytext = true
-			exports['mythic_notify']:PersistentAlert('start', '85848451521ddd', 'inform', 'Tekan [Enter] untuk memilih karakter', { ['background-color'] = '#000000' })
+			exports['mythic_notify']:PersistentAlert('start', '85848451521ddd', 'inform', 'Tekan [Enter] untuk melanjutkan', { ['background-color'] = '#000000' })
 		end
 		Citizen.Wait(1)
         RequestAnimDict("mp_character_creation@customise@male_a")
@@ -195,7 +195,7 @@ AddEventHandler("charselect:animation", function()
 			Collision(false)
 			DoScreenFadeOut(10)
 			ClearTimecycleModifier("scanline_cam_cheap")
-			TriggerEvent('rtx_selection:phase1')
+			TriggerEvent('rorp_character:phase1')
         end
 	end
 end)
@@ -207,13 +207,13 @@ AddEventHandler("charselect:animation2", function()
 	enable = true
 	SetEntityHeading(PlayerPedId(), 350.0)
 	Citizen.Wait(2000) 
-    TriggerServerEvent("charselect:createsign") 
+    TriggerServerEvent("rorp_character:createsign") 
     TriggerServerEvent("charselect:lastpos")
 	DoScreenFadeIn(1000)
     AnimationIntro()
     Citizen.Wait(1000)
 	SetCamActive(cam2, false)
-	TriggerEvent("rtx_selector:camera2")
+	TriggerEvent("rorp_character:camera2")
 	while enable == true do
 		if not notifytext == true then
 			notifytext = true
@@ -245,8 +245,8 @@ AddEventHandler("charselect:animation2", function()
 	end
 end)
 
-RegisterNetEvent("charselect:createsign")
-AddEventHandler("charselect:createsign", function(name, job, money) 
+RegisterNetEvent("rorp_character:createsign")
+AddEventHandler("rorp_character:createsign", function(name, job, money) 
     SignProp1 = CreateObject(signmodel, 1, 1, 1, false, true, false)
     SignProp2 = CreateObject(textmodel, 1, 1, 1, false, true, false)
 
@@ -349,14 +349,14 @@ function LoadScaleform (scaleform)
     return text
 end
 
-RegisterNetEvent('rtx_selection:phase1')
-AddEventHandler('rtx_selection:phase1', function()
+RegisterNetEvent('rorp_character:phase1')
+AddEventHandler('rorp_character:phase1', function()
 	local playerPed = GetPlayerPed(-1)
 	local cam = CreateCam("DEFAULT_SCRIPTED_CAMERA", 1)
 	enablee = true
     SetEntityCoords(PlayerPedId(), -796.16, 332.7, 220.43, 0.0, 0.0, 0.0, true)
 	SetEntityHeading(PlayerPedId(), 84.0)
-	TriggerEvent("charselect:visibleplayer")
+	TriggerEvent("rorp_character:visibleplayer")
 	SetEntityCoords(PlayerPedId(), -796.16, 332.7, 220.43, 0.0, 0.0, 0.0, true)
 	SetEntityHeading(PlayerPedId(), 84.0)
     Citizen.Wait(2000)
@@ -382,11 +382,11 @@ AddEventHandler('rtx_selection:phase1', function()
     createdCamera = 0
     ClearTimecycleModifier("scanline_cam_cheap")
     SetFocusEntity(GetPlayerPed(PlayerId()))
-	TriggerEvent('hud:loadMenu')
+	TriggerEvent('rorp_core-skin:loadMenu')
 end)
 
-RegisterNetEvent('rtx_selection:phase2')
-AddEventHandler('rtx_selection:phase2', function()
+RegisterNetEvent('rorp_character:phase2')
+AddEventHandler('rorp_character:phase2', function()
 	local playerPed = GetPlayerPed(-1)
 	local cam = CreateCam("DEFAULT_SCRIPTED_CAMERA", 1)
 	SetEntityHeading(PlayerPedId(), 267.5)
@@ -417,7 +417,7 @@ AddEventHandler('rtx_selection:phase2', function()
     createdCamera = 0
     ClearTimecycleModifier("scanline_cam_cheap")
     SetFocusEntity(GetPlayerPed(PlayerId()))
-	TriggerEvent('hud:loadMenuClotheFIRST')
+	TriggerEvent('rorp_core-clothes:loadMenuClothe')
 end)
 
 function CreateNamedRenderTargetForModel(name, model)
@@ -435,8 +435,8 @@ function CreateNamedRenderTargetForModel(name, model)
     return text
 end
 
-RegisterNetEvent("rtx_selection:showmenu")
-AddEventHandler("rtx_selection:showmenu", function()
+RegisterNetEvent("rorp_character:showmenu")
+AddEventHandler("rorp_character:showmenu", function()
     doAnim = false
     FreezeEntityPosition(GetPlayerPed(-1), true)
 	SetEntityCoords(PlayerPedId(), -1036.02, -2737.04, 19.2, 0.0, 0.0, 0.0, true)
