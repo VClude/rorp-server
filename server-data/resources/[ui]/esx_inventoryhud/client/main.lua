@@ -216,7 +216,7 @@ RegisterNUICallback(
 			elseif data.item.name:match "%gbag" then
                 ESX.TriggerServerCallback('esx_inventoryhud:giveBag', function(dv)
                     if dv then
-                        ESX.ShowNotification("Kapasitas Inventory anda Berlebihan muatan")
+                        ESX.ShowNotification("Kapasitas inventory anda berlebihan muatan")
                     else
                         TriggerServerEvent("esx:giveInventoryItem", data.player, data.item.type, data.item.name, count)
                     end

@@ -87,32 +87,6 @@ Config.Shops = {
         }
 	},
 
-    -- YouTool = {
-    --     Locations = {
-    --         {x = 2748.0, y = 3473.0, z = 55.68},
-    --     },
-    --     Items = {
-    --         {name = 'fixkit'},
-    --         {name = 'lokalizator'},
-    --         {name = 'licenseplate'},
-    --         {name = 'blowtorch'}
-    --     }
-    -- },
-
-    -- PrisonShop = {
-    --     Locations = {
-    --         {x = 1728.41, y = 2584.31, z = 45.84},
-    --     },
-    --     Items = {
-    --         {name = 'bread'},
-    --         {name = 'water'},
-    --         {name = 'cigarette'},
-    --         {name = 'lighter'},
-    --         {name = 'sandwich'},
-    --         {name = 'chips'}
-    --     }
-    -- },
-
     WeaponShop = {
         Locations = {
             { x = -662.180, y = -934.961, z = 20.829 },
@@ -153,9 +127,9 @@ Config.Shops = {
 
         }
     },
-    LicenseShop = {
-        Locations = {
-            { x = 12.47, y = -1105.5, z = 29.8}
-        }
-    }
+    -- LicenseShop = {
+    --     Locations = {
+    --         { x = 12.47, y = -1105.5, z = 29.8}
+    --     }
+    -- }
 }

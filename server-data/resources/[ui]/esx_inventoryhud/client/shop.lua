@@ -184,32 +184,32 @@ function IsInWeaponShopZone(coords)
     return false
 end
 
-Citizen.CreateThread(function()
-    while true do
-        Citizen.Wait(0)
-        LicenseShop = Config.Shops.LicenseShop.Locations
-        player = GetPlayerPed(-1)
-        coords = GetEntityCoords(player)
-		for i = 1, #LicenseShop, 1 do
-			if GetDistanceBetweenCoords(coords, LicenseShop[i].x, LicenseShop[i].y, LicenseShop[i].z, true) < 8.0 then
-				DrawMarker(25, LicenseShop[i].x, LicenseShop[i].y, LicenseShop[i].z - 0.99, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.MarkerSize.x, Config.MarkerSize.y, Config.MarkerSize.z, Config.MarkerColor.r, Config.MarkerColor.g, Config.MarkerColor.b, 100, false, true, 2, false, nil, nil, false)
-					if currentAction then
-						ESX.ShowHelpNotification(_U('license_shop_help'))
-						if IsControlJustReleased(0, Keys["E"]) then
-							ESX.TriggerServerCallback('esx_license:checkLicense', function(hasWeaponLicense)
-							if hasWeaponLicense then
-								exports['mythic_notify']:DoHudText('error', _U('license_shop_check'))
-							else
-								OpenBuyLicenseMenu()
-								Citizen.Wait(2000)
-							end
-						end, GetPlayerServerId(PlayerId()), 'weapon')
-					end
-				end
-			end
-		end
-    end
-end)
+-- Citizen.CreateThread(function()
+--     while true do
+--         Citizen.Wait(0)
+--         LicenseShop = Config.Shops.LicenseShop.Locations
+--         player = GetPlayerPed(-1)
+--         coords = GetEntityCoords(player)
+-- 		for i = 1, #LicenseShop, 1 do
+-- 			if GetDistanceBetweenCoords(coords, LicenseShop[i].x, LicenseShop[i].y, LicenseShop[i].z, true) < 8.0 then
+-- 				DrawMarker(25, LicenseShop[i].x, LicenseShop[i].y, LicenseShop[i].z - 0.99, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.MarkerSize.x, Config.MarkerSize.y, Config.MarkerSize.z, Config.MarkerColor.r, Config.MarkerColor.g, Config.MarkerColor.b, 100, false, true, 2, false, nil, nil, false)
+-- 					if currentAction then
+-- 						ESX.ShowHelpNotification(_U('license_shop_help'))
+-- 						if IsControlJustReleased(0, Keys["E"]) then
+-- 							ESX.TriggerServerCallback('esx_license:checkLicense', function(hasWeaponLicense)
+-- 							if hasWeaponLicense then
+-- 								exports['mythic_notify']:DoHudText('error', _U('license_shop_check'))
+-- 							else
+-- 								OpenBuyLicenseMenu()
+-- 								Citizen.Wait(2000)
+-- 							end
+-- 						end, GetPlayerServerId(PlayerId()), 'weapon')
+-- 					end
+-- 				end
+-- 			end
+-- 		end
+--     end
+-- end)
 
 function OpenBuyLicenseMenu()
     ESX.UI.Menu.CloseAll()
