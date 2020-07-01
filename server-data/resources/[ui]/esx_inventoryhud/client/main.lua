@@ -76,7 +76,8 @@ RegisterCommand('closeinv', function(source, args, raw)
     closeInventory()
 end)
 RegisterCommand('openinv', function()
-    if not isDead then
+    local darah = GetEntityHealth(GetPlayerPed(-1))
+    if darah > 0 then
         openInventory()
       end
   end)
@@ -375,6 +376,4 @@ Citizen.CreateThread(
     end
 )
 
-AddEventHandler('esx:onPlayerDeath', function() isDead = true end)
-AddEventHandler('playerSpawned', function(spawn) isDead = false end)
 
