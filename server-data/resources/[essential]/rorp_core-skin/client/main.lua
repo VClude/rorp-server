@@ -650,22 +650,6 @@ AddEventHandler('esx_skin:requestSaveSkin', function()
 	end)
 end)
 
-RegisterNetEvent('rtx_core:openMenu')
-AddEventHandler('rtx_core:openMenu', function(menu)
-
-    local type = getOrElse(menu.type, 'default')
-
-    if type == 'default' then
-        OpenDefaultMenu(menu)
-    elseif type == 'dialog' then
-        OpenDialogMenu(menu)
-    elseif type == 'list' then
-        OpenListMenu(menu)
-    elseif type == 'confirmation' then
-        OpenConfirmationMenu(menu)
-    end
-end)
-
 function OpenDefaultMenu(menu)
 
     local emptyMenu = { { label = 'Empty Menu', action = nil } }

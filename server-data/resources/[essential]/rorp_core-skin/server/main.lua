@@ -23,6 +23,17 @@ ESX.RegisterServerCallback('esx_skin:getPlayerSkin', function(source, cb)
 	end)
 end)
 
+--esx_skin---
+RegisterServerEvent('esx_skin:save')
+AddEventHandler('esx_skin:save', function(skin)
+	local xPlayer = ESX.GetPlayerFromId(source)
+
+	MySQL.Async.execute('UPDATE users SET skin = @skin WHERE identifier = @identifier', {
+		['@skin'] = json.encode(skin),
+		['@identifier'] = xPlayer.identifier
+	})
+end)
+
 -- Commands
 TriggerEvent('es:addGroupCommand', 'skin', 'admin', function(source, args, user)
 	TriggerClientEvent('esx_skin:openSaveableMenu', source)
