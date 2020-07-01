@@ -3,6 +3,18 @@ local HasAlreadyEnteredMarker, LastHospital, LastPart, LastPartNum
 local isBusy, deadPlayers, deadPlayerBlips, isOnDuty = false, {}, {}, false
 isInShopMenu = false
 
+local lib1_char_a, lib2_char_a, lib1_char_b, lib2_char_b, anim_start, anim_pump, anim_success = 'mini@cpr@char_a@cpr_def', 'mini@cpr@char_a@cpr_str', 'mini@cpr@char_b@cpr_def', 'mini@cpr@char_b@cpr_str', 'cpr_intro', 'cpr_pumpchest', 'cpr_success'
+
+Citizen.CreateThread(function()
+    RequestAnimDict(lib1_char_a)
+    RequestAnimDict(lib2_char_a)
+
+    RequestAnimDict(lib1_char_b)
+    RequestAnimDict(lib2_char_b)
+
+    -- RequestAnimDict("mini@cpr")
+end)
+
 function OpenAmbulanceActionsMenu()
 	local elements = {{label = _U('cloakroom'), value = 'cloakroom'}}
 
@@ -14,7 +26,7 @@ function OpenAmbulanceActionsMenu()
 
 	ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'ambulance_actions', {
 		title    = _U('ambulance'),
-		align    = 'top-left',
+		align    = 'top',
 		elements = elements
 	}, function(data, menu)
 		if data.current.value == 'cloakroom' then
@@ -29,35 +41,154 @@ function OpenAmbulanceActionsMenu()
 	end)
 end
 
+RegisterNetEvent('CUSTOM_esx_ambulance:playCPR')
+AddEventHandler('CUSTOM_esx_ambulance:playCPR', function(playerheading, playercoords, playerlocation)
+	local playerPed = PlayerPedId()
+
+    local cpr = true
+
+    Citizen.CreateThread(function()
+        while cpr do
+            Citizen.Wait(0)
+            DisableAllControlActions(0)
+            EnableControlAction(0, 1, true)
+        end
+    end)
+
+    ClampGameplayCamPitch(0.0, -90.0)
+
+    local heading = 0.0
+
+    local coords = GetEntityCoords(playerPed)
+    local x, y, z = table.unpack(playercoords + playerlocation)
+	NetworkResurrectLocalPlayer(x, y, z, playerheading, true, false)
+
+    SetEntityHeading(playerPed, playerheading - 270.0)
+
+
+    TaskPlayAnim(playerPed, lib1_char_b, anim_start, 8.0, 8.0, -1, 0, 0, false, false, false)
+    Citizen.Wait(15800 - 900)
+    for i=1, 15, 1 do
+        Citizen.Wait(900)
+        TaskPlayAnim(playerPed, lib2_char_b, anim_pump, 8.0, 8.0, -1, 0, 0, false, false, false)
+    end
+
+    cpr = false
+
+    TaskPlayAnim(playerPed, lib2_char_b, anim_success, 8.0, 8.0, -1, 0, 0, false, false, false)
+end)
+
 function OpenMobileAmbulanceActionsMenu()
+
 	ESX.UI.Menu.CloseAll()
 
 	ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'mobile_ambulance_actions', {
 		title    = _U('ambulance'),
-		align    = 'top-left',
+		align    = 'bottom-right',
 		elements = {
 			{label = _U('ems_menu'), value = 'citizen_interaction'}
-	}}, function(data, menu)
-		if data.current.value == 'citizen_interaction' then
+		}
+	}, function(data, menu)
+	if data.current.value == 'citizen_interaction' then
 			ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'citizen_interaction', {
 				title    = _U('ems_menu_title'),
-				align    = 'top-left',
+				align    = 'bottom-right',
 				elements = {
 					{label = _U('ems_menu_revive'), value = 'revive'},
+					{label = _U('ems_menu_billing'), value = 'billing'},
 					{label = _U('ems_menu_small'), value = 'small'},
 					{label = _U('ems_menu_big'), value = 'big'},
-					{label = _U('ems_menu_putincar'), value = 'put_in_vehicle'}
-			}}, function(data, menu)
-				if isBusy then return end
+					{label = _U('ems_menu_carry'), value = 'carry'},
+					{label = _U('ems_menu_putincar'), value = 'put_in_vehicle'},
+					{label = _U('ems_menu_outthecar'), value = 'out_the_vehicle'},
+					{label = _U('ems_menu_search'), value = 'search'}
+				}
+			}, function(data, menu)
+				if IsBusy then return end
 
 				local closestPlayer, closestDistance = ESX.Game.GetClosestPlayer()
 
-				if closestPlayer == -1 or closestDistance > 1.0 then
-					ESX.ShowNotification(_U('no_players'))
+				if data.current.value == 'search' then
+					TriggerServerEvent('esx_ambulancejob:svsearch')
+				elseif closestPlayer == -1 or closestDistance > 1.0 then
+
+					exports['mythic_notify']:DoCustomHudText('inform', _U('no_players'), 2500, { ['background-color'] = '#FF0000', ['color'] = '#ffffff' })
 				else
+
 					if data.current.value == 'revive' then
-						revivePlayer(closestPlayer)
+
+						IsBusy = true
+
+						ESX.TriggerServerCallback('esx_ambulancejob:getItemAmount', function(quantity)
+							if quantity > 0 then
+								local closestPlayerPed = GetPlayerPed(closestPlayer)
+
+								if IsPedDeadOrDying(closestPlayerPed, 1) then
+									local playerPed = PlayerPedId()
+
+                                    TriggerServerEvent('CUSTOM_esx_ambulance:requestCPR', GetPlayerServerId(closestPlayer), GetEntityHeading(playerPed), GetEntityCoords(playerPed), GetEntityForwardVector(playerPed))
+
+                                    ESX.UI.Menu.CloseAll()
+
+									ESX.ShowNotification(_U('revive_inprogress'), "success")
+
+
+                                    -- print(GetAnimDuration(lib2, anim_success))
+
+                                    local cpr = true
+
+                                    Citizen.CreateThread(function()
+                                        while cpr do
+                                            Citizen.Wait(0)
+                                            DisableAllControlActions(0)
+                                            EnableControlAction(0, 1, true)
+                                        end
+                                    end)
+
+                                    ClampGameplayCamPitch(0.0, -90.0)
+
+                                    SetCurrentPedWeapon(playerPed, GetHashKey("WEAPON_UNARMED"), true)
+
+                                    TaskPlayAnim(playerPed, lib1_char_a, anim_start, 8.0, 8.0, -1, 0, 0, false, false, false)
+
+                                    Citizen.Wait(15800 - 900)
+									for i=1, 15, 1 do
+										Citizen.Wait(900)
+										TaskPlayAnim(playerPed, lib2_char_a, anim_pump, 8.0, 8.0, -1, 0, 0, false, false, false)
+									end
+
+                                    cpr = false
+
+									TaskPlayAnim(playerPed, lib2_char_a, anim_success, 8.0, 8.0, -1, 0, 0, false, false, false)
+
+                                    Citizen.Wait(33590)
+
+									TriggerServerEvent('esx_ambulancejob:removeItem', 'medikit')
+									TriggerServerEvent('esx_ambulancejob:revive', GetPlayerServerId(closestPlayer))
+
+									-- Show revive award?
+									if Config.ReviveReward > 0 then
+										--ESX.ShowNotification(_U('revive_complete_award', GetPlayerName(closestPlayer), Config.ReviveReward))
+										exports['mythic_notify']:DoCustomHudText('inform', _U('revive_complete_award', GetPlayerName(closestPlayer), Config.ReviveReward), 5000)
+									else
+										--ESX.ShowNotification(_U('revive_complete', GetPlayerName(closestPlayer)))
+										exports['mythic_notify']:DoCustomHudText('inform', _U('revive_complete', GetPlayerName(closestPlayer)), 2500, { ['background-color'] = '#008000', ['color'] = '#ffffff' })
+									end
+								else
+									--ESX.ShowNotification(_U('player_not_unconscious'))
+									exports['mythic_notify']:DoCustomHudText('inform', _U('player_not_unconscious'), 2500, { ['background-color'] = '#FF0000', ['color'] = '#ffffff' })
+								end
+							else
+								--ESX.ShowNotification(_U('not_enough_medikit'))
+								exports['mythic_notify']:DoCustomHudText('inform', _U('not_enough_medikit'), 2500, { ['background-color'] = '#FF0000', ['color'] = '#ffffff' })
+							end
+
+							IsBusy = false
+
+						end, 'medikit')
+
 					elseif data.current.value == 'small' then
+
 						ESX.TriggerServerCallback('esx_ambulancejob:getItemAmount', function(quantity)
 							if quantity > 0 then
 								local closestPlayerPed = GetPlayerPed(closestPlayer)
@@ -66,7 +197,7 @@ function OpenMobileAmbulanceActionsMenu()
 								if health > 0 then
 									local playerPed = PlayerPedId()
 
-									isBusy = true
+									IsBusy = true
 									ESX.ShowNotification(_U('heal_inprogress'))
 									TaskStartScenarioInPlace(playerPed, 'CODE_HUMAN_MEDIC_TEND_TO_DEAD', 0, true)
 									Citizen.Wait(10000)
@@ -74,13 +205,15 @@ function OpenMobileAmbulanceActionsMenu()
 
 									TriggerServerEvent('esx_ambulancejob:removeItem', 'bandage')
 									TriggerServerEvent('esx_ambulancejob:heal', GetPlayerServerId(closestPlayer), 'small')
-									ESX.ShowNotification(_U('heal_complete', GetPlayerName(closestPlayer)))
-									isBusy = false
+									exports['mythic_notify']:DoCustomHudText('inform', _U('heal_complete', GetPlayerName(closestPlayer)), 2500, { ['background-color'] = '#FF0000', ['color'] = '#ffffff' })
+									IsBusy = false
 								else
-									ESX.ShowNotification(_U('player_not_conscious'))
+									--ESX.ShowNotification(_U('player_not_conscious'))
+									exports['mythic_notify']:DoCustomHudText('inform', _U('player_not_conscious'), 2500, { ['background-color'] = '#FF0000', ['color'] = '#ffffff' })
 								end
 							else
-								ESX.ShowNotification(_U('not_enough_bandage'))
+								--ESX.ShowNotification(_U('not_enough_bandage'))
+									exports['mythic_notify']:DoCustomHudText('inform', _U('not_enough_bandage'), 2500, { ['background-color'] = '#FF0000', ['color'] = '#ffffff' })
 							end
 						end, 'bandage')
 
@@ -94,7 +227,7 @@ function OpenMobileAmbulanceActionsMenu()
 								if health > 0 then
 									local playerPed = PlayerPedId()
 
-									isBusy = true
+									IsBusy = true
 									ESX.ShowNotification(_U('heal_inprogress'))
 									TaskStartScenarioInPlace(playerPed, 'CODE_HUMAN_MEDIC_TEND_TO_DEAD', 0, true)
 									Citizen.Wait(10000)
@@ -103,17 +236,47 @@ function OpenMobileAmbulanceActionsMenu()
 									TriggerServerEvent('esx_ambulancejob:removeItem', 'medikit')
 									TriggerServerEvent('esx_ambulancejob:heal', GetPlayerServerId(closestPlayer), 'big')
 									ESX.ShowNotification(_U('heal_complete', GetPlayerName(closestPlayer)))
-									isBusy = false
+									IsBusy = false
 								else
-									ESX.ShowNotification(_U('player_not_conscious'))
+									--ESX.ShowNotification(_U('player_not_conscious'))
+									exports['mythic_notify']:DoCustomHudText('inform', _U('player_not_conscious'), 2500, { ['background-color'] = '#FF0000', ['color'] = '#ffffff' })
 								end
 							else
-								ESX.ShowNotification(_U('not_enough_medikit'))
+								--ESX.ShowNotification(_U('not_enough_medikit'))
+								exports['mythic_notify']:DoCustomHudText('inform', _U('not_enough_medikit'), 2500, { ['background-color'] = '#FF0000', ['color'] = '#ffffff' })
 							end
 						end, 'medikit')
 
 					elseif data.current.value == 'put_in_vehicle' then
 						TriggerServerEvent('esx_ambulancejob:putInVehicle', GetPlayerServerId(closestPlayer))
+					elseif data.current.value == 'out_the_vehicle' then
+						TriggerServerEvent('esx_ambulancejob:OutVehicle', GetPlayerServerId(closestPlayer))
+					elseif data.current.value == 'carry' then
+						ExecuteCommand('carry')
+					--start billing or invoice					
+					elseif data.current.value == 'billing' then
+
+						ESX.UI.Menu.Open('dialog', GetCurrentResourceName(), 'billing', {
+							title = _U('invoice_amount')
+						}, function(data, menu)
+							local amount = tonumber(data.value)
+
+							if amount == nil or amount < 0 then
+								ESX.ShowNotification(_U('amount_invalid'))
+							else
+								local closestPlayer, closestDistance = ESX.Game.GetClosestPlayer()
+								if closestPlayer == -1 or closestDistance > 3.0 then
+									--ESX.ShowNotification(_U('no_players_nearby'))
+									exports['mythic_notify']:DoCustomHudText('inform', _U('no_players_nearby'), 2500, { ['background-color'] = '#FF0000', ['color'] = '#ffffff' })
+								else
+									menu.close()
+									TriggerServerEvent('esx_billing:sendBill', GetPlayerServerId(closestPlayer), 'society_ambulance', _U('ambulance'), amount)
+								end
+							end
+						end, function(data, menu)
+							menu.close()
+						end)
+					--end billing or invoice
 					end
 				end
 			end, function(data, menu)
@@ -244,7 +407,7 @@ Citizen.CreateThread(function()
 				end
 
 				-- Fast Travels (Prompt)
-				for k,v in ipairs(hospital.FastTravelsPrompt) do
+				for k,v in ipairs(hospital.FastTravels) do
 					local distance = #(playerCoords - v.From)
 
 					if distance < Config.DrawDistance then
@@ -252,7 +415,7 @@ Citizen.CreateThread(function()
 						letSleep = false
 
 						if distance < v.Marker.x then
-							isInMarker, currentHospital, currentPart, currentPartNum = true, hospitalNum, 'FastTravelsPrompt', k
+							isInMarker, currentHospital, currentPart, currentPartNum = true, hospitalNum, 'FastTravels', k
 						end
 					end
 				end
@@ -294,17 +457,13 @@ Citizen.CreateThread(function()
 		local playerCoords, letSleep = GetEntityCoords(PlayerPedId()), true
 
 		for hospitalNum,hospital in pairs(Config.Hospitals) do
-			-- Fast Travels
+			--Fast Travels
 			for k,v in ipairs(hospital.FastTravels) do
 				local distance = #(playerCoords - v.From)
 
 				if distance < Config.DrawDistance then
 					DrawMarker(v.Marker.type, v.From, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, v.Marker.x, v.Marker.y, v.Marker.z, v.Marker.r, v.Marker.g, v.Marker.b, v.Marker.a, false, false, 2, v.Marker.rotate, nil, nil, false)
 					letSleep = false
-
-					if distance < v.Marker.x then
-						FastTravel(v.To.coords, v.To.heading)
-					end
 				end
 			end
 		end
@@ -332,7 +491,7 @@ AddEventHandler('esx_ambulancejob:hasEnteredMarker', function(hospital, part, pa
 		CurrentAction = part
 		CurrentActionMsg = _U('helicopter_prompt')
 		CurrentActionData = {hospital = hospital, partNum = partNum}
-	elseif part == 'FastTravelsPrompt' then
+	elseif part == 'FastTravels' then
 		local travelItem = Config.Hospitals[hospital][part][partNum]
 
 		CurrentAction = part
@@ -366,7 +525,7 @@ Citizen.CreateThread(function()
 					OpenVehicleSpawnerMenu('car', CurrentActionData.hospital, CurrentAction, CurrentActionData.partNum)
 				elseif CurrentAction == 'Helicopters' then
 					OpenVehicleSpawnerMenu('helicopter', CurrentActionData.hospital, CurrentAction, CurrentActionData.partNum)
-				elseif CurrentAction == 'FastTravelsPrompt' then
+				elseif CurrentAction == 'FastTravels' then
 					FastTravel(CurrentActionData.to, CurrentActionData.heading)
 				end
 
@@ -380,6 +539,16 @@ Citizen.CreateThread(function()
 		else
 			Citizen.Wait(500)
 		end
+	end
+end)
+
+RegisterNetEvent('esx_ambulancejob:OutVehicle')
+AddEventHandler('esx_ambulancejob:OutVehicle', function()
+	local playerPed = PlayerPedId()
+
+	if IsPedSittingInAnyVehicle(playerPed) then
+		local vehicle = GetVehiclePedIsIn(playerPed, false)
+		TaskLeaveVehicle(playerPed, vehicle, 16)
 	end
 end)
 
@@ -411,7 +580,7 @@ end)
 function OpenCloakroomMenu()
 	ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'cloakroom', {
 		title    = _U('cloakroom'),
-		align    = 'top-left',
+		align    = 'top',
 		elements = {
 			{label = _U('ems_clothes_civil'), value = 'citizen_wear'},
 			{label = _U('ems_clothes_ems'), value = 'ambulance_wear'},
@@ -450,10 +619,14 @@ function OpenPharmacyMenu()
 
 	ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'pharmacy', {
 		title    = _U('pharmacy_menu_title'),
-		align    = 'top-left',
+		align    = 'top',
 		elements = {
 			{label = _U('pharmacy_take', _U('medikit')), item = 'medikit', type = 'slider', value = 1, min = 1, max = 100},
-			{label = _U('pharmacy_take', _U('bandage')), item = 'bandage', type = 'slider', value = 1, min = 1, max = 100}
+			{label = _U('pharmacy_take', _U('bandage')), item = 'bandage', type = 'slider', value = 1, min = 1, max = 100},
+			{label = _U('pharmacy_take', _U('bodybandage')), item = 'bodybandage', type = 'slider', value = 1, min = 1, max = 100},
+			{label = _U('pharmacy_take', _U('neckbrace')), item = 'neckbrace', type = 'slider', value = 1, min = 1, max = 100},
+			{label = _U('pharmacy_take', _U('armbrace')), item = 'armbrace', type = 'slider', value = 1, min = 1, max = 100},
+			{label = _U('pharmacy_take', _U('legbrace')), item = 'legbrace', type = 'slider', value = 1, min = 1, max = 100},
 	}}, function(data, menu)
 		TriggerServerEvent('esx_ambulancejob:giveItem', data.current.item, data.current.value)
 	end, function(data, menu)

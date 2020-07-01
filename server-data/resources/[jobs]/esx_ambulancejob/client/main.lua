@@ -1,7 +1,18 @@
-local firstSpawn, PlayerLoaded = true, false
-
-isDead = false
 ESX = nil
+
+local firstSpawn, PlayerLoaded = true, false
+local bedOccupying = nil
+local bedObject = nil
+local bedOccupyingData = nil
+
+local cam = nil
+
+local inBedDict = "anim@gangops@morgue@table@"
+local inBedAnim = "ko_front"
+local getOutDict = 'switch@franklin@bed'
+local getOutAnim = 'sleep_getup_rubeyes'
+
+isDead, isSearched, medic = false, false, 0
 
 Citizen.CreateThread(function()
 	while ESX == nil do
@@ -41,7 +52,7 @@ AddEventHandler('esx:onPlayerSpawn', function()
 
 			ESX.TriggerServerCallback('esx_ambulancejob:getDeathStatus', function(shouldDie)
 				if shouldDie then
-					ESX.ShowNotification(_U('combatlog_message'))
+					exports['mythic_notify']:DoCustomHudText('inform', _U('combatlog_message'), 5000)
 					RemoveItemsAfterRPDeath()
 				end
 			end)
@@ -52,6 +63,12 @@ end)
 -- Create blips
 Citizen.CreateThread(function()
 	for k,v in pairs(Config.Hospitals) do
+		local blip = AddBlipForRadius(v.Blip.coords, 50.0)
+		
+		SetBlipHighDetail(blip, true)
+		SetBlipColour(blip, 2)
+		SetBlipAlpha (blip, 128)
+
 		local blip = AddBlipForCoord(v.Blip.coords)
 
 		SetBlipSprite(blip, v.Blip.sprite)
@@ -64,6 +81,7 @@ Citizen.CreateThread(function()
 		EndTextCommandSetBlipName(blip)
 	end
 end)
+
 
 -- Disable most inputs when dead
 Citizen.CreateThread(function()
@@ -92,6 +110,67 @@ function OnPlayerDeath()
 	StartScreenEffect('DeathFailOut', 0, false)
 end
 
+function LeaveBed()
+    RequestAnimDict(getOutDict)
+    while not HasAnimDictLoaded(getOutDict) do
+        Citizen.Wait(0)
+    end
+
+    RenderScriptCams(0, true, 200, true, true)
+    DestroyCam(cam, false)
+
+    SetEntityInvincible(PlayerPedId(), false)
+
+    SetEntityHeading(PlayerPedId(), bedOccupyingData.h - 90)
+    TaskPlayAnim(PlayerPedId(), getOutDict , getOutAnim ,8.0, -8.0, -1, 0, 0, false, false, false )
+    Citizen.Wait(5000)
+    ClearPedTasks(PlayerPedId())
+    FreezeEntityPosition(PlayerPedId(), false)
+    TriggerServerEvent('esx_ambulancejob:server:LeaveBed', bedOccupying)
+
+    FreezeEntityPosition(bedObject, false)
+
+    bedOccupying = nil
+    bedObject = nil
+    bedOccupyingData = nil
+end
+
+
+Citizen.CreateThread(function()
+	while true do
+		Citizen.Wait(0)
+		if isDead and isSearched then
+			local playerPed = PlayerPedId()
+			local ped = GetPlayerPed(GetPlayerFromServerId(medic))
+			isSearched = false
+
+			AttachEntityToEntity(playerPed, ped, 11816, 0.54, 0.54, 0.0, 0.0, 0.0, 0.0, false, false, false, false, 2, true)
+			Citizen.Wait(1000)
+			DetachEntity(playerPed, true, false)
+			ClearPedTasksImmediately(playerPed)
+		end
+	end
+end)
+
+RegisterNetEvent('esx_ambulancejob:clsearch')
+AddEventHandler('esx_ambulancejob:clsearch', function(medicId)
+	local playerPed = PlayerPedId()
+
+	if isDead then
+		local coords = GetEntityCoords(playerPed)
+		local playersInArea = ESX.Game.GetPlayersInArea(coords, 50.0)
+
+		for i=1, #playersInArea, 1 do
+			local player = playersInArea[i]
+			if player == GetPlayerFromServerId(medicId) then
+				medic = tonumber(medicId)
+				isSearched = true
+				break
+			end
+		end
+	end
+end)
+
 RegisterNetEvent('esx_ambulancejob:useItem')
 AddEventHandler('esx_ambulancejob:useItem', function(itemName)
 	ESX.UI.Menu.CloseAll()
@@ -108,9 +187,10 @@ AddEventHandler('esx_ambulancejob:useItem', function(itemName)
 				Citizen.Wait(0)
 				DisableAllControlActions(0)
 			end
-
+	
 			TriggerEvent('esx_ambulancejob:heal', 'big', true)
-			ESX.ShowNotification(_U('used_medikit'))
+			--ESX.ShowNotification(_U('used_medikit'))
+			exports['mythic_notify']:DoCustomHudText('inform', _U('used_medikit'), 5000)
 		end)
 
 	elseif itemName == 'bandage' then
@@ -127,7 +207,8 @@ AddEventHandler('esx_ambulancejob:useItem', function(itemName)
 			end
 
 			TriggerEvent('esx_ambulancejob:heal', 'small', true)
-			ESX.ShowNotification(_U('used_bandage'))
+			--ESX.ShowNotification(_U('used_bandage'))
+			exports['mythic_notify']:DoCustomHudText('inform', _U('used_bandage'), 5000)
 		end)
 	end
 end)
@@ -160,10 +241,16 @@ end
 
 function SendDistressSignal()
 	local playerPed = PlayerPedId()
-	local coords = GetEntityCoords(playerPed)
+	PedPosition		= GetEntityCoords(playerPed)
+	
+	local PlayerCoords = { x = PedPosition.x, y = PedPosition.y, z = PedPosition.z }
 
-	ESX.ShowNotification(_U('distress_sent'))
-	TriggerServerEvent('esx_ambulancejob:onPlayerDistress')
+	exports['mythic_notify']:DoCustomHudText('inform', _U('distress_sent'), 5000)
+
+    TriggerServerEvent('esx_addons_gcphone:startCall', 'ambulance', _U('distress_message'), PlayerCoords, {
+
+		PlayerCoords = { x = PedPosition.x, y = PedPosition.y, z = PedPosition.z },
+	})
 end
 
 function DrawGenericTextThisFrame()
@@ -289,17 +376,18 @@ function RemoveItemsAfterRPDeath()
 		end
 
 		ESX.TriggerServerCallback('esx_ambulancejob:removeItemsAfterRPDeath', function()
-			local formattedCoords = {
-				x = Config.RespawnPoint.coords.x,
-				y = Config.RespawnPoint.coords.y,
-				z = Config.RespawnPoint.coords.z
-			}
-
+			local playerpos = Config.RespawnPoint.coords
+				
+			ESX.SetPlayerData('lastPosition', playerpos)
 			ESX.SetPlayerData('loadout', {})
-			RespawnPed(PlayerPedId(), formattedCoords, Config.RespawnPoint.heading)
+			RespawnPed(PlayerPedId(), playerpos, Config.RespawnPoint.heading)
 
+			TriggerServerEvent('esx:updateLastPosition', playerpos)
+			TriggerServerEvent('esx_ambulancejob:server:RequestBed')
+			Citizen.Wait(10)
 			StopScreenEffect('DeathFailOut')
 			DoScreenFadeIn(800)
+			-- ShakeGameplayCam("SMALL_EXPLOSION_SHAKE", 1.0)
 		end)
 	end)
 end
@@ -312,7 +400,7 @@ function RespawnPed(ped, coords, heading)
 
 	TriggerServerEvent('esx:onPlayerSpawn')
 	TriggerEvent('esx:onPlayerSpawn')
-	TriggerEvent('playerSpawned') -- compatibility with old scripts, will be removed soon
+	TriggerEvent('esx:onPlayerSpawn') -- compatibility with old scripts, will be removed soon
 end
 
 RegisterNetEvent('esx_phone:loaded')
@@ -347,14 +435,72 @@ AddEventHandler('esx_ambulancejob:revive', function()
 		y = ESX.Math.Round(coords.y, 1),
 		z = ESX.Math.Round(coords.z, 1)
 	}
+	TriggerEvent('skeletalsystem:HealBones',"all")
 
 	RespawnPed(playerPed, formattedCoords, 0.0)
 
 	StopScreenEffect('DeathFailOut')
 	DoScreenFadeIn(800)
+	ClearTimecycleModifier()
+
+	StopGameplayCamShaking(true)
+	-- ShakeGameplayCam("SMALL_EXPLOSION_SHAKE", 1.0)
+	ResetPedMovementClipset(playerPed, 0.0)
+	
 end)
 
 -- Load unloaded IPLs
 if Config.LoadIpl then
 	RequestIpl('Coroner_Int_on') -- Morgue
 end
+
+RegisterNetEvent('esx_ambulancejob:client:SendToBed')
+AddEventHandler('esx_ambulancejob:client:SendToBed', function(id, data)
+    bedOccupying = id
+    bedOccupyingData = data
+
+    bedObject = GetClosestObjectOfType(data.x, data.y, data.z, 1.0, data.model, false, false, false)
+    FreezeEntityPosition(bedObject, true)
+
+    SetEntityCoords(PlayerPedId(), data.x, data.y, data.z)
+    RequestAnimDict(inBedDict)
+    while not HasAnimDictLoaded(inBedDict) do
+        Citizen.Wait(0)
+    end
+    TaskPlayAnim(PlayerPedId(), inBedDict , inBedAnim ,8.0, -8.0, -1, 1, 0, false, false, false )
+    SetEntityHeading(PlayerPedId(), data.h + 180)
+    SetEntityInvincible(PlayerPedId(), true)
+
+    cam = CreateCam("DEFAULT_SCRIPTED_CAMERA", 1)
+    SetCamActive(cam, true)
+    RenderScriptCams(true, false, 1, true, true)
+    AttachCamToPedBone(cam, PlayerPedId(), 31085, 0, 0, 1.0 , true)
+    SetCamFov(cam, 90.0)
+    SetCamRot(cam, -90.0, 0.0, GetEntityHeading(PlayerPedId()) + 180, true)
+
+    Citizen.CreateThread(function ()
+        Citizen.Wait(5)
+        local player = PlayerPedId()
+
+        exports['mythic_notify']:SendAlert('inform', 'Dokter sedang menyembuhkan anda.')
+        Citizen.Wait(5000)
+        TriggerServerEvent('esx_ambulancejob:server:EnteredBed')
+    end)
+end)
+
+RegisterNetEvent('esx_ambulancejob:client:FinishServices')
+AddEventHandler('esx_ambulancejob:client:FinishServices', function()
+	local player = PlayerPedId()
+	
+	if IsPedDeadOrDying(player) then
+		local playerPos = GetEntityCoords(player, true)
+		NetworkResurrectLocalPlayer(playerPos, true, true, false)
+	end
+	
+	SetEntityHealth(player, GetEntityMaxHealth(player))
+    ClearPedBloodDamage(player)
+    SetPlayerSprint(PlayerId(), true)
+    TriggerEvent('esx_ambulancejob:revive')
+    exports['mythic_notify']:SendAlert('inform', 'Kamu telah di sembuhkan.')
+    LeaveBed()
+end)

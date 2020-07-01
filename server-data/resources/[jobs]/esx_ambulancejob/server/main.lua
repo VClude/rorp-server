@@ -1,5 +1,18 @@
 ESX = nil
+
+local beds = {
+	{ x = 359.6, y = -586.13, z = 43.28, h = 247.79, taken = false, model = 1631638868 },
+	{ x = 360.87, y = -581.12, z = 43.28, h = 248.75, taken = false, model = 1631638868 },
+	{ x = 366.22, y = -581.55, z = 43.28, h = 246.63, taken = false, model = 1631638868 },
+	{ x = 363.59, y = -588.95, z = 43.28, h = 250.54, taken = false, model = 1631638868 },
+	{ x = 354.12, y = -600.05, z = 43.28, h = 250.24, taken = false, model = 1631638868 },
+ 
+}
+
 local playersHealing, deadPlayers = {}, {}
+local bedsTaken = {}
+
+local injuryBasePrice = 100
 
 TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 
@@ -19,6 +32,7 @@ AddEventHandler('esx_ambulancejob:revive', function(playerId)
 				xPlayer.showNotification(_U('revive_complete_award', xTarget.name, Config.ReviveReward))
 				xPlayer.addMoney(Config.ReviveReward)
 				xTarget.triggerEvent('esx_ambulancejob:revive')
+				
 				deadPlayers[playerId] = nil
 			else
 				xPlayer.showNotification(_U('player_not_unconscious'))
@@ -29,11 +43,23 @@ AddEventHandler('esx_ambulancejob:revive', function(playerId)
 	end
 end)
 
+RegisterServerEvent('CUSTOM_esx_ambulance:requestCPR')
+AddEventHandler('CUSTOM_esx_ambulance:requestCPR', function(target, playerheading, playerCoords, playerlocation)
+    TriggerClientEvent("CUSTOM_esx_ambulance:playCPR", target, playerheading, playerCoords, playerlocation)
+end)
+
 RegisterNetEvent('esx:onPlayerDeath')
 AddEventHandler('esx:onPlayerDeath', function(data)
 	deadPlayers[source] = 'dead'
 	TriggerClientEvent('esx_ambulancejob:setDeadPlayers', -1, deadPlayers)
 end)
+
+
+RegisterServerEvent('esx_ambulancejob:svsearch')
+AddEventHandler('esx_ambulancejob:svsearch', function()
+  TriggerClientEvent('esx_ambulancejob:clsearch', -1, source)
+end)
+
 
 RegisterNetEvent('esx_ambulancejob:onPlayerDistress')
 AddEventHandler('esx_ambulancejob:onPlayerDistress', function()
@@ -73,6 +99,19 @@ AddEventHandler('esx_ambulancejob:putInVehicle', function(target)
 
 	if xPlayer.job.name == 'ambulance' then
 		TriggerClientEvent('esx_ambulancejob:putInVehicle', target)
+	else
+		print(('esx_policejob: %s attempted to put in vehicle (not ambulance)!'):format(xPlayer.identifier))
+	end
+end)
+
+RegisterNetEvent('esx_ambulancejob:OutVehicle')
+AddEventHandler('esx_ambulancejob:OutVehicle', function(target)
+	local xPlayer = ESX.GetPlayerFromId(source)
+
+	if xPlayer.job.name == 'ambulance' then
+		TriggerClientEvent('esx_ambulancejob:OutVehicle', target)
+	else
+		print(('esx_ambulancejob: %s attempted to drag out from vehicle (not ambulance)!'):format(xPlayer.identifier))
 	end
 end)
 
@@ -238,7 +277,7 @@ AddEventHandler('esx_ambulancejob:giveItem', function(itemName, amount)
 	if xPlayer.job.name ~= 'ambulance' then
 		print(('[esx_ambulancejob] [^2INFO^7] "%s" attempted to spawn in an item!'):format(xPlayer.identifier))
 		return
-	elseif (itemName ~= 'medikit' and itemName ~= 'bandage') then
+	elseif (itemName ~= 'medikit' and itemName ~= 'bandage' and itemName ~= 'hoestdrank' and itemName ~= 'bodybandage' and itemName ~= 'armbrace' and itemName ~= 'legbrace' and itemName ~= 'neckbrace' and itemName ~= 'antibiotico' and itemName ~= 'antibioticorosacea') then
 		print(('[esx_ambulancejob] [^2INFO^7] "%s" attempted to spawn in an item!'):format(xPlayer.identifier))
 		return
 	end
@@ -250,7 +289,7 @@ AddEventHandler('esx_ambulancejob:giveItem', function(itemName, amount)
 	end
 end)
 
-ESX.RegisterCommand('revive', 'admin', function(xPlayer, args, showError)
+ESX.RegisterCommand('revive', 'admin', function(source, args, showError)
 	args.playerId.triggerEvent('esx_ambulancejob:revive')
 end, true, {help = _U('revive_help'), validate = true, arguments = {
 	{name = 'playerId', help = 'The player id', type = 'player'}
@@ -306,4 +345,49 @@ AddEventHandler('esx_ambulancejob:setDeathStatus', function(isDead)
 			['@isDead'] = isDead
 		})
 	end
+end)
+
+RegisterServerEvent('esx_ambulancejob:server:RequestBed')
+AddEventHandler('esx_ambulancejob:server:RequestBed', function()
+    for k, v in pairs(beds) do
+        if not v.taken then
+            v.taken = true
+            bedsTaken[source] = k
+            TriggerClientEvent('esx_ambulancejob:client:SendToBed', source, k, v)
+            return
+        end
+    end
+
+    TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'error', text = 'Tidak ada ruangan yang tersedia.' })
+end)
+
+RegisterServerEvent('esx_ambulancejob:server:EnteredBed')
+AddEventHandler('esx_ambulancejob:server:EnteredBed', function()
+    local src = source
+    -- local injuries = GetCharsInjuries(src)
+
+    -- local totalBill = injuryBasePrice
+
+    -- if injuries ~= nil then
+    --     for k, v in pairs(injuries.limbs) do
+    --         if v.isDamaged then
+    --             totalBill = totalBill + (injuryBasePrice * v.severity)
+    --         end
+    --     end
+
+    --     if injuries.isBleeding > 0 then
+    --         totalBill = totalBill + (injuryBasePrice * injuries.isBleeding)
+    --     end
+    -- end
+
+    -- YOU NEED TO IMPLEMENT YOUR FRAMEWORKS BILLING HERE
+	-- local xPlayer = ESX.GetPlayerFromId(src)
+    -- xPlayer.removeBank(totalBill)
+    -- TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'success', text = 'You were billed for $' .. totalBill ..'.' })
+    TriggerClientEvent('esx_ambulancejob:client:FinishServices', src)
+end)
+
+RegisterServerEvent('esx_ambulancejob:server:LeaveBed')
+AddEventHandler('esx_ambulancejob:server:LeaveBed', function(id)
+    beds[id].taken = false
 end)

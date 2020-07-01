@@ -35,9 +35,12 @@ client_scripts {
 	'client/main.lua',
 	'client/job.lua',
 	'client/vehicle.lua',
+	'client/collision.lua',
 }
 
 dependencies {
 	'es_extended',
 	'rorp_core-skin'
 }
+
+export "GetDeath"

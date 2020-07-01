@@ -5,7 +5,7 @@ function OpenVehicleSpawnerMenu(type, hospital, part, partNum)
 
 	ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'vehicle', {
 		title    = _U('garage_title'),
-		align    = 'top-left',
+		align    = 'top',
 		elements = {
 			{label = _U('garage_storeditem'), action = 'garage'},
 			{label = _U('garage_storeitem'), action = 'store_garage'},
@@ -39,7 +39,7 @@ function OpenVehicleSpawnerMenu(type, hospital, part, partNum)
 		elseif data.current.action == 'garage' then
 			local garage = {}
 
-			ESX.TriggerServerCallback('esx_vehicleshop:retrieveJobVehicles', function(jobVehicles)
+			ESX.TriggerServerCallback('t1ger_cardealer:retrieveJobVehicles', function(jobVehicles)
 				if #jobVehicles > 0 then
 					local allVehicleProps = {}
 
@@ -70,7 +70,7 @@ function OpenVehicleSpawnerMenu(type, hospital, part, partNum)
 					if #garage > 0 then
 						ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'vehicle_garage', {
 							title    = _U('garage_title'),
-							align    = 'top-left',
+							align    = 'top',
 							elements = garage
 						}, function(data2, menu2)
 							if data2.current.stored then
@@ -83,21 +83,21 @@ function OpenVehicleSpawnerMenu(type, hospital, part, partNum)
 										local vehicleProps = allVehicleProps[data2.current.plate]
 										ESX.Game.SetVehicleProperties(vehicle, vehicleProps)
 
-										TriggerServerEvent('esx_vehicleshop:setJobVehicleState', data2.current.plate, false)
-										ESX.ShowNotification(_U('garage_released'))
+										TriggerServerEvent('t1ger_cardealer:setJobVehicleState', data2.current.plate, false)
+										exports['mythic_notify']:DoCustomHudText('success', _U('garage_released'), 2500)
 									end)
 								end
 							else
-								ESX.ShowNotification(_U('garage_notavailable'))
+								exports['mythic_notify']:DoCustomHudText('error', _U('garage_notavailable'), 2500)
 							end
 						end, function(data2, menu2)
 							menu2.close()
 						end)
 					else
-						ESX.ShowNotification(_U('garage_empty'))
+						exports['mythic_notify']:DoCustomHudText('error', _U('garage_empty'), 2500)
 					end
 				else
-					ESX.ShowNotification(_U('garage_empty'))
+					exports['mythic_notify']:DoCustomHudText('error', _U('garage_empty'), 2500)
 				end
 			end, type)
 		elseif data.current.action == 'store_garage' then
@@ -123,7 +123,7 @@ function StoreNearbyVehicle(playerCoords)
 			end
 		end
 	else
-		ESX.ShowNotification(_U('garage_store_nearby'))
+		exports['mythic_notify']:DoCustomHudText('error', _U('garage_store_nearby'), 2500)
 		return
 	end
 
@@ -163,9 +163,9 @@ function StoreNearbyVehicle(playerCoords)
 			end
 
 			isBusy = false
-			ESX.ShowNotification(_U('garage_has_stored'))
+			exports['mythic_notify']:DoCustomHudText('success', _U('garage_has_stored'), 2500)
 		else
-			ESX.ShowNotification(_U('garage_has_notstored'))
+			exports['mythic_notify']:DoCustomHudText('error', _U('garage_has_notstored'), 2500)
 		end
 	end, vehiclePlates)
 end
@@ -184,7 +184,7 @@ function GetAvailableVehicleSpawnPoint(hospital, part, partNum)
 	if found then
 		return true, foundSpawnPoint
 	else
-		ESX.ShowNotification(_U('garage_blocked'))
+		exports['mythic_notify']:DoCustomHudText('error', _U('garage_blocked'), 2500)
 		return false
 	end
 end
@@ -195,25 +195,25 @@ function OpenShopMenu(elements, restoreCoords, shopCoords)
 
 	ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'vehicle_shop', {
 		title    = _U('vehicleshop_title'),
-		align    = 'top-left',
+		align    = 'top',
 		elements = elements
 	}, function(data, menu)
 		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'vehicle_shop_confirm', {
 			title    = _U('vehicleshop_confirm', data.current.name, data.current.price),
-			align    = 'top-left',
+			align    = 'top',
 			elements = {
 				{label = _U('confirm_no'), value = 'no'},
 				{label = _U('confirm_yes'), value = 'yes'}
 		}}, function(data2, menu2)
 			if data2.current.value == 'yes' then
-				local newPlate = exports['esx_vehicleshop']:GeneratePlate()
+				local newPlate = exports['t1ger_cardealer']:ProduceNumberPlate()
 				local vehicle  = GetVehiclePedIsIn(playerPed, false)
 				local props    = ESX.Game.GetVehicleProperties(vehicle)
 				props.plate    = newPlate
 
 				ESX.TriggerServerCallback('esx_ambulancejob:buyJobVehicle', function(bought)
 					if bought then
-						ESX.ShowNotification(_U('vehicleshop_bought', data.current.name, ESX.Math.GroupDigits(data.current.price)))
+						exports['mythic_notify']:DoCustomHudText('success', _U('vehicleshop_bought', data.current.name, ESX.Math.GroupDigits(data.current.price)), 2500)
 
 						isInShopMenu = false
 						ESX.UI.Menu.CloseAll()
@@ -224,7 +224,7 @@ function OpenShopMenu(elements, restoreCoords, shopCoords)
 
 						ESX.Game.Teleport(playerPed, restoreCoords)
 					else
-						ESX.ShowNotification(_U('vehicleshop_money'))
+						exports['mythic_notify']:DoCustomHudText('error', _U('vehicleshop_money'), 2500)
 						menu2.close()
 					end
 				end, props, data.current.type)
