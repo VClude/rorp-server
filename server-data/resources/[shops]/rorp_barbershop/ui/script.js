@@ -6,11 +6,11 @@ $(document).ready(function(){
       $(".BarberCreator").css("display","block");
 	  $(".rotation").css("display","flex");
 	  
-	  if (event.data.gender == "muz") {
+	  if (event.data.gender == "male") {
 		$('#female').remove();
 		$('#male').show();
 	  }
-	  if (event.data.gender == "zena") {
+	  if (event.data.gender == "female") {
 		$('#male').remove();
 		$('#female').show();
 	  }
@@ -31,7 +31,7 @@ $(document).ready(function(){
 
   // Form update
   $('input').change(function(){
-    $.post('http://rtx_barbershops/updateSkinSaveBarber', JSON.stringify({
+    $.post('http://rorp_barbershop/updateSkinSaveBarber', JSON.stringify({
       value: false,
 // Face
       // Barbers
@@ -57,7 +57,7 @@ $(document).ready(function(){
   });
   $('.arrow').on('click', function(e){
     e.preventDefault();
-    $.post('http://rtx_barbershops/updateSkinSaveBarber', JSON.stringify({
+    $.post('http://rorp_barbershop/updateSkinSaveBarber', JSON.stringify({
       value: false,
       // Face
       // Barbers
@@ -85,7 +85,7 @@ $(document).ready(function(){
   // Form submited
   $('.yes').on('click', function(e){
     e.preventDefault();
-    $.post('http://rtx_barbershops/updateSkinSaveBarber', JSON.stringify({
+    $.post('http://rorp_barbershop/updateSkinSaveBarber', JSON.stringify({
       value: true,
       // Barbers
       hair: $('.hair').val(),
@@ -111,12 +111,12 @@ $(document).ready(function(){
   // Rotate player
   $(document).keypress(function(e) {
     if(e.which == 97){ // A pressed
-      $.post('http://rtx_barbershops/rotaterightheading', JSON.stringify({
+      $.post('http://rorp_barbershop/rotaterightheading', JSON.stringify({
         value: 10
       }));
     }
     if(e.which == 101){ // E pressed
-      $.post('http://rtx_barbershops/rotateleftheading', JSON.stringify({
+      $.post('http://rorp_barbershop/rotateleftheading', JSON.stringify({
         value: 10
       }));
     }
@@ -125,7 +125,7 @@ $(document).ready(function(){
   // Zoom out camera for Barbers
   $('#tabs label').on('click', function(e){
     //e.preventDefault();
-    $.post('http://rtx_barbershops/zoom', JSON.stringify({
+    $.post('http://rorp_barbershop/zoom', JSON.stringify({
       zoom: $(this).attr('data-link')
     }));
   });

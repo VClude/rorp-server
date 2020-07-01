@@ -74,7 +74,7 @@ RegisterNUICallback('updateSkinSaveBarber', function(data)
 	if(v == true) then
 		local ped = GetPlayerPed(-1)
 			
-		TriggerServerEvent('rtx_barbershops:saveBarber', hair, haircolor, haircolor2, eyebrow, eyebrowopacity, beard, beardopacity, beardcolor, lipstick, lipstickcolor, lipstickopacity, blush, blushcolor, blushopacity, makeup, makeupcolor, makeupcolor2, makeupopacity)
+		TriggerServerEvent('rorp_barbershop:saveBarber', hair, haircolor, haircolor2, eyebrow, eyebrowopacity, beard, beardopacity, beardcolor, lipstick, lipstickcolor, lipstickopacity, blush, blushcolor, blushopacity, makeup, makeupcolor, makeupcolor2, makeupopacity)
 		
 		CloseBarberCreator()
 	else
@@ -169,12 +169,12 @@ local elements    = {}
 		if skin.sex == 0 then
 			SendNUIMessage({
 				openBarberCreator = enable,
-				gender = "muz"
+				gender = "male"
 			})
 		else
 			SendNUIMessage({
 				openBarberCreator = enable,
-				gender = "zena"
+				gender = "female"
 			})
 		end
 	end)
@@ -199,11 +199,6 @@ local elements    = {}
 		})
 	end
 end
-
-RegisterNetEvent('hud:loadMenuBarber')
-AddEventHandler('hud:loadMenuBarber', function()
-	ShowBarberCreator(true)
-end)
 
 -- Disable Controls
 Citizen.CreateThread(function()
@@ -503,44 +498,14 @@ function OpenSaveableMenuBarber(submitCb, cancelCb, restrict)
 	end, cancelCb, restrict)
 end
 
-AddEventHandler('esx_barberskin:getLastSkin', function(cb)
-	cb(lastSkinOld)
-end)
-
-AddEventHandler('esx_barberskin:setLastSkin', function(skin)
-	lastSkinOld = skin
-end)
-
-RegisterNetEvent('esx_barberskin:openMenuBarber')
-AddEventHandler('esx_barberskin:openMenuBarber', function(submitCb, cancelCb)
-	OpenMenuBarber(submitCb, cancelCb, nil)
-end)
-
-RegisterNetEvent('esx_barberskin:openRestrictedMenuBarber')
-AddEventHandler('esx_barberskin:openRestrictedMenuBarber', function(submitCb, cancelCb, restrict)
-	OpenMenuBarber(submitCb, cancelCb, restrict)
-end)
-
-RegisterNetEvent('esx_barberskin:openSaveableMenuBarber')
-AddEventHandler('esx_barberskin:openSaveableMenuBarber', function(submitCb, cancelCb)
+RegisterNetEvent('rorp_barbershop:openSaveableMenuBarber')
+AddEventHandler('rorp_barbershop:openSaveableMenuBarber', function(submitCb, cancelCb)
 	ShowBarberCreator(true)
-end)
-
-RegisterNetEvent('esx_barberskin:openSaveableRestrictedMenuBarber')
-AddEventHandler('esx_barberskin:openSaveableRestrictedMenuBarber', function(submitCb, cancelCb, restrict)
-	OpenSaveableMenuBarber(submitCb, cancelCb, restrict)
-end)
-
-RegisterNetEvent('esx_barberskin:requestSaveSkin')
-AddEventHandler('esx_barberskin:requestSaveSkin', function()
-	TriggerEvent('skinchanger:getSkin', function(skin)
-		TriggerServerEvent('esx_barberskin:responseSaveSkin', skin)
-	end)
 end)
 
 function OpenBarberShopMenu()
   
-  local price = 125
+  local price = Config.Price
   
   ESX.UI.Menu.CloseAll()
 
@@ -556,7 +521,7 @@ function OpenBarberShopMenu()
     },
     function (data, menu)
       if data.current.value == 'yes' then
-        TriggerServerEvent('rtx_barbershops:buycosmetics', price)
+        TriggerServerEvent('rorp_barbershop:buycosmetics', price)
       end
       menu.close()
     end,
@@ -567,13 +532,13 @@ function OpenBarberShopMenu()
 
 end
 
-AddEventHandler('rtx_barbershopsshop:hasEnteredMarker', function(zone)
+AddEventHandler('rorp_barbershop:hasEnteredMarker', function(zone)
 	CurrentAction     = 'shop_menu'
 	CurrentActionMsg  = _U('press_menu')
 	CurrentActionData = {}
 end)
 
-AddEventHandler('rtx_barbershopsshop:hasExitedMarker', function(zone)
+AddEventHandler('rorp_barbershop:hasExitedMarker', function(zone)
 	
 	ESX.UI.Menu.CloseAll()
 	CurrentAction = nil
@@ -637,12 +602,12 @@ Citizen.CreateThread(function()
 		if (isInMarker and not HasAlreadyEnteredMarker) or (isInMarker and LastZone ~= currentZone) then
 			HasAlreadyEnteredMarker = true
 			LastZone                = currentZone
-			TriggerEvent('rtx_barbershopsshop:hasEnteredMarker', currentZone)
+			TriggerEvent('rorp_barbershop:hasEnteredMarker', currentZone)
 		end
 
 		if not isInMarker and HasAlreadyEnteredMarker then
 			HasAlreadyEnteredMarker = false
-			TriggerEvent('rtx_barbershopsshop:hasExitedMarker', LastZone)
+			TriggerEvent('rorp_barbershop:hasExitedMarker', LastZone)
 		end
 
 	end

@@ -60,16 +60,6 @@ AddEventHandler("rorp_character:visibleplayer", function()
 	Visiblee()
 end)
 
--- RegisterNetEvent("charselect:register2")
--- AddEventHandler("charselect:register2", function(source)
---     Citizen.Wait(1000)
--- 	SetEntityCoords(PlayerPedId(), 409.42, -1001.14, -99.90, 0.0, 0.0, 0.0, true)
--- 	FreezeEntityPosition(PlayerPedId(), true)
---     TriggerEvent("charselect:animation2")
---     TriggerEvent("rtx_selector:camera")
--- 	Visible()
--- end)
-
 local heading = 360.00
 local signmodel = GetHashKey("prop_police_id_board")
 local textmodel = GetHashKey("prop_police_id_text")
@@ -123,37 +113,6 @@ AddEventHandler('rorp_character:camera2', function()
     SetCamActiveWithInterp(cam3, cam2, 5000, true, true)
 end)
 
-RegisterNetEvent('rtx_selector:camera3')
-AddEventHandler('rtx_selector:camera3', function()
-	local playerPed = GetPlayerPed(-1)
-	SetFocusEntity(playerPed)
-    local pos = coords
-	SetEntityCoords(GetPlayerPed(-1), pos.x, pos.y, pos.z)
-    DoScreenFadeIn(500)
-	FreezeEntityPosition(GetPlayerPed(-1), true)
-    cam = CreateCamWithParams("DEFAULT_SCRIPTED_CAMERA", -1355.93,-1487.78,520.75, 300.00,0.00,0.00, 100.00, false, 0)
-    SetCamActive(cam, true)
-    RenderScriptCams(true, false, 1, true, true)
-    Citizen.Wait(500)
-    cam5 = CreateCamWithParams("DEFAULT_SCRIPTED_CAMERA", -1355.93,-1487.78,520.75, 300.00,0.00,0.00, 100.00, false, 0)
-    PointCamAtCoord(cam5, pos.x,pos.y,pos.z+200)
-    SetCamActiveWithInterp(cam5, cam4, 900, true, true)
-    Citizen.Wait(900)
-    cam4 = CreateCamWithParams("DEFAULT_SCRIPTED_CAMERA", pos.x,pos.y,pos.z+200, 300.00,0.00,0.00, 100.00, false, 0)
-    PointCamAtCoord(cam4, pos.x,pos.y,pos.z+2)
-    SetCamActiveWithInterp(cam4, cam5, 3700, true, true)
-    Citizen.Wait(3700)
-    PlaySoundFrontend(-1, "Zoom_Out", "DLC_HEIST_PLANNING_BOARD_SOUNDS", 1)
-    RenderScriptCams(false, true, 500, true, true)
-    PlaySoundFrontend(-1, "CAR_BIKE_WHOOSH", "MP_LOBBY_SOUNDS", 1)
-    Citizen.Wait(500)
-    SetCamActive(cam4, false)
-    DestroyCam(cam4, true)
-	FreezeEntityPosition(GetPlayerPed(-1), false)
-	EnableAllControlActions(0)
-	Collision(false)
-end)
-
 RegisterNetEvent("rorp_character:animation")
 AddEventHandler("rorp_character:animation", function()
 	local ped = PlayerPedId()
@@ -196,51 +155,6 @@ AddEventHandler("rorp_character:animation", function()
 			DoScreenFadeOut(10)
 			ClearTimecycleModifier("scanline_cam_cheap")
 			TriggerEvent('rorp_character:phase1')
-        end
-	end
-end)
-
-RegisterNetEvent("charselect:animation2")
-AddEventHandler("charselect:animation2", function()
-	local ped = PlayerPedId()
-	local playerPed = GetPlayerPed()
-	enable = true
-	SetEntityHeading(PlayerPedId(), 350.0)
-	Citizen.Wait(2000) 
-    TriggerServerEvent("rorp_character:createsign") 
-    TriggerServerEvent("charselect:lastpos")
-	DoScreenFadeIn(1000)
-    AnimationIntro()
-    Citizen.Wait(1000)
-	SetCamActive(cam2, false)
-	TriggerEvent("rorp_character:camera2")
-	while enable == true do
-		if not notifytext == true then
-			notifytext = true
-			exports['mythic_notify']:PersistentAlert('start', '85848451521ddd', 'inform', 'Tekan [Enter] untuk memilih karakter', { ['background-color'] = '#000000' })
-		end
-		Citizen.Wait(1)
-        RequestAnimDict("mp_character_creation@customise@male_a")
-        TaskPlayAnim(PlayerPedId(), "mp_character_creation@customise@male_a", "loop", 8.0, -8.0, -1, 0, 1, 0, 0, 0)
-		FreezeEntityPosition(PlayerPedId(), true)
-        if IsControlJustReleased(1, 201) then
-			FreezeEntityPosition(GetPlayerPed(-1), false)
-			Citizen.Wait(200)
-			DestroyAllCams(true)
-			exports['mythic_notify']:PersistentAlert('end', '85848451521ddd')
-			RequestAnimDict("mp_character_creation@lineup@male_a")
-			TaskPlayAnim(PlayerPedId(), "mp_character_creation@lineup@male_a", "outro", 1.0, 1.0, 9000, 0, 1, 0, 0, 0)
-			Citizen.Wait(2800)
-			DeleteObject(SignProp1)
-			DeleteObject(SignProp2)
-			Citizen.Wait(5000)			
-			SetCamActive(cam3, false)
-			enable = false
-			DestroyCam(createdCamera, 0)
-			RenderScriptCams(0, 0, 1, 1, 1)
-			createdCamera = 0
-			ClearTimecycleModifier("scanline_cam_cheap")
-			TriggerEvent('rtx_selector:camera3')
         end
 	end
 end)
@@ -435,8 +349,8 @@ function CreateNamedRenderTargetForModel(name, model)
     return text
 end
 
-RegisterNetEvent("rorp_character:showmenu")
-AddEventHandler("rorp_character:showmenu", function()
+RegisterNetEvent("rorp_character:GoToAirport")
+AddEventHandler("rorp_character:GoToAirport", function()
     doAnim = false
     FreezeEntityPosition(GetPlayerPed(-1), true)
 	SetEntityCoords(PlayerPedId(), -1036.02, -2737.04, 19.2, 0.0, 0.0, 0.0, true)

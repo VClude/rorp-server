@@ -16,7 +16,6 @@ local Keys = {
 ESX = nil
 local isClotheCreatorOpened = false		-- Change this value to show/hide UI
 local cam = -1							-- Camera control
-local firstclothe = false
 local heading = 332.219879				-- Heading coord
 local zoom = "vetements"					-- Define which tab is shown first (Default: Head)
 local isCameraActive, isCameraActiveOld, lastSkinOld
@@ -3867,11 +3866,8 @@ function CloseClotheCreator()
 	RenderScriptCams(false, true, 500, true, true)
 	cam = nil
 	
-	if firstclothe == true then
-		Citizen.Wait(550)
-		TriggerEvent('rorp_character:showmenu')
-		firstclothe = false
-	end
+	Citizen.Wait(550)
+	TriggerEvent('rorp_character:GoToAirport')
 end
 
 function ShowClotheCreator(enable)
@@ -3948,7 +3944,6 @@ end
 
 RegisterNetEvent('rorp_core-clothes:loadMenuClothe')
 AddEventHandler('rorp_core-clothes:loadMenuClothe', function()
-	firstclothe = true
 	ShowClotheCreator(true)
 end)
 

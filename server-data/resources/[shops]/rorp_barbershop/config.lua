@@ -7,6 +7,8 @@ Config.MarkerSize   = {x = 1.5, y = 1.5, z = 1.0}
 Config.MarkerColor  = {r = 255, g = 102, b = 255}
 Config.MarkerType   = 27
 
+Config.Price = 125
+
 Config.Zones = {}
 
 Config.Shops = {

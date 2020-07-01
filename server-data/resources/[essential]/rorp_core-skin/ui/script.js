@@ -158,7 +158,7 @@ $(document).ready(function(){
   // Zoom out camera for clothes
   $('#tabs label').on('click', function(e){
     //e.preventDefault();
-    $.post('http://rtx_core/zoom', JSON.stringify({
+    $.post('http://rorp_core-clothe/zoom', JSON.stringify({
       zoom: $(this).attr('data-link')
     }));
   });
