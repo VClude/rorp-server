@@ -231,8 +231,7 @@ end
 
 
 RegisterCommand('hp', function()
-  local darah = GetEntityHealth(GetPlayerPed(-1))
-  if menuIsOpen == false and darah > 0 then
+  if menuIsOpen == false and not isDead then
     ESX.TriggerServerCallback('gcphone:getItemAmount', function(qtty)
       if qtty > 0 then
         TooglePhone()

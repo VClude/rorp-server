@@ -75,12 +75,13 @@ end)
 RegisterCommand('closeinv', function(source, args, raw)
     closeInventory()
 end)
+
 RegisterCommand('openinv', function()
-    local darah = GetEntityHealth(GetPlayerPed(-1))
-    if darah > 0 then
+    if not isDead then
         openInventory()
-      end
-  end)
+    end
+
+end)
   
 
 function closeInventory()
