@@ -1,3 +1,4 @@
+isDead = false
 ESX = nil
 
 local firstSpawn, PlayerLoaded = true, false
@@ -12,7 +13,8 @@ local inBedAnim = "ko_front"
 local getOutDict = 'switch@franklin@bed'
 local getOutAnim = 'sleep_getup_rubeyes'
 
-isDead, isSearched, medic = false, false, 0
+isSearched = false
+medic =  0
 
 Citizen.CreateThread(function()
 	while ESX == nil do
@@ -400,7 +402,7 @@ function RespawnPed(ped, coords, heading)
 
 	TriggerServerEvent('esx:onPlayerSpawn')
 	TriggerEvent('esx:onPlayerSpawn')
-	TriggerEvent('esx:onPlayerSpawn') -- compatibility with old scripts, will be removed soon
+	TriggerEvent('playerSpawned') -- compatibility with old scripts, will be removed soon
 end
 
 RegisterNetEvent('esx_phone:loaded')
