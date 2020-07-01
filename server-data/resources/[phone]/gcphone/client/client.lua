@@ -68,7 +68,11 @@ Citizen.CreateThread(function()
       -- if IsControlJustPressed(1, KeyOpenClose) and GetLastInputMethod(2) and not simmenuopen then
 		  --   TooglePhone()
       -- elseif IsControlJustPressed(1, KeySimMenu) and GetLastInputMethod(2) and not menuIsOpen then
-		  -- OpenSimMenu()			
+		  -- OpenSimMenu()
+			  
+								
+			 
+			
       -- end
       if menuIsOpen == true then
         for _, value in ipairs(KeyToucheCloseEvent) do
@@ -227,21 +231,15 @@ end
 
 
 RegisterCommand('hp', function()
-  if menuIsOpen == false and not isDead then
+  local darah = GetEntityHealth(GetPlayerPed(-1))
+  if menuIsOpen == false and darah > 0 then
     ESX.TriggerServerCallback('gcphone:getItemAmount', function(qtty)
       if qtty > 0 then
         TooglePhone()
       else
-        ESX.ShowNotification("Kamu tidak memiliki ~y~Handphone")
+        exports['mythic_notify']:DoHudText('error', 'Tidak memiliki handphone')
       end
     end, 'phone')
-  end
-end)
-
-RegisterNetEvent('gcphone:OpenPhone')
-AddEventHandler('gcphone:OpenPhone', function()
-  if menuIsOpen == false and not isDead then
-    TooglePhone()
   end
 end)
 
