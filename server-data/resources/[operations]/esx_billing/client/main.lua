@@ -49,7 +49,8 @@ function ShowBillsMenu()
 end
 
 RegisterCommand('showbills', function()
-	if not isDead and not ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'billing') then
+	local darah = GetEntityHealth(GetPlayerPed(-1))
+	if darah > 0 and not ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'billing') then
 		ShowBillsMenu()
 	end
 end, false)
