@@ -68,11 +68,7 @@ Citizen.CreateThread(function()
       -- if IsControlJustPressed(1, KeyOpenClose) and GetLastInputMethod(2) and not simmenuopen then
 		  --   TooglePhone()
       -- elseif IsControlJustPressed(1, KeySimMenu) and GetLastInputMethod(2) and not menuIsOpen then
-		  -- OpenSimMenu()
-			  
-								
-			 
-			
+		  -- OpenSimMenu()			
       -- end
       if menuIsOpen == true then
         for _, value in ipairs(KeyToucheCloseEvent) do
@@ -239,6 +235,13 @@ RegisterCommand('hp', function()
         ESX.ShowNotification("Kamu tidak memiliki ~y~Handphone")
       end
     end, 'phone')
+  end
+end)
+
+RegisterNetEvent('gcphone:OpenPhone')
+AddEventHandler('gcphone:OpenPhone', function()
+  if menuIsOpen == false and not isDead then
+    TooglePhone()
   end
 end)
 
@@ -683,6 +686,7 @@ function TooglePhone()
     PhonePlayOut()
   end
 end
+
 RegisterNUICallback('faketakePhoto', function(data, cb)
   menuIsOpen = false
   SendNUIMessage({show = false})

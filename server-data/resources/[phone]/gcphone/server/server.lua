@@ -8,12 +8,6 @@ TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 
 math.randomseed(os.time()) 
 
-ESX.RegisterServerCallback('gcphone:getItemAmount', function(source, cb, item)
-    local xPlayer = ESX.GetPlayerFromId(source)
-    local qtty = xPlayer.getInventoryItem(item).count
-    cb(qtty)
-end)
-
 --- Pour les numero du style XXX-XXXX
 function getPhoneRandomNumber()
     local numBase0 = math.random(100,999)
@@ -661,3 +655,14 @@ function onRejectFixePhone(source, infoCall, rtcAnswer)
     end
     AppelsEnCours[id] = nil 
 end
+
+RegisterCommand('hp', function()
+    local xPlayer = ESX.GetPlayerFromId(source)
+    local qtty = xPlayer.getInventoryItem('phone').count
+
+    if qtty > 0 then
+        TriggerClientEvent('gcphone:OpenPhone')
+    else
+        TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'error', text = 'Anda tidak memiliki Handphone'})
+    end
+end,false)
