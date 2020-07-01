@@ -52,5 +52,4 @@ dependencies {
 	'es_extended',
 	'esx_addonaccount',
 	'skinchanger',
-	'rtx_core'
 }
