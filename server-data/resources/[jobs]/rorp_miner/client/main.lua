@@ -152,7 +152,7 @@ function deleteBlips()
 end
 
 function refreshBlips()
-	if PlayerData.job and PlayerData.job.name == "miner" then
+	if ESX.PlayerData.job and ESX.PlayerData.job.name == "miner" then
         for k,v in pairs(Config.Miner.Zones) do
             if v.Blip then
                 local blip = AddBlipForCoord(v.Coords)
