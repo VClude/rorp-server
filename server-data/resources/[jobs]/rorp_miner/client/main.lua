@@ -249,7 +249,7 @@ AddEventHandler('rorp_miner:action', function(job, zone, zoneIndex)
 			end
 		end
 
-		if jobObject and spawnPoint and vehicle and ESX.Game.IsSpawnPointClear(spawnPoint.Coords, 5.0) then
+		if jobObject and spawnPoint and vehicle and ESX.Game.IsSpawnPointClear(spawnPoint.Coords, 5.0) and isPedOnFoot(PlayerPedId(), true) then
             spawnVehicle(spawnPoint, vehicle, zone.Caution)
 		else
 			ESX.ShowNotification('Spawn Blocked')
