@@ -76,10 +76,10 @@ Citizen.CreateThread(function()
 					end
 				end
 
-				-- if distance < v.Size.x then
-				-- 	letSleep, isInMarker, currentZone, currentZoneIndex = false, true, v, k
-				-- 	break
-				-- end
+				if distance < v.Size.x then
+					letSleep, isInMarker, currentZone, currentZoneIndex = false, true, v, k
+					break
+				end
 			end
 
 			-- if IsControlJustReleased(0, 38) and not menuIsShowed and isInMarker then
