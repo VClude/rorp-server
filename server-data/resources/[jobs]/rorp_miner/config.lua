@@ -8,7 +8,7 @@ Config.Miner = {
     Quary = {
 
         Blip = {
-            Coords = vector3(2972.1259765625, 2841.3889160156, 46.025562286377),
+            Coords = vector3(-597.27, 2093.56, 131.32),
             Name = "1. Pengambilan Batu",
             Sprite = 318,
             Display = 4,
