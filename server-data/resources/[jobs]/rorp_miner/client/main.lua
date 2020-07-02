@@ -41,7 +41,7 @@ AddEventHandler('esx:playerLoaded', function(xPlayer)
 	refreshBlips()
 end)
 
-AddEventHandler('esx_jobs:hasExitedMarker', function(zone)
+AddEventHandler('rorp_miner:hasExitedMarker', function()
 	hintToDisplay = nil
 	menuIsShowed = false
 	hintIsShowed = false
@@ -136,28 +136,10 @@ Citizen.CreateThread(function()
 
 			if not isInMarker and hasAlreadyEnteredMarker then
 				hasAlreadyEnteredMarker = false
-				TriggerEvent('esx_jobs:hasExitedMarker', currentZone)
+				TriggerEvent('rorp_miner:hasExitedMarker')
 			end
-		end
-
-		-- for k,v in pairs(Config.PublicZones) do
-		-- 	local distance = GetDistanceBetweenCoords(playerCoords, v.Pos.x, v.Pos.y, v.Pos.z, true)
-
-		-- 	if v.Marker ~= -1 and distance < Config.DrawDistance then
-		-- 		DrawMarker(v.Marker, v.Pos.x, v.Pos.y, v.Pos.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, v.Size.x, v.Size.y, v.Size.z, v.Color.r, v.Color.g, v.Color.b, 100, false, true, 2, false, nil, nil, false)
-		-- 		letSleep = false
-		-- 	end
-
-		-- 	if distance < v.Size.x / 2 then
-		-- 		letSleep, isInPublicMarker = false, true
-		-- 		ESX.ShowHelpNotification(v.Hint)
-
-		-- 		if IsControlJustReleased(0, 38) then
-		-- 			ESX.Game.Teleport(playerPed, v.Teleport)
-		-- 		end
-		-- 	end
-		-- end
-
+        end
+        
 		if letSleep then
 			Citizen.Wait(500)
 		end
@@ -188,4 +170,208 @@ function refreshBlips()
             table.insert(jobBlips, blip)
         end
     end
+end
+
+-- end function custom miner
+AddEventHandler('esx_jobs:action', function(job, zone, zoneIndex)
+	menuIsShowed = true
+	if zone.Type == 'cloakroom' then
+		OpenMenu()
+	-- elseif zone.Type == 'work' then
+	-- 	hintToDisplay = nil
+	-- 	hintIsShowed = false
+	-- 	local playerPed = PlayerPedId()
+		
+	-- 	if IsPedOnFoot(playerPed) then
+
+	-- 		onWork = true
+	-- 		local playerPed = PlayerPedId()
+	-- 		local coords = GetEntityCoords(playerPed)
+			
+	-- 		-- FreezeEntityPosition(playerPed, true)
+	-- 		SetCurrentPedWeapon(playerPed, GetHashKey('WEAPON_UNARMED'))
+	-- 		Citizen.Wait(200)
+
+	-- 		TriggerEvent("mythic_progressbar:client:progress", {
+	-- 			name = "on_working",
+	-- 			duration = zone.Duration,
+	-- 			label = "Tekan 'X' Untuk Cancel",
+	-- 			useWhileDead = false,
+	-- 			canCancel = true,
+	-- 			controlDisables = {
+	-- 				disableMovement = true,
+	-- 				disableCarMovement = true,
+	-- 				disableMouse = false,
+	-- 				disableCombat = true,
+	-- 			},
+	-- 			animation = {
+	-- 				task = "CODE_HUMAN_MEDIC_TIME_OF_DEATH",
+	-- 			},
+	-- 			prop = {
+
+	-- 			},
+	-- 		}, function(status)
+	-- 			if not status then
+	-- 				for k,v in pairs(zone.Item) do
+	-- 					TriggerServerEvent("esx_jobs:alljobReward",v.db_name,v.add, v.requires, v.remove)
+	-- 					onWork = false
+	-- 				end
+	-- 			end
+	-- 		end)
+	-- 	else
+	-- 		ESX.ShowNotification(_U('foot_work'))
+	-- 	end
+	-- elseif zone.Type == 'vehspawner' then
+	-- 	local jobObject, spawnPoint, vehicle = Config.Jobs[PlayerData.job.name]
+
+	-- 	print (Config.Jobs[PlayerData.job.name])
+
+	-- 	if jobObject then
+	-- 		for k,v in pairs(jobObject.Zones) do
+	-- 			if v.Type == 'vehspawnpt' and v.Spawner == zone.Spawner then
+	-- 				spawnPoint = v
+	-- 				spawner = v.Spawner
+	-- 				break
+	-- 			end
+				
+	-- 		end
+
+	-- 		for k,v in pairs(jobObject.Vehicles) do
+	-- 			if v.Spawner == zone.Spawner then
+	-- 				vehicle = v
+	-- 				break
+	-- 			end
+	-- 		end
+	-- 	end
+
+	-- 	if jobObject and spawnPoint and vehicle and ESX.Game.IsSpawnPointClear(spawnPoint.Pos, 5.0) then
+	-- 		spawnVehicle(spawnPoint, vehicle, zone.Caution)
+	-- 	else
+	-- 		ESX.ShowNotification(_U('spawn_blocked'))
+	-- 	end
+
+	-- elseif zone.Type == 'vehdelete' then
+	-- 	local jobObject = Config.Jobs[PlayerData.job.name]
+
+	-- 	if jobObject then
+	-- 		for k,v in pairs(jobObject.Zones) do
+	-- 			if v.Type == 'vehdelete' and v.Spawner == zone.Spawner then
+	-- 				local playerPed = PlayerPedId()
+
+	-- 				if IsPedInAnyVehicle(playerPed, false) then
+	-- 					local vehicle = GetVehiclePedIsIn(playerPed, false)
+	-- 					local plate = ESX.Math.Trim(GetVehicleNumberPlateText(vehicle))
+	-- 					local driverPed = GetPedInVehicleSeat(vehicle, -1)
+
+	-- 					if playerPed == driverPed then
+	-- 						if myPlate[plate] then
+	-- 							myPlate[plate] = nil
+
+	-- 							local vehicleHealth = GetVehicleEngineHealth(vehicleInCaseofDrop)
+
+	-- 							-- fix for people using cheat engine to modify engine health
+	-- 							if vehicleHealth > vehicleMaxHealth then
+	-- 								vehicleHealth = vehicleMaxHealth
+	-- 							end
+
+	-- 							local giveBack = ESX.Math.Round(vehicleHealth / vehicleMaxHealth, 2)
+
+	-- 							TriggerServerEvent('esx_jobs:caution', 'give_back', giveBack, 0, 0)
+	-- 							DeleteVehicle(GetVehiclePedIsIn(playerPed, false))
+
+	-- 							if v.Teleport ~= 0 then
+	-- 								ESX.Game.Teleport(playerPed, v.Teleport)
+	-- 							end
+
+	-- 							if vehicleObjInCaseofDrop.HasCaution then
+	-- 								vehicleInCaseofDrop, vehicleObjInCaseofDrop, vehicleMaxHealth = nil, nil, nil
+	-- 							end
+	-- 						end
+	-- 					else
+	-- 						ESX.ShowNotification(_U('not_your_vehicle'))
+	-- 					end
+
+	-- 				end
+
+	-- 				break
+	-- 			end
+	-- 		end
+	-- 	end
+	-- elseif zone.Type == 'delivery' then
+	-- 	if Blips.delivery then
+	-- 		RemoveBlip(Blips.delivery)
+	-- 		Blips.delivery = nil
+	-- 	end
+
+	-- 	hintToDisplay = nil
+	-- 	hintIsShowed = false
+	-- 	onWork = true
+	-- 	local playerPed = PlayerPedId()
+	-- 	local coords = GetEntityCoords(playerPed)
+
+	-- 	SetCurrentPedWeapon(playerPed, GetHashKey('WEAPON_UNARMED'))
+	-- 	Citizen.Wait(200)
+
+	-- 	TriggerEvent("mythic_progressbar:client:progress", {
+	-- 		name = "on_delivery",
+	-- 		duration = 20000,
+	-- 		label = "Tekan 'X' Untuk Cancel",
+	-- 		useWhileDead = false,
+	-- 		canCancel = true,
+	-- 		controlDisables = {
+	-- 			disableMovement = true,
+	-- 			disableCarMovement = true,
+	-- 			disableMouse = false,
+	-- 			disableCombat = true,
+	-- 		},
+	-- 		animation = {
+	-- 			task = "WORLD_HUMAN_CLIPBOARD",
+	-- 		},
+	-- 		prop = {
+				
+	-- 		},
+	-- 	}, function(status)
+	-- 		if not status then
+	-- 			for k,v in pairs(zone.Item) do
+	-- 				TriggerServerEvent("esx_jobs:alljobPayout",v.requires,v.price)
+	-- 				onWork = false
+	-- 			end
+	-- 		end
+	-- 	end)
+	end
+
+	--nextStep(zone.GPS)
+end)
+
+function OpenMenu()
+	ESX.UI.Menu.CloseAll()
+
+	ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'cloakroom', {
+		title    = 'Cloakroom',
+		align    = 'bottom-right',
+		elements = {
+			{label = 'Baju Kerja',     value = 'job_wear'},
+			{label = 'Baju Sipil', value = 'citizen_wear'}
+	}}, function(data, menu)
+		if data.current.value == 'citizen_wear' then
+			onDuty = false
+			ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin)
+				TriggerEvent('skinchanger:loadSkin', skin)
+			end)
+		elseif data.current.value == 'job_wear' then
+			onDuty = true
+			-- ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin, jobSkin)
+			-- 	if skin.sex == 0 then
+			-- 		TriggerEvent('skinchanger:loadClothes', skin, jobSkin.skin_male)
+			-- 	else
+			-- 		TriggerEvent('skinchanger:loadClothes', skin, jobSkin.skin_female)
+			-- 	end
+            -- end)
+            print ('ONDUTY WOI')
+		end
+
+		menu.close()
+	end, function(data, menu)
+		menu.close()
+	end)
 end

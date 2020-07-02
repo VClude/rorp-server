@@ -19,7 +19,7 @@ Config.Miner = {
             Size = {x = 3.0, y = 3.0, z = 1.0},
             Color = {r = 204, g = 204, b = 0},
             Type = 'cloakroom',
-            Hint = 'Tekan E',
+            Hint = 'Tekan ~INPUT_CONTEXT~ mengganti baju',
             Marker = 1,
         },
 
@@ -41,7 +41,7 @@ Config.Miner = {
             Size = {x = 5.0, y = 5.0, z = 1.0},
             Color = {r = 204, g = 204, b = 0},
             Type = 'work',
-            Hint = 'Tekan E',
+            Hint = 'Tekan ~INPUT_CONTEXT~ mencuci batu',
             Marker = 1,
         },
 
@@ -52,7 +52,7 @@ Config.Miner = {
             Size = {x = 5.0, y = 5.0, z = 1.0},
             Color = {r = 204, g = 204, b = 0},
             Type = 'work',
-            Hint = 'Tekan E',
+            Hint = 'Tekan ~INPUT_CONTEXT~ melebur batu',
             Marker = 1,
         },
 
@@ -63,7 +63,7 @@ Config.Miner = {
             Size = {x = 5.0, y = 5.0, z = 1.0},
             Color = {r = 204, g = 204, b = 0},
             Type = 'work',
-            Hint = 'Tekan E',
+            Hint = 'Tekan ~INPUT_CONTEXT~ menjual tembaga',
             Marker = 1,
         },
 
@@ -74,7 +74,7 @@ Config.Miner = {
             Size = {x = 5.0, y = 5.0, z = 1.0},
             Color = {r = 204, g = 204, b = 0},
             Type = 'work',
-            Hint = 'Tekan E',
+            Hint = 'Tekan ~INPUT_CONTEXT~ menjual besi',
             Marker = 1,
         },
 
@@ -85,7 +85,7 @@ Config.Miner = {
             Size = {x = 5.0, y = 5.0, z = 1.0},
             Color = {r = 204, g = 204, b = 0},
             Type = 'work',
-            Hint = 'Tekan E',
+            Hint = 'Tekan ~INPUT_CONTEXT~ menjual emas',
             Marker = 1,
         },
 
@@ -96,7 +96,7 @@ Config.Miner = {
             Size = {x = 5.0, y = 5.0, z = 1.0},
             Color = {r = 204, g = 204, b = 0},
             Type = 'work',
-            Hint = 'Tekan E',
+            Hint = 'Tekan ~INPUT_CONTEXT~ menjual berlian',
             Marker = 1,
         }
 
