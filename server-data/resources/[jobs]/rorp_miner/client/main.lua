@@ -69,7 +69,11 @@ Citizen.CreateThread(function()
 		local letSleep, playerPed = true, PlayerPedId()
         local playerCoords = GetEntityCoords(playerPed)
         
-        if PlayerData.job and PlayerData.job.name == 'miner' then
+        if PlayerData == nil then
+
+        elseif PlayerData.job == nil then
+            
+        else
 
             local zones = Config.Miner.Zones
 
