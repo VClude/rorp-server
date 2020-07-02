@@ -33,9 +33,8 @@ AddEventHandler('esx:playerLoaded', function(xPlayer)
 end)
 
 function deleteBlips()
-	for k,v in ipairs(jobBlips) do
+	for _,v in ipairs(jobBlips) do
 		RemoveBlip(v)
-		jobBlips[k] = nil
 	end
 end
 
