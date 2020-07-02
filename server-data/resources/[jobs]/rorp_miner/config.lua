@@ -15,7 +15,7 @@ Config.Miner = {
 			Scale = 0.8,
 			Colour = 5
 		}
-    }
+    },
 
     Washer = {
 
