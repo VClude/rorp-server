@@ -359,13 +359,13 @@ function OpenMenu()
 			end)
 		elseif data.current.value == 'job_wear' then
 			onDuty = true
-			-- ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin, jobSkin)
-			-- 	if skin.sex == 0 then
-			-- 		TriggerEvent('skinchanger:loadClothes', skin, jobSkin.skin_male)
-			-- 	else
-			-- 		TriggerEvent('skinchanger:loadClothes', skin, jobSkin.skin_female)
-			-- 	end
-            -- end)
+			ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin, jobSkin)
+				if skin.sex == 0 then
+					TriggerEvent('skinchanger:loadClothes', skin, jobSkin.skin_male)
+				else
+					TriggerEvent('skinchanger:loadClothes', skin, jobSkin.skin_female)
+				end
+            end)
             print ('ONDUTY WOI')
 		end
 
