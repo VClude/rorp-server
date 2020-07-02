@@ -165,7 +165,7 @@ end
 
 function refreshBlips()
 	if ESX.PlayerData.job and ESX.PlayerData.job.name == "miner" then
-        for k,v in pairs(Config.Miner.Blip) do
+        for k,v in pairs(Config.Miner.Zones) do
             local blip = AddBlipForCoord(v.Coords)
 
             SetBlipSprite  (blip, Config.BlipSprite)
@@ -175,7 +175,7 @@ function refreshBlips()
             SetBlipAsShortRange(blip, true)
 
             BeginTextCommandSetBlipName('STRING')
-            AddTextComponentSubstringPlayerName(v.Name)
+            AddTextComponentSubstringPlayerName(v.BlipName)
             EndTextCommandSetBlipName(blip)
 
             table.insert(jobBlips, blip)
