@@ -1,9 +1,9 @@
 Config              = {}
 Config.Locale       = 'id'
 
-Config.Blip.Sprite = 318
-Config.Blip.Scale = 0.8
-Config.Blip.Colour = 5
+Config.BlipSprite = 318
+Config.BlipScale = 0.8
+Config.BlipColour = 5
 
 
 -- Quarry Settings:
