@@ -156,22 +156,24 @@ function deleteBlips()
 end
 
 function refreshBlips()
-	if ESX.PlayerData.job and ESX.PlayerData.job.name == "miner" then
-        for k,v in pairs(Config.Miner.Zones) do
-            if v.Blip then
-                local blip = AddBlipForCoord(v.Coords)
+    if PlayerData.job then
+        if PlayerData.job.name == 'miner' then
+            for k,v in pairs(Config.Miner.Zones) do
+                if v.Blip then
+                    local blip = AddBlipForCoord(v.Coords)
 
-                SetBlipSprite  (blip, Config.BlipSprite)
-                SetBlipScale   (blip, Config.BlipScale)
-                SetBlipCategory(blip, 3)
-                SetBlipColour  (blip, Config.BlipColour)
-                SetBlipAsShortRange(blip, true)
+                    SetBlipSprite  (blip, Config.BlipSprite)
+                    SetBlipScale   (blip, Config.BlipScale)
+                    SetBlipCategory(blip, 3)
+                    SetBlipColour  (blip, Config.BlipColour)
+                    SetBlipAsShortRange(blip, true)
 
-                BeginTextCommandSetBlipName('STRING')
-                AddTextComponentSubstringPlayerName(v.BlipName)
-                EndTextCommandSetBlipName(blip)
+                    BeginTextCommandSetBlipName('STRING')
+                    AddTextComponentSubstringPlayerName(v.BlipName)
+                    EndTextCommandSetBlipName(blip)
 
-                table.insert(jobBlips, blip)
+                    table.insert(jobBlips, blip)
+                end
             end
         end
     end
