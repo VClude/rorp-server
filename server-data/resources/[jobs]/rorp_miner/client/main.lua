@@ -29,7 +29,7 @@ RegisterNetEvent('esx:setJob')
 AddEventHandler('esx:setJob', function(job)
 	PlayerData.job = job
 	onDuty = false
-	-- myPlate = {} -- loosing vehicle caution in case player changes job.
+	myPlate = {} -- loosing vehicle caution in case player changes job.
 	spawner = 0
 	deleteBlips()
 	refreshBlips()
@@ -250,8 +250,7 @@ AddEventHandler('rorp_miner:action', function(job, zone, zoneIndex)
 		end
 
 		if jobObject and spawnPoint and vehicle and ESX.Game.IsSpawnPointClear(spawnPoint.Coords, 5.0) then
-            -- spawnVehicle(spawnPoint, vehicle, zone.Caution)
-            print('Mobil Spawn')
+            spawnVehicle(spawnPoint, vehicle, zone.Caution)
 		else
 			ESX.ShowNotification('Spawn Blocked')
 		end
@@ -379,3 +378,36 @@ function OpenMenu()
 		menu.close()
 	end)
 end
+
+function spawnVehicle(spawnPoint, vehicle, vehicleCaution)
+	hintToDisplay = nil
+	hintIsShowed = false
+	TriggerServerEvent('rorp_miner:caution', 'take', vehicleCaution, spawnPoint, vehicle)
+end
+
+RegisterNetEvent('rorp_miner:spawnJobVehicle')
+AddEventHandler('rorp_miner:spawnJobVehicle', function(spawnPoint, vehicle)
+	local playerPed = PlayerPedId()
+	ESX.Game.SpawnVehicle(vehicle.Hash, spawnPoint.Coords, spawnPoint.Heading, function(spawnedVehicle)
+
+		-- if vehicle.Trailer ~= 'none' then
+		-- 	ESX.Game.SpawnVehicle(vehicle.Trailer, spawnPoint.Coords, spawnPoint.Heading, function(trailer)
+		-- 		AttachVehicleToTrailer(spawnedVehicle, trailer, 1.1)
+		-- 	end)
+		-- end
+
+		-- save & set plate
+		local plate = 'WORK' .. math.random(100, 900)
+		SetVehicleNumberPlateText(spawnedVehicle, plate)
+		myPlate[plate] = true
+		TriggerEvent("carremote:grantKeys", spawnedVehicle)
+
+		TaskWarpPedIntoVehicle(playerPed, spawnedVehicle, -1)
+
+		if vehicle.HasCaution then
+			vehicleInCaseofDrop = spawnedVehicle
+			vehicleObjInCaseofDrop = vehicle
+			vehicleMaxHealth = GetVehicleEngineHealth(spawnedVehicle)
+		end
+	end)
+end)

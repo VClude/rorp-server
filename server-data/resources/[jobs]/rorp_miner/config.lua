@@ -6,6 +6,8 @@ Config.BlipSprite = 318
 Config.BlipScale = 0.8
 Config.BlipColour = 5
 
+Config.MaxCaution = 10000
+
 
 -- Quarry Settings:
 Config.Miner = {
