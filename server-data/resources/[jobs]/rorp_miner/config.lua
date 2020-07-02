@@ -25,7 +25,7 @@ Config.Miner = {
 
         Office = {
 
-            Coords = vector3(892.35, -2172.77, 31.28),
+            Coords = {x = 892.35, y = -2172.77, z = 31.28},
             BlipName = "1. Kantor T.Batu",
             Blip = true,
             Size = {x = 3.0, y = 3.0, z = 1.0},
@@ -37,7 +37,7 @@ Config.Miner = {
 
         Quary = {
 
-            Coords = vector3(-597.27, 2093.56, 131.32),
+            Coords = {x = -597.27, y = 2093.56, z = 131.32},
             BlipName = "2. Pengambilan Batu",
             Blip = true,
             Size = {x = 5.0, y = 5.0, z = 1.0},
@@ -49,7 +49,7 @@ Config.Miner = {
 
         Washer = {
 
-            Coords = vector3(1966.31, 530.83, 160.73),
+            Coords = {x = 1966.31, y = 530.83, z = 160.73},
             BlipName = "3. Pencucian Batu",
             Blip = true,
             Size = {x = 5.0, y = 5.0, z = 1.0},
@@ -61,7 +61,7 @@ Config.Miner = {
 
         Foundry = {
 
-            Coords = vector3(1088.3415527344, -2001.4940185547, 30.879274368286),
+            Coords = {x = 1088.3415527344, y = -2001.4940185547, z = 30.879274368286},
             BlipName = "4. Peleburan Batu",
             Blip = true,
             Size = {x = 5.0, y = 5.0, z = 1.0},
@@ -73,7 +73,7 @@ Config.Miner = {
 
         CooperDelivery = {
 
-            Coords = vector3(-169.481, -2659.16, 5.00103),
+            Coords = {x = -169.481, y = -2659.16, z = 5.00103},
             BlipName = "5. Penjualan Tembaga",
             Blip = true,
             Size = {x = 5.0, y = 5.0, z = 1.0},
@@ -85,7 +85,7 @@ Config.Miner = {
 
         IronDelivery = {
 
-            Coords = vector3(-148.78, -1040.38, 26.27),
+            Coords = {x = -148.78, y = -1040.38, z = 26.27},
             BlipName = "6. Penjualan Besi",
             Blip = true,
             Size = {x = 5.0, y = 5.0, z = 1.0},
@@ -97,7 +97,7 @@ Config.Miner = {
 
         GoldDelivery = {
 
-            Coords = vector3(261.48, 207.35, 109.28),
+            Coords = {x = 261.48, y = 207.35, z = 109.28},
             BlipName = "7. Penjualan Emas",
             Blip = true,
             Size = {x = 5.0, y = 5.0, z = 1.0},
@@ -109,7 +109,7 @@ Config.Miner = {
 
         DiamondDelivery = {
 
-            Coords = vector3(-621.04, -228.53, 37.05),
+            Coords = {x = -621.04, y = -228.53, z = 37.05},
             BlipName = "8. Penjualan Berlian",
             Blip = true,
             Size = {x = 5.0, y = 5.0, z = 1.0},
@@ -121,7 +121,7 @@ Config.Miner = {
 
         VehicleSpawner = {
 
-            Coords = vector3(884.86, -2176.51, 29.51),
+            Coords = {x = 884.86, y = -2176.51, z = 29.51},
             Size = {x = 5.0, y = 5.0, z = 1.0},
             Color = {r = 204, g = 204, b = 0},
             Marker = 1,
@@ -135,7 +135,7 @@ Config.Miner = {
             
         VehicleSpawnPoint = {
 
-            Coords = vector3(879.55, -2189.79, 29.51),
+            Coords = {x = 879.55, y = -2189.79, z = 29.51},
             Size = {x = 5.0, y = 5.0, z = 1.0},
             Marker = -1,
             Blip = false,
@@ -147,7 +147,7 @@ Config.Miner = {
             
         VehicleDeletePoint = {
 
-            Pos = vector3(881.93, -2198.01, 29.51),
+            Pos = {x = 881.93, y = -2198.01, z = 29.51},
             Size = {x = 5.0, y = 5.0, z = 1.0},
             Color = {r = 255, g = 0, b = 0},
             Marker = 1,
