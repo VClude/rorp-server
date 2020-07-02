@@ -37,7 +37,7 @@ end)
 
 RegisterNetEvent('esx:playerLoaded')
 AddEventHandler('esx:playerLoaded', function(xPlayer)
-	PlayerData = xPlayer
+	ESX.PlayerData = xPlayer
 	refreshBlips()
 end)
 
