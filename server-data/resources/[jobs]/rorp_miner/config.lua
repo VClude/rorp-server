@@ -6,16 +6,30 @@ Config.Locale       = 'id'
 Config.Miner = {
 
     Quary = {
-        
+
         Blip = {
             Coords = vector3(2972.1259765625, 2841.3889160156, 46.025562286377),
-            Name = "Quarry",
+            Name = "1. Pengambilan Batu",
             Sprite = 318,
             Display = 4,
 			Scale = 0.8,
 			Colour = 5
 		}
     }
+
+    Washer = {
+
+        Blip = {
+            Coords = vector3(1966.31, 530.83, 160.73),
+            Name = "2. Pencucian Batu",
+            Sprite = 318,
+            Display = 4,
+			Scale = 0.8,
+			Colour = 5
+		}
+    }
+
+
 }
 
 -- Mining Spots:

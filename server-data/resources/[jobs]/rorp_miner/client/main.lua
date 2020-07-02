@@ -1,6 +1,7 @@
 ESX = nil
 
 local jobBlips = {}
+local onDuty = false
 
 Citizen.CreateThread(function()
 	while ESX == nil do
@@ -57,3 +58,4 @@ function refreshBlips()
         end
     end
 end
+
