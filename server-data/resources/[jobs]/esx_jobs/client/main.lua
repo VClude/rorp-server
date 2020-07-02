@@ -237,7 +237,6 @@ function DrawText3Ds(x,y,z, text)
 end
 
 -- end function custom miner
-
 AddEventHandler('esx_jobs:action', function(job, zone, zoneIndex)
 	menuIsShowed = true
 	if zone.Type == 'cloakroom' then

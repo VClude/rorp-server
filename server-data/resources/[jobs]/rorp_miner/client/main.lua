@@ -65,7 +65,7 @@ end)
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
-		local zones, currentZone, isInMarker = {}
+		local zones, currentZone, currentZoneIndex, isInMarker = {}
 		local letSleep, playerPed = true, PlayerPedId()
         local playerCoords = GetEntityCoords(playerPed)
         
@@ -84,15 +84,14 @@ Citizen.CreateThread(function()
 				end
 
 				if distance < v.Size.x then
-					letSleep, isInMarker, currentZone = false, true, v
+					letSleep, isInMarker, currentZone, currentZoneIndex = false, true, v, k
 					break
 				end
 			end
 
 			if IsControlJustReleased(0, 38) and not menuIsShowed and isInMarker then
                 if onDuty or currentZone.Type == 'cloakroom' then
-                    print(currentZone.Type)
-					-- TriggerEvent('esx_jobs:action', PlayerData.job.name, currentZone, currentZoneIndex)
+					TriggerEvent('esx_jobs:action', PlayerData.job.name, currentZone, currentZoneIndex)
 				end
 			end
 
