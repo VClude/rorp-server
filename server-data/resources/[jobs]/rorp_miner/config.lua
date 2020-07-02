@@ -10,12 +10,24 @@ Config.BlipColour = 5
 -- Quarry Settings:
 Config.Miner = {
 
+    Vehicles = {
+
+        Truck = {
+            Spawner = 1,
+            Hash = 'rubble',
+            Trailer = 'none',
+            HasCaution = true
+        }
+
+	},
+
     Zones = {
 
         Office = {
 
             Coords = vector3(892.35, -2172.77, 31.28),
             BlipName = "1. Kantor T.Batu",
+            Blip = true,
             Size = {x = 3.0, y = 3.0, z = 1.0},
             Color = {r = 204, g = 204, b = 0},
             Type = 'cloakroom',
@@ -27,6 +39,7 @@ Config.Miner = {
 
             Coords = vector3(-597.27, 2093.56, 131.32),
             BlipName = "2. Pengambilan Batu",
+            Blip = true,
             Size = {x = 5.0, y = 5.0, z = 1.0},
             Color = {r = 204, g = 204, b = 0},
             Type = 'work',
@@ -38,6 +51,7 @@ Config.Miner = {
 
             Coords = vector3(1966.31, 530.83, 160.73),
             BlipName = "3. Pencucian Batu",
+            Blip = true,
             Size = {x = 5.0, y = 5.0, z = 1.0},
             Color = {r = 204, g = 204, b = 0},
             Type = 'work',
@@ -49,6 +63,7 @@ Config.Miner = {
 
             Coords = vector3(1088.3415527344, -2001.4940185547, 30.879274368286),
             BlipName = "4. Peleburan Batu",
+            Blip = true,
             Size = {x = 5.0, y = 5.0, z = 1.0},
             Color = {r = 204, g = 204, b = 0},
             Type = 'work',
@@ -60,6 +75,7 @@ Config.Miner = {
 
             Coords = vector3(-169.481, -2659.16, 5.00103),
             BlipName = "5. Penjualan Tembaga",
+            Blip = true,
             Size = {x = 5.0, y = 5.0, z = 1.0},
             Color = {r = 204, g = 204, b = 0},
             Type = 'work',
@@ -71,6 +87,7 @@ Config.Miner = {
 
             Coords = vector3(-148.78, -1040.38, 26.27),
             BlipName = "6. Penjualan Besi",
+            Blip = true,
             Size = {x = 5.0, y = 5.0, z = 1.0},
             Color = {r = 204, g = 204, b = 0},
             Type = 'work',
@@ -82,6 +99,7 @@ Config.Miner = {
 
             Coords = vector3(261.48, 207.35, 109.28),
             BlipName = "7. Penjualan Emas",
+            Blip = true,
             Size = {x = 5.0, y = 5.0, z = 1.0},
             Color = {r = 204, g = 204, b = 0},
             Type = 'work',
@@ -93,15 +111,55 @@ Config.Miner = {
 
             Coords = vector3(-621.04, -228.53, 37.05),
             BlipName = "8. Penjualan Berlian",
+            Blip = true,
             Size = {x = 5.0, y = 5.0, z = 1.0},
             Color = {r = 204, g = 204, b = 0},
             Type = 'work',
             Hint = 'Tekan ~INPUT_CONTEXT~ menjual berlian',
             Marker = 1,
+        },
+
+        VehicleSpawner = {
+
+            Coords = vector3(884.86, -2176.51, 29.51),
+            Size = {x = 5.0, y = 5.0, z = 1.0},
+            Color = {r = 204, g = 204, b = 0},
+            Marker = 1,
+            Blip = false,
+            Name = _U('spawn_veh'),
+            Type = 'vehspawner',
+            Spawner = 1,
+            Hint = 'Tekan ~INPUT_CONTEXT~ mengambil kendaraan',
+            Caution = 2000,
+        },
+            
+        VehicleSpawnPoint = {
+
+            Pos = {x = 879.55, y = -2189.79, z = 29.51},
+            Size = {x = 5.0, y = 5.0, z = 1.0},
+            Marker = -1,
+            Blip = false,
+            Name = _U('service_vh'),
+            Type = 'vehspawnpt',
+            Spawner = 1,
+            Heading = 90.1,
+        },
+            
+        VehicleDeletePoint = {
+
+            Pos = {x = 881.93, y = -2198.01, z = 29.51},
+            Size = {x = 5.0, y = 5.0, z = 1.0},
+            Color = {r = 255, g = 0, b = 0},
+            Marker = 1,
+            Blip = false,
+            Name = _U('return_vh'),
+            Type = 'vehdelete',
+            Hint = 'Tekan ~INPUT_CONTEXT~ mengembalikan kendaraan',
+            Spawner = 1,
+            Caution = 2000,
+            Teleport = 0
         }
-
     }
-
 }
 
 -- Mining Spots:

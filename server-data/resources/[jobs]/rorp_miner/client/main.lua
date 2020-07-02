@@ -28,9 +28,9 @@ end)
 RegisterNetEvent('esx:setJob')
 AddEventHandler('esx:setJob', function(job)
 	ESX.PlayerData.job = job
-	-- onDuty = false
+	onDuty = false
 	-- myPlate = {} -- loosing vehicle caution in case player changes job.
-	-- spawner = 0
+	spawner = 0
 	deleteBlips()
 	refreshBlips()
 end)
@@ -91,7 +91,7 @@ Citizen.CreateThread(function()
 
 			if IsControlJustReleased(0, 38) and not menuIsShowed and isInMarker then
                 if onDuty or currentZone.Type == 'cloakroom' then
-					TriggerEvent('esx_jobs:action', PlayerData.job.name, currentZone, currentZoneIndex)
+					TriggerEvent('rorp_miner:action', ESX.PlayerData.job.name, currentZone, currentZoneIndex)
 				end
 			end
 
@@ -154,25 +154,27 @@ end
 function refreshBlips()
 	if ESX.PlayerData.job and ESX.PlayerData.job.name == "miner" then
         for k,v in pairs(Config.Miner.Zones) do
-            local blip = AddBlipForCoord(v.Coords)
+            if v.Blip then
+                local blip = AddBlipForCoord(v.Coords)
 
-            SetBlipSprite  (blip, Config.BlipSprite)
-            SetBlipScale   (blip, Config.BlipScale)
-            SetBlipCategory(blip, 3)
-            SetBlipColour  (blip, Config.BlipColour)
-            SetBlipAsShortRange(blip, true)
+                SetBlipSprite  (blip, Config.BlipSprite)
+                SetBlipScale   (blip, Config.BlipScale)
+                SetBlipCategory(blip, 3)
+                SetBlipColour  (blip, Config.BlipColour)
+                SetBlipAsShortRange(blip, true)
 
-            BeginTextCommandSetBlipName('STRING')
-            AddTextComponentSubstringPlayerName(v.BlipName)
-            EndTextCommandSetBlipName(blip)
+                BeginTextCommandSetBlipName('STRING')
+                AddTextComponentSubstringPlayerName(v.BlipName)
+                EndTextCommandSetBlipName(blip)
 
-            table.insert(jobBlips, blip)
+                table.insert(jobBlips, blip)
+            end
         end
     end
 end
 
 -- end function custom miner
-AddEventHandler('esx_jobs:action', function(job, zone, zoneIndex)
+AddEventHandler('rorp_miner:action', function(job, zone, zoneIndex)
 	menuIsShowed = true
 	if zone.Type == 'cloakroom' then
 		OpenMenu()
@@ -220,82 +222,81 @@ AddEventHandler('esx_jobs:action', function(job, zone, zoneIndex)
 	-- 	else
 	-- 		ESX.ShowNotification(_U('foot_work'))
 	-- 	end
-	-- elseif zone.Type == 'vehspawner' then
-	-- 	local jobObject, spawnPoint, vehicle = Config.Jobs[PlayerData.job.name]
+	elseif zone.Type == 'vehspawner' then
+		local jobObject, spawnPoint, vehicle = Config.Miner
 
-	-- 	print (Config.Jobs[PlayerData.job.name])
-
-	-- 	if jobObject then
-	-- 		for k,v in pairs(jobObject.Zones) do
-	-- 			if v.Type == 'vehspawnpt' and v.Spawner == zone.Spawner then
-	-- 				spawnPoint = v
-	-- 				spawner = v.Spawner
-	-- 				break
-	-- 			end
+		if jobObject then
+			for k,v in pairs(jobObject.Zones) do
+				if v.Type == 'vehspawnpt' and v.Spawner == zone.Spawner then
+					-- spawnPoint = v
+                    -- spawner = v.Spawner
+                    print('spawner')
+					break
+				end
 				
-	-- 		end
+			end
 
-	-- 		for k,v in pairs(jobObject.Vehicles) do
-	-- 			if v.Spawner == zone.Spawner then
-	-- 				vehicle = v
-	-- 				break
-	-- 			end
-	-- 		end
-	-- 	end
+			for k,v in pairs(jobObject.Vehicles) do
+				if v.Spawner == zone.Spawner then
+					vehicle = v
+					break
+				end
+			end
+		end
 
-	-- 	if jobObject and spawnPoint and vehicle and ESX.Game.IsSpawnPointClear(spawnPoint.Pos, 5.0) then
-	-- 		spawnVehicle(spawnPoint, vehicle, zone.Caution)
-	-- 	else
-	-- 		ESX.ShowNotification(_U('spawn_blocked'))
-	-- 	end
+		if jobObject and spawnPoint and vehicle and ESX.Game.IsSpawnPointClear(spawnPoint.Pos, 5.0) then
+			spawnVehicle(spawnPoint, vehicle, zone.Caution)
+		else
+			ESX.ShowNotification(_U('spawn_blocked'))
+		end
 
-	-- elseif zone.Type == 'vehdelete' then
-	-- 	local jobObject = Config.Jobs[PlayerData.job.name]
+	elseif zone.Type == 'vehdelete' then
+		local jobObject = Config.Jobs[PlayerData.job.name]
 
-	-- 	if jobObject then
-	-- 		for k,v in pairs(jobObject.Zones) do
-	-- 			if v.Type == 'vehdelete' and v.Spawner == zone.Spawner then
-	-- 				local playerPed = PlayerPedId()
+		if jobObject then
+			for k,v in pairs(jobObject.Zones) do
+				if v.Type == 'vehdelete' and v.Spawner == zone.Spawner then
+					local playerPed = PlayerPedId()
 
-	-- 				if IsPedInAnyVehicle(playerPed, false) then
-	-- 					local vehicle = GetVehiclePedIsIn(playerPed, false)
-	-- 					local plate = ESX.Math.Trim(GetVehicleNumberPlateText(vehicle))
-	-- 					local driverPed = GetPedInVehicleSeat(vehicle, -1)
+					if IsPedInAnyVehicle(playerPed, false) then
+						local vehicle = GetVehiclePedIsIn(playerPed, false)
+						local plate = ESX.Math.Trim(GetVehicleNumberPlateText(vehicle))
+						local driverPed = GetPedInVehicleSeat(vehicle, -1)
 
-	-- 					if playerPed == driverPed then
-	-- 						if myPlate[plate] then
-	-- 							myPlate[plate] = nil
+						if playerPed == driverPed then
+							if myPlate[plate] then
+								myPlate[plate] = nil
 
-	-- 							local vehicleHealth = GetVehicleEngineHealth(vehicleInCaseofDrop)
+								local vehicleHealth = GetVehicleEngineHealth(vehicleInCaseofDrop)
 
-	-- 							-- fix for people using cheat engine to modify engine health
-	-- 							if vehicleHealth > vehicleMaxHealth then
-	-- 								vehicleHealth = vehicleMaxHealth
-	-- 							end
+								-- fix for people using cheat engine to modify engine health
+								if vehicleHealth > vehicleMaxHealth then
+									vehicleHealth = vehicleMaxHealth
+								end
 
-	-- 							local giveBack = ESX.Math.Round(vehicleHealth / vehicleMaxHealth, 2)
+								local giveBack = ESX.Math.Round(vehicleHealth / vehicleMaxHealth, 2)
 
-	-- 							TriggerServerEvent('esx_jobs:caution', 'give_back', giveBack, 0, 0)
-	-- 							DeleteVehicle(GetVehiclePedIsIn(playerPed, false))
+								TriggerServerEvent('esx_jobs:caution', 'give_back', giveBack, 0, 0)
+								DeleteVehicle(GetVehiclePedIsIn(playerPed, false))
 
-	-- 							if v.Teleport ~= 0 then
-	-- 								ESX.Game.Teleport(playerPed, v.Teleport)
-	-- 							end
+								if v.Teleport ~= 0 then
+									ESX.Game.Teleport(playerPed, v.Teleport)
+								end
 
-	-- 							if vehicleObjInCaseofDrop.HasCaution then
-	-- 								vehicleInCaseofDrop, vehicleObjInCaseofDrop, vehicleMaxHealth = nil, nil, nil
-	-- 							end
-	-- 						end
-	-- 					else
-	-- 						ESX.ShowNotification(_U('not_your_vehicle'))
-	-- 					end
+								if vehicleObjInCaseofDrop.HasCaution then
+									vehicleInCaseofDrop, vehicleObjInCaseofDrop, vehicleMaxHealth = nil, nil, nil
+								end
+							end
+						else
+							ESX.ShowNotification(_U('not_your_vehicle'))
+						end
 
-	-- 				end
+					end
 
-	-- 				break
-	-- 			end
-	-- 		end
-	-- 	end
+					break
+				end
+			end
+		end
 	-- elseif zone.Type == 'delivery' then
 	-- 	if Blips.delivery then
 	-- 		RemoveBlip(Blips.delivery)
@@ -366,9 +367,7 @@ function OpenMenu()
 					TriggerEvent('skinchanger:loadClothes', skin, jobSkin.skin_female)
 				end
             end)
-            print ('ONDUTY WOI')
 		end
-
 		menu.close()
 	end, function(data, menu)
 		menu.close()
