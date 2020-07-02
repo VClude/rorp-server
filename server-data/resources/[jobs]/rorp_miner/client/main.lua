@@ -18,7 +18,7 @@ end)
 
 RegisterNetEvent('esx:setJob')
 AddEventHandler('esx:setJob', function(job)
-	PlayerData.job = job
+	ESX.PlayerData.job = job
 	-- onDuty = false
 	-- myPlate = {} -- loosing vehicle caution in case player changes job.
 	-- spawner = 0
