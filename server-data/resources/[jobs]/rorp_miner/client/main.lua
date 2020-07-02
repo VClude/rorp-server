@@ -1,7 +1,15 @@
 ESX = nil
 
 local jobBlips = {}
-local onDuty = false
+local menuIsShowed, hintIsShowed, hintToDisplay, hasAlreadyEnteredMarker, isInMarker, vehicleObjInCaseofDrop, vehicleInCaseofDrop, vehicleMaxHealth
+local PlayerData, Blips, JobBlips, myPlate, onDuty, spawner = {}, {}, {}, {}, true, 0
+
+local PlayerData = nil
+local currentlyMining = false
+local currentlyWashing = false
+local currentlySmelting = false
+local currentlySelling = false
+local onWork = false
 
 Citizen.CreateThread(function()
 	while ESX == nil do
@@ -33,6 +41,122 @@ AddEventHandler('esx:playerLoaded', function(xPlayer)
 	refreshBlips()
 end)
 
+-- Show top left hint
+Citizen.CreateThread(function()
+	while true do
+		Citizen.Wait(0)
+
+		if hintIsShowed and hintToDisplay then
+			ESX.ShowHelpNotification(hintToDisplay)
+		else
+			Citizen.Wait(500)
+		end
+	end
+end)
+
+-- -- Draw markers (only if on duty and the player's job ones)
+-- Citizen.CreateThread(function()
+-- 	while true do
+-- 		Citizen.Wait(0)
+-- 		local zones, currentZone, currentZoneIndex, isInMarker = {}
+-- 		local letSleep, playerPed = true, PlayerPedId()
+-- 		local playerCoords = GetEntityCoords(playerPed)
+-- 		if PlayerData == nil then
+
+-- 		elseif ESX.PlayerData.job == nil then
+
+-- 		else
+
+-- 			for k,v in pairs(zones) do
+-- 				local distance = GetDistanceBetweenCoords(playerCoords, v.Pos.x, v.Pos.y, v.Pos.z, true)
+
+-- 				if onDuty or v.Type == 'cloakroom' then
+-- 					if(v.Marker ~= -1 and distance < Config.DrawDistance) then
+-- 						letSleep = false
+-- 						DrawMarker(v.Marker, v.Pos.x, v.Pos.y, v.Pos.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, v.Size.x, v.Size.y, v.Size.z, v.Color.r, v.Color.g, v.Color.b, 100, false, true, 2, false, nil, nil, false)
+-- 					end
+-- 				end
+
+-- 				if distance < v.Size.x then
+-- 					letSleep, isInMarker, currentZone, currentZoneIndex = false, true, v, k
+-- 					break
+-- 				end
+-- 			end
+
+-- 			if IsControlJustReleased(0, 38) and not menuIsShowed and isInMarker then
+-- 				if onDuty or currentZone.Type == 'cloakroom' or PlayerData.job.name == 'reporter' then
+-- 					TriggerEvent('esx_jobs:action', PlayerData.job.name, currentZone, currentZoneIndex)
+-- 				end
+-- 			end
+
+-- 			-- hide or show top left zone hints
+-- 			if isInMarker and not menuIsShowed then
+-- 				hintIsShowed = true
+-- 				if (onDuty or currentZone.Type == 'cloakroom' or PlayerData.job.name == 'reporter') and currentZone.Type ~= 'vehdelete' then
+-- 					hintToDisplay = currentZone.Hint
+-- 					hintIsShowed = true
+-- 				elseif currentZone.Type == 'vehdelete' and (onDuty or PlayerData.job.name == 'reporter') then
+-- 					local playerPed = PlayerPedId()
+
+-- 					if IsPedInAnyVehicle(playerPed, false) then
+-- 						local vehicle = GetVehiclePedIsIn(playerPed, false)
+-- 						local driverPed = GetPedInVehicleSeat(vehicle, -1)
+-- 						local plate = ESX.Math.Trim(GetVehicleNumberPlateText(vehicle))
+
+-- 						if playerPed == driverPed then
+-- 							if myPlate[plate] then
+-- 								hintToDisplay = currentZone.Hint
+-- 							end
+-- 						else
+-- 							hintToDisplay = _U('not_your_vehicle')
+-- 						end
+-- 					else
+-- 						hintToDisplay = _U('in_vehicle')
+-- 					end
+-- 					hintIsShowed = true
+-- 				elseif onDuty and currentZone.Spawner ~= spawner then
+-- 					hintToDisplay = _U('wrong_point')
+-- 					hintIsShowed = true
+-- 				else
+-- 					hintToDisplay = nil
+-- 					hintIsShowed = false
+-- 				end
+-- 			end
+
+-- 			if isInMarker and not hasAlreadyEnteredMarker then
+-- 				hasAlreadyEnteredMarker = true
+-- 			end
+
+-- 			if not isInMarker and hasAlreadyEnteredMarker then
+-- 				hasAlreadyEnteredMarker = false
+-- 				TriggerEvent('esx_jobs:hasExitedMarker', currentZone)
+-- 			end
+-- 		end
+
+-- 		for k,v in pairs(Config.PublicZones) do
+-- 			local distance = GetDistanceBetweenCoords(playerCoords, v.Pos.x, v.Pos.y, v.Pos.z, true)
+
+-- 			if v.Marker ~= -1 and distance < Config.DrawDistance then
+-- 				DrawMarker(v.Marker, v.Pos.x, v.Pos.y, v.Pos.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, v.Size.x, v.Size.y, v.Size.z, v.Color.r, v.Color.g, v.Color.b, 100, false, true, 2, false, nil, nil, false)
+-- 				letSleep = false
+-- 			end
+
+-- 			if distance < v.Size.x / 2 then
+-- 				letSleep, isInPublicMarker = false, true
+-- 				ESX.ShowHelpNotification(v.Hint)
+
+-- 				if IsControlJustReleased(0, 38) then
+-- 					ESX.Game.Teleport(playerPed, v.Teleport)
+-- 				end
+-- 			end
+-- 		end
+
+-- 		if letSleep then
+-- 			Citizen.Wait(500)
+-- 		end
+-- 	end
+-- end)
+
 function deleteBlips()
 	for _,v in ipairs(jobBlips) do
 		RemoveBlip(v)
@@ -41,17 +165,17 @@ end
 
 function refreshBlips()
 	if ESX.PlayerData.job and ESX.PlayerData.job.name == "miner" then
-        for k,v in pairs(Config.Miner) do
-            local blip = AddBlipForCoord(v.Blip.Coords)
+        for k,v in pairs(Config.Miner.Blip) do
+            local blip = AddBlipForCoord(v.Coords)
 
-            SetBlipSprite  (blip, v.Blip.Sprite)
-            SetBlipScale   (blip, v.Blip.Scale)
+            SetBlipSprite  (blip, v.Sprite)
+            SetBlipScale   (blip, v.Scale)
             SetBlipCategory(blip, 3)
-            SetBlipColour  (blip, v.Blip.Colour)
+            SetBlipColour  (blip, v.Colour)
             SetBlipAsShortRange(blip, true)
 
             BeginTextCommandSetBlipName('STRING')
-            AddTextComponentSubstringPlayerName(v.Blip.Name)
+            AddTextComponentSubstringPlayerName(v.Name)
             EndTextCommandSetBlipName(blip)
 
             table.insert(jobBlips, blip)
@@ -59,3 +183,8 @@ function refreshBlips()
     end
 end
 
+function spawnVehicle(spawnPoint, vehicle, vehicleCaution)
+	hintToDisplay = nil
+	hintIsShowed = false
+	TriggerServerEvent('esx_jobs:caution', 'take', vehicleCaution, spawnPoint, vehicle)
+end

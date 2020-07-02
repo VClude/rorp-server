@@ -5,30 +5,93 @@ Config.Locale       = 'id'
 -- Quarry Settings:
 Config.Miner = {
 
-    Quary = {
+    Blip = {
 
-        Blip = {
-            Coords = vector3(-597.27, 2093.56, 131.32),
-            Name = "1. Pengambilan Batu",
+        Office = {
+
+            Coords = vector3(892.35, -2172.77, 31.28),
+            Name = "1. Kantor T.Batu",
             Sprite = 318,
             Display = 4,
-			Scale = 0.8,
-			Colour = 5
-		}
+            Scale = 0.8,
+            Colour = 5
+        },
+
+        Quary = {
+
+            Coords = vector3(-597.27, 2093.56, 131.32),
+            Name = "2. Pengambilan Batu",
+            Sprite = 318,
+            Display = 4,
+            Scale = 0.8,
+            Colour = 5
+        },
+
+        Washer = {
+
+            Coords = vector3(1088.3415527344, -2001.4940185547, 30.879274368286),
+            Name = "3. Pencucian Batu",
+            Sprite = 318,
+            Display = 4,
+            Scale = 0.8,
+            Colour = 5
+        },
+
+        Foundry = {
+
+            Coords = vector3(1966.31, 530.83, 160.73),
+            Name = "4. Peleburan Batu",
+            Sprite = 318,
+            Display = 4,
+            Scale = 0.8,
+            Colour = 5
+        },
+
+        CooperDelivery = {
+
+            Coords = vector3(1966.31, 530.83, 160.73),
+            Name = "5. Penjualan Tembaga",
+            Sprite = 318,
+            Display = 4,
+            Scale = 0.8,
+            Colour = 5
+        },
+
+        IronDelivery = {
+
+            Coords = vector3(1966.31, 530.83, 160.73),
+            Name = "6. Penjualan Besi",
+            Sprite = 318,
+            Display = 4,
+            Scale = 0.8,
+            Colour = 5
+        },
+
+        GoldDelivery = {
+
+            Coords = vector3(1966.31, 530.83, 160.73),
+            Name = "7. Penjualan Emas",
+            Sprite = 318,
+            Display = 4,
+            Scale = 0.8,
+            Colour = 5
+        },
+
+        DiamonDelivery = {
+
+            Coords = vector3(1966.31, 530.83, 160.73),
+            Name = "8. Penjualan Berlian",
+            Sprite = 318,
+            Display = 4,
+            Scale = 0.8,
+            Colour = 5
+        }
+
     },
 
-    Washer = {
+    Zones = {
 
-        Blip = {
-            Coords = vector3(1966.31, 530.83, 160.73),
-            Name = "2. Pencucian Batu",
-            Sprite = 318,
-            Display = 4,
-			Scale = 0.8,
-			Colour = 5
-		}
     }
-
 
 }
 
@@ -70,7 +133,7 @@ Config.MiningSpots =
 Config.MiningMarker = 27 												-- marker type
 Config.MiningMarkerColor = { r = 30, g = 139, b = 195, a = 170 } 		-- rgba color of the marker
 Config.MiningMarkerScale = { x = 1.25, y = 1.25, z = 1.25 }  			-- the scale for the marker on the x, y and z axis
-Config.DrawMining3DText = "Tekan ~g~[E]~s~ untuk ~b~Menambang~s~"				-- set your desired text here
+Config.DrawMining3DText = "Tekan ~g~[E]~s~ untuk ~b~Menambang~s~"		-- set your desired text here
 
 Config.KeyToStartMining = 38
 
