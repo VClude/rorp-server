@@ -89,39 +89,39 @@ Citizen.CreateThread(function()
 				end
 			end
 
-			-- -- hide or show top left zone hints
-			-- if isInMarker and not menuIsShowed then
-			-- 	hintIsShowed = true
-			-- 	if (onDuty or currentZone.Type == 'cloakroom' or PlayerData.job.name == 'reporter') and currentZone.Type ~= 'vehdelete' then
-			-- 		hintToDisplay = currentZone.Hint
-			-- 		hintIsShowed = true
-			-- 	elseif currentZone.Type == 'vehdelete' and (onDuty or PlayerData.job.name == 'reporter') then
-			-- 		local playerPed = PlayerPedId()
+			-- hide or show top left zone hints
+			if isInMarker and not menuIsShowed then
+				hintIsShowed = true
+				if (onDuty or currentZone.Type == 'cloakroom') and currentZone.Type ~= 'vehdelete' then
+					hintToDisplay = currentZone.Hint
+					hintIsShowed = true
+				elseif currentZone.Type == 'vehdelete' and onDuty then
+					-- local playerPed = PlayerPedId()
 
-			-- 		if IsPedInAnyVehicle(playerPed, false) then
-			-- 			local vehicle = GetVehiclePedIsIn(playerPed, false)
-			-- 			local driverPed = GetPedInVehicleSeat(vehicle, -1)
-			-- 			local plate = ESX.Math.Trim(GetVehicleNumberPlateText(vehicle))
+					-- if IsPedInAnyVehicle(playerPed, false) then
+					-- 	local vehicle = GetVehiclePedIsIn(playerPed, false)
+					-- 	local driverPed = GetPedInVehicleSeat(vehicle, -1)
+					-- 	local plate = ESX.Math.Trim(GetVehicleNumberPlateText(vehicle))
 
-			-- 			if playerPed == driverPed then
-			-- 				if myPlate[plate] then
-			-- 					hintToDisplay = currentZone.Hint
-			-- 				end
-			-- 			else
-			-- 				hintToDisplay = _U('not_your_vehicle')
-			-- 			end
-			-- 		else
-			-- 			hintToDisplay = _U('in_vehicle')
-			-- 		end
-			-- 		hintIsShowed = true
-			-- 	elseif onDuty and currentZone.Spawner ~= spawner then
-			-- 		hintToDisplay = _U('wrong_point')
-			-- 		hintIsShowed = true
-			-- 	else
-			-- 		hintToDisplay = nil
-			-- 		hintIsShowed = false
-			-- 	end
-			-- end
+					-- 	if playerPed == driverPed then
+					-- 		if myPlate[plate] then
+					-- 			hintToDisplay = currentZone.Hint
+					-- 		end
+					-- 	else
+					-- 		hintToDisplay = _U('not_your_vehicle')
+					-- 	end
+					-- else
+					-- 	hintToDisplay = _U('in_vehicle')
+					-- end
+					-- hintIsShowed = true
+				-- elseif onDuty and currentZone.Spawner ~= spawner then
+				-- 	hintToDisplay = _U('wrong_point')
+				-- 	hintIsShowed = true
+				else
+					hintToDisplay = nil
+					hintIsShowed = false
+				end
+			end
 
 			-- if isInMarker and not hasAlreadyEnteredMarker then
 			-- 	hasAlreadyEnteredMarker = true

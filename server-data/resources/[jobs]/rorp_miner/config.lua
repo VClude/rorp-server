@@ -19,6 +19,7 @@ Config.Miner = {
             Size = {x = 3.0, y = 3.0, z = 1.0},
             Color = {r = 204, g = 204, b = 0},
             Type = 'cloakroom',
+            Hint = 'Tekan E'
             Marker = 1,
         },
 
@@ -29,6 +30,7 @@ Config.Miner = {
             Size = {x = 5.0, y = 5.0, z = 1.0},
             Color = {r = 204, g = 204, b = 0},
             Type = 'work',
+            Hint = 'Tekan E'
             Marker = 1,
         },
 
@@ -39,6 +41,7 @@ Config.Miner = {
             Size = {x = 5.0, y = 5.0, z = 1.0},
             Color = {r = 204, g = 204, b = 0},
             Type = 'work',
+            Hint = 'Tekan E'
             Marker = 1,
         },
 
@@ -49,6 +52,7 @@ Config.Miner = {
             Size = {x = 5.0, y = 5.0, z = 1.0},
             Color = {r = 204, g = 204, b = 0},
             Type = 'work',
+            Hint = 'Tekan E'
             Marker = 1,
         },
 
@@ -59,6 +63,7 @@ Config.Miner = {
             Size = {x = 5.0, y = 5.0, z = 1.0},
             Color = {r = 204, g = 204, b = 0},
             Type = 'work',
+            Hint = 'Tekan E'
             Marker = 1,
         },
 
@@ -69,6 +74,7 @@ Config.Miner = {
             Size = {x = 5.0, y = 5.0, z = 1.0},
             Color = {r = 204, g = 204, b = 0},
             Type = 'work',
+            Hint = 'Tekan E'
             Marker = 1,
         },
 
@@ -79,6 +85,7 @@ Config.Miner = {
             Size = {x = 5.0, y = 5.0, z = 1.0},
             Color = {r = 204, g = 204, b = 0},
             Type = 'work',
+            Hint = 'Tekan E'
             Marker = 1,
         },
 
@@ -89,6 +96,7 @@ Config.Miner = {
             Size = {x = 5.0, y = 5.0, z = 1.0},
             Color = {r = 204, g = 204, b = 0},
             Type = 'work',
+            Hint = 'Tekan E'
             Marker = 1,
         }
 
