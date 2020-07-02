@@ -33,9 +33,9 @@ AddEventHandler('esx:playerLoaded', function(xPlayer)
 end)
 
 function deleteBlips()
-	for k,v in ipairs(JobBlips) do
+	for k,v in ipairs(jobBlips) do
 		RemoveBlip(v)
-		JobBlips[k] = nil
+		jobBlips[k] = nil
 	end
 end
 
@@ -55,7 +55,7 @@ function refreshBlips()
                 AddTextComponentSubstringPlayerName(v.Name)
                 EndTextCommandSetBlipName(blip)
 
-                table.insert(JobBlips, blip)
+                table.insert(jobBlips, blip)
             end
         end
     end
