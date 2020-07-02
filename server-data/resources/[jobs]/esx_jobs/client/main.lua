@@ -446,8 +446,6 @@ function deleteBlips()
 	end
 end
 
-
-
 function refreshBlips()
 	if PlayerData.job then
 		local jobObject = Config.Jobs[PlayerData.job.name]
