@@ -41,6 +41,13 @@ AddEventHandler('esx:playerLoaded', function(xPlayer)
 	refreshBlips()
 end)
 
+AddEventHandler('esx_jobs:hasExitedMarker', function(zone)
+	hintToDisplay = nil
+	menuIsShowed = false
+	hintIsShowed = false
+	isInMarker = false
+end)
+
 -- Show top left hint
 Citizen.CreateThread(function()
 	while true do
@@ -123,14 +130,14 @@ Citizen.CreateThread(function()
 				end
 			end
 
-			-- if isInMarker and not hasAlreadyEnteredMarker then
-			-- 	hasAlreadyEnteredMarker = true
-			-- end
+			if isInMarker and not hasAlreadyEnteredMarker then
+				hasAlreadyEnteredMarker = true
+			end
 
-			-- if not isInMarker and hasAlreadyEnteredMarker then
-			-- 	hasAlreadyEnteredMarker = false
-			-- 	TriggerEvent('esx_jobs:hasExitedMarker', currentZone)
-			-- end
+			if not isInMarker and hasAlreadyEnteredMarker then
+				hasAlreadyEnteredMarker = false
+				TriggerEvent('esx_jobs:hasExitedMarker', currentZone)
+			end
 		end
 
 		-- for k,v in pairs(Config.PublicZones) do
