@@ -256,7 +256,7 @@ AddEventHandler('rorp_miner:action', function(job, zone, zoneIndex)
 		end
 
 	elseif zone.Type == 'vehdelete' then
-		local jobObject = Config.Jobs[PlayerData.job.name]
+		local jobObject = Config.Miner
 
 		if jobObject then
 			for k,v in pairs(jobObject.Zones) do
