@@ -135,7 +135,7 @@ Config.Miner = {
             
         VehicleSpawnPoint = {
 
-            Pos = {x = 879.55, y = -2189.79, z = 29.51},
+            Coords = vector3(879.55, -2189.79, 29.51),
             Size = {x = 5.0, y = 5.0, z = 1.0},
             Marker = -1,
             Blip = false,
@@ -147,7 +147,7 @@ Config.Miner = {
             
         VehicleDeletePoint = {
 
-            Pos = {x = 881.93, y = -2198.01, z = 29.51},
+            Pos = vector3(881.93, -2198.01, 29.51),
             Size = {x = 5.0, y = 5.0, z = 1.0},
             Color = {r = 255, g = 0, b = 0},
             Marker = 1,
