@@ -1,7 +1,7 @@
 Config              = {}
 Config.Locale       = 'id'
 
-Config.DrawDistance = 100.0
+Config.DrawDistance = 20.0
 Config.BlipSprite = 318
 Config.BlipScale = 0.8
 Config.BlipColour = 5
