@@ -27,7 +27,7 @@ end)
 
 RegisterNetEvent('esx:setJob')
 AddEventHandler('esx:setJob', function(job)
-	ESX.PlayerData.job = job
+	PlayerData.job = job
 	onDuty = false
 	-- myPlate = {} -- loosing vehicle caution in case player changes job.
 	spawner = 0
@@ -37,7 +37,7 @@ end)
 
 RegisterNetEvent('esx:playerLoaded')
 AddEventHandler('esx:playerLoaded', function(xPlayer)
-	ESX.PlayerData = xPlayer
+	PlayerData = xPlayer
 	refreshBlips()
 end)
 
@@ -69,7 +69,7 @@ Citizen.CreateThread(function()
 		local letSleep, playerPed = true, PlayerPedId()
         local playerCoords = GetEntityCoords(playerPed)
         
-	    if ESX.PlayerData ~= nil and ESX.PlayerData.job.name == 'miner'  then
+        if PlayerData.job and PlayerData.job.name == 'miner' then
 
             local zones = Config.Miner.Zones
 
@@ -91,7 +91,7 @@ Citizen.CreateThread(function()
 
 			if IsControlJustReleased(0, 38) and not menuIsShowed and isInMarker then
                 if onDuty or currentZone.Type == 'cloakroom' then
-					TriggerEvent('rorp_miner:action', ESX.PlayerData.job.name, currentZone, currentZoneIndex)
+					TriggerEvent('rorp_miner:action', PlayerData.job.name, currentZone, currentZoneIndex)
 				end
 			end
 
@@ -152,7 +152,7 @@ function deleteBlips()
 end
 
 function refreshBlips()
-	if ESX.PlayerData.job and ESX.PlayerData.job.name == "miner" then
+	if PlayerData.job and PlayerData.job.name == "miner" then
         for k,v in pairs(Config.Miner.Zones) do
             if v.Blip then
                 local blip = AddBlipForCoord(v.Coords)
