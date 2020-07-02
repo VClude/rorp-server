@@ -3,16 +3,18 @@ Config.Locale       = 'id'
 
 
 -- Quarry Settings:
-Config.Blips = {
+Config.Miner = {
+
     Quary = {
-        { 
-            Pos = { x = 2972.1259765625, y = 2841.3889160156, z = 46.025562286377 },
+        
+        Blip = {
+            Coords = vector3(2972.1259765625, 2841.3889160156, 46.025562286377),
             Name = "Quarry",
             Sprite = 318,
             Display = 4,
-            Scale = 1.0,
-            Colour = 5
-        }
+			Scale = 0.8,
+			Colour = 5
+		}
     }
 }
 
