@@ -43,7 +43,7 @@ Config.Miner = {
             Size = {x = 5.0, y = 5.0, z = 1.0},
             Color = {r = 204, g = 204, b = 0},
             Type = 'work',
-            Hint = 'Tekan E',
+            Hint = 'Tekan ~INPUT_CONTEXT~ mengambil batu',
             Marker = 1,
         },
 

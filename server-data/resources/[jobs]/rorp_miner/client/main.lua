@@ -234,9 +234,8 @@ AddEventHandler('rorp_miner:action', function(job, zone, zoneIndex)
 		if jobObject then
 			for k,v in pairs(jobObject.Zones) do
 				if v.Type == 'vehspawnpt' and v.Spawner == zone.Spawner then
-					-- spawnPoint = v
-                    -- spawner = v.Spawner
-                    print('spawner')
+					spawnPoint = v
+                    spawner = v.Spawner
 					break
 				end
 				
@@ -250,10 +249,11 @@ AddEventHandler('rorp_miner:action', function(job, zone, zoneIndex)
 			end
 		end
 
-		if jobObject and spawnPoint and vehicle and ESX.Game.IsSpawnPointClear(spawnPoint.Pos, 5.0) then
-			spawnVehicle(spawnPoint, vehicle, zone.Caution)
+		if jobObject and spawnPoint and vehicle and ESX.Game.IsSpawnPointClear(spawnPoint.Coords, 5.0) then
+            -- spawnVehicle(spawnPoint, vehicle, zone.Caution)
+            print('Mobil Spawn')
 		else
-			ESX.ShowNotification(_U('spawn_blocked'))
+			ESX.ShowNotification('Spawn Blocked')
 		end
 
 	elseif zone.Type == 'vehdelete' then
