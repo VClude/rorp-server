@@ -2,7 +2,7 @@ ESX = nil
 
 local jobBlips = {}
 local menuIsShowed, hintIsShowed, hintToDisplay, hasAlreadyEnteredMarker, isInMarker, vehicleObjInCaseofDrop, vehicleInCaseofDrop, vehicleMaxHealth
-local PlayerData, Blips, JobBlips, myPlate, onDuty, spawner = {}, {}, {}, {}, true, 0
+local PlayerData, Blips, JobBlips, myPlate, onDuty, spawner = {}, {}, {}, {}, false, 0
 
 local PlayerData = nil
 local currentlyMining = false

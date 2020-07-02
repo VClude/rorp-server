@@ -16,7 +16,7 @@ Config.Miner = {
 
             Coords = vector3(892.35, -2172.77, 31.28),
             BlipName = "1. Kantor T.Batu",
-            Size = {x = 5.0, y = 5.0, z = 1.0},
+            Size = {x = 3.0, y = 3.0, z = 1.0},
             Color = {r = 204, g = 204, b = 0},
             Type = 'cloakroom',
             Marker = 1,
