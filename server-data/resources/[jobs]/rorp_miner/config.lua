@@ -1,6 +1,7 @@
 Config              = {}
 Config.Locale       = 'id'
 
+Config.DrawDistance = 100.0
 Config.BlipSprite = 318
 Config.BlipScale = 0.8
 Config.BlipColour = 5
@@ -15,48 +16,80 @@ Config.Miner = {
 
             Coords = vector3(892.35, -2172.77, 31.28),
             BlipName = "1. Kantor T.Batu",
+            Size = {x = 5.0, y = 5.0, z = 1.0},
+            Color = {r = 204, g = 204, b = 0},
+            Type = 'cloakroom',
+            Marker = 1,
         },
 
         Quary = {
 
             Coords = vector3(-597.27, 2093.56, 131.32),
             BlipName = "2. Pengambilan Batu",
+            Size = {x = 5.0, y = 5.0, z = 1.0},
+            Color = {r = 204, g = 204, b = 0},
+            Type = 'work',
+            Marker = 1,
         },
 
         Washer = {
 
             Coords = vector3(1966.31, 530.83, 160.73),
             BlipName = "3. Pencucian Batu",
+            Size = {x = 5.0, y = 5.0, z = 1.0},
+            Color = {r = 204, g = 204, b = 0},
+            Type = 'work',
+            Marker = 1,
         },
 
         Foundry = {
 
             Coords = vector3(1088.3415527344, -2001.4940185547, 30.879274368286),
             BlipName = "4. Peleburan Batu",
+            Size = {x = 5.0, y = 5.0, z = 1.0},
+            Color = {r = 204, g = 204, b = 0},
+            Type = 'work',
+            Marker = 1,
         },
 
         CooperDelivery = {
 
             Coords = vector3(-169.481, -2659.16, 5.00103),
             BlipName = "5. Penjualan Tembaga",
+            Size = {x = 5.0, y = 5.0, z = 1.0},
+            Color = {r = 204, g = 204, b = 0},
+            Type = 'work',
+            Marker = 1,
         },
 
         IronDelivery = {
 
             Coords = vector3(-148.78, -1040.38, 26.27),
             BlipName = "6. Penjualan Besi",
+            Size = {x = 5.0, y = 5.0, z = 1.0},
+            Color = {r = 204, g = 204, b = 0},
+            Type = 'work',
+            Marker = 1,
         },
 
         GoldDelivery = {
 
             Coords = vector3(261.48, 207.35, 109.28),
             BlipName = "7. Penjualan Emas",
+            Size = {x = 5.0, y = 5.0, z = 1.0},
+            Color = {r = 204, g = 204, b = 0},
+            Type = 'work',
+            Marker = 1,
         },
 
         DiamondDelivery = {
 
             Coords = vector3(-621.04, -228.53, 37.05),
             BlipName = "8. Penjualan Berlian",
+            Size = {x = 5.0, y = 5.0, z = 1.0},
+            Color = {r = 204, g = 204, b = 0},
+            Type = 'work',
+            Marker = 1,
         }
 
     }
