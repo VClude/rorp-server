@@ -113,34 +113,34 @@ function MiningEvent()
 
 end
 
--- Core Thread Function:
-Citizen.CreateThread(function()
-	while true do
-        Citizen.Wait(5)
-		local coords = GetEntityCoords(GetPlayerPed(-1))
-		for k,v in pairs(Config.WasherLocation) do
-			local distance = GetDistanceBetweenCoords(coords, v.x, v.y, v.z, true)
-			if distance <= 20.0 and not currentlyWashing then
-				DrawMarker(Config.WasherMarker, v.x, v.y, v.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.WasherMarkerScale.x, Config.WasherMarkerScale.y, Config.WasherMarkerScale.z, Config.WasherMarkerColor.r,Config.WasherMarkerColor.g,Config.WasherMarkerColor.b,Config.WasherMarkerColor.a, false, true, 2, true, false, false, false)					
-			else
-				Citizen.Wait(1000)
-			end	
-			if distance <= 1.2 and not currentlyWashing then
-				DrawText3Ds(v.x, v.y, v.z, Config.DrawWasher3DText)
-				if IsControlJustPressed(0, Config.KeyToStartWashing) then
-					ESX.RegisterServerCallback("esx_jobs:getPickaxe",function(isMiner)
-						if isMiner then
-							WasherEvent()
-						else
-							ESX.ShowNotification('Kamu bukan penambang batu')
-						end
-					end)					
-					Citizen.Wait(300)
-				end
-			end
-		end		
-	end
-end)
+-- -- Core Thread Function:
+-- Citizen.CreateThread(function()
+-- 	while true do
+--         Citizen.Wait(5)
+-- 		local coords = GetEntityCoords(GetPlayerPed(-1))
+-- 		for k,v in pairs(Config.WasherLocation) do
+-- 			local distance = GetDistanceBetweenCoords(coords, v.x, v.y, v.z, true)
+-- 			if distance <= 20.0 and not currentlyWashing then
+-- 				DrawMarker(Config.WasherMarker, v.x, v.y, v.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.WasherMarkerScale.x, Config.WasherMarkerScale.y, Config.WasherMarkerScale.z, Config.WasherMarkerColor.r,Config.WasherMarkerColor.g,Config.WasherMarkerColor.b,Config.WasherMarkerColor.a, false, true, 2, true, false, false, false)					
+-- 			else
+-- 				Citizen.Wait(1000)
+-- 			end	
+-- 			if distance <= 1.2 and not currentlyWashing then
+-- 				DrawText3Ds(v.x, v.y, v.z, Config.DrawWasher3DText)
+-- 				if IsControlJustPressed(0, Config.KeyToStartWashing) then
+-- 					ESX.RegisterServerCallback("esx_jobs:getPickaxe",function(isMiner)
+-- 						if isMiner then
+-- 							WasherEvent()
+-- 						else
+-- 							ESX.ShowNotification('Kamu bukan penambang batu')
+-- 						end
+-- 					end)					
+-- 					Citizen.Wait(300)
+-- 				end
+-- 			end
+-- 		end		
+-- 	end
+-- end)
 
 function WasherEvent()
 	
@@ -169,35 +169,35 @@ end
 
 
 
--- Core Thread Function:
-Citizen.CreateThread(function()
-	while true do
-        Citizen.Wait(5)
-		local coords = GetEntityCoords(GetPlayerPed(-1))
-		for k,v in pairs(Config.SmelterSpots) do
-			local distance = GetDistanceBetweenCoords(coords, v.Pos.x, v.Pos.y, v.Pos.z, true)
-			if distance <= 20.0 and not currentlySmelting then
-				DrawMarker(Config.SmelterMarker, v.Pos.x, v.Pos.y, v.Pos.z-0.97, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.SmelterMarkerScale.x, Config.SmelterMarkerScale.y, Config.SmelterMarkerScale.z, Config.SmelterMarkerColor.r,Config.SmelterMarkerColor.g,Config.SmelterMarkerColor.b,Config.SmelterMarkerColor.a, false, true, 2, true, false, false, false)					
-			else
-				Citizen.Wait(1000)
-			end	
-			if distance <= 1.0 and not currentlySmelting then
-				DrawText3Ds(v.Pos.x, v.Pos.y, v.Pos.z, Config.DrawSmelter3DText)
-				if IsControlJustPressed(0, Config.KeyToStartSmelting) then
-					local closestPlayer, closestDistance = ESX.Game.GetClosestPlayer()
-                    if closestPlayer == -1 or closestDistance >= 0.7 then
-						ESX.TriggerServerCallback("esx_jobs:getWashedStone", function(WashedStone)
-							SmeltingEvent()
-						end)
-					else
-						ESX.ShowNotification("Kamu terlalu dekat dengan yang lain")
-					end
-					Citizen.Wait(300)
-				end
-			end
-		end		
-	end
-end)
+-- -- Core Thread Function:
+-- Citizen.CreateThread(function()
+-- 	while true do
+--         Citizen.Wait(5)
+-- 		local coords = GetEntityCoords(GetPlayerPed(-1))
+-- 		for k,v in pairs(Config.SmelterSpots) do
+-- 			local distance = GetDistanceBetweenCoords(coords, v.Pos.x, v.Pos.y, v.Pos.z, true)
+-- 			if distance <= 20.0 and not currentlySmelting then
+-- 				DrawMarker(Config.SmelterMarker, v.Pos.x, v.Pos.y, v.Pos.z-0.97, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.SmelterMarkerScale.x, Config.SmelterMarkerScale.y, Config.SmelterMarkerScale.z, Config.SmelterMarkerColor.r,Config.SmelterMarkerColor.g,Config.SmelterMarkerColor.b,Config.SmelterMarkerColor.a, false, true, 2, true, false, false, false)					
+-- 			else
+-- 				Citizen.Wait(1000)
+-- 			end	
+-- 			if distance <= 1.0 and not currentlySmelting then
+-- 				DrawText3Ds(v.Pos.x, v.Pos.y, v.Pos.z, Config.DrawSmelter3DText)
+-- 				if IsControlJustPressed(0, Config.KeyToStartSmelting) then
+-- 					local closestPlayer, closestDistance = ESX.Game.GetClosestPlayer()
+--                     if closestPlayer == -1 or closestDistance >= 0.7 then
+-- 						ESX.TriggerServerCallback("esx_jobs:getWashedStone", function(WashedStone)
+-- 							SmeltingEvent()
+-- 						end)
+-- 					else
+-- 						ESX.ShowNotification("Kamu terlalu dekat dengan yang lain")
+-- 					end
+-- 					Citizen.Wait(300)
+-- 				end
+-- 			end
+-- 		end		
+-- 	end
+-- end)
 
 function SmeltingEvent()
 	

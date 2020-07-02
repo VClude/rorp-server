@@ -42,21 +42,19 @@ end
 function refreshBlips()
 	if ESX.PlayerData.job and ESX.PlayerData.job.name == "miner" then
         for k,v in pairs(Config.Blips) do
-            if v.Pos then
-                local blip = AddBlipForCoord(v.Pos.x, v.Pos.y, v.Pos.z)
+            local blip = AddBlipForCoord(v.Pos.x, v.Pos.y, v.Pos.z)
 
-                SetBlipSprite  (blip, v.Sprite)
-                SetBlipScale   (blip, v.Scale)
-                SetBlipCategory(blip, 3)
-                SetBlipColour  (blip, v.Colour)
-                SetBlipAsShortRange(blip, true)
+            SetBlipSprite  (blip, v.Sprite)
+            SetBlipScale   (blip, v.Scale)
+            SetBlipCategory(blip, 3)
+            SetBlipColour  (blip, v.Colour)
+            SetBlipAsShortRange(blip, true)
 
-                BeginTextCommandSetBlipName('STRING')
-                AddTextComponentSubstringPlayerName(v.Name)
-                EndTextCommandSetBlipName(blip)
+            BeginTextCommandSetBlipName('STRING')
+            AddTextComponentSubstringPlayerName(v.Name)
+            EndTextCommandSetBlipName(blip)
 
-                table.insert(jobBlips, blip)
-            end
+            table.insert(jobBlips, blip)
         end
     end
 end
