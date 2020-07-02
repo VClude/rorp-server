@@ -168,10 +168,10 @@ function refreshBlips()
         for k,v in pairs(Config.Miner.Blip) do
             local blip = AddBlipForCoord(v.Coords)
 
-            SetBlipSprite  (blip, v.Sprite)
-            SetBlipScale   (blip, v.Scale)
+            SetBlipSprite  (blip, Config.Blip.Sprite)
+            SetBlipScale   (blip, Config.Blip.Scale)
             SetBlipCategory(blip, 3)
-            SetBlipColour  (blip, v.Colour)
+            SetBlipColour  (blip, Config.Blip.Colour)
             SetBlipAsShortRange(blip, true)
 
             BeginTextCommandSetBlipName('STRING')

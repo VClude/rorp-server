@@ -1,6 +1,10 @@
 Config              = {}
 Config.Locale       = 'id'
 
+Config.Blip.Sprite = 318
+Config.Blip.Scale = 0.8
+Config.Blip.Colour = 5
+
 
 -- Quarry Settings:
 Config.Miner = {
@@ -11,80 +15,48 @@ Config.Miner = {
 
             Coords = vector3(892.35, -2172.77, 31.28),
             Name = "1. Kantor T.Batu",
-            Sprite = 318,
-            Display = 4,
-            Scale = 0.8,
-            Colour = 5
         },
 
         Quary = {
 
             Coords = vector3(-597.27, 2093.56, 131.32),
             Name = "2. Pengambilan Batu",
-            Sprite = 318,
-            Display = 4,
-            Scale = 0.8,
-            Colour = 5
         },
 
         Washer = {
 
-            Coords = vector3(1088.3415527344, -2001.4940185547, 30.879274368286),
+            Coords = vector3(1966.31, 530.83, 160.73),
             Name = "3. Pencucian Batu",
-            Sprite = 318,
-            Display = 4,
-            Scale = 0.8,
-            Colour = 5
         },
 
         Foundry = {
 
             Coords = vector3(1966.31, 530.83, 160.73),
             Name = "4. Peleburan Batu",
-            Sprite = 318,
-            Display = 4,
-            Scale = 0.8,
-            Colour = 5
         },
 
         CooperDelivery = {
 
-            Coords = vector3(1966.31, 530.83, 160.73),
+            Coords = vector3(-169.481, -2659.16, 5.00103),
             Name = "5. Penjualan Tembaga",
-            Sprite = 318,
-            Display = 4,
-            Scale = 0.8,
-            Colour = 5
         },
 
         IronDelivery = {
 
-            Coords = vector3(1966.31, 530.83, 160.73),
+            Coords = vector3(-148.78, -1040.38, 26.27),
             Name = "6. Penjualan Besi",
-            Sprite = 318,
-            Display = 4,
-            Scale = 0.8,
-            Colour = 5
         },
 
         GoldDelivery = {
 
-            Coords = vector3(1966.31, 530.83, 160.73),
+            Coords = vector3(261.48, 207.35, 109.28),
             Name = "7. Penjualan Emas",
-            Sprite = 318,
-            Display = 4,
-            Scale = 0.8,
-            Colour = 5
         },
 
-        DiamonDelivery = {
+        DiamondDelivery = {
 
-            Coords = vector3(1966.31, 530.83, 160.73),
+            Coords = vector3(-621.04, -228.53, 37.05),
             Name = "8. Penjualan Berlian",
-            Sprite = 318,
-            Display = 4,
-            Scale = 0.8,
-            Colour = 5
         }
 
     },
