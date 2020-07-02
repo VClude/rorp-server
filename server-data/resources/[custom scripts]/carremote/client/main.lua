@@ -521,7 +521,7 @@ end)
 
 RegisterNetEvent("carremote:hotkeyEnginePressed")
 AddEventHandler("carremote:hotkeyEnginePressed", function()
-  local playerPed = GetPlayerPed(-1)
+  local ped = GetPlayerPed(-1)
   
   if (IsPedInAnyVehicle(ped, true)) then
     local vehicle = GetVehiclePedIsIn(ped, false)
