@@ -277,6 +277,14 @@ AddEventHandler('rorp_miner:action', function(job, zone, zoneIndex)
 		else
 			ESX.ShowNotification(_U('foot_work'))
 		end
+	elseif zone.Type == 'wash' then
+		hintToDisplay = nil
+		hintIsShowed = false
+		local playerPed = PlayerPedId()
+		
+		if IsPedOnFoot(playerPed) then
+			WasherEvent()
+		end
 	elseif zone.Type == 'vehspawner' then
 		local jobObject, spawnPoint, vehicle = Config.Miner
 
@@ -531,4 +539,29 @@ function MiningEvent()
     DeleteObject(object)
 	currentlyMining = false
 
+end
+
+function WasherEvent()
+	
+	currentlyWashing = true
+	local playerPed = PlayerPedId()
+	local coords = GetEntityCoords(playerPed)
+	
+	FreezeEntityPosition(playerPed, true)
+	SetCurrentPedWeapon(playerPed, GetHashKey('WEAPON_UNARMED'))
+	Citizen.Wait(200)
+	
+	ESX.TriggerServerCallback("rorp_miner:required", function(stoneCount)
+		if stoneCount then
+			exports['progressBars']:startUI((10000), "WASHING STONE")
+			TaskStartScenarioInPlace(playerPed, "PROP_HUMAN_BUM_BIN", 0, true)
+			Citizen.Wait(10000)
+			TriggerServerEvent("rorp_miner:reward",'washed_stone',5)	
+		else
+			ESX.ShowNotification("Kamu membutuhkan ~r~5~s~x ~y~Batu~s~!")
+		end
+		ClearPedTasks(playerPed)
+		FreezeEntityPosition(playerPed, false)
+		currentlyWashing = false
+	end,"stone",5)
 end

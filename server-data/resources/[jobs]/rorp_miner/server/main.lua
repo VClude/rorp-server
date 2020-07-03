@@ -43,11 +43,13 @@ end)
 
 -- Function to reward player after mining/washing:
 RegisterServerEvent("rorp_miner:reward")
-AddEventHandler("rorp_miner:reward", function(itemName,itemAmount,ItemReqName,ItemReqAmount)
+AddEventHandler("rorp_miner:reward", function(itemName,itemAmount)
 	local xPlayer = ESX.GetPlayerFromId(source)
 	local itemLabel = ESX.GetItemLabel(itemName)
-	if ItemReqName == nil then
+	if xPlayer.canCarryItem(itemName, itemAmount) then
 		xPlayer.addInventoryItem(itemName, itemAmount)
-		TriggerClientEvent("esx:showNotification",source,"Kamu mendapatkan ~r~x"..itemAmount.."~s~x ~y~"..itemLabel.."~s~")
+		TriggerClientEvent("esx:showNotification",source,"Kamu mendapatkan ~r~"..itemAmount.."~s~x ~y~"..itemLabel.."~s~")
+	else
+		TriggerClientEvent("esx:showNotification",source,"Inventory kamu sudah penuh")
 	end
 end)
