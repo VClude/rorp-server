@@ -35,7 +35,6 @@ Config.Miner = {
             Type = 'cloakroom',
             Hint = 'Tekan ~INPUT_CONTEXT~ mengganti baju',
             Marker = 1,
-            DrawMarker = true,
         },
 
         Quary = {
@@ -48,7 +47,6 @@ Config.Miner = {
             Type = 'work',
             Hint = 'Tekan ~INPUT_CONTEXT~ mengambil batu',
             Marker = -1,
-            DrawMarker = false,
         },
 
         Washer = {
@@ -61,7 +59,6 @@ Config.Miner = {
             Type = 'work',
             Hint = 'Tekan ~INPUT_CONTEXT~ mencuci batu',
             Marker = 1,
-            DrawMarker = true,
         },
 
         Foundry = {
@@ -74,7 +71,6 @@ Config.Miner = {
             Type = 'work',
             Hint = 'Tekan ~INPUT_CONTEXT~ melebur batu',
             Marker = 1,
-            DrawMarker = true,
         },
 
         CooperDelivery = {
@@ -87,7 +83,6 @@ Config.Miner = {
             Type = 'work',
             Hint = 'Tekan ~INPUT_CONTEXT~ menjual tembaga',
             Marker = 1,
-            DrawMarker = true,
         },
 
         IronDelivery = {
@@ -100,7 +95,6 @@ Config.Miner = {
             Type = 'work',
             Hint = 'Tekan ~INPUT_CONTEXT~ menjual besi',
             Marker = 1,
-            DrawMarker = true,
         },
 
         GoldDelivery = {
@@ -112,8 +106,7 @@ Config.Miner = {
             Color = {r = 204, g = 204, b = 0},
             Type = 'work',
             Hint = 'Tekan ~INPUT_CONTEXT~ menjual emas',
-            Marker = 1,
-            DrawMarker = true,           
+            Marker = 1,        
         },
 
         DiamondDelivery = {
@@ -126,7 +119,6 @@ Config.Miner = {
             Type = 'work',
             Hint = 'Tekan ~INPUT_CONTEXT~ menjual berlian',
             Marker = 1,
-            DrawMarker = true,
         },
 
         VehicleSpawner = {
@@ -141,7 +133,6 @@ Config.Miner = {
             Spawner = 1,
             Hint = 'Tekan ~INPUT_CONTEXT~ mengambil kendaraan',
             Caution = 2000,
-            DrawMarker = true,
         },
             
         VehicleSpawnPoint = {
@@ -168,8 +159,7 @@ Config.Miner = {
             Hint = 'Tekan ~INPUT_CONTEXT~ mengembalikan kendaraan',
             Spawner = 1,
             Caution = 2000,
-            DrawMarker = true,
-            Teleport = 0
+            Teleport = 0,
         }
     }
 }

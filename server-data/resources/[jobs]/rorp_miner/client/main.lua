@@ -87,7 +87,7 @@ Citizen.CreateThread(function()
 					end
 				end
 
-				if distance < v.Size.x then
+				if distance < v.Size.x and v.Marker ~= -1 then
 					letSleep, isInMarker, currentZone, currentZoneIndex = false, true, v, k
 					break
 				end
@@ -344,8 +344,6 @@ AddEventHandler('rorp_miner:action', function(job, zone, zoneIndex)
 	-- 		end
 	-- 	end)
 	end
-
-	--nextStep(zone.GPS)
 end)
 
 function OpenMenu()
@@ -388,13 +386,7 @@ end
 RegisterNetEvent('rorp_miner:spawnJobVehicle')
 AddEventHandler('rorp_miner:spawnJobVehicle', function(spawnPoint, vehicle)
 	local playerPed = PlayerPedId()
-	ESX.Game.SpawnVehicle(vehicle.Hash, spawnPoint.Coords, spawnPoint.Heading, function(spawnedVehicle)
-
-		-- if vehicle.Trailer ~= 'none' then
-		-- 	ESX.Game.SpawnVehicle(vehicle.Trailer, spawnPoint.Coords, spawnPoint.Heading, function(trailer)
-		-- 		AttachVehicleToTrailer(spawnedVehicle, trailer, 1.1)
-		-- 	end)
-		-- end
+    ESX.Game.SpawnVehicle(vehicle.Hash, spawnPoint.Coords, spawnPoint.Heading, function(spawnedVehicle)
 
 		-- save & set plate
 		local plate = 'WORK' .. math.random(100, 900)
