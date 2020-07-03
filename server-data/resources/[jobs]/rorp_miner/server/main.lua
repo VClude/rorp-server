@@ -55,7 +55,7 @@ AddEventHandler("rorp_miner:reward", function(itemName,itemAmount)
 end)
 
 -- Server Callback to get stone count & remove stone:
-ESX.RegisterServerCallback("rorp_miner:required",function(source,cb,itemReq, itemReqAmount)
+ ,function(source,cb,itemReq, itemReqAmount)
 	local xPlayer = ESX.GetPlayerFromId(source)
 	if xPlayer.getInventoryItem(itemReq).count >= itemReqAmount  then
 		xPlayer.removeInventoryItem(itemReq, itemReqAmount)
@@ -63,4 +63,63 @@ ESX.RegisterServerCallback("rorp_miner:required",function(source,cb,itemReq, ite
 	else
 		cb(false)
 	end
+end)
+
+-- Function to reward player after smelting:
+RegisterServerEvent("rorp_miner:rewardSmelting")
+AddEventHandler("rorp_miner:rewardSmelting", function()
+	local xPlayer = ESX.GetPlayerFromId(source)
+	
+	local rewardChance = math.random(1,15)
+	
+	if rewardChance == 1 then
+		if xPlayer.canCarryItem("diamond", 1) then
+			xPlayer.addInventoryItem("diamond", 1)
+			TriggerClientEvent("esx:showNotification",source,"Kamu mendapatkan ~r~1x~s~ ~y~Berlian~s~")
+		else
+			TriggerClientEvent("esx:showNotification",source,"Inventory kamu sudah penuh")
+		end
+	elseif rewardChance == 2 then
+		if xPlayer.canCarryItem("ruby", 1) then
+			xPlayer.addInventoryItem("ruby", 1)
+			TriggerClientEvent("esx:showNotification",source,"Kamu mendapatkan ~r~1x~s~ ~y~Ruby~s~")
+		else
+			TriggerClientEvent("esx:showNotification",source,"Inventory kamu sudah penuh")
+		end
+	elseif rewardChance == 3 or rewardChance == 4 or rewardChance == 5 then
+		local firstChance = math.random(1,3)
+		if firstChance == 1 then
+			if xPlayer.canCarryItem("gold", 1) then
+				xPlayer.addInventoryItem("gold", 1)
+				TriggerClientEvent("esx:showNotification",source,"Kamu mendapatkan ~r~1x~s~ ~y~Emas~s~")
+			else
+				TriggerClientEvent("esx:showNotification",source,"Inventory kamu sudah penuh")
+			end
+		elseif firstChance == 2 or firstChance == 3 then
+			if xPlayer.canCarryItem("silver", 2) then
+				xPlayer.addInventoryItem("silver", 2)
+				TriggerClientEvent("esx:showNotification",source,"Kamu mendapatkan ~r~2x~s~ ~y~Perak~s~")
+			else
+				TriggerClientEvent("esx:showNotification",source,"Inventory kamu sudah penuh")
+			end
+		end
+	elseif rewardChance == 6 or rewardChance == 7 or rewardChance == 8 or rewardChance == 9 or rewardChance == 10 or rewardChance == 11 or rewardChance == 12 or rewardChance == 13 or rewardChance == 14 or rewardChance == 15  then
+		local secondChance = math.random(1,2)
+		if secondChance == 1 then
+			if xPlayer.canCarryItem("copper", 3) then
+				xPlayer.addInventoryItem("copper", 3)
+				TriggerClientEvent("esx:showNotification",source,"Kamu mendapatkan ~r~3x~s~ ~y~Tembaga~s~")
+			else
+				TriggerClientEvent("esx:showNotification",source,"Inventory kamu sudah penuh")
+			end
+		else
+			if xPlayer.canCarryItem("iron", 5)
+				xPlayer.addInventoryItem("iron", 5)
+				TriggerClientEvent("esx:showNotification",source,"Kamu mendapatkan ~r~7x~s~ ~y~Besi~s~")
+			else
+				TriggerClientEvent("esx:showNotification",source,"Inventory kamu sudah penuh")
+			end
+		end
+	end
+	
 end)

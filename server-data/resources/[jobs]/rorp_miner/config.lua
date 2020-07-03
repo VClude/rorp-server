@@ -63,12 +63,12 @@ Config.Miner = {
 
         Foundry = {
 
-            Coords = vector3(1088.3415527344, -2001.4940185547, 30.879274368286),
+            Coords = vector3(1088.3415527344, -2001.4940185547, 29.879274368286),
             BlipName = "4. Peleburan Batu",
             Blip = true,
             Size = {x = 5.0, y = 5.0, z = 1.0},
             Color = {r = 204, g = 204, b = 0},
-            Type = 'work',
+            Type = 'smelting',
             Hint = 'Tekan ~INPUT_CONTEXT~ melebur batu',
             Marker = 1,
         },

@@ -233,50 +233,6 @@ AddEventHandler('rorp_miner:action', function(job, zone, zoneIndex)
 	menuIsShowed = true
 	if zone.Type == 'cloakroom' then
 		OpenMenu()
-	elseif zone.Type == 'work' then
-		hintToDisplay = nil
-		hintIsShowed = false
-		local playerPed = PlayerPedId()
-		
-		if IsPedOnFoot(playerPed) then
-
-			onWork = true
-			local playerPed = PlayerPedId()
-			local coords = GetEntityCoords(playerPed)
-			
-			-- FreezeEntityPosition(playerPed, true)
-			SetCurrentPedWeapon(playerPed, GetHashKey('WEAPON_UNARMED'))
-			Citizen.Wait(200)
-
-			TriggerEvent("mythic_progressbar:client:progress", {
-				name = "on_working",
-				duration = zone.Duration,
-				label = "Tekan 'X' Untuk Cancel",
-				useWhileDead = false,
-				canCancel = true,
-				controlDisables = {
-					disableMovement = true,
-					disableCarMovement = true,
-					disableMouse = false,
-					disableCombat = true,
-				},
-				animation = {
-					task = "CODE_HUMAN_MEDIC_TIME_OF_DEATH",
-				},
-				prop = {
-
-				},
-			}, function(status)
-				if not status then
-					for k,v in pairs(zone.Item) do
-						TriggerServerEvent("esx_jobs:alljobReward",v.db_name,v.add, v.requires, v.remove)
-						onWork = false
-					end
-				end
-			end)
-		else
-			ESX.ShowNotification(_U('foot_work'))
-		end
 	elseif zone.Type == 'wash' then
 		hintToDisplay = nil
 		hintIsShowed = false
@@ -285,6 +241,10 @@ AddEventHandler('rorp_miner:action', function(job, zone, zoneIndex)
 		if IsPedOnFoot(playerPed) then
 			WasherEvent()
 		end
+	elseif zone.Type == 'smelting' then
+		hintToDisplay = nil
+		hintIsShowed = false
+		SmeltingEvent()
 	elseif zone.Type == 'vehspawner' then
 		local jobObject, spawnPoint, vehicle = Config.Miner
 
@@ -565,3 +525,44 @@ function WasherEvent()
 		currentlyWashing = false
 	end,"stone",5)
 end
+
+function SmeltingEvent()
+	
+	currentlySmelting = true
+	local playerPed = PlayerPedId()
+	local coords = GetEntityCoords(playerPed)
+	
+	FreezeEntityPosition(playerPed, true)
+	SetCurrentPedWeapon(playerPed, GetHashKey('WEAPON_UNARMED'))
+	Citizen.Wait(200)
+
+	ESX.TriggerServerCallback("rorp_miner:required",function(hasWashedStone)
+	if hasWashedStone then
+		TriggerEvent("mythic_progressbar:client:progress", {
+			name = "on_working",
+			duration = 20000,
+			label = "Tekan 'X' Untuk Cancel",
+			useWhileDead = false,
+			canCancel = true,
+			controlDisables = {
+				disableMovement = true,
+				disableCarMovement = true,
+				disableMouse = false,
+				disableCombat = true,
+			},
+			animation = {
+				task = "CODE_HUMAN_MEDIC_TIME_OF_DEATH",
+			},
+			prop = {
+				
+			},
+		}, function(status)
+			if not status then
+				TriggerServerEvent("rorp_miner:rewardSmelting")
+				FreezeEntityPosition(playerPed, false)
+				currentlySmelting = false
+			end
+		end)		
+	end,'washed_stone',5)	
+end
+
