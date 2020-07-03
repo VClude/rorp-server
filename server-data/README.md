@@ -28,4 +28,4 @@ existing ones - anything goes, as long as you make sure to:
 2. Not change default behavior without a toggle.
 3. Use best practices (convars over config files, native commands wherever possible, etc.)
 
-Modifying or rewriting existing resources in this repository for local use only is _strongly_ discouraged.
+Modifying or rewriting existing resources in this repository for local use only is _strongly_ discouraged.# rorp-server
