@@ -46,6 +46,24 @@ RegisterServerEvent("rorp_miner:reward")
 AddEventHandler("rorp_miner:reward", function(itemName,itemAmount)
 	local xPlayer = ESX.GetPlayerFromId(source)
 	local itemLabel = ESX.GetItemLabel(itemName)
-	xPlayer.addInventoryItem(itemName, itemAmount)
-	TriggerClientEvent("esx:showNotification",source,"Kamu mendapatkan ~r~x"..itemAmount.."~s~x ~y~"..itemLabel.."~s~")
+	if xPlayer.canCarryItem(itemName,itemAmount) then
+		xPlayer.addInventoryItem(itemName, itemAmount)
+		TriggerClientEvent("esx:showNotification",source,"Kamu mendapatkan ~r~"..itemAmount.."~s~x ~y~"..itemLabel.."~s~")
+	else
+		TriggerClientEvent("esx:showNotification",source,"Inventory sudah penuh")
+	end
+end)
+
+ESX.RegisterServerCallback("rorp_miner:ReqItem",function(source,cb,reqItem,amount)
+	local xPlayer = ESX.GetPlayerFromId(source)
+	if xPlayer.getInventoryItem(reqItem).count >= amount then
+		if xPlayer.canCarryItem(reqItem, amount) then
+			xPlayer.removeInventoryItem(reqItem, amount)
+			cb(true)
+		else
+			cb(false)
+		end
+	else
+		cb(false)
+	end
 end)

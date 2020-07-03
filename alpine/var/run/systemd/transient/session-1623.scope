@@ -1,0 +1,17 @@
+# This is a transient unit file, created programmatically via the systemd API. Do not edit.
+[Scope]
+Slice=user-1001.slice
+
+[Unit]
+Description=Session 1623 of user mysql
+Wants=user-runtime-dir@1001.service
+Wants=user@1001.service
+After=systemd-logind.service
+After=systemd-user-sessions.service
+After=user-runtime-dir@1001.service
+After=user@1001.service
+RequiresMountsFor=/home/mysql
+
+[Scope]
+SendSIGHUP=yes
+TasksMax=infinity

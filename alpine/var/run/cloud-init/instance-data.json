@@ -1,0 +1,47 @@
+{
+ "base64-encoded-keys": [
+  "ds/user-data"
+ ],
+ "ds": {
+  "ec2_metadata": {},
+  "meta-data": {
+   "availability_zone": "nova",
+   "devices": [],
+   "hostname": "republicofroleplay",
+   "instance-id": "57e5a835-7e3d-43ed-8fce-3da332f71c8b",
+   "launch_index": 0,
+   "local-hostname": "republicofroleplay",
+   "name": "republicofroleplay",
+   "project_id": "5cfaac75-e7d9-4e9d-9f01-0ea7df044eed",
+   "uuid": "57e5a835-7e3d-43ed-8fce-3da332f71c8b"
+  },
+  "network_json": {
+   "links": [
+    {
+     "ethernet_mac_address": "0C:C4:7A:84:1C:82",
+     "id": "8aca585d-6bd0-4ea3-b25d-d49238b30f0e",
+     "type": "phy",
+     "vif_id": "748e92fd-9735-4c92-baaf-af4d4161affa"
+    }
+   ],
+   "networks": [
+    {
+     "id": "0970a399-94e3-49de-903d-0ac03b12a1b0",
+     "link": "8aca585d-6bd0-4ea3-b25d-d49238b30f0e",
+     "network_id": "8dec083b-875d-4347-a593-0277a67de249",
+     "type": "ipv4_dhcp"
+    }
+   ],
+   "services": []
+  },
+  "user-data": "IyEvYmluL2Jhc2gKUEhPTkVIT01FVVJMPSdodHRwczovL2RzLWNhLm1ldGFkYXRhLm92aC9kZWRpY2F0ZWQvcGhvbmVob21lJwpwaG9uZUhvbWUoKSgKICAgIHVybD0kezF9CiAgICBwYXJhbXM9JHsyfQogICAgaWYgWyAtZSAvdXNyL2Jpbi9jdXJsIF0KICAgIHRoZW4KICAgICAgICBjdXJsIC0tcmV0cnkgMTAgLWQgIiR7cGFyYW1zfSIgLVggUE9TVCAiJHt1cmx9IgogICAgZWxzZQogICAgICAgIHdnZXQgLS10cmllcz0xMCAtLW1ldGhvZD1QT1NUICIke3VybH0/JHtwYXJhbXN9IiAtTyAtCiAgICBmaQopCgpzYW5pdHlDaGVjaygpKAogICAgdXVpZD0kKGNhdCAvcHJvYy9zeXMva2VybmVsL3JhbmRvbS91dWlkKQogICAgbWVzc2FnZT0nSW5zdGFsbGVkIHN1Y2NlZWQnCiAgICBzdGF0dXM9J09LJwoKICAgICMgc2hlbGxjaGVjayBkaXNhYmxlPVNDMjA5MQogICAgd2hpbGUgISBncmVwIC1xaUUgJ3NjcmlwdHMtcGVyLW9uY2UuKnN1Y2Nlc3MnIC92YXIvbG9nL2Nsb3VkLWluaXQubG9nCiAgICAjd2hpbGUgcGdyZXAgLWYgY2xvdWQtaW5pdAogICAgZG8KICAgICAgICBpZiAoZ3JlcCAtaXEgZXJyb3IgL3Zhci9sb2cvY2xvdWQtaW5pdC5sb2cpCiAgICAgICAgdGhlbgogICAgICAgICAgICBtZXNzYWdlPSdFcnJvciBhdCBib290IGNoZWNrIEtWTSBhbmQgbG9ncycKICAgICAgICAgICAgc3RhdHVzPSdLTycKICAgICAgICBmaQogICAgICAgIHNsZWVwIDUKICAgIGRvbmUKCiAgICBwYXJhbXM9Imluc3RhbmNlX2lkPSR7dXVpZH0mc3RhdHVzPSR7c3RhdHVzfSZtZXNzYWdlPSR7bWVzc2FnZX0iCiAgICBlY2hvICIke3BhcmFtc30iCikKCm1haW4oKXsKICAgIHBoX3VybD0iJHtQSE9ORUhPTUVVUkx9IiAgICAKCiAgICBwYXJhbXM9JChzYW5pdHlDaGVjaykKCiAgICBwaG9uZUhvbWUgIiR7cGhfdXJsfSIgIiR7cGFyYW1zfSIKfQoKbWFpbiAmCg==",
+  "vendor-data": "#cloud-config\nmanage_etc_hosts: localhost\npreserve_hostname: true\nssh_pwauth: yes\nchpasswd:\n  list:\n    - debian:$1$sKcnw0yY$1VvUXyVhpWHFrWI5IP/0A1"
+ },
+ "v1": {
+  "availability-zone": "nova",
+  "cloud-name": "configdrive",
+  "instance-id": "57e5a835-7e3d-43ed-8fce-3da332f71c8b",
+  "local-hostname": "republicofroleplay",
+  "region": null
+ }
+}
