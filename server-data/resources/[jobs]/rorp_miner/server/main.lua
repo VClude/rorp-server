@@ -113,7 +113,7 @@ AddEventHandler("rorp_miner:rewardSmelting", function()
 				TriggerClientEvent("esx:showNotification",source,"Inventory kamu sudah penuh")
 			end
 		else
-			if xPlayer.canCarryItem("iron", 5)
+			if xPlayer.canCarryItem("iron", 5) then
 				xPlayer.addInventoryItem("iron", 5)
 				TriggerClientEvent("esx:showNotification",source,"Kamu mendapatkan ~r~7x~s~ ~y~Besi~s~")
 			else
