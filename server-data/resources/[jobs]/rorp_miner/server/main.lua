@@ -55,7 +55,7 @@ AddEventHandler("rorp_miner:reward", function(itemName,itemAmount)
 end)
 
 -- Server Callback to get stone count & remove stone:
- ,function(source,cb,itemReq, itemReqAmount)
+ ESX.RegisterServerCallback("rorp_miner:required",function(source,cb,itemReq, itemReqAmount)
 	local xPlayer = ESX.GetPlayerFromId(source)
 	if xPlayer.getInventoryItem(itemReq).count >= itemReqAmount  then
 		xPlayer.removeInventoryItem(itemReq, itemReqAmount)
