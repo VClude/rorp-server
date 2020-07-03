@@ -554,7 +554,7 @@ RegisterNetEvent("carremote:toggleEngineInside")
 AddEventHandler("carremote:toggleEngineInside", function(vehicle)
   local engineStatus = GetIsVehicleEngineRunning(vehicle)
   
-	if engineStatus >= 1 then
+	if engineStatus then
 		engineOffInside(vehicle)
 	else
 		engineOnInside(vehicle)
@@ -585,9 +585,12 @@ AddEventHandler("carremote:clientEngines", function(vehicleNetId, value)
     if vehicle then
       if DoesEntityExist(vehicle) then
         if value == 1 then
-          SetVehicleEngineOn(vehicle, true, true, false)
+          SetVehicleEngineOn(vehicle, true, true, true)
         else
-          SetVehicleEngineOn(vehicle, false, false, false)
+          local engineStatus = GetIsVehicleEngineRunning(vehicle)
+          if engineStatus then
+            SetVehicleEngineOn(vehicle, false, true, true)
+          end
         end
       end
     end
@@ -850,7 +853,7 @@ end
 
 function engineOnInside(vehicle)
   ESX.ShowNotification(_U('engine_on'))
-  SetVehicleEngineOn(vehicle, true, true, false)
+  SetVehicleEngineOn(vehicle, true, false, true)
 
   local vehicleNetId = VehToNet(vehicle)
   TriggerServerEvent("carremote:serverEngines", vehicleNetId, 1)
@@ -868,7 +871,7 @@ function engineOnOutside(vehicle)
   local ped = GetPlayerPed(-1)
   ClearPedTasks(ped)
   playAnimation()
-  SetVehicleEngineOn(vehicle, true, true, false)
+  SetVehicleEngineOn(vehicle, true, true, true)
 
   local vehicleNetId = VehToNet(vehicle)
   TriggerServerEvent("carremote:serverEngines", vehicleNetId, 1)
@@ -878,7 +881,7 @@ function engineOffOutside(vehicle)
   local ped = GetPlayerPed(-1)
   ClearPedTasks(ped)
   playAnimation()
-  SetVehicleEngineOn(vehicle, false, false, false)
+  SetVehicleEngineOn(vehicle, false, true, true)
 
   local vehicleNetId = VehToNet(vehicle)
   TriggerServerEvent("carremote:serverEngines", vehicleNetId, 0)

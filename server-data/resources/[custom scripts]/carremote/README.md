@@ -4,7 +4,7 @@
 Car Remote
 
 ## Version
-2.0.3
+2.0.4
 
 ## Requirements
 * [es_extended](https://github.com/ESX-Org/es_extended)
