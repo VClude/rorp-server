@@ -56,7 +56,7 @@ Config.Miner = {
             Blip = true,
             Size = {x = 5.0, y = 5.0, z = 1.0},
             Color = {r = 204, g = 204, b = 0},
-            Type = 'wash',
+            Type = 'work',
             Hint = 'Tekan ~INPUT_CONTEXT~ mencuci batu',
             Marker = 1,
         },
