@@ -75,14 +75,14 @@ AddEventHandler("rorp_miner:rewardSmelting", function()
 	if rewardChance == 1 then
 		if xPlayer.canCarryItem("diamond", 1) then
 			xPlayer.addInventoryItem("diamond", 1)
-			TriggerClientEvent("esx:showNotification",source,"Kamu mendapatkan ~r~1x~s~ ~y~Berlian~s~")
+			TriggerClientEvent("esx:showNotification",source,"Kamu mendapatkan ~r~1~s~x ~y~Berlian~s~")
 		else
 			TriggerClientEvent("esx:showNotification",source,"Inventory kamu sudah penuh")
 		end
 	elseif rewardChance == 2 then
 		if xPlayer.canCarryItem("ruby", 1) then
 			xPlayer.addInventoryItem("ruby", 1)
-			TriggerClientEvent("esx:showNotification",source,"Kamu mendapatkan ~r~1x~s~ ~y~Ruby~s~")
+			TriggerClientEvent("esx:showNotification",source,"Kamu mendapatkan ~r~1~s~x ~y~Ruby~s~")
 		else
 			TriggerClientEvent("esx:showNotification",source,"Inventory kamu sudah penuh")
 		end
@@ -91,14 +91,14 @@ AddEventHandler("rorp_miner:rewardSmelting", function()
 		if firstChance == 1 then
 			if xPlayer.canCarryItem("gold", 1) then
 				xPlayer.addInventoryItem("gold", 1)
-				TriggerClientEvent("esx:showNotification",source,"Kamu mendapatkan ~r~1x~s~ ~y~Emas~s~")
+				TriggerClientEvent("esx:showNotification",source,"Kamu mendapatkan ~r~1~s~x ~y~Emas~s~")
 			else
 				TriggerClientEvent("esx:showNotification",source,"Inventory kamu sudah penuh")
 			end
 		elseif firstChance == 2 or firstChance == 3 then
 			if xPlayer.canCarryItem("silver", 2) then
 				xPlayer.addInventoryItem("silver", 2)
-				TriggerClientEvent("esx:showNotification",source,"Kamu mendapatkan ~r~2x~s~ ~y~Perak~s~")
+				TriggerClientEvent("esx:showNotification",source,"Kamu mendapatkan ~r~2~s~ x~y~Perak~s~")
 			else
 				TriggerClientEvent("esx:showNotification",source,"Inventory kamu sudah penuh")
 			end
@@ -108,14 +108,14 @@ AddEventHandler("rorp_miner:rewardSmelting", function()
 		if secondChance == 1 then
 			if xPlayer.canCarryItem("copper", 3) then
 				xPlayer.addInventoryItem("copper", 3)
-				TriggerClientEvent("esx:showNotification",source,"Kamu mendapatkan ~r~3x~s~ ~y~Tembaga~s~")
+				TriggerClientEvent("esx:showNotification",source,"Kamu mendapatkan ~r~3~s~x ~y~Tembaga~s~")
 			else
 				TriggerClientEvent("esx:showNotification",source,"Inventory kamu sudah penuh")
 			end
 		else
 			if xPlayer.canCarryItem("iron", 5) then
 				xPlayer.addInventoryItem("iron", 5)
-				TriggerClientEvent("esx:showNotification",source,"Kamu mendapatkan ~r~7x~s~ ~y~Besi~s~")
+				TriggerClientEvent("esx:showNotification",source,"Kamu mendapatkan ~r~5~s~x ~y~Besi~s~")
 			else
 				TriggerClientEvent("esx:showNotification",source,"Inventory kamu sudah penuh")
 			end

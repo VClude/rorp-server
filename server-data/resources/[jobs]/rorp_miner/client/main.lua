@@ -537,33 +537,46 @@ function SmeltingEvent()
 	Citizen.Wait(200)
 
 	ESX.TriggerServerCallback("rorp_miner:required",function(hasWashedStone)
-		if hasWashedStone then
-			TriggerEvent("mythic_progressbar:client:progress", {
-				name = "on_working",
-				duration = 20000,
-				label = "Tekan 'X' Untuk Cancel",
-				useWhileDead = false,
-				canCancel = true,
-				controlDisables = {
-					disableMovement = true,
-					disableCarMovement = true,
-					disableMouse = false,
-					disableCombat = true,
-				},
-				animation = {
-					task = "CODE_HUMAN_MEDIC_TIME_OF_DEATH",
-				},
-				prop = {
-					
-				},
-			}, function(status)
-				if not status then
-					TriggerServerEvent("rorp_miner:rewardSmelting")
-					FreezeEntityPosition(playerPed, false)
-					currentlySmelting = false
-				end
-			end)		
+		if hasWashedStone then	
+			exports['progressBars']:startUI((20000), "Melebur Batu...")
+			TaskStartScenarioInPlace(playerPed, "CODE_HUMAN_MEDIC_TIME_OF_DEATH", 0, true)
+			Citizen.Wait(20000)
+			TriggerServerEvent("rorp_miner:rewardSmelting")
+			FreezeEntityPosition(playerPed, false)
+			currentlySmelting = false
+		else
+
 		end
-	end,'washed_stone',5)	
+	end, 'washed_stone',5)
+
+	-- ESX.TriggerServerCallback("rorp_miner:required",function(hasWashedStone)
+	-- 	if hasWashedStone then
+	-- 		TriggerEvent("mythic_progressbar:client:progress", {
+	-- 			name = "on_working",
+	-- 			duration = 20000,
+	-- 			label = "Tekan 'X' Untuk Cancel",
+	-- 			useWhileDead = false,
+	-- 			canCancel = true,
+	-- 			controlDisables = {
+	-- 				disableMovement = true,
+	-- 				disableCarMovement = true,
+	-- 				disableMouse = false,
+	-- 				disableCombat = true,
+	-- 			},
+	-- 			animation = {
+	-- 				task = "CODE_HUMAN_MEDIC_TIME_OF_DEATH",
+	-- 			},
+	-- 			prop = {
+					
+	-- 			},
+	-- 		}, function(status)
+	-- 			if not status then
+	-- 				TriggerServerEvent("rorp_miner:rewardSmelting")
+	-- 				FreezeEntityPosition(playerPed, false)
+	-- 				currentlySmelting = false
+	-- 			end
+	-- 		end)		
+	-- 	end
+	-- end,'washed_stone',5)	
 end
 
