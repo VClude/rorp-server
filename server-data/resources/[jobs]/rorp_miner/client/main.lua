@@ -531,13 +531,13 @@ function SmeltingEvent()
 	currentlySmelting = true
 	local playerPed = PlayerPedId()
 	local coords = GetEntityCoords(playerPed)
-	
-	FreezeEntityPosition(playerPed, true)
-	SetCurrentPedWeapon(playerPed, GetHashKey('WEAPON_UNARMED'))
-	Citizen.Wait(200)
 
 	ESX.TriggerServerCallback("rorp_miner:required",function(hasWashedStone)
 		if hasWashedStone then	
+			FreezeEntityPosition(playerPed, true)
+			SetCurrentPedWeapon(playerPed, GetHashKey('WEAPON_UNARMED'))
+			Citizen.Wait(200)
+
 			exports['progressBars']:startUI((20000), "Melebur Batu...")
 			TaskStartScenarioInPlace(playerPed, "CODE_HUMAN_MEDIC_TIME_OF_DEATH", 0, true)
 			Citizen.Wait(20000)
@@ -546,7 +546,7 @@ function SmeltingEvent()
 			FreezeEntityPosition(playerPed, false)
 			currentlySmelting = false
 		else
-
+			ESX.ShowNotification('Ga ada washed stone')
 		end
 	end, 'washed_stone',5)	
 end
