@@ -47,14 +47,14 @@ Config = {
 
   -- Purchase room prices.
   Prices = {
-    PinkCage = 500,
-    Bilingsgate = 250,
-    Motoa = 350,
-    Rancho = 125,
-    VonCrastenburg = 250,
-    DreamView = 500,
-    CrownJewels = 1000,
-    BayviewLodge = 500,
+    PinkCage = 50000,
+    Bilingsgate = 25000,
+    Motoa = 35000,
+    Rancho = 12500,
+    VonCrastenburg = 25000,
+    DreamView = 50000,
+    CrownJewels = 100000,
+    BayviewLodge = 50000,
     -- Eastern = 250,
   },
 

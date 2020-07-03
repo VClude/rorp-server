@@ -13,7 +13,7 @@ local playersHealing, deadPlayers = {}, {}
 local bedsTaken = {}
 
 local injuryBasePrice = 100
-
+local _rPrice = Config.ReviveReward * 2
 TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 
 TriggerEvent('esx_phone:registerNumber', 'ambulance', _U('alert_ambulance'), true, true)
@@ -31,9 +31,16 @@ AddEventHandler('esx_ambulancejob:revive', function(playerId)
 			if deadPlayers[playerId] then
 				xPlayer.showNotification(_U('revive_complete_award', xTarget.name, Config.ReviveReward))
 				xPlayer.addMoney(Config.ReviveReward)
-				xTarget.triggerEvent('esx_ambulancejob:revive')
-				
-				deadPlayers[playerId] = nil
+				if xTarget.getMoney() >= _rPrice then
+					xTarget.removeAccountMoney('bank', _rPrice)
+					TriggerClientEvent('esx:ShowNotification', playerId, "Anda telah Membayar biaya Revive sebesar Rp." .. _rPrice)
+					xTarget.triggerEvent('esx_ambulancejob:revive')
+					deadPlayers[playerId] = nil
+				else
+					TriggerClientEvent('esx:ShowNotification', playerId, "Anda tidak mampu Membayar biaya Revive, silahkan Lakukan RP Pembayaran")
+					xTarget.triggerEvent('esx_ambulancejob:revive')
+					deadPlayers[playerId] = nil
+				end
 			else
 				xPlayer.showNotification(_U('player_not_unconscious'))
 			end
@@ -391,3 +398,23 @@ RegisterServerEvent('esx_ambulancejob:server:LeaveBed')
 AddEventHandler('esx_ambulancejob:server:LeaveBed', function(id)
     beds[id].taken = false
 end)
+
+-- AddEventHandler('chatMessage', function(source, name, msg)
+--     sm = stringsplit(msg, " ");
+--     if sm[1] == "/blips" then
+--         CancelEvent()
+--         TriggerClientEvent('mostraBlips', source)
+--     end
+-- end)
+
+function stringsplit(inputstr, sep)
+    if sep == nil then
+        sep = "%s"
+    end
+    local t={} ; i=1
+    for str in string.gmatch(inputstr, "([^"..sep.."]+)") do
+        t[i] = str
+        i = i + 1
+    end
+    return t
+end

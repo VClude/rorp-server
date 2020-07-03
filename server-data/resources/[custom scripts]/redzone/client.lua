@@ -1,5 +1,5 @@
 Citizen.CreateThread(function()
-local blips = AddBlipForRadius(552.03, 5430.21, 670.21 , 3500.0) 
+local blips = AddBlipForRadius(355.28, 5623.84, 700.15 , 3500.0) 
 
 SetBlipHighDetail(blips, true)
 SetBlipColour(blips, 1)
