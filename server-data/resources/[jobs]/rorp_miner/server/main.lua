@@ -123,3 +123,20 @@ AddEventHandler("rorp_miner:rewardSmelting", function()
 	end
 	
 end)
+
+-- fungsi global reward buat semua job
+RegisterServerEvent("rorp_miner:alljobPayout")
+AddEventHandler("rorp_miner:alljobPayout", function(itemName, itemPrice)
+	local xPlayer = ESX.GetPlayerFromId(source)
+	local itemLabel = ESX.GetItemLabel(itemName)
+	local itemAmount = xPlayer.getInventoryItem(itemName).count
+	local price = itemPrice * itemAmount
+	local name = itemName
+		if itemAmount > 0 then
+			xPlayer.removeInventoryItem(itemName, itemAmount)
+			xPlayer.addMoney(price)
+			TriggerClientEvent("esx:showNotification",source,"Kamu menjual ~r~"..itemName.."~s~x Sejumlah ~y~"..itemAmount.."~s~")
+		else
+			TriggerClientEvent("esx:showNotification",source,"anda tidak mempunyai "..itemName.." untuk dijual")
+		end
+end)
