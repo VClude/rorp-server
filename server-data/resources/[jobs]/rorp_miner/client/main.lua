@@ -48,40 +48,40 @@ AddEventHandler('rorp_miner:hasExitedMarker', function()
 	isInMarker = false
 end)
 
--- Core Thread Function:
-Citizen.CreateThread(function()
-	while true do
-        Citizen.Wait(5)
-		local coords = GetEntityCoords(GetPlayerPed(-1))
-		for k,v in pairs(Config.MiningSpots) do
-			local distance = GetDistanceBetweenCoords(coords, v.Pos.x, v.Pos.y, v.Pos.z, true)
-			if distance <= 20.0 and not currentlyMining then
-				DrawMarker(Config.MiningMarker, v.Pos.x, v.Pos.y, v.Pos.z-0.97, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.MiningMarkerScale.x, Config.MiningMarkerScale.y, Config.MiningMarkerScale.z, Config.MiningMarkerColor.r,Config.MiningMarkerColor.g,Config.MiningMarkerColor.b,Config.MiningMarkerColor.a, false, true, 2, true, false, false, false)					
-			else
-				Citizen.Wait(1000)
-			end	
-			if distance <= 1.0 and not currentlyMining then
-				DrawText3Ds(v.Pos.x, v.Pos.y, v.Pos.z, Config.DrawMining3DText)
-				if IsControlJustPressed(0, Config.KeyToStartMining) then
-					local closestPlayer, closestDistance = ESX.Game.GetClosestPlayer()
-                    if closestPlayer == -1 or closestDistance >= 1 then
-						-- ESX.TriggerServerCallback("esx_MinerJob:getPickaxe", function(pickaxe)
-						-- 	if pickaxe then
-						-- 		MiningEvent()	
-						-- 	else
-						-- 		ESX.ShowNotification("You need a ~y~pickaxe~s~ to ~b~mine~s~ here!")
-						-- 	end
-                        -- end)
-                        print('Menambang')
-					else
-						ESX.ShowNotification("You are too close to another player")
-					end
-					Citizen.Wait(300)
-				end
-			end
-		end		
-	end
-end)
+-- -- Core Thread Function:
+-- Citizen.CreateThread(function()
+-- 	while true do
+--         Citizen.Wait(5)
+-- 		local coords = GetEntityCoords(GetPlayerPed(-1))
+-- 		for k,v in pairs(Config.MiningSpots) do
+-- 			local distance = GetDistanceBetweenCoords(coords, v.Pos.x, v.Pos.y, v.Pos.z, true)
+-- 			if distance <= 20.0 and not currentlyMining then
+-- 				DrawMarker(Config.MiningMarker, v.Pos.x, v.Pos.y, v.Pos.z-0.97, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.MiningMarkerScale.x, Config.MiningMarkerScale.y, Config.MiningMarkerScale.z, Config.MiningMarkerColor.r,Config.MiningMarkerColor.g,Config.MiningMarkerColor.b,Config.MiningMarkerColor.a, false, true, 2, true, false, false, false)					
+-- 			else
+-- 				Citizen.Wait(1000)
+-- 			end	
+-- 			if distance <= 1.0 and not currentlyMining then
+-- 				DrawText3Ds(v.Pos.x, v.Pos.y, v.Pos.z, Config.DrawMining3DText)
+-- 				if IsControlJustPressed(0, Config.KeyToStartMining) then
+-- 					local closestPlayer, closestDistance = ESX.Game.GetClosestPlayer()
+--                     if closestPlayer == -1 or closestDistance >= 1 then
+-- 						ESX.TriggerServerCallback("esx_MinerJob:getPickaxe", function(pickaxe)
+-- 							if pickaxe then
+-- 								MiningEvent()	
+-- 							else
+-- 								ESX.ShowNotification("You need a ~y~pickaxe~s~ to ~b~mine~s~ here!")
+-- 							end
+--                         end)
+--                         print('Menambang')
+-- 					else
+-- 						ESX.ShowNotification("You are too close to another player")
+-- 					end
+-- 					Citizen.Wait(300)
+-- 				end
+-- 			end
+-- 		end		
+-- 	end
+-- end)
 
 -- Show top left hint
 Citizen.CreateThread(function()
