@@ -106,27 +106,27 @@ Citizen.CreateThread(function()
 					hintToDisplay = currentZone.Hint
 					hintIsShowed = true
 				elseif currentZone.Type == 'vehdelete' and onDuty then
-					-- local playerPed = PlayerPedId()
+					local playerPed = PlayerPedId()
 
-					-- if IsPedInAnyVehicle(playerPed, false) then
-					-- 	local vehicle = GetVehiclePedIsIn(playerPed, false)
-					-- 	local driverPed = GetPedInVehicleSeat(vehicle, -1)
-					-- 	local plate = ESX.Math.Trim(GetVehicleNumberPlateText(vehicle))
+					if IsPedInAnyVehicle(playerPed, false) then
+						local vehicle = GetVehiclePedIsIn(playerPed, false)
+						local driverPed = GetPedInVehicleSeat(vehicle, -1)
+						local plate = ESX.Math.Trim(GetVehicleNumberPlateText(vehicle))
 
-					-- 	if playerPed == driverPed then
-					-- 		if myPlate[plate] then
-					-- 			hintToDisplay = currentZone.Hint
-					-- 		end
-					-- 	else
-					-- 		hintToDisplay = _U('not_your_vehicle')
-					-- 	end
-					-- else
-					-- 	hintToDisplay = _U('in_vehicle')
-					-- end
-					-- hintIsShowed = true
-				-- elseif onDuty and currentZone.Spawner ~= spawner then
-				-- 	hintToDisplay = _U('wrong_point')
-				-- 	hintIsShowed = true
+						if playerPed == driverPed then
+							if myPlate[plate] then
+								hintToDisplay = currentZone.Hint
+							end
+						else
+							hintToDisplay = _U('not_your_vehicle')
+						end
+					else
+						hintToDisplay = _U('in_vehicle')
+					end
+					hintIsShowed = true
+				elseif onDuty and currentZone.Spawner ~= spawner then
+					hintToDisplay = _U('wrong_point')
+					hintIsShowed = true
 				else
 					hintToDisplay = nil
 					hintIsShowed = false
@@ -249,7 +249,7 @@ AddEventHandler('rorp_miner:action', function(job, zone, zoneIndex)
 			end
 		end
 
-		if jobObject and spawnPoint and vehicle and ESX.Game.IsSpawnPointClear(spawnPoint.Coords, 5.0) and isPedOnFoot(PlayerPedId()) then
+		if jobObject and spawnPoint and vehicle and ESX.Game.IsSpawnPointClear(spawnPoint.Coords, 5.0) then
             spawnVehicle(spawnPoint, vehicle, zone.Caution)
 		else
 			ESX.ShowNotification('Spawn Blocked')
