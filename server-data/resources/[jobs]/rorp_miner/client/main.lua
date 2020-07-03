@@ -319,47 +319,43 @@ AddEventHandler('rorp_miner:action', function(job, zone, zoneIndex)
 				end
 			end
 		end
-	-- elseif zone.Type == 'delivery' then
-	-- 	if Blips.delivery then
-	-- 		RemoveBlip(Blips.delivery)
-	-- 		Blips.delivery = nil
-	-- 	end
+	elseif zone.Type == 'delivery' then
 
-	-- 	hintToDisplay = nil
-	-- 	hintIsShowed = false
-	-- 	onWork = true
-	-- 	local playerPed = PlayerPedId()
-	-- 	local coords = GetEntityCoords(playerPed)
+		hintToDisplay = nil
+		hintIsShowed = false
+		onWork = true
+		local playerPed = PlayerPedId()
+		local coords = GetEntityCoords(playerPed)
 
-	-- 	SetCurrentPedWeapon(playerPed, GetHashKey('WEAPON_UNARMED'))
-	-- 	Citizen.Wait(200)
+		SetCurrentPedWeapon(playerPed, GetHashKey('WEAPON_UNARMED'))
+		Citizen.Wait(200)
 
-	-- 	TriggerEvent("mythic_progressbar:client:progress", {
-	-- 		name = "on_delivery",
-	-- 		duration = 20000,
-	-- 		label = "Tekan 'X' Untuk Cancel",
-	-- 		useWhileDead = false,
-	-- 		canCancel = true,
-	-- 		controlDisables = {
-	-- 			disableMovement = true,
-	-- 			disableCarMovement = true,
-	-- 			disableMouse = false,
-	-- 			disableCombat = true,
-	-- 		},
-	-- 		animation = {
-	-- 			task = "WORLD_HUMAN_CLIPBOARD",
-	-- 		},
-	-- 		prop = {
+		TriggerEvent("mythic_progressbar:client:progress", {
+			name = "on_delivery",
+			duration = 20000,
+			label = "Tekan 'X' Untuk Cancel",
+			useWhileDead = false,
+			canCancel = true,
+			controlDisables = {
+				disableMovement = true,
+				disableCarMovement = true,
+				disableMouse = false,
+				disableCombat = true,
+			},
+			animation = {
+				task = "WORLD_HUMAN_CLIPBOARD",
+			},
+			prop = {
 				
-	-- 		},
-	-- 	}, function(status)
-	-- 		if not status then
-	-- 			for k,v in pairs(zone.Item) do
-	-- 				TriggerServerEvent("esx_jobs:alljobPayout",v.requires,v.price)
-	-- 				onWork = false
-	-- 			end
-	-- 		end
-	-- 	end)
+			},
+		}, function(status)
+			if not status then
+				for k,v in pairs(zone.Item) do
+					TriggerServerEvent("esx_jobs:alljobPayout",v.requires,v.price)
+					onWork = false
+				end
+			end
+		end)
 	end
 end)
 

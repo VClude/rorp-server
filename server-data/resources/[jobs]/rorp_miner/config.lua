@@ -83,6 +83,12 @@ Config.Miner = {
             Type = 'work',
             Hint = 'Tekan ~INPUT_CONTEXT~ menjual tembaga',
             Marker = 1,
+            Item = {
+                {
+                    price = 600,
+                    requires = 'copper',
+                }
+            },
         },
 
         IronDelivery = {
@@ -95,6 +101,12 @@ Config.Miner = {
             Type = 'work',
             Hint = 'Tekan ~INPUT_CONTEXT~ menjual besi',
             Marker = 1,
+            Item = {
+                {
+                    price = 600,
+                    requires = 'Iron',
+                }
+            },
         },
 
         GoldDelivery = {
@@ -106,7 +118,13 @@ Config.Miner = {
             Color = {r = 204, g = 204, b = 0},
             Type = 'work',
             Hint = 'Tekan ~INPUT_CONTEXT~ menjual emas',
-            Marker = 1,        
+            Marker = 1,
+            Item = {
+                {
+                    price = 600,
+                    requires = 'gold',
+                }
+            },        
         },
 
         DiamondDelivery = {
@@ -119,6 +137,12 @@ Config.Miner = {
             Type = 'work',
             Hint = 'Tekan ~INPUT_CONTEXT~ menjual berlian',
             Marker = 1,
+            Item = {
+                {
+                    price = 600,
+                    requires = 'diamond',
+                }
+            },
         },
 
         VehicleSpawner = {
