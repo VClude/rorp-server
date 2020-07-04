@@ -263,7 +263,7 @@ AddEventHandler('rorp_miner:action', function(job, zone, zoneIndex)
 
 								local giveBack = ESX.Math.Round(vehicleHealth / vehicleMaxHealth, 2)
 
-								TriggerServerEvent('esx_jobs:caution', 'give_back', giveBack, 0, 0)
+								TriggerServerEvent('rorp_miner:caution', 'kembalikan', giveBack, 0, 0)
 								DeleteVehicle(GetVehiclePedIsIn(playerPed, false))
 
 								if v.Teleport ~= 0 then
@@ -292,28 +292,25 @@ AddEventHandler('rorp_miner:action', function(job, zone, zoneIndex)
 		local playerPed = PlayerPedId()
 		local coords = GetEntityCoords(playerPed)
 
-		for k,v in pairs(zone.Items) do
-			local reqItems = v.requires
-			local itemsPrice = v.price
-		end
-
 		SetCurrentPedWeapon(playerPed, GetHashKey('WEAPON_UNARMED'))
 		Citizen.Wait(200)
 
-		ESX.TriggerServerCallback('rorp_miner:required',function(hasRequired)
-		
-			if hasRequired then
-				exports['progressBars']:startUI((20000), "Delivery...")
-				TaskStartScenarioInPlace(playerPed, "WORLD_HUMAN_CLIPBOARD", 0, true)
-				Citizen.Wait(20000)
-				TriggerServerEvent("rorp_miner:Payout",reqItems,itemsPrice)	
-			else
-				ESX.ShowNotification("Kamu membutuhkan ~y~"..reqItems)
-			end
-			ClearPedTasks(playerPed)
-			FreezeEntityPosition(playerPed, false)
-			onWork = false	
-		end,reqItems,1)
+		for k,v in pairs(zone.Items) do
+			ESX.TriggerServerCallback("rorp_miner:required",function(hasRequired)
+			
+				if hasRequired then
+					exports['progressBars']:startUI((20000), "Delivery...")
+					TaskStartScenarioInPlace(playerPed, "WORLD_HUMAN_CLIPBOARD", 0, true)
+					Citizen.Wait(20000)
+					TriggerServerEvent("rorp_miner:Payout",v.requires,v.price)	
+				else
+					ESX.ShowNotification("Kamu membutuhkan ~y~"..v.requires)
+				end
+				ClearPedTasks(playerPed)
+				FreezeEntityPosition(playerPed, false)
+				onWork = false	
+			end,v.requires,1)
+		end
 		-- TriggerEvent("mythic_progressbar:client:progress", {
 		-- 	name = "on_delivery",
 		-- 	duration = 20000,
@@ -377,7 +374,7 @@ end
 function spawnVehicle(spawnPoint, vehicle, vehicleCaution)
 	hintToDisplay = nil
 	hintIsShowed = false
-	TriggerServerEvent('rorp_miner:caution', 'take', vehicleCaution, spawnPoint, vehicle)
+	TriggerServerEvent('rorp_miner:caution', 'ambil', vehicleCaution, spawnPoint, vehicle)
 end
 
 RegisterNetEvent('rorp_miner:spawnJobVehicle')

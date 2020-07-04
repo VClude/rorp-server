@@ -8,24 +8,22 @@ RegisterNetEvent('rorp_miner:caution')
 AddEventHandler('rorp_miner:caution', function(cautionType, cautionAmount, spawnPoint, vehicle)
 	local xPlayer = ESX.GetPlayerFromId(source)
 
-	if cautionType == 'take' then
+	if cautionType == 'ambil' then
 		if cautionAmount <= Config.MaxCaution and cautionAmount > 0 then
 			TriggerEvent('esx_addonaccount:getAccount', 'caution', xPlayer.identifier, function(account)
 				if xPlayer.getAccount('bank').money >= cautionAmount then
 					xPlayer.removeAccountMoney('bank', cautionAmount)
 					account.addMoney(cautionAmount)
-                    -- xPlayer.showNotification(_U('bank_deposit_taken', ESX.Math.GroupDigits(cautionAmount)))
-                    xPlayer.showNotification(cautionAmount)
+                    xPlayer.showNotification(_U('bank_deposit_taken', ESX.Math.GroupDigits(cautionAmount)))
 					TriggerClientEvent('rorp_miner:spawnJobVehicle', xPlayer.source, spawnPoint, vehicle)
 				else
-                    -- xPlayer.showNotification(_U('caution_afford', ESX.Math.GroupDigits(cautionAmount)))
-                    xPlayer.showNotification(cautionAmount)
+                    xPlayer.showNotification(_U('caution_afford', ESX.Math.GroupDigits(cautionAmount)))                  
 				end
 			end)
 		elseif cautionAmount == 0 then
 			TriggerClientEvent('rorp_miner:spawnJobVehicle', xPlayer.source, spawnPoint, vehicle)
 		end
-	elseif cautionType == 'give_back' then
+	elseif cautionType == 'kembalikan' then
 		if cautionAmount <= 1 and cautionAmount > 0 then
 			TriggerEvent('esx_addonaccount:getAccount', 'caution', xPlayer.identifier, function(account)
 				local caution = account.money
@@ -33,8 +31,7 @@ AddEventHandler('rorp_miner:caution', function(cautionType, cautionAmount, spawn
 	
 				xPlayer.addAccountMoney('bank', toGive)
 				account.removeMoney(toGive)
-                -- TriggerClientEvent('esx:showNotification', source, _U('bank_deposit_returned', ESX.Math.GroupDigits(toGive)))
-                TriggerClientEvent('esx:showNotification', source, toGive)
+                TriggerClientEvent('esx:showNotification', source, _U('bank_deposit_returned', ESX.Math.GroupDigits(toGive)))
 			end)
 		end
 	end
