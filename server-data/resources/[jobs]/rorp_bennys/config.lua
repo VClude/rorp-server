@@ -102,7 +102,7 @@ Config.Zones = {
 
 		Spawner = vector3(-171.45, -1295.49, 31.14),
 
-		InsideShop = vector3(183.91, -1302.92, 31.29),
+		InsideShop = vector3(-157.02, -1282.5, 47.9),
 
 		SpawnPoints = {
 
