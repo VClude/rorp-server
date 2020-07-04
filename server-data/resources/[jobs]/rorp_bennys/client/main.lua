@@ -99,6 +99,7 @@ end)
 
 AddEventHandler("rorp_bennys:hasExitedMarker", function(zone)
 	if not isInShopMenu then
+		print(isInShopMenu)
 		ESX.UI.Menu.CloseAll()
 	end
 	CurrentAction = nil

@@ -1,5 +1,4 @@
 local spawnedVehicles = {}
-local isInShopMenu
 
 function OpenVehicleSpawnerMenu(type)
 	local playerCoords = GetEntityCoords(PlayerPedId())
