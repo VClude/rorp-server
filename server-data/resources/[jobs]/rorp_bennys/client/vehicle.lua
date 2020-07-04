@@ -47,6 +47,7 @@ function OpenVehicleSpawnerMenu(type)
             else
                 ESX.ShowNotification('BACOT')
             end
+
 		elseif data.current.action == 'garage' then
 			local garage = {}
 
@@ -110,7 +111,8 @@ function OpenVehicleSpawnerMenu(type)
 				else
 					exports['mythic_notify']:DoCustomHudText('error', 'Tidak ada kendaraan', 2500)
 				end
-			end, type)
+            end, type)
+             
 		elseif data.current.action == 'store_garage' then
 			StoreNearbyVehicle(playerCoords)
 		end

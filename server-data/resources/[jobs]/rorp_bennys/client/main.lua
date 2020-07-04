@@ -14,7 +14,7 @@ local Keys = {
 ESX                           = nil
 local HasAlreadyEnteredMarker, LastZone = false, nil
 local CurrentlyTowedVehicle, Blips = nil, {}
-local isDead, isBusy = false, false
+local isDead, isBusy, isInShopMenu = false, false, false
 local PlayerData              = {}
 local isInMarker  = false
 local currentZone = nil
@@ -28,8 +28,6 @@ local currentlyGetTire = false
 local CurrentAction, CurrentActionPos, CurrentActionMsg, CurrentActionData = nil, "", {}
 
 local Blips = {}
-
-local isInShopMenu = false
 
 local Vehicles =		{}
 local lsMenuIsShowed	= false
