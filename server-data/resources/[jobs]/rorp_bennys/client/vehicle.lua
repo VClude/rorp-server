@@ -1,4 +1,5 @@
 local spawnedVehicles = {}
+local isInShopMenu
 
 function OpenVehicleSpawnerMenu(type)
 	local playerCoords = GetEntityCoords(PlayerPedId())
@@ -121,8 +122,8 @@ end
 
 
 function OpenVehicleShopMenu(elements, restoreCoords, shopCoords)
-    isInShopMenu = true
     local playerPed = PlayerPedId()
+    isInShopMenu = true
 	ESX.UI.Menu.Open("default",GetCurrentResourceName(),"vehicle_shop",
 		{
 			title = "Buy Company Car",
