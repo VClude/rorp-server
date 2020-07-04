@@ -67,7 +67,7 @@ AddEventHandler('esx:onPlayerSpawn', function()
 
 			ESX.TriggerServerCallback('esx_ambulancejob:getDeathStatus', function(shouldDie)
 				if shouldDie then
-					Citizen.Wait(2000)
+					Citizen.Wait(1000)
 					exports['mythic_notify']:DoCustomHudText('inform', _U('combatlog_message'), 5000)
 					SetEntityHealth(GetPlayerPed(-1),0)
 					-- RemoveItemsAfterRPDeath()					
