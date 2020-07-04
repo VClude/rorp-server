@@ -124,7 +124,7 @@ end
 
 function OpenVehicleShopMenu(elements, restoreCoords, shopCoords)
     local playerPed = PlayerPedId()
-    isInShopMenu = true
+    diMenuBeliMobil = true
 	ESX.UI.Menu.Open("default",GetCurrentResourceName(),"vehicle_shop",{
         title = "Buy Company Car",
         align = "bottom-right",
@@ -147,7 +147,7 @@ function OpenVehicleShopMenu(elements, restoreCoords, shopCoords)
                     if bought then
                         exports['mythic_notify']:SendAlert('success', 'You bought a vehicle ' .. data.current.name .. ' for $' .. ESX.Math.GroupDigits(data.current.price) .. '.', 5000)
                         
-                        isInShopMenu = false
+                        diMenuBeliMobil = false
                         ESX.UI.Menu.CloseAll()
                         DeleteSpawnedVehicles()
                         FreezeEntityPosition(playerPed, false)
@@ -166,7 +166,7 @@ function OpenVehicleShopMenu(elements, restoreCoords, shopCoords)
 					menu2.close()
         end)
     end,function(data, menu)
-        isInShopMenu = false
+        diMenuBeliMobil = false
         ESX.UI.Menu.CloseAll()
         
         DeleteSpawnedVehicles()
@@ -322,7 +322,7 @@ Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
 
-        if isInShopMenu then
+        if diMenuBeliMobil then
             DisableControlAction(0, 75, true) -- Disable exit vehicle
             DisableControlAction(27, 75, true) -- Disable exit vehicle
         else

@@ -14,7 +14,7 @@ local Keys = {
 ESX                           = nil
 local HasAlreadyEnteredMarker, LastZone = false, nil
 local CurrentlyTowedVehicle, Blips = nil, {}
-local isDead, isBusy, isInShopMenu = false, false, false
+local isDead, isBusy, diMenuBeliMobil = false, false, false
 local PlayerData              = {}
 local isInMarker  = false
 local currentZone = nil
@@ -96,7 +96,7 @@ AddEventHandler("rorp_bennys:hasEnteredMarker", function(zone)
 end)
 
 AddEventHandler("rorp_bennys:hasExitedMarker", function(zone)
-	if not isInShopMenu then
+	if not diMenuBeliMobil then
 		ESX.UI.Menu.CloseAll()
 	end
 	CurrentAction = nil
