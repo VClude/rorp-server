@@ -59,9 +59,11 @@ AddEventHandler('esx:onPlayerSpawn', function()
 
 	if firstSpawn then
 		firstSpawn = false
+		ExecuteCommand('e T')
 		FreezeEntityPosition(PlayerPedId(), true)
-		Citizen.Wait(3000)
+		Citizen.Wait(5000)
 		FreezeEntityPosition(PlayerPedId(), false)
+		ClearPedTasks(GetPlayerPed(-1))
 
 		if Config.AntiCombatLog then
 			while not PlayerLoaded do
