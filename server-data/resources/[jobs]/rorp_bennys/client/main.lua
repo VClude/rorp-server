@@ -210,7 +210,7 @@ Citizen.CreateThread( function()
 					if CurrentAction == "cloakrooms_menu" then
 						OpenCloakRoomsMenu()
 					elseif CurrentAction == "vehicles_menu" then
-						OpenVehicleSpawnerMenu('car')
+						OpenVehicleSpawnerMenu("car")
 					elseif CurrentAction == "boss_menu" then
 						if  ESX.PlayerData.job and ESX.PlayerData.job.name == "bennys" and ESX.PlayerData.job.grade_name == 'boss' then
 							OpenBossMenu()
