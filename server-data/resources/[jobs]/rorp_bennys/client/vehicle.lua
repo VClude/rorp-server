@@ -123,117 +123,83 @@ end
 function OpenVehicleShopMenu(elements, restoreCoords, shopCoords)
     local playerPed = PlayerPedId()
     isInShopMenu = true
-	ESX.UI.Menu.Open("default",GetCurrentResourceName(),"vehicle_shop",
-		{
-			title = "Buy Company Car",
-			align = "bottom-right",
-			elements = elements
-		},
-		function(data, menu)
-			DeleteSpawnedVehicles()
-			WaitForVehicleToLoad(data.current.model)
-            ESX.Game.SpawnLocalVehicle(data.current.model,shopCoords,0.0,
-            
-            function(vehicle)
+	ESX.UI.Menu.Open("default",GetCurrentResourceName(),"vehicle_shop",{
+        title = "Buy Company Car",
+        align = "bottom-right",
+        elements = elements
+	},function(data, menu)
+        ESX.UI.Menu.Open("default",GetCurrentResourceName(),"vehicle_shop_confirm",{
+            title = "Really buy a vehicle " .. data.current.name .. " for $" .. data.current.price .. "?",
+            align = "bottom-right",
+            elements = {
+                {label = "No", value = "no"},
+                {label = "Yes", value = "yes"}
+        }}, function(data2, menu2)
+		    if data2.current.value == "yes" then
+                local newPlate = exports['t1ger_cardealer']:ProduceNumberPlate()
+                local vehicle = GetVehiclePedIsIn(playerPed, false)
+                local props = ESX.Game.GetVehicleProperties(vehicle)
+                props.plate = newPlate
 
-                table.insert(spawnedVehicles, vehicle)
-                TaskWarpPedIntoVehicle(playerPed, vehicle, -1)
-                FreezeEntityPosition(vehicle, true)
+                ESX.TriggerServerCallback("rorp_bennys:buyJobVehicle",function(bought)
+                    if bought then
+                        exports['mythic_notify']:SendAlert('success', 'You bought a vehicle ' .. data.current.name .. ' for $' .. ESX.Math.GroupDigits(data.current.price) .. '.', 5000)
+                        
+                        isInShopMenu = false
+                        ESX.UI.Menu.CloseAll()
+                        DeleteSpawnedVehicles()
+                        FreezeEntityPosition(playerPed, false)
+                        SetEntityVisible(playerPed, true)
 
-                if data.current.livery then
-                    SetVehicleModKit(vehicle, 0)
-                    SetVehicleLivery(vehicle, data.current.livery)
-                end
-			end)
-
-			ESX.UI.Menu.Open("default",GetCurrentResourceName(),"vehicle_shop_confirm",
-				{
-					title = "Really buy a vehicle " .. data.current.name .. " for $" .. data.current.price .. "?",
-					align = "bottom-right",
-					elements = {
-						{label = "No", value = "no"},
-						{label = "Yes", value = "yes"}
-					}
-				},
-
-				function(data2, menu2)
-					if data2.current.value == "yes" then
-						local newPlate = exports['t1ger_cardealer']:ProduceNumberPlate()
-						local vehicle = GetVehiclePedIsIn(playerPed, false)
-						local props = ESX.Game.GetVehicleProperties(vehicle)
-						props.plate = newPlate
-
-						ESX.TriggerServerCallback("rorp_bennys:buyJobVehicle",function(bought)
-                            if bought then
-                                exports['mythic_notify']:SendAlert('success', 'You bought a vehicle ' .. data.current.name .. ' for $' .. ESX.Math.GroupDigits(data.current.price) .. '.', 5000)
-                                isInShopMenu = false
-                                ESX.UI.Menu.CloseAll()
-                                DeleteSpawnedVehicles()
-                                FreezeEntityPosition(playerPed, false)
-                                SetEntityVisible(playerPed, true)
-
-                                ESX.Game.Teleport(playerPed, restoreCoords)
-                            else
-                                exports['mythic_notify']:SendAlert('error', 'Nemáš dostatek peněz na zakoupení vozidla.', 5000)
-                                menu2.close()
-                            end
-
-						end,props,data.current.type)
-					else
-						menu2.close()
-					end
-                end,
-                
-				function(data2, menu2)
+                        ESX.Game.Teleport(playerPed, restoreCoords)
+                    else
+                        exports['mythic_notify']:SendAlert('error', 'Nemáš dostatek peněz na zakoupení vozidla.', 5000)
+                        menu2.close()
+                    end
+                end,props,data.current.type)
+			else
+				menu2.close()
+			end
+        end,function(data2, menu2)
 					menu2.close()
-                end)
-        end,
+        end)
+    end,function(data, menu)
+        isInShopMenu = false
+        ESX.UI.Menu.CloseAll()
         
-		function(data, menu)
+        DeleteSpawnedVehicles()
+        FreezeEntityPosition(playerPed, false)
+        SetEntityVisible(playerPed, true)
 
-			isInShopMenu = false
-			ESX.UI.Menu.CloseAll()
-			DeleteSpawnedVehicles()
-			FreezeEntityPosition(playerPed, false)
-			SetEntityVisible(playerPed, true)
-			ESX.Game.Teleport(playerPed, restoreCoords)
-		end,
+        ESX.Game.Teleport(playerPed, restoreCoords)
+	end,function(data, menu)
+        DeleteSpawnedVehicles()
+        WaitForVehicleToLoad(data.current.model)
 
-		function(data, menu)
-			DeleteSpawnedVehicles()
-			WaitForVehicleToLoad(data.current.model)
-			ESX.Game.SpawnLocalVehicle(data.current.model,shopCoords,0.0,
+        ESX.Game.SpawnLocalVehicle(data.current.model,shopCoords,0.0,function(vehicle)
+            table.insert(spawnedVehicles, vehicle)
+            TaskWarpPedIntoVehicle(playerPed, vehicle, -1)
+            FreezeEntityPosition(vehicle, true)
 
-				function(vehicle)
-					table.insert(spawnedVehicles, vehicle)
-					TaskWarpPedIntoVehicle(playerPed, vehicle, -1)
-					FreezeEntityPosition(vehicle, true)
-
-					if data.current.livery then
-						SetVehicleModKit(vehicle, 0)
-						SetVehicleLivery(vehicle, data.current.livery)
-					end
-				end
-			)
-        end
-    )
+            if data.current.livery then
+                SetVehicleModKit(vehicle, 0)
+                SetVehicleLivery(vehicle, data.current.livery)
+            end
+		end)
+    end)
 
 
     WaitForVehicleToLoad(elements[1].model)
-	ESX.Game.SpawnLocalVehicle(elements[1].model,shopCoords,0.0,
+	ESX.Game.SpawnLocalVehicle(elements[1].model,shopCoords,0.0,function(vehicle)
+        table.insert(spawnedVehicles, vehicle)
+        TaskWarpPedIntoVehicle(playerPed, vehicle, -1)
+        FreezeEntityPosition(vehicle, true)
 
-		function(vehicle)
-			table.insert(spawnedVehicles, vehicle)
-			TaskWarpPedIntoVehicle(playerPed, vehicle, -1)
-			FreezeEntityPosition(vehicle, true)
-
-			if elements[1].livery then
-				SetVehicleModKit(vehicle, 0)
-				SetVehicleLivery(vehicle, elements[1].livery)
-			end
-		end
-
-	)
+        if elements[1].livery then
+            SetVehicleModKit(vehicle, 0)
+            SetVehicleLivery(vehicle, elements[1].livery)
+        end
+    end)
 end
 
 function WaitForVehicleToLoad(modelHash)
