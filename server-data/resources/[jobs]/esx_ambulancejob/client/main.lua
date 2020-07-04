@@ -398,7 +398,6 @@ function RemoveItemsAfterRPDeath()
 			RespawnPed(PlayerPedId(), playerpos, Config.RespawnPoint.heading)
 
 			TriggerServerEvent('esx:updateLastPosition', playerpos)
-			TriggerServerEvent('esx_ambulancejob:server:RequestBed')
 			Citizen.Wait(10)
 			StopScreenEffect('DeathFailOut')
 			DoScreenFadeIn(800)
