@@ -70,6 +70,10 @@ AddEventHandler("rorp_bennys:hasEnteredMarker", function(zone)
 		CurrentAction = "cloakrooms_menu"
 		CurrentActionMsg = "Tekan ~b~[E]~w~ untuk membuka Bennys Cloakroom"
 		CurrentActionData = {}
+	elseif zone == "Vehicles" then
+		CurrentAction = "vehicles_menu"
+		CurrentActionMsg = "Tekan ~b~[E]~w~ untuk membuka garasi Bennys"
+		CurrentActionData = {}
 	elseif zone == "BossMenu" then
 		CurrentAction = "boss_menu"
 		CurrentActionMsg = "Tekan ~b~[E]~w~ untuk membuka Boss Menu"
@@ -94,11 +98,10 @@ AddEventHandler("rorp_bennys:hasEnteredMarker", function(zone)
 end)
 
 AddEventHandler("rorp_bennys:hasExitedMarker", function(zone)
-
-		CurrentAction = nil
-		if not isInShopMenu then
-		  ESX.UI.Menu.CloseAll()
-		end
+	CurrentAction = nil
+	if not isInShopMenu then
+		ESX.UI.Menu.CloseAll()
+	end
 end)
 
 
@@ -206,23 +209,25 @@ Citizen.CreateThread( function()
 				if IsControlJustReleased(0, Keys["E"]) then
 					if CurrentAction == "cloakrooms_menu" then
 						OpenCloakRoomsMenu()
+					elseif CurrentAction == "vehicles_menu" then
+						OpenVehicleSpawnerMenu('car')
 					elseif CurrentAction == "boss_menu" then
 						if  ESX.PlayerData.job and ESX.PlayerData.job.name == "bennys" and ESX.PlayerData.job.grade_name == 'boss' then
 							OpenBossMenu()
 						else
-							NotifInformasi('Tidak memiliki akses boss menu')
+							NotifError('Tidak memiliki akses boss menu')
 						end						
 					elseif CurrentAction == "bennys_inventory_menu" then
 						if  ESX.PlayerData.job and ESX.PlayerData.job.name == "bennys" and ESX.PlayerData.job.grade_name ~= 'magang' and ESX.PlayerData.job.grade_name ~= 'karyawan_bengkel' then						
 							OpenBennysInventoryMenu()
 						else
-							NotifInformasi('Anda tidak memiliki akses membuka inventory')
+							NotifError('Anda tidak memiliki akses membuka inventory')
 						end							
 					elseif CurrentAction == 'ls_custom' then
 						if  ESX.PlayerData.job and ESX.PlayerData.job.name == "bennys" and ESX.PlayerData.job.grade_name ~= 'magang' then						
 							OpenLSAction()
 						else
-							NotifInformasi('Pengalaman anda kurang untuk modifikasi kendaraan')
+							NotifError('Pengalaman anda kurang untuk modifikasi kendaraan')
 						end
 					end
 					CurrentAction = nil

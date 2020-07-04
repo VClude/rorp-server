@@ -28,31 +28,6 @@ Config.Zones = {
 		Type = -1
 
 	},
-
-	CarLift = {
-
-		Pos = { x = -219.3204, y = -1326.43, z = 31.90041},
-
-		Size = {x = 1.5, y = 1.5, z = 1.0},
-
-		Color = {r = 204, g = 204, b = 0},
-
-		Type = -1
-
-	},	
-	
-	CarLift2 = {
-
-		Pos = { x = -212.44, y = -1317.55, z = 31.90041},
-
-		Size = {x = 1.5, y = 1.5, z = 1.0},
-
-		Color = {r = 204, g = 204, b = 0},
-
-		Type = -1
-   
-	},
-	
 	
 	ls1 = {
 
@@ -117,7 +92,7 @@ Config.Zones = {
 
 	Vehicles = {
 
-		Pos = {["x"] = -171.45, ["y"] = -1295.49, ["z"] = 32.14},
+		Pos = {["x"] = -171.45, ["y"] = -1295.49, ["z"] = 31.14},
 
 		Size = {x = 1.0, y = 1.0, z = 1.0},
 
@@ -143,6 +118,30 @@ Config.Zones = {
 
 		}
 
+	}
+
+}
+
+Config.AuthorizedVehicles = {
+
+	zacatecnik = {
+		{label = "Odtahovka", model = "towtruck", price = 1000}
+	},
+
+	mechanik = {
+		{label = "Odtahovka", model = "towtruck", price = 1000}
+	},
+
+	profesional = {
+		{label = "Odtahovka", model = "towtruck", price = 1000},
+	},
+
+	manazer = {
+		{label = "Odtahovka", model = "towtruck", price = 1000},
+	},
+
+	boss = {
+		{label = "Odtahovka", model = "towtruck", price = 1000},
 	}
 
 }
