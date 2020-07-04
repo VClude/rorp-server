@@ -122,7 +122,8 @@ end
 
 function OpenVehicleShopMenu(elements, restoreCoords, shopCoords)
     local playerPed = PlayerPedId()
-    isInShopMenu = true  
+    isInShopMenu = true
+    print(isInShopMenu)
 	ESX.UI.Menu.Open("default",GetCurrentResourceName(),"vehicle_shop",
 		{
 			title = "Buy Company Car",
