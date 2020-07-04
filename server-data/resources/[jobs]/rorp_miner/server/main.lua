@@ -78,6 +78,7 @@ AddEventHandler("rorp_miner:rewardSmelting", function()
 			TriggerClientEvent("esx:showNotification",source,"Kamu mendapatkan ~r~1~s~x ~y~Berlian~s~")
 		else
 			TriggerClientEvent("esx:showNotification",source,"Inventory kamu sudah penuh")
+		end
 	elseif rewardChance == 2 then
 		local firstChance = math.random(1,3)
 		if firstChance == 1 then
