@@ -21,7 +21,7 @@ function OpenVehicleSpawnerMenu(type)
 
                 if #authorizedVehicles > 0 then
                     for k,vehicle in ipairs(authorizedVehicles) do
-                        
+                        if IsModelInCdimage(vehicle.model) then
                             local vehicleLabel = GetLabelText(GetDisplayNameFromVehicleModel(vehicle.model))
 
                             table.insert(shopElements, {
@@ -33,14 +33,20 @@ function OpenVehicleSpawnerMenu(type)
                                 props = vehicle.props,
                                 type  = type
                             })
-                            
- 
+                        end                             
+                    end
+
+                    if #shopElements > 0 then
+                        OpenVehicleShopMenu(shopElements, playerCoords, shopCoords)
+                    else
+                        ESX.ShowNotification('BACOT')
                     end
                 else
-                    return
+                    ESX.ShowNotification('BACOT')
                 end
+            else
+                ESX.ShowNotification('BACOT')
             end
-            OpenVehicleShopMenu(shopElements, playerCoords, shopCoords)
 		elseif data.current.action == 'garage' then
 			local garage = {}
 
