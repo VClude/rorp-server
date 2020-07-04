@@ -54,6 +54,16 @@ AddEventHandler('esx:setJob', function(job)
 	end
 end)
 
+function killPlayer()
+	SetEntityHealth(GetPlayerPed(-1),0)
+	playerDied()
+end
+
+function playerDied()
+	TriggerServerEvent('esx_ambulancejob:setDeathStatus', true)
+	isDead = true
+end
+
 AddEventHandler('esx:onPlayerSpawn', function()
 	isDead = false
 
@@ -68,7 +78,8 @@ AddEventHandler('esx:onPlayerSpawn', function()
 			ESX.TriggerServerCallback('esx_ambulancejob:getDeathStatus', function(shouldDie)
 				if shouldDie then
 					exports['mythic_notify']:DoCustomHudText('inform', _U('combatlog_message'), 5000)
-					RemoveItemsAfterRPDeath()
+					-- RemoveItemsAfterRPDeath()
+					killPlayer()
 				end
 			end)
 		end
