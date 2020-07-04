@@ -9,9 +9,9 @@ function OpenVehicleSpawnerMenu(type)
 		title    = _U('garage_title'),
 		align    = 'top',
 		elements = {
-			{label = _U('garage_storeditem'), action = 'garage'},
-			{label = _U('garage_storeitem'), action = 'store_garage'},
-			{label = _U('garage_buyitem'), action = 'buy_vehicle'}
+			{label = 'Garasi bennys', action = 'garage'},
+			{label = 'Simpan di garasi', action = 'store_garage'},
+			{label = 'Beli kendaraan', action = 'buy_vehicle'}
 	}}, function(data, menu)
 		if data.current.action == 'buy_vehicle' then
             local shopElements, shopCoords = {}
