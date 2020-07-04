@@ -59,6 +59,9 @@ AddEventHandler('esx:onPlayerSpawn', function()
 
 	if firstSpawn then
 		firstSpawn = false
+		FreezeEntityPosition(PlayerPedId(), true)
+		Citizen.Wait(3000)
+		FreezeEntityPosition(PlayerPedId(), false)
 
 		if Config.AntiCombatLog then
 			while not PlayerLoaded do
@@ -451,7 +454,6 @@ AddEventHandler('esx_ambulancejob:revive', function()
 		y = ESX.Math.Round(coords.y, 1),
 		z = ESX.Math.Round(coords.z, 1)
 	}
-	TriggerEvent('skeletalsystem:HealBones',"all")
 
 	RespawnPed(playerPed, formattedCoords, 0.0)
 
