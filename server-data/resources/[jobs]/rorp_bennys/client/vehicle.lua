@@ -21,7 +21,7 @@ function OpenVehicleSpawnerMenu(type)
 
                 if #authorizedVehicles > 0 then
                     for k,vehicle in ipairs(authorizedVehicles) do
-                        
+                        if IsModelInCdimage(vehicle.model) then
                             local vehicleLabel = GetLabelText(GetDisplayNameFromVehicleModel(vehicle.model))
 
                             table.insert(shopElements, {
@@ -32,10 +32,10 @@ function OpenVehicleSpawnerMenu(type)
                                 props = vehicle.props,
                                 type  = type
                             })
-                        
+                        end
                     end
                 else
-                   return
+                    exports['mythic_notify']:DoCustomHudText('error', 'Error disini', 2500)
                 end
             end
 		elseif data.current.action == 'garage' then
