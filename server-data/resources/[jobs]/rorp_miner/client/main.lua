@@ -351,7 +351,6 @@ AddEventHandler('rorp_miner:action', function(job, zone, zoneIndex)
 		}, function(status)
 			if not status then
 				for k,v in pairs(zone.Items) do
-					print(v.requires)
 					TriggerServerEvent("rorp_miner:alljobPayout",v.requires,v.price)
 					onWork = false
 				end
