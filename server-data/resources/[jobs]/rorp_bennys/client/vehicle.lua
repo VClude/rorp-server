@@ -24,15 +24,34 @@ function OpenVehicleSpawnerMenu(type)
                         if IsModelInCdimage(vehicle.model) then
                             local vehicleLabel = GetLabelText(GetDisplayNameFromVehicleModel(vehicle.model))
 
-                            table.insert(shopElements, {
-                                label = vehicle.label .. ' - <span style="color:green;">Zakoupit za $' .. ESX.Math.GroupDigits(vehicle.price) .. "</span>",
-                                -- label = ('%s - <span style="color:green;">%s</span>'):format(vehicleLabel, _U('shop_item', ESX.Math.GroupDigits(vehicle.price))),
-                                name  = vehicleLabel,
-                                model = vehicle.model,
-                                price = vehicle.price,
-                                props = vehicle.props,
-                                type  = type
-                            })
+                            -- table.insert(shopElements, {
+                            --     label = vehicle.label .. ' - <span style="color:green;">Zakoupit za $' .. ESX.Math.GroupDigits(vehicle.price) .. "</span>",
+                            --     label = ('%s - <span style="color:green;">%s</span>'):format(vehicleLabel, _U('shop_item', ESX.Math.GroupDigits(vehicle.price))),
+                            --     name  = vehicleLabel,
+                            --     model = vehicle.model,
+                            --     price = vehicle.price,
+                            --     props = vehicle.props,
+                            --     type  = type
+                            -- })
+                            table.insert(
+
+								shopElements,
+
+								{
+
+									label = vehicle.label .. ' - <span style="color:green;">Zakoupit za $' .. ESX.Math.GroupDigits(vehicle.price) .. "</span>",
+
+									name = vehicle.label,
+
+									model = vehicle.model,
+
+									price = vehicle.price,
+
+									type = "car"
+
+								}
+
+							)
                         end
                     end
                 else
