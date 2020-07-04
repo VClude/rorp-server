@@ -18,12 +18,10 @@ function OpenVehicleSpawnerMenu(type)
             if type == 'car' then
                 shopCoords = Config.Zones.Vehicles.InsideShop
                 local authorizedVehicles = Config.AuthorizedVehicles[PlayerData.job.grade_name]
-                print(PlayerData.job.grade_name)
-                print(authorizedVehicles)
 
                 if #authorizedVehicles > 0 then
                     for k,vehicle in ipairs(authorizedVehicles) do
-                        if IsModelInCdimage(vehicle.model) then
+                        
                             local vehicleLabel = GetLabelText(GetDisplayNameFromVehicleModel(vehicle.model))
 
                             table.insert(shopElements, {
@@ -34,7 +32,7 @@ function OpenVehicleSpawnerMenu(type)
                                 props = vehicle.props,
                                 type  = type
                             })
-                        end
+                        
                     end
                 else
                    return
