@@ -83,7 +83,7 @@ Config.Miner = {
             Type = 'delivery',
             Hint = 'Tekan ~INPUT_CONTEXT~ menjual tembaga',
             Marker = 1,
-            Item = {
+            Items = {
                 {
                     price = 600,
                     requires = 'copper',
@@ -101,7 +101,7 @@ Config.Miner = {
             Type = 'delivery',
             Hint = 'Tekan ~INPUT_CONTEXT~ menjual besi',
             Marker = 1,
-            Item = {
+            Items = {
                 {
                     price = 600,
                     requires = 'Iron',
@@ -119,7 +119,7 @@ Config.Miner = {
             Type = 'delivery',
             Hint = 'Tekan ~INPUT_CONTEXT~ menjual emas',
             Marker = 1,
-            Item = {
+            Items = {
                 {
                     price = 600,
                     requires = 'gold',
@@ -137,7 +137,7 @@ Config.Miner = {
             Type = 'delivery',
             Hint = 'Tekan ~INPUT_CONTEXT~ menjual berlian',
             Marker = 1,
-            Item = {
+            Items = {
                 {
                     price = 600,
                     requires = 'diamond',
