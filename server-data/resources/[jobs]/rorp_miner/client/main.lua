@@ -295,21 +295,15 @@ AddEventHandler('rorp_miner:action', function(job, zone, zoneIndex)
 		SetCurrentPedWeapon(playerPed, GetHashKey('WEAPON_UNARMED'))
 		Citizen.Wait(200)
 
-		for k,v in pairs(zone.Items) do
-			ESX.TriggerServerCallback("rorp_miner:required",function(hasRequired)
-			
-				if hasRequired then
-					exports['progressBars']:startUI((20000), "Delivery...")
-					TaskStartScenarioInPlace(playerPed, "WORLD_HUMAN_CLIPBOARD", 0, true)
-					Citizen.Wait(20000)
-					TriggerServerEvent("rorp_miner:Payout",v.requires,v.price)	
-				else
-					ESX.ShowNotification("Kamu membutuhkan ~y~"..v.requires)
-				end
-				ClearPedTasks(playerPed)
-				FreezeEntityPosition(playerPed, false)
-				onWork = false	
-			end,v.requires,1)
+		for k,v in pairs(zone.Items) do			
+			exports['progressBars']:startUI((20000), "Delivery...")
+			TaskStartScenarioInPlace(playerPed, "WORLD_HUMAN_CLIPBOARD", 0, true)
+			Citizen.Wait(20000)
+			TriggerServerEvent("rorp_miner:Payout",v.requires,v.price)	
+						
+			ClearPedTasks(playerPed)
+			FreezeEntityPosition(playerPed, false)
+			onWork = false	
 		end
 		-- TriggerEvent("mythic_progressbar:client:progress", {
 		-- 	name = "on_delivery",
