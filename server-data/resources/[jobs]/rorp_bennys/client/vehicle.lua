@@ -328,3 +328,11 @@ Citizen.CreateThread(function()
         end
     end
 end)
+
+function DeleteSpawnedVehicles()
+	while #spawnedVehicles > 0 do
+		local vehicle = spawnedVehicles[1]
+		ESX.Game.DeleteVehicle(vehicle)
+		table.remove(spawnedVehicles, 1)
+	end
+end
