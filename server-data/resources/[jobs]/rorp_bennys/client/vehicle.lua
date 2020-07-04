@@ -22,7 +22,6 @@ function OpenVehicleSpawnerMenu(type)
                 if #authorizedVehicles > 0 then
                     for k,vehicle in ipairs(authorizedVehicles) do
                         if IsModelInCdimage(vehicle.model) then
-                            print(vehicle.model)
                             local vehicleLabel = GetLabelText(GetDisplayNameFromVehicleModel(vehicle.model))
 
                             table.insert(shopElements, {
@@ -100,7 +99,7 @@ function OpenVehicleSpawnerMenu(type)
 						exports['mythic_notify']:DoCustomHudText('error', _U('garage_empty'), 2500)
 					end
 				else
-					exports['mythic_notify']:DoCustomHudText('error', _U('garage_empty'), 2500)
+					exports['mythic_notify']:DoCustomHudText('error', 'Tidak ada kendaraan', 2500)
 				end
 			end, type)
 		elseif data.current.action == 'store_garage' then
