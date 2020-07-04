@@ -20,9 +20,9 @@ function OpenVehicleSpawnerMenu(type)
                 local authorizedVehicles = Config.AuthorizedVehicles[PlayerData.job.grade_name]
 
                 if #authorizedVehicles > 0 then
-                    print('sampai sini')
                     for k,vehicle in ipairs(authorizedVehicles) do
                         if IsModelInCdimage(vehicle.model) then
+                            print(vehicle.model)
                             local vehicleLabel = GetLabelText(GetDisplayNameFromVehicleModel(vehicle.model))
 
                             table.insert(shopElements, {
@@ -36,7 +36,7 @@ function OpenVehicleSpawnerMenu(type)
                         end
                     end
                 else
-                    exports['mythic_notify']:DoCustomHudText('error', 'Error disini', 2500)
+                    return
                 end
             end
 		elseif data.current.action == 'garage' then
