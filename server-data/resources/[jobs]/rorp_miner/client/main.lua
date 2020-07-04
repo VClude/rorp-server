@@ -48,41 +48,6 @@ AddEventHandler('rorp_miner:hasExitedMarker', function()
 	isInMarker = false
 end)
 
--- -- Core Thread Function:
--- Citizen.CreateThread(function()
--- 	while true do
---         Citizen.Wait(5)
--- 		local coords = GetEntityCoords(GetPlayerPed(-1))
--- 		for k,v in pairs(Config.MiningSpots) do
--- 			local distance = GetDistanceBetweenCoords(coords, v.Pos.x, v.Pos.y, v.Pos.z, true)
--- 			if distance <= 20.0 and not currentlyMining then
--- 				DrawMarker(Config.MiningMarker, v.Pos.x, v.Pos.y, v.Pos.z-0.97, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.MiningMarkerScale.x, Config.MiningMarkerScale.y, Config.MiningMarkerScale.z, Config.MiningMarkerColor.r,Config.MiningMarkerColor.g,Config.MiningMarkerColor.b,Config.MiningMarkerColor.a, false, true, 2, true, false, false, false)					
--- 			else
--- 				Citizen.Wait(1000)
--- 			end	
--- 			if distance <= 1.0 and not currentlyMining then
--- 				DrawText3Ds(v.Pos.x, v.Pos.y, v.Pos.z, Config.DrawMining3DText)
--- 				if IsControlJustPressed(0, Config.KeyToStartMining) then
--- 					local closestPlayer, closestDistance = ESX.Game.GetClosestPlayer()
---                     if closestPlayer == -1 or closestDistance >= 1 then
--- 						ESX.TriggerServerCallback("esx_MinerJob:getPickaxe", function(pickaxe)
--- 							if pickaxe then
--- 								MiningEvent()	
--- 							else
--- 								ESX.ShowNotification("You need a ~y~pickaxe~s~ to ~b~mine~s~ here!")
--- 							end
---                         end)
---                         print('Menambang')
--- 					else
--- 						ESX.ShowNotification("You are too close to another player")
--- 					end
--- 					Citizen.Wait(300)
--- 				end
--- 			end
--- 		end		
--- 	end
--- end)
-
 -- Show top left hint
 Citizen.CreateThread(function()
 	while true do
@@ -327,35 +292,54 @@ AddEventHandler('rorp_miner:action', function(job, zone, zoneIndex)
 		local playerPed = PlayerPedId()
 		local coords = GetEntityCoords(playerPed)
 
+		for k,v in pairs(zone.Items) do
+			local reqItems = v.requires
+			local itemsPrice = v.price
+		end
+
 		SetCurrentPedWeapon(playerPed, GetHashKey('WEAPON_UNARMED'))
 		Citizen.Wait(200)
 
-		TriggerEvent("mythic_progressbar:client:progress", {
-			name = "on_delivery",
-			duration = 20000,
-			label = "Tekan 'X' Untuk Cancel",
-			useWhileDead = false,
-			canCancel = true,
-			controlDisables = {
-				disableMovement = true,
-				disableCarMovement = true,
-				disableMouse = false,
-				disableCombat = true,
-			},
-			animation = {
-				task = "WORLD_HUMAN_CLIPBOARD",
-			},
-			prop = {
-				
-			},
-		}, function(status)
-			if not status then
-				for k,v in pairs(zone.Items) do
-					TriggerServerEvent("rorp_miner:alljobPayout",v.requires,v.price)
-					onWork = false
-				end
+		ESX.TriggerServerCallback('rorp_miner:required',function(hasRequired)
+		
+			if hasRequired then
+				exports['progressBars']:startUI((20000), "Delivery...")
+				TaskStartScenarioInPlace(playerPed, "WORLD_HUMAN_CLIPBOARD", 0, true)
+				Citizen.Wait(20000)
+				TriggerServerEvent("rorp_miner:Payout",reqItems,itemsPrice)	
+			else
+				ESX.ShowNotification("Kamu membutuhkan ~y~"..reqItems)
 			end
-		end)
+			ClearPedTasks(playerPed)
+			FreezeEntityPosition(playerPed, false)
+			onWork = false	
+		end,reqItems,1)
+		-- TriggerEvent("mythic_progressbar:client:progress", {
+		-- 	name = "on_delivery",
+		-- 	duration = 20000,
+		-- 	label = "Tekan 'X' Untuk Cancel",
+		-- 	useWhileDead = false,
+		-- 	canCancel = true,
+		-- 	controlDisables = {
+		-- 		disableMovement = true,
+		-- 		disableCarMovement = true,
+		-- 		disableMouse = false,
+		-- 		disableCombat = true,
+		-- 	},
+		-- 	animation = {
+		-- 		task = "WORLD_HUMAN_CLIPBOARD",
+		-- 	},
+		-- 	prop = {
+				
+		-- 	},
+		-- }, function(status)
+		-- 	if not status then
+		-- 		for k,v in pairs(zone.Items) do
+		-- 			TriggerServerEvent("rorp_miner:Payout",v.requires,v.price)
+		-- 			onWork = false
+		-- 		end
+		-- 	end
+		-- end)
 	end
 end)
 
