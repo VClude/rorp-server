@@ -97,12 +97,12 @@ AddEventHandler("rorp_bennys:hasEnteredMarker", function(zone)
 	end
 end)
 
-AddEventHandler("rorp_bennys:hasExitedMarker", function(zone)
-	CurrentAction = nil
-	if not isInShopMenu then
-		ESX.UI.Menu.CloseAll()
-	end
-end)
+-- AddEventHandler("rorp_bennys:hasExitedMarker", function(zone)
+-- 	CurrentAction = nil
+-- 	if not isInShopMenu then
+-- 		ESX.UI.Menu.CloseAll()
+-- 	end
+-- end)
 
 
 
