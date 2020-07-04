@@ -21,38 +21,20 @@ function OpenVehicleSpawnerMenu(type)
 
                 if #authorizedVehicles > 0 then
                     for k,vehicle in ipairs(authorizedVehicles) do
-                        if IsModelInCdimage(vehicle.model) then
+                        
                             local vehicleLabel = GetLabelText(GetDisplayNameFromVehicleModel(vehicle.model))
 
-                            -- table.insert(shopElements, {
-                            --     label = vehicle.label .. ' - <span style="color:green;">Zakoupit za $' .. ESX.Math.GroupDigits(vehicle.price) .. "</span>",
-                            --     label = ('%s - <span style="color:green;">%s</span>'):format(vehicleLabel, _U('shop_item', ESX.Math.GroupDigits(vehicle.price))),
-                            --     name  = vehicleLabel,
-                            --     model = vehicle.model,
-                            --     price = vehicle.price,
-                            --     props = vehicle.props,
-                            --     type  = type
-                            -- })
-                            table.insert(
-
-								shopElements,
-
-								{
-
-									label = vehicle.label .. ' - <span style="color:green;">Zakoupit za $' .. ESX.Math.GroupDigits(vehicle.price) .. "</span>",
-
-									name = vehicle.label,
-
-									model = vehicle.model,
-
-									price = vehicle.price,
-
-									type = "car"
-
-								}
-
-							)
-                        end
+                            table.insert(shopElements, {
+                                -- label = vehicle.label .. ' - <span style="color:green;">Zakoupit za $' .. ESX.Math.GroupDigits(vehicle.price) .. "</span>",
+                                label = ('%s - <span style="color:green;">%s</span>'):format(vehicleLabel, _U('shop_item', ESX.Math.GroupDigits(vehicle.price))),
+                                name  = vehicleLabel,
+                                model = vehicle.model,
+                                price = vehicle.price,
+                                props = vehicle.props,
+                                type  = type
+                            })
+                            
+ 
                     end
                 else
                     return
@@ -160,7 +142,7 @@ function OpenVehicleShopMenu(elements, restoreCoords, shopCoords)
 
 			ESX.UI.Menu.Open("default",GetCurrentResourceName(),"vehicle_shop_confirm",
 				{
-					title = "Opravdu zakoupit vozidlo " .. data.current.name .. " za $" .. data.current.price .. "?",
+					title = "Really buy a vehicle " .. data.current.name .. " for $" .. data.current.price .. "?",
 					align = "bottom-right",
 					elements = {
 						{label = "No", value = "no"},
