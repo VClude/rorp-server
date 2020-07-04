@@ -93,7 +93,7 @@ AddEventHandler("rorp_miner:rewardSmelting", function()
 				TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'error', text = 'Inventory kamu sudah penuh'})
 			end
 		end
-	elseif rewardChance == 3 and or rewardChance == 4 or rewardChance == 5 or rewardChance == 6 or rewardChance == 7 or rewardChance == 8 or rewardChance == 9 or rewardChance == 10 or rewardChance == 11 or rewardChance == 12 or rewardChance == 13 or rewardChance == 14 or rewardChance == 15  then
+	elseif rewardChance == 3 or rewardChance == 4 or rewardChance == 5 or rewardChance == 6 or rewardChance == 7 or rewardChance == 8 or rewardChance == 9 or rewardChance == 10 or rewardChance == 11 or rewardChance == 12 or rewardChance == 13 or rewardChance == 14 or rewardChance == 15  then
 		local secondChance = math.random(1,10)
 		if secondChance == 1 or secondChance == 2 or secondChance == 3 then
 			if xPlayer.canCarryItem("copper", 3) then
