@@ -20,6 +20,7 @@ function OpenVehicleSpawnerMenu(type)
                 local authorizedVehicles = Config.AuthorizedVehicles[PlayerData.job.grade_name]
 
                 if #authorizedVehicles > 0 then
+                    print('sampai sini')
                     for k,vehicle in ipairs(authorizedVehicles) do
                         if IsModelInCdimage(vehicle.model) then
                             local vehicleLabel = GetLabelText(GetDisplayNameFromVehicleModel(vehicle.model))
