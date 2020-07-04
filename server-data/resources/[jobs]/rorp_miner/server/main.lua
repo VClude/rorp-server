@@ -135,7 +135,7 @@ AddEventHandler("rorp_miner:alljobPayout", function(itemName, itemPrice)
 		if itemAmount > 0 then
 			xPlayer.removeInventoryItem(itemName, itemAmount)
 			xPlayer.addMoney(price)
-			TriggerClientEvent("esx:showNotification",source,"Kamu menjual ~r~"..itemName.."~s~x Sejumlah ~y~"..itemAmount.."~s~")
+			TriggerClientEvent("esx:showNotification",source,"Kamu menjual ~r~"..itemAmount.."~s~x "..itemLabel.." dengan total penjualan ~g~$"..price)
 		else
 			TriggerClientEvent("esx:showNotification",source,"anda tidak mempunyai "..itemName.." untuk dijual")
 		end

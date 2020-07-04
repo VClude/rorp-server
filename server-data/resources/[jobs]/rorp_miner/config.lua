@@ -104,7 +104,7 @@ Config.Miner = {
             Items = {
                 {
                     price = 600,
-                    requires = 'Iron',
+                    requires = 'iron',
                 }
             },
         },
