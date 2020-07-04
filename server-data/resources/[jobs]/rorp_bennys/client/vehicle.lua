@@ -25,7 +25,8 @@ function OpenVehicleSpawnerMenu(type)
                             local vehicleLabel = GetLabelText(GetDisplayNameFromVehicleModel(vehicle.model))
 
                             table.insert(shopElements, {
-                                label = vehicle.label .. ' - <span style="color:green;">Zakoupit za $' .. ESX.Math.GroupDigits(vehicle.price) .. "</span>",
+                                -- label = vehicle.label .. ' - <span style="color:green;">Zakoupit za $' .. ESX.Math.GroupDigits(vehicle.price) .. "</span>",
+                                label = ('%s - <span style="color:green;">%s</span>'):format(vehicleLabel, _U('shop_item', ESX.Math.GroupDigits(vehicle.price))),
                                 name  = vehicleLabel,
                                 model = vehicle.model,
                                 price = vehicle.price,
@@ -38,6 +39,7 @@ function OpenVehicleSpawnerMenu(type)
                     return
                 end
             end
+            OpenVehicleShopMenu(shopElements, playerCoords, shopCoords)
 		elseif data.current.action == 'garage' then
 			local garage = {}
 
