@@ -140,65 +140,6 @@ AddEventHandler('esx_jobs:caution', function(cautionType, cautionAmount, spawnPo
 	end
 end)
 
--- Server Callback to get inventory pickaxe:
-ESX.RegisterServerCallback("esx_jobs:getPickaxe",function(source,cb)
-	local xPlayer = ESX.GetPlayerFromId(source)
-	if xPlayer.getJob().name == 'miner' then
-		cb(true)
-	else
-		cb(false)
-	end
-end)
-
--- Server Callback to get inventory washing pan:
-ESX.RegisterServerCallback("esx_jobs:cekMiner",function(source,cb)
-	local xPlayer = ESX.GetPlayerFromId(source)
-	if xPlayer.getJob().name == 'miner' then
-		cb(true)
-	else
-		cb(false)
-	end
-end)
-
--- Server Callback to get washed stone:
-ESX.RegisterServerCallback("esx_jobs:getWashedStone",function(source,cb)
-	local xPlayer = ESX.GetPlayerFromId(source)
-	if xPlayer.getInventoryItem("washed_stone").count >= 7  and xPlayer.getJob().name == 'miner' then
-		xPlayer.removeInventoryItem("washed_stone", 7)
-		cb(true)
-	else
-		cb(false)
-	end
-end)
-
--- Server Callback to get stone count & remove stone:
-ESX.RegisterServerCallback("esx_jobs:removeStone",function(source,cb)
-	local xPlayer = ESX.GetPlayerFromId(source)
-	if xPlayer.getInventoryItem("stone").count >= 7  and xPlayer.getJob().name == 'miner' then
-		xPlayer.removeInventoryItem("stone", 7)
-		cb(true)
-	else
-		cb(false)
-	end
-end)
-
--- ESX.RegisterServerCallback("esx_jobs:preCheck",function(source,cb)
--- 	local xPlayer = ESX.GetPlayerFromId(source)
--- 	if xPlayer.canCarryItem('petrol', 24) then
--- 		cb(true)
--- 	else
--- 		cb(false)
--- 	end
--- end)
-
--- ESX.RegisterServerCallback("esx_jobs:Postcheck",function(source,cb)
--- 	local xPlayer = ESX.GetPlayerFromId(source)
--- 	if xPlayer.canCarryItem('ban', 1) then
--- 		cb(true)
--- 	else
--- 		cb(false)
--- 	end
--- end)
 
 -- fungsi global reward buat semua job
 RegisterServerEvent("esx_jobs:alljobReward")
@@ -228,7 +169,7 @@ AddEventHandler("esx_jobs:alljobReward", function(itemName,itemAmount,itemRequir
 end)
 
 
--- fungsi global reward buat semua job
+-- fungsi global payout buat semua job
 RegisterServerEvent("esx_jobs:alljobPayout")
 AddEventHandler("esx_jobs:alljobPayout", function(itemName, itemPrice)
 	local xPlayer = ESX.GetPlayerFromId(source)
@@ -246,16 +187,6 @@ AddEventHandler("esx_jobs:alljobPayout", function(itemName, itemPrice)
 end)
 
 
--- jual emas
-RegisterServerEvent("esx_jobs:payGold")
-AddEventHandler("esx_jobs:payGold", function()
-	local xPlayer = ESX.GetPlayerFromId(source)
-	local goldQty = ESX.getInventoryItem(gold).count
-	local amount = goldQty * 3000
-	xPlayer.addMoney(amount)
-	TriggerClientEvent("esx:showNotification",source,"Kamu mendapatkan ~r~"..amount.."~s~x ~y~"..itemLabel.."~s~")
-end)
-
 -- Function to reward player after mining/washing:
 RegisterServerEvent("esx_jobs:reward")
 AddEventHandler("esx_jobs:reward", function(itemName,itemAmount)
@@ -269,39 +200,5 @@ AddEventHandler("esx_jobs:reward", function(itemName,itemAmount)
 	end
 end)
 
--- Function to reward player after smelting:
-RegisterServerEvent("esx_jobs:rewardSmelting")
-AddEventHandler("esx_jobs:rewardSmelting", function()
-	local xPlayer = ESX.GetPlayerFromId(source)
-	
-	local rewardChance = math.random(1,10)
-	
-	if rewardChance == 1 then
-		xPlayer.addInventoryItem("diamond", 1)
-		TriggerClientEvent("esx:showNotification",source,"Kamu mendapatkan ~r~1x~s~ ~y~Berlian~s~")
-	elseif rewardChance == 2 then
-		xPlayer.addInventoryItem("ruby", 1)
-		TriggerClientEvent("esx:showNotification",source,"Kamu mendapatkan ~r~1x~s~ ~y~Ruby~s~")
-	elseif rewardChance == 3 or rewardChance == 4 or rewardChance == 5 then
-		local firstChance = math.random(1,2)
-		if firstChance == 1 then
-			xPlayer.addInventoryItem("gold", 1)
-			TriggerClientEvent("esx:showNotification",source,"Kamu mendapatkan ~r~1x~s~ ~y~Emas~s~")
-		else
-			xPlayer.addInventoryItem("silver", 2)
-			TriggerClientEvent("esx:showNotification",source,"Kamu mendapatkan ~r~2x~s~ ~y~Perak~s~")
-		end
-	elseif rewardChance == 6 or rewardChance == 7 or rewardChance == 8 or rewardChance == 9 or rewardChance == 10 then
-		local secondChance = math.random(1,2)
-		if secondChance == 1 then
-			xPlayer.addInventoryItem("copper", 3)
-		TriggerClientEvent("esx:showNotification",source,"Kamu mendapatkan ~r~3x~s~ ~y~Tembaga~s~")
-		else
-			xPlayer.addInventoryItem("iron", 7)
-		TriggerClientEvent("esx:showNotification",source,"Kamu mendapatkan ~r~7x~s~ ~y~Besi~s~")
-		end
-	end
-	
-end)
 
 

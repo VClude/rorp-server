@@ -126,6 +126,6 @@ AddEventHandler("rorp_miner:Payout", function(itemName, itemPrice)
 		xPlayer.addMoney(price)
 		TriggerClientEvent("esx:showNotification",source,"Kamu menjual ~r~"..itemAmount.."~s~x "..itemLabel.." dengan total penjualan ~g~$"..price)
 	else
-		TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'error', text = 'Kamu tidak mempunyai '..itemName})
+		TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'error', text = 'Kamu tidak mempunyai '..itemLabel})
 	end
 end)
