@@ -103,7 +103,7 @@ Config.Miner = {
             Marker = 1,
             Items = {
                 {
-                    price = 600,
+                    price = 300,
                     requires = 'iron',
                 }
             },
@@ -121,7 +121,7 @@ Config.Miner = {
             Marker = 1,
             Items = {
                 {
-                    price = 600,
+                    price = 8000,
                     requires = 'gold',
                 }
             },        
@@ -139,7 +139,7 @@ Config.Miner = {
             Marker = 1,
             Items = {
                 {
-                    price = 600,
+                    price = 10000,
                     requires = 'diamond',
                 }
             },
