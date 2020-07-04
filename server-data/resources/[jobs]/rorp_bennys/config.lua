@@ -6,10 +6,6 @@ Config.MaxInService               = -1
 Config.EnablePlayerManagement     = true
 Config.EnableSocietyOwnedVehicles = true
 Config.EnableEmploy				  = true
-Config.speed_up = 0.01
-Config.speed_up_slow = 0.006 
-Config.speed_down_slow = 0.0055 
-Config.speed_down = 0.015
 
 Config.max = 31.75 
 Config.beforemax = 31.53 
@@ -18,65 +14,6 @@ Config.min = 29.83
 Config.spawndistance = 23
 
 Config.debug = false
-
---------------------------------
-------- Created by Hamza -------
--------------------------------- 
-
-Config.KeyToOpenCarGarage = 38			-- default 38 is E
-
-Config.MechanicDatabaseName = 'bennys'	-- set the exact name from your jobs database for Mechanic
-
---Mechanic Car Garage:
-Config.CarZones = {
-	MechanicCarGarage = {
-		Pos = {
-			{x = -165.52,  y = -1302.9, z = 31.3},
-		}
-	}
-}
-
--- Mechanic Car Garage Blip Settings:
-Config.CarGarageSprite = 357
-Config.CarGarageDisplay = 4
-Config.CarGarageScale = 0.65
-Config.CarGarageColour = 38
-Config.CarGarageName = "Bennys Car Garage"
-Config.EnableCarGarageBlip = false
-
--- Mechanic Car Garage Marker Settings:
-Config.MechanicCarMarker = 27 													-- marker type
-Config.MechanicCarMarkerColor = { r = 50, g = 50, b = 204, a = 100 } 			-- rgba color of the marker
-Config.MechanicCarMarkerScale = { x = 1.5, y = 1.5, z = 1.0 }  				-- the scale for the marker on the x, y and z axis
-Config.CarDraw3DText = "Tekan ~g~[E]~s~ untuk membuka ~y~Garasi Bennys~s~"				-- set your desired text here
-
--- -- Mechanic Cars:
-Config.MechanicVehicles = {
-	{ model = 'flatbed', label = 'FLATBED', price = 0 },
-	{ model = 'towtruck', label = 'TOWING Truck', price = 0 }
-}
-
--- Menu Labels & Titles:
-Config.LabelStoreVeh = "Menyimpan Kendaraan"
-Config.LabelGetVeh = "Mengambil Kendaraan"
-Config.LabelPrimaryCol = "Primary"
-Config.LabelSecondaryCol = "Secondary"
-Config.LabelExtra = "Extra"
-Config.LabelLivery = "Livery"
-Config.TitleMechanicGarage = "Garasi Bennys"
-Config.TitleMechanicExtra = "Extra"
-Config.TitleMechanicLivery = "Livery"
-Config.TitleColorType = "Color Type"
-Config.TitleValues = "Value"
-
--- ESX.ShowNotifications:
-Config.VehicleParked = "~b~Kendaraan~s~ disimpan!"
-Config.NoVehicleNearby = "Tidak ada ~b~Kendaraan~s~ disekitar!"
-Config.CarOutFromPolGar = "Kamu mengambil ~b~Kendaraan~s~ di ~y~Garasi Bennys~s~!"
-
-Config.VehicleLoadText = "Wait for vehicle to spawn"			-- text on screen when vehicle model is being loaded
-
- 
 
 Config.Zones = {
 
@@ -178,35 +115,35 @@ Config.Zones = {
 	},
 	
 
-	-- Vehicles = {
+	Vehicles = {
 
-	-- 	Pos = {["x"] = -171.45, ["y"] = -1295.49, ["z"] = 32.14},
+		Pos = {["x"] = -171.45, ["y"] = -1295.49, ["z"] = 32.14},
 
-	-- 	Size = {x = 1.0, y = 1.0, z = 1.0},
+		Size = {x = 1.0, y = 1.0, z = 1.0},
 
-	-- 	Color = {r = 255, g = 102, b = 255},
+		Color = {r = 255, g = 102, b = 255},
 
-	-- 	Type = 36,
+		Type = 36,
 
-	-- 	Spawner = vector3(-171.45, -1295.49, 31.14),
+		Spawner = vector3(-171.45, -1295.49, 31.14),
 
-	-- 	InsideShop = vector3(183.91, -1302.92, 31.29),
+		InsideShop = vector3(183.91, -1302.92, 31.29),
 
-	-- 	SpawnPoints = {
+		SpawnPoints = {
 
-	-- 		{coords = vector3(-164.18, -1299.0, 31.17), heading = 170.5, radius = 2.5},
+			{coords = vector3(-164.18, -1299.0, 31.17), heading = 170.5, radius = 2.5},
 
-	-- 		{coords = vector3(-158.58, -1298.67, 31.14), heading = 170.5, radius = 2.5},
+			{coords = vector3(-158.58, -1298.67, 31.14), heading = 170.5, radius = 2.5},
 
-	-- 		{coords = vector3(-158.25, -1304.87, 31.31), heading = 1.5, radius = 2.5},
+			{coords = vector3(-158.25, -1304.87, 31.31), heading = 1.5, radius = 2.5},
 
-	-- 		{coords = vector3(-164.68, -1305.38, 31.33), heading = 1.5, radius = 2.5},
+			{coords = vector3(-164.68, -1305.38, 31.33), heading = 1.5, radius = 2.5},
 
-	-- 		{coords = vector3(-169.11, -1305.54, 31.34), heading = 1.5, radius = 2.5}
+			{coords = vector3(-169.11, -1305.54, 31.34), heading = 1.5, radius = 2.5}
 
-	-- 	}
+		}
 
-	-- }
+	}
 
 }
 
@@ -221,7 +158,7 @@ Config.PickupItems =
 
 Config.ItemMarker = -1 														-- marker type
 Config.ItemMarkerColor = { r = 30, g = 139, b = 195, a = 170 } 				-- rgba color of the marker
-Config.ItemMarkerScale = { x = 1.25, y = 1.25, z = 1.25 }  				-- the scale for the marker on the x, y and z axis
+Config.ItemMarkerScale = { x = 1.25, y = 1.25, z = 1.25 }  					-- the scale for the marker on the x, y and z axis
 Config.DrawItem3DText = "Tekan ~g~[E]~s~ untuk mengambil ~b~Barang~s~"		-- set your desired text here
 Config.KeyToStartItem = 38
 
