@@ -19,7 +19,7 @@ Config.RealWeapons = {
 	{name = 'WEAPON_FLASHLIGHT', 		bone = 24818, x = 0.0, y = 0.0, z = 0.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'melee', 		model = ''},
 
 	-- {name = 'WEAPON_PISTOL', 			bone = 51826, x = -0.01, y = 0.10, z = 0.07,  xRot = -115.0, yRot = 0.0,  zRot = 0.0, category = 'handguns', 	model = 'w_pi_pistol'},
-	{name = 'WEAPON_PISTOL', 			bone = 24818, x = -0.21, y = -0.14, z = 0.0, xRot = 10.0, yRot = 360.0, zRot = 10.0, category = 'handguns', 	model = 'w_pi_pistol'},
+	{name = 'WEAPON_PISTOL', 			bone = 24818, x = -0.21, y = -0.13, z = 0.0, xRot = 10.0, yRot = 80.0, zRot = 10.0, category = 'handguns', 	model = 'w_pi_pistol'},
 	{name = 'WEAPON_COMBATPISTOL', 		bone = 51826, x = -0.01, y = 0.10, z = 0.07,  xRot = -115.0, yRot = 0.0,  zRot = 0.0, category = 'handguns', 	model = 'w_pi_combatpistol'},
 	{name = 'WEAPON_APPISTOL', 			bone = 51826, x = -0.01, y = 0.10, z = 0.07,  xRot = -115.0, yRot = 0.0,  zRot = 0.0, category = 'handguns', 	model = 'w_pi_appistol'},
 	{name = 'WEAPON_PISTOL50', 			bone = 51826, x = -0.01, y = 0.10, z = 0.07,  xRot = -115.0, yRot = 0.0,  zRot = 0.0, category = 'handguns', 	model = 'w_pi_pistol50'},
