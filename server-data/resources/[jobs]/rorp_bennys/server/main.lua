@@ -202,35 +202,6 @@ ESX.RegisterServerCallback('rorp_bennys:storeNearbyVehicle', function(source, cb
 
 end)
 
-function getPriceFromHash(hashKey, jobGrade, type)
-	if type == 'helicopter' then
-		local vehicles = Config.AuthorizedHelicopters[jobGrade]
-
-		for k,v in ipairs(vehicles) do
-			if GetHashKey(v.model) == hashKey then
-				return v.price
-			end
-		end
-	elseif type == 'car' then
-		local vehicles = Config.AuthorizedVehicles[jobGrade]
-		local shared = Config.AuthorizedVehicles['Shared']
-
-		for k,v in ipairs(vehicles) do
-			if GetHashKey(v.model) == hashKey then
-				return v.price
-			end
-		end
-
-		for k,v in ipairs(shared) do
-			if GetHashKey(v.model) == hashKey then
-				return v.price
-			end
-		end
-	end
-
-	return 0
-end
-
 ESX.RegisterServerCallback('rorp_bennys:getPlayerInventory', function(source, cb)
 	local xPlayer    = ESX.GetPlayerFromId(source)
 	local items      = xPlayer.inventory

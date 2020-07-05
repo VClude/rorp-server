@@ -19,7 +19,7 @@ Config.Zones = {
 
 	Cloakrooms = {
 
-		Pos = {["x"] = -213.94, ["y"] = -1333.38, ["z"] = 30.89},
+		Pos = {["x"] = -205.87, ["y"] = -1342.68, ["z"] = 30.89},
 
 		Size = {x = 1.5, y = 1.5, z = 1.0},
 
@@ -67,7 +67,7 @@ Config.Zones = {
 
 	BossMenu = {
 
-		Pos = {["x"] = -208.06, ["y"] = -1341.21, ["z"] = 34.89},
+		Pos = {["x"] = -203.59, ["y"] = -1330.65, ["z"] = 34.89},
 
 		Size = {x = 1.5, y = 1.5, z = 1.0},
 
@@ -149,8 +149,8 @@ Config.AuthorizedVehicles = {
 Config.PickupItems = 
 {
 	{ 
-		Pos = { x = -185.57, y = -1318.51, z = 31.3 },
-		Heading = 93.76,
+		Pos = { x = -221.77, y = -1319.98, z = 30.89 },
+		Heading = 6.77,
 		InUse = false
 	}
 }
@@ -167,8 +167,8 @@ Config.KeyToStartItem = 38
 Config.CraftItems = 
 {
 	{ 
-		Pos = { x = -176.66, y = -1286.24, z = 31.3 },
-		Heading = 271.69,
+		Pos = { x = -227.83, y = -1327.53, z = 30.89 },
+		Heading = 94.22,
 		InUse = false
 	}
 }
