@@ -34,11 +34,13 @@ Config.MarkerZones = {
     {x = 1034.23, y = -767.18, z = 58.0},
     {x = 306.0, y = -2006.45, z = 20.51},
     {x = -1044.43, y = -2730.07, z = 20.17},
-
+    {x = -423.07, y = -1195.6, z = 325.67},
 }
 
 
 -- Edit blip titles
+Config.Title = "Rental Sepeda"
+Config.colour = 7
 Config.BlipZones = { 
 
     {title="Rental Sepeda", colour=7, x = -1262.36, y = -1438.98, z = 3.45},
@@ -53,5 +55,7 @@ Config.BlipZones = {
     {title="Rental Sepeda", colour=7, x = -285.99, y = -52.45, z = 49.32},
     {title="Rental Sepeda", colour=7, x = 1034.23, y = -767.18, z = 58.0},
     {title="Rental Sepeda", colour=7, x = 306.0, y = -2006.45, z = 20.51},
+    {title="Rental Sepeda", colour=7, x = -1044.43, y = -2730.07, z = 20.17},
+    {title="Rental Sepeda", colour=7, x = -423.07, y = -1195.6, z = 325.67},
 
 }

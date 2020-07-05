@@ -25,15 +25,15 @@ Citizen.CreateThread(function()
 
 	if not Config.EnableBlips then return end
 	
-	for _, info in pairs(Config.BlipZones) do
-		info.blip = AddBlipForCoord(info.x, info.y, info.z)
-		SetBlipDisplay(info.blip, 4)
-		SetBlipScale(info.blip, 0.8)
-		SetBlipColour(info.blip, info.colour)
-		SetBlipAsShortRange(info.blip, true)
+	for _, info in pairs(Config.MarkerZones) do
+		blip = AddBlipForCoord(info.x, info.y, info.z)
+		SetBlipDisplay(blip, 4)
+		SetBlipScale(blip, 0.8)
+		SetBlipColour(blip, Config.colour)
+		SetBlipAsShortRange(blip, true)
 		BeginTextCommandSetBlipName("STRING")
-		AddTextComponentString(info.title)
-		EndTextCommandSetBlipName(info.blip)
+		AddTextComponentString(Config.Title)
+		EndTextCommandSetBlipName(blip)
 	end
 end)
 
