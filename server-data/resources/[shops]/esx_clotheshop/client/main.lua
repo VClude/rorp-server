@@ -22,7 +22,7 @@ function OpenShopMenu()
 			align = 'bottom-left',
 			elements = {
 				{label = _U('no'), value = 'no'},
-				{label = _U('yes',ESX.Math.GroupDigits(Config.Price))), value = 'yes'}
+				{label = _U('yes',ESX.Math.GroupDigits(Config.Price)), value = 'yes'}
 		}}, function(data, menu)
 			menu.close()
 
