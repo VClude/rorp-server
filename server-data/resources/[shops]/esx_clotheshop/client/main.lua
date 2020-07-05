@@ -19,7 +19,7 @@ function OpenShopMenu()
 
 		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'shop_confirm', {
 			title = _U('valid_this_purchase'),
-			align = 'bottom-left',
+			align = 'bottom-right',
 			elements = {
 				{label = _U('no'), value = 'no'},
 				{label = _U('yes',ESX.Math.GroupDigits(Config.Price)), value = 'yes'}
@@ -39,7 +39,7 @@ function OpenShopMenu()
 							if foundStore then
 								ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'save_dressing', {
 									title = _U('save_in_dressing'),
-									align = 'bottom-left',
+									align = 'bottom-right',
 									elements = {
 										{label = _U('no'),  value = 'no'},
 										{label = _U('yes'), value = 'yes'}
