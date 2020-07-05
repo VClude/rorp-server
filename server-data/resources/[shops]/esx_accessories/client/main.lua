@@ -13,7 +13,7 @@ end)
 function OpenAccessoryMenu()
 	ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'set_unset_accessory', {
 		title = _U('set_unset'),
-		align = 'bottom-left',
+		align = 'top-left',
 		elements = {
 			{label = _U('helmet'), value = 'Helmet'},
 			{label = _U('ears'), value = 'Ears'},
@@ -69,7 +69,7 @@ function OpenShopMenu(accessory)
 
 		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'shop_confirm', {
 			title = _U('valid_purchase'),
-			align = 'bottom-left',
+			align = 'top-left',
 			elements = {
 				{label = _U('no'), value = 'no'},
 				{label = _U('yes', ESX.Math.GroupDigits(Config.Price)), value = 'yes'}
@@ -146,7 +146,7 @@ Citizen.CreateThread(function()
 
 				SetBlipSprite (blip, v.Blip.sprite)
 				SetBlipDisplay(blip, 4)
-				SetBlipScale  (blip, 1.0)
+				SetBlipScale  (blip, 0.8)
 				SetBlipColour (blip, v.Blip.color)
 				SetBlipAsShortRange(blip, true)
 

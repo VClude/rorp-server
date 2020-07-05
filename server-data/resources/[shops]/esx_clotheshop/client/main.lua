@@ -19,7 +19,7 @@ function OpenShopMenu()
 
 		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'shop_confirm', {
 			title = _U('valid_this_purchase'),
-			align = 'bottom-right',
+			align = 'top-left',
 			elements = {
 				{label = _U('no'), value = 'no'},
 				{label = _U('yes',ESX.Math.GroupDigits(Config.Price)), value = 'yes'}
@@ -39,7 +39,7 @@ function OpenShopMenu()
 							if foundStore then
 								ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'save_dressing', {
 									title = _U('save_in_dressing'),
-									align = 'bottom-right',
+									align = 'top-left',
 									elements = {
 										{label = _U('no'),  value = 'no'},
 										{label = _U('yes'), value = 'yes'}
@@ -128,6 +128,7 @@ Citizen.CreateThread(function()
 	for k,v in ipairs(Config.Shops) do
 		local blip = AddBlipForCoord(v)
 
+		SetBlipScale (blip, 0.8)
 		SetBlipSprite (blip, 73)
 		SetBlipColour (blip, 47)
 		SetBlipAsShortRange(blip, true)

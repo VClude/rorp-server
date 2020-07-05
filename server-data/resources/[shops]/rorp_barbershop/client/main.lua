@@ -515,7 +515,7 @@ function OpenBarberShopMenu()
     'default', GetCurrentResourceName(), 'shop_barber',
     {
       title = _U('shop_barber'),
-	  align    = 'bottom-right',
+	  align    = 'top-left',
       elements = {
         { label = _U('yes') .. ' (<span style="color:red">$' .. price .. '</span>)', value = 'yes' },
         { label = _U('no'), value = 'no' },
