@@ -1,5 +1,5 @@
 -- Resource Metadata
-fx_version 'adamant'
+fx_version 'bodacious'
 
 game 'gta5'
 
@@ -8,7 +8,7 @@ version '1.0.0'
 
 -- What to run
 client_scripts {
-    'config/NoCarJack_cfg.lua'
+    'config/NoCarJack_cfg.lua',
     'client/BetterRecoil.lua',
     'client/Crouched.lua',
     'client/DisableSneaking.lua',
@@ -32,7 +32,7 @@ client_scripts {
     'client/TakeHostage_cl.lua',
     'client/Drift',
     'client/3DMe_cl.lua',
-    'client/CarryPeople_cl.lua'
+    'client/CarryPeople_cl.lua',
 }
 
 server_scripts {
@@ -42,5 +42,5 @@ server_scripts {
     'server/SmartTrafficLights_sv.lua',
     'server/TakeHostage_sv.lua',
     'server/3DMe_sv.lua',
-    'server/CarryPeople_sv.lua'
+    'server/CarryPeople_sv.lua',
 }
