@@ -39,6 +39,7 @@ client_scripts {
 
 server_scripts {
     '@mysql-async/lib/MySQL.lua',
+    'server/AutoSave.lua',
     'server/NoCarJack_sv.lua',
     'server/SlashK_sv.lua',
     'server/SmartTrafficLights_sv.lua',
