@@ -102,7 +102,8 @@ function OpenShopMenu()
 		'pants_1', 'pants_2',
 		'shoes_1', 'shoes_2',
 		'chain_1', 'chain_2',
-		'bags_1',	'bags_2'
+		'bags_1',	'bags_2',
+		'watch'
 	})
 end
 
