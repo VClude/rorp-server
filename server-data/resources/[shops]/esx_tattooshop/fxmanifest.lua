@@ -33,5 +33,5 @@ client_scripts {
 dependencies {
 	'es_extended',
 	'skinchanger',
-	'esx_skin'
+	'rorp_core-skin'
 }
