@@ -29,8 +29,8 @@ menuConfigs = {
                     navAngle = 270,                 -- Oritentation of wheel
                     minRadiusPercent = 0.2,         -- Minimum radius of wheel in percentage
                     maxRadiusPercent = 0.6,         -- Maximum radius of wheel in percentage
-                    labels = {"imgsrc:emote.png","imgsrc:bag.png","imgsrc:baju.png", "imgsrc:identitas.png", "imgsrc:billing.png", "imgsrc:car.png" ,"imgsrc:phone2.png"},
-                    commands = {"submenuEmote","openinv","submenuPakaian", "menuident" ,"showbills","subVehicles","hp"}
+                    labels = {"imgsrc:emote.png","imgsrc:bag.png","imgsrc:identitas.png", "imgsrc:billing.png", "imgsrc:car.png" ,"imgsrc:phone2.png"},
+                    commands = {"submenuEmote","openinv","menuident" ,"showbills","subVehicles","hp"}
                 },
                 -- {
                 --     navAngle = 285,                 -- Oritentation of wheel
@@ -121,37 +121,37 @@ subMenuConfigs = {
             }
         }
     },
-    ['submenuPakaian'] = {
-        data = {
-            keybind = "F1",
-            style = {
-                sizePx = 400,
-                slices = {
-                    default = { ['fill'] = '#000000', ['stroke'] = '#000000', ['stroke-width'] = 2, ['opacity'] = 0.30 },
-                    hover = { ['fill'] = '#ff8000', ['stroke'] = '#000000', ['stroke-width'] = 2, ['opacity'] = 0.80 },
-                    selected = { ['fill'] = '#ff8000', ['stroke'] = '#000000', ['stroke-width'] = 2, ['opacity'] = 0.80 }
-                },
-                titles = {
-                    default = { ['fill'] = '#ffffff', ['stroke'] = 'none', ['font'] = 'Helvetica', ['font-size'] = 16, ['font-weight'] = 'bold' },
-                    hover = { ['fill'] = '#ffffff', ['stroke'] = 'none', ['font'] = 'Helvetica', ['font-size'] = 16, ['font-weight'] = 'bold' },
-                    selected = { ['fill'] = '#ffffff', ['stroke'] = 'none', ['font'] = 'Helvetica', ['font-size'] = 16, ['font-weight'] = 'bold' }
-                },
-                icons = {
-                    width = 50,
-                    height = 50
-                }
-            },
-            wheels = {
-                {
-                    navAngle = 290,
-                    minRadiusPercent = 0.4,
-                    maxRadiusPercent = 1.0,
-                    labels = {"imgsrc:ear.png","imgsrc:neck.png","imgsrc:watch.png","imgsrc:bracelet.png","imgsrc:vest.png","imgsrc:top.png","imgsrc:baju2.png","imgsrc:pants.png","imgsrc:gloves.png","imgsrc:visor.png","imgsrc:hat.png","imgsrc:shoes.png","imgsrc:mask.png","imgsrc:hair.png","imgsrc:bagoff.png","imgsrc:glasses.png","imgsrc:reset.png"},
-                    commands = {"ear","neck","watch","bracelet","vest","top","shirt","pants","gloves","visor","hat","shoes","mask","hair","bagoff","glasses","revertclothing"}
-                },
-            }
-        }
-    },
+    -- ['submenuPakaian'] = {
+    --     data = {
+    --         keybind = "F1",
+    --         style = {
+    --             sizePx = 400,
+    --             slices = {
+    --                 default = { ['fill'] = '#000000', ['stroke'] = '#000000', ['stroke-width'] = 2, ['opacity'] = 0.30 },
+    --                 hover = { ['fill'] = '#ff8000', ['stroke'] = '#000000', ['stroke-width'] = 2, ['opacity'] = 0.80 },
+    --                 selected = { ['fill'] = '#ff8000', ['stroke'] = '#000000', ['stroke-width'] = 2, ['opacity'] = 0.80 }
+    --             },
+    --             titles = {
+    --                 default = { ['fill'] = '#ffffff', ['stroke'] = 'none', ['font'] = 'Helvetica', ['font-size'] = 16, ['font-weight'] = 'bold' },
+    --                 hover = { ['fill'] = '#ffffff', ['stroke'] = 'none', ['font'] = 'Helvetica', ['font-size'] = 16, ['font-weight'] = 'bold' },
+    --                 selected = { ['fill'] = '#ffffff', ['stroke'] = 'none', ['font'] = 'Helvetica', ['font-size'] = 16, ['font-weight'] = 'bold' }
+    --             },
+    --             icons = {
+    --                 width = 50,
+    --                 height = 50
+    --             }
+    --         },
+    --         wheels = {
+    --             {
+    --                 navAngle = 290,
+    --                 minRadiusPercent = 0.4,
+    --                 maxRadiusPercent = 1.0,
+    --                 labels = {"imgsrc:ear.png","imgsrc:neck.png","imgsrc:watch.png","imgsrc:bracelet.png","imgsrc:vest.png","imgsrc:top.png","imgsrc:baju2.png","imgsrc:pants.png","imgsrc:gloves.png","imgsrc:visor.png","imgsrc:hat.png","imgsrc:shoes.png","imgsrc:mask.png","imgsrc:hair.png","imgsrc:bagoff.png","imgsrc:glasses.png","imgsrc:reset.png"},
+    --                 commands = {"ear","neck","watch","bracelet","vest","top","shirt","pants","gloves","visor","hat","shoes","mask","hair","bagoff","glasses","revertclothing"}
+    --             },
+    --         }
+    --     }
+    -- },
     ['subVehicles'] = {
         data = {
             keybind = "F1",
