@@ -1,6 +1,7 @@
 -- Resource Metadata
 fx_version 'bodacious'
-games 'gta5'
+
+games {'gta5'}
 
 description 'Main Core RORP Server'
 version '1.0.0'
@@ -31,7 +32,7 @@ client_scripts {
     'client/TakeHostage_cl.lua',
     'client/Drift',
     'client/3DMe_cl.lua',
-    'client/CarryPeople_cl.lua',
+    'client/CarryPeople_cl.lua'
 }
 
 server_scripts {
@@ -41,6 +42,5 @@ server_scripts {
     'server/SmartTrafficLights_sv.lua',
     'server/TakeHostage_sv.lua',
     'server/3DMe_sv.lua',
-    'server/CarryPeople_sv.lua',
-
+    'server/CarryPeople_sv.lua'
 }
