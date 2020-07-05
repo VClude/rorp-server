@@ -12,7 +12,7 @@
 
 local defaultScale = 0.5 -- Text scale
 local color = { r = 230, g = 230, b = 230, a = 255 } -- Text color
-local font = 0 -- Text font
+local font = 2 -- Text font
 local displayTime = 5000 -- Duration to display the text (in ms)
 local distToDraw = 250 -- Min. distance to draw 
 
