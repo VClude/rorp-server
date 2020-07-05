@@ -98,11 +98,11 @@ function OpenShopMenu()
 	end, {
 		'tshirt_1', 'tshirt_2',
 		'torso_1', 'torso_2',
-		'decals_1', 'decals_2',
 		'arms',
 		'pants_1', 'pants_2',
 		'shoes_1', 'shoes_2',
-		'chain_1', 'chain_2'
+		'chain_1', 'chain_2',
+		'bags_1',	'bags_2'
 	})
 end
 
