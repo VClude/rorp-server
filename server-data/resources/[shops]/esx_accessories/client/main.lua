@@ -13,7 +13,7 @@ end)
 function OpenAccessoryMenu()
 	ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'set_unset_accessory', {
 		title = _U('set_unset'),
-		align = 'top-left',
+		align = 'bottom-left',
 		elements = {
 			{label = _U('helmet'), value = 'Helmet'},
 			{label = _U('ears'), value = 'Ears'},
@@ -57,6 +57,7 @@ function SetUnsetAccessory(accessory)
 end
 
 function OpenShopMenu(accessory)
+	TriggerEvent(“dpc:EquipLast”)
 	local _accessory = string.lower(accessory)
 	local restrict = {}
 
@@ -68,7 +69,7 @@ function OpenShopMenu(accessory)
 
 		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'shop_confirm', {
 			title = _U('valid_purchase'),
-			align = 'top-left',
+			align = 'bottom-left',
 			elements = {
 				{label = _U('no'), value = 'no'},
 				{label = _U('yes', ESX.Math.GroupDigits(Config.Price)), value = 'yes'}

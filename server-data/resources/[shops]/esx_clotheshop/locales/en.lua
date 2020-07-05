@@ -1,6 +1,6 @@
 Locales['en'] = {
   ['valid_this_purchase'] = 'validate this purchase?',
-  ['yes'] = 'yes',
+  ['yes'] = 'yes (<span style="color: green;">$%s</span>)',
   ['no'] = 'no',
   ['not_enough_money'] = 'you do not have enough money',
   ['press_menu'] = 'press ~INPUT_CONTEXT~ to access the ~y~Clothing Shop~s~.',

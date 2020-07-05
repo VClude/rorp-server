@@ -12,16 +12,17 @@ end)
 
 function OpenShopMenu()
 	hasPaid = false
-
+	TriggerEvent(“dpc:EquipLast”)
+	
 	TriggerEvent('esx_skin:openRestrictedMenu', function(data, menu)
 		menu.close()
 
 		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'shop_confirm', {
 			title = _U('valid_this_purchase'),
-			align = 'top-left',
+			align = 'bottom-left',
 			elements = {
 				{label = _U('no'), value = 'no'},
-				{label = _U('yes'), value = 'yes'}
+				{label = _U('yes',ESX.Math.GroupDigits(Config.Price))), value = 'yes'}
 		}}, function(data, menu)
 			menu.close()
 
@@ -38,7 +39,7 @@ function OpenShopMenu()
 							if foundStore then
 								ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'save_dressing', {
 									title = _U('save_in_dressing'),
-									align = 'top-left',
+									align = 'bottom-left',
 									elements = {
 										{label = _U('no'),  value = 'no'},
 										{label = _U('yes'), value = 'yes'}
@@ -101,9 +102,7 @@ function OpenShopMenu()
 		'arms',
 		'pants_1', 'pants_2',
 		'shoes_1', 'shoes_2',
-		'chain_1', 'chain_2',
-		'helmet_1', 'helmet_2',
-		'glasses_1', 'glasses_2'
+		'chain_1', 'chain_2'
 	})
 end
 
@@ -118,9 +117,6 @@ AddEventHandler('esx_clotheshop:hasExitedMarker', function(zone)
 	currentAction = nil
 
 	if not hasPaid then
-		-- TriggerEvent('esx_skin:getLastSkin', function(skin)
-		-- 	TriggerEvent('skinchanger:loadSkin', skin)
-		-- end)
 		ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin)
 			TriggerEvent('skinchanger:loadSkin', skin)
 		end)
