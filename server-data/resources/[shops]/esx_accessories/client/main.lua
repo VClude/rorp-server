@@ -1,5 +1,5 @@
 ESX	= nil
-local HasAlreadyEnteredMarker, isDead = false, false
+local HasAlreadyEnteredMarker, isDead, hasPaid = false, false, false
 local LastZone, CurrentAction, CurrentActionMsg
 local CurrentActionData	= {}
 
@@ -11,6 +11,7 @@ Citizen.CreateThread(function()
 end)
 
 function OpenAccessoryMenu()
+	hasPaid = false
 	ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'set_unset_accessory', {
 		title = _U('set_unset'),
 		align = 'top-left',
@@ -57,7 +58,6 @@ function SetUnsetAccessory(accessory)
 end
 
 function OpenShopMenu(accessory)
-	TriggerEvent('dpc:EquipLast')
 	local _accessory = string.lower(accessory)
 	local restrict = {}
 
@@ -82,6 +82,7 @@ function OpenShopMenu(accessory)
 						TriggerEvent('skinchanger:getSkin', function(skin)
 							TriggerServerEvent('esx_accessories:save', skin, accessory)
 						end)
+						hasPaid = true
 					else
 						TriggerEvent('esx_skin:getLastSkin', function(skin)
 							TriggerEvent('skinchanger:loadSkin', skin)
@@ -135,6 +136,12 @@ end)
 AddEventHandler('esx_accessories:hasExitedMarker', function(zone)
 	ESX.UI.Menu.CloseAll()
 	CurrentAction = nil
+
+	if not hasPaid then
+		ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin)
+			TriggerEvent('skinchanger:loadSkin', skin)
+		end)
+	end
 end)
 
 -- Create Blips --
