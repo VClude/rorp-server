@@ -8,7 +8,6 @@ version '1.0.0'
 
 -- What to run
 client_scripts {
-    'config/NoCarJack_cfg.lua',
     'client/BetterRecoil.lua',
     'client/Crouched.lua',
     'client/DisableSneaking.lua',
@@ -33,6 +32,9 @@ client_scripts {
     'client/Drift',
     'client/3DMe_cl.lua',
     'client/CarryPeople_cl.lua',
+    'client/HolsterWeapon.lua',
+    'client/AKF-Kick_cl.lua',
+    'client/PING-Kick_cl.lua',
 }
 
 server_scripts {
@@ -43,4 +45,6 @@ server_scripts {
     'server/TakeHostage_sv.lua',
     'server/3DMe_sv.lua',
     'server/CarryPeople_sv.lua',
+    'server/AKF-Kick_sv.lua',
+    'server/PING_Kick_sv.lua',
 }
