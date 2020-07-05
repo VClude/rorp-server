@@ -83,7 +83,7 @@ ESX.RegisterServerCallback('eden_garage:getOutVehicles',function(source, cb, Kin
 		identifier = ESX.GetPlayerFromId(_source).identifier
 	end
 
-	MySQL.Async.fetchAll("SELECT * FROM owned_vehicles WHERE owner = @identifier AND (`stored` = FALSE OR pound = TRUE) AND refound_name = @refound_name AND type=@vehicle_type AND owned_vehicles.plate NOT IN (SELECT plate from h_impounded_vehicles) AND owned_vehicles.plate NOT IN (SELECT plate from rtx_property_garage_vehicles)",{
+	MySQL.Async.fetchAll("SELECT * FROM owned_vehicles WHERE owner = @identifier AND (`stored` = FALSE OR pound = TRUE) AND refound_name = @refound_name AND type=@vehicle_type AND owned_vehicles.plate NOT IN (SELECT plate from h_impounded_vehicles)",{
 		['@identifier'] = identifier,
 		['@refound_name'] = refound_name, 
 		['@vehicle_type'] = vehicle_type
