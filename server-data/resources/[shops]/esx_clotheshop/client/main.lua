@@ -12,7 +12,7 @@ end)
 
 function OpenShopMenu()
 	hasPaid = false
-	TriggerEvent(“dpc:EquipLast”)
+	TriggerEvent('dpc:EquipLast')
 	
 	TriggerEvent('esx_skin:openRestrictedMenu', function(data, menu)
 		menu.close()

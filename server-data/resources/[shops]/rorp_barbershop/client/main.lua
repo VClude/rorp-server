@@ -505,7 +505,7 @@ end)
 
 function OpenBarberShopMenu()
 
-  TriggerEvent(“dpc:EquipLast”)
+  TriggerEvent('dpc:EquipLast')
   
   local price = Config.Price
   

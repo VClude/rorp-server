@@ -57,7 +57,7 @@ function SetUnsetAccessory(accessory)
 end
 
 function OpenShopMenu(accessory)
-	TriggerEvent(“dpc:EquipLast”)
+	TriggerEvent('dpc:EquipLast')
 	local _accessory = string.lower(accessory)
 	local restrict = {}
 
