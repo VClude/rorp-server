@@ -103,9 +103,7 @@ function SetGear(weapon)
 	end
 
 	ESX.Game.SpawnObject(model, {
-		x = x,
-		y = y,
-		z = z
+		vector3(x, y, z)
 	}, function(object)
 		local boneIndex = GetPedBoneIndex(playerPed, bone)
 		local bonePos 	= GetWorldPositionOfEntityBone(playerPed, boneIndex)
@@ -152,9 +150,7 @@ function SetGears()
 		local _wait = true
 
 		ESX.Game.SpawnObject(model, {
-			x = x,
-			y = y,
-			z = z
+			vector3(x, y, z)
 		}, function(object)
 			local boneIndex = GetPedBoneIndex(playerPed, bone)
 			local bonePos 	= GetWorldPositionOfEntityBone(playerPed, boneIndex)
