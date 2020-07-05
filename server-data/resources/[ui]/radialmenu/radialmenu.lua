@@ -174,3 +174,7 @@ RegisterNUICallback('testprint', function(data, cb)
     -- Send ACK to callback function
     cb('ok')
 end)
+
+RegisterCommand('engine',function()
+    TriggerEvent("carremote:hotkeyEnginePressed")
+end)
