@@ -504,8 +504,6 @@ AddEventHandler('rorp_barbershop:openSaveableMenuBarber', function(submitCb, can
 end)
 
 function OpenBarberShopMenu()
-
-  TriggerEvent('dpc:EquipLast')
   
   local price = Config.Price
   
