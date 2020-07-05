@@ -124,19 +124,19 @@ Config.Zones = {
 
 Config.AuthorizedVehicles = {
 
-	zacatecnik = {
+	training = {
 		{label = "Odtahovka", model = "towtruck", price = 1000}
 	},
 
-	mechanik = {
+	karyawan = {
 		{label = "Odtahovka", model = "towtruck", price = 1000}
 	},
 
-	profesional = {
+	senior = {
 		{label = "Odtahovka", model = "towtruck", price = 1000},
 	},
 
-	manazer = {
+	kepala_bengkel = {
 		{label = "Odtahovka", model = "towtruck", price = 1000},
 	},
 

@@ -218,13 +218,13 @@ Citizen.CreateThread( function()
 							NotifError('Tidak memiliki akses boss menu')
 						end						
 					elseif CurrentAction == "bennys_inventory_menu" then
-						if  ESX.PlayerData.job and ESX.PlayerData.job.name == "bennys" and ESX.PlayerData.job.grade_name ~= 'magang' and ESX.PlayerData.job.grade_name ~= 'karyawan_bengkel' then						
+						if  ESX.PlayerData.job and ESX.PlayerData.job.name == "bennys" and ESX.PlayerData.job.grade_name ~= 'training' and ESX.PlayerData.job.grade_name ~= 'karyawan' then						
 							OpenBennysInventoryMenu()
 						else
 							NotifError('Anda tidak memiliki akses membuka inventory')
 						end							
 					elseif CurrentAction == 'ls_custom' then
-						if  ESX.PlayerData.job and ESX.PlayerData.job.name == "bennys" and ESX.PlayerData.job.grade_name ~= 'magang' then						
+						if  ESX.PlayerData.job and ESX.PlayerData.job.name == "bennys" and ESX.PlayerData.job.grade_name ~= 'training' then						
 							OpenLSAction()
 						else
 							NotifError('Pengalaman anda kurang untuk modifikasi kendaraan')
@@ -1311,17 +1311,17 @@ VehicleMenu = function(type)
 	local pos = GetEntityCoords(ped)
 	
 	if type == 'car' then
-		if ESX.PlayerData.job.grade_name == 'magang' then
+		if ESX.PlayerData.job.grade_name == 'training' then
 				table.insert(elements,{label = 'Tidak ada kendaraan'})
-		elseif ESX.PlayerData.job.grade_name == 'karyawan_bengkel' then
+		elseif ESX.PlayerData.job.grade_name == 'karyawan' then
 			for k,v in pairs(Config.MechanicVehicles) do
 				table.insert(elements,{label = v.label, name = v.label, model = v.model, price = v.price, type = 'car'})
 			end
-		elseif ESX.PlayerData.job.grade_name == 'karyawan_senior' then
+		elseif ESX.PlayerData.job.grade_name == 'senior' then
 			for k,v in pairs(Config.MechanicVehicles) do
 				table.insert(elements,{label = v.label, name = v.label, model = v.model, price = v.price, type = 'car'})
 			end
-		elseif ESX.PlayerData.job.grade_name == 'kepala_staff' then
+		elseif ESX.PlayerData.job.grade_name == 'kepala_bengkel' then
 			for k,v in pairs(Config.MechanicVehicles) do
 				table.insert(elements,{label = v.label, name = v.label, model = v.model, price = v.price, type = 'car'})
 			end
@@ -1332,7 +1332,7 @@ VehicleMenu = function(type)
 		end
 	end
 		
-	ESX.UI.Menu.Open('default', GetCurrentResourceName(), "esx_MechanicGarage_vehicle_garage",
+	ESX.UI.Menu.Open('default', GetCurrentResourceName(), "rorp_bennys_garage",
 		{
 			title    = Config.TitleMechanicGarage,
 			align    = "bottom-right",
@@ -1537,7 +1537,7 @@ Citizen.CreateThread(function()
 	while true do
         Citizen.Wait(5)
 		local coords = GetEntityCoords(GetPlayerPed(-1))
-		if ESX.PlayerData.job and ESX.PlayerData.job.name == "bennys" and ESX.PlayerData.job.grade_name ~= "magang" then
+		if ESX.PlayerData.job and ESX.PlayerData.job.name == "bennys" and ESX.PlayerData.job.grade_name ~= "training" then
 			for k,v in pairs(Config.Tires) do
 				local distance = GetDistanceBetweenCoords(coords, v.Pos.x, v.Pos.y, v.Pos.z, true)
 				if distance <= 20.0 and not currentlyGetTire then

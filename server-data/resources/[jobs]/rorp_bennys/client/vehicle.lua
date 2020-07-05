@@ -6,10 +6,10 @@ function OpenVehicleSpawnerMenu(type)
     PlayerData = ESX.GetPlayerData()
 
 	ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'vehicle', {
-		title    = _U('garage_title'),
+		title    = 'Garasi Bennys',
 		align    = 'top',
 		elements = {
-			{label = 'Garasi bennys', action = 'garage'},
+			{label = 'Garasi', action = 'garage'},
 			{label = 'Simpan di garasi', action = 'store_garage'},
 			{label = 'Beli kendaraan', action = 'buy_vehicle'}
 	}}, function(data, menu)
@@ -25,7 +25,6 @@ function OpenVehicleSpawnerMenu(type)
                             local vehicleLabel = GetLabelText(GetDisplayNameFromVehicleModel(vehicle.model))
 
                             table.insert(shopElements, {
-                                -- label = vehicle.label .. ' - <span style="color:green;">Zakoupit za $' .. ESX.Math.GroupDigits(vehicle.price) .. "</span>",
                                 label = ('%s - <span style="color:green;">%s</span>'):format(vehicleLabel, _U('shop_item', ESX.Math.GroupDigits(vehicle.price))),
                                 name  = vehicleLabel,
                                 model = vehicle.model,
@@ -39,13 +38,13 @@ function OpenVehicleSpawnerMenu(type)
                     if #shopElements > 0 then
                         OpenVehicleShopMenu(shopElements, playerCoords, shopCoords)
                     else
-                        ESX.ShowNotification('BACOT')
+                        exports['mythic_notify']:DoCustomHudText('error', 'Tidak memiliki izin membeli kendaraan jenis tersebut.', 2500)
                     end
                 else
-                    ESX.ShowNotification('BACOT')
+                    exports['mythic_notify']:DoCustomHudText('error', 'Tidak memiliki izin membeli kendaraan jenis tersebut.', 2500)
                 end
             else
-                ESX.ShowNotification('BACOT')
+                exports['mythic_notify']:DoCustomHudText('error', 'Tidak memiliki izin membeli kendaraan jenis tersebut.', 2500)
             end
 
 		elseif data.current.action == 'garage' then
@@ -81,7 +80,7 @@ function OpenVehicleSpawnerMenu(type)
 
 					if #garage > 0 then
 						ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'vehicle_garage', {
-							title    = _U('garage_title'),
+							title    = 'Garasi Bennys',
 							align    = 'top',
 							elements = garage
 						}, function(data2, menu2)
@@ -96,20 +95,20 @@ function OpenVehicleSpawnerMenu(type)
 										ESX.Game.SetVehicleProperties(vehicle, vehicleProps)
 
 										TriggerServerEvent('t1ger_cardealer:setJobVehicleState', data2.current.plate, false)
-										exports['mythic_notify']:DoCustomHudText('success', _U('garage_released'), 2500)
+										exports['mythic_notify']:DoCustomHudText('success', 'Mobil berhasil di keluarkan', 2500)
 									end)
 								end
 							else
-								exports['mythic_notify']:DoCustomHudText('error', _U('garage_notavailable'), 2500)
+								exports['mythic_notify']:DoCustomHudText('error', 'Kendaraan anda tidak ada di garasi.', 2500)
 							end
 						end, function(data2, menu2)
 							menu2.close()
 						end)
 					else
-						exports['mythic_notify']:DoCustomHudText('error', _U('garage_empty'), 2500)
+						exports['mythic_notify']:DoCustomHudText('error', 'Kamu tidak memiliki kendaraan di garasi', 2500)
 					end
 				else
-					exports['mythic_notify']:DoCustomHudText('error', 'Tidak ada kendaraan', 2500)
+					exports['mythic_notify']:DoCustomHudText('error', 'Tidak ada kendaraan untuk perusahaan ini', 2500)
 				end
             end, type)
             
@@ -131,7 +130,7 @@ function OpenVehicleShopMenu(elements, restoreCoords, shopCoords)
         elements = elements
 	},function(data, menu)
         ESX.UI.Menu.Open("default",GetCurrentResourceName(),"vehicle_shop_confirm",{
-            title = "Really buy a vehicle " .. data.current.name .. " for $" .. data.current.price .. "?",
+            title = "Confirmation buy " .. data.current.name .. " for $" .. data.current.price .. "?",
             align = "bottom-right",
             elements = {
                 {label = "No", value = "no"},
@@ -145,7 +144,7 @@ function OpenVehicleShopMenu(elements, restoreCoords, shopCoords)
 
                 ESX.TriggerServerCallback("rorp_bennys:buyJobVehicle",function(bought)
                     if bought then
-                        exports['mythic_notify']:SendAlert('success', 'You bought a vehicle ' .. data.current.name .. ' for $' .. ESX.Math.GroupDigits(data.current.price) .. '.', 5000)
+                        exports['mythic_notify']:SendAlert('success', 'Kamu berhasil membeli ' .. data.current.name .. ' dengan harga $' .. ESX.Math.GroupDigits(data.current.price) .. '.', 5000)
                         
                         isInShopMenu = false
                         ESX.UI.Menu.CloseAll()
@@ -155,7 +154,7 @@ function OpenVehicleShopMenu(elements, restoreCoords, shopCoords)
 
                         ESX.Game.Teleport(playerPed, restoreCoords)
                     else
-                        exports['mythic_notify']:SendAlert('error', 'Nemáš dostatek peněz na zakoupení vozidla.', 5000)
+                        exports['mythic_notify']:SendAlert('error', 'Tidak cukup uang untuk membeli kendaraan', 5000)
                         menu2.close()
                     end
                 end,props,data.current.type)
@@ -234,7 +233,7 @@ function GetAvailableVehicleSpawnPoint()
 	if found then
 		return true, foundSpawnPoint
 	else
-		exports['mythic_notify']:SendAlert('error', 'All parking spaces are occupied.', 5000)
+		exports['mythic_notify']:SendAlert('error', 'Spawn point is blocked.', 5000)
 		return false
 	end
 end
@@ -296,9 +295,9 @@ function StoreNearbyVehicle(playerCoords)
 			end
 
 			IsBusy = false
-			exports['mythic_notify']:SendAlert('success', 'The vehicle was stored in the garage.', 5000)
+			exports['mythic_notify']:SendAlert('success', 'Berhasil menyimpan kendaraan', 5000)
 		else
-			exports['mythic_notify']:SendAlert('error', 'The vehicle could not be stored.', 5000)
+			exports['mythic_notify']:SendAlert('error', 'Gagal menyimpan kendaraan', 5000)
 		end
 	end, vehiclePlates)
 end
