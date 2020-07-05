@@ -35,7 +35,7 @@ ESX.RegisterServerCallback("esx_atmRobbery:isRobbingPossible",function(source,cb
 	if not CheckCooldownTime(GetPlayerIdentifier(source)) then
 		cb(false)
 	else
-		TriggerClientEvent("esx:showNotification",source,string.format("Kamu bisa hack ATM lagi dalam: ~b~%s~s~ menit",waitTimer))
+		TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'inform', text = string.format("ATM Robbery delay in: ~b~%s~s~ minutes",waitTimer)})
 		cb(true)
 	end
 end)
@@ -55,7 +55,7 @@ ESX.RegisterServerCallback("esx_atmRobbery:getOnlinePoliceCount",function(source
 		cb(true)
 	else
 		cb(false)
-		TriggerClientEvent('esx:showNotification', source, "Tidak~r~Cukup~s~ ~y~Polisi~s~ di dalam ~b~Kota~s~")
+		TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'error', text = 'Dibutuhkan 2x Polisi di kota'})
 	end
 end)
 
@@ -66,7 +66,7 @@ ESX.RegisterServerCallback("esx_atmRobbery:getHackerDevice",function(source,cb)
 		cb(true)
 	else
 		cb(false)
-		TriggerClientEvent('esx:showNotification', source, "Kamu membutuhkan ~y~Hacking Device~s~ untuk hack ATM!")
+		TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'error', text = 'Tidak memiliki Hacking Device'})
 	end
 end)
 
