@@ -11,7 +11,6 @@ Citizen.CreateThread(function()
 end)
 
 function OpenAccessoryMenu()
-	hasPaid = false
 	ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'set_unset_accessory', {
 		title = _U('set_unset'),
 		align = 'top-left',
@@ -58,6 +57,7 @@ function SetUnsetAccessory(accessory)
 end
 
 function OpenShopMenu(accessory)
+	hasPaid = false
 	local _accessory = string.lower(accessory)
 	local restrict = {}
 
