@@ -8,7 +8,7 @@ Config.RealWeapons = {
 	{name = 'WEAPON_NIGHTSTICK', 		bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'melee', 		model = 'w_me_nightstick'},
 	{name = 'WEAPON_HAMMER', 			bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'melee', 		model = 'prop_tool_hammer'},
 	-- {name = 'WEAPON_BAT', 				bone = 24818, x = 0.09, y = -0.15, z = 0.1, xRot = 10.0, yRot = 240.0, zRot = 10.0, category = 'melee', 		model = 'w_me_bat'},
-	{name = 'WEAPON_BAT', 				bone = 58271, x = -0.01, y = 0.0,  z = -0.09, xRot = -240.0,  yRot = 65.0, zRot = 0.0, category = 'melee', 		model = 'w_me_bat'},
+	{name = 'WEAPON_BAT', 				bone = 58271, x = -0.01, y = 0.0,  z = -0.11, xRot = -240.0,  yRot = 65.0, zRot = 0.0, category = 'melee', 		model = 'w_me_bat'},
 	{name = 'WEAPON_GOLFCLUB', 			bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'melee', 		model = 'w_me_gclub'},
 	{name = 'WEAPON_CROWBAR', 			bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'melee', 		model = 'w_me_crowbar'},
 	{name = 'WEAPON_BOTTLE', 			bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'melee', 		model = 'prop_w_me_bottle'},
@@ -19,7 +19,7 @@ Config.RealWeapons = {
 	{name = 'WEAPON_FLASHLIGHT', 		bone = 24818, x = 0.0, y = 0.0, z = 0.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'melee', 		model = ''},
 
 	-- {name = 'WEAPON_PISTOL', 			bone = 51826, x = -0.01, y = 0.10, z = 0.07,  xRot = -115.0, yRot = 0.0,  zRot = 0.0, category = 'handguns', 	model = 'w_pi_pistol'},
-	{name = 'WEAPON_PISTOL', 			bone = 24818, x = -0.05, y = -0.15, z = 0.1, xRot = 10.0, yRot = 240.0, zRot = 10.0, category = 'handguns', 	model = 'w_pi_pistol'},
+	{name = 'WEAPON_PISTOL', 			bone = 24818, x = -0.15, y = -0.15, z = 0.1, xRot = 10.0, yRot = 240.0, zRot = 10.0, category = 'handguns', 	model = 'w_pi_pistol'},
 	{name = 'WEAPON_COMBATPISTOL', 		bone = 51826, x = -0.01, y = 0.10, z = 0.07,  xRot = -115.0, yRot = 0.0,  zRot = 0.0, category = 'handguns', 	model = 'w_pi_combatpistol'},
 	{name = 'WEAPON_APPISTOL', 			bone = 51826, x = -0.01, y = 0.10, z = 0.07,  xRot = -115.0, yRot = 0.0,  zRot = 0.0, category = 'handguns', 	model = 'w_pi_appistol'},
 	{name = 'WEAPON_PISTOL50', 			bone = 51826, x = -0.01, y = 0.10, z = 0.07,  xRot = -115.0, yRot = 0.0,  zRot = 0.0, category = 'handguns', 	model = 'w_pi_pistol50'},
