@@ -53,7 +53,7 @@ end)
 ESX.RegisterServerCallback('esx_eden_clotheshop:checkMoney', function(source, cb)
 	local xPlayer = ESX.GetPlayerFromId(source)
 
-	if xPlayer.get('money') >= Config.Price then
+	if xPlayer.getMoney() >= Config.Price then
 		cb(true)
 	else
 		cb(false)
