@@ -251,7 +251,10 @@ AddEventHandler('esx_eden_clotheshop:hasExitedMarker', function(zone)
 	if not HasPayed then
 		if not HasLoadCloth then 
 
-			TriggerEvent('esx_skin:getLastSkin', function(skin)
+			-- TriggerEvent('esx_skin:getLastSkin', function(skin)
+			-- 	TriggerEvent('skinchanger:loadSkin', skin)
+			-- end)
+			ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin)
 				TriggerEvent('skinchanger:loadSkin', skin)
 			end)
 		end
