@@ -1,7 +1,7 @@
 -- Resource Metadata
-fx_version 'bodacious'
+fx_version 'adamant'
 
-games {'gta5'}
+game 'gta5'
 
 description 'Main Core RORP Server'
 version '1.0.0'
