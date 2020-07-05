@@ -42,7 +42,7 @@ function OpenShopMenu()
 									align = 'top-left',
 									elements = {
 										{label = _U('no'),  value = 'no'},
-										{label = _U('yes'), value = 'yes'}
+										{label = _U('yes_validate'), value = 'yes'}
 								}}, function(data2, menu2)
 									menu2.close()
 
