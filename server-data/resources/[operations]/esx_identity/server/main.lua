@@ -164,7 +164,7 @@ ESX.RegisterCommand('register', 'user', function(xPlayer, args, showError)
 			TriggerClientEvent('esx_identity:showRegisterIdentity', xPlayer.source)
 		end
 	end)
-end, false, {help = _U('show_registration')})
+end, true, {help = _U('show_registration')})
 
 ESX.RegisterCommand('char', 'user', function(xPlayer, args, showError)
 	getIdentity(xPlayer.source, function(data)
@@ -174,7 +174,7 @@ ESX.RegisterCommand('char', 'user', function(xPlayer, args, showError)
 			xPlayer.showNotification(_U('active_character', data.firstname, data.lastname))
 		end
 	end)
-end, false, {help = _U('show_active_character')})
+end, true, {help = _U('show_active_character')})
 
 ESX.RegisterCommand('chardel', 'user', function(xPlayer, args, showError)
 	getIdentity(xPlayer.source, function(data)
@@ -186,4 +186,4 @@ ESX.RegisterCommand('chardel', 'user', function(xPlayer, args, showError)
 			TriggerClientEvent('esx_identity:showRegisterIdentity', xPlayer.source)
 		end
 	end)
-end, false, {help = _U('delete_character')})
+end, true, {help = _U('delete_character')})

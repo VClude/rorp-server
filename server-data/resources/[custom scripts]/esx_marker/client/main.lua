@@ -16,34 +16,32 @@ end)
 
 
 TeleportToWaypoint = function()
-    -- ESX.TriggerServerCallback("esx_marker:fetchUserRank", function(playerRank)
-    --     print(playerRank)
-    --     if playerRank == "admin" or playerRank == "superadmin" or playerRank == "mod" then
-            local WaypointHandle = GetFirstBlipInfoId(8)
+    if IsPlayerAceAllowed(source, "command") then
+        local WaypointHandle = GetFirstBlipInfoId(8)
 
-            if DoesBlipExist(WaypointHandle) then
-                local waypointCoords = GetBlipInfoIdCoord(WaypointHandle)
+        if DoesBlipExist(WaypointHandle) then
+            local waypointCoords = GetBlipInfoIdCoord(WaypointHandle)
 
-                for height = 1, 1000 do
+            for height = 1, 1000 do
+                SetPedCoordsKeepVehicle(PlayerPedId(), waypointCoords["x"], waypointCoords["y"], height + 0.0)
+
+                local foundGround, zPos = GetGroundZFor_3dCoord(waypointCoords["x"], waypointCoords["y"], height + 0.0)
+
+                if foundGround then
                     SetPedCoordsKeepVehicle(PlayerPedId(), waypointCoords["x"], waypointCoords["y"], height + 0.0)
 
-                    local foundGround, zPos = GetGroundZFor_3dCoord(waypointCoords["x"], waypointCoords["y"], height + 0.0)
-
-                    if foundGround then
-                        SetPedCoordsKeepVehicle(PlayerPedId(), waypointCoords["x"], waypointCoords["y"], height + 0.0)
-
-                        break
-                    end
-
-                    Citizen.Wait(5)
+                    break
                 end
 
-                ESX.ShowNotification("Teleported.")
-            else
-                ESX.ShowNotification("Please place your waypoint.")
+                Citizen.Wait(5)
             end
-        -- else
-        --     ESX.ShowNotification("You do not have rights to do this.")
+
+            ESX.ShowNotification("Teleported.")
+        else
+            ESX.ShowNotification("Please place your waypoint.")
+        end
+    else
+         ESX.ShowNotification("You do not have rights to do this.")
         -- end
-    -- end)
+    end
 end
