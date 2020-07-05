@@ -102,7 +102,7 @@ function SetGear(weapon)
 		end
 	end
 
-	ESX.Game.SpawnObject(model, {
+	ExM.Game.SpawnObject(model, {
 		x = x,
 		y = y,
 		z = z
@@ -151,7 +151,7 @@ function SetGears()
 
 		local _wait = true
 
-		ESX.Game.SpawnObject(model, {
+		ExM.Game.SpawnObject(model, {
 			x = x,
 			y = y,
 			z = z
