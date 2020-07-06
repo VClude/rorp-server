@@ -138,11 +138,11 @@ AddEventHandler('esx_accessories:hasExitedMarker', function(zone)
 	ESX.UI.Menu.CloseAll()
 	CurrentAction = nil
 
-	-- if not hasPaid then
-	-- 	ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin)
-	-- 		TriggerEvent('skinchanger:loadSkin', skin)
-	-- 	end)
-	-- end
+	if not hasPaid then
+		ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin)
+			TriggerEvent('skinchanger:loadSkin', skin)
+		end)
+	end
 end)
 
 -- Create Blips --
