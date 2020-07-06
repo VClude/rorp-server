@@ -309,6 +309,8 @@ AddEventHandler('esx_accessories:shirt', function()
 			['torso_1'] = 15, ['torso_2'] = 0,
 			['arms'] = 15, ['arms_2'] = 0
 		}
+		TriggerEvent('shirt',true)
+		Citizen.Wait(800)
 		TriggerEvent('skinchanger:loadClothes', skin, clothesSkin)
 	end)
 end)
@@ -319,6 +321,8 @@ AddEventHandler('esx_accessories:pants', function()
 		local clothesSkin = {
 			['pants_1'] = 21, ['pants_2'] = 0
 		}
+		TriggerEvent('pants',true)
+		Citizen.Wait(800)
 		TriggerEvent('skinchanger:loadClothes', skin, clothesSkin)
 	end)
 end)
@@ -359,11 +363,57 @@ AddEventHandler('shoes', function(putOn)
 	local anim
 
 	if putOn then
-		dict = "random@domestic" --anim: take_off_helmet_stand
+		dict = "random@domestic" 
 		anim = "pickup_low"
 	else
-		dict = "random@domestic" --anim: take_off_helmet_stand
+		dict = "random@domestic"
 		anim = "pickup_low"
+	end
+
+	loadAnimDict( dict )
+	TaskPlayAnim( player, dict, anim, 8.0, 0.6, -1, 49, 0, 0, 0, 0 )
+	Wait (500)
+	ClearPedSecondaryTask(player)
+end)
+
+--
+-- Animation Shirt
+--
+RegisterNetEvent('shirt')
+AddEventHandler('shirt', function(putOn)
+	local player = PlayerPedId()
+	local dict   -- "take_off"
+	local anim
+
+	if putOn then
+		dict = "clothingtie"
+		anim = "try_tie_negative_a"
+	else
+		dict = "clothingtie"
+		anim = "try_tie_negative_a"
+	end
+
+	loadAnimDict( dict )
+	TaskPlayAnim( player, dict, anim, 8.0, 0.6, -1, 49, 0, 0, 0, 0 )
+	Wait (500)
+	ClearPedSecondaryTask(player)
+end)
+
+--
+-- Animation Pants
+--
+RegisterNetEvent('pants')
+AddEventHandler('pants', function(putOn)
+	local player = PlayerPedId()
+	local dict   -- "take_off"
+	local anim
+
+	if putOn then
+		dict = "re@construction"
+		anim = "out_of_breath"
+	else
+		dict = "re@construction"
+		anim = "out_of_breath"
 	end
 
 	loadAnimDict( dict )
