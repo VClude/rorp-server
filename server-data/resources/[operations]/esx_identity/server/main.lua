@@ -5,7 +5,7 @@ TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 function getIdentity(source, callback)
 	local xPlayer = ESX.GetPlayerFromId(source)
 
-	MySQL.Async.fetchAll('SELECT identifier, firstname, lastname, dateofbirth, sex, height FROM `users` WHERE `identifier` = @identifier', {
+	MySQL.Async.fetchAll('SELECT identifier, firstname, lastname, name, dateofbirth, sex, height FROM `users` WHERE `identifier` = @identifier', {
 		['@identifier'] = xPlayer.identifier
 	}, function(result)
 		if result[1].firstname ~= nil then
@@ -13,6 +13,7 @@ function getIdentity(source, callback)
 				identifier	= result[1].identifier,
 				firstname	= result[1].firstname,
 				lastname	= result[1].lastname,
+				name 		= result[1].firstname..' '..result[1].lastname,
 				dateofbirth	= result[1].dateofbirth,
 				sex			= result[1].sex,
 				height		= result[1].height
@@ -35,11 +36,11 @@ function getIdentity(source, callback)
 end
 
 function setIdentity(identifier, data, callback)
-	MySQL.Async.execute('UPDATE `users` SET `firstname` = @firstname, `lastname` = @lastname, `name` = @fullname, `dateofbirth` = @dateofbirth, `sex` = @sex, `height` = @height WHERE identifier = @identifier', {
+	MySQL.Async.execute('UPDATE `users` SET `firstname` = @firstname, `lastname` = @lastname, `name` = @name, `dateofbirth` = @dateofbirth, `sex` = @sex, `height` = @height WHERE identifier = @identifier', {
 		['@identifier']		= identifier,
 		['@firstname']		= data.firstname,
 		['@lastname']		= data.lastname,
-		['@fullname']		= data.firstname..' '..data.lastname,
+		['@name'] 			= data.firstname..' '..data.lastname,
 		['@dateofbirth']	= data.dateofbirth,
 		['@sex']			= data.sex,
 		['@height']			= data.height
@@ -53,11 +54,11 @@ end
 function updateIdentity(playerId, data, callback)
 	local xPlayer = ESX.GetPlayerFromId(playerId)
 
-	MySQL.Async.execute('UPDATE `users` SET `firstname` = @firstname, `lastname` = @lastname, `name` = @fullname, `dateofbirth` = @dateofbirth, `sex` = @sex, `height` = @height WHERE identifier = @identifier', {
-		['@identifier']		= xPlayer.identifier,
+	MySQL.Async.execute('UPDATE `users` SET `firstname` = @firstname, `lastname` = @lastname, `name` = @name, `dateofbirth` = @dateofbirth, `sex` = @sex, `height` = @height WHERE identifier = @identifier', {
+		['@identifier']		= identifier,
 		['@firstname']		= data.firstname,
 		['@lastname']		= data.lastname,
-		['@fullname']		= data.firstname..' '..data.lastname,
+		['@name'] 			= data.firstname..' '..data.lastname,
 		['@dateofbirth']	= data.dateofbirth,
 		['@sex']			= data.sex,
 		['@height']			= data.height
@@ -158,25 +159,25 @@ AddEventHandler('onResourceStart', function(resource)
 	end
 end)
 
--- ESX.RegisterCommand('register', 'user', function(xPlayer, args, showError)
--- 	getIdentity(xPlayer.source, function(data)
--- 		if data.firstname ~= '' then
--- 			xPlayer.showNotification(_U('already_registered'))
--- 		else
--- 			TriggerClientEvent('esx_identity:showRegisterIdentity', xPlayer.source)
--- 		end
--- 	end)
--- end, false, {help = _U('show_registration')})
+ESX.RegisterCommand('register', 'user', function(xPlayer, args, showError)
+	getIdentity(xPlayer.source, function(data)
+		if data.firstname ~= '' then
+			xPlayer.showNotification(_U('already_registered'))
+		else
+			TriggerClientEvent('esx_identity:showRegisterIdentity', xPlayer.source)
+		end
+	end)
+end, true, {help = _U('show_registration')})
 
--- ESX.RegisterCommand('char', 'user', function(xPlayer, args, showError)
--- 	getIdentity(xPlayer.source, function(data)
--- 		if data.firstname == '' then
--- 			xPlayer.showNotification(_U('not_registered'))
--- 		else
--- 			xPlayer.showNotification(_U('active_character', data.firstname, data.lastname))
--- 		end
--- 	end)
--- end, false, {help = _U('show_active_character')})
+ESX.RegisterCommand('char', 'user', function(xPlayer, args, showError)
+	getIdentity(xPlayer.source, function(data)
+		if data.firstname == '' then
+			xPlayer.showNotification(_U('not_registered'))
+		else
+			xPlayer.showNotification(_U('active_character', data.firstname, data.lastname))
+		end
+	end)
+end, true, {help = _U('show_active_character')})
 
 ESX.RegisterCommand('chardel', 'user', function(xPlayer, args, showError)
 	getIdentity(xPlayer.source, function(data)
@@ -188,4 +189,4 @@ ESX.RegisterCommand('chardel', 'user', function(xPlayer, args, showError)
 			TriggerClientEvent('esx_identity:showRegisterIdentity', xPlayer.source)
 		end
 	end)
-end, false, {help = _U('delete_character')})
+end, true, {help = _U('delete_character')})

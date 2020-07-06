@@ -12,7 +12,7 @@ $(function() {
 	};
 	
 	$("#register").submit(function(event) {
-		event.preventDefault(); // Prevent form from submitting
+		event.preventDefault(); // Prevent from submitting
 		
 		// Verify date
 		var date = $("#dateofbirth").val();

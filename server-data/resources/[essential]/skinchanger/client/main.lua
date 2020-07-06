@@ -342,7 +342,6 @@ end)
 local playerSpawned = false
 AddEventHandler('playerSpawned', function()
 	playerSpawned = true
-	SetEntityCoords(PlayerPedId(), -1036.02, -2737.04, 19.2, 0.0, 0.0, 0.0, true)
 end)
 
 CreateThread(function()
