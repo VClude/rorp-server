@@ -65,6 +65,15 @@ function SetUnsetAccessory(accessory)
 				if skin[_accessory .. '_1'] == mAccessory then
 					mAccessory = accessorySkin[_accessory .. '_1']
 					mColor = accessorySkin[_accessory .. '_2']
+					if _accessory ~= "ears" then
+						TriggerEvent(_accessory, true)
+						Wait(500)
+					end
+				else
+					if _accessory ~= "ears" then
+						TriggerEvent(_accessory, false)
+						Wait(500)
+					end
 				end
 
 				local accessorySkin = {}
