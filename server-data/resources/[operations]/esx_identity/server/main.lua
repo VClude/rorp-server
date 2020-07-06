@@ -39,7 +39,7 @@ function setIdentity(identifier, data, callback)
 		['@identifier']		= identifier,
 		['@firstname']		= data.firstname,
 		['@lastname']		= data.lastname,
-		['@fullname']		= data.firstName..' '..data.lastname,
+		['@fullname']		= data.firstname..' '..data.lastname,
 		['@dateofbirth']	= data.dateofbirth,
 		['@sex']			= data.sex,
 		['@height']			= data.height
@@ -53,10 +53,11 @@ end
 function updateIdentity(playerId, data, callback)
 	local xPlayer = ESX.GetPlayerFromId(playerId)
 
-	MySQL.Async.execute('UPDATE `users` SET `firstname` = @firstname, `lastname` = @lastname, `dateofbirth` = @dateofbirth, `sex` = @sex, `height` = @height WHERE identifier = @identifier', {
+	MySQL.Async.execute('UPDATE `users` SET `firstname` = @firstname, `lastname` = @lastname, `name` = @fullname, `dateofbirth` = @dateofbirth, `sex` = @sex, `height` = @height WHERE identifier = @identifier', {
 		['@identifier']		= xPlayer.identifier,
 		['@firstname']		= data.firstname,
 		['@lastname']		= data.lastname,
+		['@fullname']		= data.firstname..' '..data.lastname,
 		['@dateofbirth']	= data.dateofbirth,
 		['@sex']			= data.sex,
 		['@height']			= data.height
@@ -157,25 +158,25 @@ AddEventHandler('onResourceStart', function(resource)
 	end
 end)
 
-ESX.RegisterCommand('register', 'user', function(xPlayer, args, showError)
-	getIdentity(xPlayer.source, function(data)
-		if data.firstname ~= '' then
-			xPlayer.showNotification(_U('already_registered'))
-		else
-			TriggerClientEvent('esx_identity:showRegisterIdentity', xPlayer.source)
-		end
-	end)
-end, false, {help = _U('show_registration')})
+-- ESX.RegisterCommand('register', 'user', function(xPlayer, args, showError)
+-- 	getIdentity(xPlayer.source, function(data)
+-- 		if data.firstname ~= '' then
+-- 			xPlayer.showNotification(_U('already_registered'))
+-- 		else
+-- 			TriggerClientEvent('esx_identity:showRegisterIdentity', xPlayer.source)
+-- 		end
+-- 	end)
+-- end, false, {help = _U('show_registration')})
 
-ESX.RegisterCommand('char', 'user', function(xPlayer, args, showError)
-	getIdentity(xPlayer.source, function(data)
-		if data.firstname == '' then
-			xPlayer.showNotification(_U('not_registered'))
-		else
-			xPlayer.showNotification(_U('active_character', data.firstname, data.lastname))
-		end
-	end)
-end, false, {help = _U('show_active_character')})
+-- ESX.RegisterCommand('char', 'user', function(xPlayer, args, showError)
+-- 	getIdentity(xPlayer.source, function(data)
+-- 		if data.firstname == '' then
+-- 			xPlayer.showNotification(_U('not_registered'))
+-- 		else
+-- 			xPlayer.showNotification(_U('active_character', data.firstname, data.lastname))
+-- 		end
+-- 	end)
+-- end, false, {help = _U('show_active_character')})
 
 ESX.RegisterCommand('chardel', 'user', function(xPlayer, args, showError)
 	getIdentity(xPlayer.source, function(data)
