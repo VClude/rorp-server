@@ -32,7 +32,6 @@ RegisterNetEvent('esx_identity:showRegisterIdentity')
 AddEventHandler('esx_identity:showRegisterIdentity', function()
 	if not isDead then
 		EnableGui(true)
-		SetEntityCoords(PlayerPedId(), -1036.02, -2737.04, 19.2, 0.0, 0.0, 0.0, true)
 	end
 end)
 
@@ -84,6 +83,7 @@ RegisterNUICallback('register', function(data, cb)
 	end
 	
 	if reason == "" then
+		SetEntityCoords(PlayerPedId(), -1036.02, -2737.04, 19.2, 0.0, 0.0, 0.0, true)
 		TriggerServerEvent('esx_identity:setIdentity', data, myIdentifiers)
 		EnableGui(false)
 		Citizen.Wait(500)
