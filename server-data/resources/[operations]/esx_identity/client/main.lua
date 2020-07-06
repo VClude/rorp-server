@@ -83,7 +83,15 @@ RegisterNUICallback('register', function(data, cb)
 	end
 	
 	if reason == "" then
-		-- SetEntityCoords(PlayerPedId(), -1035.83, -2735, 20.17, 0.0, 0.0, 0.0, true)
+		-- local lokasi = {
+		-- 	lok1 = {x = -1035.83, y = -2735, z = 20.17},
+		-- 	lok2 = {x = -1042.03, y = -2736.3, z = 20.17},
+		-- 	lok3 = {x = -1033.34, y = -2739.88, z = 20.17},
+		-- 	lok4 = {x = -1028.49, y = -2740.71, z = 20.17},
+		-- 	lok5 = {x = -1040.52, y = -2744.27, z = 21.36}
+		-- }
+
+		SetEntityCoords(PlayerPedId(), -1035.83, -2735, 20.17, 0.0, 0.0, 0.0, true)
 		TriggerServerEvent('esx_identity:setIdentity', data, myIdentifiers)
 		EnableGui(false)
 		Citizen.Wait(500)
