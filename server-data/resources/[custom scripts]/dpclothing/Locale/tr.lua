@@ -32,6 +32,7 @@ Locale.tr = {
 	NoShirtOn = "Gömleğin olmadan bunu yapamazsın.",
 	Reset = "Geri Döndür", --Revert
 	Reset2 = "Her şeyi normale döndür.",
+	Exit = "Çıkmak",
 	-- Commands
 	BAG = "canta", --default -bag
 	BRACELET = "bilezik", --default bracelet
@@ -50,5 +51,5 @@ Locale.tr = {
 	PANTS = "pantolon", --pants
 	SHIRT = "shirt", --shirt this some because turkish translate = Tişört "ş,ö" maybe it can cause problems in commands.
 	RESET = "normaledondur", --revertclothing
-	BAGOFF = "bagoff",
+	BAGOFF = "cantacikart", --default : bagoff
 }

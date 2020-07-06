@@ -3,7 +3,7 @@ Config = {
 	ExtrasEnabled = true,				-- This toggles the extra commands (Shirt, Pants) in case you dont want your players stripping their clothes for whatever reason.
 	Debug = false,						-- Enables logging and on screen display of what your character is wearing.
 	GUI = {
-		Position = {x = 0.5, y = 0.5},	-- 0.5 is the middle!
+		Position = {x = 0.65, y = 0.5},	-- 0.5 is the middle!
 		AllowInCars = false,			-- Allow the GUI in cars?
 		AllowWhenRagdolled = false,			-- Allow the GUI when ragdolled?
 		Enabled = true, 				-- You can turn the gui off here, the base commands will still work.
@@ -13,6 +13,7 @@ Config = {
 		TextOutline = true,
 		TextFont = 0,					-- Change font, useful for other languages.
 		TextSize = 0.21,				-- Change the text size below buttons here, useful for other languages.
+		Toggle = false,					-- Change the keybind from toggling the window open, or just holding it to open it.
 	}
 }
 
@@ -169,12 +170,22 @@ Config.ExtraCommands = {
 		OffsetY = 0.0,
 	},
 	[Lang("RESET")] = {
-		Func = function() if not ResetClothing() then Notify(Lang("AlreadyWearing")) end end,
+		Func = function() if not ResetClothing(true) then Notify(Lang("AlreadyWearing")) end end,
 		Sprite = "reset",
 		Desc = Lang("Reset2"),
 		Name = Lang("Reset"),
 		OffsetX = 0.12,
 		OffsetY = 0.2,
+		Rotate = true
+	},
+	["clothingexit"] = {
+		Func = function() MenuOpened = false end,
+		Sprite = "exit",
+		Desc = "",
+		Name = Lang("Exit"),
+		OffsetX = 0.12,
+		OffsetY = -0.2,
+		Enabled = Config.GUI.Toggle
 	},
 	[Lang("BAGOFF")] = {
 		Func = function() ToggleClothing("Bagoff", true) end,
