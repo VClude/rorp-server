@@ -335,13 +335,13 @@ AddEventHandler('esx_accessories:shoes', function()
 				['shoes_1'] = 34, ['shoes_2'] = 0
 			}
 			TriggerEvent('skinchanger:loadClothes', skin, clothesSkin)
-			TriggerServerCallback('shoes',true)
+			TriggerEvent('shoes',true)
 		else
 			local clothesSkin = {
 				['shoes_1'] = 35, ['shoes_2'] = 0
 			}
 			TriggerEvent('skinchanger:loadClothes', skin, clothesSkin)
-			TriggerServerCallback('shoes',false)
+			TriggerEvent('shoes',false)
 		end
 	end)
 end)
