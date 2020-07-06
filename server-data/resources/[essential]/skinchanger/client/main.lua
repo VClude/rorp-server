@@ -46,26 +46,26 @@ function GetMaxVals()
 		sex = 1,
 		face = 45,
 		skin = 45,
-		nosew = 10,
-		noseh = 10,
-		nosel = 10,
-		nosebh = 10,
-		nosepl = 10,
-		noset = 10,
-		eyebh = 10,
-		eyebf = 10,
-		cbh = 10,
-		cbw = 10,
-		chw = 10,
-		eyeop = 10,
-		lipst = 10,
-		jbw = 10,
-		jbbl = 10,
-		chbbl = 10,
-		chbble = 10,
-		chbw = 10,
-		chho = 10,
-		neckt = 10,
+		-- nosew = 10,
+		-- noseh = 10,
+		-- nosel = 10,
+		-- nosebh = 10,
+		-- nosepl = 10,
+		-- noset = 10,
+		-- eyebh = 10,
+		-- eyebf = 10,
+		-- cbh = 10,
+		-- cbw = 10,
+		-- chw = 10,
+		-- eyeop = 10,
+		-- lipst = 10,
+		-- jbw = 10,
+		-- jbbl = 10,
+		-- chbbl = 10,
+		-- chbble = 10,
+		-- chbw = 10,
+		-- chho = 10,
+		-- neckt = 10,
 		age_1 = GetNumHeadOverlayValues(3)-1,
 		age_2 = 10,
 		beard_1 = GetNumHeadOverlayValues(1)-1,
@@ -89,15 +89,15 @@ function GetMaxVals()
 		lipstick_2 = 10,
 		lipstick_3 = GetNumHairColors()-1,
 		lipstick_4 = GetNumHairColors()-1,
-		blemishes_1 = GetNumHeadOverlayValues(0)-1,
-		blemishes_2 = 10,
+		-- blemishes_1 = GetNumHeadOverlayValues(0)-1,
+		-- blemishes_2 = 10,
 		blush_1 = GetNumHeadOverlayValues(5)-1,
 		blush_2 = 10,
 		blush_3 = GetNumHairColors()-1,
-		complexion_1 = GetNumHeadOverlayValues(6)-1,
-		complexion_2 = 10,
-		sun_1 = GetNumHeadOverlayValues(7)-1,
-		sun_2 = 10,
+		-- complexion_1 = GetNumHeadOverlayValues(6)-1,
+		-- complexion_2 = 10,
+		-- sun_1 = GetNumHeadOverlayValues(7)-1,
+		-- sun_2 = 10,
 		moles_1 = GetNumHeadOverlayValues(9)-1,
 		moles_2 = 10,
 		chest_1 = GetNumHeadOverlayValues(10)-1,
@@ -111,24 +111,24 @@ function GetMaxVals()
 		tshirt_2 = GetNumberOfPedTextureVariations(playerPed, 8, Character['tshirt_1']) - 1,
 		torso_1 = GetNumberOfPedDrawableVariations(playerPed, 11) - 1,
 		torso_2 = GetNumberOfPedTextureVariations(playerPed, 11, Character['torso_1']) - 1,
-		decals_1 = GetNumberOfPedDrawableVariations(playerPed, 10) - 1,
-		decals_2 = GetNumberOfPedTextureVariations(playerPed, 10, Character['decals_1']) - 1,
+		-- decals_1 = GetNumberOfPedDrawableVariations(playerPed, 10) - 1,
+		-- decals_2 = GetNumberOfPedTextureVariations(playerPed, 10, Character['decals_1']) - 1,
 		arms = GetNumberOfPedDrawableVariations(playerPed, 3) - 1,
 		arms_2 = 10,
 		pants_1 = GetNumberOfPedDrawableVariations(playerPed, 4) - 1,
 		pants_2 = GetNumberOfPedTextureVariations(playerPed, 4, Character['pants_1']) - 1,
 		shoes_1 = GetNumberOfPedDrawableVariations(playerPed, 6) + 1,
 		shoes_2 = GetNumberOfPedTextureVariations(playerPed, 6, Character['shoes_1']) + 1,
-		mask_1 = GetNumberOfPedDrawableVariations(playerPed, 1) - 1,
-		mask_2 = GetNumberOfPedTextureVariations(playerPed, 1, Character['mask_1']) - 1,
-		bproof_1 = GetNumberOfPedDrawableVariations(playerPed, 9) - 1,
-		bproof_2 = GetNumberOfPedTextureVariations(playerPed, 9, Character['bproof_1']) - 1,
+		-- mask_1 = GetNumberOfPedDrawableVariations(playerPed, 1) - 1,
+		-- mask_2 = GetNumberOfPedTextureVariations(playerPed, 1, Character['mask_1']) - 1,
+		-- bproof_1 = GetNumberOfPedDrawableVariations(playerPed, 9) - 1,
+		-- bproof_2 = GetNumberOfPedTextureVariations(playerPed, 9, Character['bproof_1']) - 1,
 		chain_1 = GetNumberOfPedDrawableVariations(playerPed, 7) - 1,
 		chain_2 = GetNumberOfPedTextureVariations(playerPed, 7, Character['chain_1']) - 1,
-		bags_1 = GetNumberOfPedDrawableVariations(playerPed, 5) - 1,
-		bags_2 = GetNumberOfPedTextureVariations(playerPed, 5, Character['bags_1']) - 1,
-		helmet_1 = GetNumberOfPedPropDrawableVariations(playerPed, 0) - 1,
-		helmet_2 = GetNumberOfPedPropTextureVariations(playerPed, 0, Character['helmet_1']) - 1,
+		-- bags_1 = GetNumberOfPedDrawableVariations(playerPed, 5) - 1,
+		-- bags_2 = GetNumberOfPedTextureVariations(playerPed, 5, Character['bags_1']) - 1,
+		-- helmet_1 = GetNumberOfPedPropDrawableVariations(playerPed, 0) - 1,
+		-- helmet_2 = GetNumberOfPedPropTextureVariations(playerPed, 0, Character['helmet_1']) - 1,
 		glasses_1 = GetNumberOfPedPropDrawableVariations(playerPed, 1) - 1,
 		glasses_2 = GetNumberOfPedPropTextureVariations(playerPed, 1, Character['glasses_1'] - 1),
 		watches_1 = GetNumberOfPedPropDrawableVariations(playerPed, 6) - 1,
@@ -219,19 +219,19 @@ function ApplySkin(skin, clothes)
 	SetPedComponentVariation(playerPed, 8, Character['tshirt_1'], Character['tshirt_2'], 2) -- Tshirt
 	SetPedComponentVariation(playerPed, 11, Character['torso_1'], Character['torso_2'], 2) -- torso parts
 	SetPedComponentVariation(playerPed, 3, Character['arms'], Character['arms_2'], 2) -- Amrs
-	SetPedComponentVariation(playerPed, 10, Character['decals_1'], Character['decals_2'], 2) -- decals
+	-- SetPedComponentVariation(playerPed, 10, Character['decals_1'], Character['decals_2'], 2) -- decals
 	SetPedComponentVariation(playerPed, 4, Character['pants_1'], Character['pants_2'], 2) -- pants
 	SetPedComponentVariation(playerPed, 6, Character['shoes_1'], Character['shoes_2'], 2) -- shoes
-	SetPedComponentVariation(playerPed, 1, Character['mask_1'], Character['mask_2'], 2) -- mask
-	SetPedComponentVariation(playerPed, 9, Character['bproof_1'], Character['bproof_2'], 2) -- bulletproof
+	-- SetPedComponentVariation(playerPed, 1, Character['mask_1'], Character['mask_2'], 2) -- mask
+	-- SetPedComponentVariation(playerPed, 9, Character['bproof_1'], Character['bproof_2'], 2) -- bulletproof
 	SetPedComponentVariation(playerPed, 7, Character['chain_1'], Character['chain_2'], 2) -- chain
-	SetPedComponentVariation(playerPed, 5, Character['bags_1'], Character['bags_2'], 2) -- Bag
+	-- SetPedComponentVariation(playerPed, 5, Character['bags_1'], Character['bags_2'], 2) -- Bag
 
-	if Character['helmet_1'] == -1 then
-		ClearPedProp(playerPed, 0)
-	else
-		SetPedPropIndex(playerPed, 0, Character['helmet_1'], Character['helmet_2'], 2) -- Helmet
-	end
+	-- if Character['helmet_1'] == -1 then
+	-- 	ClearPedProp(playerPed, 0)
+	-- else
+	-- 	SetPedPropIndex(playerPed, 0, Character['helmet_1'], Character['helmet_2'], 2) -- Helmet
+	-- end
 
 	if Character['glasses_1'] == -1 then
 		ClearPedProp(playerPed, 1)
