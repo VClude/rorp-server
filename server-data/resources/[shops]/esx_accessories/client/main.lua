@@ -334,14 +334,15 @@ AddEventHandler('esx_accessories:shoes', function()
 			local clothesSkin = {
 				['shoes_1'] = 34, ['shoes_2'] = 0
 			}
-			TriggerEvent('skinchanger:loadClothes', skin, clothesSkin)
 			TriggerEvent('shoes',true)
+			TriggerEvent('skinchanger:loadClothes', skin, clothesSkin)
+			
 		else
 			local clothesSkin = {
 				['shoes_1'] = 35, ['shoes_2'] = 0
 			}
-			TriggerEvent('skinchanger:loadClothes', skin, clothesSkin)
-			TriggerEvent('shoes',false)
+			TriggerEvent('shoes',true)
+			TriggerEvent('skinchanger:loadClothes', skin, clothesSkin)			
 		end
 	end)
 end)
