@@ -74,6 +74,11 @@ Citizen.CreateThread(function()
   end
 end)
 
+
+RegisterCommand('engine',function()
+  TriggerEvent("carremote:hotkeyEnginePressed")
+end)
+
 RegisterNUICallback('NUIFocusOff', function()
 	SetNuiFocus(false, false)
 end)

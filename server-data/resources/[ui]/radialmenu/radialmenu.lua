@@ -80,22 +80,22 @@ RegisterCommand("submenuEmote", function(source, args, rawCommand)
    
 end, false)
 
--- RegisterCommand("submenuPakaian", function(source, args, rawCommand)
---     -- Wait for next frame jus to be safe
---     Citizen.Wait(0)
+RegisterCommand("submenuPakaian", function(source, args, rawCommand)
+    -- Wait for next frame jus to be safe
+    Citizen.Wait(0)
 
---     -- Init UI and set focus
---     showMenu = true SendNUIMessage({
---         type = 'init',
---         data = subMenuConfigs["submenuPakaian"].data,
---         resourceName = GetCurrentResourceName()
---     })
---     SetCursorLocation(0.5, 0.5)
---     SetNuiFocus(true, true)
+    -- Init UI and set focus
+    showMenu = true SendNUIMessage({
+        type = 'init',
+        data = subMenuConfigs["submenuPakaian"].data,
+        resourceName = GetCurrentResourceName()
+    })
+    SetCursorLocation(0.5, 0.5)
+    SetNuiFocus(true, true)
 
---     while showMenu == true do Citizen.Wait(100) end
---     Citizen.Wait(100)
--- end, false)
+    while showMenu == true do Citizen.Wait(100) end
+    Citizen.Wait(100)
+end, false)
 
 RegisterCommand("submenuKendaraan", function(source, args, rawCommand)
     -- Wait for next frame jus to be safe
@@ -173,8 +173,4 @@ RegisterNUICallback('testprint', function(data, cb)
 
     -- Send ACK to callback function
     cb('ok')
-end)
-
-RegisterCommand('engine',function()
-    TriggerEvent("carremote:hotkeyEnginePressed")
 end)

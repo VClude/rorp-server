@@ -121,37 +121,37 @@ subMenuConfigs = {
             }
         }
     },
-    -- ['submenuPakaian'] = {
-    --     data = {
-    --         keybind = "F1",
-    --         style = {
-    --             sizePx = 400,
-    --             slices = {
-    --                 default = { ['fill'] = '#000000', ['stroke'] = '#000000', ['stroke-width'] = 2, ['opacity'] = 0.30 },
-    --                 hover = { ['fill'] = '#ff8000', ['stroke'] = '#000000', ['stroke-width'] = 2, ['opacity'] = 0.80 },
-    --                 selected = { ['fill'] = '#ff8000', ['stroke'] = '#000000', ['stroke-width'] = 2, ['opacity'] = 0.80 }
-    --             },
-    --             titles = {
-    --                 default = { ['fill'] = '#ffffff', ['stroke'] = 'none', ['font'] = 'Helvetica', ['font-size'] = 16, ['font-weight'] = 'bold' },
-    --                 hover = { ['fill'] = '#ffffff', ['stroke'] = 'none', ['font'] = 'Helvetica', ['font-size'] = 16, ['font-weight'] = 'bold' },
-    --                 selected = { ['fill'] = '#ffffff', ['stroke'] = 'none', ['font'] = 'Helvetica', ['font-size'] = 16, ['font-weight'] = 'bold' }
-    --             },
-    --             icons = {
-    --                 width = 50,
-    --                 height = 50
-    --             }
-    --         },
-    --         wheels = {
-    --             {
-    --                 navAngle = 290,
-    --                 minRadiusPercent = 0.4,
-    --                 maxRadiusPercent = 1.0,
-    --                 labels = {"imgsrc:ear.png","imgsrc:neck.png","imgsrc:watch.png","imgsrc:bracelet.png","imgsrc:vest.png","imgsrc:top.png","imgsrc:baju2.png","imgsrc:pants.png","imgsrc:gloves.png","imgsrc:visor.png","imgsrc:hat.png","imgsrc:shoes.png","imgsrc:mask.png","imgsrc:hair.png","imgsrc:bagoff.png","imgsrc:glasses.png","imgsrc:reset.png"},
-    --                 commands = {"ear","neck","watch","bracelet","vest","top","shirt","pants","gloves","visor","hat","shoes","mask","hair","bagoff","glasses","revertclothing"}
-    --             },
-    --         }
-    --     }
-    -- },
+    ['submenuPakaian'] = {
+        data = {
+            keybind = "F1",
+            style = {
+                sizePx = 400,
+                slices = {
+                    default = { ['fill'] = '#000000', ['stroke'] = '#000000', ['stroke-width'] = 2, ['opacity'] = 0.30 },
+                    hover = { ['fill'] = '#ff8000', ['stroke'] = '#000000', ['stroke-width'] = 2, ['opacity'] = 0.80 },
+                    selected = { ['fill'] = '#ff8000', ['stroke'] = '#000000', ['stroke-width'] = 2, ['opacity'] = 0.80 }
+                },
+                titles = {
+                    default = { ['fill'] = '#ffffff', ['stroke'] = 'none', ['font'] = 'Helvetica', ['font-size'] = 16, ['font-weight'] = 'bold' },
+                    hover = { ['fill'] = '#ffffff', ['stroke'] = 'none', ['font'] = 'Helvetica', ['font-size'] = 16, ['font-weight'] = 'bold' },
+                    selected = { ['fill'] = '#ffffff', ['stroke'] = 'none', ['font'] = 'Helvetica', ['font-size'] = 16, ['font-weight'] = 'bold' }
+                },
+                icons = {
+                    width = 50,
+                    height = 50
+                }
+            },
+            wheels = {
+                {
+                    navAngle = 290,
+                    minRadiusPercent = 0.4,
+                    maxRadiusPercent = 1.0,
+                    labels = {"imgsrc:ear.png","imgsrc:baju2.png","imgsrc:pants.png","imgsrc:hat.png","imgsrc:shoes.png","imgsrc:mask.png","imgsrc:glasses.png","imgsrc:reset.png"},
+                    commands = {"ears","shirt","pants","hat","shoes","mask","glasses","restore"}
+                },
+            }
+        }
+    },
     ['subVehicles'] = {
         data = {
             keybind = "F1",
