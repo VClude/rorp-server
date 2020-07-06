@@ -139,9 +139,7 @@ AddEventHandler('esx_accessories:hasExitedMarker', function(zone)
 	CurrentAction = nil
 
 	if not hasPaid then
-		ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin)
-			TriggerEvent('skinchanger:loadSkin', skin)
-		end)
+		TriggerEvent('dpc:EquipLast')
 	end
 end)
 
