@@ -159,34 +159,34 @@ AddEventHandler('onResourceStart', function(resource)
 	end
 end)
 
-ESX.RegisterCommand('register', 'user', function(xPlayer, args, showError)
-	getIdentity(xPlayer.source, function(data)
-		if data.firstname ~= '' then
-			xPlayer.showNotification(_U('already_registered'))
-		else
-			TriggerClientEvent('esx_identity:showRegisterIdentity', xPlayer.source)
-		end
-	end)
-end, true, {help = _U('show_registration')})
+-- ESX.RegisterCommand('register', 'user', function(xPlayer, args, showError)
+-- 	getIdentity(xPlayer.source, function(data)
+-- 		if data.firstname ~= '' then
+-- 			xPlayer.showNotification(_U('already_registered'))
+-- 		else
+-- 			TriggerClientEvent('esx_identity:showRegisterIdentity', xPlayer.source)
+-- 		end
+-- 	end)
+-- end, true, {help = _U('show_registration')})
 
-ESX.RegisterCommand('char', 'user', function(xPlayer, args, showError)
-	getIdentity(xPlayer.source, function(data)
-		if data.firstname == '' then
-			xPlayer.showNotification(_U('not_registered'))
-		else
-			xPlayer.showNotification(_U('active_character', data.firstname, data.lastname))
-		end
-	end)
-end, true, {help = _U('show_active_character')})
+-- ESX.RegisterCommand('char', 'user', function(xPlayer, args, showError)
+-- 	getIdentity(xPlayer.source, function(data)
+-- 		if data.firstname == '' then
+-- 			xPlayer.showNotification(_U('not_registered'))
+-- 		else
+-- 			xPlayer.showNotification(_U('active_character', data.firstname, data.lastname))
+-- 		end
+-- 	end)
+-- end, true, {help = _U('show_active_character')})
 
-ESX.RegisterCommand('chardel', 'user', function(xPlayer, args, showError)
-	getIdentity(xPlayer.source, function(data)
-		if data.firstname == '' then
-			xPlayer.showNotification(_U('not_registered'))
-		else
-			deleteIdentity(xPlayer.source)
-			xPlayer.showNotification(_U('deleted_character'))
-			TriggerClientEvent('esx_identity:showRegisterIdentity', xPlayer.source)
-		end
-	end)
-end, true, {help = _U('delete_character')})
+-- ESX.RegisterCommand('chardel', 'user', function(xPlayer, args, showError)
+-- 	getIdentity(xPlayer.source, function(data)
+-- 		if data.firstname == '' then
+-- 			xPlayer.showNotification(_U('not_registered'))
+-- 		else
+-- 			deleteIdentity(xPlayer.source)
+-- 			xPlayer.showNotification(_U('deleted_character'))
+-- 			TriggerClientEvent('esx_identity:showRegisterIdentity', xPlayer.source)
+-- 		end
+-- 	end)
+-- end, true, {help = _U('delete_character')})
