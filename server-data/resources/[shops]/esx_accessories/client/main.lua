@@ -28,6 +28,7 @@ function OpenAccessoryMenu()
 end
 
 function SetUnsetAccessory(accessory)
+	TriggerEvent('dpc:EquipLast')
 	ESX.TriggerServerCallback('esx_accessories:get', function(hasAccessory, accessorySkin)
 		local _accessory = string.lower(accessory)
 
@@ -218,12 +219,7 @@ Citizen.CreateThread(function()
 			ESX.ShowHelpNotification(CurrentActionMsg)
 
 			if IsControlJustReleased(0, 38) and CurrentActionData.accessory then
-				if CurrentActionData.accessory == 'Helmet' then
-					TriggerEvent('dpc:EquipLast')
-					OpenShopMenu(CurrentActionData.accessory)
-				else
-					OpenShopMenu(CurrentActionData.accessory)
-				end
+				OpenShopMenu(CurrentActionData.accessory)
 				CurrentAction = nil
 			end
 		elseif CurrentAction and not Config.EnableControls then
