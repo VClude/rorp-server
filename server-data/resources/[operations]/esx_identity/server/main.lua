@@ -35,10 +35,11 @@ function getIdentity(source, callback)
 end
 
 function setIdentity(identifier, data, callback)
-	MySQL.Async.execute('UPDATE `users` SET `firstname` = @firstname, `lastname` = @lastname, `dateofbirth` = @dateofbirth, `sex` = @sex, `height` = @height WHERE identifier = @identifier', {
+	MySQL.Async.execute('UPDATE `users` SET `firstname` = @firstname, `lastname` = @lastname, `name` = @fullname, `dateofbirth` = @dateofbirth, `sex` = @sex, `height` = @height WHERE identifier = @identifier', {
 		['@identifier']		= identifier,
 		['@firstname']		= data.firstname,
 		['@lastname']		= data.lastname,
+		['@fullname']		= data.firstName..' '..data.lastname
 		['@dateofbirth']	= data.dateofbirth,
 		['@sex']			= data.sex,
 		['@height']			= data.height
