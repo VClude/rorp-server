@@ -140,7 +140,7 @@ AddEventHandler('esx_accessories:hasExitedMarker', function(zone)
 
 	if not hasPaid then
 		local player = PlayerPedId()
-		TriggerEvent('esx_skin:getLastSkin', function(skin)
+		ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin)
 			TriggerEvent('skinchanger:loadSkin', skin)
 		end)
 		if accessory == "Ears" then
