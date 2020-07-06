@@ -6,11 +6,11 @@ $(document).ready(function(){
       $(".ClotheCreator").css("display","block");
 	  $(".rotation").css("display","flex");
       
-	  if (event.data.gender == "muz") {
+	  if (event.data.gender == "male") {
 		$('#female').remove();
 		$('#male').show();
 	  }
-	  if (event.data.gender == "zena") {
+	  if (event.data.gender == "female") {
 		$('#male').remove();
 		$('#female').show();
 	  }
