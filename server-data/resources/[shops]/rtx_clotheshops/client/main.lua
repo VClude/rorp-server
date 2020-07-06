@@ -4013,9 +4013,9 @@ end)
 function OpenMenuClothe(submitCb, cancelCb, restrict)
 	local playerPed = PlayerPedId()
 
-	-- TriggerEvent('skinchanger:getSkin', function(skin)
-	-- 	lastSkinOld = skin
-	-- end)
+	TriggerEvent('skinchanger:getSkin', function(skin)
+		lastSkinOld = skin
+	end)
 
 	TriggerEvent('skinchanger:getData', function(components, maxVals)
 		local elements    = {}
@@ -4090,7 +4090,7 @@ function OpenMenuClothe(submitCb, cancelCb, restrict)
 		end, function(data, MenuClothe)
 			MenuClothe.close()
 			DeleteSkinCam()
-			TriggerEvent('skinchanger:loadSkin', lastSkinOld)
+			-- TriggerEvent('skinchanger:loadSkin', lastSkinOld)
 
 			if cancelCb ~= nil then
 				cancelCb(data, MenuClothe)
