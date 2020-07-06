@@ -1,4 +1,5 @@
 local PlayerData                = {}
+local myIdentifiers             = {}
 local doAnim                    = false
 ESX                             = nil
 
@@ -296,7 +297,8 @@ AddEventHandler('rorp_character:phase1', function()
     createdCamera = 0
     ClearTimecycleModifier("scanline_cam_cheap")
     SetFocusEntity(GetPlayerPed(PlayerId()))
-	TriggerEvent('rorp_core-skin:loadMenu')
+    TriggerEvent('esx_skin:openSaveableMenu', myIdentifiers)
+	-- TriggerEvent('rorp_core-skin:loadMenu')
 end)
 
 RegisterNetEvent('rorp_character:phase2')
