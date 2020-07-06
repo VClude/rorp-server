@@ -139,9 +139,19 @@ AddEventHandler('esx_accessories:hasExitedMarker', function(zone)
 	CurrentAction = nil
 
 	if not hasPaid then
+		local player = PlayerPedId()
 		TriggerEvent('esx_skin:getLastSkin', function(skin)
 			TriggerEvent('skinchanger:loadSkin', skin)
 		end)
+		if accessory == "Ears" then
+			ClearPedProp(player, 2)
+		elseif accessory == "Mask" then
+			SetPedComponentVariation(player, 1, 0 ,0, 2)
+		elseif accessory == "Helmet" then
+			ClearPedProp(player, 0)
+		elseif accessory == "Glasses" then
+			SetPedPropIndex(player, 1, -1, 0, 0)
+		end
 	end
 end)
 
