@@ -32,13 +32,13 @@ function OpenAccessoryMenu()
 				end)
 				ESX.UI.Menu.CloseAll()	
 			elseif data.current.value == 'shirt' then
-				TriggerEvent('esx_newaccessories:shirt')
+				TriggerEvent('esx_accessories:shirt')
 				ESX.UI.Menu.CloseAll()	
 			elseif data.current.value == 'pants' then
-				TriggerEvent('esx_newaccessories:pants')
+				TriggerEvent('esx_accessories:pants')
 				ESX.UI.Menu.CloseAll()	
 			elseif data.current.value == 'shoes' then
-				TriggerEvent('esx_newaccessories:shoes')
+				TriggerEvent('esx_accessories:shoes')
 				ESX.UI.Menu.CloseAll()	
 			end
 		else
@@ -275,13 +275,13 @@ Citizen.CreateThread(function()
 end)
 
 RegisterCommand('shirt', function(source, args, raw)
-	TriggerEvent('esx_newaccessories:shirt')
+	TriggerEvent('esx_accessories:shirt')
 end)
 RegisterCommand('pants', function(source, args, raw)
-	TriggerEvent('esx_newaccessories:pants')
+	TriggerEvent('esx_accessories:pants')
 end)
 RegisterCommand('shoes', function(source, args, raw)
-	TriggerEvent('esx_newaccessories:shoes')
+	TriggerEvent('esx_accessories:shoes')
 end)
 RegisterCommand('restore', function(source, args, raw)
 	ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin)
@@ -301,8 +301,8 @@ RegisterCommand('glasses', function(source, args, raw)
 	SetUnsetAccessory('Glasses')
 end)
 
-RegisterNetEvent('esx_newaccessories:shirt')
-AddEventHandler('esx_newaccessories:shirt', function()
+RegisterNetEvent('esx_accessories:shirt')
+AddEventHandler('esx_accessories:shirt', function()
 	TriggerEvent('skinchanger:getSkin', function(skin)
 		local clothesSkin = {
 			['tshirt_1'] = 15, ['tshirt_2'] = 0,
@@ -313,8 +313,8 @@ AddEventHandler('esx_newaccessories:shirt', function()
 	end)
 end)
 
-RegisterNetEvent('esx_newaccessories:pants')
-AddEventHandler('esx_newaccessories:pants', function()
+RegisterNetEvent('esx_accessories:pants')
+AddEventHandler('esx_accessories:pants', function()
 	TriggerEvent('skinchanger:getSkin', function(skin)
 		local clothesSkin = {
 			['pants_1'] = 21, ['pants_2'] = 0
@@ -323,8 +323,8 @@ AddEventHandler('esx_newaccessories:pants', function()
 	end)
 end)
 
-RegisterNetEvent('esx_newaccessories:shoes')
-AddEventHandler('esx_newaccessories:shoes', function()
+RegisterNetEvent('esx_accessories:shoes')
+AddEventHandler('esx_accessories:shoes', function()
 	TriggerEvent('skinchanger:getSkin', function(skin)
 		--[[local clothesSkin = {
 			['shoes_1'] = 34, ['shoes_2'] = 0
@@ -335,13 +335,38 @@ AddEventHandler('esx_newaccessories:shoes', function()
 				['shoes_1'] = 34, ['shoes_2'] = 0
 			}
 			TriggerEvent('skinchanger:loadClothes', skin, clothesSkin)
+			TriggerServerCallback('shoes',true)
 		else
 			local clothesSkin = {
 				['shoes_1'] = 35, ['shoes_2'] = 0
 			}
 			TriggerEvent('skinchanger:loadClothes', skin, clothesSkin)
+			TriggerServerCallback('shoes',false)
 		end
 	end)
+end)
+
+--
+-- Animation Shoes
+--
+RegisterNetEvent('shoes')
+AddEventHandler('shoes', function(putOn)
+	local player = PlayerPedId()
+	local dict   -- "take_off"
+	local anim
+
+	if putOn then
+		dict = "random@domestic" --anim: take_off_helmet_stand
+		anim = "pickup_low"
+	else
+		dict = "random@domestic" --anim: take_off_helmet_stand
+		anim = "pickup_low"
+	end
+
+	loadAnimDict( dict )
+	TaskPlayAnim( player, dict, anim, 8.0, 0.6, -1, 49, 0, 0, 0, 0 )
+	Wait (500)
+	ClearPedSecondaryTask(player)
 end)
 
 --
