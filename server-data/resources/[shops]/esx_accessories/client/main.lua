@@ -218,7 +218,12 @@ Citizen.CreateThread(function()
 			ESX.ShowHelpNotification(CurrentActionMsg)
 
 			if IsControlJustReleased(0, 38) and CurrentActionData.accessory then
-				OpenShopMenu(CurrentActionData.accessory)
+				if CurrentActionData.accessory == 'Helmet' then
+					TriggerEvent('dpc:EquipLast')
+					OpenShopMenu(CurrentActionData.accessory)
+				else
+					OpenShopMenu(CurrentActionData.accessory)
+				end
 				CurrentAction = nil
 			end
 		elseif CurrentAction and not Config.EnableControls then
