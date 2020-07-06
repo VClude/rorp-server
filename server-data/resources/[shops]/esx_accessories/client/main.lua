@@ -28,7 +28,6 @@ function OpenAccessoryMenu()
 end
 
 function SetUnsetAccessory(accessory)
-	TriggerEvent('dpc:EquipLast')
 	ESX.TriggerServerCallback('esx_accessories:get', function(hasAccessory, accessorySkin)
 		local _accessory = string.lower(accessory)
 
@@ -58,6 +57,7 @@ function SetUnsetAccessory(accessory)
 end
 
 function OpenShopMenu(accessory)
+	TriggerEvent('dpc:EquipLast')
 	hasPaid = false
 	local _accessory = string.lower(accessory)
 	local restrict = {}
