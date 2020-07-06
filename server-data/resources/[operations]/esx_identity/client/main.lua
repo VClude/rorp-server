@@ -83,7 +83,7 @@ RegisterNUICallback('register', function(data, cb)
 	end
 	
 	if reason == "" then
-		SetEntityCoords(PlayerPedId(), -1036.02, -2737.04, 19.2, 0.0, 0.0, 0.0, true)
+		-- SetEntityCoords(PlayerPedId(), -1035.83, -2735, 20.17, 0.0, 0.0, 0.0, true)
 		TriggerServerEvent('esx_identity:setIdentity', data, myIdentifiers)
 		EnableGui(false)
 		Citizen.Wait(500)
