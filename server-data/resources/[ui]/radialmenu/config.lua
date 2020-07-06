@@ -29,8 +29,8 @@ menuConfigs = {
                     navAngle = 270,                 -- Oritentation of wheel
                     minRadiusPercent = 0.2,         -- Minimum radius of wheel in percentage
                     maxRadiusPercent = 0.6,         -- Maximum radius of wheel in percentage
-                    labels = {"imgsrc:emote.png","imgsrc:bag.png","imgsrc:baju.png","imgsrc:identitas.png", "imgsrc:billing.png", "imgsrc:car.png" ,"imgsrc:phone2.png"},
-                    commands = {"submenuEmote","openinv","submenuPakaian","menuident" ,"showbills","subVehicles","hp"}
+                    labels = {"imgsrc:emote.png","imgsrc:bag.png","imgsrc:baju.png","imgsrc:identitas.png", "imgsrc:billing.png" ,"imgsrc:phone2.png"},
+                    commands = {"submenuEmote","openinv","submenuPakaian","menuident" ,"showbills","hp"}
                 },
                 -- {
                 --     navAngle = 285,                 -- Oritentation of wheel
