@@ -335,6 +335,7 @@ AddEventHandler('esx_accessories:shoes', function()
 				['shoes_1'] = 34, ['shoes_2'] = 0
 			}
 			TriggerEvent('shoes',true)
+			Citizen.Wait(1000)
 			TriggerEvent('skinchanger:loadClothes', skin, clothesSkin)
 			
 		else
@@ -342,6 +343,7 @@ AddEventHandler('esx_accessories:shoes', function()
 				['shoes_1'] = 35, ['shoes_2'] = 0
 			}
 			TriggerEvent('shoes',true)
+			Citizen.Wait(1000)
 			TriggerEvent('skinchanger:loadClothes', skin, clothesSkin)			
 		end
 	end)
