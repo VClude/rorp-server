@@ -11,9 +11,7 @@ Citizen.CreateThread(function()
 end)
 
 function OpenShopMenu()
-	hasPaid = false
-	TriggerEvent('dpc:EquipLast')
-	
+	hasPaid = false	
 	TriggerEvent('esx_skin:openRestrictedMenu', function(data, menu)
 		menu.close()
 
