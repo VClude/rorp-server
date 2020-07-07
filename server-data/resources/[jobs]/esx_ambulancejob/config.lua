@@ -179,7 +179,7 @@ Config.Uniforms = {
 	chief_doctor = {
 		male = {
 			tshirt_1 = 32,  tshirt_2 = 0,
-			torso_1 = 30,   torso_2 = 4,
+			torso_1 = 30,   torso_2 = 5,
 			decals_1 = 60,   decals_2 = 0,
 			arms = 86,
 			pants_1 = 24,   pants_2 = 5,
@@ -204,7 +204,7 @@ Config.Uniforms = {
 	boss = {
 		male = {
 			tshirt_1 = 32,  tshirt_2 = 0,
-			torso_1 = 30,   torso_2 = 4,
+			torso_1 = 30,   torso_2 = 5,
 			decals_1 = 60,   decals_2 = 0,
 			arms = 86,
 			pants_1 = 24,   pants_2 = 5,
