@@ -2,9 +2,9 @@
 
 <CVehicleModelInfoVariation>
   <variationData> 
-<Item>
-  <modelName>ems_gs1200</modelName>
-	<colors>
+   <Item>
+    <modelName>psp_bmwgs</modelName>
+      <colors>
         <Item>
           <indices content="char_array">
             132
@@ -32,7 +32,7 @@
         <Probabilities />
       </plateProbabilities>
       <lightSettings value="1" />
-      <sirenSettings value="14" />
+      <sirenSettings value="1" />
   </Item>
   </variationData>
 </CVehicleModelInfoVariation>

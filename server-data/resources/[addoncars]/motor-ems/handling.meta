@@ -3,7 +3,7 @@
 <CHandlingDataMgr>
   <HandlingData>
 	<Item type="CHandlingData">
-      <handlingName>ems_gs1200</handlingName>
+      <handlingName>psp_bmwgs</handlingName>
       <fMass value="250.000000" />
       <fInitialDragCoeff value="9.000000" />
       <fPercentSubmerged value="95.000000" />

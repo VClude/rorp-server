@@ -4,10 +4,10 @@
   <residentAnims />
   <InitDatas>
 	<Item>
-      <modelName>ems_gs1200</modelName>
-      <txdName>ems_gs1200</txdName>
-      <handlingId>ems_gs1200</handlingId>
-      <gameName>ems_gs1200</gameName>
+      <modelName>psp_bmwgs</modelName>
+      <txdName>psp_bmwgs</txdName>
+      <handlingId>psp_bmwgs</handlingId>
+      <gameName>psp_bmwgs</gameName>
       <vehicleMakeName />
       <expressionDictName>null</expressionDictName>
       <expressionName>null</expressionName>
@@ -15,7 +15,7 @@
       <animConvRoofName>null</animConvRoofName>
       <animConvRoofWindowsAffected />
       <ptfxAssetName>null</ptfxAssetName>
-      <audioNameHash>POLICEB</audioNameHash>
+      <audioNameHash>policeb</audioNameHash>
       <layout>LAYOUT_BIKE_DIRT</layout>
       <coverBoundOffsets>POLICEB_COVER_OFFSET_INFO</coverBoundOffsets>
 	  <POVTuningInfo>POLICEB_POV_TUNING</POVTuningInfo>
@@ -64,7 +64,7 @@
       <steerWheelMult value="0.600000" />
       <HDTextureDist value="5.000000" />
       <lodDistances content="float_array">
-        500.000000
+        250.000000
         500.000000
         500.000000
         500.000000
@@ -121,9 +121,9 @@
     </Item>
   </InitDatas>
   <txdRelationships>
-      <Item>
+    <Item>
       <parent>vehicles_chopperbk_interior</parent>
-      <child>policeb</child>
+      <child>psp_bmwgs</child>
     </Item>
   </txdRelationships>
 </CVehicleModelInfo__InitDataList>

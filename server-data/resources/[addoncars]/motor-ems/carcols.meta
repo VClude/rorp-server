@@ -608,7 +608,7 @@
         <zBias value="0.250000" />
         <pullCoronaIn value="false" />
       </reversingLightCorona>
-      <name>policetempu</name>
+      <name>navy_ambulance</name>
     </Item>
     </Lights>
 
