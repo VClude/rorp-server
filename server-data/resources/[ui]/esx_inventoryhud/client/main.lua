@@ -261,13 +261,13 @@ function loadPlayerInventory()
             accounts = data.accounts
             money = data.money
             weapons = data.weapons
-            weight = data.weight
-            maxWeight = data.maxWeight
+            weight = data.weight / 1000
+            maxWeight = data.maxWeight / 1000
 
             SendNUIMessage(
                 {
                     action = "setWeight",
-                    text = "<p>" .._U("player_inventory_weight").. "</p><div class=\"control\"><p>" ..weight.. " / " ..maxWeight.. "</p></div>"
+                    text = "<p>" .._U("player_inventory_weight").. "</p><div class=\"control\"><p>" ..weight.. " KG / " ..maxWeight.. " KG </p></div>"
                 }
             )
             if Config.IncludeCash and money ~= nil and money > 0 then
