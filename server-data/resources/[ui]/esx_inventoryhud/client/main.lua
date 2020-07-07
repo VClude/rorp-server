@@ -2,7 +2,7 @@ isInInventory = false
 ESX = nil
 local canOpenInventory = true
 local targetInventory = nil
-local isDead = false
+
 Citizen.CreateThread(
     function()
         while ESX == nil do
@@ -16,6 +16,19 @@ Citizen.CreateThread(
         end
     end
 )
+
+-- Citizen.CreateThread(
+--     function()
+--         while true do
+--             Citizen.Wait(0)
+--             if IsControlJustReleased(0, Config.CloseControl) then
+-- 			if isInInventory then
+--                 closeInventory()
+-- 				end
+--             end
+--         end
+--     end
+-- )
 
 -- Citizen.CreateThread(
 --     function()
@@ -76,13 +89,12 @@ RegisterCommand('closeinv', function(source, args, raw)
     closeInventory()
 end)
 
+
 RegisterCommand('openinv', function()
     if not isDead then
         openInventory()
     end
-
 end)
-  
 
 function closeInventory()
     if targetInventory ~= nil then -- checks if search inventory was open and target's inventory needs to be enabled
@@ -172,15 +184,7 @@ RegisterNUICallback(
         if type(data.number) == "number" and math.floor(data.number) == data.number then
 			if data.item.type == "item_money" then
 				TriggerServerEvent("esx:removeInventoryItem", "item_account", "money", data.number)
-            elseif data.item.name:match "%gbag" then
-                ESX.TriggerServerCallback('esx_inventoryhud:dropBag', function(dv)
-                    if dv then
-                        ESX.ShowNotification("Kapasitas Inventory anda Berlebihan muatan")
-                    else
-                        TriggerServerEvent("esx:removeInventoryItem", data.item.type, data.item.name, data.number)
-                    end
-                end)
-            else
+			else
 				TriggerServerEvent("esx:removeInventoryItem", data.item.type, data.item.name, data.number)
 			end
         end
@@ -208,21 +212,14 @@ RegisterNUICallback(
 
         if foundPlayer then
             local count = tonumber(data.number)
+
             if data.item.type == "item_weapon" then
                 count = GetAmmoInPedWeapon(PlayerPedId(), GetHashKey(data.item.name))
             end
 
             if data.item.type == "item_money" then
 				TriggerServerEvent("esx:giveInventoryItem", data.player, "item_account", "money", count)
-			elseif data.item.name:match "%gbag" then
-                ESX.TriggerServerCallback('esx_inventoryhud:giveBag', function(dv)
-                    if dv then
-                        ESX.ShowNotification("Kapasitas inventory anda berlebihan muatan")
-                    else
-                        TriggerServerEvent("esx:giveInventoryItem", data.player, data.item.type, data.item.name, count)
-                    end
-                end)
-            else
+			else
 				TriggerServerEvent("esx:giveInventoryItem", data.player, data.item.type, data.item.name, count)
 			end
             Wait(250)
@@ -264,13 +261,13 @@ function loadPlayerInventory()
             accounts = data.accounts
             money = data.money
             weapons = data.weapons
-            weight = data.weight / 1000
-            maxWeight = data.maxWeight / 1000
+            weight = data.weight
+            maxWeight = data.maxWeight
 
             SendNUIMessage(
                 {
                     action = "setWeight",
-                    text = "<p>" .._U("player_inventory_weight").. "</p><div class=\"control\"><p>" ..weight.. " KG / " ..maxWeight.. " KG </p></div>"
+                    text = "<p>" .._U("player_inventory_weight").. "</p><div class=\"control\"><p>" ..weight.. " / " ..maxWeight.. "</p></div>"
                 }
             )
             if Config.IncludeCash and money ~= nil and money > 0 then
@@ -376,5 +373,3 @@ Citizen.CreateThread(
         end
     end
 )
-
-

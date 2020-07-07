@@ -51,9 +51,9 @@ AddEventHandler("esx:setJob", function(job)
 	if PlayerData == nil then
 		PlayerData = ESX.GetPlayerData()
     		PlayerData.job = job
-		print ('Trunk cannot sync profession. This is not bad.')  -- Cannot sync job, not bad
+		print ('Kofferbak kan beroep niet synchroniseren. Dit is niet erg.')  -- Cannot sync job, not bad
 	else
-		print ('Trunk has synchronized your profession.') -- Can sync job
+		print ('Kofferbak heeft je beroep gesynchroniseerd.') -- Can sync job
 		PlayerData.job = job
 	end
 end)
@@ -146,37 +146,21 @@ function openmenuvehicle()
                 OpenCoffreInventoryMenu(GetVehicleNumberPlateText(vehFront), Config.VehicleWeight[class], myVeh)
               end
             else
-            
-            exports.pNotify:SendNotification({
-              text = _U("trunk_closed"),
-              type = "info",
-              timeout = math.random(1000, 10000),
-              layout = "centerLeft",
-              queue = "left"
-            })
+           
+            exports['b1g_notify']:Notify('true', _U("trunk_closed"))
             end
           end
         else
-            exports.pNotify:SendNotification({
-              text = _U("no_veh_nearby"),
-              type = "info",
-              timeout = math.random(1000, 10000),
-              layout = "centerLeft",
-              queue = "left"
-            })
+         
+            exports['b1g_notify']:Notify('false', _U("no_veh_nearby"))
         end
         lastOpen = true
         GUI.Time = GetGameTimer()
       end
     else
       -- Not their vehicle
-      exports.pNotify:SendNotification({
-        text = _U("nacho_veh"),
-        type = "error",
-        timeout = math.random(1000, 10000),
-        layout = "centerLeft",
-        queue = "left"
-      })
+    
+            exports['b1g_notify']:Notify('false', _U("nacho_veh"))
     end
   end
 end
@@ -229,7 +213,7 @@ function OpenCoffreInventoryMenu(plate, max, myVeh)
   ESX.TriggerServerCallback(
     "esx_trunk:getInventoryV",
     function(inventory)
-      text = _U("trunk_info", plate, (inventory.weight / 1000), (max / 1000))
+      text = _U("trunk_info", plate, (inventory.weight / 100), (max / 100))
       data = {plate = plate, max = max, myVeh = myVeh, text = text}
       TriggerEvent("esx_inventoryhud:openTrunkInventory", data, inventory.blackMoney, inventory.cashMoney, inventory.items, inventory.weapons)
     end,

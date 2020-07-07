@@ -19,8 +19,7 @@ Citizen.CreateThread(function()
         Citizen.Wait(0)
         player = GetPlayerPed(-1)
         coords = GetEntityCoords(player)
-        -- if IsInRegularShopZone(coords) or IsInRobsLiquorZone(coords) or IsInYouToolZone(coords) or IsInPrisonShopZone(coords) or IsInWeaponShopZone(coords) then
-        if IsInRegularShopZone(coords) or IsInRobsLiquorZone(coords) or IsInWeaponShopZone(coords) then
+        if IsInRegularShopZone(coords) or IsInRobsLiquorZone(coords) or IsInYouToolZone(coords) or IsInPrisonShopZone(coords) or IsInWeaponShopZone(coords) then
             if IsInRegularShopZone(coords) then
                 if currentAction then
                     ESX.ShowHelpNotification(currentActionMsg)
@@ -39,6 +38,24 @@ Citizen.CreateThread(function()
                     end
                 end
             end
+            if IsInYouToolZone(coords) then
+                if currentAction then
+                    ESX.ShowHelpNotification(currentActionMsg)
+                    if IsControlJustReleased(0, Keys["E"]) then
+                        OpenShopInv("youtool")
+                        Citizen.Wait(2000)
+                    end
+                end
+            end
+            if IsInPrisonShopZone(coords) then
+                if currentAction then
+                    ESX.ShowHelpNotification(currentActionMsg)
+                    if IsControlJustReleased(0, Keys["E"]) then
+                        OpenShopInv("prison")
+                        Citizen.Wait(2000)
+                    end
+                end
+            end
             if IsInWeaponShopZone(coords) then
                 if currentAction then
                     ESX.ShowHelpNotification(currentActionMsg)
@@ -48,7 +65,7 @@ Citizen.CreateThread(function()
                                 OpenShopInv("weaponshop")
                                 Citizen.Wait(2000)
                             else
-                                OpenBuyLicenseMenu()
+                                exports['mythic_notify']:DoHudText('error', _U('license_check_fail'))
                             end
                         end, GetPlayerServerId(PlayerId()), 'weapon')
                     end
@@ -77,7 +94,6 @@ AddEventHandler('esx_inventoryhud:disableOpen', function()
     closeInventory()
     canOpenShopInventory = false
 end)
-
 AddEventHandler("esx_inventoryhud:enableOpen", function()
     canOpenShopInventory = true
 end)
@@ -174,6 +190,26 @@ function IsInRobsLiquorZone(coords)
     return false
 end
 
+function IsInYouToolZone(coords)
+    YouTool = Config.Shops.YouTool.Locations
+    for i = 1, #YouTool, 1 do
+        if GetDistanceBetweenCoords(coords, YouTool[i].x, YouTool[i].y, YouTool[i].z, true) < 1.5 then
+            return true
+        end
+    end
+    return false
+end
+
+function IsInPrisonShopZone(coords)
+    PrisonShop = Config.Shops.PrisonShop.Locations
+    for i = 1, #PrisonShop, 1 do
+        if GetDistanceBetweenCoords(coords, PrisonShop[i].x, PrisonShop[i].y, PrisonShop[i].z, true) < 1.5 then
+            return true
+        end
+    end
+    return false
+end
+
 function IsInWeaponShopZone(coords)
     WeaponShop = Config.Shops.WeaponShop.Locations
     for i = 1, #WeaponShop, 1 do
@@ -184,41 +220,40 @@ function IsInWeaponShopZone(coords)
     return false
 end
 
--- Citizen.CreateThread(function()
---     while true do
---         Citizen.Wait(0)
---         LicenseShop = Config.Shops.LicenseShop.Locations
---         player = GetPlayerPed(-1)
---         coords = GetEntityCoords(player)
--- 		for i = 1, #LicenseShop, 1 do
--- 			if GetDistanceBetweenCoords(coords, LicenseShop[i].x, LicenseShop[i].y, LicenseShop[i].z, true) < 8.0 then
--- 				DrawMarker(25, LicenseShop[i].x, LicenseShop[i].y, LicenseShop[i].z - 0.99, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.MarkerSize.x, Config.MarkerSize.y, Config.MarkerSize.z, Config.MarkerColor.r, Config.MarkerColor.g, Config.MarkerColor.b, 100, false, true, 2, false, nil, nil, false)
--- 					if currentAction then
--- 						ESX.ShowHelpNotification(_U('license_shop_help'))
--- 						if IsControlJustReleased(0, Keys["E"]) then
--- 							ESX.TriggerServerCallback('esx_license:checkLicense', function(hasWeaponLicense)
--- 							if hasWeaponLicense then
--- 								exports['mythic_notify']:DoHudText('error', _U('license_shop_check'))
--- 							else
--- 								OpenBuyLicenseMenu()
--- 								Citizen.Wait(2000)
--- 							end
--- 						end, GetPlayerServerId(PlayerId()), 'weapon')
--- 					end
--- 				end
--- 			end
--- 		end
---     end
--- end)
+Citizen.CreateThread(function()
+    while true do
+        Citizen.Wait(0)
+        LicenseShop = Config.Shops.LicenseShop.Locations
+        player = GetPlayerPed(-1)
+        coords = GetEntityCoords(player)
+		for i = 1, #LicenseShop, 1 do
+			if GetDistanceBetweenCoords(coords, LicenseShop[i].x, LicenseShop[i].y, LicenseShop[i].z, true) < 8.0 then
+				DrawMarker(25, LicenseShop[i].x, LicenseShop[i].y, LicenseShop[i].z - 0.99, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.MarkerSize.x, Config.MarkerSize.y, Config.MarkerSize.z, Config.MarkerColor.r, Config.MarkerColor.g, Config.MarkerColor.b, 100, false, true, 2, false, nil, nil, false)
+					if currentAction then
+						ESX.ShowHelpNotification(_U('license_shop_help'))
+						if IsControlJustReleased(0, Keys["E"]) then
+							ESX.TriggerServerCallback('esx_license:checkLicense', function(hasWeaponLicense)
+							if hasWeaponLicense then
+								exports['mythic_notify']:DoHudText('error', _U('license_shop_check'))
+							else
+								OpenBuyLicenseMenu()
+								Citizen.Wait(2000)
+							end
+						end, GetPlayerServerId(PlayerId()), 'weapon')
+					end
+				end
+			end
+		end
+    end
+end)
 
 function OpenBuyLicenseMenu()
     ESX.UI.Menu.CloseAll()
     ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'shop_license',{
         title = _U('license_shop_title'), --Register a License
-        align    = 'bottom-right',
         elements = {
-          { label = 'Ya' ..' (<span style="color:red;">$' .. Config.LicensePrice ..'</span>)', value = 'yes' }, --yes
-          { label = 'Tidak', value = 'no' },
+          { label = 'yes' ..' ($' .. Config.LicensePrice ..')', value = 'yes' }, --yes
+          { label = 'no', value = 'no' },
         }
       },
       function (data, menu)		
@@ -246,9 +281,19 @@ Citizen.CreateThread(function()
         CreateBlip(vector3(Config.Shops.RobsLiquor.Locations[k].x, Config.Shops.RobsLiquor.Locations[k].y, Config.Shops.RobsLiquor.Locations[k].z ), _U('robs_liquor_name'), 3.0, Config.Color, Config.LiquorBlipID)
     end
 
+    for k, v in pairs(Config.Shops.YouTool.Locations) do
+        CreateBlip(vector3(Config.Shops.YouTool.Locations[k].x, Config.Shops.YouTool.Locations[k].y, Config.Shops.YouTool.Locations[k].z ), _U('you_tool_name'), 3.0, Config.Color, Config.YouToolBlipID)
+    end
+
+    for k, v in pairs(Config.Shops.PrisonShop.Locations) do
+        CreateBlip(vector3(Config.Shops.PrisonShop.Locations[k].x, Config.Shops.PrisonShop.Locations[k].y, Config.Shops.PrisonShop.Locations[k].z), _U('prison_shop_name'), 3.0, Config.Color, Config.PrisonShopBlipID)
+    end
+
     for k, v in pairs(Config.Shops.WeaponShop.Locations) do
         CreateBlip(vector3(Config.Shops.WeaponShop.Locations[k].x, Config.Shops.WeaponShop.Locations[k].y, Config.Shops.WeaponShop.Locations[k].z), _U('weapon_shop_name'), 3.0, Config.WeaponColor, Config.WeaponShopBlipID)
     end
+
+    CreateBlip(vector3(-755.79, 5596.07, 41.67), "Cablecart", 3.0, 4, 36)
 end)
 
 Citizen.CreateThread(function()
@@ -314,6 +359,18 @@ Citizen.CreateThread(function()
         for k, v in pairs(Config.Shops.RobsLiquor.Locations) do
             if GetDistanceBetweenCoords(coords, Config.Shops.RobsLiquor.Locations[k].x, Config.Shops.RobsLiquor.Locations[k].y, Config.Shops.RobsLiquor.Locations[k].z + 0.01, true) < 12.0 then
                 DrawMarker(25, Config.Shops.RobsLiquor.Locations[k].x, Config.Shops.RobsLiquor.Locations[k].y, Config.Shops.RobsLiquor.Locations[k].z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.MarkerSize.x, Config.MarkerSize.y, Config.MarkerSize.z, Config.MarkerColor.r, Config.MarkerColor.g, Config.MarkerColor.b, 100, false, true, 2, false, nil, nil, false)
+            end
+        end
+
+        for k, v in pairs(Config.Shops.YouTool.Locations) do
+            if GetDistanceBetweenCoords(coords, Config.Shops.YouTool.Locations[k].x, Config.Shops.YouTool.Locations[k].y, Config.Shops.YouTool.Locations[k].z + 0.01, true) < 12.0 then
+                DrawMarker(25, Config.Shops.YouTool.Locations[k].x, Config.Shops.YouTool.Locations[k].y, Config.Shops.YouTool.Locations[k].z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.MarkerSize.x, Config.MarkerSize.y, Config.MarkerSize.z, Config.MarkerColor.r, Config.MarkerColor.g, Config.MarkerColor.b, 100, false, true, 2, false, nil, nil, false)
+            end
+        end
+
+        for k, v in pairs(Config.Shops.PrisonShop.Locations) do
+            if GetDistanceBetweenCoords(coords, Config.Shops.PrisonShop.Locations[k].x, Config.Shops.PrisonShop.Locations[k].y, Config.Shops.PrisonShop.Locations[k].z + 0.01, true) < 12.0 then
+                DrawMarker(25, Config.Shops.PrisonShop.Locations[k].x, Config.Shops.PrisonShop.Locations[k].y, Config.Shops.PrisonShop.Locations[k].z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.MarkerSize.x, Config.MarkerSize.y, Config.MarkerSize.z, Config.MarkerColor.r, Config.MarkerColor.g, Config.MarkerColor.b, 100, false, true, 2, false, nil, nil, false)
             end
         end
 

@@ -1,5 +1,6 @@
 local trunkData = nil
 local canOpenTrunkInventory = true
+
 AddEventHandler('esx_inventoryhud:disableOpen', function()
     closeInventory()
     canOpenTrunkInventory = false
@@ -138,17 +139,8 @@ RegisterNUICallback(
             if data.item.type == "item_weapon" then
                 count = GetAmmoInPedWeapon(PlayerPedId(), GetHashKey(data.item.name))
             end
-            if data.item.name:match "%gbag" then
-                ESX.TriggerServerCallback('esx_inventoryhud:dropBag', function(dv)
-                    if dv then
-                        ESX.ShowNotification("Kapasitas Inventory anda Berlebihan muatan")
-                    else
-                        TriggerServerEvent("esx_trunk:putItem", trunkData.plate, data.item.type, data.item.name, count, trunkData.max, trunkData.myVeh, data.item.label)
-                    end
-                end)
-            else
+
             TriggerServerEvent("esx_trunk:putItem", trunkData.plate, data.item.type, data.item.name, count, trunkData.max, trunkData.myVeh, data.item.label)
-            end
         end
 
         Wait(250)

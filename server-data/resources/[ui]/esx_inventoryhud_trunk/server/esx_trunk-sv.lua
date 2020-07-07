@@ -198,7 +198,7 @@ AddEventHandler(
 
             local weight = getTotalInventoryWeight(plate)
 
-            text = _U("trunk_info", plate, (weight / 1000), (max / 1000))
+            text = _U("trunk_info", plate, (weight / 100), (max / 100))
             data = {plate = plate, max = max, myVeh = owned, text = text}
             TriggerClientEvent("esx_inventoryhud:refreshTrunkInventory", _source, data, blackMoney, cashMoney, items, weapons)
           end
@@ -243,7 +243,7 @@ AddEventHandler(
 
             local weight = getTotalInventoryWeight(plate)
 
-            text = _U("trunk_info", plate, (weight / 1000), (max / 1000))
+            text = _U("trunk_info", plate, (weight / 100), (max / 100))
             data = {plate = plate, max = max, myVeh = owned, text = text}
             TriggerClientEvent("esx_inventoryhud:refreshTrunkInventory", _source, data, blackMoney, cashMoney, items, weapons)
           else
@@ -287,7 +287,7 @@ AddEventHandler(
 
             local weight = getTotalInventoryWeight(plate)
 
-            text = _U("trunk_info", plate, (weight / 1000), (max / 1000))
+            text = _U("trunk_info", plate, (weight / 100), (max / 100))
             data = {plate = plate, max = max, myVeh = owned, text = text}
             TriggerClientEvent("esx_inventoryhud:refreshTrunkInventory", _source, data, blackMoney, cashMoney, items, weapons)
           else
@@ -359,7 +359,7 @@ AddEventHandler(
 
           local weight = getTotalInventoryWeight(plate)
 
-          text = _U("trunk_info", plate, (weight / 1000), (max / 1000))
+          text = _U("trunk_info", plate, (weight / 100), (max / 100))
           data = {plate = plate, max = max, myVeh = owned, text = text}
           TriggerClientEvent("esx_inventoryhud:refreshTrunkInventory", _source, data, blackMoney, cashMoney, items, weapons)
         end
@@ -569,7 +569,7 @@ AddEventHandler(
 
         local weight = getTotalInventoryWeight(plate)
 
-        text = _U("trunk_info", plate, (weight / 1000), (max / 1000))
+        text = _U("trunk_info", plate, (weight / 100), (max / 100))
         data = {plate = plate, max = max, myVeh = owned, text = text}
         TriggerClientEvent("esx_inventoryhud:refreshTrunkInventory", _source, data, blackMoney, cashMoney, items, weapons)
       end
