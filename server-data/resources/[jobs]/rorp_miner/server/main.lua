@@ -86,8 +86,8 @@ AddEventHandler("rorp_miner:rewardSmelting", function()
 				TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'error', text = 'Inventory kamu sudah penuh'})
 			end
 		elseif firstChance == 2 or firstChance == 3 then
-			if xPlayer.canCarryItem("botolkaca", 2) then
-				xPlayer.addInventoryItem("botolkaca", 2)
+			if xPlayer.canCarryItem("botolkaca", 5) then
+				xPlayer.addInventoryItem("botolkaca", 5)
 				TriggerClientEvent("esx:showNotification",source,"Kamu mendapatkan ~r~2~s~ x~y~Tembaga~s~")
 			else
 				TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'error', text = 'Inventory kamu sudah penuh'})
@@ -97,8 +97,8 @@ AddEventHandler("rorp_miner:rewardSmelting", function()
 	elseif rewardChance ~= 1 or rewardChance ~=2 then	
 	local secondChance = math.random(1,10)
 		if secondChance == 1 or secondChance == 2 or secondChance == 3 then
-			if xPlayer.canCarryItem("botolkaca", 3) then
-				xPlayer.addInventoryItem("botolkaca", 3)
+			if xPlayer.canCarryItem("botolkaca", 5) then
+				xPlayer.addInventoryItem("botolkaca", 5)
 				TriggerClientEvent("esx:showNotification",source,"Kamu mendapatkan ~r~3~s~x ~y~Tembaga~s~")
 			else
 				TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'error', text = 'Inventory kamu sudah penuh'})
