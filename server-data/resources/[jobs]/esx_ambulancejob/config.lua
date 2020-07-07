@@ -157,7 +157,7 @@ Config.Uniforms = {
 			torso_1 = 39,   torso_2 = 0,
 			decals_1 = 60,   decals_2 = 0,
 			arms = 85,
-			pants_1 = 93,   pants_2 = 0,
+			pants_1 = 13,   pants_2 = 0,
 			shoes_1 = 25,   shoes_2 = 0,
 			helmet_1 = 8,  	helmet_2 = 0,
 			chain_1 = 126,  chain_2 = 0,
@@ -178,12 +178,12 @@ Config.Uniforms = {
 
 	chief_doctor = {
 		male = {
-			tshirt_1 = 57,  tshirt_2 = 0,
-			torso_1 = 39,   torso_2 = 0,
+			tshirt_1 = 32,  tshirt_2 = 0,
+			torso_1 = 30,   torso_2 = 4,
 			decals_1 = 60,   decals_2 = 0,
-			arms = 85,
-			pants_1 = 93,   pants_2 = 0,
-			shoes_1 = 25,   shoes_2 = 0,
+			arms = 86,
+			pants_1 = 24,   pants_2 = 5,
+			shoes_1 = 10,   shoes_2 = 0,
 			helmet_1 = 8,  	helmet_2 = 0,
 			chain_1 = 126,  chain_2 = 0,
 			ears_1 = -1,     ears_2 = 0
@@ -203,12 +203,12 @@ Config.Uniforms = {
 
 	boss = {
 		male = {
-			tshirt_1 = 57,  tshirt_2 = 0,
-			torso_1 = 39,   torso_2 = 0,
+			tshirt_1 = 32,  tshirt_2 = 0,
+			torso_1 = 30,   torso_2 = 4,
 			decals_1 = 60,   decals_2 = 0,
-			arms = 85,
-			pants_1 = 93,   pants_2 = 0,
-			shoes_1 = 25,   shoes_2 = 0,
+			arms = 86,
+			pants_1 = 24,   pants_2 = 5,
+			shoes_1 = 10,   shoes_2 = 0,
 			helmet_1 = 8,  	helmet_2 = 0,
 			chain_1 = 126,  chain_2 = 0,
 			ears_1 = -1,     ears_2 = 0
