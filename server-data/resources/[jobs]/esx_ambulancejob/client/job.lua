@@ -15,6 +15,25 @@ Citizen.CreateThread(function()
     -- RequestAnimDict("mini@cpr")
 end)
 
+-- Set Uniforms
+function setUniform(job, playerPed) 
+    TriggerEvent( "skinchanger:getSkin", function(skin)
+        if skin.sex == 0 then
+            if Config.Uniforms[job].male then
+                TriggerEvent("skinchanger:loadClothes", skin, Config.Uniforms[job].male)
+            else
+                NotifError("Pakaian tidak tersedia!")
+            end
+        else
+            if Config.Uniforms[job].female then
+                TriggerEvent("skinchanger:loadClothes", skin, Config.Uniforms[job].female)
+            else
+                NotifError("Pakaian tidak tersedia!")
+            end
+        end
+    end)
+end
+
 function OpenAmbulanceActionsMenu()
 	local elements = {{label = _U('cloakroom'), value = 'cloakroom'}}
 
@@ -597,12 +616,12 @@ function OpenCloakroomMenu()
 			end)
 		elseif data.current.value == 'ambulance_wear' then
 			ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin, jobSkin)
-				if skin.sex == 0 then
-					TriggerEvent('skinchanger:loadClothes', skin, jobSkin.skin_male)
-				else
-					TriggerEvent('skinchanger:loadClothes', skin, jobSkin.skin_female)
-				end
-
+				-- if skin.sex == 0 then
+				-- 	TriggerEvent('skinchanger:loadClothes', skin, jobSkin.skin_male)
+				-- else
+				-- 	TriggerEvent('skinchanger:loadClothes', skin, jobSkin.skin_female)
+				-- end
+				setUniform('working', playerPed) 
 				isOnDuty = true
 				TriggerEvent('esx_ambulancejob:setDeadPlayers', deadPlayers)
 			end)

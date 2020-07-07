@@ -77,6 +77,7 @@ AddEventHandler('esx:onPlayerSpawn', function()
 	end
 end)
 
+
 -- Create blips
 Citizen.CreateThread(function()
 	for k,v in pairs(Config.Hospitals) do
