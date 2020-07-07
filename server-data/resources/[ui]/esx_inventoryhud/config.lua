@@ -70,26 +70,6 @@ Config.Shops = {
         }
 	},
 
-    -- YouTool = {
-    --     Locations = {
-    --         {x = 2748.0, y = 3473.0, z = 55.68},
-    --     },
-    --     Items = {
-    --         {name = 'fixkit'}, -- add more items here
-    --         {name = 'blowtorch'}
-    --     }
-    -- },
-
-    -- PrisonShop = {
-    --     Locations = {
-    --         {x = 1728.41, y = 2584.31, z = 45.84},
-    --     },
-    --     Items = {
-    --         {name = 'bread'}, -- add more items here
-    --         {name = 'water'}
-    --     }
-    -- },
-
     WeaponShop = {
         Locations = {
             { x = -662.180, y = -934.961, z = 20.829 },            
@@ -117,9 +97,4 @@ Config.Shops = {
 
         }
     },
-    -- LicenseShop = {
-    --     Locations = {
-    --         { x = 12.47, y = -1105.5, z = 29.8}
-    --     }
-    -- }
 }
