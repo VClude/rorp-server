@@ -36,7 +36,7 @@ Config.Jobs.slaughterer = {
 			Blip = true,
 			Name = _U('s_cow'),
 			Type = 'work',
-			Duration = 30000,
+			Duration = 15000,
 			Item = {
 				{
 					name = _U('s_meat_cow'),
