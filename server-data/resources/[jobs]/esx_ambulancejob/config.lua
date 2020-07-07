@@ -140,9 +140,9 @@ Config.Uniforms = {
 		},
 		female = {
 			tshirt_1 = 36,  tshirt_2 = 1,
-			torso_1 = 48,   torso_2 = 0,
+			torso_1 = 41,   torso_2 = 0,
 			decals_1 = 0,   decals_2 = 0,
-			arms = 44,
+			arms = 105,
 			pants_1 = 34,   pants_2 = 0,
 			shoes_1 = 27,   shoes_2 = 0,
 			helmet_1 = 45,  helmet_2 = 0,
