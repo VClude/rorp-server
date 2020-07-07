@@ -616,12 +616,12 @@ function OpenCloakroomMenu()
 			end)
 		elseif data.current.value == 'ambulance_wear' then
 			ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin, jobSkin)
-				-- if skin.sex == 0 then
-				-- 	TriggerEvent('skinchanger:loadClothes', skin, jobSkin.skin_male)
-				-- else
-				-- 	TriggerEvent('skinchanger:loadClothes', skin, jobSkin.skin_female)
-				-- end
-				setUniform('working', playerPed) 
+				if skin.sex == 0 then
+					TriggerEvent('skinchanger:loadClothes', skin, jobSkin.skin_male)
+				else
+					TriggerEvent('skinchanger:loadClothes', skin, jobSkin.skin_female)
+				end
+				-- setUniform('working', playerPed) 
 				isOnDuty = true
 				TriggerEvent('esx_ambulancejob:setDeadPlayers', deadPlayers)
 			end)
