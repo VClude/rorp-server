@@ -136,7 +136,7 @@ Config.Uniforms = {
 			shoes_1 = 25,   shoes_2 = 0,
 			helmet_1 = 8,  	helmet_2 = 0,
 			chain_1 = 126,  chain_2 = 0,
-			ears_1 = 0,     ears_2 = 0
+			ears_1 = -1,     ears_2 = 0
 		},
 		female = {
 			tshirt_1 = 36,  tshirt_2 = 1,
@@ -147,7 +147,7 @@ Config.Uniforms = {
 			shoes_1 = 27,   shoes_2 = 0,
 			helmet_1 = 45,  helmet_2 = 0,
 			chain_1 = 0,    chain_2 = 0,
-			ears_1 = 0,     ears_2 = 0
+			ears_1 = -1,     ears_2 = 0
 		}
 	},
 
@@ -161,7 +161,7 @@ Config.Uniforms = {
 			shoes_1 = 25,   shoes_2 = 0,
 			helmet_1 = 8,  	helmet_2 = 0,
 			chain_1 = 126,  chain_2 = 0,
-			ears_1 = 0,     ears_2 = 0
+			ears_1 = -1,     ears_2 = 0
 		},
 		female = {
 			tshirt_1 = 36,  tshirt_2 = 1,
@@ -172,7 +172,7 @@ Config.Uniforms = {
 			shoes_1 = 27,   shoes_2 = 0,
 			helmet_1 = 45,  helmet_2 = 0,
 			chain_1 = 0,    chain_2 = 0,
-			ears_1 = 0,     ears_2 = 0
+			ears_1 = -1,     ears_2 = 0
 		}
 	},
 
@@ -186,7 +186,7 @@ Config.Uniforms = {
 			shoes_1 = 25,   shoes_2 = 0,
 			helmet_1 = 8,  	helmet_2 = 0,
 			chain_1 = 126,  chain_2 = 0,
-			ears_1 = 0,     ears_2 = 0
+			ears_1 = -1,     ears_2 = 0
 		},
 		female = {
 			tshirt_1 = 36,  tshirt_2 = 1,
@@ -197,7 +197,7 @@ Config.Uniforms = {
 			shoes_1 = 27,   shoes_2 = 0,
 			helmet_1 = 45,  helmet_2 = 0,
 			chain_1 = 0,    chain_2 = 0,
-			ears_1 = 0,     ears_2 = 0
+			ears_1 = -1,     ears_2 = 0
 		}
 	},
 
@@ -211,7 +211,7 @@ Config.Uniforms = {
 			shoes_1 = 25,   shoes_2 = 0,
 			helmet_1 = 8,  	helmet_2 = 0,
 			chain_1 = 126,  chain_2 = 0,
-			ears_1 = 0,     ears_2 = 0
+			ears_1 = -1,     ears_2 = 0
 		},
 		female = {
 			tshirt_1 = 36,  tshirt_2 = 1,
@@ -222,7 +222,7 @@ Config.Uniforms = {
 			shoes_1 = 27,   shoes_2 = 0,
 			helmet_1 = 45,  helmet_2 = 0,
 			chain_1 = 0,    chain_2 = 0,
-			ears_1 = 0,     ears_2 = 0
+			ears_1 = -1,     ears_2 = 0
 		}
 	}
 }
