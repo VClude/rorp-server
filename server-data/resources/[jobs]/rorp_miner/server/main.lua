@@ -67,7 +67,7 @@ RegisterServerEvent("rorp_miner:rewardSmelting")
 AddEventHandler("rorp_miner:rewardSmelting", function()
 	local xPlayer = ESX.GetPlayerFromId(source)
 	
-	local rewardChance = math.random(1,15)
+	local rewardChance = math.random(1,50)
 	
 	if rewardChance == 1 then
 		if xPlayer.canCarryItem("diamond", 1) then
@@ -86,25 +86,26 @@ AddEventHandler("rorp_miner:rewardSmelting", function()
 				TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'error', text = 'Inventory kamu sudah penuh'})
 			end
 		elseif firstChance == 2 or firstChance == 3 then
-			if xPlayer.canCarryItem("cooper", 2) then
-				xPlayer.addInventoryItem("cooper", 2)
+			if xPlayer.canCarryItem("botolkaca", 2) then
+				xPlayer.addInventoryItem("botolkaca", 2)
 				TriggerClientEvent("esx:showNotification",source,"Kamu mendapatkan ~r~2~s~ x~y~Tembaga~s~")
 			else
 				TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'error', text = 'Inventory kamu sudah penuh'})
 			end
 		end
-	elseif rewardChance == 3 or rewardChance == 4 or rewardChance == 5 or rewardChance == 6 or rewardChance == 7 or rewardChance == 8 or rewardChance == 9 or rewardChance == 10 or rewardChance == 11 or rewardChance == 12 or rewardChance == 13 or rewardChance == 14 or rewardChance == 15  then
-		local secondChance = math.random(1,10)
+	-- elseif rewardChance == 3 or rewardChance == 4 or rewardChance == 5 or rewardChance == 6 or rewardChance == 7 or rewardChance == 8 or rewardChance == 9 or rewardChance == 10 or rewardChance == 11 or rewardChance == 12 or rewardChance == 13 or rewardChance == 14 or rewardChance == 15  then
+	elseif rewardChance ~= 1 or rewardChance ~=2 then	
+	local secondChance = math.random(1,10)
 		if secondChance == 1 or secondChance == 2 or secondChance == 3 then
-			if xPlayer.canCarryItem("copper", 3) then
-				xPlayer.addInventoryItem("copper", 3)
+			if xPlayer.canCarryItem("botolkaca", 3) then
+				xPlayer.addInventoryItem("botolkaca", 3)
 				TriggerClientEvent("esx:showNotification",source,"Kamu mendapatkan ~r~3~s~x ~y~Tembaga~s~")
 			else
 				TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'error', text = 'Inventory kamu sudah penuh'})
 			end
 		elseif secondChance == 4 or secondChance == 5 or secondChance == 6 or secondChance == 7 or secondChance == 8 or secondChance == 9 or secondChance == 10 then
-			if xPlayer.canCarryItem("iron", 5) then
-				xPlayer.addInventoryItem("iron", 5)
+			if xPlayer.canCarryItem("botolkaca", 5) then
+				xPlayer.addInventoryItem("botolkaca", 5)
 				TriggerClientEvent("esx:showNotification",source,"Kamu mendapatkan ~r~5~s~x ~y~Besi~s~")
 			else
 				TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'error', text = 'Inventory kamu sudah penuh'})
