@@ -159,8 +159,8 @@ Config.Jobs.lumberjack = {
 					remove = 1,
 					max = 100, -- if not present, probably an error at itemQtty >= item.max in esx_jobs_sv.lua
 					price = 210,
-					requires = 'cutted_wood',
-					requires_name = _U('lj_cutwood'),
+					requires = 'wood',
+					requires_name = _U('[lj_wood'),
 					drop = 100
 				}
 			},
