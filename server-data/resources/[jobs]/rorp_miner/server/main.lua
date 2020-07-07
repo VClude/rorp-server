@@ -79,11 +79,12 @@ AddEventHandler("rorp_miner:rewardSmelting", function()
 				TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'error', text = 'Inventory kamu sudah penuh'})
 			end
 		elseif firstChance == 2 or firstChance == 3 then
-		if xPlayer.canCarryItem("botolkaca", 5) then
-			xPlayer.addInventoryItem("botolkaca", 5)
-			TriggerClientEvent("esx:showNotification",source,"Kamu mendapatkan ~r~1~s~x ~y~Botol Kaca~s~")
-		else
-			TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'error', text = 'Inventory kamu sudah penuh'})
+			if xPlayer.canCarryItem("botolkaca", 5) then
+				xPlayer.addInventoryItem("botolkaca", 5)
+				TriggerClientEvent("esx:showNotification",source,"Kamu mendapatkan ~r~1~s~x ~y~Botol Kaca~s~")
+			else
+				TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'error', text = 'Inventory kamu sudah penuh'})
+			end
 		end
 	elseif rewardChance == 2 then
 		local firstChance = math.random(1,3)
@@ -104,7 +105,7 @@ AddEventHandler("rorp_miner:rewardSmelting", function()
 		end
 	-- elseif rewardChance == 3 or rewardChance == 4 or rewardChance == 5 or rewardChance == 6 or rewardChance == 7 or rewardChance == 8 or rewardChance == 9 or rewardChance == 10 or rewardChance == 11 or rewardChance == 12 or rewardChance == 13 or rewardChance == 14 or rewardChance == 15  then
 	elseif rewardChance ~= 1 or rewardChance ~=2 then	
-	local secondChance = math.random(1,10)
+		local secondChance = math.random(1,10)
 		if secondChance == 1 or secondChance == 2 or secondChance == 3 then
 			if xPlayer.canCarryItem("botolkaca", 5) then
 				xPlayer.addInventoryItem("botolkaca", 5)
