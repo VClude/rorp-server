@@ -124,45 +124,105 @@ Config.AuthorizedVehicles = {
 	}
 }
 
+-- CHECK SKINCHANGER CLIENT MAIN.LUA for matching elements
 Config.Uniforms = {
-	working = {
+	ambulance = {
 		male = {
-			["tshirt_1"] = 15,
-			["tshirt_2"] = 0,
-			["torso_1"] = 43,
-			["torso_2"] = 0,
-			["decals_1"] = 0,
-			["decals_2"] = 0,
-			["arms"] = 11,
-			["pants_1"] = 49,
-			["pants_2"] = 1,
-			["shoes_1"] = 25,
-			["shoes_2"] = 0,
-			["helmet_1"] = -1,
-			["helmet_2"] = -1,
-			["chain_1"] = -1,
-			["chain_2"] = 0,
-			["ears_1"] = 2,
-			["ears_2"] = 0
+			tshirt_1 = 57,  tshirt_2 = 0,
+			torso_1 = 39,   torso_2 = 0,
+			decals_1 = 60,   decals_2 = 0,
+			arms = 85,
+			pants_1 = 93,   pants_2 = 0,
+			shoes_1 = 25,   shoes_2 = 0,
+			helmet_1 = 8,  	helmet_2 = 0,
+			chain_1 = 126,  chain_2 = 0,
+			ears_1 = 1,     ears_2 = 0
 		},
 		female = {
-			["tshirt_1"] = 2,
-			["tshirt_2"] = 0,
-			["torso_1"] = 286,
-			["torso_2"] = 0,
-			["decals_1"] = 0,
-			["decals_2"] = 0,
-			["arms"] = 0,
-			["pants_1"] = 92,
-			["pants_2"] = 20,
-			["shoes_1"] = 52,
-			["shoes_2"] = 0,
-			["helmet_1"] = -1,
-			["helmet_2"] = -1,
-			["chain_1"] = -1,
-			["chain_2"] = 0,
-			["ears_1"] = -1,
-			["ears_2"] = 0
+			tshirt_1 = 36,  tshirt_2 = 1,
+			torso_1 = 48,   torso_2 = 0,
+			decals_1 = 0,   decals_2 = 0,
+			arms = 44,
+			pants_1 = 34,   pants_2 = 0,
+			shoes_1 = 27,   shoes_2 = 0,
+			helmet_1 = 45,  helmet_2 = 0,
+			chain_1 = 0,    chain_2 = 0,
+			ears_1 = 1,     ears_2 = 0
+		}
+	},
+
+	doctor = {
+		male = {
+			tshirt_1 = 57,  tshirt_2 = 0,
+			torso_1 = 39,   torso_2 = 0,
+			decals_1 = 60,   decals_2 = 0,
+			arms = 85,
+			pants_1 = 93,   pants_2 = 0,
+			shoes_1 = 25,   shoes_2 = 0,
+			helmet_1 = 8,  	helmet_2 = 0,
+			chain_1 = 126,  chain_2 = 0,
+			ears_1 = 1,     ears_2 = 0
+		},
+		female = {
+			tshirt_1 = 36,  tshirt_2 = 1,
+			torso_1 = 48,   torso_2 = 0,
+			decals_1 = 0,   decals_2 = 0,
+			arms = 44,
+			pants_1 = 34,   pants_2 = 0,
+			shoes_1 = 27,   shoes_2 = 0,
+			helmet_1 = 45,  helmet_2 = 0,
+			chain_1 = 0,    chain_2 = 0,
+			ears_1 = 1,     ears_2 = 0
+		}
+	},
+
+	chief_doctor = {
+		male = {
+			tshirt_1 = 57,  tshirt_2 = 0,
+			torso_1 = 39,   torso_2 = 0,
+			decals_1 = 60,   decals_2 = 0,
+			arms = 85,
+			pants_1 = 93,   pants_2 = 0,
+			shoes_1 = 25,   shoes_2 = 0,
+			helmet_1 = 8,  	helmet_2 = 0,
+			chain_1 = 126,  chain_2 = 0,
+			ears_1 = 1,     ears_2 = 0
+		},
+		female = {
+			tshirt_1 = 36,  tshirt_2 = 1,
+			torso_1 = 48,   torso_2 = 0,
+			decals_1 = 0,   decals_2 = 0,
+			arms = 44,
+			pants_1 = 34,   pants_2 = 0,
+			shoes_1 = 27,   shoes_2 = 0,
+			helmet_1 = 45,  helmet_2 = 0,
+			chain_1 = 0,    chain_2 = 0,
+			ears_1 = 1,     ears_2 = 0
+		}
+	},
+
+	boss = {
+		male = {
+			tshirt_1 = 57,  tshirt_2 = 0,
+			torso_1 = 39,   torso_2 = 0,
+			decals_1 = 60,   decals_2 = 0,
+			arms = 85,
+			pants_1 = 93,   pants_2 = 0,
+			shoes_1 = 25,   shoes_2 = 0,
+			helmet_1 = 8,  	helmet_2 = 0,
+			chain_1 = 126,  chain_2 = 0,
+			ears_1 = 1,     ears_2 = 0
+		},
+		female = {
+			tshirt_1 = 36,  tshirt_2 = 1,
+			torso_1 = 48,   torso_2 = 0,
+			decals_1 = 0,   decals_2 = 0,
+			arms = 44,
+			pants_1 = 34,   pants_2 = 0,
+			shoes_1 = 27,   shoes_2 = 0,
+			helmet_1 = 45,  helmet_2 = 0,
+			chain_1 = 0,    chain_2 = 0,
+			ears_1 = 1,     ears_2 = 0
 		}
 	}
 }

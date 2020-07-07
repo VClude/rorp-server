@@ -15,23 +15,22 @@ Citizen.CreateThread(function()
     -- RequestAnimDict("mini@cpr")
 end)
 
--- Set Uniforms
-function setUniform(job, playerPed) 
-    TriggerEvent( "skinchanger:getSkin", function(skin)
-        if skin.sex == 0 then
-            if Config.Uniforms[job].male then
-                TriggerEvent("skinchanger:loadClothes", skin, Config.Uniforms[job].male)
-            else
-                NotifError("Pakaian tidak tersedia!")
-            end
-        else
-            if Config.Uniforms[job].female then
-                TriggerEvent("skinchanger:loadClothes", skin, Config.Uniforms[job].female)
-            else
-                NotifError("Pakaian tidak tersedia!")
-            end
-        end
-    end)
+function setUniform(uniform, playerPed)
+	TriggerEvent('skinchanger:getSkin', function(skin)
+		local uniformObject
+
+		if skin.sex == 0 then
+			uniformObject = Config.Uniforms[uniform].male
+		else
+			uniformObject = Config.Uniforms[uniform].female
+		end
+
+		if uniformObject then
+			TriggerEvent('skinchanger:loadClothes', skin, uniformObject)
+		else
+			ESX.ShowNotification(_U('no_outfit'))
+		end
+	end)
 end
 
 function OpenAmbulanceActionsMenu()
@@ -597,12 +596,15 @@ AddEventHandler('esx_ambulancejob:putInVehicle', function()
 end)
 
 function OpenCloakroomMenu()
+	local playerPed = PlayerPedId()
+	local grade = ESX.PlayerData.job.grade_name
+
 	ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'cloakroom', {
 		title    = _U('cloakroom'),
 		align    = 'top',
 		elements = {
 			{label = _U('ems_clothes_civil'), value = 'citizen_wear'},
-			{label = _U('ems_clothes_ems'), value = 'ambulance_wear'},
+			{label = _U('ems_clothes_ems'), uniform = grade },
 	}}, function(data, menu)
 		if data.current.value == 'citizen_wear' then
 			ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin, jobSkin)
@@ -614,17 +616,19 @@ function OpenCloakroomMenu()
 					deadPlayerBlips[playerId] = nil
 				end
 			end)
-		elseif data.current.value == 'ambulance_wear' then
-			ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin, jobSkin)
-				if skin.sex == 0 then
-					TriggerEvent('skinchanger:loadClothes', skin, jobSkin.skin_male)
-				else
-					TriggerEvent('skinchanger:loadClothes', skin, jobSkin.skin_female)
-				end
-				-- setUniform('working', playerPed) 
-				isOnDuty = true
-				TriggerEvent('esx_ambulancejob:setDeadPlayers', deadPlayers)
-			end)
+		elseif data.current.uniform then
+			-- ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin, jobSkin)
+			-- 	if skin.sex == 0 then
+			-- 		TriggerEvent('skinchanger:loadClothes', skin, jobSkin.skin_male)
+			-- 	else
+			-- 		TriggerEvent('skinchanger:loadClothes', skin, jobSkin.skin_female)
+			-- 	end
+			-- 	isOnDuty = true
+			-- 	TriggerEvent('esx_ambulancejob:setDeadPlayers', deadPlayers)
+			-- end)
+			setUniform(data.current.uniform, playerPed)
+			isOnDuty = true
+			TriggerEvent('esx_ambulancejob:setDeadPlayers', deadPlayers)
 		end
 
 		menu.close()
