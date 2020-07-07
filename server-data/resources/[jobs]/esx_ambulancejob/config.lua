@@ -145,7 +145,7 @@ Config.Uniforms = {
 			arms = 105,
 			pants_1 = 42,   pants_2 = 0,
 			shoes_1 = 27,   shoes_2 = 0,
-			helmet_1 = 0,  helmet_2 = 0,
+			helmet_1 = -1,  helmet_2 = 0,
 			chain_1 = 96,    chain_2 = 0,
 			ears_1 = -1,     ears_2 = 0
 		}
@@ -170,7 +170,7 @@ Config.Uniforms = {
 			arms = 102,
 			pants_1 = 34,   pants_2 = 0,
 			shoes_1 = 29,   shoes_2 = 0,
-			helmet_1 = 0,  helmet_2 = 0,
+			helmet_1 = -1,  helmet_2 = 0,
 			chain_1 = 96,    chain_2 = 0,
 			ears_1 = -1,     ears_2 = 0
 		}
@@ -195,7 +195,7 @@ Config.Uniforms = {
 			arms = 103,
 			pants_1 = 23,   pants_2 = 0,
 			shoes_1 = 0,   shoes_2 = 0,
-			helmet_1 = 0,  helmet_2 = 0,
+			helmet_1 = -1,  helmet_2 = 0,
 			chain_1 = 96,    chain_2 = 0,
 			ears_1 = -1,     ears_2 = 0
 		}
@@ -220,7 +220,7 @@ Config.Uniforms = {
 			arms = 103,
 			pants_1 = 23,   pants_2 = 0,
 			shoes_1 = 0,   shoes_2 = 0,
-			helmet_1 = 0,  helmet_2 = 0,
+			helmet_1 = -1,  helmet_2 = 0,
 			chain_1 = 96,    chain_2 = 0,
 			ears_1 = -1,     ears_2 = 0
 		}
