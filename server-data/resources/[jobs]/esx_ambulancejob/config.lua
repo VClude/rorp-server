@@ -129,7 +129,7 @@ Config.Uniforms = {
 	ambulance = {
 		male = {
 			tshirt_1 = 57,  tshirt_2 = 0,
-			torso_1 = 39,   torso_2 = 0,
+			torso_1 = 45,   torso_2 = 0,
 			decals_1 = 60,   decals_2 = 0,
 			arms = 85,
 			pants_1 = 93,   pants_2 = 0,
