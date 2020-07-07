@@ -82,7 +82,7 @@ window.addEventListener("message", function (event) {
         $("#nearPlayers").html("");
 
         $.each(event.data.players, function (index, player) {
-            $("#nearPlayers").append('<button class="nearbyPlayerButton" data-player="' + player.player + '">' + player.label + ' (' + player.player + ')</button>');
+            $("#nearPlayers").append('<button class="nearbyPlayerButton" style=" border: none; background: none;color:white;" data-player="' + player.player + '"> ID :' + player.player + '</button></br>');
         });
 
         $("#dialog").dialog("open");
@@ -178,7 +178,8 @@ function disableInventory(ms) {
 }
 
 function setCount(item) {
-    count = item.count
+    
+    count = item.count + " <p style='color:orange;'>" + (item.weight * item.count / 1000) + " KG</p>"
 
     if (item.limit > 0) {
         count = item.count + " / " + item.limit
