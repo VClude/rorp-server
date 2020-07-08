@@ -1,5 +1,5 @@
 ESX = nil
-local connectedPlayers, maxPlayers = {}, GetConvarInt('sv_maxclients', 32)
+local connectedPlayers, maxPlayers = {}, GetConvarInt('sv_maxclients', 128)
 
 TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 

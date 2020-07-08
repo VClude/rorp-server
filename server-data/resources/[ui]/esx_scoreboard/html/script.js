@@ -21,6 +21,7 @@ $(function() {
 				$('#police').html(jobs.police);
 				$('#taxi').html(jobs.taxi);
 				$('#mechanic').html(jobs.mechanic);
+				$('#petani').html(jobs.petani);
 				$('#cardealer').html(jobs.cardealer);
 				$('#estate').html(jobs.estate);
 				break;
