@@ -7,8 +7,8 @@
       <modelName>psp_bmwgs</modelName>
       <txdName>psp_bmwgs</txdName>
       <handlingId>psp_bmwgs</handlingId>
-      <gameName>psp_bmwgs</gameName>
-      <vehicleMakeName />
+      <gameName>BMWGS1200</gameName>
+      <vehicleMakeName>BMW</vehicleMakeName>
       <expressionDictName>null</expressionDictName>
       <expressionName>null</expressionName>
       <animConvRoofDictName>null</animConvRoofDictName>
