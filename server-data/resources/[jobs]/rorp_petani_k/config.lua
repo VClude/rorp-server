@@ -57,10 +57,10 @@ Config.Crops = {
 
 -- This is the option for selling crops
 Config.PackagingCrop = {
-	{label = 'Botol Kecap', DBname = 'botolkecap', bahan1 = 'kedelai', bahan2 = 'kaca'},
-	{label = 'Botol Coklat', DBname = 'botolcoklat', bahan1 = 'cocoa', bahan2 = 'kaca'},
+	{label = 'Botol Kecap', DBname = 'botolkecap', bahan1 = 'kedelai', bahan2 = 'botolkaca'},
+	{label = 'Botol Coklat', DBname = 'botolcoklat', bahan1 = 'cocoa', bahan2 = 'botolkaca'},
 	{label = 'Teh Celup', DBname = 'tehcelup', bahan1 = 'teh', bahan2 = 'kain'},
-	{label = 'Botol Kopi', DBname = 'botolkopi', bahan1 = 'bijikopi', bahan2 = 'kaca'},-- DBNAME IS THE ITEM YOU WOULD LIKE TO SELL
+	{label = 'Botol Kopi', DBname = 'botolkopi', bahan1 = 'bijikopi', bahan2 = 'botolkaca'},-- DBNAME IS THE ITEM YOU WOULD LIKE TO SELL
 	-- {label = 'TEST', DBname = 'test_item', price = 0},
 }
 
