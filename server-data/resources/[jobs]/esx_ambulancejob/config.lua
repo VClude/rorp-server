@@ -97,14 +97,15 @@ Config.AuthorizedVehicles = {
 
 		doctor = {
 			{model = 'ambulance', price = 100}
+			{model = 'psp_bmwgs', price = 100}
 		},
 
 		chief_doctor = {
-			{model = 'ambulance', price = 100}
+			{model = 'psp_bmwgs', price = 100}
 		},
 
 		boss = {
-			{model = 'ambulance', price = 100}
+			{model = 'psp_bmwgs', price = 100}
 		}
 	},
 
